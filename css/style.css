@@ -238,18 +238,26 @@ p {
 .nav-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 72px;
+  gap: var(--space-xl);
+  height: 80px;
+}
+
+@media (min-width: 1024px) {
+  .nav-container {
+    max-width: 1450px;
+    padding: 0 44px;
+  }
 }
 
 .nav-logo img {
-  height: 32px;
+  height: 38px;
   width: auto;
 }
 
 .nav-links {
   display: none;
   gap: var(--space-xl);
+  margin-left: auto;
 }
 
 .nav-links a {
@@ -290,7 +298,7 @@ p {
 .nav-mobile {
   display: none;
   position: absolute;
-  top: 72px;
+  top: 80px;
   left: 0;
   right: 0;
   background-color: var(--bg-surface);
@@ -321,7 +329,8 @@ p {
   }
 
   .nav-cta {
-    display: block;
+    display: inline-flex;
+    padding: 12px 28px;
   }
 
   .nav-toggle {
@@ -333,14 +342,26 @@ p {
    Hero Section
    -------------------------------------------------------------------------- */
 .hero {
-  padding-top: calc(72px + var(--space-xxl));
-  padding-bottom: var(--space-xxl);
+  height: 1000px; /* Fixed height for 16-inch MacBook Pro viewport */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 80px; /* Account for fixed nav */
+  padding-bottom: var(--space-xl);
+}
+
+.hero-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
   text-align: center;
 }
 
 .hero-content {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 720px;
+  text-align: center;
 }
 
 .hero h1 {
@@ -359,6 +380,7 @@ p {
   flex-direction: column;
   gap: var(--space-m);
   align-items: center;
+  justify-content: center;
 }
 
 .hero-note {
@@ -367,10 +389,44 @@ p {
   color: var(--text-tertiary);
 }
 
+.hero-image {
+  max-width: 450px;
+  width: 100%;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+}
+
 @media (min-width: 768px) {
-  .hero {
-    padding-top: calc(72px + var(--space-xxxl));
-    padding-bottom: var(--space-xxxl);
+  .hero-ctas {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero .container {
+    max-width: 1450px;
+    padding: 0 44px;
+  }
+
+  .hero-grid {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xl);
+    width: 100%;
+  }
+
+  .hero-content {
+    text-align: left;
+    flex: 1;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .hero h1 {
@@ -379,11 +435,19 @@ p {
 
   .hero-subtitle {
     font-size: 1.25rem;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .hero-ctas {
-    flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
+  }
+
+  .hero-image {
+    flex: 0 0 auto;
+    max-width: 720px;
+    width: 720px;
+    margin-right: -35px;
   }
 }
 
@@ -500,12 +564,148 @@ p {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-xxl);
   }
+}
 
-  .steps-connector {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+/* --------------------------------------------------------------------------
+   FAQ Section
+   -------------------------------------------------------------------------- */
+.faq {
+  background-color: var(--bg-primary);
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+}
+
+.faq-item {
+  background-color: var(--bg-surface);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
+  padding: var(--space-l) var(--space-xl);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: background-color var(--transition-fast);
+}
+
+.faq-question:hover {
+  background-color: var(--bg-secondary);
+}
+
+.faq-question span {
+  flex: 1;
+}
+
+.faq-icon {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text-secondary);
+  stroke-width: 2;
+  fill: none;
+  flex-shrink: 0;
+  transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+
+/* CSS Grid technique for smooth height animation */
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-item.active .faq-answer {
+  grid-template-rows: 1fr;
+}
+
+.faq-answer-inner {
+  overflow: hidden;
+}
+
+.faq-answer p {
+  padding: 0 var(--space-xl) var(--space-l);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+/* --------------------------------------------------------------------------
+   Contact Section
+   -------------------------------------------------------------------------- */
+.contact {
+  background-color: var(--bg-secondary);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-l);
+  align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  padding: var(--space-l) var(--space-xl);
+  background-color: var(--bg-surface);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  width: 100%;
+  justify-content: center;
+}
+
+.contact-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.contact-item svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--text-primary);
+  stroke-width: 2;
+  fill: none;
+}
+
+.contact-item span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+  .contact-info {
+    flex-direction: row;
+    max-width: 700px;
+  }
+  
+  .contact-item {
+    flex: 1;
   }
 }
 
@@ -535,55 +735,6 @@ p {
     flex-direction: row;
     justify-content: center;
   }
-}
-
-/* --------------------------------------------------------------------------
-   Pricing Section
-   -------------------------------------------------------------------------- */
-.pricing {
-  background-color: var(--bg-primary);
-}
-
-.pricing-card {
-  max-width: 500px;
-  margin: 0 auto;
-  background-color: var(--bg-surface);
-  border-radius: var(--card-radius);
-  padding: var(--space-xl);
-  box-shadow: var(--shadow-card);
-  text-align: center;
-}
-
-.pricing-badge {
-  display: inline-block;
-  background-color: var(--accent-highlight);
-  color: #FFFFFF;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 6px 16px;
-  border-radius: 20px;
-  margin-bottom: var(--space-m);
-}
-
-.pricing-price {
-  font-family: var(--font-serif);
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: var(--space-s);
-}
-
-.pricing-card > p {
-  margin-bottom: var(--space-m);
-}
-
-.pricing-note {
-  font-size: 0.875rem;
-  color: var(--text-tertiary);
-  padding-top: var(--space-m);
-  border-top: 1px solid var(--border-subtle);
 }
 
 /* --------------------------------------------------------------------------
@@ -652,7 +803,19 @@ p {
 
 @media (min-width: 768px) {
   .footer-content {
-    grid-template-columns: 2fr 1fr 1fr;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-xl);
+  }
+
+  .footer-brand {
+    flex: 1;
+  }
+
+  .footer-links,
+  .footer-contact {
+    text-align: right;
   }
 
   .footer-bottom {
@@ -661,11 +824,18 @@ p {
   }
 }
 
+@media (min-width: 1024px) {
+  .footer .container {
+    max-width: 1450px;
+    padding: 0 44px;
+  }
+}
+
 /* --------------------------------------------------------------------------
    Legal Pages Styles
    -------------------------------------------------------------------------- */
 .legal-page {
-  padding-top: calc(72px + var(--space-xl));
+  padding-top: calc(80px + var(--space-xl));
   padding-bottom: var(--space-xxxl);
 }
 

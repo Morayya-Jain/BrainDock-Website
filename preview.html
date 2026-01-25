@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Preview</title>
+    <style>
+        :root {
+            --bg: #F2F2F2;
+            --ink: #2C2C2C;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .canvas {
+            width: 800px;
+            height: 600px;
+            max-width: 100%;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .stroke {
+            fill: none;
+            stroke: var(--ink);
+            stroke-width: 8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 2000;
+            stroke-dashoffset: 2000;
+            opacity: 0;
+        }
+        
+        .fill-grey {
+            fill: #808080;
+            stroke: none;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .node {
+            fill: var(--ink);
+            stroke: none;
+            opacity: 0;
+            animation: scaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes draw {
+            0% { stroke-dashoffset: 2000; opacity: 1; }
+            100% { stroke-dashoffset: 0; opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Animation Sequence */
+        /* Total duration approx 10s */
+        
+        /* 1. Monitor (0s - 2s) */
+        .s1 { animation: draw 1.0s ease-out 0.0s forwards; } /* Screen outline */
+        .s2 { animation: draw 0.5s ease-out 1.0s forwards; } /* Stand */
+        .s3 { animation: draw 0.5s ease-out 1.5s forwards; } /* Base */
+
+        /* 2. Network (2s - 4s) */
+        /* Nodes appear, then lines connect them */
+        .n1 { animation-delay: 2.0s; transform-origin: 180px 150px; }
+        .n2 { animation-delay: 2.1s; transform-origin: 220px 130px; }
+        .n3 { animation-delay: 2.2s; transform-origin: 250px 170px; }
+        .n4 { animation-delay: 2.3s; transform-origin: 200px 190px; }
+        
+        .l1 { animation: draw 0.4s ease-out 2.4s forwards; }
+        .l2 { animation: draw 0.4s ease-out 2.6s forwards; }
+        .l3 { animation: draw 0.4s ease-out 2.8s forwards; }
+        
+        /* Connection to head */
+        .n5 { animation-delay: 3.2s; transform-origin: 320px 140px; } /* Outside node */
+        .n6 { animation-delay: 3.4s; transform-origin: 380px 120px; } /* Head node */
+        
+        .l4 { animation: draw 0.5s ease-out 3.0s forwards; } /* Screen to outside */
+        .l5 { animation: draw 0.5s ease-out 3.5s forwards; } /* Outside to head */
+
+        /* 3. Head Profile (4s - 6s) */
+        .s4 { animation: draw 1.5s ease-out 4.0s forwards; } /* Face profile */
+        .s5 { animation: draw 1.0s ease-out 5.5s forwards; } /* Back of head/neck */
+
+        /* 4. Book & Hands (6.5s - 8.5s) */
+        .s6 { animation: draw 0.8s ease-out 6.5s forwards; } /* Left hand/arm */
+        .s7 { animation: draw 0.8s ease-out 7.3s forwards; } /* Book */
+        .s8 { animation: draw 0.8s ease-out 8.1s forwards; } /* Right hand/arm */
+
+        /* 5. Waves (8.5s - 10s) */
+        .w1 { animation: draw 0.5s ease-out 8.9s forwards; }
+        .w2 { animation: draw 0.5s ease-out 9.2s forwards; }
+        .w3 { animation: draw 0.5s ease-out 9.5s forwards; }
+        .w4 { animation: draw 0.5s ease-out 9.8s forwards; }
+
+    </style>
+</head>
+<body>
+    <div class="canvas">
+        <svg viewBox="0 0 600 500">
+            <!-- Monitor Group -->
+            <g transform="translate(50, 50)">
+                <!-- Monitor Outline -->
+                <rect x="0" y="0" width="220" height="160" rx="10" class="stroke s1" stroke-width="10" />
+                <!-- Screen inner border (optional, maybe just the outer is enough based on style) -->
+                
+                <!-- Stand -->
+                <path d="M110 160 L110 200" class="stroke s2" stroke-width="12" />
+                <path d="M70 200 L150 200" class="stroke s3" stroke-width="10" stroke-linecap="round" />
+            </g>
+
+            <!-- Network Graph -->
+            <!-- Inside Monitor -->
+            <g class="network">
+                <!-- Nodes -->
+                <circle cx="150" cy="150" r="8" class="node n1" />
+                <circle cx="200" cy="120" r="10" class="node n2" />
+                <circle cx="230" cy="160" r="7" class="node n3" />
+                <circle cx="180" cy="180" r="6" class="node n4" />
+                
+                <!-- Lines -->
+                <path d="M150 150 L200 120" class="stroke l1" stroke-width="4" />
+                <path d="M200 120 L230 160" class="stroke l2" stroke-width="4" />
+                <path d="M150 150 L180 180" class="stroke l3" stroke-width="4" />
+                
+                <!-- Connection OUT of monitor -->
+                <path d="M230 160 L350 140" class="stroke l4" stroke-width="4" />
+                <circle cx="350" cy="140" r="12" class="node n5" fill="#808080" /> <!-- Grey node -->
+                
+                <path d="M350 140 L450 120" class="stroke l5" stroke-width="4" />
+                <circle cx="450" cy="120" r="8" class="node n6" />
+            </g>
+
+            <!-- Head Profile -->
+            <!-- Drawing a continuous line for the profile -->
+            <!-- Forehead -> Nose -> Lips -> Chin -> Neck -->
+            <path d="M450 120 
+                     C 480 120, 500 140, 500 170 
+                     C 500 200, 480 250, 480 300 
+                     C 480 350, 520 400, 450 450
+                     C 400 480, 350 450, 300 450" 
+                  class="stroke s4" stroke-width="10" fill="none" />
+            
+            <!-- Back of head -->
+            <!-- Starts from forehead connection, goes back and down -->
+            <path d="M450 120 
+                     C 420 100, 380 100, 380 150
+                     C 380 200, 350 250, 320 280" 
+                  class="stroke s5" stroke-width="10" fill="none" />
+
+            <!-- Book and Hands -->
+            <!-- Left Hand/Arm -->
+            <path d="M250 450 C 250 400, 280 350, 320 350" class="stroke s6" stroke-width="10" />
+            
+            <!-- Book (Open) -->
+            <path d="M320 350 L360 380 L400 350 L400 420 L360 450 L320 420 Z" class="stroke s7" stroke-width="8" stroke-linejoin="round" />
+            
+            <!-- Right Hand/Arm (connected to body) -->
+            <path d="M400 350 C 440 350, 450 400, 450 450" class="stroke s8" stroke-width="10" />
+
+            <!-- Waves (Bottom Left) -->
+            <g transform="translate(80, 350)">
+                <path d="M0 0 Q-20 20 0 40" class="stroke w1" stroke-width="8" />
+                <path d="M-20 -10 Q-50 20 -20 50" class="stroke w2" stroke-width="8" />
+                <path d="M-40 -20 Q-80 20 -40 60" class="stroke w3" stroke-width="8" />
+            </g>
+
+        </svg>
+    </div>
+</body>
+</html>

@@ -154,7 +154,7 @@ Our AI processing analyses only:
 - Position (is the person at the desk or away?)
 - Object detection (is a phone/tablet/controller being actively used?)
 
-This is fundamentally different from biometric processing. We process the content of frames to detect objects and presence—we do not extract or store any biometric characteristics.
+This is fundamentally different from biometric processing. We process the content of frames to detect objects and presence. We do not extract or store any biometric characteristics.
 
 ---
 

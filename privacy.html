@@ -30,11 +30,10 @@
       <div class="nav-links">
         <a href="index.html#features">Features</a>
         <a href="index.html#how-it-works">How It Works</a>
-        <a href="index.html#download">Download</a>
-        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#contact">Contact Us</a>
       </div>
       
-      <a href="index.html#download" class="btn btn-primary nav-cta">Download Free</a>
+      <a href="index.html#download" class="btn btn-primary nav-cta">Download</a>
       
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span>
@@ -46,8 +45,8 @@
     <div class="nav-mobile" id="nav-mobile">
       <a href="index.html#features">Features</a>
       <a href="index.html#how-it-works">How It Works</a>
+      <a href="index.html#contact">Contact Us</a>
       <a href="index.html#download">Download</a>
-      <a href="index.html#pricing">Pricing</a>
     </div>
   </nav>
 
@@ -244,7 +243,7 @@
           <li>Position (is the person at the desk or away?)</li>
           <li>Object detection (is a phone/tablet/controller being actively used?)</li>
         </ul>
-        <p>This is fundamentally different from biometric processing. We process the content of frames to detect objects and presence—we do not extract or store any biometric characteristics.</p>
+        <p>This is fundamentally different from biometric processing. We process the content of frames to detect objects and presence. We do not extract or store any biometric characteristics.</p>
 
         <h2>5. How We Use Your Information</h2>
         <p>We use collected information for the following purposes:</p>
@@ -734,20 +733,7 @@ Data NOT Collected:
     </div>
   </footer>
 
-  <!-- Mobile menu toggle script -->
-  <script>
-    document.querySelector('.nav-toggle').addEventListener('click', function() {
-      const menu = document.getElementById('nav-mobile');
-      const isOpen = menu.classList.toggle('active');
-      this.setAttribute('aria-expanded', isOpen);
-    });
-
-    document.querySelectorAll('.nav-mobile a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('nav-mobile').classList.remove('active');
-        document.querySelector('.nav-toggle').setAttribute('aria-expanded', 'false');
-      });
-    });
-  </script>
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
 </body>
 </html>

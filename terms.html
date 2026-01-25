@@ -30,11 +30,10 @@
       <div class="nav-links">
         <a href="index.html#features">Features</a>
         <a href="index.html#how-it-works">How It Works</a>
-        <a href="index.html#download">Download</a>
-        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#contact">Contact Us</a>
       </div>
       
-      <a href="index.html#download" class="btn btn-primary nav-cta">Download Free</a>
+      <a href="index.html#download" class="btn btn-primary nav-cta">Download</a>
       
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span>
@@ -46,8 +45,8 @@
     <div class="nav-mobile" id="nav-mobile">
       <a href="index.html#features">Features</a>
       <a href="index.html#how-it-works">How It Works</a>
+      <a href="index.html#contact">Contact Us</a>
       <a href="index.html#download">Download</a>
-      <a href="index.html#pricing">Pricing</a>
     </div>
   </nav>
 
@@ -422,20 +421,7 @@
     </div>
   </footer>
 
-  <!-- Mobile menu toggle script -->
-  <script>
-    document.querySelector('.nav-toggle').addEventListener('click', function() {
-      const menu = document.getElementById('nav-mobile');
-      const isOpen = menu.classList.toggle('active');
-      this.setAttribute('aria-expanded', isOpen);
-    });
-
-    document.querySelectorAll('.nav-mobile a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('nav-mobile').classList.remove('active');
-        document.querySelector('.nav-toggle').setAttribute('aria-expanded', 'false');
-      });
-    });
-  </script>
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
 </body>
 </html>
