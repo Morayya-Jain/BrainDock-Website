@@ -61,6 +61,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 100px; /* Account for fixed navbar (80px) + breathing room */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
