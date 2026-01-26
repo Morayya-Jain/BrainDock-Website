@@ -247,6 +247,14 @@ p {
     max-width: 1450px;
     padding: 0 44px;
   }
+
+  .nav-logo {
+    margin-left: -20px;
+  }
+
+  .nav-cta {
+    margin-right: -20px;
+  }
 }
 
 .nav-logo img {
@@ -443,11 +451,15 @@ p {
     justify-content: flex-start;
   }
 
+  .hero-content {
+    margin-left: -20px;
+  }
+
   .hero-image {
     flex: 0 0 auto;
     max-width: 720px;
     width: 720px;
-    margin-right: -35px;
+    margin-right: -55px;
   }
 }
 
@@ -828,6 +840,14 @@ p {
   .footer .container {
     max-width: 1450px;
     padding: 0 44px;
+  }
+
+  .footer-brand {
+    margin-left: -20px;
+  }
+
+  .footer-contact {
+    margin-right: -20px;
   }
 }
 
