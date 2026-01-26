@@ -390,11 +390,9 @@ You may not assign or transfer these Terms without our prior written consent. We
 
 If you have questions about these Terms, please contact us at:
 
-**Email**: morayyajain@gmail.com
+**Email**: morayyajain@gmail.com or morayyajain@restartmedia.org
 
 **Website**: thebraindock.com
-
-**Address**: 108-128 Leicester Street, Carlton, VIC-3053
 
 ---
 

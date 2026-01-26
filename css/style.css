@@ -249,11 +249,11 @@ p {
   }
 
   .nav-logo {
-    margin-left: -20px;
+    margin-left: -40px;
   }
 
   .nav-cta {
-    margin-right: -20px;
+    margin-right: -40px;
   }
 }
 
@@ -452,14 +452,14 @@ p {
   }
 
   .hero-content {
-    margin-left: -20px;
+    margin-left: -40px;
   }
 
   .hero-image {
     flex: 0 0 auto;
     max-width: 720px;
     width: 720px;
-    margin-right: -55px;
+    margin-right: -75px;
   }
 }
 
@@ -843,11 +843,11 @@ p {
   }
 
   .footer-brand {
-    margin-left: -20px;
+    margin-left: -40px;
   }
 
   .footer-contact {
-    margin-right: -20px;
+    margin-right: -40px;
   }
 }
 

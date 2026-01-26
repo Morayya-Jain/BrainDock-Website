@@ -27,9 +27,8 @@ BrainDock is a focus tracking application that helps users monitor their study a
 
 **Contact Information:**
 
-- Email: morayyajain@gmail.com
+- Email: morayyajain@gmail.com or morayyajain@restartmedia.org
 - Website: thebraindock.com
-- Address: 108-128 Leicester Street, Carlton, VIC-3053
 
 ---
 
@@ -385,7 +384,7 @@ If you are in the EU or UK, you have additional rights including:
 
 ### 11.3 How to Make a Request
 
-Contact us at morayyajain@gmail.com with:
+Contact us at morayyajain@gmail.com or morayyajain@restartmedia.org with:
 - Your name and contact details
 - A description of what you are requesting
 - Any information to help us locate your data
@@ -578,11 +577,9 @@ Data NOT Collected:
 
 If you have questions about this Privacy Policy or our data practices, please contact us:
 
-**Email:** morayyajain@gmail.com
+**Email:** morayyajain@gmail.com or morayyajain@restartmedia.org
 
 **Website:** thebraindock.com
-
-**Address:** 108-128 Leicester Street, Carlton, VIC-3053
 
 We aim to respond to all enquiries within 30 days.
 
