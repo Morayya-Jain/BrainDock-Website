@@ -48,6 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Benefit card popup functionality
   initBenefitCards();
+
+  // Linux coming soon popup
+  initComingSoonPopup();
 });
 
 /**
@@ -151,6 +154,52 @@ function initBenefitCards() {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       hideCard();
+    }
+  });
+}
+
+/**
+ * Initialize the "Coming Soon" popup for the Linux download button.
+ */
+function initComingSoonPopup() {
+  const linuxBtn = document.getElementById('linux-download-btn');
+  const popup = document.getElementById('coming-soon-popup');
+  const overlay = document.getElementById('coming-soon-overlay');
+  const closeBtn = document.getElementById('popup-close-btn');
+
+  if (!linuxBtn || !popup || !overlay || !closeBtn) {
+    return;
+  }
+
+  /**
+   * Show the coming soon popup.
+   */
+  function showPopup() {
+    popup.classList.add('active');
+    overlay.classList.add('active');
+  }
+
+  /**
+   * Hide the coming soon popup.
+   */
+  function hidePopup() {
+    popup.classList.remove('active');
+    overlay.classList.remove('active');
+  }
+
+  // Show popup when clicking the Linux download button
+  linuxBtn.addEventListener('click', showPopup);
+
+  // Close popup when clicking the close button
+  closeBtn.addEventListener('click', hidePopup);
+
+  // Close popup when clicking the overlay
+  overlay.addEventListener('click', hidePopup);
+
+  // Close popup on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && popup.classList.contains('active')) {
+      hidePopup();
     }
   });
 }
