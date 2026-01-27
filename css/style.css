@@ -169,6 +169,118 @@ p {
   font-size: 1.125rem;
 }
 
+/* Benefits Grid - Two column bullet points */
+.benefits-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: var(--space-l);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.benefits-list li {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  padding: var(--space-s) 0;
+  position: relative;
+  padding-left: var(--space-l);
+  text-align: left;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.benefits-list li:hover {
+  color: var(--text-primary);
+}
+
+.benefits-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-highlight);
+  border-radius: 50%;
+}
+
+@media (min-width: 768px) {
+  .benefits-grid {
+    flex-direction: row;
+    gap: var(--space-xxxl);
+    align-items: flex-start;
+    max-width: none;
+  }
+
+  .benefits-list {
+    min-width: 280px;
+  }
+}
+
+/* Benefit Card - Floating explanation card */
+.benefit-card {
+  position: fixed;
+  background-color: var(--bg-surface);
+  border-radius: var(--card-radius);
+  padding: var(--space-l) var(--space-xl);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  width: 340px;
+  z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95);
+  transition: opacity 150ms ease, transform 150ms ease, visibility 150ms;
+}
+
+.benefit-card.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.benefit-card-text {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  margin: 0;
+  text-align: center;
+}
+
+/* Overlay behind the floating card */
+.benefit-card-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 199;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms ease, visibility 200ms;
+}
+
+.benefit-card-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
 /* --------------------------------------------------------------------------
    Buttons
    -------------------------------------------------------------------------- */

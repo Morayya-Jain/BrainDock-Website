@@ -47,7 +47,14 @@
         <a href="#contact">Contact Us</a>
       </div>
       
-      <a href="#download" class="btn btn-primary nav-cta">Download</a>
+      <a href="#download" class="btn btn-primary nav-cta">
+            Download
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </a>
       
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span>
@@ -75,7 +82,14 @@
             BrainDock uses AI to help you focus, work smarter and strengthen concentration.
           </p>
           <div class="hero-ctas">
-            <a href="#download" class="btn btn-primary">Download</a>
+            <a href="#download" class="btn btn-primary">
+              Download
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </a>
             <a href="#features" class="btn btn-secondary">Learn More</a>
           </div>
           <p class="hero-note">Available for macOS, Windows and Linux.</p>
@@ -91,7 +105,24 @@
       <div class="container">
         <div class="section-header">
           <h2>Why Use BrainDock?</h2>
-          <p>A simple tool that helps you understand and improve your focus habits.</p>
+          <div class="benefits-grid">
+            <ul class="benefits-list">
+              <li data-explanation="During important tasks like work deadlines or personal projects, BrainDock helps you maintain your attention on what you're doing.">Stay focused when it matters most</li>
+              <li data-explanation="Deep work means working on one thing for an extended period without switching tasks. BrainDock helps create the conditions for this kind of sustained attention.">Promotes deep work</li>
+              <li data-explanation="When your attention wanders, BrainDock lets you know. Over time, you start recognizing your own distraction patterns and when they tend to happen.">Turn distractions into Awareness</li>
+            </ul>
+            <ul class="benefits-list">
+              <li data-explanation="The system can tell the difference between a phone sitting on your desk and a phone you're actually using. It only responds to actual distractions.">Intelligent support that suits you</li>
+              <li data-explanation="Concentration improves with regular practice. BrainDock tracks your sessions so you can see how your focus duration changes over days and weeks.">Better concentration over time</li>
+              <li data-explanation="After each session, you get a PDF report with your focus percentage, a timeline of the session, and details about when distractions occurred.">Gain Confidence with positive Results</li>
+            </ul>
+          </div>
+          
+          <!-- Floating card for benefit explanations -->
+          <div class="benefit-card" id="benefit-card">
+            <p class="benefit-card-text"></p>
+          </div>
+          <div class="benefit-card-overlay" id="benefit-card-overlay"></div>
         </div>
         
         <div class="features-grid">
