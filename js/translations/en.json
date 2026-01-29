@@ -37,7 +37,7 @@
       },
       "tailoredAiGuidance": {
         "title": "Tailored AI Guidance",
-        "explanation": "AI-driven nudges adapt to your goals and routines, offering support that feels personal; not pushy."
+        "explanation": "AI-driven nudges adapt to your goals and routines, offering support that feels personal, not pushy."
       },
       "buildLastingFocus": {
         "title": "Build Lasting Focus",
@@ -45,7 +45,7 @@
       },
       "confidenceFromResults": {
         "title": "Confidence From Results",
-        "explanation": "As you complete more of what matters, you'll feel more in control of your day and goals; and bring more confidence in YOU."
+        "explanation": "As you complete more of what matters, you'll feel more in control of your day and goals, gaining more confidence in yourself."
       }
     }
   },
@@ -66,7 +66,7 @@
       },
       "detailedReports": {
         "title": "Performance Report",
-        "description": "Generate detailed PDF reports with insights of your session highlighting your focus scores, distractions & activity logs."
+        "description": "Generate detailed PDF reports with insights into your session highlighting your focus scores, distractions & activity logs."
       }
     }
   },
@@ -76,7 +76,7 @@
     "steps": {
       "step1": {
         "title": "Download the App",
-        "description": "Click the Download button as per your Operating system (macOS, Windows, Linux). Configure your settings and you're good to go!"
+        "description": "Click the Download button for your operating system (macOS, Windows, Linux). Configure your settings and you're good to go!"
       },
       "step2": {
         "title": "Start a Session",
@@ -112,7 +112,7 @@
       },
       "internetConnection": {
         "question": "Does BrainDock require an internet connection?",
-        "answer": "Screen sharing operates entirely offline, as it runs locally on your computer. AI-powered distraction sensing requires an internet connection to identify devices such as phones and tablets; however, no data is stored permanently on servers, and any data used for sharing is discarded after processing."
+        "answer": "Screen sharing operates entirely offline, as it runs locally on your computer. AI-powered distraction sensing requires an internet connection to identify devices such as phones and tablets; however, no data is stored permanently on servers, and any data sent for analysis is discarded after processing."
       },
       "cloudData": {
         "question": "Is my data uploaded to the Cloud?",

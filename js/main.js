@@ -117,6 +117,18 @@ function initBenefitCards() {
         showCard(item, explanation);
       }
     });
+
+    // Keyboard activation (Enter/Space) for accessibility
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if (activeItem === item) {
+          hideCard();
+        } else {
+          showCard(item, explanation);
+        }
+      }
+    });
   });
 
   // Close card when clicking overlay

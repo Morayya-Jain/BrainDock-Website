@@ -214,6 +214,13 @@ p {
   background-color: #FAFAF8; /* Slightly lighter on hover */
 }
 
+.benefits-list li:focus-visible {
+  outline: 2px solid var(--accent-highlight);
+  outline-offset: 2px;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
 @media (min-width: 768px) {
   .benefits-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -378,11 +385,11 @@ p {
   padding: 0 var(--space-l); /* Default padding for mobile */
 }
 
-/* Desktop navigation: Capped max-width with 60px edge padding */
+/* Desktop navigation: Capped max-width with 80px edge padding */
 @media (min-width: 1024px) {
   .nav-container {
     max-width: 1570px;
-    padding: 0 60px;
+    padding: 0 80px;
     margin: 0 auto;
   }
 }
@@ -500,10 +507,10 @@ p {
   margin: 0 auto;
 }
 
-/* Desktop: 60px edge padding */
+/* Desktop: 80px edge padding */
 @media (min-width: 1024px) {
   .hero .container {
-    padding: 0 60px;
+    padding: 0 80px;
   }
 }
 
@@ -583,6 +590,7 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-left: 40px; /* Shift content slightly right */
   }
 
   /* Fluid title - scales down when needed, capped at max */
@@ -605,6 +613,7 @@ p {
     flex: 0 1 720px; /* Starts at 720px max, shrinks if needed */
     max-width: min(720px, min(45vw, 70vh));
     width: auto;
+    margin-right: 40px; /* Shift image slightly left */
   }
 }
 
@@ -953,6 +962,7 @@ p {
 }
 
 .footer-links a,
+.footer-links span,
 .footer-contact a,
 .footer-contact p {
   display: block;
@@ -960,6 +970,12 @@ p {
   font-size: 0.9375rem;
   margin-bottom: var(--space-s);
   transition: color var(--transition-fast);
+}
+
+/* Current page indicator in footer (non-clickable) */
+.footer-links span {
+  color: rgba(255, 255, 255, 0.5);
+  cursor: default;
 }
 
 .footer-links a:hover,
@@ -991,24 +1007,28 @@ p {
 
   .footer-brand {
     flex: 1;
+    margin-left: 40px; /* Shift brand slightly right to match hero */
   }
 
   .footer-links,
   .footer-contact {
     text-align: right;
+    margin-right: 40px; /* Shift links/contact slightly left to match hero */
   }
 
   .footer-bottom {
     flex-direction: row;
     justify-content: space-between;
+    padding-left: 40px; /* Match hero content alignment */
+    padding-right: 40px; /* Match hero image alignment */
   }
 }
 
-/* Desktop footer: Capped max-width with 60px edge padding */
+/* Desktop footer: Capped max-width with 80px edge padding */
 @media (min-width: 1024px) {
   .footer .container {
     max-width: 1570px;
-    padding: 0 60px;
+    padding: 0 80px;
     margin: 0 auto;
   }
 }
