@@ -180,8 +180,8 @@ p {
   margin-right: auto;
 }
 
-/* Wrapper to center the grid */
-.section-header:has(.benefits-grid) {
+/* Wrapper to center the grid - using class for Firefox compatibility */
+.why-braindock .section-header {
   text-align: center;
   margin-bottom: 0;
 }
@@ -199,7 +199,7 @@ p {
   font-weight: 500;
   color: var(--text-primary);
   padding: var(--space-m) var(--space-l);
-  background-color: var(--bg-surface);
+  background-color: #F7F6F3; /* Subtle off-white, lighter than section bg (#F2F0EB) */
   border-radius: var(--card-radius);
   box-shadow: var(--shadow-card);
   cursor: pointer;
@@ -211,7 +211,7 @@ p {
 .benefits-list li:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-hover);
-  background-color: var(--bg-surface);
+  background-color: #FAFAF8; /* Slightly lighter on hover */
 }
 
 @media (min-width: 768px) {
@@ -271,13 +271,19 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5); /* More opaque fallback */
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   z-index: 199;
   opacity: 0;
   visibility: hidden;
   transition: opacity 200ms ease, visibility 200ms;
+}
+
+@supports (backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px)) {
+  .benefit-card-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
 }
 
 .benefit-card-overlay.active {
@@ -310,6 +316,11 @@ p {
 
 .btn:active {
   transform: translateY(0);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent-highlight);
+  outline-offset: 2px;
 }
 
 .btn-primary {
@@ -346,10 +357,17 @@ p {
   left: 0;
   right: 0;
   z-index: 100;
-  background-color: rgba(249, 248, 244, 0.9);
+  background-color: rgba(249, 248, 244, 0.95); /* Slightly more opaque fallback */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Enhance background for browsers that support backdrop-filter */
+@supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)) {
+  .nav {
+    background-color: rgba(249, 248, 244, 0.9);
+  }
 }
 
 .nav-container {
@@ -467,7 +485,7 @@ p {
    Fixed 50px minimum edge padding.
    -------------------------------------------------------------------------- */
 .hero {
-  min-height: calc(100vh - 80px);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1303,13 +1321,19 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5); /* More opaque fallback */
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   z-index: 299;
   opacity: 0;
   visibility: hidden;
   transition: opacity 200ms ease, visibility 200ms;
+}
+
+@supports (backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px)) {
+  .popup-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
 }
 
 .popup-overlay.active {
@@ -1390,4 +1414,26 @@ p {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Skip link becomes visible on focus for keyboard users */
+.sr-only:focus {
+  position: fixed;
+  top: var(--space-m);
+  left: var(--space-m);
+  width: auto;
+  height: auto;
+  padding: var(--space-m) var(--space-l);
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: nowrap;
+  background-color: var(--text-primary);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--btn-radius);
+  z-index: 1000;
+  box-shadow: var(--shadow-hover);
 }

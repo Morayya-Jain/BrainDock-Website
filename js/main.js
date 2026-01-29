@@ -22,6 +22,16 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
 
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (navMobile.classList.contains('active') && 
+          !navMobile.contains(e.target) && 
+          !navToggle.contains(e.target)) {
+        navMobile.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
     // Close mobile menu when viewport widens past mobile breakpoint
     window.addEventListener('resize', function() {
       if (window.innerWidth >= 950 && navMobile.classList.contains('active')) {
@@ -76,111 +86,12 @@ function initBenefitCards() {
   }
 
   let activeItem = null;
-  const CARD_WIDTH = 340;
-  const GAP = 16;
-  const VIEWPORT_PADDING = 16;
 
   /**
-   * Measure the width of text as rendered.
-   */
-  function measureTextWidth(text, font) {
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    context.font = font;
-    return context.measureText(text).width;
-  }
-
-  /**
-   * Check if the card can fit beside the item (either left or right).
-   * Returns { fits: boolean, side: 'left' | 'right' | null, position: object }
-   */
-  function calculateCardPosition(item) {
-    const list = item.closest('.benefits-list');
-    const benefitsGrid = item.closest('.benefits-grid');
-    const lists = benefitsGrid.querySelectorAll('.benefits-list');
-    const isLeftColumn = list === lists[0];
-    
-    const itemRect = item.getBoundingClientRect();
-    const styles = window.getComputedStyle(item);
-    const font = styles.font;
-    const paddingLeft = parseFloat(styles.paddingLeft);
-    
-    const textWidth = measureTextWidth(item.textContent, font);
-    const textEndX = itemRect.left + paddingLeft + textWidth;
-    
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    
-    // Calculate available space on each side
-    const spaceOnRight = viewportWidth - textEndX - GAP - VIEWPORT_PADDING;
-    const spaceOnLeft = itemRect.left - GAP - VIEWPORT_PADDING;
-    
-    // Check if card fits on the preferred side based on column
-    if (isLeftColumn) {
-      // Prefer right side for left column items
-      if (spaceOnRight >= CARD_WIDTH) {
-        return {
-          fits: true,
-          side: 'right',
-          position: {
-            left: textEndX + GAP,
-            top: Math.min(itemRect.top, viewportHeight - 200)
-          }
-        };
-      }
-      // Try left side as fallback
-      if (spaceOnLeft >= CARD_WIDTH) {
-        return {
-          fits: true,
-          side: 'left',
-          position: {
-            right: viewportWidth - itemRect.left + GAP,
-            top: Math.min(itemRect.top, viewportHeight - 200)
-          }
-        };
-      }
-    } else {
-      // Prefer left side for right column items
-      if (spaceOnLeft >= CARD_WIDTH) {
-        return {
-          fits: true,
-          side: 'left',
-          position: {
-            right: viewportWidth - itemRect.left + GAP,
-            top: Math.min(itemRect.top, viewportHeight - 200)
-          }
-        };
-      }
-      // Try right side as fallback
-      if (spaceOnRight >= CARD_WIDTH) {
-        return {
-          fits: true,
-          side: 'right',
-          position: {
-            left: textEndX + GAP,
-            top: Math.min(itemRect.top, viewportHeight - 200)
-          }
-        };
-      }
-    }
-    
-    // Card doesn't fit on either side, will be centered
-    return { fits: false, side: null, position: null };
-  }
-
-  /**
-   * Show the benefit card. Always centers it on the screen.
+   * Show the benefit card centered on screen.
    */
   function showCard(item, explanation) {
     benefitCardText.textContent = explanation;
-    
-    // Always center the card on the page
-    benefitCard.classList.add('centered');
-    // Clear any inline styles so CSS centering takes over
-    benefitCard.style.left = '';
-    benefitCard.style.right = '';
-    benefitCard.style.top = '';
-    
     benefitCard.classList.add('active');
     benefitCardOverlay.classList.add('active');
     activeItem = item;
@@ -191,7 +102,6 @@ function initBenefitCards() {
    */
   function hideCard() {
     benefitCard.classList.remove('active');
-    benefitCard.classList.remove('centered');
     benefitCardOverlay.classList.remove('active');
     activeItem = null;
   }
