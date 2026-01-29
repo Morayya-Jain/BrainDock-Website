@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "title": {
+      "index": "BrainDock - AI驱动的专注助手",
+      "privacy": "隐私政策 - BrainDock",
+      "terms": "条款和条件 - BrainDock"
+    }
+  },
+  "nav": {
+    "whyBrainDock": "为什么选择BrainDock",
+    "features": "功能特点",
+    "howItWorks": "工作原理",
+    "contact": "联系我们",
+    "download": "下载"
+  },
+  "hero": {
+    "title": "掌控你的注意力",
+    "subtitle": "BrainDock使用AI帮助你集中注意力，更聪明地工作，增强专注力。",
+    "downloadBtn": "下载",
+    "learnMoreBtn": "了解更多",
+    "note": "支持macOS、Windows和Linux。"
+  },
+  "whyBrainDock": {
+    "sectionTitle": "为什么使用BrainDock？",
+    "benefits": {
+      "focusWhenItCounts": {
+        "title": "关键时刻保持专注",
+        "explanation": "BrainDock帮助你在学习、工作和截止日期期间保持专注；最大限度地减少干扰，在注意力分散时快速引导你回归。"
+      },
+      "enableDeepWork": {
+        "title": "实现深度工作",
+        "explanation": "保护不受干扰的专注时间，让你能够清晰思考，更聪明地工作，更快地完成重要任务。"
+      },
+      "distractionsToAwareness": {
+        "title": "从分心到自觉",
+        "explanation": "帮助你认识到何时以及为何分心，以便你能更快地重新集中注意力，建立更健康的屏幕使用习惯。"
+      },
+      "tailoredAiGuidance": {
+        "title": "个性化AI指导",
+        "explanation": "AI驱动的提醒适应你的目标和日常习惯，提供感觉个性化而非强迫性的支持。"
+      },
+      "buildLastingFocus": {
+        "title": "建立持久的专注力",
+        "explanation": "通过持续练习建立更强的注意力，使长时间专注变得更容易。"
+      },
+      "confidenceFromResults": {
+        "title": "从成果中获得自信",
+        "explanation": "当你完成更多重要的事情时，你会感到对自己的一天和目标更有掌控力；对自己更有信心。"
+      }
+    }
+  },
+  "features": {
+    "sectionTitle": "功能特点",
+    "cards": {
+      "timedSessions": {
+        "title": "计时会话",
+        "description": "准备好后随时开始会话。BrainDock当你工作时实时关注你的专注状态。"
+      },
+      "attentionCoach": {
+        "title": "专注教练",
+        "description": "当设备分散你的注意力或当你离开办公桌时，会温和地提醒你。"
+      },
+      "screenAwareness": {
+        "title": "屏幕感知",
+        "description": "可选择追踪活动窗口，识别切换到分散注意力的应用程序或网站。"
+      },
+      "detailedReports": {
+        "title": "绩效报告",
+        "description": "生成详细的PDF报告，展示您的会话洞察，突出显示专注分数、分心情况和活动日志。"
+      }
+    }
+  },
+  "howItWorks": {
+    "sectionTitle": "工作原理",
+    "sectionSubtitle": "三个简单步骤，实现更好的专注。",
+    "steps": {
+      "step1": {
+        "title": "下载应用",
+        "description": "根据您的操作系统（macOS、Windows、Linux）点击下载按钮。配置您的设置，即可开始使用！"
+      },
+      "step2": {
+        "title": "开始会话",
+        "description": "点击开始按钮启动会话，调整摄像头视角，然后开始工作。BrainDock在后台静静运行。您可以随时暂停或停止。"
+      },
+      "step3": {
+        "title": "报告生成",
+        "description": "每次会话结束后，包含会话洞察和分析的PDF报告即可使用。"
+      }
+    }
+  },
+  "download": {
+    "sectionTitle": "下载BrainDock",
+    "sectionSubtitle": "支持macOS、Windows和Linux。",
+    "macOS": "macOS",
+    "windows": "Windows",
+    "linux": "Linux"
+  },
+  "faq": {
+    "sectionTitle": "常见问题",
+    "items": {
+      "privacy": {
+        "question": "BrainDock会侵犯我的隐私吗？",
+        "answer": "不会，隐私是我们构建BrainDock时的首要考虑。我们不会永久存储任何内容，不使用人脸识别，你的会话数据保存在你的设备上。BrainDock是为了帮助你集中注意力，而不是收集你的个人信息。"
+      },
+      "screenSharing": {
+        "question": "屏幕共享是私密和安全的吗？",
+        "answer": "是的，完全安全。屏幕共享完全在你的电脑上进行，可以离线工作。BrainDock只读取活动窗口的名称，与你的干扰列表进行比对。不会截图，不会录像，这方面的任何数据都不会离开你的设备。"
+      },
+      "whatCanNotice": {
+        "question": "BrainDock在你的会话期间能注意到什么？",
+        "answer": "BrainDock可以注意到会话期间的活动。例如，你离开办公桌、使用手机、平板电脑、游戏控制器等造成的分心。最棒的是，它只在你在屏幕前实际使用这些设备时才标记，而不是仅仅因为它们在附近。"
+      },
+      "internetConnection": {
+        "question": "BrainDock需要互联网连接吗？",
+        "answer": "屏幕共享完全离线运行，因为它在你的电脑上本地运行。AI驱动的分心感应需要互联网连接来识别手机和平板等设备；但是，服务器上不会永久存储任何数据，用于共享的任何数据在处理后都会被丢弃。"
+      },
+      "cloudData": {
+        "question": "我的数据会上传到云端吗？",
+        "answer": "你的会话统计数据、报告和个人数据保存在你的电脑上。对于分心感应，帧会临时传输到我们的AI模型进行分析，然后删除。不会永久存储任何数据，我们也不保留你会话的记录。"
+      }
+    }
+  },
+  "footer": {
+    "brandDescription": "AI驱动的专注助手，帮助你建立更好的习惯。",
+    "legalTitle": "法律信息",
+    "privacyPolicy": "隐私政策",
+    "termsOfService": "服务条款",
+    "contactTitle": "联系方式",
+    "copyright": "© 2026 BrainDock. 保留所有权利。"
+  },
+  "popup": {
+    "comingSoon": "即将推出！"
+  },
+  "language": {
+    "en": "English",
+    "ja": "日本語 (Japan)",
+    "de": "Deutsch (Germany)",
+    "fr": "Français (France)",
+    "zh": "中文 (China)",
+    "hi": "हिन्दी (India)"
+  }
+}

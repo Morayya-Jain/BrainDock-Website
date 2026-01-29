@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "title": {
+      "index": "BrainDock - AI-Powered Focus Assistant",
+      "privacy": "Privacy Policy - BrainDock",
+      "terms": "Terms and Conditions - BrainDock"
+    }
+  },
+  "nav": {
+    "whyBrainDock": "Why Use BrainDock",
+    "features": "Features",
+    "howItWorks": "How It Works",
+    "contact": "Contact Us",
+    "download": "Download"
+  },
+  "hero": {
+    "title": "Own Your Attention",
+    "subtitle": "BrainDock uses AI to help you focus, work smarter and strengthen concentration.",
+    "downloadBtn": "Download",
+    "learnMoreBtn": "Learn More",
+    "note": "Available for macOS, Windows and Linux."
+  },
+  "whyBrainDock": {
+    "sectionTitle": "Why Use BrainDock?",
+    "benefits": {
+      "focusWhenItCounts": {
+        "title": "Focus When It Counts",
+        "explanation": "BrainDock helps you stay on track during studying, work sessions, and deadlines; minimizing distractions and guiding you back quickly when attention drifts."
+      },
+      "enableDeepWork": {
+        "title": "Enable Deep Work",
+        "explanation": "Protects uninterrupted focus time so you can think clearly, work smarter, and finish meaningful tasks faster."
+      },
+      "distractionsToAwareness": {
+        "title": "Distractions To Awareness",
+        "explanation": "Helps you recognize when and why you get pulled away, so you can reset sooner and build healthier screen habits."
+      },
+      "tailoredAiGuidance": {
+        "title": "Tailored AI Guidance",
+        "explanation": "AI-driven nudges adapt to your goals and routines, offering support that feels personal; not pushy."
+      },
+      "buildLastingFocus": {
+        "title": "Build Lasting Focus",
+        "explanation": "Builds stronger attention through consistent practice, making it easier to focus for longer periods."
+      },
+      "confidenceFromResults": {
+        "title": "Confidence From Results",
+        "explanation": "As you complete more of what matters, you'll feel more in control of your day and goals; and bring more confidence in YOU."
+      }
+    }
+  },
+  "features": {
+    "sectionTitle": "Features",
+    "cards": {
+      "timedSessions": {
+        "title": "Timed Sessions",
+        "description": "Start a timed session whenever you're ready. BrainDock observes your focus in real-time when you are working."
+      },
+      "attentionCoach": {
+        "title": "Attention Coach",
+        "description": "Gently notices when devices pull your attention away or when you step away from your desk."
+      },
+      "screenAwareness": {
+        "title": "Screen Awareness",
+        "description": "Optionally tracks the active window to identify shifts to distracting applications or websites."
+      },
+      "detailedReports": {
+        "title": "Performance Report",
+        "description": "Generate detailed PDF reports with insights of your session highlighting your focus scores, distractions & activity logs."
+      }
+    }
+  },
+  "howItWorks": {
+    "sectionTitle": "How It Works",
+    "sectionSubtitle": "Three simple steps to better focus.",
+    "steps": {
+      "step1": {
+        "title": "Download the App",
+        "description": "Click the Download button as per your Operating system (macOS, Windows, Linux). Configure your settings and you're good to go!"
+      },
+      "step2": {
+        "title": "Start a Session",
+        "description": "Click Start to begin your session, align your camera view, and start working. BrainDock runs quietly in the background. You can pause or stop any time."
+      },
+      "step3": {
+        "title": "Report Generated",
+        "description": "A PDF report containing session insights and analytics is available after each session ends."
+      }
+    }
+  },
+  "download": {
+    "sectionTitle": "Download BrainDock",
+    "sectionSubtitle": "Available for macOS, Windows and Linux.",
+    "macOS": "macOS",
+    "windows": "Windows",
+    "linux": "Linux"
+  },
+  "faq": {
+    "sectionTitle": "Frequently Asked Questions",
+    "items": {
+      "privacy": {
+        "question": "Does BrainDock violate my privacy?",
+        "answer": "No, privacy was a top priority when we built BrainDock. We don't permanently store anything, we don't use facial recognition, and your session data stays on your device. BrainDock is here to help you focus, not collect your personal information."
+      },
+      "screenSharing": {
+        "question": "Is sharing your screen private and safe?",
+        "answer": "Yes, completely. Screen sharing is done entirely on your computer and works offline. BrainDock only reads the name of your active window to check against your distraction list. No screenshots are taken, no recordings are made, and nothing regarding this leaves your machine."
+      },
+      "whatCanNotice": {
+        "question": "What can BrainDock actually notice during your session?",
+        "answer": "BrainDock can notice activities during your session. For example, stepping away from your desk, distractions like using your phone, tablets, game controllers, etc. The best part is that it only flags these when you're actually using them in front of your screen, not just because they're nearby."
+      },
+      "internetConnection": {
+        "question": "Does BrainDock require an internet connection?",
+        "answer": "Screen sharing operates entirely offline, as it runs locally on your computer. AI-powered distraction sensing requires an internet connection to identify devices such as phones and tablets; however, no data is stored permanently on servers, and any data used for sharing is discarded after processing."
+      },
+      "cloudData": {
+        "question": "Is my data uploaded to the Cloud?",
+        "answer": "Your session statistics, reports, and personal data remain on your computer. For distraction sensing, frames are temporarily transmitted to our AI models for analysis and then deleted. No data is stored permanently, and we do not retain records of your sessions."
+      }
+    }
+  },
+  "footer": {
+    "brandDescription": "AI-powered focus assistant that helps you build better habits.",
+    "legalTitle": "Legal",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "contactTitle": "Contact",
+    "copyright": "© 2026 BrainDock. All rights reserved."
+  },
+  "popup": {
+    "comingSoon": "Coming Soon!"
+  },
+  "language": {
+    "en": "English",
+    "ja": "日本語 (Japan)",
+    "de": "Deutsch (Germany)",
+    "fr": "Français (France)",
+    "zh": "中文 (China)",
+    "hi": "हिन्दी (India)"
+  }
+}

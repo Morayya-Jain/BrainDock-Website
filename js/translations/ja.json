@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "title": {
+      "index": "BrainDock - AI搭載フォーカスアシスタント",
+      "privacy": "プライバシーポリシー - BrainDock",
+      "terms": "利用規約 - BrainDock"
+    }
+  },
+  "nav": {
+    "whyBrainDock": "BrainDockを使う理由",
+    "features": "機能",
+    "howItWorks": "仕組み",
+    "contact": "お問い合わせ",
+    "download": "ダウンロード"
+  },
+  "hero": {
+    "title": "集中力を手に入れる",
+    "subtitle": "BrainDockはAIを使って集中力を高め、より賢く働き、集中力を強化します。",
+    "downloadBtn": "ダウンロード",
+    "learnMoreBtn": "詳細を見る",
+    "note": "macOS、Windows、Linuxに対応。"
+  },
+  "whyBrainDock": {
+    "sectionTitle": "BrainDockを使う理由",
+    "benefits": {
+      "focusWhenItCounts": {
+        "title": "大切な時に集中",
+        "explanation": "BrainDockは勉強、仕事、締め切り時に集中を維持し、気が散ったときも素早く戻れるようサポートします。"
+      },
+      "enableDeepWork": {
+        "title": "ディープワークを実現",
+        "explanation": "中断されない集中時間を守り、明確に考え、賢く働き、重要なタスクをより早く完了できます。"
+      },
+      "distractionsToAwareness": {
+        "title": "気づきへの転換",
+        "explanation": "いつ、なぜ気が散るのかを認識し、より早くリセットして健康的なスクリーン習慣を築けます。"
+      },
+      "tailoredAiGuidance": {
+        "title": "パーソナライズされたAIガイダンス",
+        "explanation": "AI駆動のナッジがあなたの目標とルーティンに適応し、押し付けがましくない個人的なサポートを提供します。"
+      },
+      "buildLastingFocus": {
+        "title": "持続する集中力を構築",
+        "explanation": "継続的な練習を通じてより強い注意力を構築し、より長い時間集中しやすくなります。"
+      },
+      "confidenceFromResults": {
+        "title": "結果からの自信",
+        "explanation": "重要なことをより多く達成すると、日々と目標をコントロールしている感覚が増し、自信が生まれます。"
+      }
+    }
+  },
+  "features": {
+    "sectionTitle": "機能",
+    "cards": {
+      "timedSessions": {
+        "title": "タイマーセッション",
+        "description": "準備ができたらいつでもセッションを開始。BrainDockが作業している時にフォーカスをリアルタイムで見守ります。"
+      },
+      "attentionCoach": {
+        "title": "集中コーチ",
+        "description": "デバイスが注意をそらした時や、席を離れた時にやさしくお知らせします。"
+      },
+      "screenAwareness": {
+        "title": "スクリーン認識",
+        "description": "オプションでアクティブウィンドウを追跡し、気が散るアプリケーションやウェブサイトへの切り替えを検出します。"
+      },
+      "detailedReports": {
+        "title": "パフォーマンスレポート",
+        "description": "集中スコア、気が散った時間、アクティビティログをハイライトした詳細なPDFレポートを生成します。"
+      }
+    }
+  },
+  "howItWorks": {
+    "sectionTitle": "仕組み",
+    "sectionSubtitle": "より良い集中のための3つの簡単なステップ。",
+    "steps": {
+      "step1": {
+        "title": "アプリをダウンロード",
+        "description": "お使いのOS（macOS、Windows、Linux）に応じてダウンロードボタンをクリックしてください。設定を構成すれば準備完了です！"
+      },
+      "step2": {
+        "title": "セッションを開始",
+        "description": "Startをクリックしてセッションを開始し、カメラビューを調整して作業を始めます。BrainDockはバックグラウンドで静かに動作します。いつでも一時停止または終了できます。"
+      },
+      "step3": {
+        "title": "レポート生成",
+        "description": "各セッション終了後に、セッションの分析とインサイトを含むPDFレポートが利用可能になります。"
+      }
+    }
+  },
+  "download": {
+    "sectionTitle": "BrainDockをダウンロード",
+    "sectionSubtitle": "macOS、Windows、Linuxに対応。",
+    "macOS": "macOS",
+    "windows": "Windows",
+    "linux": "Linux"
+  },
+  "faq": {
+    "sectionTitle": "よくある質問",
+    "items": {
+      "privacy": {
+        "question": "BrainDockはプライバシーを侵害しますか？",
+        "answer": "いいえ、BrainDockを開発する際、プライバシーは最優先事項でした。何も永久に保存せず、顔認識も使用せず、セッションデータはデバイス上に残ります。BrainDockは集中を助けるためにあり、個人情報を収集するためではありません。"
+      },
+      "screenSharing": {
+        "question": "画面共有はプライベートで安全ですか？",
+        "answer": "はい、完全に安全です。画面共有は完全にコンピュータ上で行われ、オフラインでも動作します。BrainDockはアクティブウィンドウの名前のみを読み取り、気を散らすリストと照合します。スクリーンショットは撮影されず、録画もされず、これに関するデータはマシンから外部に送信されません。"
+      },
+      "whatCanNotice": {
+        "question": "セッション中にBrainDockは何に気づきますか？",
+        "answer": "BrainDockはセッション中の活動に気づくことができます。例えば、席を離れること、スマートフォン、タブレット、ゲームコントローラーなどの使用による気が散る行動などです。最も良い点は、画面の前で実際に使用している時だけこれらを検出し、近くにあるだけでは反応しないことです。"
+      },
+      "internetConnection": {
+        "question": "BrainDockにはインターネット接続が必要ですか？",
+        "answer": "画面共有はコンピュータ上でローカルに実行されるため、完全にオフラインで動作します。AI搭載の気が散る行動検出には、スマートフォンやタブレットなどのデバイスを識別するためにインターネット接続が必要です。ただし、サーバーにデータが永久に保存されることはなく、共有に使用されたデータは処理後に破棄されます。"
+      },
+      "cloudData": {
+        "question": "データはクラウドにアップロードされますか？",
+        "answer": "セッション統計、レポート、個人データはコンピュータ上に残ります。気が散る行動検出では、フレームは一時的にAIモデルに送信されて分析され、その後削除されます。データは永久に保存されず、セッションの記録も保持しません。"
+      }
+    }
+  },
+  "footer": {
+    "brandDescription": "より良い習慣を築くAI搭載フォーカスアシスタント。",
+    "legalTitle": "法的情報",
+    "privacyPolicy": "プライバシーポリシー",
+    "termsOfService": "利用規約",
+    "contactTitle": "お問い合わせ",
+    "copyright": "© 2026 BrainDock. All rights reserved."
+  },
+  "popup": {
+    "comingSoon": "近日公開！"
+  },
+  "language": {
+    "en": "English",
+    "ja": "日本語 (Japan)",
+    "de": "Deutsch (Germany)",
+    "fr": "Français (France)",
+    "zh": "中文 (China)",
+    "hi": "हिन्दी (India)"
+  }
+}

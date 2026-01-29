@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "title": {
+      "index": "BrainDock - Assistant de concentration alimenté par l'IA",
+      "privacy": "Politique de confidentialité - BrainDock",
+      "terms": "Conditions générales - BrainDock"
+    }
+  },
+  "nav": {
+    "whyBrainDock": "Pourquoi BrainDock",
+    "features": "Fonctionnalités",
+    "howItWorks": "Comment ça marche",
+    "contact": "Nous contacter",
+    "download": "Télécharger"
+  },
+  "hero": {
+    "title": "Maîtrisez votre attention",
+    "subtitle": "BrainDock utilise l'IA pour vous aider à vous concentrer, travailler plus intelligemment et renforcer votre concentration.",
+    "downloadBtn": "Télécharger",
+    "learnMoreBtn": "En savoir plus",
+    "note": "Disponible pour macOS, Windows et Linux."
+  },
+  "whyBrainDock": {
+    "sectionTitle": "Pourquoi utiliser BrainDock ?",
+    "benefits": {
+      "focusWhenItCounts": {
+        "title": "Concentrez-vous quand ça compte",
+        "explanation": "BrainDock vous aide à rester sur la bonne voie pendant les études, les sessions de travail et les délais; en minimisant les distractions et en vous ramenant rapidement quand l'attention dérive."
+      },
+      "enableDeepWork": {
+        "title": "Permettre le travail en profondeur",
+        "explanation": "Protège le temps de concentration ininterrompu pour que vous puissiez penser clairement, travailler plus intelligemment et terminer les tâches importantes plus rapidement."
+      },
+      "distractionsToAwareness": {
+        "title": "Des distractions à la conscience",
+        "explanation": "Vous aide à reconnaître quand et pourquoi vous êtes distrait, afin que vous puissiez vous recentrer plus vite et construire des habitudes d'écran plus saines."
+      },
+      "tailoredAiGuidance": {
+        "title": "Guidage IA personnalisé",
+        "explanation": "Les rappels alimentés par l'IA s'adaptent à vos objectifs et routines, offrant un soutien qui semble personnel; pas intrusif."
+      },
+      "buildLastingFocus": {
+        "title": "Construire une concentration durable",
+        "explanation": "Développe une attention plus forte grâce à une pratique constante, facilitant la concentration sur de plus longues périodes."
+      },
+      "confidenceFromResults": {
+        "title": "La confiance par les résultats",
+        "explanation": "En accomplissant plus de ce qui compte, vous vous sentirez plus en contrôle de votre journée et de vos objectifs; et gagnerez plus de confiance en VOUS."
+      }
+    }
+  },
+  "features": {
+    "sectionTitle": "Fonctionnalités",
+    "cards": {
+      "timedSessions": {
+        "title": "Sessions minutées",
+        "description": "Lancez une session quand vous êtes prêt. BrainDock suit votre concentration en temps réel lorsque vous travaillez."
+      },
+      "attentionCoach": {
+        "title": "Coach d'attention",
+        "description": "Remarque doucement quand les appareils détournent votre attention ou quand vous vous éloignez de votre bureau."
+      },
+      "screenAwareness": {
+        "title": "Conscience de l'écran",
+        "description": "Suit optionnellement la fenêtre active pour identifier les passages vers des applications ou sites web distrayants."
+      },
+      "detailedReports": {
+        "title": "Rapport de performance",
+        "description": "Générez des rapports PDF détaillés avec des aperçus de votre session mettant en évidence vos scores de concentration, distractions et journaux d'activité."
+      }
+    }
+  },
+  "howItWorks": {
+    "sectionTitle": "Comment ça marche",
+    "sectionSubtitle": "Trois étapes simples pour une meilleure concentration.",
+    "steps": {
+      "step1": {
+        "title": "Télécharger l'application",
+        "description": "Cliquez sur le bouton Télécharger selon votre système d'exploitation (macOS, Windows, Linux). Configurez vos paramètres et c'est parti !"
+      },
+      "step2": {
+        "title": "Démarrer une session",
+        "description": "Cliquez sur Démarrer pour commencer votre session, alignez votre vue caméra et commencez à travailler. BrainDock fonctionne silencieusement en arrière-plan. Vous pouvez mettre en pause ou arrêter à tout moment."
+      },
+      "step3": {
+        "title": "Rapport généré",
+        "description": "Un rapport PDF contenant les aperçus et analyses de session est disponible après chaque session."
+      }
+    }
+  },
+  "download": {
+    "sectionTitle": "Télécharger BrainDock",
+    "sectionSubtitle": "Disponible pour macOS, Windows et Linux.",
+    "macOS": "macOS",
+    "windows": "Windows",
+    "linux": "Linux"
+  },
+  "faq": {
+    "sectionTitle": "Questions fréquemment posées",
+    "items": {
+      "privacy": {
+        "question": "BrainDock viole-t-il ma vie privée ?",
+        "answer": "Non, la confidentialité était une priorité absolue lorsque nous avons créé BrainDock. Nous ne stockons rien de façon permanente, nous n'utilisons pas la reconnaissance faciale, et vos données de session restent sur votre appareil. BrainDock est là pour vous aider à vous concentrer, pas pour collecter vos informations personnelles."
+      },
+      "screenSharing": {
+        "question": "Le partage d'écran est-il privé et sécurisé ?",
+        "answer": "Oui, complètement. Le partage d'écran se fait entièrement sur votre ordinateur et fonctionne hors ligne. BrainDock lit uniquement le nom de votre fenêtre active pour le comparer à votre liste de distractions. Aucune capture d'écran n'est prise, aucun enregistrement n'est effectué, et rien de tout cela ne quitte votre machine."
+      },
+      "whatCanNotice": {
+        "question": "Que peut remarquer BrainDock pendant votre session ?",
+        "answer": "BrainDock peut remarquer les activités pendant votre session. Par exemple, quand vous vous éloignez de votre bureau, les distractions comme l'utilisation de votre téléphone, tablettes, manettes de jeu, etc. Le meilleur ? Il ne les signale que lorsque vous les utilisez réellement devant votre écran, pas seulement parce qu'ils sont à proximité."
+      },
+      "internetConnection": {
+        "question": "BrainDock nécessite-t-il une connexion Internet ?",
+        "answer": "Le partage d'écran fonctionne entièrement hors ligne, car il s'exécute localement sur votre ordinateur. La détection de distractions alimentée par l'IA nécessite une connexion Internet pour identifier des appareils comme les téléphones et tablettes; cependant, aucune donnée n'est stockée de façon permanente sur les serveurs, et toutes les données utilisées pour le partage sont supprimées après traitement."
+      },
+      "cloudData": {
+        "question": "Mes données sont-elles téléchargées vers le Cloud ?",
+        "answer": "Vos statistiques de session, rapports et données personnelles restent sur votre ordinateur. Pour la détection de distractions, les images sont temporairement transmises à nos modèles d'IA pour analyse puis supprimées. Aucune donnée n'est stockée de façon permanente, et nous ne conservons pas d'enregistrements de vos sessions."
+      }
+    }
+  },
+  "footer": {
+    "brandDescription": "Assistant de concentration alimenté par l'IA qui vous aide à construire de meilleures habitudes.",
+    "legalTitle": "Mentions légales",
+    "privacyPolicy": "Politique de confidentialité",
+    "termsOfService": "Conditions d'utilisation",
+    "contactTitle": "Contact",
+    "copyright": "© 2026 BrainDock. Tous droits réservés."
+  },
+  "popup": {
+    "comingSoon": "Bientôt disponible !"
+  },
+  "language": {
+    "en": "English",
+    "ja": "日本語 (Japan)",
+    "de": "Deutsch (Germany)",
+    "fr": "Français (France)",
+    "zh": "中文 (China)",
+    "hi": "हिन्दी (India)"
+  }
+}

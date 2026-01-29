@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "title": {
+      "index": "BrainDock - KI-gestützter Fokus-Assistent",
+      "privacy": "Datenschutzrichtlinie - BrainDock",
+      "terms": "Allgemeine Geschäftsbedingungen - BrainDock"
+    }
+  },
+  "nav": {
+    "whyBrainDock": "Warum BrainDock",
+    "features": "Funktionen",
+    "howItWorks": "So funktioniert es",
+    "contact": "Kontakt",
+    "download": "Herunterladen"
+  },
+  "hero": {
+    "title": "Behalte deine Aufmerksamkeit",
+    "subtitle": "BrainDock nutzt KI, um dir zu helfen, dich zu konzentrieren, intelligenter zu arbeiten und die Konzentration zu stärken.",
+    "downloadBtn": "Herunterladen",
+    "learnMoreBtn": "Mehr erfahren",
+    "note": "Verfügbar für macOS, Windows und Linux."
+  },
+  "whyBrainDock": {
+    "sectionTitle": "Warum BrainDock nutzen?",
+    "benefits": {
+      "focusWhenItCounts": {
+        "title": "Fokus wenn es zählt",
+        "explanation": "BrainDock hilft dir, beim Lernen, bei Arbeitssitzungen und Deadlines auf Kurs zu bleiben; minimiert Ablenkungen und führt dich schnell zurück, wenn die Aufmerksamkeit nachlässt."
+      },
+      "enableDeepWork": {
+        "title": "Deep Work ermöglichen",
+        "explanation": "Schützt ununterbrochene Fokuszeit, damit du klar denken, intelligenter arbeiten und wichtige Aufgaben schneller erledigen kannst."
+      },
+      "distractionsToAwareness": {
+        "title": "Von Ablenkungen zu Bewusstsein",
+        "explanation": "Hilft dir zu erkennen, wann und warum du abgelenkt wirst, damit du dich schneller erholen und gesündere Bildschirmgewohnheiten aufbauen kannst."
+      },
+      "tailoredAiGuidance": {
+        "title": "Maßgeschneiderte KI-Führung",
+        "explanation": "KI-gesteuerte Impulse passen sich deinen Zielen und Routinen an und bieten Unterstützung, die persönlich wirkt; nicht aufdringlich."
+      },
+      "buildLastingFocus": {
+        "title": "Dauerhaften Fokus aufbauen",
+        "explanation": "Baut durch konsequentes Üben eine stärkere Aufmerksamkeit auf, sodass es leichter wird, sich länger zu konzentrieren."
+      },
+      "confidenceFromResults": {
+        "title": "Selbstvertrauen durch Ergebnisse",
+        "explanation": "Wenn du mehr von dem erreichst, was wichtig ist, fühlst du dich mehr in Kontrolle über deinen Tag und deine Ziele; und gewinnst mehr Vertrauen in DICH."
+      }
+    }
+  },
+  "features": {
+    "sectionTitle": "Funktionen",
+    "cards": {
+      "timedSessions": {
+        "title": "Zeitsitzungen",
+        "description": "Starte eine Sitzung, wann immer du bereit bist. BrainDock begleitet deinen Fokus in Echtzeit, wenn du arbeitest."
+      },
+      "attentionCoach": {
+        "title": "Aufmerksamkeits-Coach",
+        "description": "Bemerkt sanft, wenn Geräte deine Aufmerksamkeit ablenken oder wenn du vom Schreibtisch aufstehst."
+      },
+      "screenAwareness": {
+        "title": "Bildschirm-Bewusstsein",
+        "description": "Verfolgt optional das aktive Fenster, um Wechsel zu ablenkenden Anwendungen oder Websites zu erkennen."
+      },
+      "detailedReports": {
+        "title": "Leistungsbericht",
+        "description": "Erstelle detaillierte PDF-Berichte mit Einblicken in deine Sitzung, die deine Fokus-Werte, Ablenkungen und Aktivitätsprotokolle hervorheben."
+      }
+    }
+  },
+  "howItWorks": {
+    "sectionTitle": "So funktioniert es",
+    "sectionSubtitle": "Drei einfache Schritte zu besserem Fokus.",
+    "steps": {
+      "step1": {
+        "title": "App herunterladen",
+        "description": "Klicke auf den Download-Button entsprechend deinem Betriebssystem (macOS, Windows, Linux). Konfiguriere deine Einstellungen und du kannst loslegen!"
+      },
+      "step2": {
+        "title": "Sitzung starten",
+        "description": "Klicke auf Start, um deine Sitzung zu beginnen, richte deine Kamera aus und beginne zu arbeiten. BrainDock läuft leise im Hintergrund. Du kannst jederzeit pausieren oder beenden."
+      },
+      "step3": {
+        "title": "Bericht erstellt",
+        "description": "Ein PDF-Bericht mit Sitzungseinblicken und Analysen ist nach jeder Sitzung verfügbar."
+      }
+    }
+  },
+  "download": {
+    "sectionTitle": "BrainDock herunterladen",
+    "sectionSubtitle": "Verfügbar für macOS, Windows und Linux.",
+    "macOS": "macOS",
+    "windows": "Windows",
+    "linux": "Linux"
+  },
+  "faq": {
+    "sectionTitle": "Häufig gestellte Fragen",
+    "items": {
+      "privacy": {
+        "question": "Verletzt BrainDock meine Privatsphäre?",
+        "answer": "Nein, Datenschutz hatte höchste Priorität als wir BrainDock entwickelt haben. Wir speichern nichts dauerhaft, wir verwenden keine Gesichtserkennung und deine Sitzungsdaten bleiben auf deinem Gerät. BrainDock ist da, um dir beim Fokussieren zu helfen, nicht um deine persönlichen Daten zu sammeln."
+      },
+      "screenSharing": {
+        "question": "Ist die Bildschirmfreigabe privat und sicher?",
+        "answer": "Ja, vollständig. Die Bildschirmfreigabe erfolgt komplett auf deinem Computer und funktioniert offline. BrainDock liest nur den Namen deines aktiven Fensters, um ihn mit deiner Ablenkungsliste abzugleichen. Es werden keine Screenshots gemacht, keine Aufnahmen erstellt und nichts davon verlässt deinen Computer."
+      },
+      "whatCanNotice": {
+        "question": "Was kann BrainDock während deiner Sitzung bemerken?",
+        "answer": "BrainDock kann Aktivitäten während deiner Sitzung bemerken. Zum Beispiel wenn du vom Schreibtisch aufstehst, Ablenkungen wie die Nutzung deines Handys, Tablets, Gamecontrollers usw. Das Beste daran ist, dass es diese nur markiert, wenn du sie tatsächlich vor deinem Bildschirm benutzt, nicht nur weil sie in der Nähe sind."
+      },
+      "internetConnection": {
+        "question": "Benötigt BrainDock eine Internetverbindung?",
+        "answer": "Die Bildschirmfreigabe funktioniert vollständig offline, da sie lokal auf deinem Computer läuft. Die KI-gestützte Ablenkungserkennung benötigt eine Internetverbindung, um Geräte wie Handys und Tablets zu identifizieren; jedoch werden keine Daten dauerhaft auf Servern gespeichert und alle Daten werden nach der Verarbeitung verworfen."
+      },
+      "cloudData": {
+        "question": "Werden meine Daten in die Cloud hochgeladen?",
+        "answer": "Deine Sitzungsstatistiken, Berichte und persönlichen Daten bleiben auf deinem Computer. Für die Ablenkungserkennung werden Frames vorübergehend an unsere KI-Modelle zur Analyse übertragen und dann gelöscht. Es werden keine Daten dauerhaft gespeichert und wir behalten keine Aufzeichnungen deiner Sitzungen."
+      }
+    }
+  },
+  "footer": {
+    "brandDescription": "KI-gestützter Fokus-Assistent, der dir hilft, bessere Gewohnheiten aufzubauen.",
+    "legalTitle": "Rechtliches",
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "termsOfService": "Nutzungsbedingungen",
+    "contactTitle": "Kontakt",
+    "copyright": "© 2026 BrainDock. Alle Rechte vorbehalten."
+  },
+  "popup": {
+    "comingSoon": "Demnächst verfügbar!"
+  },
+  "language": {
+    "en": "English",
+    "ja": "日本語 (Japan)",
+    "de": "Deutsch (Germany)",
+    "fr": "Français (France)",
+    "zh": "中文 (China)",
+    "hi": "हिन्दी (India)"
+  }
+}

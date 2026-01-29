@@ -28,12 +28,12 @@
       </a>
       
       <div class="nav-links">
-        <a href="index.html#features">Features</a>
-        <a href="index.html#how-it-works">How It Works</a>
-        <a href="index.html#contact">Contact Us</a>
+        <a href="index.html#features" data-i18n="nav.features">Why Use BrainDock</a>
+        <a href="index.html#how-it-works" data-i18n="nav.howItWorks">How It Works</a>
+        <a href="index.html#contact" data-i18n="nav.contact">Contact Us</a>
       </div>
       
-      <a href="index.html#download" class="btn btn-primary nav-cta">Download</a>
+      <a href="index.html#download" class="btn btn-primary nav-cta" data-i18n="nav.download">Download</a>
       
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span>
@@ -43,10 +43,10 @@
     </div>
     
     <div class="nav-mobile" id="nav-mobile">
-      <a href="index.html#features">Features</a>
-      <a href="index.html#how-it-works">How It Works</a>
-      <a href="index.html#contact">Contact Us</a>
-      <a href="index.html#download">Download</a>
+      <a href="index.html#features" data-i18n="nav.features">Why Use BrainDock</a>
+      <a href="index.html#how-it-works" data-i18n="nav.howItWorks">How It Works</a>
+      <a href="index.html#contact" data-i18n="nav.contact">Contact Us</a>
+      <a href="index.html#download" data-i18n="nav.download">Download</a>
     </div>
   </nav>
 
@@ -398,29 +398,53 @@
       <div class="footer-content">
         <div class="footer-brand">
           <img src="assets/logo_with_text.png" alt="BrainDock">
-          <p>AI-powered focus assistant that helps you build better habits.</p>
+          <p data-i18n="footer.brandDescription">AI-powered focus assistant that helps you build better habits.</p>
         </div>
         
         <div class="footer-links">
-          <h4>Legal</h4>
-          <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>
-          <a href="terms.html" target="_blank" rel="noopener">Terms of Service</a>
+          <h4 data-i18n="footer.legalTitle">Legal</h4>
+          <a href="privacy.html" target="_blank" rel="noopener" data-i18n="footer.privacyPolicy">Privacy Policy</a>
+          <a href="terms.html" target="_blank" rel="noopener" data-i18n="footer.termsOfService">Terms of Service</a>
         </div>
         
         <div class="footer-contact" id="contact">
-          <h4>Contact</h4>
+          <h4 data-i18n="footer.contactTitle">Contact</h4>
           <a href="mailto:morayyajain@gmail.com">morayyajain@gmail.com</a>
           <a href="mailto:morayyajain@restartmedia.org">morayyajain@restartmedia.org</a>
         </div>
       </div>
       
       <div class="footer-bottom">
-        <p>&copy; 2026 BrainDock. All rights reserved.</p>
+        <p data-i18n="footer.copyright">&copy; 2026 BrainDock. All rights reserved.</p>
+        
+        <!-- Language Selector -->
+        <div class="language-selector">
+          <button class="language-toggle" aria-expanded="false" aria-haspopup="listbox">
+            <svg class="globe-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span class="language-current">English</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+          <ul class="language-dropdown" role="listbox">
+            <li role="option" data-lang="en">English</li>
+            <li role="option" data-lang="ja">日本語 (Japan)</li>
+            <li role="option" data-lang="de">Deutsch (Germany)</li>
+            <li role="option" data-lang="fr">Français (France)</li>
+            <li role="option" data-lang="zh">中文 (China)</li>
+            <li role="option" data-lang="hi">हिन्दी (India)</li>
+          </ul>
+        </div>
       </div>
     </div>
   </footer>
 
   <!-- Scripts -->
+  <script src="js/i18n.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
