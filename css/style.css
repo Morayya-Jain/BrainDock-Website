@@ -8,7 +8,11 @@
 :root {
   /* Colors */
   --bg-primary: #F9F8F4;
+  --bg-primary-dark: #C7C6C3;  /* 20% darker for gradient left */
+  --bg-primary-light: #FDFCF9;  /* 3% lighter for gradient right */
   --bg-secondary: #F2F0EB;
+  --bg-secondary-dark: #C2C0BC;  /* 20% darker for gradient left */
+  --bg-secondary-light: #F8F6F1;  /* 3% lighter for gradient right */
   --bg-surface: #FFFFFF;
   --text-primary: #1C1C1E;
   --text-secondary: rgba(60, 60, 67, 0.6);
@@ -71,7 +75,7 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: var(--text-primary);
-  background-color: var(--bg-primary);
+  background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
 }
 
 img {
@@ -364,16 +368,16 @@ p {
   left: 0;
   right: 0;
   z-index: 100;
-  background-color: rgba(249, 248, 244, 0.95); /* Slightly more opaque fallback */
+  background: linear-gradient(to right, rgba(199, 198, 195, 0.95) 0%, rgba(253, 252, 249, 0.95) 45%); /* Gradient with fallback */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid #E5E5EA;
 }
 
 /* Enhance background for browsers that support backdrop-filter */
 @supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)) {
   .nav {
-    background-color: rgba(249, 248, 244, 0.9);
+    background: linear-gradient(to right, rgba(199, 198, 195, 0.9) 0%, rgba(253, 252, 249, 0.9) 45%);
   }
 }
 
@@ -447,7 +451,7 @@ p {
   top: 80px;
   left: 0;
   right: 0;
-  background-color: var(--bg-surface);
+  background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
   border-bottom: 1px solid var(--border-subtle);
   padding: var(--space-l);
 }
@@ -498,6 +502,7 @@ p {
   justify-content: center;
   padding-top: 80px; /* Account for fixed nav */
   padding-bottom: clamp(var(--space-l), 4vh, var(--space-xxl));
+  background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
 }
 
 /* Hero container padding - responsive */
@@ -621,14 +626,14 @@ p {
    Why Use BrainDock Section
    -------------------------------------------------------------------------- */
 .why-braindock {
-  background-color: var(--bg-secondary);
+  background: linear-gradient(to right, var(--bg-secondary-dark) 0%, var(--bg-secondary-light) 45%);
 }
 
 /* --------------------------------------------------------------------------
    Features Section
    -------------------------------------------------------------------------- */
 .features {
-  background-color: var(--bg-primary);
+  background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
 }
 
 .features-grid {
@@ -695,7 +700,7 @@ p {
    How It Works Section
    -------------------------------------------------------------------------- */
 .how-it-works {
-  background-color: var(--bg-secondary);
+  background: linear-gradient(to right, var(--bg-secondary-dark) 0%, var(--bg-secondary-light) 45%);
 }
 
 .steps {
@@ -750,7 +755,7 @@ p {
    FAQ Section
    -------------------------------------------------------------------------- */
 .faq {
-  background-color: var(--bg-secondary);
+  background: linear-gradient(to right, var(--bg-secondary-dark) 0%, var(--bg-secondary-light) 45%);
 }
 
 .faq-list {
@@ -834,7 +839,7 @@ p {
    Contact Section
    -------------------------------------------------------------------------- */
 .contact {
-  background-color: var(--bg-secondary);
+  background: linear-gradient(to right, var(--bg-secondary-dark) 0%, var(--bg-secondary-light) 45%);
 }
 
 .contact-info {
@@ -893,7 +898,7 @@ p {
    Download Section
    -------------------------------------------------------------------------- */
 .download {
-  background-color: var(--bg-primary);
+  background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
 }
 
 .download-buttons {
