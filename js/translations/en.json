@@ -6,6 +6,481 @@
       "terms": "Terms and Conditions - BrainDock"
     }
   },
+  "legal": {
+    "backToTop": "Back to top",
+    "privacy": {
+      "pageTitle": "Privacy Policy",
+      "pageMeta": "BrainDock Focus Assistance Application - Last Updated: January 2026",
+      "section1": {
+        "title": "1. Introduction",
+        "content": "<p>BrainDock (\"we\", \"us\", \"our\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our focus assistance application (\"the Application\").</p><p>This policy is designed to comply with the Australian Privacy Principles (APPs) under the Privacy Act 1988 (Cth), as well as provide transparency for users in other jurisdictions including the European Union (GDPR) and United Kingdom (UK GDPR).</p><p><strong>Please read this Privacy Policy carefully.</strong> By using the Application, you consent to the practices described in this policy.</p>"
+      },
+      "section2": {
+        "title": "2. About Us",
+        "content": "<p>BrainDock is a focus assistance application that helps users observe their study and work sessions using camera-based presence awareness.</p><p><strong>Contact Information:</strong></p><ul><li>Email: <a href=\"mailto:morayya@thebraindock.com\">morayya@thebraindock.com</a> or <a href=\"mailto:help.thebraindock@gmail.com\">help.thebraindock@gmail.com</a></li><li>Website: thebraindock.com</li></ul>"
+      },
+      "section3": {
+        "title": "3. Information We Collect",
+        "intro": "<p>We collect different types of information to provide and improve our service.</p>",
+        "subsection1": {
+          "title": "3.1 Camera Frame Data (Processed, Not Stored)",
+          "content": "<p><strong>What we capture:</strong></p><ul><li>Visual frames from your device's camera during active sessions started by you.</li></ul><p><strong>What we analyse:</strong></p><ul><li>Whether a person is present at the desk</li><li>Whether the person appears to be engaged with distraction devices (phones, tablets, game controllers)</li><li>General presence indicators (at desk vs. away)</li></ul><p><strong>What we do NOT analyse or collect:</strong></p><ul><li>Your identity or facial features for recognition purposes</li><li>Biometric templates or biometric identifiers</li><li>Audio from your microphone</li><li>Keystrokes or typing content</li></ul><p><strong>Processing:</strong></p><ul><li>Frames are captured approximately every 3 seconds during active sessions only</li><li>Frames are transmitted to our AI processing providers (OpenAI or Google Gemini) for analysis</li><li>Frames are NOT stored locally on your device</li><li>Frames are NOT stored on our servers</li></ul>"
+        },
+        "subsection2": {
+          "title": "3.2 Screen Awareness Data (Processed Locally On Your Device)",
+          "content": "<p><strong>What we observe:</strong></p><ul><li>Active window and browser tab titles (e.g., \"YouTube - Google Chrome\")</li><li>Browser URLs when detectable</li><li>Active application names</li></ul><p><strong>How it works:</strong></p><ul><li>Window titles and URLs are compared against your list of distraction apps/websites</li><li>This processing happens <strong>locally on your device</strong></li><li>Window titles and URLs are NOT sent to third-party services (unless AI Screenshot Analysis is enabled)</li></ul><p><strong>What we do NOT observe:</strong></p><ul><li>Content within windows or applications</li><li>Text you type or read</li><li>Files you open or create</li></ul>"
+        },
+        "subsection3": {
+          "title": "3.3 AI Screenshot Analysis (User-Controlled)",
+          "content": "<p><strong>This feature is disabled by default.</strong> You must explicitly enable it in Application settings.</p><p><strong>When enabled:</strong></p><ul><li>The Application captures screenshots of your screen</li><li>Screenshots are transmitted to our AI providers (OpenAI or Google Gemini) for analysis</li><li>AI analyses the screenshot to identify distraction content</li><li>Screenshots are processed in real-time and <strong>NOT stored</strong> on your device or our servers</li></ul><p><strong>What the AI analyses:</strong></p><ul><li>Whether distraction apps/websites are visible</li><li>General screen content category (work, entertainment, social media, etc.)</li></ul><p><strong>What the AI does NOT extract:</strong></p><ul><li>Text content or readable information from screenshots</li><li>Personal data visible on screen</li><li>File names, passwords, or sensitive information</li></ul><p><strong>Important warnings:</strong></p><ul><li>Screenshots may capture sensitive information visible on your screen</li><li>Ensure no confidential information is visible when this feature is enabled</li><li>You can disable this feature at any time</li></ul>"
+        },
+        "subsection4": {
+          "title": "3.4 Session Log Data (Local)",
+          "content": "<p>The following data is generated and stored locally on your device:</p><table><thead><tr><th>Data Type</th><th>Description</th><th>Storage Location</th></tr></thead><tbody><tr><td>Session timestamps</td><td>Start and end times of focus sessions</td><td>Your device</td></tr><tr><td>Event logs</td><td>Timestamps of state changes (present, away, distraction identified)</td><td>Your device</td></tr><tr><td>Focus statistics</td><td>Calculated metrics (focus time, distraction count, etc.)</td><td>Your device</td></tr><tr><td>Session reports</td><td>Generated PDF summaries</td><td>Your device (Downloads folder)</td></tr></tbody></table>"
+        },
+        "subsection5": {
+          "title": "3.5 Licence and Payment Data",
+          "content": "<p>When you purchase the Application:</p><table><thead><tr><th>Data Type</th><th>Collected By</th><th>Purpose</th></tr></thead><tbody><tr><td>Email address</td><td>Stripe (payment processor)</td><td>Payment confirmation, licence delivery</td></tr><tr><td>Payment details</td><td>Stripe</td><td>Process payment</td></tr><tr><td>Licence key</td><td>Stored locally</td><td>Validate your licence</td></tr><tr><td>Terms acceptance</td><td>Stripe</td><td>Record of consent</td></tr></tbody></table><p>We do not directly collect or store your payment card details.</p>"
+        },
+        "subsection6": {
+          "title": "3.6 Technical and Diagnostic Data",
+          "content": "<p>We may collect minimal technical data for troubleshooting:</p><ul><li>Error logs (may include timestamps, error messages)</li><li>Application version</li><li>Operating system type</li></ul><p><strong>Note:</strong> We design our logging to avoid capturing personal information. However, error logs may inadvertently contain personal data in some circumstances.</p>"
+        }
+      },
+      "section4": {
+        "title": "4. Explicit Statement: No Biometric Data Collection",
+        "content": "<p><strong>We explicitly confirm that BrainDock does NOT collect biometric information.</strong></p><p>Specifically, we do NOT:</p><ul><li>Perform facial recognition or facial identification</li><li>Create facial geometry maps or templates</li><li>Store biometric identifiers or biometric templates</li><li>Use biometric information for automated biometric verification or identification</li><li>Match or verify user identity using biological characteristics</li><li>Create profiles that could uniquely identify you</li></ul><p>Our AI processing analyses only:</p><ul><li>General presence (is a person visible?)</li><li>Position (is the person at the desk or away?)</li><li>Object identification (is a phone/tablet/controller being actively used?)</li></ul><p>This is fundamentally different from biometric processing. We process the content of frames to identify objects and presence. We do not extract or store any biometric characteristics.</p>"
+      },
+      "section5": {
+        "title": "5. How We Use Your Information",
+        "content": "<p>We use collected information for the following purposes:</p><table><thead><tr><th>Purpose</th><th>Legal Basis (GDPR)</th><th>APP Reference</th></tr></thead><tbody><tr><td>Provide focus assistance functionality</td><td>Contract performance / Consent</td><td>APP 3, 6</td></tr><tr><td>Generate session reports</td><td>Contract performance</td><td>APP 6</td></tr><tr><td>Process payments</td><td>Contract performance</td><td>APP 3, 6</td></tr><tr><td>Validate licences</td><td>Legitimate interest</td><td>APP 6</td></tr><tr><td>Improve the Application</td><td>Legitimate interest</td><td>APP 6</td></tr><tr><td>Respond to support requests</td><td>Contract performance</td><td>APP 6</td></tr><tr><td>Comply with legal obligations</td><td>Legal obligation</td><td>APP 6</td></tr></tbody></table>"
+      },
+      "section6": {
+        "title": "6. Disclosure to Third Parties",
+        "intro": "",
+        "subsection1": {
+          "title": "6.1 AI Processing Providers",
+          "intro": "<p>We use third-party AI services for image analysis. <strong>Only one provider is used at a time</strong> during any given session, but we may switch between providers. Our current providers are:</p>",
+          "openai": {
+            "title": "6.1.1 OpenAI",
+            "content": "<p><strong>What is disclosed:</strong> Camera frames during active sessions</p><p><strong>Why:</strong> To perform AI-based presence and object identification</p><p><strong>Location:</strong> United States</p><p><strong>Their data practices:</strong></p><ul><li>OpenAI may retain API data as per OpenAI's policy</li><li>OpenAI Privacy Policy: <a href=\"https://openai.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://openai.com/privacy</a></li><li>OpenAI API Data Usage: <a href=\"https://openai.com/policies/api-data-usage-policies\" target=\"_blank\" rel=\"noopener noreferrer\">https://openai.com/policies/api-data-usage-policies</a></li></ul>"
+          },
+          "google": {
+            "title": "6.1.2 Google (Gemini)",
+            "content": "<p><strong>What is disclosed:</strong> Camera frames during active sessions</p><p><strong>Why:</strong> To perform AI-based presence and object identification</p><p><strong>Location:</strong> United States</p><p><strong>Their data practices:</strong></p><ul><li>Google's Gemini API may retain data for safety observation and abuse prevention</li><li>Google Privacy Policy: <a href=\"https://policies.google.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://policies.google.com/privacy</a></li><li>Google Cloud Data Processing Terms: <a href=\"https://cloud.google.com/terms/data-processing-terms\" target=\"_blank\" rel=\"noopener noreferrer\">https://cloud.google.com/terms/data-processing-terms</a></li><li>Gemini API Terms: <a href=\"https://ai.google.dev/gemini-api/terms\" target=\"_blank\" rel=\"noopener noreferrer\">https://ai.google.dev/gemini-api/terms</a></li></ul>"
+          },
+          "safeguards": "<p><strong>Our safeguards (apply to all providers):</strong></p><ul><li>We use API-only services (not consumer products)</li><li>We send only the minimum data required for analysis</li><li>We use optimised settings to reduce data transmission where available</li><li>We do not send identifying metadata with frames</li></ul>"
+        },
+        "subsection2": {
+          "title": "6.2 Payment Processor (Stripe)",
+          "content": "<p><strong>What is disclosed:</strong> Payment and contact information you provide at checkout</p><p><strong>Why:</strong> To process your payment and deliver your licence</p><p><strong>Location:</strong> United States (with global operations)</p><p><strong>Their data practices:</strong> <a href=\"https://stripe.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://stripe.com/privacy</a></p>"
+        },
+        "subsection3": {
+          "title": "6.3 Other Disclosures",
+          "content": "<p>We may disclose your information:</p><ul><li><strong>Legal Requirements:</strong> If required by law, court order, or government request</li><li><strong>Protection of Rights:</strong> To protect our rights, privacy, safety, or property</li><li><strong>Business Transfer:</strong> In connection with a merger, acquisition, or sale of assets (with notice to you)</li></ul><p>We do NOT:</p><ul><li>Sell your personal information</li><li>Share data for third-party marketing</li><li>Trade in personal information</li></ul>"
+        }
+      },
+      "section7": {
+        "title": "7. Cross-Border Data Transfers (APP 8)",
+        "intro": "<p>Your camera frame data is transferred to the United States for processing by our AI providers (OpenAI and/or Google Gemini).</p>",
+        "subsection1": {
+          "title": "7.1 Why We Transfer Data Overseas",
+          "content": "<p>We use cloud-based AI vision APIs (OpenAI Vision and Google Gemini) because they provide the most accurate and privacy-preserving method for presence awareness without requiring on-device facial recognition or biometric processing.</p>"
+        },
+        "subsection2": {
+          "title": "7.2 Protections for Overseas Transfers",
+          "content": "<p>We take the following steps to protect your data:</p><ol><li><strong>Contractual Protections:</strong> Both OpenAI and Google are bound by their published data usage policies and enterprise terms</li><li><strong>Data Minimisation:</strong> We send only camera frames (and screenshots if enabled), not identifying metadata</li><li><strong>No Permanent Storage:</strong> Frames and screenshots are processed in real-time and not permanently stored by us</li><li><strong>Reputable Providers:</strong> Both OpenAI and Google maintain SOC 2 compliance and enterprise security standards</li></ol>"
+        },
+        "subsection3": {
+          "title": "7.3 Your Consent",
+          "content": "<p>By using the Application, you consent to this cross-border transfer. If you do not consent, please do not use the Application.</p>"
+        },
+        "subsection4": {
+          "title": "7.4 EU/UK Users",
+          "content": "<p>For users in the European Union or United Kingdom, transfers to the US are conducted in accordance with applicable data transfer mechanisms under GDPR/UK GDPR.</p>"
+        }
+      },
+      "section8": {
+        "title": "8. Data Retention Schedule",
+        "intro": "<p>We maintain the following retention practices:</p>",
+        "table": "<table><thead><tr><th>Data Type</th><th>Retention Period</th><th>Deletion Method</th></tr></thead><tbody><tr><td>Camera frames</td><td>Not retained (processed in real-time only)</td><td>Not applicable</td></tr><tr><td>Screenshots (if enabled)</td><td>Not retained (processed in real-time only)</td><td>Not applicable</td></tr><tr><td>Screen awareness data</td><td>Not retained (processed locally in real-time)</td><td>Not applicable</td></tr><tr><td>Session logs (local)</td><td>Until you delete them</td><td>User-controlled deletion</td></tr><tr><td>PDF reports (local)</td><td>Until you delete them</td><td>User-controlled deletion</td></tr><tr><td>Error logs</td><td>Minimal retention for troubleshooting</td><td>Automatic deletion</td></tr><tr><td>Licence data</td><td>Duration of licence validity</td><td>Upon licence revocation</td></tr><tr><td>Payment records (Stripe)</td><td>Per Stripe's retention policy</td><td>Contact Stripe</td></tr><tr><td>OpenAI processing</td><td>Per OpenAI's API data usage policy</td><td>Automatic per OpenAI</td></tr><tr><td>Google Gemini processing</td><td>Per Google's Gemini API terms</td><td>Automatic per Google</td></tr></tbody></table>",
+        "subsection1": {
+          "title": "8.1 Your Control Over Local Data",
+          "content": "<p>All session data and reports are stored locally on your device. You can delete this data at any time by:</p><ol><li>Deleting files from the Application's data directory</li><li>Uninstalling the Application</li><li>Using your operating system's file management tools</li></ol>"
+        },
+        "subsection2": {
+          "title": "8.2 Data We Cannot Delete",
+          "content": "<p>Once frames are transmitted to our AI providers (OpenAI or Google Gemini), their retention is governed by those providers' respective policies. We cannot delete this data on your behalf.</p>"
+        }
+      },
+      "section9": {
+        "title": "9. Data Security (APP 11)",
+        "intro": "<p>We implement reasonable security measures to protect your information:</p>",
+        "subsection1": {
+          "title": "9.1 Technical Measures",
+          "content": "<ul><li><strong>Encryption in Transit:</strong> All data transmitted to third parties uses TLS/HTTPS encryption</li><li><strong>Local Storage:</strong> Session data is stored in standard file formats on your device, protected by your device's security</li><li><strong>No Central Database:</strong> We do not maintain a central database of user session data</li><li><strong>API Security:</strong> We use secure API authentication with our service providers</li></ul>"
+        },
+        "subsection2": {
+          "title": "9.2 Organisational Measures",
+          "content": "<ul><li>Access to systems is limited to authorised personnel</li><li>We follow secure development practices</li><li>We regularly review and update security measures</li></ul>"
+        },
+        "subsection3": {
+          "title": "9.3 Your Responsibilities",
+          "content": "<p>You are responsible for:</p><ul><li>Securing your device with appropriate passwords/biometrics</li><li>Keeping your operating system and the Application updated</li><li>Not sharing your licence key with others</li><li>Protecting any exported reports containing session data</li></ul>"
+        }
+      },
+      "section10": {
+        "title": "10. Data Breach Response",
+        "subsection1": {
+          "title": "10.1 AI Provider Responsibility",
+          "content": "<p>Visual data is shared with our AI providers (OpenAI or Google Gemini) for processing. Any data breach involving this data is the responsibility of those AI providers as per their respective policies.</p>"
+        },
+        "subsection2": {
+          "title": "10.2 Limitation of Liability",
+          "content": "<p>BrainDock expressly disclaims liability for any data breaches, security incidents, or unauthorised access that occurs:</p><ul><li>At the AI provider level (OpenAI or Google Gemini)</li><li>At the payment processor level (Stripe)</li><li>On your local device due to unauthorised access</li></ul>"
+        },
+        "subsection3": {
+          "title": "10.3 Local Data",
+          "content": "<p>Session data stored locally on your device is your responsibility to secure. If your device is compromised, you should report to relevant authorities as appropriate.</p>"
+        }
+      },
+      "section11": {
+        "title": "11. Your Privacy Rights",
+        "subsection1": {
+          "title": "11.1 Australian Users (APP 12, 13)",
+          "content": "<p>Under the Australian Privacy Principles, you have the right to:</p><ul><li><strong>Access:</strong> Request access to personal information we may hold about you</li><li><strong>Correction:</strong> Request correction of inaccurate information</li><li><strong>Complaint:</strong> Lodge a complaint if you believe we have breached the APPs</li></ul><p>To exercise these rights, contact us using the details in Section 2.</p><p><strong>Note:</strong> Because most data is stored locally on your device, you already have direct access to and control over this information.</p>"
+        },
+        "subsection2": {
+          "title": "11.2 EU/UK Users (GDPR Rights)",
+          "content": "<p>If you are in the EU or UK, you have additional rights including:</p><ul><li>Right to erasure (\"right to be forgotten\")</li><li>Right to restrict processing</li><li>Right to data portability</li><li>Right to object to processing</li><li>Rights related to automated decision-making</li></ul>"
+        },
+        "subsection3": {
+          "title": "11.3 How to Make a Request",
+          "content": "<p>Contact us at <a href=\"mailto:morayya@thebraindock.com\">morayya@thebraindock.com</a> or <a href=\"mailto:help.thebraindock@gmail.com\">help.thebraindock@gmail.com</a> with:</p><ul><li>Your name and contact details</li><li>A description of what you are requesting</li><li>Any information to help us locate your data</li></ul><p>We will respond within 30 days (or sooner if required by applicable law).</p>"
+        },
+        "subsection4": {
+          "title": "11.4 Complaints",
+          "content": "<p>If you are not satisfied with our response, you may lodge a complaint with:</p><p><strong>Australia:</strong><br>Office of the Australian Information Commissioner (OAIC)<br>Website: <a href=\"https://www.oaic.gov.au\" target=\"_blank\" rel=\"noopener noreferrer\">www.oaic.gov.au</a><br>Phone: 1300 363 992</p><p><strong>EU:</strong><br>Your local Data Protection Authority</p><p><strong>UK:</strong><br>Information Commissioner's Office (ICO)<br>Website: <a href=\"https://www.ico.org.uk\" target=\"_blank\" rel=\"noopener noreferrer\">www.ico.org.uk</a></p>"
+        }
+      },
+      "section12": {
+        "title": "12. Third-Party Capture Warning",
+        "intro": "<p><strong>IMPORTANT:</strong> Your camera may capture other people in your environment.</p>",
+        "subsection1": {
+          "title": "12.1 Your Obligations",
+          "content": "<p>If other individuals may appear in your camera's view (housemates, family members, colleagues, visitors, people on video calls), <strong>you are responsible for:</strong></p><ul><li>Informing them that camera capture is occurring</li><li>Obtaining their consent where required by law</li><li>Positioning your camera to minimise third-party capture</li><li>Not using the Application if you cannot obtain appropriate consent</li></ul>"
+        },
+        "subsection2": {
+          "title": "12.2 Our Limitations",
+          "content": "<p>We cannot:</p><ul><li>Identify or filter out third parties from frames</li><li>Obtain consent on your behalf</li><li>Accept responsibility for your capture of others</li></ul>"
+        },
+        "subsection3": {
+          "title": "12.3 Recommended Practices",
+          "content": "<ul><li>Use the Application in a private space</li><li>Position your camera to show only your immediate workspace</li><li>Pause sessions when others enter your space</li><li>Inform household members that you use focus assistance software</li></ul>"
+        }
+      },
+      "section13": {
+        "title": "13. Children's Privacy",
+        "subsection1": {
+          "title": "13.1 Users Under 18",
+          "content": "<p>Users under 18 years of age should use the Application under parents / legal guardian's supervision or permission or both. The parent or legal guardian is responsible for:</p><ul><li>Reviewing this Privacy Policy</li><li>Supervising the user's use of the Application</li><li>Ensuring appropriate consent for camera capture</li></ul>"
+        },
+        "subsection2": {
+          "title": "13.2 Discovery of Minor's Data",
+          "content": "<p>If we learn we have collected personal information from a user under 18 without parental consent, we will take steps to delete that information.</p>"
+        }
+      },
+      "section14": {
+        "title": "14. Workplace Use",
+        "subsection1": {
+          "title": "14.1 Employee Use",
+          "content": "<p>If you use BrainDock on your own initiative for personal productivity at work:</p><ul><li>You are responsible for complying with your employer's policies</li><li>Session data on your work device may be subject to employer access</li></ul>"
+        },
+        "subsection2": {
+          "title": "14.2 Employer Deployment",
+          "content": "<p>If an employer deploys BrainDock to observe employees:</p><ul><li>The employer becomes a controller of data collected through the Application</li><li>The employer must provide their own privacy notice to employees</li><li>The employer must comply with workplace observation laws</li><li>We are not responsible for the employer's data handling practices</li></ul><p><strong>This Privacy Policy applies to our direct relationship with users, not to employer-employee relationships.</strong></p>"
+        }
+      },
+      "section15": {
+        "title": "15. Cookies and Web Technologies",
+        "content": "<p>The desktop application does not use any web technologies for data collection.</p><p>If you visit any associated websites, those sites may use cookies as described in their respective privacy notices.</p>"
+      },
+      "section16": {
+        "title": "16. Changes to This Privacy Policy",
+        "subsection1": {
+          "title": "16.1 Updates",
+          "content": "<p>We may update this Privacy Policy from time to time. Changes will be indicated by the \"Last Updated\" date at the top.</p>"
+        },
+        "subsection2": {
+          "title": "16.2 Notification",
+          "content": "<p>For material changes, we will notify you through:</p><ul><li>In-app notification</li><li>Email (if available)</li><li>Notice on our website</li></ul>"
+        },
+        "subsection3": {
+          "title": "16.3 Your Continued Use",
+          "content": "<p>Your continued use of the Application after changes constitutes acceptance of the updated Privacy Policy.</p>"
+        }
+      },
+      "section17": {
+        "title": "17. Additional Information for Specific Jurisdictions",
+        "subsection1": {
+          "title": "17.1 California Residents (CCPA)",
+          "content": "<p>California residents have specific rights under the California Consumer Privacy Act. Contact us for information about exercising these rights.</p>"
+        },
+        "subsection2": {
+          "title": "17.2 Other Jurisdictions",
+          "content": "<p>If you are located in a jurisdiction with specific privacy laws not addressed here, please contact us to discuss how we can accommodate your rights.</p>"
+        }
+      },
+      "section18": {
+        "title": "18. Data Flow Summary",
+        "content": "<p>For transparency, here is a summary of how data flows through our Application:</p><pre><code>+------------------------------------------------------------------+\n|                        YOUR DEVICE                               |\n+------------------------------------------------------------------+\n|                                                                  |\n|  CAMERA AWARENESS (activated when selected)                      |\n|  Camera -> Captures frames -> Sent to AI -> Returns presence info|\n|                                                                  |\n|  SCREEN AWARENESS (activated when selected)                      |\n|  Window titles & URLs -> Checked locally against your list       |\n|  (NOT sent to AI unless screenshot analysis enabled)             |\n|                                                                  |\n|  SCREENSHOT ANALYSIS (optional, disabled by default)             |\n|  If enabled: Screenshot -> Sent to AI -> Returns distraction info|\n|  (Screenshots are NOT stored)                                    |\n|                                                                  |\n|  Results stored locally -> Session logs, statistics              |\n|       |                                                          |\n|  PDF Report generated -> Saved to Downloads on your device       |\n|                                                                  |\n+------------------------------------------------------------------+\n                              |\n                              v\n+------------------------------------------------------------------+\n|              AI PROVIDERS (Only one used at a time)              |\n+------------------------------------------------------------------+\n|                                                                  |\n|  OPENAI                         GOOGLE GEMINI                    |\n|  - Vision API                   - Gemini Vision API              |\n|  - Located in US                - Located in US                  |\n|  - As per OpenAI's policy       - As per Google's policy         |\n|                                                                  |\n|  Both providers receive:                                         |\n|  - Camera frames (for presence/gadget identification)            |\n|  - Screenshots if enabled (for distraction identification)       |\n|  - Return identification results only                            |\n|                                                                  |\n+------------------------------------------------------------------+\n\nData NOT Collected:\nX Biometric templates\nX Facial recognition data  \nX Audio\nX Keystroke data\nX File contents\nX Passwords or sensitive text from screenshots</code></pre>"
+      },
+      "section19": {
+        "title": "19. Questions and Contact",
+        "content": "<p>If you have questions about this Privacy Policy or our data practices, please contact us:</p><p><strong>Email:</strong> <a href=\"mailto:morayya@thebraindock.com\">morayya@thebraindock.com</a> or <a href=\"mailto:help.thebraindock@gmail.com\">help.thebraindock@gmail.com</a></p><p><strong>Website:</strong> thebraindock.com</p><p>We aim to respond to all enquiries within 30 days.</p>"
+      },
+      "section20": {
+        "title": "20. Acknowledgment",
+        "content": "<p>By using BrainDock, you acknowledge that you have read and understood this Privacy Policy and consent to the collection, use, and disclosure of your information as described herein.</p><hr><p><em>This Privacy Policy was last updated in January 2026.</em></p><p><em>This policy is designed to comply with applicable privacy laws and regulations globally. However, this document does not constitute legal advice. We recommend consulting with a qualified privacy lawyer for advice specific to your situation.</em></p>"
+      }
+    },
+    "terms": {
+      "pageTitle": "Terms and Conditions",
+      "pageMeta": "BrainDock Focus Assistance Application - Last Updated: January 2026",
+      "section1": {
+        "title": "1. Agreement to Terms and Conditions",
+        "content": "<p>By downloading, installing, accessing, or using BrainDock (\"the Application\", \"the App\", \"we\", \"us\", or \"our\"), you (\"User\", \"you\", or \"your\") agree to be bound by these Terms and Conditions (\"Terms\"). If you do not agree to these Terms and Conditions, do not use the Application.</p><p>These Terms and Conditions constitute a legally binding agreement between you and BrainDock. Please read them carefully.</p>"
+      },
+      "section2": {
+        "title": "2. Description of Service",
+        "intro": "<p>BrainDock is a focus assistance application designed to help users observe their study or work sessions. The Application:</p><ul><li>Uses your device's camera to identify your presence and potential distractions</li><li>Observes your active window and browser URLs to identify distraction apps/websites</li><li>Optionally captures screenshots for AI analysis (disabled by default, user-controlled)</li><li>Sends camera frames and/or screenshots to third-party AI services for real-time analysis</li><li>Generates session reports summarising your focus patterns</li><li>Does <strong>NOT</strong> perform facial recognition, identity verification, or biometric identification</li></ul>",
+        "subsection1": {
+          "title": "2.1 What BrainDock Does",
+          "content": "<ul><li>Identifies whether a person is present at the desk</li><li>Identifies whether you appear to be using distraction devices (phones, tablets, game controllers, etc.)</li><li>Observes active window titles and browser URLs to identify distraction apps/websites</li><li><strong>Optional AI Screenshot Analysis:</strong> If enabled by you, captures screenshots and sends them to AI for distraction identification (disabled by default)</li><li>Generates focus session statistics and PDF reports</li><li>Provides AI-generated insights about your focus patterns</li></ul>"
+        },
+        "subsection2": {
+          "title": "2.2 What BrainDock Does NOT Do",
+          "content": "<ul><li><strong>No Facial Recognition:</strong> We do not identify who you are</li><li><strong>No Biometric Templates:</strong> We do not create, store, or match biometric data</li><li><strong>No Identity Verification:</strong> We do not verify or match your identity across sessions</li><li><strong>No Video Storage:</strong> We do not save or store video footage</li><li><strong>No Screenshot Storage:</strong> Screenshots (if enabled) are processed in real-time and not permanently saved</li><li><strong>No Continuous Observation:</strong> Processing only occurs during active sessions you initiate</li><li><strong>No Keystroke Logging:</strong> We do not capture what you type</li></ul>"
+        }
+      },
+      "section3": {
+        "title": "3. Eligibility",
+        "subsection1": {
+          "title": "3.1 Age Requirements",
+          "content": "<p>Users under 18 years of age should use the Application under parents / legal guardian's supervision or permission or both who agree to these Terms and Conditions on your behalf.</p>"
+        },
+        "subsection2": {
+          "title": "3.2 Capacity",
+          "content": "<p>By using the Application, you represent that you have the legal capacity to enter into this agreement.</p>"
+        }
+      },
+      "section4": {
+        "title": "4. User Responsibilities",
+        "subsection1": {
+          "title": "4.1 Your Device and Environment",
+          "content": "<p>You are responsible for:</p><ul><li>Ensuring you have the legal right to use camera capture on your device</li><li>The content captured by your camera during sessions</li><li>Obtaining consent from any third parties who may be captured by your camera</li></ul>"
+        },
+        "subsection2": {
+          "title": "4.2 Third-Party Consent Warning",
+          "content": "<p><strong>IMPORTANT:</strong> The Application captures camera frames from your device. If other people (housemates, family members, colleagues, clients on video calls, or passersby) may appear in your camera's view:</p><ul><li><strong>You are responsible for obtaining their consent</strong> before starting a session</li><li>Consider positioning your camera to minimise capturing others</li><li>Use the Application in a private space where practical</li><li>Do not use the Application to observe others without their knowledge and consent</li></ul><p>We are not responsible for any privacy violations arising from your capture of third parties.</p>"
+        },
+        "subsection3": {
+          "title": "4.3 Prohibited Uses",
+          "content": "<p>You agree NOT to use the Application:</p><ul><li>To covertly observe or surveil other individuals</li><li>In violation of any applicable laws or regulations</li><li>To capture or process images of minors without parental consent</li><li>In any manner that infringes the rights of others</li><li>To circumvent, disable, or interfere with security features</li></ul>"
+        },
+        "subsection4": {
+          "title": "4.4 Workplace Use",
+          "content": "<p>If you use BrainDock in a workplace context (whether as an employee or employer):</p><ul><li><strong>Employees:</strong> Ensure your employer permits personal software on work devices</li><li><strong>Employers deploying to staff:</strong> You must comply with workplace observation laws in your jurisdiction</li></ul><p><strong>Australian Employers - Special Notice:</strong> If deploying BrainDock to observe employees in Australia, you must comply with state and territory workplace observation legislation, including but not limited to:</p><ul><li><strong>NSW:</strong> Workplace Surveillance Act 2005 - requires written notice at least 14 days before observation begins, specifying the kind of observation, how it will be carried out, when it starts, and whether it is continuous or intermittent</li><li><strong>VIC:</strong> Surveillance Devices Act 1999</li><li><strong>QLD:</strong> Invasion of Privacy Act 1971</li><li><strong>Other states:</strong> Applicable surveillance device legislation</li></ul><p><strong>We strongly recommend employers seek independent legal advice before deploying BrainDock for employee observation.</strong></p>"
+        }
+      },
+      "section5": {
+        "title": "5. Licence and Access",
+        "subsection1": {
+          "title": "5.1 Licence Grant",
+          "content": "<p>Subject to these Terms and Conditions and payment of applicable fees, we grant you a limited, non-exclusive, non-transferable, revocable licence to use the Application for personal, non-commercial purposes.</p>"
+        },
+        "subsection2": {
+          "title": "5.2 Licence Restrictions",
+          "content": "<p>You should not:</p><ul><li>Copy, modify, or distribute the Application</li><li>Reverse engineer, decompile, or disassemble the Application</li><li>Rent, lease, lend, sell, or sublicense the Application</li><li>Use the Application to develop competing products</li><li>Remove or alter any proprietary notices</li></ul>"
+        },
+        "subsection3": {
+          "title": "5.3 Licence Termination",
+          "content": "<p>We may terminate your licence if you breach these Terms and Conditions. Upon termination, you must cease all use of the Application and delete all copies.</p>"
+        }
+      },
+      "section6": {
+        "title": "6. Payment and Refunds",
+        "subsection1": {
+          "title": "6.1 Pricing",
+          "content": "<p>The Application requires a one-time payment for full access. Current pricing is displayed at the point of purchase.</p>"
+        },
+        "subsection2": {
+          "title": "6.2 Payment Processing",
+          "content": "<p>Payments are processed securely through Stripe. By making a payment, you also agree to Stripe's terms of service.</p>"
+        },
+        "subsection3": {
+          "title": "6.3 Refund Policy",
+          "content": "<p>Given the nature of digital software, refunds are provided at our discretion. You may request a refund within 7 days of purchase if:</p><ul><li>The Application fails to function as described</li><li>You experience technical issues we cannot resolve</li><li>You have not generated any session reports</li></ul><p>To request a refund, contact us with your purchase details.</p>"
+        }
+      },
+      "section7": {
+        "title": "7. Data Processing Acknowledgment",
+        "intro": "<p>By using the Application, you acknowledge and consent to:</p>",
+        "subsection1": {
+          "title": "7.1 Camera Frame Processing",
+          "content": "<ul><li>Camera frames are captured during active sessions</li><li>Frames are transmitted to third-party AI services for analysis. We use one of the following providers at a time:<ul><li><strong>OpenAI</strong> (servers located in the United States)</li><li><strong>Google Gemini</strong> (servers located in the United States)</li></ul></li><li>These providers may retain data as per their respective policies</li><li>We do not store raw camera frames on your device or our servers</li></ul>"
+        },
+        "subsection2": {
+          "title": "7.2 Screen Awareness",
+          "content": "<ul><li>The Application observes your active window titles and browser URLs to identify distraction apps/websites</li><li>This data is processed locally on your device and compared against your list</li><li>Window titles and URLs are NOT sent to third-party services (unless AI Screenshot Analysis is enabled)</li></ul>"
+        },
+        "subsection3": {
+          "title": "7.3 Optional AI Screenshot Analysis",
+          "content": "<ul><li>This feature is <strong>disabled by default</strong> and requires you to explicitly enable it</li><li>When enabled, the Application captures screenshots of your screen</li><li>Screenshots are transmitted to our AI providers (OpenAI or Google Gemini) for distraction analysis</li><li>Screenshots are processed in real-time and <strong>NOT stored</strong> on your device or our servers</li><li>You can disable this feature at any time in the Application settings</li><li><strong>Warning:</strong> Screenshots may capture sensitive information visible on your screen</li></ul>"
+        },
+        "subsection4": {
+          "title": "7.4 Session Data",
+          "content": "<ul><li>Session logs (timestamps, event types, focus statistics) are stored locally on your device</li><li>PDF reports are generated and saved to your device</li><li>You control the retention and deletion of local data</li></ul>"
+        },
+        "subsection5": {
+          "title": "7.5 Cross-Border Data Transfer",
+          "content": "<p>Your camera frames and screenshots (if enabled) are transmitted to AI service providers located in the United States of America. Our current providers (OpenAI and Google) operate servers in the United States. By using the Application, you consent to this cross-border transfer. See our <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener noreferrer\">Privacy Policy</a> for details on data protection measures.</p>"
+        }
+      },
+      "section8": {
+        "title": "8. No Biometrics Pledge",
+        "content": "<p>We explicitly confirm that BrainDock:</p><ul><li>Does <strong>NOT</strong> perform facial recognition or identification</li><li>Does <strong>NOT</strong> create biometric templates or profiles</li><li>Does <strong>NOT</strong> match or verify user identity</li><li>Does <strong>NOT</strong> use biometric information for automated verification or identification</li><li>Processes only general presence awareness (is someone at the desk?) and object identification (is a phone visible?)</li></ul><p>This pledge is a fundamental design principle of our Application.</p>"
+      },
+      "section9": {
+        "title": "9. Intellectual Property",
+        "subsection1": {
+          "title": "9.1 Our Property",
+          "content": "<p>The Application, including its code, design, features, documentation, and branding, is owned by BrainDock and protected by intellectual property laws.</p>"
+        },
+        "subsection2": {
+          "title": "9.2 Your Content",
+          "content": "<p>You retain ownership of any content you create using the Application (such as session reports). By using the Application, you grant us no rights to your generated content.</p>"
+        }
+      },
+      "section10": {
+        "title": "10. Third-Party Services",
+        "subsection1": {
+          "title": "10.1 AI Processing Services",
+          "content": "<p>The Application uses third-party AI services for image analysis. We currently use one of the following providers at any given time:</p><p><strong>OpenAI:</strong></p><ul><li>OpenAI Terms of Use: <a href=\"https://openai.com/terms\" target=\"_blank\" rel=\"noopener noreferrer\">https://openai.com/terms</a></li><li>OpenAI Privacy Policy: <a href=\"https://openai.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://openai.com/privacy</a></li><li>OpenAI API Data Usage Policy: <a href=\"https://openai.com/policies/api-data-usage-policies\" target=\"_blank\" rel=\"noopener noreferrer\">https://openai.com/policies/api-data-usage-policies</a></li></ul><p><strong>Google (Gemini):</strong></p><ul><li>Google Terms of Service: <a href=\"https://policies.google.com/terms\" target=\"_blank\" rel=\"noopener noreferrer\">https://policies.google.com/terms</a></li><li>Google Privacy Policy: <a href=\"https://policies.google.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://policies.google.com/privacy</a></li><li>Google Cloud Data Processing Terms: <a href=\"https://cloud.google.com/terms/data-processing-terms\" target=\"_blank\" rel=\"noopener noreferrer\">https://cloud.google.com/terms/data-processing-terms</a></li></ul>"
+        },
+        "subsection2": {
+          "title": "10.2 Payment Processing",
+          "content": "<p>Payments are processed by Stripe:</p><ul><li>Stripe Terms of Service: <a href=\"https://stripe.com/legal\" target=\"_blank\" rel=\"noopener noreferrer\">https://stripe.com/legal</a></li><li>Stripe Privacy Policy: <a href=\"https://stripe.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://stripe.com/privacy</a></li></ul>"
+        }
+      },
+      "section11": {
+        "title": "11. Disclaimers",
+        "subsection1": {
+          "title": "11.1 \"As Is\" Provision",
+          "content": "<p>THE APPLICATION IS PROVIDED \"AS IS\" AND \"AS AVAILABLE\" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. WE DISCLAIM ALL WARRANTIES INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p>"
+        },
+        "subsection2": {
+          "title": "11.2 No Guarantee of Results",
+          "content": "<p>We do not guarantee that:</p><ul><li>The Application will improve your focus or productivity</li><li>Identification will be 100% accurate</li><li>The Application will be uninterrupted or error-free</li><li>The Application will meet your specific requirements</li></ul>"
+        },
+        "subsection3": {
+          "title": "11.3 Not Medical or Therapeutic Advice",
+          "content": "<p>BrainDock is a productivity tool, not a medical device or therapeutic intervention. The Application:</p><ul><li>Does not provide medical, psychological, or therapeutic advice</li><li>Is not intended to diagnose, treat, or manage any medical condition including ADHD, anxiety, or other conditions</li><li>Should not be used as a substitute for professional medical advice</li></ul><p>If you have concerns about focus, attention, or mental health, please consult a qualified healthcare professional.</p>"
+        }
+      },
+      "section12": {
+        "title": "12. Limitation of Liability",
+        "subsection1": {
+          "title": "12.1 Exclusion of Damages",
+          "content": "<p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL BRAINDOCK BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO:</p><ul><li>Loss of profits, data, or goodwill</li><li>Business interruption</li><li>Personal injury or emotional distress</li><li>Privacy breaches caused by your use of the Application</li><li>Any damages arising from third-party actions</li></ul>"
+        },
+        "subsection2": {
+          "title": "12.2 Cap on Liability",
+          "content": "<p>OUR TOTAL LIABILITY FOR ALL CLAIMS ARISING FROM OR RELATING TO THESE TERMS OR THE APPLICATION SHALL NOT EXCEED THE AMOUNT YOU PAID FOR THE APPLICATION IN THE 12 MONTHS PRECEDING THE CLAIM.</p>"
+        },
+        "subsection3": {
+          "title": "12.3 Australian Consumer Law",
+          "content": "<p>Nothing in these Terms and Conditions excludes, restricts, or modifies any consumer guarantee, right, or remedy conferred by the Australian Consumer Law (Schedule 2 of the Competition and Consumer Act 2010) that cannot be excluded, restricted, or modified by agreement.</p>"
+        }
+      },
+      "section13": {
+        "title": "13. Indemnification",
+        "content": "<p>You agree to indemnify and hold harmless BrainDock and its officers, directors, employees, and agents from any claims, damages, losses, or expenses (including legal fees) arising from:</p><ul><li>Your use of the Application</li><li>Your breach of these Terms and Conditions</li><li>Your violation of any third party's rights, including privacy rights</li><li>Your capture of third parties without consent</li><li>Your use of the Application in violation of workplace observation laws</li></ul>"
+      },
+      "section14": {
+        "title": "14. Modifications to Terms and Conditions",
+        "subsection1": {
+          "title": "14.1 Right to Modify",
+          "content": "<p>We reserve the right to modify these Terms and Conditions at any time. Changes will be effective when posted.</p>"
+        },
+        "subsection2": {
+          "title": "14.2 Notification",
+          "content": "<p>We will notify you of material changes through:</p><ul><li>In-app notification</li><li>Email (if you have provided one)</li><li>Updated \"Last Updated\" date on these Terms and Conditions</li></ul>"
+        },
+        "subsection3": {
+          "title": "14.3 Continued Use",
+          "content": "<p>Your continued use of the Application after changes constitutes acceptance of the modified Terms and Conditions. If you do not agree to changes, you must stop using the Application.</p>"
+        }
+      },
+      "section15": {
+        "title": "15. Termination",
+        "subsection1": {
+          "title": "15.1 By You",
+          "content": "<p>You may stop using the Application at any time by uninstalling it from your device.</p>"
+        },
+        "subsection2": {
+          "title": "15.2 By Us",
+          "content": "<p>We may terminate or suspend your access immediately, without prior notice, for any reason, including breach of these Terms and Conditions.</p>"
+        },
+        "subsection3": {
+          "title": "15.3 Effect of Termination",
+          "content": "<p>Upon termination:</p><ul><li>Your licence to use the Application ends</li><li>You must delete all copies of the Application</li><li>Provisions that by their nature should survive (including disclaimers, limitations of liability, and indemnification) will survive</li></ul>"
+        }
+      },
+      "section16": {
+        "title": "16. Governing Law and Disputes",
+        "subsection1": {
+          "title": "16.1 Governing Law",
+          "content": "<p>These Terms and Conditions are governed by and construed in accordance with the laws of Victoria, Australia.</p>"
+        },
+        "subsection2": {
+          "title": "16.2 Jurisdiction",
+          "content": "<p>You agree to submit to the exclusive jurisdiction of the courts of Victoria, Australia, for any disputes arising from or relating to these Terms and Conditions or the Application.</p>"
+        },
+        "subsection3": {
+          "title": "16.3 Informal Resolution",
+          "content": "<p>Before initiating formal proceedings, you agree to contact us to attempt to resolve any dispute informally.</p>"
+        }
+      },
+      "section17": {
+        "title": "17. General Provisions",
+        "subsection1": {
+          "title": "17.1 Entire Agreement",
+          "content": "<p>These Terms and Conditions, together with our Privacy Policy, constitute the entire agreement between you and BrainDock regarding the Application.</p>"
+        },
+        "subsection2": {
+          "title": "17.2 Severability",
+          "content": "<p>If any provision of these Terms and Conditions is found to be unenforceable, the remaining provisions will continue in effect.</p>"
+        },
+        "subsection3": {
+          "title": "17.3 Waiver",
+          "content": "<p>Our failure to enforce any right or provision of these Terms and Conditions will not constitute a waiver of that right or provision.</p>"
+        },
+        "subsection4": {
+          "title": "17.4 Assignment",
+          "content": "<p>You may not assign or transfer these Terms and Conditions without our prior written consent. We may assign our rights and obligations without restriction.</p>"
+        }
+      },
+      "section18": {
+        "title": "18. Contact Us",
+        "content": "<p>If you have questions about these Terms and Conditions, please contact us at:</p><p><strong>Email:</strong> <a href=\"mailto:morayya@thebraindock.com\">morayya@thebraindock.com</a> OR <a href=\"mailto:help.thebraindock@gmail.com\">help.thebraindock@gmail.com</a></p><p><strong>Website:</strong> thebraindock.com</p>"
+      },
+      "section19": {
+        "title": "19. Acceptance",
+        "content": "<p>By clicking \"I Agree\", completing a purchase, or using the Application, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions and our Privacy Policy.</p><hr><p><em>These Terms and Conditions were last updated in January 2026.</em></p>"
+      }
+    }
+  },
   "nav": {
     "whyBrainDock": "Why Use BrainDock",
     "features": "Features",
@@ -124,7 +599,7 @@
     "brandDescription": "AI-powered focus assistant that helps you build better habits.",
     "legalTitle": "Legal",
     "privacyPolicy": "Privacy Policy",
-    "termsOfService": "Terms of Service",
+    "termsOfService": "Terms and Conditions",
     "contactTitle": "Contact",
     "copyright": "© 2026 BrainDock. All rights reserved."
   },

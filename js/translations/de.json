@@ -6,6 +6,481 @@
       "terms": "Allgemeine Geschäftsbedingungen - BrainDock"
     }
   },
+  "legal": {
+    "backToTop": "Nach oben",
+    "privacy": {
+      "pageTitle": "Datenschutzrichtlinie",
+      "pageMeta": "BrainDock Fokus-Unterstützungsanwendung - Letzte Aktualisierung: Januar 2026",
+      "section1": {
+        "title": "1. Einleitung",
+        "content": "<p>BrainDock (\"wir\", \"uns\", \"unser\") verpflichtet sich zum Schutz Ihrer Privatsphäre. Diese Datenschutzrichtlinie erklärt, wie wir Ihre Informationen erheben, verwenden, offenlegen und schützen, wenn Sie unsere Fokus-Unterstützungsanwendung (\"die Anwendung\") nutzen.</p><p>Diese Richtlinie ist so konzipiert, dass sie den australischen Datenschutzgrundsätzen (APPs) gemäß dem Privacy Act 1988 (Cth) entspricht und Transparenz für Nutzer in anderen Rechtsgebieten einschließlich der Europäischen Union (DSGVO) und des Vereinigten Königreichs (UK DSGVO) bietet.</p><p><strong>Bitte lesen Sie diese Datenschutzrichtlinie sorgfältig.</strong> Durch die Nutzung der Anwendung stimmen Sie den in dieser Richtlinie beschriebenen Praktiken zu.</p>"
+      },
+      "section2": {
+        "title": "2. Über uns",
+        "content": "<p>BrainDock ist eine Fokus-Unterstützungsanwendung, die Nutzern hilft, ihre Lern- und Arbeitssitzungen mithilfe kamerabasierter Anwesenheitserkennung zu erfassen.</p><p><strong>Kontaktinformationen:</strong></p><ul><li>E-Mail: <a href=\"mailto:morayya@thebraindock.com\">morayya@thebraindock.com</a> oder <a href=\"mailto:help.thebraindock@gmail.com\">help.thebraindock@gmail.com</a></li><li>Website: thebraindock.com</li></ul>"
+      },
+      "section3": {
+        "title": "3. Von uns erhobene Informationen",
+        "intro": "<p>Wir erheben verschiedene Arten von Informationen, um unseren Service bereitzustellen und zu verbessern.</p>",
+        "subsection1": {
+          "title": "3.1 Kamera-Frame-Daten (Verarbeitet, Nicht Gespeichert)",
+          "content": "<p><strong>Was wir erfassen:</strong></p><ul><li>Visuelle Frames von der Kamera Ihres Geräts während aktiver Sitzungen, die von Ihnen gestartet wurden.</li></ul><p><strong>Was wir analysieren:</strong></p><ul><li>Ob eine Person am Schreibtisch anwesend ist</li><li>Ob die Person ablenkende Geräte verwendet (Smartphones, Tablets, Spielcontroller)</li><li>Allgemeine Anwesenheitsindikatoren (am Schreibtisch vs. abwesend)</li></ul><p><strong>Was wir NICHT analysieren oder erheben:</strong></p><ul><li>Ihre Identität oder Gesichtsmerkmale zu Erkennungszwecken</li><li>Biometrische Vorlagen oder biometrische Identifikatoren</li><li>Audio von Ihrem Mikrofon</li><li>Tastenanschläge oder Eingabeinhalte</li></ul><p><strong>Verarbeitung:</strong></p><ul><li>Frames werden nur während aktiver Sitzungen etwa alle 3 Sekunden erfasst</li><li>Frames werden zur Analyse an unsere KI-Verarbeitungsanbieter (OpenAI oder Google Gemini) übermittelt</li><li>Frames werden NICHT lokal auf Ihrem Gerät gespeichert</li><li>Frames werden NICHT auf unseren Servern gespeichert</li></ul>"
+        },
+        "subsection2": {
+          "title": "3.2 Bildschirm-Erfassungsdaten (Lokal auf Ihrem Gerät verarbeitet)",
+          "content": "<p><strong>Was wir erfassen:</strong></p><ul><li>Aktive Fenster- und Browser-Tab-Titel (z.B. \"YouTube - Google Chrome\")</li><li>Browser-URLs, wenn erkennbar</li><li>Namen aktiver Anwendungen</li></ul><p><strong>Wie es funktioniert:</strong></p><ul><li>Fenstertitel und URLs werden mit Ihrer Liste von ablenkenden Apps/Websites verglichen</li><li>Diese Verarbeitung erfolgt <strong>lokal auf Ihrem Gerät</strong></li><li>Fenstertitel und URLs werden NICHT an Drittanbieterdienste gesendet (es sei denn, KI-Screenshot-Analyse ist aktiviert)</li></ul><p><strong>Was wir NICHT erfassen:</strong></p><ul><li>Inhalte innerhalb von Fenstern oder Anwendungen</li><li>Text, den Sie eingeben oder lesen</li><li>Dateien, die Sie öffnen oder erstellen</li></ul>"
+        },
+        "subsection3": {
+          "title": "3.3 KI-Screenshot-Analyse (Benutzergesteuert)",
+          "content": "<p><strong>Diese Funktion ist standardmäßig deaktiviert.</strong> Sie müssen sie in den Anwendungseinstellungen explizit aktivieren.</p><p><strong>Wenn aktiviert:</strong></p><ul><li>Die Anwendung erfasst Screenshots Ihres Bildschirms</li><li>Screenshots werden zur Analyse an unsere KI-Anbieter (OpenAI oder Google Gemini) übermittelt</li><li>KI analysiert den Screenshot, um ablenkende Inhalte zu identifizieren</li><li>Screenshots werden in Echtzeit verarbeitet und <strong>NICHT</strong> auf Ihrem Gerät oder unseren Servern gespeichert</li></ul><p><strong>Was die KI analysiert:</strong></p><ul><li>Ob ablenkende Apps/Websites sichtbar sind</li><li>Allgemeine Bildschirminhaltskategorie (Arbeit, Unterhaltung, soziale Medien, etc.)</li></ul><p><strong>Was die KI NICHT extrahiert:</strong></p><ul><li>Textinhalte oder lesbare Informationen aus Screenshots</li><li>Persönliche Daten, die auf dem Bildschirm sichtbar sind</li><li>Dateinamen, Passwörter oder sensible Informationen</li></ul><p><strong>Wichtige Warnungen:</strong></p><ul><li>Screenshots können sensible Informationen erfassen, die auf Ihrem Bildschirm sichtbar sind</li><li>Stellen Sie sicher, dass keine vertraulichen Informationen sichtbar sind, wenn diese Funktion aktiviert ist</li><li>Sie können diese Funktion jederzeit deaktivieren</li></ul>"
+        },
+        "subsection4": {
+          "title": "3.4 Sitzungsprotokolldaten (Lokal)",
+          "content": "<p>Die folgenden Daten werden lokal auf Ihrem Gerät generiert und gespeichert:</p><table><thead><tr><th>Datentyp</th><th>Beschreibung</th><th>Speicherort</th></tr></thead><tbody><tr><td>Sitzungszeitstempel</td><td>Start- und Endzeiten von Fokussitzungen</td><td>Ihr Gerät</td></tr><tr><td>Ereignisprotokolle</td><td>Zeitstempel von Statusänderungen (anwesend, abwesend, Ablenkung erkannt)</td><td>Ihr Gerät</td></tr><tr><td>Fokusstatistiken</td><td>Berechnete Metriken (Fokuszeit, Ablenkungszähler, etc.)</td><td>Ihr Gerät</td></tr><tr><td>Sitzungsberichte</td><td>Generierte PDF-Zusammenfassungen</td><td>Ihr Gerät (Downloads-Ordner)</td></tr></tbody></table>"
+        },
+        "subsection5": {
+          "title": "3.5 Lizenz- und Zahlungsdaten",
+          "content": "<p>Beim Kauf der Anwendung:</p><table><thead><tr><th>Datentyp</th><th>Erhoben von</th><th>Zweck</th></tr></thead><tbody><tr><td>E-Mail-Adresse</td><td>Stripe (Zahlungsabwickler)</td><td>Zahlungsbestätigung, Lizenzlieferung</td></tr><tr><td>Zahlungsdetails</td><td>Stripe</td><td>Zahlungsabwicklung</td></tr><tr><td>Lizenzschlüssel</td><td>Lokal gespeichert</td><td>Lizenzvalidierung</td></tr><tr><td>Zustimmung zu Bedingungen</td><td>Stripe</td><td>Nachweis der Einwilligung</td></tr></tbody></table><p>Wir erheben oder speichern Ihre Zahlungskartendaten nicht direkt.</p>"
+        },
+        "subsection6": {
+          "title": "3.6 Technische und Diagnosedaten",
+          "content": "<p>Wir können minimale technische Daten zur Fehlerbehebung erheben:</p><ul><li>Fehlerprotokolle (können Zeitstempel, Fehlermeldungen enthalten)</li><li>Anwendungsversion</li><li>Betriebssystemtyp</li></ul><p><strong>Hinweis:</strong> Wir gestalten unsere Protokollierung so, dass keine persönlichen Informationen erfasst werden. Fehlerprotokolle können jedoch unter bestimmten Umständen unbeabsichtigt persönliche Daten enthalten.</p>"
+        }
+      },
+      "section4": {
+        "title": "4. Ausdrückliche Erklärung: Keine Erhebung biometrischer Daten",
+        "content": "<p><strong>Wir bestätigen ausdrücklich, dass BrainDock KEINE biometrischen Informationen erhebt.</strong></p><p>Konkret führen wir NICHT durch:</p><ul><li>Gesichtserkennung oder Gesichtsidentifizierung</li><li>Erstellung von Gesichtsgeometrie-Karten oder -Vorlagen</li><li>Speicherung biometrischer Identifikatoren oder biometrischer Vorlagen</li><li>Verwendung biometrischer Informationen für automatisierte biometrische Verifizierung oder Identifizierung</li><li>Abgleich oder Verifizierung der Benutzeridentität anhand biologischer Merkmale</li><li>Erstellung von Profilen, die Sie eindeutig identifizieren könnten</li></ul><p>Unsere KI-Verarbeitung analysiert nur:</p><ul><li>Allgemeine Anwesenheit (ist eine Person sichtbar?)</li><li>Position (ist die Person am Schreibtisch oder abwesend?)</li><li>Objekterkennung (wird ein Smartphone/Tablet/Controller aktiv verwendet?)</li></ul><p>Dies unterscheidet sich grundlegend von biometrischer Verarbeitung. Wir verarbeiten den Inhalt von Frames, um Objekte und Anwesenheit zu identifizieren. Wir extrahieren oder speichern keine biometrischen Merkmale.</p>"
+      },
+      "section5": {
+        "title": "5. Wie wir Ihre Informationen verwenden",
+        "content": "<p>Wir verwenden die erhobenen Informationen für folgende Zwecke:</p><table><thead><tr><th>Zweck</th><th>Rechtsgrundlage (DSGVO)</th><th>APP-Referenz</th></tr></thead><tbody><tr><td>Bereitstellung der Fokus-Unterstützungsfunktionalität</td><td>Vertragserfüllung / Einwilligung</td><td>APP 3, 6</td></tr><tr><td>Erstellung von Sitzungsberichten</td><td>Vertragserfüllung</td><td>APP 6</td></tr><tr><td>Zahlungsabwicklung</td><td>Vertragserfüllung</td><td>APP 3, 6</td></tr><tr><td>Lizenzvalidierung</td><td>Berechtigtes Interesse</td><td>APP 6</td></tr><tr><td>Verbesserung der Anwendung</td><td>Berechtigtes Interesse</td><td>APP 6</td></tr><tr><td>Beantwortung von Supportanfragen</td><td>Vertragserfüllung</td><td>APP 6</td></tr><tr><td>Erfüllung rechtlicher Verpflichtungen</td><td>Rechtliche Verpflichtung</td><td>APP 6</td></tr></tbody></table>"
+      },
+      "section6": {
+        "title": "6. Offenlegung an Dritte",
+        "intro": "",
+        "subsection1": {
+          "title": "6.1 KI-Verarbeitungsanbieter",
+          "intro": "<p>Wir verwenden KI-Dienste von Drittanbietern für die Bildanalyse. <strong>Während einer Sitzung wird nur ein Anbieter gleichzeitig verwendet</strong>, aber wir können zwischen Anbietern wechseln. Unsere aktuellen Anbieter sind:</p>",
+          "openai": {
+            "title": "6.1.1 OpenAI",
+            "content": "<p><strong>Was offengelegt wird:</strong> Kamera-Frames während aktiver Sitzungen</p><p><strong>Warum:</strong> Um KI-basierte Anwesenheits- und Objekterkennung durchzuführen</p><p><strong>Standort:</strong> Vereinigte Staaten</p><p><strong>Deren Datenpraktiken:</strong></p><ul><li>OpenAI kann API-Daten gemäß der OpenAI-Richtlinie aufbewahren</li><li>OpenAI Datenschutzrichtlinie: <a href=\"https://openai.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://openai.com/privacy</a></li><li>OpenAI API-Datennutzung: <a href=\"https://openai.com/policies/api-data-usage-policies\" target=\"_blank\" rel=\"noopener noreferrer\">https://openai.com/policies/api-data-usage-policies</a></li></ul>"
+          },
+          "google": {
+            "title": "6.1.2 Google (Gemini)",
+            "content": "<p><strong>Was offengelegt wird:</strong> Kamera-Frames während aktiver Sitzungen</p><p><strong>Warum:</strong> Um KI-basierte Anwesenheits- und Objekterkennung durchzuführen</p><p><strong>Standort:</strong> Vereinigte Staaten</p><p><strong>Deren Datenpraktiken:</strong></p><ul><li>Googles Gemini-API kann Daten zur Sicherheitsprüfung und Missbrauchsprävention aufbewahren</li><li>Google Datenschutzrichtlinie: <a href=\"https://policies.google.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://policies.google.com/privacy</a></li><li>Google Cloud Datenverarbeitungsbedingungen: <a href=\"https://cloud.google.com/terms/data-processing-terms\" target=\"_blank\" rel=\"noopener noreferrer\">https://cloud.google.com/terms/data-processing-terms</a></li><li>Gemini API-Bedingungen: <a href=\"https://ai.google.dev/gemini-api/terms\" target=\"_blank\" rel=\"noopener noreferrer\">https://ai.google.dev/gemini-api/terms</a></li></ul>"
+          },
+          "safeguards": "<p><strong>Unsere Schutzmaßnahmen (gelten für alle Anbieter):</strong></p><ul><li>Wir verwenden nur API-Dienste (keine Verbraucherprodukte)</li><li>Wir senden nur die für die Analyse erforderlichen Mindestdaten</li><li>Wir verwenden optimierte Einstellungen, um die Datenübertragung zu reduzieren, wo verfügbar</li><li>Wir senden keine identifizierenden Metadaten mit Frames</li></ul>"
+        },
+        "subsection2": {
+          "title": "6.2 Zahlungsabwickler (Stripe)",
+          "content": "<p><strong>Was offengelegt wird:</strong> Zahlungs- und Kontaktinformationen, die Sie beim Checkout angeben</p><p><strong>Warum:</strong> Um Ihre Zahlung abzuwickeln und Ihre Lizenz zu liefern</p><p><strong>Standort:</strong> Vereinigte Staaten (mit weltweitem Betrieb)</p><p><strong>Deren Datenpraktiken:</strong> <a href=\"https://stripe.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://stripe.com/privacy</a></p>"
+        },
+        "subsection3": {
+          "title": "6.3 Sonstige Offenlegungen",
+          "content": "<p>Wir können Ihre Informationen offenlegen:</p><ul><li><strong>Rechtliche Anforderungen:</strong> Wenn gesetzlich, durch Gerichtsbeschluss oder behördliche Anfrage erforderlich</li><li><strong>Schutz von Rechten:</strong> Um unsere Rechte, Privatsphäre, Sicherheit oder unser Eigentum zu schützen</li><li><strong>Unternehmensübertragung:</strong> Im Zusammenhang mit einer Fusion, Übernahme oder einem Verkauf von Vermögenswerten (mit Benachrichtigung an Sie)</li></ul><p>Wir tun NICHT:</p><ul><li>Ihre persönlichen Informationen verkaufen</li><li>Daten für Marketing Dritter teilen</li><li>Mit persönlichen Informationen handeln</li></ul>"
+        }
+      },
+      "section7": {
+        "title": "7. Grenzüberschreitende Datenübertragungen (APP 8)",
+        "intro": "<p>Ihre Kamera-Frame-Daten werden zur Verarbeitung durch unsere KI-Anbieter (OpenAI und/oder Google Gemini) in die Vereinigten Staaten übertragen.</p>",
+        "subsection1": {
+          "title": "7.1 Warum wir Daten ins Ausland übertragen",
+          "content": "<p>Wir verwenden cloudbasierte KI-Vision-APIs (OpenAI Vision und Google Gemini), da sie die genaueste und datenschutzfreundlichste Methode für die Anwesenheitserkennung bieten, ohne Gesichtserkennung oder biometrische Verarbeitung auf dem Gerät zu erfordern.</p>"
+        },
+        "subsection2": {
+          "title": "7.2 Schutzmaßnahmen für Auslandsübertragungen",
+          "content": "<p>Wir ergreifen folgende Maßnahmen zum Schutz Ihrer Daten:</p><ol><li><strong>Vertragliche Schutzmaßnahmen:</strong> Sowohl OpenAI als auch Google sind an ihre veröffentlichten Datennutzungsrichtlinien und Unternehmensbedingungen gebunden</li><li><strong>Datenminimierung:</strong> Wir senden nur Kamera-Frames (und Screenshots, wenn aktiviert), keine identifizierenden Metadaten</li><li><strong>Keine dauerhafte Speicherung:</strong> Frames und Screenshots werden in Echtzeit verarbeitet und nicht von uns dauerhaft gespeichert</li><li><strong>Renommierte Anbieter:</strong> Sowohl OpenAI als auch Google erfüllen SOC 2-Compliance und Unternehmenssicherheitsstandards</li></ol>"
+        },
+        "subsection3": {
+          "title": "7.3 Ihre Einwilligung",
+          "content": "<p>Durch die Nutzung der Anwendung willigen Sie in diese grenzüberschreitende Übertragung ein. Wenn Sie nicht einwilligen, nutzen Sie die Anwendung bitte nicht.</p>"
+        },
+        "subsection4": {
+          "title": "7.4 EU/UK-Nutzer",
+          "content": "<p>Für Nutzer in der Europäischen Union oder im Vereinigten Königreich erfolgen Übertragungen in die USA gemäß den anwendbaren Datenübertragungsmechanismen der DSGVO/UK DSGVO.</p>"
+        }
+      },
+      "section8": {
+        "title": "8. Datenaufbewahrungsplan",
+        "intro": "<p>Wir pflegen folgende Aufbewahrungspraktiken:</p>",
+        "table": "<table><thead><tr><th>Datentyp</th><th>Aufbewahrungszeitraum</th><th>Löschmethode</th></tr></thead><tbody><tr><td>Kamera-Frames</td><td>Nicht aufbewahrt (nur Echtzeitverarbeitung)</td><td>Nicht zutreffend</td></tr><tr><td>Screenshots (wenn aktiviert)</td><td>Nicht aufbewahrt (nur Echtzeitverarbeitung)</td><td>Nicht zutreffend</td></tr><tr><td>Bildschirm-Erfassungsdaten</td><td>Nicht aufbewahrt (lokal in Echtzeit verarbeitet)</td><td>Nicht zutreffend</td></tr><tr><td>Sitzungsprotokolle (lokal)</td><td>Bis Sie sie löschen</td><td>Benutzergesteuerte Löschung</td></tr><tr><td>PDF-Berichte (lokal)</td><td>Bis Sie sie löschen</td><td>Benutzergesteuerte Löschung</td></tr><tr><td>Fehlerprotokolle</td><td>Minimale Aufbewahrung für Fehlerbehebung</td><td>Automatische Löschung</td></tr><tr><td>Lizenzdaten</td><td>Dauer der Lizenzgültigkeit</td><td>Bei Lizenzwiderruf</td></tr><tr><td>Zahlungsnachweise (Stripe)</td><td>Gemäß Stripes Aufbewahrungsrichtlinie</td><td>Kontaktieren Sie Stripe</td></tr><tr><td>OpenAI-Verarbeitung</td><td>Gemäß OpenAIs API-Datennutzungsrichtlinie</td><td>Automatisch durch OpenAI</td></tr><tr><td>Google Gemini-Verarbeitung</td><td>Gemäß Googles Gemini-API-Bedingungen</td><td>Automatisch durch Google</td></tr></tbody></table>",
+        "subsection1": {
+          "title": "8.1 Ihre Kontrolle über lokale Daten",
+          "content": "<p>Alle Sitzungsdaten und Berichte werden lokal auf Ihrem Gerät gespeichert. Sie können diese Daten jederzeit löschen durch:</p><ol><li>Löschen von Dateien aus dem Datenverzeichnis der Anwendung</li><li>Deinstallation der Anwendung</li><li>Verwendung der Dateiverwaltungstools Ihres Betriebssystems</li></ol>"
+        },
+        "subsection2": {
+          "title": "8.2 Daten, die wir nicht löschen können",
+          "content": "<p>Sobald Frames an unsere KI-Anbieter (OpenAI oder Google Gemini) übertragen wurden, unterliegt deren Aufbewahrung den jeweiligen Richtlinien dieser Anbieter. Wir können diese Daten nicht in Ihrem Auftrag löschen.</p>"
+        }
+      },
+      "section9": {
+        "title": "9. Datensicherheit (APP 11)",
+        "intro": "<p>Wir implementieren angemessene Sicherheitsmaßnahmen zum Schutz Ihrer Informationen:</p>",
+        "subsection1": {
+          "title": "9.1 Technische Maßnahmen",
+          "content": "<ul><li><strong>Verschlüsselung bei der Übertragung:</strong> Alle an Dritte übermittelten Daten verwenden TLS/HTTPS-Verschlüsselung</li><li><strong>Lokale Speicherung:</strong> Sitzungsdaten werden in Standarddateiformaten auf Ihrem Gerät gespeichert, geschützt durch die Sicherheit Ihres Geräts</li><li><strong>Keine zentrale Datenbank:</strong> Wir unterhalten keine zentrale Datenbank mit Benutzersitzungsdaten</li><li><strong>API-Sicherheit:</strong> Wir verwenden sichere API-Authentifizierung mit unseren Dienstanbietern</li></ul>"
+        },
+        "subsection2": {
+          "title": "9.2 Organisatorische Maßnahmen",
+          "content": "<ul><li>Der Zugang zu Systemen ist auf autorisiertes Personal beschränkt</li><li>Wir befolgen sichere Entwicklungspraktiken</li><li>Wir überprüfen und aktualisieren Sicherheitsmaßnahmen regelmäßig</li></ul>"
+        },
+        "subsection3": {
+          "title": "9.3 Ihre Verantwortlichkeiten",
+          "content": "<p>Sie sind verantwortlich für:</p><ul><li>Sicherung Ihres Geräts mit geeigneten Passwörtern/Biometrie</li><li>Aktualisierung Ihres Betriebssystems und der Anwendung</li><li>Keine Weitergabe Ihres Lizenzschlüssels an andere</li><li>Schutz exportierter Berichte mit Sitzungsdaten</li></ul>"
+        }
+      },
+      "section10": {
+        "title": "10. Reaktion auf Datenschutzverletzungen",
+        "subsection1": {
+          "title": "10.1 Verantwortung des KI-Anbieters",
+          "content": "<p>Visuelle Daten werden zur Verarbeitung mit unseren KI-Anbietern (OpenAI oder Google Gemini) geteilt. Jede Datenschutzverletzung, die diese Daten betrifft, liegt in der Verantwortung dieser KI-Anbieter gemäß deren jeweiligen Richtlinien.</p>"
+        },
+        "subsection2": {
+          "title": "10.2 Haftungsbeschränkung",
+          "content": "<p>BrainDock lehnt ausdrücklich jede Haftung für Datenschutzverletzungen, Sicherheitsvorfälle oder unbefugten Zugriff ab, die auftreten:</p><ul><li>Auf Ebene des KI-Anbieters (OpenAI oder Google Gemini)</li><li>Auf Ebene des Zahlungsabwicklers (Stripe)</li><li>Auf Ihrem lokalen Gerät durch unbefugten Zugriff</li></ul>"
+        },
+        "subsection3": {
+          "title": "10.3 Lokale Daten",
+          "content": "<p>Für die Sicherheit der lokal auf Ihrem Gerät gespeicherten Sitzungsdaten sind Sie verantwortlich. Wenn Ihr Gerät kompromittiert wird, sollten Sie dies gegebenenfalls den zuständigen Behörden melden.</p>"
+        }
+      },
+      "section11": {
+        "title": "11. Ihre Datenschutzrechte",
+        "subsection1": {
+          "title": "11.1 Australische Nutzer (APP 12, 13)",
+          "content": "<p>Gemäß den australischen Datenschutzgrundsätzen haben Sie das Recht:</p><ul><li><strong>Zugang:</strong> Zugang zu persönlichen Informationen anzufordern, die wir möglicherweise über Sie haben</li><li><strong>Berichtigung:</strong> Berichtigung ungenauer Informationen anzufordern</li><li><strong>Beschwerde:</strong> Eine Beschwerde einzureichen, wenn Sie glauben, dass wir gegen die APPs verstoßen haben</li></ul><p>Um diese Rechte auszuüben, kontaktieren Sie uns unter den in Abschnitt 2 angegebenen Details.</p><p><strong>Hinweis:</strong> Da die meisten Daten lokal auf Ihrem Gerät gespeichert werden, haben Sie bereits direkten Zugang zu und Kontrolle über diese Informationen.</p>"
+        },
+        "subsection2": {
+          "title": "11.2 EU/UK-Nutzer (DSGVO-Rechte)",
+          "content": "<p>Wenn Sie in der EU oder im UK sind, haben Sie zusätzliche Rechte, einschließlich:</p><ul><li>Recht auf Löschung (\"Recht auf Vergessenwerden\")</li><li>Recht auf Einschränkung der Verarbeitung</li><li>Recht auf Datenübertragbarkeit</li><li>Widerspruchsrecht gegen Verarbeitung</li><li>Rechte in Bezug auf automatisierte Entscheidungsfindung</li></ul>"
+        },
+        "subsection3": {
+          "title": "11.3 Wie Sie eine Anfrage stellen",
+          "content": "<p>Kontaktieren Sie uns unter <a href=\"mailto:morayya@thebraindock.com\">morayya@thebraindock.com</a> oder <a href=\"mailto:help.thebraindock@gmail.com\">help.thebraindock@gmail.com</a> mit:</p><ul><li>Ihrem Namen und Kontaktdaten</li><li>Einer Beschreibung dessen, was Sie anfordern</li><li>Allen Informationen, die uns helfen, Ihre Daten zu finden</li></ul><p>Wir werden innerhalb von 30 Tagen antworten (oder früher, wenn nach geltendem Recht erforderlich).</p>"
+        },
+        "subsection4": {
+          "title": "11.4 Beschwerden",
+          "content": "<p>Wenn Sie mit unserer Antwort nicht zufrieden sind, können Sie eine Beschwerde einreichen bei:</p><p><strong>Australien:</strong><br>Office of the Australian Information Commissioner (OAIC)<br>Website: <a href=\"https://www.oaic.gov.au\" target=\"_blank\" rel=\"noopener noreferrer\">www.oaic.gov.au</a><br>Telefon: 1300 363 992</p><p><strong>EU:</strong><br>Ihre örtliche Datenschutzbehörde</p><p><strong>UK:</strong><br>Information Commissioner's Office (ICO)<br>Website: <a href=\"https://www.ico.org.uk\" target=\"_blank\" rel=\"noopener noreferrer\">www.ico.org.uk</a></p>"
+        }
+      },
+      "section12": {
+        "title": "12. Warnung zur Erfassung Dritter",
+        "intro": "<p><strong>WICHTIG:</strong> Ihre Kamera kann andere Personen in Ihrer Umgebung erfassen.</p>",
+        "subsection1": {
+          "title": "12.1 Ihre Pflichten",
+          "content": "<p>Wenn andere Personen im Sichtfeld Ihrer Kamera erscheinen können (Mitbewohner, Familienmitglieder, Kollegen, Besucher, Personen in Videoanrufen), <strong>sind Sie verantwortlich für:</strong></p><ul><li>Information, dass Kameraaufnahmen stattfinden</li><li>Einholung der Einwilligung, wo gesetzlich vorgeschrieben</li><li>Positionierung Ihrer Kamera, um die Erfassung Dritter zu minimieren</li><li>Nichtverwendung der Anwendung, wenn Sie keine angemessene Einwilligung einholen können</li></ul>"
+        },
+        "subsection2": {
+          "title": "12.2 Unsere Einschränkungen",
+          "content": "<p>Wir können nicht:</p><ul><li>Dritte aus Frames identifizieren oder herausfiltern</li><li>In Ihrem Namen Einwilligung einholen</li><li>Verantwortung für Ihre Erfassung anderer übernehmen</li></ul>"
+        },
+        "subsection3": {
+          "title": "12.3 Empfohlene Praktiken",
+          "content": "<ul><li>Verwenden Sie die Anwendung in einem privaten Raum</li><li>Positionieren Sie Ihre Kamera so, dass nur Ihr unmittelbarer Arbeitsbereich gezeigt wird</li><li>Pausieren Sie Sitzungen, wenn andere Ihren Bereich betreten</li><li>Informieren Sie Haushaltsmitglieder, dass Sie Fokus-Unterstützungssoftware verwenden</li></ul>"
+        }
+      },
+      "section13": {
+        "title": "13. Datenschutz von Kindern",
+        "subsection1": {
+          "title": "13.1 Nutzer unter 18 Jahren",
+          "content": "<p>Nutzer unter 18 Jahren sollten die Anwendung unter Aufsicht oder mit Erlaubnis der Eltern / des gesetzlichen Vormunds oder beidem verwenden. Der Elternteil oder gesetzliche Vormund ist verantwortlich für:</p><ul><li>Überprüfung dieser Datenschutzrichtlinie</li><li>Beaufsichtigung der Nutzung der Anwendung durch den Nutzer</li><li>Sicherstellung der angemessenen Einwilligung für Kameraaufnahmen</li></ul>"
+        },
+        "subsection2": {
+          "title": "13.2 Entdeckung von Daten Minderjähriger",
+          "content": "<p>Wenn wir erfahren, dass wir persönliche Informationen von einem Nutzer unter 18 Jahren ohne elterliche Einwilligung erhoben haben, werden wir Maßnahmen ergreifen, um diese Informationen zu löschen.</p>"
+        }
+      },
+      "section14": {
+        "title": "14. Nutzung am Arbeitsplatz",
+        "subsection1": {
+          "title": "14.1 Mitarbeiternutzung",
+          "content": "<p>Wenn Sie BrainDock aus eigener Initiative für persönliche Produktivität bei der Arbeit verwenden:</p><ul><li>Sie sind für die Einhaltung der Richtlinien Ihres Arbeitgebers verantwortlich</li><li>Sitzungsdaten auf Ihrem Arbeitsgerät können dem Zugriff des Arbeitgebers unterliegen</li></ul>"
+        },
+        "subsection2": {
+          "title": "14.2 Arbeitgebereinsatz",
+          "content": "<p>Wenn ein Arbeitgeber BrainDock zur Beobachtung von Mitarbeitern einsetzt:</p><ul><li>Der Arbeitgeber wird zum Verantwortlichen für die durch die Anwendung erhobenen Daten</li><li>Der Arbeitgeber muss den Mitarbeitern eine eigene Datenschutzerklärung zur Verfügung stellen</li><li>Der Arbeitgeber muss die Gesetze zur Arbeitsplatzbeobachtung einhalten</li><li>Wir sind nicht für die Datenverarbeitungspraktiken des Arbeitgebers verantwortlich</li></ul><p><strong>Diese Datenschutzrichtlinie gilt für unsere direkte Beziehung zu Nutzern, nicht für Arbeitgeber-Arbeitnehmer-Beziehungen.</strong></p>"
+        }
+      },
+      "section15": {
+        "title": "15. Cookies und Web-Technologien",
+        "content": "<p>Die Desktop-Anwendung verwendet keine Web-Technologien zur Datenerfassung.</p><p>Wenn Sie zugehörige Websites besuchen, können diese Websites Cookies verwenden, wie in ihren jeweiligen Datenschutzhinweisen beschrieben.</p>"
+      },
+      "section16": {
+        "title": "16. Änderungen dieser Datenschutzrichtlinie",
+        "subsection1": {
+          "title": "16.1 Aktualisierungen",
+          "content": "<p>Wir können diese Datenschutzrichtlinie von Zeit zu Zeit aktualisieren. Änderungen werden durch das Datum \"Letzte Aktualisierung\" oben angezeigt.</p>"
+        },
+        "subsection2": {
+          "title": "16.2 Benachrichtigung",
+          "content": "<p>Bei wesentlichen Änderungen werden wir Sie benachrichtigen durch:</p><ul><li>In-App-Benachrichtigung</li><li>E-Mail (falls verfügbar)</li><li>Hinweis auf unserer Website</li></ul>"
+        },
+        "subsection3": {
+          "title": "16.3 Ihre fortgesetzte Nutzung",
+          "content": "<p>Ihre fortgesetzte Nutzung der Anwendung nach Änderungen bedeutet die Annahme der aktualisierten Datenschutzrichtlinie.</p>"
+        }
+      },
+      "section17": {
+        "title": "17. Zusätzliche Informationen für bestimmte Rechtsgebiete",
+        "subsection1": {
+          "title": "17.1 Einwohner Kaliforniens (CCPA)",
+          "content": "<p>Einwohner Kaliforniens haben nach dem California Consumer Privacy Act bestimmte Rechte. Kontaktieren Sie uns für Informationen zur Ausübung dieser Rechte.</p>"
+        },
+        "subsection2": {
+          "title": "17.2 Andere Rechtsgebiete",
+          "content": "<p>Wenn Sie sich in einem Rechtsgebiet mit spezifischen Datenschutzgesetzen befinden, die hier nicht behandelt werden, kontaktieren Sie uns bitte, um zu besprechen, wie wir Ihre Rechte berücksichtigen können.</p>"
+        }
+      },
+      "section18": {
+        "title": "18. Zusammenfassung des Datenflusses",
+        "content": "<p>Für Transparenz folgt hier eine Zusammenfassung, wie Daten durch unsere Anwendung fließen:</p><pre><code>+------------------------------------------------------------------+\n|                        IHR GERÄT                                 |\n+------------------------------------------------------------------+\n|                                                                  |\n|  KAMERA-ERFASSUNG (aktiviert bei Auswahl)                        |\n|  Kamera -> Frames erfassen -> An KI senden -> Anwesenheitsinfo   |\n|                                                                  |\n|  BILDSCHIRM-ERFASSUNG (aktiviert bei Auswahl)                    |\n|  Fenstertitel & URLs -> Lokal mit Ihrer Liste abgeglichen        |\n|  (NICHT an KI gesendet, außer Screenshot-Analyse aktiviert)      |\n|                                                                  |\n|  SCREENSHOT-ANALYSE (optional, standardmäßig deaktiviert)        |\n|  Wenn aktiviert: Screenshot -> An KI -> Ablenkungsinfo zurück    |\n|  (Screenshots werden NICHT gespeichert)                          |\n|                                                                  |\n|  Ergebnisse lokal gespeichert -> Sitzungsprotokolle, Statistiken |\n|       |                                                          |\n|  PDF-Bericht generiert -> In Downloads auf Ihrem Gerät gespeichert|\n|                                                                  |\n+------------------------------------------------------------------+\n                              |\n                              v\n+------------------------------------------------------------------+\n|              KI-ANBIETER (Nur einer gleichzeitig verwendet)      |\n+------------------------------------------------------------------+\n|                                                                  |\n|  OPENAI                         GOOGLE GEMINI                    |\n|  - Vision API                   - Gemini Vision API              |\n|  - Standort USA                 - Standort USA                   |\n|  - Gemäß OpenAI-Richtlinie      - Gemäß Google-Richtlinie        |\n|                                                                  |\n|  Beide Anbieter erhalten:                                        |\n|  - Kamera-Frames (für Anwesenheits-/Geräte-Erkennung)            |\n|  - Screenshots wenn aktiviert (für Ablenkungserkennung)          |\n|  - Geben nur Erkennungsergebnisse zurück                         |\n|                                                                  |\n+------------------------------------------------------------------+\n\nDaten, die NICHT erhoben werden:\nX Biometrische Vorlagen\nX Gesichtserkennungsdaten  \nX Audio\nX Tastenanschlag-Daten\nX Dateiinhalte\nX Passwörter oder sensible Texte aus Screenshots</code></pre>"
+      },
+      "section19": {
+        "title": "19. Fragen und Kontakt",
+        "content": "<p>Wenn Sie Fragen zu dieser Datenschutzrichtlinie oder unseren Datenpraktiken haben, kontaktieren Sie uns bitte:</p><p><strong>E-Mail:</strong> <a href=\"mailto:morayya@thebraindock.com\">morayya@thebraindock.com</a> oder <a href=\"mailto:help.thebraindock@gmail.com\">help.thebraindock@gmail.com</a></p><p><strong>Website:</strong> thebraindock.com</p><p>Wir bemühen uns, alle Anfragen innerhalb von 30 Tagen zu beantworten.</p>"
+      },
+      "section20": {
+        "title": "20. Bestätigung",
+        "content": "<p>Durch die Nutzung von BrainDock bestätigen Sie, dass Sie diese Datenschutzrichtlinie gelesen und verstanden haben und der Erhebung, Verwendung und Offenlegung Ihrer Informationen wie hierin beschrieben zustimmen.</p><hr><p><em>Diese Datenschutzrichtlinie wurde zuletzt im Januar 2026 aktualisiert.</em></p><p><em>Diese Richtlinie ist so konzipiert, dass sie weltweit geltenden Datenschutzgesetzen und -vorschriften entspricht. Dieses Dokument stellt jedoch keine Rechtsberatung dar. Wir empfehlen, sich für eine auf Ihre Situation zugeschnittene Beratung an einen qualifizierten Datenschutzanwalt zu wenden.</em></p>"
+      }
+    },
+    "terms": {
+      "pageTitle": "Allgemeine Geschäftsbedingungen",
+      "pageMeta": "BrainDock Fokus-Unterstützungsanwendung - Letzte Aktualisierung: Januar 2026",
+      "section1": {
+        "title": "1. Zustimmung zu den Allgemeinen Geschäftsbedingungen",
+        "content": "<p>Durch das Herunterladen, Installieren, Zugreifen oder Nutzen von BrainDock (\"die Anwendung\", \"die App\", \"wir\", \"uns\" oder \"unser\") stimmen Sie (\"Nutzer\", \"Sie\" oder \"Ihr\") zu, an diese Allgemeinen Geschäftsbedingungen (\"Bedingungen\") gebunden zu sein. Wenn Sie diesen Allgemeinen Geschäftsbedingungen nicht zustimmen, nutzen Sie die Anwendung nicht.</p><p>Diese Allgemeinen Geschäftsbedingungen stellen eine rechtsverbindliche Vereinbarung zwischen Ihnen und BrainDock dar. Bitte lesen Sie sie sorgfältig.</p>"
+      },
+      "section2": {
+        "title": "2. Beschreibung des Dienstes",
+        "intro": "<p>BrainDock ist eine Fokus-Unterstützungsanwendung, die Nutzern helfen soll, ihre Lern- oder Arbeitssitzungen zu erfassen. Die Anwendung:</p><ul><li>Verwendet die Kamera Ihres Geräts, um Ihre Anwesenheit und potenzielle Ablenkungen zu erkennen</li><li>Erfasst Ihr aktives Fenster und Browser-URLs, um ablenkende Apps/Websites zu identifizieren</li><li>Erfasst optional Screenshots zur KI-Analyse (standardmäßig deaktiviert, benutzergesteuert)</li><li>Sendet Kamera-Frames und/oder Screenshots an KI-Dienste von Drittanbietern zur Echtzeitanalyse</li><li>Generiert Sitzungsberichte, die Ihre Fokusmuster zusammenfassen</li><li>Führt <strong>KEINE</strong> Gesichtserkennung, Identitätsverifizierung oder biometrische Identifikation durch</li></ul>",
+        "subsection1": {
+          "title": "2.1 Was BrainDock tut",
+          "content": "<ul><li>Erkennt, ob eine Person am Schreibtisch anwesend ist</li><li>Erkennt, ob Sie ablenkende Geräte verwenden (Smartphones, Tablets, Spielcontroller, etc.)</li><li>Erfasst aktive Fenstertitel und Browser-URLs, um ablenkende Apps/Websites zu identifizieren</li><li><strong>Optionale KI-Screenshot-Analyse:</strong> Wenn von Ihnen aktiviert, erfasst Screenshots und sendet sie zur KI zur Ablenkungserkennung (standardmäßig deaktiviert)</li><li>Generiert Fokussitzungsstatistiken und PDF-Berichte</li><li>Bietet KI-generierte Einblicke in Ihre Fokusmuster</li></ul>"
+        },
+        "subsection2": {
+          "title": "2.2 Was BrainDock NICHT tut",
+          "content": "<ul><li><strong>Keine Gesichtserkennung:</strong> Wir identifizieren nicht, wer Sie sind</li><li><strong>Keine biometrischen Vorlagen:</strong> Wir erstellen, speichern oder gleichen keine biometrischen Daten ab</li><li><strong>Keine Identitätsverifizierung:</strong> Wir verifizieren oder gleichen Ihre Identität nicht über Sitzungen hinweg ab</li><li><strong>Keine Videospeicherung:</strong> Wir speichern keine Videoaufnahmen</li><li><strong>Keine Screenshot-Speicherung:</strong> Screenshots (wenn aktiviert) werden in Echtzeit verarbeitet und nicht dauerhaft gespeichert</li><li><strong>Keine kontinuierliche Beobachtung:</strong> Die Verarbeitung erfolgt nur während aktiver Sitzungen, die Sie starten</li><li><strong>Kein Tastaturprotokoll:</strong> Wir erfassen nicht, was Sie eingeben</li></ul>"
+        }
+      },
+      "section3": {
+        "title": "3. Berechtigung",
+        "subsection1": {
+          "title": "3.1 Altersanforderungen",
+          "content": "<p>Nutzer unter 18 Jahren sollten die Anwendung unter Aufsicht oder mit Erlaubnis der Eltern / des gesetzlichen Vormunds oder beidem verwenden, die diesen Allgemeinen Geschäftsbedingungen in Ihrem Namen zustimmen.</p>"
+        },
+        "subsection2": {
+          "title": "3.2 Geschäftsfähigkeit",
+          "content": "<p>Durch die Nutzung der Anwendung erklären Sie, dass Sie die rechtliche Geschäftsfähigkeit haben, diese Vereinbarung einzugehen.</p>"
+        }
+      },
+      "section4": {
+        "title": "4. Nutzerpflichten",
+        "subsection1": {
+          "title": "4.1 Ihr Gerät und Ihre Umgebung",
+          "content": "<p>Sie sind verantwortlich für:</p><ul><li>Sicherstellung, dass Sie das Recht haben, Kameraaufnahmen auf Ihrem Gerät zu verwenden</li><li>Die während Sitzungen von Ihrer Kamera erfassten Inhalte</li><li>Einholung der Einwilligung von Dritten, die von Ihrer Kamera erfasst werden könnten</li></ul>"
+        },
+        "subsection2": {
+          "title": "4.2 Warnung zur Einwilligung Dritter",
+          "content": "<p><strong>WICHTIG:</strong> Die Anwendung erfasst Kamera-Frames von Ihrem Gerät. Wenn andere Personen (Mitbewohner, Familienmitglieder, Kollegen, Kunden in Videoanrufen oder Passanten) im Sichtfeld Ihrer Kamera erscheinen könnten:</p><ul><li><strong>Sie sind verantwortlich für die Einholung deren Einwilligung</strong> vor Beginn einer Sitzung</li><li>Erwägen Sie, Ihre Kamera so zu positionieren, dass die Erfassung anderer minimiert wird</li><li>Verwenden Sie die Anwendung nach Möglichkeit in einem privaten Raum</li><li>Verwenden Sie die Anwendung nicht, um andere ohne deren Wissen und Einwilligung zu beobachten</li></ul><p>Wir sind nicht verantwortlich für Datenschutzverletzungen, die aus Ihrer Erfassung Dritter entstehen.</p>"
+        },
+        "subsection3": {
+          "title": "4.3 Verbotene Nutzungen",
+          "content": "<p>Sie stimmen zu, die Anwendung NICHT zu nutzen:</p><ul><li>Um andere Personen heimlich zu beobachten</li><li>Unter Verstoß gegen geltende Gesetze oder Vorschriften</li><li>Um Bilder von Minderjährigen ohne elterliche Einwilligung zu erfassen oder zu verarbeiten</li><li>In einer Weise, die die Rechte anderer verletzt</li><li>Um Sicherheitsfunktionen zu umgehen, zu deaktivieren oder zu stören</li></ul>"
+        },
+        "subsection4": {
+          "title": "4.4 Nutzung am Arbeitsplatz",
+          "content": "<p>Wenn Sie BrainDock im Arbeitskontext verwenden (ob als Arbeitnehmer oder Arbeitgeber):</p><ul><li><strong>Arbeitnehmer:</strong> Stellen Sie sicher, dass Ihr Arbeitgeber persönliche Software auf Arbeitsgeräten erlaubt</li><li><strong>Arbeitgeber, die es für Mitarbeiter einsetzen:</strong> Sie müssen die Gesetze zur Arbeitsplatzbeobachtung in Ihrem Rechtsgebiet einhalten</li></ul><p><strong>Australische Arbeitgeber - Besonderer Hinweis:</strong> Wenn Sie BrainDock zur Beobachtung von Mitarbeitern in Australien einsetzen, müssen Sie die Gesetzgebung zur Arbeitsplatzbeobachtung der Bundesstaaten und Territorien einhalten, einschließlich, aber nicht beschränkt auf:</p><ul><li><strong>NSW:</strong> Workplace Surveillance Act 2005 - erfordert schriftliche Mitteilung mindestens 14 Tage vor Beginn der Beobachtung, mit Angabe der Art der Beobachtung, wie sie durchgeführt wird, wann sie beginnt und ob sie kontinuierlich oder intermittierend ist</li><li><strong>VIC:</strong> Surveillance Devices Act 1999</li><li><strong>QLD:</strong> Invasion of Privacy Act 1971</li><li><strong>Andere Bundesstaaten:</strong> Geltende Gesetzgebung zu Überwachungsgeräten</li></ul><p><strong>Wir empfehlen Arbeitgebern dringend, unabhängige Rechtsberatung einzuholen, bevor sie BrainDock zur Mitarbeiterbeobachtung einsetzen.</strong></p>"
+        }
+      },
+      "section5": {
+        "title": "5. Lizenz und Zugang",
+        "subsection1": {
+          "title": "5.1 Lizenzerteilung",
+          "content": "<p>Vorbehaltlich dieser Allgemeinen Geschäftsbedingungen und der Zahlung anfallender Gebühren gewähren wir Ihnen eine beschränkte, nicht-exklusive, nicht übertragbare, widerrufliche Lizenz zur Nutzung der Anwendung für persönliche, nicht-kommerzielle Zwecke.</p>"
+        },
+        "subsection2": {
+          "title": "5.2 Lizenzbeschränkungen",
+          "content": "<p>Sie sollten nicht:</p><ul><li>Die Anwendung kopieren, modifizieren oder verteilen</li><li>Die Anwendung reverse-engineeren, dekompilieren oder disassemblieren</li><li>Die Anwendung vermieten, verleasen, verleihen, verkaufen oder unterlizenzieren</li><li>Die Anwendung zur Entwicklung konkurrierender Produkte verwenden</li><li>Eigentumshinweise entfernen oder ändern</li></ul>"
+        },
+        "subsection3": {
+          "title": "5.3 Lizenzkündigung",
+          "content": "<p>Wir können Ihre Lizenz kündigen, wenn Sie gegen diese Allgemeinen Geschäftsbedingungen verstoßen. Bei Kündigung müssen Sie alle Nutzung der Anwendung einstellen und alle Kopien löschen.</p>"
+        }
+      },
+      "section6": {
+        "title": "6. Zahlung und Rückerstattungen",
+        "subsection1": {
+          "title": "6.1 Preise",
+          "content": "<p>Die Anwendung erfordert eine einmalige Zahlung für vollen Zugang. Aktuelle Preise werden zum Zeitpunkt des Kaufs angezeigt.</p>"
+        },
+        "subsection2": {
+          "title": "6.2 Zahlungsabwicklung",
+          "content": "<p>Zahlungen werden sicher über Stripe abgewickelt. Mit einer Zahlung stimmen Sie auch den Nutzungsbedingungen von Stripe zu.</p>"
+        },
+        "subsection3": {
+          "title": "6.3 Rückerstattungsrichtlinie",
+          "content": "<p>Angesichts der Natur digitaler Software werden Rückerstattungen nach unserem Ermessen gewährt. Sie können innerhalb von 7 Tagen nach dem Kauf eine Rückerstattung beantragen, wenn:</p><ul><li>Die Anwendung nicht wie beschrieben funktioniert</li><li>Sie technische Probleme haben, die wir nicht lösen können</li><li>Sie keine Sitzungsberichte generiert haben</li></ul><p>Um eine Rückerstattung zu beantragen, kontaktieren Sie uns mit Ihren Kaufdetails.</p>"
+        }
+      },
+      "section7": {
+        "title": "7. Bestätigung der Datenverarbeitung",
+        "intro": "<p>Durch die Nutzung der Anwendung bestätigen Sie und stimmen zu:</p>",
+        "subsection1": {
+          "title": "7.1 Kamera-Frame-Verarbeitung",
+          "content": "<ul><li>Kamera-Frames werden während aktiver Sitzungen erfasst</li><li>Frames werden zur Analyse an KI-Dienste von Drittanbietern übermittelt. Wir verwenden jeweils einen der folgenden Anbieter:<ul><li><strong>OpenAI</strong> (Server in den Vereinigten Staaten)</li><li><strong>Google Gemini</strong> (Server in den Vereinigten Staaten)</li></ul></li><li>Diese Anbieter können Daten gemäß ihren jeweiligen Richtlinien aufbewahren</li><li>Wir speichern keine rohen Kamera-Frames auf Ihrem Gerät oder unseren Servern</li></ul>"
+        },
+        "subsection2": {
+          "title": "7.2 Bildschirm-Erfassung",
+          "content": "<ul><li>Die Anwendung erfasst Ihre aktiven Fenstertitel und Browser-URLs, um ablenkende Apps/Websites zu identifizieren</li><li>Diese Daten werden lokal auf Ihrem Gerät verarbeitet und mit Ihrer Liste verglichen</li><li>Fenstertitel und URLs werden NICHT an Drittanbieterdienste gesendet (es sei denn, KI-Screenshot-Analyse ist aktiviert)</li></ul>"
+        },
+        "subsection3": {
+          "title": "7.3 Optionale KI-Screenshot-Analyse",
+          "content": "<ul><li>Diese Funktion ist <strong>standardmäßig deaktiviert</strong> und erfordert eine explizite Aktivierung durch Sie</li><li>Wenn aktiviert, erfasst die Anwendung Screenshots Ihres Bildschirms</li><li>Screenshots werden zur Ablenkungsanalyse an unsere KI-Anbieter (OpenAI oder Google Gemini) übermittelt</li><li>Screenshots werden in Echtzeit verarbeitet und <strong>NICHT</strong> auf Ihrem Gerät oder unseren Servern gespeichert</li><li>Sie können diese Funktion jederzeit in den Anwendungseinstellungen deaktivieren</li><li><strong>Warnung:</strong> Screenshots können sensible Informationen erfassen, die auf Ihrem Bildschirm sichtbar sind</li></ul>"
+        },
+        "subsection4": {
+          "title": "7.4 Sitzungsdaten",
+          "content": "<ul><li>Sitzungsprotokolle (Zeitstempel, Ereignistypen, Fokusstatistiken) werden lokal auf Ihrem Gerät gespeichert</li><li>PDF-Berichte werden generiert und auf Ihrem Gerät gespeichert</li><li>Sie kontrollieren die Aufbewahrung und Löschung lokaler Daten</li></ul>"
+        },
+        "subsection5": {
+          "title": "7.5 Grenzüberschreitende Datenübertragung",
+          "content": "<p>Ihre Kamera-Frames und Screenshots (wenn aktiviert) werden an KI-Dienstanbieter in den Vereinigten Staaten von Amerika übermittelt. Unsere aktuellen Anbieter (OpenAI und Google) betreiben Server in den Vereinigten Staaten. Durch die Nutzung der Anwendung stimmen Sie dieser grenzüberschreitenden Übertragung zu. Siehe unsere <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener noreferrer\">Datenschutzrichtlinie</a> für Details zu Datenschutzmaßnahmen.</p>"
+        }
+      },
+      "section8": {
+        "title": "8. Keine-Biometrie-Versprechen",
+        "content": "<p>Wir bestätigen ausdrücklich, dass BrainDock:</p><ul><li><strong>KEINE</strong> Gesichtserkennung oder Identifikation durchführt</li><li><strong>KEINE</strong> biometrischen Vorlagen oder Profile erstellt</li><li><strong>KEINE</strong> Benutzeridentität abgleicht oder verifiziert</li><li><strong>KEINE</strong> biometrischen Informationen für automatisierte Verifizierung oder Identifikation verwendet</li><li>Nur allgemeine Anwesenheitserkennung (ist jemand am Schreibtisch?) und Objekterkennung (ist ein Smartphone sichtbar?) verarbeitet</li></ul><p>Dieses Versprechen ist ein grundlegendes Designprinzip unserer Anwendung.</p>"
+      },
+      "section9": {
+        "title": "9. Geistiges Eigentum",
+        "subsection1": {
+          "title": "9.1 Unser Eigentum",
+          "content": "<p>Die Anwendung, einschließlich ihres Codes, Designs, ihrer Funktionen, Dokumentation und Branding, gehört BrainDock und ist durch Gesetze zum geistigen Eigentum geschützt.</p>"
+        },
+        "subsection2": {
+          "title": "9.2 Ihr Inhalt",
+          "content": "<p>Sie behalten das Eigentum an allen Inhalten, die Sie mit der Anwendung erstellen (wie Sitzungsberichte). Durch die Nutzung der Anwendung gewähren Sie uns keine Rechte an Ihren generierten Inhalten.</p>"
+        }
+      },
+      "section10": {
+        "title": "10. Drittanbieterdienste",
+        "subsection1": {
+          "title": "10.1 KI-Verarbeitungsdienste",
+          "content": "<p>Die Anwendung verwendet KI-Dienste von Drittanbietern für die Bildanalyse. Wir verwenden derzeit jeweils einen der folgenden Anbieter:</p><p><strong>OpenAI:</strong></p><ul><li>OpenAI Nutzungsbedingungen: <a href=\"https://openai.com/terms\" target=\"_blank\" rel=\"noopener noreferrer\">https://openai.com/terms</a></li><li>OpenAI Datenschutzrichtlinie: <a href=\"https://openai.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://openai.com/privacy</a></li><li>OpenAI API-Datennutzungsrichtlinie: <a href=\"https://openai.com/policies/api-data-usage-policies\" target=\"_blank\" rel=\"noopener noreferrer\">https://openai.com/policies/api-data-usage-policies</a></li></ul><p><strong>Google (Gemini):</strong></p><ul><li>Google Nutzungsbedingungen: <a href=\"https://policies.google.com/terms\" target=\"_blank\" rel=\"noopener noreferrer\">https://policies.google.com/terms</a></li><li>Google Datenschutzrichtlinie: <a href=\"https://policies.google.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://policies.google.com/privacy</a></li><li>Google Cloud Datenverarbeitungsbedingungen: <a href=\"https://cloud.google.com/terms/data-processing-terms\" target=\"_blank\" rel=\"noopener noreferrer\">https://cloud.google.com/terms/data-processing-terms</a></li></ul>"
+        },
+        "subsection2": {
+          "title": "10.2 Zahlungsabwicklung",
+          "content": "<p>Zahlungen werden von Stripe abgewickelt:</p><ul><li>Stripe Nutzungsbedingungen: <a href=\"https://stripe.com/legal\" target=\"_blank\" rel=\"noopener noreferrer\">https://stripe.com/legal</a></li><li>Stripe Datenschutzrichtlinie: <a href=\"https://stripe.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://stripe.com/privacy</a></li></ul>"
+        }
+      },
+      "section11": {
+        "title": "11. Haftungsausschlüsse",
+        "subsection1": {
+          "title": "11.1 \"Wie besehen\"-Bereitstellung",
+          "content": "<p>DIE ANWENDUNG WIRD \"WIE BESEHEN\" UND \"WIE VERFÜGBAR\" OHNE GEWÄHRLEISTUNGEN JEGLICHER ART, AUSDRÜCKLICH ODER STILLSCHWEIGEND, BEREITGESTELLT. WIR SCHLIESSEN ALLE GEWÄHRLEISTUNGEN AUS, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF STILLSCHWEIGENDE GEWÄHRLEISTUNGEN DER MARKTGÄNGIGKEIT, EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND NICHTVERLETZUNG.</p>"
+        },
+        "subsection2": {
+          "title": "11.2 Keine Garantie für Ergebnisse",
+          "content": "<p>Wir garantieren nicht, dass:</p><ul><li>Die Anwendung Ihren Fokus oder Ihre Produktivität verbessert</li><li>Die Erkennung 100% genau ist</li><li>Die Anwendung unterbrechungs- oder fehlerfrei funktioniert</li><li>Die Anwendung Ihre spezifischen Anforderungen erfüllt</li></ul>"
+        },
+        "subsection3": {
+          "title": "11.3 Keine medizinische oder therapeutische Beratung",
+          "content": "<p>BrainDock ist ein Produktivitätswerkzeug, kein Medizinprodukt oder therapeutische Intervention. Die Anwendung:</p><ul><li>Bietet keine medizinische, psychologische oder therapeutische Beratung</li><li>Ist nicht dazu bestimmt, medizinische Zustände wie ADHS, Angst oder andere Erkrankungen zu diagnostizieren, zu behandeln oder zu verwalten</li><li>Sollte nicht als Ersatz für professionelle medizinische Beratung verwendet werden</li></ul><p>Wenn Sie Bedenken bezüglich Fokus, Aufmerksamkeit oder psychischer Gesundheit haben, wenden Sie sich bitte an einen qualifizierten Gesundheitsfachmann.</p>"
+        }
+      },
+      "section12": {
+        "title": "12. Haftungsbeschränkung",
+        "subsection1": {
+          "title": "12.1 Ausschluss von Schäden",
+          "content": "<p>IM GRÖSSTMÖGLICHEN GESETZLICH ZULÄSSIGEN UMFANG HAFTET BRAINDOCK IN KEINEM FALL FÜR INDIREKTE, ZUFÄLLIGE, BESONDERE, FOLGE- ODER STRAFSCHÄDEN, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF:</p><ul><li>Verlust von Gewinnen, Daten oder Geschäftswert</li><li>Geschäftsunterbrechung</li><li>Körperverletzung oder emotionale Belastung</li><li>Datenschutzverletzungen durch Ihre Nutzung der Anwendung</li><li>Schäden aus Handlungen Dritter</li></ul>"
+        },
+        "subsection2": {
+          "title": "12.2 Haftungsobergrenze",
+          "content": "<p>UNSERE GESAMTHAFTUNG FÜR ALLE ANSPRÜCHE, DIE AUS ODER IN VERBINDUNG MIT DIESEN BEDINGUNGEN ODER DER ANWENDUNG ENTSTEHEN, ÜBERSTEIGT NICHT DEN BETRAG, DEN SIE IN DEN 12 MONATEN VOR DEM ANSPRUCH FÜR DIE ANWENDUNG GEZAHLT HABEN.</p>"
+        },
+        "subsection3": {
+          "title": "12.3 Australisches Verbraucherrecht",
+          "content": "<p>Nichts in diesen Allgemeinen Geschäftsbedingungen schließt Verbrauchergarantien, Rechte oder Rechtsmittel aus, beschränkt oder modifiziert sie, die durch das Australian Consumer Law (Schedule 2 des Competition and Consumer Act 2010) gewährt werden und nicht durch Vereinbarung ausgeschlossen, beschränkt oder modifiziert werden können.</p>"
+        }
+      },
+      "section13": {
+        "title": "13. Freistellung",
+        "content": "<p>Sie stimmen zu, BrainDock und seine leitenden Angestellten, Direktoren, Mitarbeiter und Vertreter von allen Ansprüchen, Schäden, Verlusten oder Kosten (einschließlich Anwaltsgebühren) freizustellen und schadlos zu halten, die entstehen aus:</p><ul><li>Ihrer Nutzung der Anwendung</li><li>Ihrem Verstoß gegen diese Allgemeinen Geschäftsbedingungen</li><li>Ihrer Verletzung der Rechte Dritter, einschließlich Datenschutzrechte</li><li>Ihrer Erfassung Dritter ohne Einwilligung</li><li>Ihrer Nutzung der Anwendung unter Verstoß gegen Gesetze zur Arbeitsplatzbeobachtung</li></ul>"
+      },
+      "section14": {
+        "title": "14. Änderungen der Allgemeinen Geschäftsbedingungen",
+        "subsection1": {
+          "title": "14.1 Änderungsrecht",
+          "content": "<p>Wir behalten uns das Recht vor, diese Allgemeinen Geschäftsbedingungen jederzeit zu ändern. Änderungen werden bei Veröffentlichung wirksam.</p>"
+        },
+        "subsection2": {
+          "title": "14.2 Benachrichtigung",
+          "content": "<p>Wir werden Sie über wesentliche Änderungen informieren durch:</p><ul><li>In-App-Benachrichtigung</li><li>E-Mail (falls Sie eine angegeben haben)</li><li>Aktualisiertes Datum \"Letzte Aktualisierung\" in diesen Allgemeinen Geschäftsbedingungen</li></ul>"
+        },
+        "subsection3": {
+          "title": "14.3 Fortgesetzte Nutzung",
+          "content": "<p>Ihre fortgesetzte Nutzung der Anwendung nach Änderungen bedeutet die Annahme der geänderten Allgemeinen Geschäftsbedingungen. Wenn Sie den Änderungen nicht zustimmen, müssen Sie die Nutzung der Anwendung einstellen.</p>"
+        }
+      },
+      "section15": {
+        "title": "15. Kündigung",
+        "subsection1": {
+          "title": "15.1 Durch Sie",
+          "content": "<p>Sie können die Nutzung der Anwendung jederzeit beenden, indem Sie sie von Ihrem Gerät deinstallieren.</p>"
+        },
+        "subsection2": {
+          "title": "15.2 Durch uns",
+          "content": "<p>Wir können Ihren Zugang sofort ohne vorherige Ankündigung aus jedem Grund kündigen oder aussetzen, einschließlich bei Verstoß gegen diese Allgemeinen Geschäftsbedingungen.</p>"
+        },
+        "subsection3": {
+          "title": "15.3 Wirkung der Kündigung",
+          "content": "<p>Bei Kündigung:</p><ul><li>Endet Ihre Lizenz zur Nutzung der Anwendung</li><li>Müssen Sie alle Kopien der Anwendung löschen</li><li>Bestimmungen, die ihrer Natur nach fortbestehen sollten (einschließlich Haftungsausschlüsse, Haftungsbeschränkungen und Freistellung) bestehen fort</li></ul>"
+        }
+      },
+      "section16": {
+        "title": "16. Anwendbares Recht und Streitigkeiten",
+        "subsection1": {
+          "title": "16.1 Anwendbares Recht",
+          "content": "<p>Diese Allgemeinen Geschäftsbedingungen unterliegen den Gesetzen von Victoria, Australien, und sind entsprechend auszulegen.</p>"
+        },
+        "subsection2": {
+          "title": "16.2 Gerichtsstand",
+          "content": "<p>Sie stimmen zu, sich der ausschließlichen Gerichtsbarkeit der Gerichte von Victoria, Australien, für alle Streitigkeiten zu unterwerfen, die aus oder in Verbindung mit diesen Allgemeinen Geschäftsbedingungen oder der Anwendung entstehen.</p>"
+        },
+        "subsection3": {
+          "title": "16.3 Informelle Beilegung",
+          "content": "<p>Bevor Sie ein formelles Verfahren einleiten, stimmen Sie zu, uns zu kontaktieren, um zu versuchen, Streitigkeiten informell zu lösen.</p>"
+        }
+      },
+      "section17": {
+        "title": "17. Allgemeine Bestimmungen",
+        "subsection1": {
+          "title": "17.1 Gesamte Vereinbarung",
+          "content": "<p>Diese Allgemeinen Geschäftsbedingungen zusammen mit unserer Datenschutzrichtlinie stellen die gesamte Vereinbarung zwischen Ihnen und BrainDock bezüglich der Anwendung dar.</p>"
+        },
+        "subsection2": {
+          "title": "17.2 Salvatorische Klausel",
+          "content": "<p>Wenn eine Bestimmung dieser Allgemeinen Geschäftsbedingungen für nicht durchsetzbar befunden wird, bleiben die übrigen Bestimmungen in Kraft.</p>"
+        },
+        "subsection3": {
+          "title": "17.3 Verzicht",
+          "content": "<p>Unser Versäumnis, ein Recht oder eine Bestimmung dieser Allgemeinen Geschäftsbedingungen durchzusetzen, stellt keinen Verzicht auf dieses Recht oder diese Bestimmung dar.</p>"
+        },
+        "subsection4": {
+          "title": "17.4 Abtretung",
+          "content": "<p>Sie dürfen diese Allgemeinen Geschäftsbedingungen nicht ohne unsere vorherige schriftliche Zustimmung abtreten oder übertragen. Wir können unsere Rechte und Pflichten ohne Einschränkung abtreten.</p>"
+        }
+      },
+      "section18": {
+        "title": "18. Kontaktieren Sie uns",
+        "content": "<p>Wenn Sie Fragen zu diesen Allgemeinen Geschäftsbedingungen haben, kontaktieren Sie uns bitte unter:</p><p><strong>E-Mail:</strong> <a href=\"mailto:morayya@thebraindock.com\">morayya@thebraindock.com</a> ODER <a href=\"mailto:help.thebraindock@gmail.com\">help.thebraindock@gmail.com</a></p><p><strong>Website:</strong> thebraindock.com</p>"
+      },
+      "section19": {
+        "title": "19. Annahme",
+        "content": "<p>Durch Klicken auf \"Ich stimme zu\", Abschluss eines Kaufs oder Nutzung der Anwendung bestätigen Sie, dass Sie diese Allgemeinen Geschäftsbedingungen und unsere Datenschutzrichtlinie gelesen, verstanden haben und sich daran gebunden fühlen.</p><hr><p><em>Diese Allgemeinen Geschäftsbedingungen wurden zuletzt im Januar 2026 aktualisiert.</em></p>"
+      }
+    }
+  },
   "nav": {
     "whyBrainDock": "Warum BrainDock",
     "features": "Funktionen",

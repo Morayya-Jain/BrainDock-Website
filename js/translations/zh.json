@@ -6,6 +6,481 @@
       "terms": "条款和条件 - BrainDock"
     }
   },
+  "legal": {
+    "backToTop": "返回顶部",
+    "privacy": {
+      "pageTitle": "隐私政策",
+      "pageMeta": "BrainDock 专注辅助应用程序 - 最后更新：2026年1月",
+      "section1": {
+        "title": "1. 简介",
+        "content": "<p>BrainDock（"我们"、"我们的"）致力于保护您的隐私。本隐私政策解释了当您使用我们的专注辅助应用程序（"本应用程序"）时，我们如何收集、使用、披露和保护您的信息。</p><p>本政策旨在遵守1988年《隐私法》（联邦）下的澳大利亚隐私原则（APPs），并为欧盟（GDPR）和英国（UK GDPR）等其他司法管辖区的用户提供透明度。</p><p><strong>请仔细阅读本隐私政策。</strong>使用本应用程序即表示您同意本政策中描述的做法。</p>"
+      },
+      "section2": {
+        "title": "2. 关于我们",
+        "content": "<p>BrainDock是一款专注辅助应用程序，通过基于摄像头的在席感知帮助用户观察其学习和工作时段。</p><p><strong>联系信息：</strong></p><ul><li>电子邮件：<a href=\"mailto:morayya@thebraindock.com\">morayya@thebraindock.com</a> 或 <a href=\"mailto:help.thebraindock@gmail.com\">help.thebraindock@gmail.com</a></li><li>网站：thebraindock.com</li></ul>"
+      },
+      "section3": {
+        "title": "3. 我们收集的信息",
+        "intro": "<p>我们收集不同类型的信息以提供和改进我们的服务。</p>",
+        "subsection1": {
+          "title": "3.1 摄像头帧数据（处理但不存储）",
+          "content": "<p><strong>我们捕获的内容：</strong></p><ul><li>您启动的活动会话期间，来自设备摄像头的视觉帧。</li></ul><p><strong>我们分析的内容：</strong></p><ul><li>是否有人在办公桌前</li><li>该人是否正在使用分散注意力的设备（手机、平板电脑、游戏控制器）</li><li>一般在席指标（在办公桌前 vs 离开）</li></ul><p><strong>我们不分析或收集的内容：</strong></p><ul><li>您的身份或用于识别目的的面部特征</li><li>生物识别模板或生物识别标识符</li><li>麦克风的音频</li><li>键盘输入或打字内容</li></ul><p><strong>处理方式：</strong></p><ul><li>仅在活动会话期间约每3秒捕获一次帧</li><li>帧被传输到我们的AI处理提供商（OpenAI或Google Gemini）进行分析</li><li>帧不会本地存储在您的设备上</li><li>帧不会存储在我们的服务器上</li></ul>"
+        },
+        "subsection2": {
+          "title": "3.2 屏幕感知数据（在您的设备上本地处理）",
+          "content": "<p><strong>我们观察的内容：</strong></p><ul><li>活动窗口和浏览器标签标题（例如："YouTube - Google Chrome"）</li><li>可检测时的浏览器URL</li><li>活动应用程序名称</li></ul><p><strong>工作原理：</strong></p><ul><li>窗口标题和URL与您的分散注意力应用程序/网站列表进行比对</li><li>此处理<strong>在您的设备上本地</strong>进行</li><li>窗口标题和URL不会发送到第三方服务（除非启用AI截图分析）</li></ul><p><strong>我们不观察的内容：</strong></p><ul><li>窗口或应用程序中的内容</li><li>您输入或阅读的文本</li><li>您打开或创建的文件</li></ul>"
+        },
+        "subsection3": {
+          "title": "3.3 AI截图分析（用户控制）",
+          "content": "<p><strong>此功能默认禁用。</strong>您必须在应用程序设置中明确启用它。</p><p><strong>启用时：</strong></p><ul><li>应用程序捕获屏幕截图</li><li>截图被传输到我们的AI提供商（OpenAI或Google Gemini）进行分析</li><li>AI分析截图以识别分散注意力的内容</li><li>截图实时处理，<strong>不存储</strong>在您的设备或我们的服务器上</li></ul><p><strong>AI分析的内容：</strong></p><ul><li>是否显示分散注意力的应用程序/网站</li><li>一般屏幕内容类别（工作、娱乐、社交媒体等）</li></ul><p><strong>AI不提取的内容：</strong></p><ul><li>截图中的文本内容或可读信息</li><li>屏幕上显示的个人数据</li><li>文件名、密码或敏感信息</li></ul><p><strong>重要警告：</strong></p><ul><li>截图可能捕获屏幕上显示的敏感信息</li><li>启用此功能时，请确保没有机密信息可见</li><li>您可以随时禁用此功能</li></ul>"
+        },
+        "subsection4": {
+          "title": "3.4 会话日志数据（本地）",
+          "content": "<p>以下数据在您的设备上本地生成和存储：</p><table><thead><tr><th>数据类型</th><th>描述</th><th>存储位置</th></tr></thead><tbody><tr><td>会话时间戳</td><td>专注会话的开始和结束时间</td><td>您的设备</td></tr><tr><td>事件日志</td><td>状态变化的时间戳（在席、离开、识别到分心）</td><td>您的设备</td></tr><tr><td>专注统计</td><td>计算的指标（专注时间、分心次数等）</td><td>您的设备</td></tr><tr><td>会话报告</td><td>生成的PDF摘要</td><td>您的设备（下载文件夹）</td></tr></tbody></table>"
+        },
+        "subsection5": {
+          "title": "3.5 许可证和支付数据",
+          "content": "<p>购买应用程序时：</p><table><thead><tr><th>数据类型</th><th>收集方</th><th>目的</th></tr></thead><tbody><tr><td>电子邮件地址</td><td>Stripe（支付处理商）</td><td>支付确认、许可证交付</td></tr><tr><td>支付详情</td><td>Stripe</td><td>处理支付</td></tr><tr><td>许可证密钥</td><td>本地存储</td><td>验证您的许可证</td></tr><tr><td>条款接受</td><td>Stripe</td><td>同意记录</td></tr></tbody></table><p>我们不直接收集或存储您的支付卡详情。</p>"
+        },
+        "subsection6": {
+          "title": "3.6 技术和诊断数据",
+          "content": "<p>我们可能收集最少的技术数据用于故障排除：</p><ul><li>错误日志（可能包括时间戳、错误消息）</li><li>应用程序版本</li><li>操作系统类型</li></ul><p><strong>注意：</strong>我们设计日志记录以避免捕获个人信息。然而，在某些情况下，错误日志可能无意中包含个人数据。</p>"
+        }
+      },
+      "section4": {
+        "title": "4. 明确声明：不收集生物识别数据",
+        "content": "<p><strong>我们明确确认BrainDock不收集生物识别信息。</strong></p><p>具体而言，我们不：</p><ul><li>执行面部识别或面部认证</li><li>创建面部几何图谱或模板</li><li>存储生物识别标识符或生物识别模板</li><li>使用生物识别信息进行自动生物识别验证或认证</li><li>使用生物特征匹配或验证用户身份</li><li>创建可唯一识别您的个人资料</li></ul><p>我们的AI处理仅分析：</p><ul><li>一般在席检测（是否有人可见？）</li><li>位置（该人在办公桌前还是离开了？）</li><li>物体识别（手机/平板电脑/控制器是否正在使用？）</li></ul><p>这与生物识别处理根本不同。我们处理帧内容以识别物体和在席状态。我们不提取或存储任何生物识别特征。</p>"
+      },
+      "section5": {
+        "title": "5. 我们如何使用您的信息",
+        "content": "<p>我们将收集的信息用于以下目的：</p><table><thead><tr><th>目的</th><th>法律依据（GDPR）</th><th>APP参考</th></tr></thead><tbody><tr><td>提供专注辅助功能</td><td>合同履行/同意</td><td>APP 3, 6</td></tr><tr><td>生成会话报告</td><td>合同履行</td><td>APP 6</td></tr><tr><td>处理支付</td><td>合同履行</td><td>APP 3, 6</td></tr><tr><td>验证许可证</td><td>合法利益</td><td>APP 6</td></tr><tr><td>改进应用程序</td><td>合法利益</td><td>APP 6</td></tr><tr><td>回应支持请求</td><td>合同履行</td><td>APP 6</td></tr><tr><td>遵守法律义务</td><td>法律义务</td><td>APP 6</td></tr></tbody></table>"
+      },
+      "section6": {
+        "title": "6. 向第三方披露",
+        "intro": "",
+        "subsection1": {
+          "title": "6.1 AI处理提供商",
+          "intro": "<p>我们使用第三方AI服务进行图像分析。<strong>在任何给定会话期间，一次只使用一个提供商</strong>，但我们可能会在提供商之间切换。我们目前的提供商是：</p>",
+          "openai": {
+            "title": "6.1.1 OpenAI",
+            "content": "<p><strong>披露内容：</strong>活动会话期间的摄像头帧</p><p><strong>原因：</strong>执行基于AI的在席和物体识别</p><p><strong>位置：</strong>美国</p><p><strong>其数据实践：</strong></p><ul><li>OpenAI可能根据OpenAI政策保留API数据</li><li>OpenAI隐私政策：<a href=\"https://openai.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://openai.com/privacy</a></li><li>OpenAI API数据使用：<a href=\"https://openai.com/policies/api-data-usage-policies\" target=\"_blank\" rel=\"noopener noreferrer\">https://openai.com/policies/api-data-usage-policies</a></li></ul>"
+          },
+          "google": {
+            "title": "6.1.2 Google (Gemini)",
+            "content": "<p><strong>披露内容：</strong>活动会话期间的摄像头帧</p><p><strong>原因：</strong>执行基于AI的在席和物体识别</p><p><strong>位置：</strong>美国</p><p><strong>其数据实践：</strong></p><ul><li>Google的Gemini API可能保留数据用于安全检查和滥用防范</li><li>Google隐私政策：<a href=\"https://policies.google.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://policies.google.com/privacy</a></li><li>Google Cloud数据处理条款：<a href=\"https://cloud.google.com/terms/data-processing-terms\" target=\"_blank\" rel=\"noopener noreferrer\">https://cloud.google.com/terms/data-processing-terms</a></li><li>Gemini API条款：<a href=\"https://ai.google.dev/gemini-api/terms\" target=\"_blank\" rel=\"noopener noreferrer\">https://ai.google.dev/gemini-api/terms</a></li></ul>"
+          },
+          "safeguards": "<p><strong>我们的保障措施（适用于所有提供商）：</strong></p><ul><li>我们仅使用API服务（非消费产品）</li><li>我们只发送分析所需的最少数据</li><li>我们在可用时使用优化设置以减少数据传输</li><li>我们不随帧发送识别元数据</li></ul>"
+        },
+        "subsection2": {
+          "title": "6.2 支付处理商（Stripe）",
+          "content": "<p><strong>披露内容：</strong>您在结账时提供的支付和联系信息</p><p><strong>原因：</strong>处理您的支付并交付您的许可证</p><p><strong>位置：</strong>美国（全球运营）</p><p><strong>其数据实践：</strong><a href=\"https://stripe.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://stripe.com/privacy</a></p>"
+        },
+        "subsection3": {
+          "title": "6.3 其他披露",
+          "content": "<p>我们可能会披露您的信息：</p><ul><li><strong>法律要求：</strong>如果法律、法院命令或政府要求</li><li><strong>权利保护：</strong>保护我们的权利、隐私、安全或财产</li><li><strong>业务转让：</strong>与合并、收购或资产出售相关（会通知您）</li></ul><p>我们不会：</p><ul><li>出售您的个人信息</li><li>为第三方营销目的分享数据</li><li>交易个人信息</li></ul>"
+        }
+      },
+      "section7": {
+        "title": "7. 跨境数据传输（APP 8）",
+        "intro": "<p>您的摄像头帧数据被传输到美国，由我们的AI提供商（OpenAI和/或Google Gemini）处理。</p>",
+        "subsection1": {
+          "title": "7.1 为什么我们将数据传输到海外",
+          "content": "<p>我们使用基于云的AI视觉API（OpenAI Vision和Google Gemini），因为它们提供了最准确和隐私保护的在席感知方法，无需设备上的面部识别或生物识别处理。</p>"
+        },
+        "subsection2": {
+          "title": "7.2 海外传输的保护措施",
+          "content": "<p>我们采取以下措施保护您的数据：</p><ol><li><strong>合同保护：</strong>OpenAI和Google均受其公布的数据使用政策和企业条款约束</li><li><strong>数据最小化：</strong>我们仅发送摄像头帧（如果启用则包括截图），不发送识别元数据</li><li><strong>无永久存储：</strong>帧和截图实时处理，我们不永久存储</li><li><strong>信誉良好的提供商：</strong>OpenAI和Google均保持SOC 2合规性和企业安全标准</li></ol>"
+        },
+        "subsection3": {
+          "title": "7.3 您的同意",
+          "content": "<p>使用应用程序即表示您同意此跨境传输。如果您不同意，请不要使用应用程序。</p>"
+        },
+        "subsection4": {
+          "title": "7.4 欧盟/英国用户",
+          "content": "<p>对于欧盟或英国的用户，向美国的传输根据GDPR/UK GDPR下适用的数据传输机制进行。</p>"
+        }
+      },
+      "section8": {
+        "title": "8. 数据保留计划",
+        "intro": "<p>我们保持以下保留做法：</p>",
+        "table": "<table><thead><tr><th>数据类型</th><th>保留期限</th><th>删除方法</th></tr></thead><tbody><tr><td>摄像头帧</td><td>不保留（仅实时处理）</td><td>不适用</td></tr><tr><td>截图（如果启用）</td><td>不保留（仅实时处理）</td><td>不适用</td></tr><tr><td>屏幕感知数据</td><td>不保留（本地实时处理）</td><td>不适用</td></tr><tr><td>会话日志（本地）</td><td>直到您删除</td><td>用户控制删除</td></tr><tr><td>PDF报告（本地）</td><td>直到您删除</td><td>用户控制删除</td></tr><tr><td>错误日志</td><td>故障排除的最少保留</td><td>自动删除</td></tr><tr><td>许可证数据</td><td>许可证有效期内</td><td>许可证撤销时</td></tr><tr><td>支付记录（Stripe）</td><td>根据Stripe的保留政策</td><td>联系Stripe</td></tr><tr><td>OpenAI处理</td><td>根据OpenAI的API数据使用政策</td><td>OpenAI自动处理</td></tr><tr><td>Google Gemini处理</td><td>根据Google的Gemini API条款</td><td>Google自动处理</td></tr></tbody></table>",
+        "subsection1": {
+          "title": "8.1 您对本地数据的控制",
+          "content": "<p>所有会话数据和报告都存储在您设备的本地。您可以随时通过以下方式删除这些数据：</p><ol><li>从应用程序的数据目录删除文件</li><li>卸载应用程序</li><li>使用操作系统的文件管理工具</li></ol>"
+        },
+        "subsection2": {
+          "title": "8.2 我们无法删除的数据",
+          "content": "<p>一旦帧被传输到我们的AI提供商（OpenAI或Google Gemini），其保留由这些提供商各自的政策管理。我们无法代表您删除这些数据。</p>"
+        }
+      },
+      "section9": {
+        "title": "9. 数据安全（APP 11）",
+        "intro": "<p>我们实施合理的安全措施来保护您的信息：</p>",
+        "subsection1": {
+          "title": "9.1 技术措施",
+          "content": "<ul><li><strong>传输加密：</strong>传输给第三方的所有数据均使用TLS/HTTPS加密</li><li><strong>本地存储：</strong>会话数据以标准文件格式存储在您的设备上，受设备安全保护</li><li><strong>无中央数据库：</strong>我们不维护用户会话数据的中央数据库</li><li><strong>API安全：</strong>我们与服务提供商使用安全的API身份验证</li></ul>"
+        },
+        "subsection2": {
+          "title": "9.2 组织措施",
+          "content": "<ul><li>系统访问仅限授权人员</li><li>我们遵循安全开发实践</li><li>我们定期审查和更新安全措施</li></ul>"
+        },
+        "subsection3": {
+          "title": "9.3 您的责任",
+          "content": "<p>您负责：</p><ul><li>使用适当的密码/生物识别保护您的设备</li><li>保持操作系统和应用程序更新</li><li>不与他人分享您的许可证密钥</li><li>保护包含会话数据的导出报告</li></ul>"
+        }
+      },
+      "section10": {
+        "title": "10. 数据泄露响应",
+        "subsection1": {
+          "title": "10.1 AI提供商责任",
+          "content": "<p>视觉数据与我们的AI提供商（OpenAI或Google Gemini）共享进行处理。涉及此数据的任何数据泄露由这些AI提供商根据其各自的政策负责。</p>"
+        },
+        "subsection2": {
+          "title": "10.2 责任限制",
+          "content": "<p>BrainDock明确免除以下情况发生的数据泄露、安全事件或未经授权访问的责任：</p><ul><li>AI提供商层面（OpenAI或Google Gemini）</li><li>支付处理商层面（Stripe）</li><li>由于未经授权访问导致的您本地设备上</li></ul>"
+        },
+        "subsection3": {
+          "title": "10.3 本地数据",
+          "content": "<p>存储在您设备本地的会话数据的安全由您负责。如果您的设备遭到入侵，您应酌情向相关当局报告。</p>"
+        }
+      },
+      "section11": {
+        "title": "11. 您的隐私权",
+        "subsection1": {
+          "title": "11.1 澳大利亚用户（APP 12, 13）",
+          "content": "<p>根据澳大利亚隐私原则，您有权：</p><ul><li><strong>访问：</strong>请求访问我们可能持有的关于您的个人信息</li><li><strong>更正：</strong>请求更正不准确的信息</li><li><strong>投诉：</strong>如果您认为我们违反了APP，可以提出投诉</li></ul><p>要行使这些权利，请使用第2节中的详细信息联系我们。</p><p><strong>注意：</strong>因为大部分数据存储在您设备的本地，您已经可以直接访问和控制这些信息。</p>"
+        },
+        "subsection2": {
+          "title": "11.2 欧盟/英国用户（GDPR权利）",
+          "content": "<p>如果您在欧盟或英国，您有额外的权利，包括：</p><ul><li>删除权（"被遗忘权"）</li><li>限制处理的权利</li><li>数据可携带权</li><li>反对处理的权利</li><li>与自动化决策相关的权利</li></ul>"
+        },
+        "subsection3": {
+          "title": "11.3 如何提出请求",
+          "content": "<p>请通过<a href=\"mailto:morayya@thebraindock.com\">morayya@thebraindock.com</a>或<a href=\"mailto:help.thebraindock@gmail.com\">help.thebraindock@gmail.com</a>联系我们，并提供：</p><ul><li>您的姓名和联系方式</li><li>您请求的描述</li><li>帮助我们定位您数据的任何信息</li></ul><p>我们将在30天内回复（或根据适用法律要求更快）。</p>"
+        },
+        "subsection4": {
+          "title": "11.4 投诉",
+          "content": "<p>如果您对我们的回复不满意，可以向以下机构投诉：</p><p><strong>澳大利亚：</strong><br>澳大利亚信息专员办公室（OAIC）<br>网站：<a href=\"https://www.oaic.gov.au\" target=\"_blank\" rel=\"noopener noreferrer\">www.oaic.gov.au</a><br>电话：1300 363 992</p><p><strong>欧盟：</strong><br>您当地的数据保护机构</p><p><strong>英国：</strong><br>信息专员办公室（ICO）<br>网站：<a href=\"https://www.ico.org.uk\" target=\"_blank\" rel=\"noopener noreferrer\">www.ico.org.uk</a></p>"
+        }
+      },
+      "section12": {
+        "title": "12. 第三方捕获警告",
+        "intro": "<p><strong>重要：</strong>您的摄像头可能会捕获您环境中的其他人。</p>",
+        "subsection1": {
+          "title": "12.1 您的义务",
+          "content": "<p>如果其他人可能出现在您摄像头的视野中（室友、家人、同事、访客、视频通话中的人），<strong>您有责任：</strong></p><ul><li>告知他们摄像头捕获正在进行</li><li>在法律要求时获得他们的同意</li><li>调整摄像头位置以减少捕获第三方</li><li>如果无法获得适当同意，请不要使用应用程序</li></ul>"
+        },
+        "subsection2": {
+          "title": "12.2 我们的限制",
+          "content": "<p>我们无法：</p><ul><li>识别或过滤帧中的第三方</li><li>代表您获得同意</li><li>对您捕获他人承担责任</li></ul>"
+        },
+        "subsection3": {
+          "title": "12.3 建议做法",
+          "content": "<ul><li>在私密空间使用应用程序</li><li>调整摄像头位置仅显示您的直接工作区域</li><li>当他人进入您的空间时暂停会话</li><li>告知家庭成员您使用专注辅助软件</li></ul>"
+        }
+      },
+      "section13": {
+        "title": "13. 儿童隐私",
+        "subsection1": {
+          "title": "13.1 18岁以下用户",
+          "content": "<p>18岁以下的用户应在父母/法定监护人的监督或许可下使用应用程序。父母或法定监护人负责：</p><ul><li>审查本隐私政策</li><li>监督用户对应用程序的使用</li><li>确保对摄像头捕获的适当同意</li></ul>"
+        },
+        "subsection2": {
+          "title": "13.2 发现未成年人数据",
+          "content": "<p>如果我们得知我们在未经父母同意的情况下收集了18岁以下用户的个人信息，我们将采取措施删除该信息。</p>"
+        }
+      },
+      "section14": {
+        "title": "14. 工作场所使用",
+        "subsection1": {
+          "title": "14.1 员工使用",
+          "content": "<p>如果您主动在工作中使用BrainDock提高个人生产力：</p><ul><li>您有责任遵守雇主的政策</li><li>工作设备上的会话数据可能受雇主访问</li></ul>"
+        },
+        "subsection2": {
+          "title": "14.2 雇主部署",
+          "content": "<p>如果雇主部署BrainDock来观察员工：</p><ul><li>雇主成为通过应用程序收集的数据的控制者</li><li>雇主必须向员工提供自己的隐私通知</li><li>雇主必须遵守工作场所观察法律</li><li>我们不对雇主的数据处理实践负责</li></ul><p><strong>本隐私政策适用于我们与用户的直接关系，不适用于雇主-员工关系。</strong></p>"
+        }
+      },
+      "section15": {
+        "title": "15. Cookie和网络技术",
+        "content": "<p>桌面应用程序不使用任何网络技术进行数据收集。</p><p>如果您访问任何关联网站，这些网站可能会按其各自的隐私通知中所述使用cookie。</p>"
+      },
+      "section16": {
+        "title": "16. 本隐私政策的变更",
+        "subsection1": {
+          "title": "16.1 更新",
+          "content": "<p>我们可能会不时更新本隐私政策。更改将通过顶部的"最后更新"日期表示。</p>"
+        },
+        "subsection2": {
+          "title": "16.2 通知",
+          "content": "<p>对于重大更改，我们将通过以下方式通知您：</p><ul><li>应用内通知</li><li>电子邮件（如果可用）</li><li>我们网站上的通知</li></ul>"
+        },
+        "subsection3": {
+          "title": "16.3 您的继续使用",
+          "content": "<p>更改后继续使用应用程序即表示接受更新后的隐私政策。</p>"
+        }
+      },
+      "section17": {
+        "title": "17. 特定司法管辖区的额外信息",
+        "subsection1": {
+          "title": "17.1 加州居民（CCPA）",
+          "content": "<p>加州居民根据《加州消费者隐私法》享有特定权利。请联系我们了解如何行使这些权利的信息。</p>"
+        },
+        "subsection2": {
+          "title": "17.2 其他司法管辖区",
+          "content": "<p>如果您位于有特定隐私法律但此处未涉及的司法管辖区，请联系我们讨论我们如何满足您的权利。</p>"
+        }
+      },
+      "section18": {
+        "title": "18. 数据流摘要",
+        "content": "<p>为了透明度，以下是数据如何通过我们的应用程序流动的摘要：</p><pre><code>+------------------------------------------------------------------+\n|                        您的设备                                   |\n+------------------------------------------------------------------+\n|                                                                  |\n|  摄像头感知（选择时激活）                                         |\n|  摄像头 -> 捕获帧 -> 发送到AI -> 返回在席信息                     |\n|                                                                  |\n|  屏幕感知（选择时激活）                                           |\n|  窗口标题和URL -> 本地与您的列表检查                              |\n|  （除非启用截图分析，否则不发送到AI）                             |\n|                                                                  |\n|  截图分析（可选，默认禁用）                                       |\n|  如果启用：截图 -> 发送到AI -> 返回分心信息                       |\n|  （截图不存储）                                                   |\n|                                                                  |\n|  结果本地存储 -> 会话日志、统计                                   |\n|       |                                                          |\n|  生成PDF报告 -> 保存到您设备的下载文件夹                          |\n|                                                                  |\n+------------------------------------------------------------------+\n                              |\n                              v\n+------------------------------------------------------------------+\n|              AI提供商（一次仅使用一个）                           |\n+------------------------------------------------------------------+\n|                                                                  |\n|  OPENAI                         GOOGLE GEMINI                    |\n|  - Vision API                   - Gemini Vision API              |\n|  - 位于美国                     - 位于美国                       |\n|  - 根据OpenAI政策               - 根据Google政策                 |\n|                                                                  |\n|  两个提供商接收：                                                 |\n|  - 摄像头帧（用于在席/设备识别）                                  |\n|  - 如果启用则包括截图（用于分心识别）                             |\n|  - 仅返回识别结果                                                 |\n|                                                                  |\n+------------------------------------------------------------------+\n\n不收集的数据：\nX 生物识别模板\nX 面部识别数据  \nX 音频\nX 按键数据\nX 文件内容\nX 截图中的密码或敏感文本</code></pre>"
+      },
+      "section19": {
+        "title": "19. 问题和联系",
+        "content": "<p>如果您对本隐私政策或我们的数据实践有疑问，请联系我们：</p><p><strong>电子邮件：</strong><a href=\"mailto:morayya@thebraindock.com\">morayya@thebraindock.com</a>或<a href=\"mailto:help.thebraindock@gmail.com\">help.thebraindock@gmail.com</a></p><p><strong>网站：</strong>thebraindock.com</p><p>我们的目标是在30天内回复所有询问。</p>"
+      },
+      "section20": {
+        "title": "20. 确认",
+        "content": "<p>使用BrainDock即表示您确认您已阅读并理解本隐私政策，并同意按照此处所述收集、使用和披露您的信息。</p><hr><p><em>本隐私政策最后更新于2026年1月。</em></p><p><em>本政策旨在遵守全球适用的隐私法律和法规。但是，本文件不构成法律建议。我们建议您就您的具体情况咨询合格的隐私律师。</em></p>"
+      }
+    },
+    "terms": {
+      "pageTitle": "条款和条件",
+      "pageMeta": "BrainDock 专注辅助应用程序 - 最后更新：2026年1月",
+      "section1": {
+        "title": "1. 同意条款和条件",
+        "content": "<p>通过下载、安装、访问或使用BrainDock（"本应用程序"、"本应用"、"我们"、"我们的"），您（"用户"、"您"、"您的"）同意受这些条款和条件（"条款"）的约束。如果您不同意这些条款和条件，请不要使用本应用程序。</p><p>这些条款和条件构成您与BrainDock之间具有法律约束力的协议。请仔细阅读。</p>"
+      },
+      "section2": {
+        "title": "2. 服务描述",
+        "intro": "<p>BrainDock是一款专注辅助应用程序，旨在帮助用户观察其学习或工作时段。本应用程序：</p><ul><li>使用您设备的摄像头识别您的在席状态和潜在分心</li><li>观察您的活动窗口和浏览器URL以识别分散注意力的应用程序/网站</li><li>可选择捕获截图进行AI分析（默认禁用，用户控制）</li><li>将摄像头帧和/或截图发送到第三方AI服务进行实时分析</li><li>生成总结您专注模式的会话报告</li><li><strong>不</strong>进行面部识别、身份验证或生物识别</li></ul>",
+        "subsection1": {
+          "title": "2.1 BrainDock做什么",
+          "content": "<ul><li>识别是否有人在办公桌前</li><li>识别您是否在使用分散注意力的设备（手机、平板电脑、游戏控制器等）</li><li>观察活动窗口标题和浏览器URL以识别分散注意力的应用程序/网站</li><li><strong>可选AI截图分析：</strong>如果您启用，捕获截图并发送到AI进行分心识别（默认禁用）</li><li>生成专注会话统计和PDF报告</li><li>提供关于您专注模式的AI生成见解</li></ul>"
+        },
+        "subsection2": {
+          "title": "2.2 BrainDock不做什么",
+          "content": "<ul><li><strong>无面部识别：</strong>我们不识别您是谁</li><li><strong>无生物识别模板：</strong>我们不创建、存储或匹配生物识别数据</li><li><strong>无身份验证：</strong>我们不在会话之间验证或匹配您的身份</li><li><strong>无视频存储：</strong>我们不保存或存储视频片段</li><li><strong>无截图存储：</strong>截图（如果启用）实时处理，不永久保存</li><li><strong>无持续观察：</strong>处理仅在您发起的活动会话期间进行</li><li><strong>无按键记录：</strong>我们不捕获您输入的内容</li></ul>"
+        }
+      },
+      "section3": {
+        "title": "3. 资格",
+        "subsection1": {
+          "title": "3.1 年龄要求",
+          "content": "<p>18岁以下的用户应在代表您同意这些条款和条件的父母/法定监护人的监督或许可下使用本应用程序。</p>"
+        },
+        "subsection2": {
+          "title": "3.2 行为能力",
+          "content": "<p>使用本应用程序即表示您声明您有法律行为能力签订本协议。</p>"
+        }
+      },
+      "section4": {
+        "title": "4. 用户责任",
+        "subsection1": {
+          "title": "4.1 您的设备和环境",
+          "content": "<p>您负责：</p><ul><li>确保您有合法权利在您的设备上使用摄像头捕获</li><li>会话期间摄像头捕获的内容</li><li>获取可能被您摄像头捕获的任何第三方的同意</li></ul>"
+        },
+        "subsection2": {
+          "title": "4.2 第三方同意警告",
+          "content": "<p><strong>重要：</strong>本应用程序从您的设备捕获摄像头帧。如果其他人（室友、家人、同事、视频通话中的客户或路人）可能出现在您摄像头的视野中：</p><ul><li><strong>您有责任在开始会话前获得他们的同意</strong></li><li>考虑调整摄像头位置以减少捕获他人</li><li>尽可能在私密空间使用本应用程序</li><li>不要在未经他人知情和同意的情况下使用本应用程序观察他人</li></ul><p>我们不对您捕获第三方引起的任何隐私侵犯负责。</p>"
+        },
+        "subsection3": {
+          "title": "4.3 禁止使用",
+          "content": "<p>您同意不将本应用程序用于：</p><ul><li>秘密观察其他人</li><li>违反任何适用法律或法规</li><li>未经父母同意捕获或处理未成年人图像</li><li>以任何侵犯他人权利的方式</li><li>规避、禁用或干扰安全功能</li></ul>"
+        },
+        "subsection4": {
+          "title": "4.4 工作场所使用",
+          "content": "<p>如果您在工作场所使用BrainDock（无论是作为员工还是雇主）：</p><ul><li><strong>员工：</strong>确保您的雇主允许在工作设备上使用个人软件</li><li><strong>为员工部署的雇主：</strong>您必须遵守您所在司法管辖区的工作场所观察法律</li></ul><p><strong>澳大利亚雇主 - 特别通知：</strong>如果在澳大利亚部署BrainDock观察员工，您必须遵守州和领地的工作场所观察立法，包括但不限于：</p><ul><li><strong>新南威尔士州：</strong>2005年工作场所监视法 - 要求在观察开始前至少14天发出书面通知，说明观察的类型、如何进行、何时开始以及是连续还是间歇性的</li><li><strong>维多利亚州：</strong>1999年监视设备法</li><li><strong>昆士兰州：</strong>1971年侵犯隐私法</li><li><strong>其他州：</strong>适用的监视设备立法</li></ul><p><strong>我们强烈建议雇主在部署BrainDock进行员工观察之前寻求独立法律建议。</strong></p>"
+        }
+      },
+      "section5": {
+        "title": "5. 许可证和访问",
+        "subsection1": {
+          "title": "5.1 许可证授予",
+          "content": "<p>在遵守这些条款和条件并支付适用费用的前提下，我们授予您有限的、非独占的、不可转让的、可撤销的许可证，用于个人、非商业目的使用本应用程序。</p>"
+        },
+        "subsection2": {
+          "title": "5.2 许可证限制",
+          "content": "<p>您不应：</p><ul><li>复制、修改或分发本应用程序</li><li>逆向工程、反编译或反汇编本应用程序</li><li>出租、租赁、出借、出售或再许可本应用程序</li><li>使用本应用程序开发竞争产品</li><li>删除或更改任何专有声明</li></ul>"
+        },
+        "subsection3": {
+          "title": "5.3 许可证终止",
+          "content": "<p>如果您违反这些条款和条件，我们可能终止您的许可证。终止后，您必须停止使用本应用程序并删除所有副本。</p>"
+        }
+      },
+      "section6": {
+        "title": "6. 付款和退款",
+        "subsection1": {
+          "title": "6.1 定价",
+          "content": "<p>本应用程序需要一次性付款才能获得完全访问权限。当前价格在购买时显示。</p>"
+        },
+        "subsection2": {
+          "title": "6.2 支付处理",
+          "content": "<p>支付通过Stripe安全处理。付款即表示您也同意Stripe的服务条款。</p>"
+        },
+        "subsection3": {
+          "title": "6.3 退款政策",
+          "content": "<p>鉴于数字软件的性质，退款由我们酌情提供。如果出现以下情况，您可以在购买后7天内申请退款：</p><ul><li>本应用程序未按描述运行</li><li>您遇到我们无法解决的技术问题</li><li>您尚未生成任何会话报告</li></ul><p>要申请退款，请联系我们并提供您的购买详情。</p>"
+        }
+      },
+      "section7": {
+        "title": "7. 数据处理确认",
+        "intro": "<p>使用本应用程序即表示您确认并同意：</p>",
+        "subsection1": {
+          "title": "7.1 摄像头帧处理",
+          "content": "<ul><li>活动会话期间捕获摄像头帧</li><li>帧被传输到第三方AI服务进行分析。我们一次使用以下提供商之一：<ul><li><strong>OpenAI</strong>（服务器位于美国）</li><li><strong>Google Gemini</strong>（服务器位于美国）</li></ul></li><li>这些提供商可能根据其各自的政策保留数据</li><li>我们不在您的设备或我们的服务器上存储原始摄像头帧</li></ul>"
+        },
+        "subsection2": {
+          "title": "7.2 屏幕感知",
+          "content": "<ul><li>本应用程序观察您的活动窗口标题和浏览器URL以识别分散注意力的应用程序/网站</li><li>此数据在您的设备上本地处理并与您的列表进行比较</li><li>窗口标题和URL不会发送到第三方服务（除非启用AI截图分析）</li></ul>"
+        },
+        "subsection3": {
+          "title": "7.3 可选AI截图分析",
+          "content": "<ul><li>此功能<strong>默认禁用</strong>，需要您明确启用</li><li>启用后，本应用程序捕获您屏幕的截图</li><li>截图被传输到我们的AI提供商（OpenAI或Google Gemini）进行分心分析</li><li>截图实时处理，<strong>不存储</strong>在您的设备或我们的服务器上</li><li>您可以随时在应用程序设置中禁用此功能</li><li><strong>警告：</strong>截图可能捕获屏幕上显示的敏感信息</li></ul>"
+        },
+        "subsection4": {
+          "title": "7.4 会话数据",
+          "content": "<ul><li>会话日志（时间戳、事件类型、专注统计）存储在您设备的本地</li><li>PDF报告生成并保存到您的设备</li><li>您控制本地数据的保留和删除</li></ul>"
+        },
+        "subsection5": {
+          "title": "7.5 跨境数据传输",
+          "content": "<p>您的摄像头帧和截图（如果启用）被传输到位于美国的AI服务提供商。我们目前的提供商（OpenAI和Google）在美国运营服务器。使用本应用程序即表示您同意此跨境传输。有关数据保护措施的详情，请参阅我们的<a href=\"privacy.html\" target=\"_blank\" rel=\"noopener noreferrer\">隐私政策</a>。</p>"
+        }
+      },
+      "section8": {
+        "title": "8. 无生物识别承诺",
+        "content": "<p>我们明确确认BrainDock：</p><ul><li><strong>不</strong>进行面部识别或认证</li><li><strong>不</strong>创建生物识别模板或配置文件</li><li><strong>不</strong>匹配或验证用户身份</li><li><strong>不</strong>使用生物识别信息进行自动验证或认证</li><li>仅处理一般在席感知（办公桌前是否有人？）和物体识别（手机是否可见？）</li></ul><p>此承诺是我们应用程序的基本设计原则。</p>"
+      },
+      "section9": {
+        "title": "9. 知识产权",
+        "subsection1": {
+          "title": "9.1 我们的财产",
+          "content": "<p>本应用程序，包括其代码、设计、功能、文档和品牌，归BrainDock所有，受知识产权法保护。</p>"
+        },
+        "subsection2": {
+          "title": "9.2 您的内容",
+          "content": "<p>您保留使用本应用程序创建的任何内容（如会话报告）的所有权。使用本应用程序不授予我们对您生成内容的任何权利。</p>"
+        }
+      },
+      "section10": {
+        "title": "10. 第三方服务",
+        "subsection1": {
+          "title": "10.1 AI处理服务",
+          "content": "<p>本应用程序使用第三方AI服务进行图像分析。我们目前在任何给定时间使用以下提供商之一：</p><p><strong>OpenAI：</strong></p><ul><li>OpenAI使用条款：<a href=\"https://openai.com/terms\" target=\"_blank\" rel=\"noopener noreferrer\">https://openai.com/terms</a></li><li>OpenAI隐私政策：<a href=\"https://openai.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://openai.com/privacy</a></li><li>OpenAI API数据使用政策：<a href=\"https://openai.com/policies/api-data-usage-policies\" target=\"_blank\" rel=\"noopener noreferrer\">https://openai.com/policies/api-data-usage-policies</a></li></ul><p><strong>Google (Gemini)：</strong></p><ul><li>Google服务条款：<a href=\"https://policies.google.com/terms\" target=\"_blank\" rel=\"noopener noreferrer\">https://policies.google.com/terms</a></li><li>Google隐私政策：<a href=\"https://policies.google.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://policies.google.com/privacy</a></li><li>Google Cloud数据处理条款：<a href=\"https://cloud.google.com/terms/data-processing-terms\" target=\"_blank\" rel=\"noopener noreferrer\">https://cloud.google.com/terms/data-processing-terms</a></li></ul>"
+        },
+        "subsection2": {
+          "title": "10.2 支付处理",
+          "content": "<p>支付由Stripe处理：</p><ul><li>Stripe服务条款：<a href=\"https://stripe.com/legal\" target=\"_blank\" rel=\"noopener noreferrer\">https://stripe.com/legal</a></li><li>Stripe隐私政策：<a href=\"https://stripe.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://stripe.com/privacy</a></li></ul>"
+        }
+      },
+      "section11": {
+        "title": "11. 免责声明",
+        "subsection1": {
+          "title": "11.1 "按原样"提供",
+          "content": "<p>本应用程序"按原样"和"可用"提供，不提供任何形式的明示或暗示保证。我们否认所有保证，包括但不限于适销性、特定用途适用性和非侵权的暗示保证。</p>"
+        },
+        "subsection2": {
+          "title": "11.2 不保证结果",
+          "content": "<p>我们不保证：</p><ul><li>本应用程序将提高您的专注力或生产力</li><li>识别将100%准确</li><li>本应用程序将不间断或无错误运行</li><li>本应用程序将满足您的特定要求</li></ul>"
+        },
+        "subsection3": {
+          "title": "11.3 非医疗或治疗建议",
+          "content": "<p>BrainDock是一款生产力工具，不是医疗设备或治疗干预。本应用程序：</p><ul><li>不提供医疗、心理或治疗建议</li><li>不旨在诊断、治疗或管理任何医疗状况，包括ADHD、焦虑或其他状况</li><li>不应用作专业医疗建议的替代品</li></ul><p>如果您对专注力、注意力或心理健康有担忧，请咨询合格的医疗专业人员。</p>"
+        }
+      },
+      "section12": {
+        "title": "12. 责任限制",
+        "subsection1": {
+          "title": "12.1 损害赔偿的排除",
+          "content": "<p>在法律允许的最大范围内，BRAINDOCK在任何情况下均不对任何间接、附带、特殊、后果性或惩罚性损害承担责任，包括但不限于：</p><ul><li>利润、数据或商誉损失</li><li>业务中断</li><li>人身伤害或精神痛苦</li><li>您使用本应用程序导致的隐私侵犯</li><li>第三方行为造成的任何损害</li></ul>"
+        },
+        "subsection2": {
+          "title": "12.2 责任上限",
+          "content": "<p>我们因这些条款或本应用程序引起或与之相关的所有索赔的总责任不超过您在索赔前12个月内为本应用程序支付的金额。</p>"
+        },
+        "subsection3": {
+          "title": "12.3 澳大利亚消费者法",
+          "content": "<p>这些条款和条件中的任何内容均不排除、限制或修改澳大利亚消费者法（2010年竞争和消费者法附表2）授予的任何消费者保证、权利或救济，这些保证、权利或救济不能通过协议排除、限制或修改。</p>"
+        }
+      },
+      "section13": {
+        "title": "13. 赔偿",
+        "content": "<p>您同意赔偿并使BrainDock及其管理人员、董事、员工和代理人免受因以下原因产生的任何索赔、损害、损失或费用（包括法律费用）：</p><ul><li>您对本应用程序的使用</li><li>您违反这些条款和条件</li><li>您侵犯任何第三方的权利，包括隐私权</li><li>您未经同意捕获第三方</li><li>您违反工作场所观察法律使用本应用程序</li></ul>"
+      },
+      "section14": {
+        "title": "14. 条款和条件的修改",
+        "subsection1": {
+          "title": "14.1 修改权",
+          "content": "<p>我们保留随时修改这些条款和条件的权利。更改将在发布时生效。</p>"
+        },
+        "subsection2": {
+          "title": "14.2 通知",
+          "content": "<p>对于重大更改，我们将通过以下方式通知您：</p><ul><li>应用内通知</li><li>电子邮件（如果您提供了）</li><li>这些条款和条件上更新的"最后更新"日期</li></ul>"
+        },
+        "subsection3": {
+          "title": "14.3 继续使用",
+          "content": "<p>更改后继续使用本应用程序即表示接受修改后的条款和条件。如果您不同意更改，您必须停止使用本应用程序。</p>"
+        }
+      },
+      "section15": {
+        "title": "15. 终止",
+        "subsection1": {
+          "title": "15.1 由您终止",
+          "content": "<p>您可以通过从设备卸载本应用程序随时停止使用。</p>"
+        },
+        "subsection2": {
+          "title": "15.2 由我们终止",
+          "content": "<p>我们可以因任何原因立即终止或暂停您的访问，无需事先通知，包括违反这些条款和条件。</p>"
+        },
+        "subsection3": {
+          "title": "15.3 终止的效果",
+          "content": "<p>终止后：</p><ul><li>您使用本应用程序的许可证终止</li><li>您必须删除本应用程序的所有副本</li><li>按其性质应继续有效的条款（包括免责声明、责任限制和赔偿）将继续有效</li></ul>"
+        }
+      },
+      "section16": {
+        "title": "16. 管辖法律和争议",
+        "subsection1": {
+          "title": "16.1 管辖法律",
+          "content": "<p>这些条款和条件受澳大利亚维多利亚州法律管辖并据此解释。</p>"
+        },
+        "subsection2": {
+          "title": "16.2 管辖权",
+          "content": "<p>您同意就因这些条款和条件或本应用程序引起或与之相关的任何争议服从澳大利亚维多利亚州法院的专属管辖权。</p>"
+        },
+        "subsection3": {
+          "title": "16.3 非正式解决",
+          "content": "<p>在启动正式程序之前，您同意联系我们尝试非正式解决任何争议。</p>"
+        }
+      },
+      "section17": {
+        "title": "17. 一般条款",
+        "subsection1": {
+          "title": "17.1 完整协议",
+          "content": "<p>这些条款和条件连同我们的隐私政策构成您与BrainDock之间关于本应用程序的完整协议。</p>"
+        },
+        "subsection2": {
+          "title": "17.2 可分割性",
+          "content": "<p>如果这些条款和条件的任何条款被认定不可执行，其余条款将继续有效。</p>"
+        },
+        "subsection3": {
+          "title": "17.3 弃权",
+          "content": "<p>我们未能执行这些条款和条件的任何权利或条款不构成对该权利或条款的放弃。</p>"
+        },
+        "subsection4": {
+          "title": "17.4 转让",
+          "content": "<p>未经我们事先书面同意，您不得转让或转移这些条款和条件。我们可以不受限制地转让我们的权利和义务。</p>"
+        }
+      },
+      "section18": {
+        "title": "18. 联系我们",
+        "content": "<p>如果您对这些条款和条件有疑问，请通过以下方式联系我们：</p><p><strong>电子邮件：</strong><a href=\"mailto:morayya@thebraindock.com\">morayya@thebraindock.com</a>或<a href=\"mailto:help.thebraindock@gmail.com\">help.thebraindock@gmail.com</a></p><p><strong>网站：</strong>thebraindock.com</p>"
+      },
+      "section19": {
+        "title": "19. 接受",
+        "content": "<p>通过点击"我同意"、完成购买或使用本应用程序，您确认您已阅读、理解并同意受这些条款和条件以及我们的隐私政策的约束。</p><hr><p><em>这些条款和条件最后更新于2026年1月。</em></p>"
+      }
+    }
+  },
   "nav": {
     "whyBrainDock": "为什么选择BrainDock",
     "features": "功能特点",

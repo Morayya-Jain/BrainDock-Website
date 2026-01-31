@@ -11,11 +11,11 @@ Last Updated: January 2026
 
 ---
 
-## 1. Agreement to Terms
+## 1. Agreement to Terms and Conditions
 
-By downloading, installing, accessing, or using BrainDock ("the Application", "the App", "we", "us", or "our"), you ("User", "you", or "your") agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to these Terms, do not use the Application.
+By downloading, installing, accessing, or using BrainDock ("the Application", "the App", "we", "us", or "our"), you ("User", "you", or "your") agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to these Terms and Conditions, do not use the Application.
 
-These Terms constitute a legally binding agreement between you and BrainDock. Please read them carefully.
+These Terms and Conditions constitute a legally binding agreement between you and BrainDock. Please read them carefully.
 
 ---
 
@@ -45,7 +45,7 @@ BrainDock is a focus tracking application designed to help users monitor their s
 - **No Biometric Templates**: We do not create, store, or match biometric data
 - **No Identity Verification**: We do not verify or match your identity across sessions
 - **No Video Recording**: We do not save or store video footage
-- **No Screenshot Storage**: Screenshots (if enabled) are processed in real-time and not saved
+- **No Screenshot Storage**: Screenshots (if enabled) are processed in real-time and not permanently saved
 - **No Continuous Surveillance**: Processing only occurs during active sessions you initiate
 - **No Keystroke Logging**: We do not record what you type
 
@@ -55,7 +55,7 @@ BrainDock is a focus tracking application designed to help users monitor their s
 
 ### 3.1 Age Requirements
 
-You must be at least 13 years of age to use this Application. If you are under 18, you must have permission from a parent or legal guardian who agrees to these Terms on your behalf.
+Users under 18 years of age should use the Application under parents / legal guardian's supervision or permission or both who agree to these Terms and Conditions on your behalf.
 
 ### 3.2 Capacity
 
@@ -116,11 +116,11 @@ If you use BrainDock in a workplace context (whether as an employee or employer)
 
 ### 5.1 Licence Grant
 
-Subject to these Terms and payment of applicable fees, we grant you a limited, non-exclusive, non-transferable, revocable licence to use the Application for personal, non-commercial purposes.
+Subject to these Terms and Conditions and payment of applicable fees, we grant you a limited, non-exclusive, non-transferable, revocable licence to use the Application for personal, non-commercial purposes.
 
 ### 5.2 Licence Restrictions
 
-You may not:
+You must not:
 
 - Copy, modify, or distribute the Application
 - Reverse engineer, decompile, or disassemble the Application
@@ -130,7 +130,7 @@ You may not:
 
 ### 5.3 Licence Termination
 
-We may terminate your licence if you breach these Terms. Upon termination, you must cease all use of the Application and delete all copies.
+We may terminate your licence if you breach these Terms and Conditions. Upon termination, you must cease all use of the Application and delete all copies.
 
 ---
 
@@ -166,13 +166,13 @@ By using the Application, you acknowledge and consent to:
 - Frames are transmitted to third-party AI services for analysis. We use one of the following providers at a time:
   - **OpenAI** (servers located in the United States)
   - **Google Gemini** (servers located in the United States)
-- These providers may retain data for up to 30 days for safety and abuse monitoring per their respective policies
+- These providers may retain data as per their respective policies
 - We do not store raw camera frames on your device or our servers
 
 ### 7.2 Screen Monitoring
 
 - The Application monitors your active window titles and browser URLs to detect distraction apps/websites
-- This data is processed locally on your device and compared against your blocklist
+- This data is processed locally on your device and compared against your list
 - Window titles and URLs are NOT sent to third-party services (unless AI Screenshot Analysis is enabled)
 
 ### 7.3 Optional AI Screenshot Analysis
@@ -192,7 +192,7 @@ By using the Application, you acknowledge and consent to:
 
 ### 7.5 Cross-Border Data Transfer
 
-Your camera frames and screenshots (if enabled) are transmitted to AI service providers located outside Australia. Our current providers (OpenAI and Google) operate servers in the United States. By using the Application, you consent to this cross-border transfer. See our Privacy Policy for details on data protection measures.
+Your camera frames and screenshots (if enabled) are transmitted to AI service providers located in the United States of America. Our current providers (OpenAI and Google) operate servers in the United States. By using the Application, you consent to this cross-border transfer. See our Privacy Policy for details on data protection measures.
 
 For full details on data handling, please review our [Privacy Policy](PRIVACY_POLICY.md).
 
@@ -294,7 +294,7 @@ OUR TOTAL LIABILITY FOR ALL CLAIMS ARISING FROM OR RELATING TO THESE TERMS OR TH
 
 ### 12.3 Australian Consumer Law
 
-Nothing in these Terms excludes, restricts, or modifies any consumer guarantee, right, or remedy conferred by the Australian Consumer Law (Schedule 2 of the Competition and Consumer Act 2010) that cannot be excluded, restricted, or modified by agreement.
+Nothing in these Terms and Conditions excludes, restricts, or modifies any consumer guarantee, right, or remedy conferred by the Australian Consumer Law (Schedule 2 of the Competition and Consumer Act 2010) that cannot be excluded, restricted, or modified by agreement.
 
 ---
 
@@ -303,18 +303,18 @@ Nothing in these Terms excludes, restricts, or modifies any consumer guarantee, 
 You agree to indemnify and hold harmless BrainDock and its officers, directors, employees, and agents from any claims, damages, losses, or expenses (including legal fees) arising from:
 
 - Your use of the Application
-- Your breach of these Terms
+- Your breach of these Terms and Conditions
 - Your violation of any third party's rights, including privacy rights
 - Your capture of third parties without consent
 - Your use of the Application in violation of workplace surveillance laws
 
 ---
 
-## 14. Modifications to Terms
+## 14. Modifications to Terms and Conditions
 
 ### 14.1 Right to Modify
 
-We reserve the right to modify these Terms at any time. Changes will be effective when posted.
+We reserve the right to modify these Terms and Conditions at any time. Changes will be effective when posted.
 
 ### 14.2 Notification
 
@@ -322,11 +322,11 @@ We will notify you of material changes through:
 
 - In-app notification
 - Email (if you have provided one)
-- Updated "Last Updated" date on these Terms
+- Updated "Last Updated" date on these Terms and Conditions
 
 ### 14.3 Continued Use
 
-Your continued use of the Application after changes constitutes acceptance of the modified Terms. If you do not agree to changes, you must stop using the Application.
+Your continued use of the Application after changes constitutes acceptance of the modified Terms and Conditions. If you do not agree to changes, you must stop using the Application.
 
 ---
 
@@ -338,7 +338,7 @@ You may stop using the Application at any time by uninstalling it from your devi
 
 ### 15.2 By Us
 
-We may terminate or suspend your access immediately, without prior notice, for any reason, including breach of these Terms.
+We may terminate or suspend your access immediately, without prior notice, for any reason, including breach of these Terms and Conditions.
 
 ### 15.3 Effect of Termination
 
@@ -354,11 +354,11 @@ Upon termination:
 
 ### 16.1 Governing Law
 
-These Terms are governed by and construed in accordance with the laws of Victoria, Australia.
+These Terms and Conditions are governed by and construed in accordance with the laws of Victoria, Australia.
 
 ### 16.2 Jurisdiction
 
-You agree to submit to the exclusive jurisdiction of the courts of Victoria, Australia, for any disputes arising from or relating to these Terms or the Application.
+You agree to submit to the exclusive jurisdiction of the courts of Victoria, Australia, for any disputes arising from or relating to these Terms and Conditions or the Application.
 
 ### 16.3 Informal Resolution
 
@@ -370,27 +370,27 @@ Before initiating formal proceedings, you agree to contact us to attempt to reso
 
 ### 17.1 Entire Agreement
 
-These Terms, together with our Privacy Policy, constitute the entire agreement between you and BrainDock regarding the Application.
+These Terms and Conditions, together with our Privacy Policy, constitute the entire agreement between you and BrainDock regarding the Application.
 
 ### 17.2 Severability
 
-If any provision of these Terms is found to be unenforceable, the remaining provisions will continue in effect.
+If any provision of these Terms and Conditions is found to be unenforceable, the remaining provisions will continue in effect.
 
 ### 17.3 Waiver
 
-Our failure to enforce any right or provision of these Terms will not constitute a waiver of that right or provision.
+Our failure to enforce any right or provision of these Terms and Conditions will not constitute a waiver of that right or provision.
 
 ### 17.4 Assignment
 
-You may not assign or transfer these Terms without our prior written consent. We may assign our rights and obligations without restriction.
+You may not assign or transfer these Terms and Conditions without our prior written consent. We may assign our rights and obligations without restriction.
 
 ---
 
 ## 18. Contact Us
 
-If you have questions about these Terms, please contact us at:
+If you have questions about these Terms and Conditions, please contact us at:
 
-**Email**: morayyajain@gmail.com or morayyajain@restartmedia.org
+**Email**: morayyajain@gmail.com OR morayyajain@restartmedia.org
 
 **Website**: thebraindock.com
 

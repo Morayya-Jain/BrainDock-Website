@@ -191,46 +191,87 @@ const I18n = {
 
   /**
    * Initialize the language toggle dropdown functionality.
+   * Handles header, footer, and mobile language selectors.
    */
   initLanguageToggle() {
-    const toggle = document.querySelector('.language-toggle');
-    const dropdown = document.querySelector('.language-dropdown');
+    // Footer language selector
+    const footerToggle = document.querySelector('.language-toggle');
+    const footerDropdown = document.querySelector('.language-dropdown');
     
-    if (!toggle || !dropdown) return;
+    // Header language selector
+    const headerToggle = document.querySelector('.header-language-toggle');
+    const headerDropdown = document.querySelector('.header-language-dropdown');
+    
+    // Mobile language selector
+    const mobileToggle = document.querySelector('.mobile-language-toggle');
+    const mobileDropdown = document.querySelector('.mobile-language-dropdown');
+    
+    // Store all toggle/dropdown pairs for unified handling
+    const selectors = [];
+    
+    if (footerToggle && footerDropdown) {
+      selectors.push({ toggle: footerToggle, dropdown: footerDropdown });
+    }
+    
+    if (headerToggle && headerDropdown) {
+      selectors.push({ toggle: headerToggle, dropdown: headerDropdown });
+    }
+    
+    if (mobileToggle && mobileDropdown) {
+      selectors.push({ toggle: mobileToggle, dropdown: mobileDropdown });
+    }
+    
+    if (selectors.length === 0) return;
+    
+    // Initialize each language selector
+    selectors.forEach(({ toggle, dropdown }) => {
+      // Toggle dropdown on button click
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        
+        // Close other dropdowns first
+        selectors.forEach(({ toggle: otherToggle, dropdown: otherDropdown }) => {
+          if (otherToggle !== toggle) {
+            otherToggle.setAttribute('aria-expanded', 'false');
+            otherDropdown.classList.remove('active');
+          }
+        });
+        
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', !isExpanded);
+        dropdown.classList.toggle('active');
+      });
 
-    // Toggle dropdown on button click
-    toggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', !isExpanded);
-      dropdown.classList.toggle('active');
+      // Handle language selection
+      dropdown.querySelectorAll('[data-lang]').forEach(option => {
+        option.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const newLang = option.getAttribute('data-lang');
+          if (newLang && newLang !== this.currentLang) {
+            this.changeLanguage(newLang);
+          }
+          // Close dropdown
+          toggle.setAttribute('aria-expanded', 'false');
+          dropdown.classList.remove('active');
+        });
+      });
     });
 
-    // Handle language selection
-    dropdown.querySelectorAll('[data-lang]').forEach(option => {
-      option.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const newLang = option.getAttribute('data-lang');
-        if (newLang && newLang !== this.currentLang) {
-          this.changeLanguage(newLang);
-        }
-        // Close dropdown
+    // Close all dropdowns when clicking outside
+    document.addEventListener('click', () => {
+      selectors.forEach(({ toggle, dropdown }) => {
         toggle.setAttribute('aria-expanded', 'false');
         dropdown.classList.remove('active');
       });
     });
 
-    // Close dropdown when clicking outside
-    document.addEventListener('click', () => {
-      toggle.setAttribute('aria-expanded', 'false');
-      dropdown.classList.remove('active');
-    });
-
-    // Close on Escape key
+    // Close all on Escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        toggle.setAttribute('aria-expanded', 'false');
-        dropdown.classList.remove('active');
+        selectors.forEach(({ toggle, dropdown }) => {
+          toggle.setAttribute('aria-expanded', 'false');
+          dropdown.classList.remove('active');
+        });
       }
     });
 
@@ -240,18 +281,39 @@ const I18n = {
 
   /**
    * Update the language toggle to show current language.
+   * Handles header, footer, and mobile language selectors.
    */
   updateLanguageToggleDisplay() {
-    const currentDisplay = document.querySelector('.language-current');
-    if (currentDisplay) {
-      const langName = this.getTranslation(`language.${this.currentLang}`);
-      if (langName) {
-        currentDisplay.textContent = langName;
-      }
+    const langName = this.getTranslation(`language.${this.currentLang}`);
+    
+    // Update footer language selector display text
+    const footerCurrentDisplay = document.querySelector('.language-current');
+    if (footerCurrentDisplay && langName) {
+      footerCurrentDisplay.textContent = langName;
+    }
+    
+    // Update mobile language selector display text
+    const mobileCurrentDisplay = document.querySelector('.mobile-language-current');
+    if (mobileCurrentDisplay && langName) {
+      mobileCurrentDisplay.textContent = langName;
     }
 
-    // Update selected state in dropdown
+    // Update selected state in footer dropdown
     document.querySelectorAll('.language-dropdown [data-lang]').forEach(option => {
+      const lang = option.getAttribute('data-lang');
+      option.classList.toggle('selected', lang === this.currentLang);
+      option.setAttribute('aria-selected', lang === this.currentLang);
+    });
+    
+    // Update selected state in header dropdown
+    document.querySelectorAll('.header-language-dropdown [data-lang]').forEach(option => {
+      const lang = option.getAttribute('data-lang');
+      option.classList.toggle('selected', lang === this.currentLang);
+      option.setAttribute('aria-selected', lang === this.currentLang);
+    });
+    
+    // Update selected state in mobile dropdown
+    document.querySelectorAll('.mobile-language-dropdown [data-lang]').forEach(option => {
       const lang = option.getAttribute('data-lang');
       option.classList.toggle('selected', lang === this.currentLang);
       option.setAttribute('aria-selected', lang === this.currentLang);

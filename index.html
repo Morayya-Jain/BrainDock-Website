@@ -53,14 +53,36 @@
         <a href="#contact" data-i18n="nav.contact">Contact Us</a>
       </div>
       
+      <!-- Header Language Selector -->
+      <div class="header-language-selector">
+        <button class="header-language-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
+          <svg class="globe-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <svg class="chevron-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </button>
+        <ul class="header-language-dropdown" role="listbox">
+          <li role="option" aria-selected="false" data-lang="en">English</li>
+          <li role="option" aria-selected="false" data-lang="ja">Japanese</li>
+          <li role="option" aria-selected="false" data-lang="de">German</li>
+          <li role="option" aria-selected="false" data-lang="fr">French</li>
+          <li role="option" aria-selected="false" data-lang="zh">Chinese</li>
+          <li role="option" aria-selected="false" data-lang="hi">Hindi</li>
+        </ul>
+      </div>
+      
       <a href="#download" class="btn btn-primary nav-cta">
-            <span data-i18n="nav.download">Download</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-          </a>
+        <span data-i18n="nav.download">Download</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+      </a>
       
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span>
@@ -76,6 +98,29 @@
       <a href="#how-it-works" data-i18n="nav.howItWorks">How It Works</a>
       <a href="#contact" data-i18n="nav.contact">Contact Us</a>
       <a href="#download" data-i18n="nav.download">Download</a>
+      
+      <!-- Mobile Language Selector -->
+      <div class="mobile-language-selector">
+        <button class="mobile-language-toggle" aria-expanded="false" aria-haspopup="listbox">
+          <svg class="globe-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <span class="mobile-language-current">English</span>
+          <svg class="chevron-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </button>
+        <ul class="mobile-language-dropdown" role="listbox">
+          <li role="option" aria-selected="false" data-lang="en">English</li>
+          <li role="option" aria-selected="false" data-lang="ja">Japanese</li>
+          <li role="option" aria-selected="false" data-lang="de">German</li>
+          <li role="option" aria-selected="false" data-lang="fr">French</li>
+          <li role="option" aria-selected="false" data-lang="zh">Chinese</li>
+          <li role="option" aria-selected="false" data-lang="hi">Hindi</li>
+        </ul>
+      </div>
     </div>
   </nav>
 
@@ -359,7 +404,7 @@
         <div class="footer-links">
           <h4 data-i18n="footer.legalTitle">Legal</h4>
           <a href="privacy.html" target="_blank" rel="noopener noreferrer" data-i18n="footer.privacyPolicy">Privacy Policy</a>
-          <a href="terms.html" target="_blank" rel="noopener noreferrer" data-i18n="footer.termsOfService">Terms of Service</a>
+          <a href="terms.html" target="_blank" rel="noopener noreferrer" data-i18n="footer.termsOfService">Terms and Conditions</a>
         </div>
         
         <div class="footer-contact" id="contact">

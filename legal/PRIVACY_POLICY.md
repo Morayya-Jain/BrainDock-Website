@@ -39,12 +39,12 @@ We collect different types of information to provide and improve our service.
 ### 3.1 Camera Frame Data (Processed, Not Stored)
 
 **What we capture:**
-- Visual frames from your device's camera during active sessions
+- Visual frames from your device's camera during active sessions started by you.
 
 **What we analyse:**
 - Whether a person is present at the desk
 - Whether the person appears to be engaged with distraction devices (phones, tablets, game controllers)
-- General posture/presence indicators (at desk vs. away)
+- General presence indicators (at desk vs. away)
 
 **What we do NOT analyse or collect:**
 - Your identity or facial features for recognition purposes
@@ -53,20 +53,20 @@ We collect different types of information to provide and improve our service.
 - Keystrokes or typing content
 
 **Processing:**
-- Frames are captured approximately once per second during active sessions only
+- Frames are captured approximately every 3 seconds during active sessions only
 - Frames are transmitted to our AI processing providers (OpenAI or Google Gemini) for analysis
 - Frames are NOT stored locally on your device
 - Frames are NOT stored on our servers
 
-### 3.2 Screen Monitoring Data (Processed Locally)
+### 3.2 Screen Monitoring Data (Processed Locally On Your Device)
 
 **What we monitor:**
-- Active window titles (e.g., "YouTube - Google Chrome")
+- Active window and browser tab titles (e.g., "YouTube - Google Chrome")
 - Browser URLs when detectable
 - Active application names
 
 **How it works:**
-- Window titles and URLs are compared against your blocklist of distraction apps/websites
+- Window titles and URLs are compared against your list of distraction apps/websites
 - This processing happens **locally on your device**
 - Window titles and URLs are NOT sent to third-party services (unless AI Screenshot Analysis is enabled)
 
@@ -75,7 +75,7 @@ We collect different types of information to provide and improve our service.
 - Text you type or read
 - Files you open or create
 
-### 3.3 Optional Screenshot Data (User-Controlled)
+### 3.3 AI Screenshot Analysis (User-Controlled)
 
 **This feature is disabled by default.** You must explicitly enable it in Application settings.
 
@@ -99,7 +99,7 @@ We collect different types of information to provide and improve our service.
 - Ensure no confidential information is visible when this feature is enabled
 - You can disable this feature at any time
 
-### 3.5 Session Log Data (Stored Locally)
+### 3.4 Session Log Data (Local)
 
 The following data is generated and stored locally on your device:
 
@@ -110,7 +110,7 @@ The following data is generated and stored locally on your device:
 | Focus statistics | Calculated metrics (focus time, distraction count, etc.) | Your device |
 | Session reports | Generated PDF summaries | Your device (Downloads folder) |
 
-### 3.6 Licence and Payment Data
+### 3.5 Licence and Payment Data
 
 When you purchase the Application:
 
@@ -123,7 +123,7 @@ When you purchase the Application:
 
 We do not directly collect or store your payment card details.
 
-### 3.7 Technical and Diagnostic Data
+### 3.6 Technical and Diagnostic Data
 
 We may collect minimal technical data for troubleshooting:
 
@@ -190,8 +190,7 @@ We use third-party AI services for image analysis. **Only one provider is used a
 **Location:** United States
 
 **Their data practices:**
-- OpenAI's API Data Usage Policy states they may retain API data for up to 30 days for safety and abuse monitoring
-- OpenAI does not use API data to train their models (as of their current policy)
+- OpenAI may retain API data as per OpenAI's policy
 - OpenAI Privacy Policy: https://openai.com/privacy
 - OpenAI API Data Usage: https://openai.com/policies/api-data-usage-policies
 
@@ -207,7 +206,6 @@ We use third-party AI services for image analysis. **Only one provider is used a
 
 **Their data practices:**
 - Google's Gemini API may retain data for safety monitoring and abuse prevention
-- Google does not use Gemini API data to train their models (per their current API terms)
 - Google Privacy Policy: https://policies.google.com/privacy
 - Google Cloud Data Processing Terms: https://cloud.google.com/terms/data-processing-terms
 - Gemini API Terms: https://ai.google.dev/gemini-api/terms
@@ -283,11 +281,11 @@ We maintain the following retention practices:
 | Screen monitoring data | Not retained (processed locally in real-time) | Not applicable |
 | Session logs (local) | Until you delete them | User-controlled deletion |
 | PDF reports (local) | Until you delete them | User-controlled deletion |
-| Error logs | 30 days maximum | Automatic deletion |
+| Error logs | Minimal retention for troubleshooting | Automatic deletion |
 | Licence data | Duration of licence validity | Upon licence revocation |
 | Payment records (Stripe) | Per Stripe's retention policy | Contact Stripe |
-| OpenAI processing | Up to 30 days per OpenAI policy | Automatic per OpenAI |
-| Google Gemini processing | Per Google's retention policy | Automatic per Google |
+| OpenAI processing | Per OpenAI's API data usage policy | Automatic per OpenAI |
+| Google Gemini processing | Per Google's Gemini API terms | Automatic per Google |
 
 ### 8.1 Your Control Over Local Data
 
@@ -299,7 +297,7 @@ All session data and reports are stored locally on your device. You can delete t
 
 ### 8.2 Data We Cannot Delete
 
-Once frames are transmitted to our AI providers (OpenAI or Google Gemini), their retention is governed by those providers' respective policies. We cannot delete this data on your behalf. Both providers may retain data for up to 30 days for safety and abuse monitoring purposes.
+Once frames are transmitted to our AI providers (OpenAI or Google Gemini), their retention is governed by those providers' respective policies. We cannot delete this data on your behalf.
 
 ---
 
@@ -332,29 +330,20 @@ You are responsible for:
 
 ## 10. Data Breach Response
 
-### 10.1 Our Commitment
+### 10.1 AI Provider Responsibility
 
-In the event of a data breach that is likely to result in serious harm to you, we will:
+Visual data is shared with our AI providers (OpenAI or Google Gemini) for processing. Any data breach involving this data is the responsibility of those AI providers as per their respective policies.
 
-1. **Assess** the breach within 30 days to determine severity
-2. **Notify** affected individuals as soon as practicable
-3. **Report** to the Office of the Australian Information Commissioner (OAIC) if required under the Notifiable Data Breaches scheme
-4. **Take steps** to contain the breach and prevent recurrence
+### 10.2 Limitation of Liability
 
-### 10.2 What We Will Tell You
+BrainDock expressly disclaims liability for any data breaches, security incidents, or unauthorised access that occurs:
+- At the AI provider level (OpenAI or Google Gemini)
+- At the payment processor level (Stripe)
+- On your local device due to unauthorised access
 
-If we need to notify you of a breach, we will provide:
-- A description of the breach
-- The types of information involved
-- Recommendations for protective steps you can take
-- Our contact information for further questions
+### 10.3 Local Data
 
-### 10.3 Limitations
-
-Because we do not store camera frames and session data is stored locally on your device, the most likely breach scenarios involve:
-- Compromise of our AI provider's systems (governed by their incident response)
-- Compromise of payment processor systems (governed by Stripe's incident response)
-- Unauthorised access to your local device (your responsibility to report to relevant authorities)
+Session data stored locally on your device is your responsibility to secure. If your device is compromised, you should report to relevant authorities as appropriate.
 
 ---
 
@@ -364,7 +353,7 @@ Because we do not store camera frames and session data is stored locally on your
 
 Under the Australian Privacy Principles, you have the right to:
 
-- **Access:** Request access to personal information we hold about you
+- **Access:** Request access to personal information we may hold about you
 - **Correction:** Request correction of inaccurate information
 - **Complaint:** Lodge a complaint if you believe we have breached the APPs
 
@@ -440,21 +429,17 @@ We cannot:
 
 ## 13. Children's Privacy
 
-### 13.1 Age Restrictions
+### 13.1 Users Under 18
 
-The Application is not intended for children under 13 years of age. We do not knowingly collect information from children under 13.
-
-### 13.2 Parental Consent
-
-If you are between 13 and 18 years of age, you must have permission from a parent or guardian to use the Application. The parent or guardian is responsible for:
+Users under 18 years of age should use the Application under parents / legal guardian's supervision or permission or both. The parent or legal guardian is responsible for:
 
 - Reviewing this Privacy Policy
-- Supervising the child's use of the Application
+- Supervising the user's use of the Application
 - Ensuring appropriate consent for camera capture
 
-### 13.3 Discovery of Child's Data
+### 13.2 Discovery of Minor's Data
 
-If we learn we have collected personal information from a child under 13 without parental consent, we will take steps to delete that information.
+If we learn we have collected personal information from a user under 18 without parental consent, we will take steps to delete that information.
 
 ---
 
@@ -480,7 +465,7 @@ If an employer deploys BrainDock to monitor employees:
 
 ## 15. Cookies and Tracking
 
-The desktop Application does not use cookies or web tracking technologies.
+The desktop application does not use any web tracking technologies.
 
 If you visit any associated websites, those sites may use cookies as described in their respective privacy notices.
 
@@ -526,11 +511,11 @@ For transparency, here is a summary of how data flows through our Application:
 │                        YOUR DEVICE                               │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  CAMERA MONITORING (always on during sessions)                   │
+│  CAMERA MONITORING (activated when selected)                     │
 │  Camera → Captures frames → Sent to AI → Returns presence info   │
 │                                                                  │
-│  SCREEN MONITORING (always on during sessions)                   │
-│  Window titles & URLs → Checked locally against your blocklist   │
+│  SCREEN MONITORING (activated when selected)                     │
+│  Window titles & URLs → Checked locally against your list   │
 │  (NOT sent to AI unless screenshot analysis enabled)             │
 │                                                                  │
 │  SCREENSHOT ANALYSIS (optional, disabled by default)             │
@@ -539,26 +524,24 @@ For transparency, here is a summary of how data flows through our Application:
 │                                                                  │
 │  Results stored locally → Session logs, statistics               │
 │       ↓                                                          │
-│  PDF Report generated → Saved to Downloads folder                │
+│  PDF Report generated → Saved to Downloads on your device        │
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
                               │
                               ↓
 ┌─────────────────────────────────────────────────────────────────┐
-│              AI PROVIDERS (One used at a time)                   │
+│              AI PROVIDERS (Only one used at a time)              │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
 │  OPENAI                         GOOGLE GEMINI                    │
 │  • Vision API                   • Gemini Vision API              │
 │  • Located in US                • Located in US                  │
-│  • Up to 30 days retention      • Per Google's policy            │
-│  • No training on API data      • No training on API data        │
+│  • As per OpenAI's policy       • As per Google's policy         │
 │                                                                  │
 │  Both providers receive:                                         │
 │  • Camera frames (for presence/gadget detection)                 │
 │  • Screenshots if enabled (for distraction detection)            │
 │  • Return detection results only                                 │
-│  • Do not use API data for model training                        │
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 
@@ -593,4 +576,4 @@ By using BrainDock, you acknowledge that you have read and understood this Priva
 
 *This Privacy Policy was last updated in January 2026.*
 
-*This policy is designed to comply with the Australian Privacy Act 1988 and Australian Privacy Principles (APPs), GDPR, and UK GDPR. However, this document does not constitute legal advice. We recommend consulting with a qualified privacy lawyer for advice specific to your situation.*
+*This policy is designed to comply with applicable privacy laws and regulations globally. However, this document does not constitute legal advice. We recommend consulting with a qualified privacy lawyer for advice specific to your situation.*
