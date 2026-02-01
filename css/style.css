@@ -16,7 +16,7 @@
   --bg-surface: #FFFFFF;
   --text-primary: #1C1C1E;
   --text-secondary: rgba(60, 60, 67, 0.6);
-  --text-tertiary: rgba(60, 60, 67, 0.3);
+  --text-tertiary: rgba(60, 60, 67, 0.45);
   --accent-highlight: #D4A373;
   --border-subtle: #E5E5EA;
   --success: #34C759;
@@ -937,12 +937,6 @@ p {
 }
 
 @media (min-width: 768px) {
-  .step h3 {
-    font-size: 1.5rem;
-  }
-}
-
-@media (min-width: 768px) {
   .steps {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-xxl);
@@ -994,6 +988,12 @@ p {
   background-color: var(--bg-secondary);
 }
 
+.faq-question:focus-visible {
+  outline: 2px solid var(--accent-highlight);
+  outline-offset: -2px;
+  background-color: var(--bg-secondary);
+}
+
 .faq-question span {
   flex: 1;
 }
@@ -1031,65 +1031,6 @@ p {
   padding: 0 var(--space-xl) var(--space-l);
   font-size: 0.9375rem;
   line-height: 1.7;
-}
-
-/* --------------------------------------------------------------------------
-   Contact Section
-   -------------------------------------------------------------------------- */
-.contact {
-  background: linear-gradient(to right, var(--bg-secondary-dark) 0%, var(--bg-secondary-light) 45%);
-}
-
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-l);
-  align-items: center;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-m);
-  padding: var(--space-l) var(--space-xl);
-  background-color: var(--bg-surface);
-  border-radius: var(--card-radius);
-  box-shadow: var(--shadow-card);
-  transition: transform var(--transition-base), box-shadow var(--transition-base);
-  width: 100%;
-  justify-content: center;
-}
-
-.contact-item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
-}
-
-.contact-item svg {
-  width: 24px;
-  height: 24px;
-  stroke: var(--text-primary);
-  stroke-width: 2;
-  fill: none;
-}
-
-.contact-item span {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-@media (min-width: 768px) {
-  .contact-info {
-    flex-direction: row;
-    max-width: 700px;
-  }
-  
-  .contact-item {
-    flex: 1;
-  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1193,7 +1134,7 @@ p {
   flex-direction: column;
   gap: var(--space-s);
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .footer-bottom p {

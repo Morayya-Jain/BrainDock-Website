@@ -1,0 +1,6 @@
+# BrainDock Website Robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://thebraindock.com/sitemap.xml

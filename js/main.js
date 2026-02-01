@@ -32,12 +32,16 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Close mobile menu when viewport widens past mobile breakpoint
+    // Close mobile menu when viewport widens past mobile breakpoint (debounced)
+    let resizeTimeout;
     window.addEventListener('resize', function() {
-      if (window.innerWidth >= 950 && navMobile.classList.contains('active')) {
-        navMobile.classList.remove('active');
-        navToggle.setAttribute('aria-expanded', 'false');
-      }
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(function() {
+        if (window.innerWidth >= 950 && navMobile.classList.contains('active')) {
+          navMobile.classList.remove('active');
+          navToggle.setAttribute('aria-expanded', 'false');
+        }
+      }, 100);
     });
   }
 
