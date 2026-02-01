@@ -35,8 +35,33 @@
   
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Preload JavaScript -->
+  <link rel="preload" href="js/i18n.js" as="script">
+  <link rel="preload" href="js/main.js" as="script">
+  
+  <!-- Meta robots -->
+  <meta name="robots" content="index, follow">
 </head>
 <body>
+  <!-- Fallback for users with JavaScript disabled -->
+  <noscript>
+    <style>
+      .noscript-notice {
+        background-color: #FFF3CD;
+        color: #856404;
+        padding: 12px 20px;
+        text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 14px;
+        border-bottom: 1px solid #FFE69C;
+      }
+    </style>
+    <div class="noscript-notice">
+      JavaScript is required for full functionality. Some features like language switching may not work without it.
+    </div>
+  </noscript>
+  
   <!-- Skip to content link for accessibility -->
   <a href="#main" class="sr-only">Skip to main content</a>
 
@@ -56,7 +81,7 @@
       
       <!-- Header Language Selector -->
       <div class="header-language-selector">
-        <button class="header-language-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
+        <button class="header-language-toggle" id="header-lang-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
           <svg class="globe-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <circle cx="12" cy="12" r="10"/>
             <line x1="2" y1="12" x2="22" y2="12"/>
@@ -66,7 +91,7 @@
             <path d="M6 9l6 6 6-6"/>
           </svg>
         </button>
-        <ul class="header-language-dropdown" role="listbox">
+        <ul class="header-language-dropdown" role="listbox" aria-labelledby="header-lang-toggle">
           <li role="option" aria-selected="false" data-lang="en">English</li>
           <li role="option" aria-selected="false" data-lang="ja">日本語 (Japan)</li>
           <li role="option" aria-selected="false" data-lang="de">Deutsch (Germany)</li>
@@ -102,7 +127,7 @@
       
       <!-- Mobile Language Selector -->
       <div class="mobile-language-selector">
-        <button class="mobile-language-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
+        <button class="mobile-language-toggle" id="mobile-lang-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
           <svg class="globe-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <circle cx="12" cy="12" r="10"/>
             <line x1="2" y1="12" x2="22" y2="12"/>
@@ -113,7 +138,7 @@
             <path d="M6 9l6 6 6-6"/>
           </svg>
         </button>
-        <ul class="mobile-language-dropdown" role="listbox">
+        <ul class="mobile-language-dropdown" role="listbox" aria-labelledby="mobile-lang-toggle">
           <li role="option" aria-selected="false" data-lang="en">English</li>
           <li role="option" aria-selected="false" data-lang="ja">日本語 (Japan)</li>
           <li role="option" aria-selected="false" data-lang="de">Deutsch (Germany)</li>
@@ -148,7 +173,7 @@
           <p class="hero-note" data-i18n="hero.note">Available for macOS, Windows and Linux.</p>
         </div>
         <div class="hero-image">
-          <img src="assets/image_transparent_screen.png" alt="BrainDock - AI connecting devices and mind">
+          <img src="assets/image_transparent_screen.png" alt="BrainDock - AI connecting devices and mind" data-i18n-alt="hero.imageAlt">
         </div>
       </div>
     </section>
@@ -172,7 +197,7 @@
           </div>
           
           <!-- Floating card for benefit explanations -->
-          <div class="benefit-card" id="benefit-card">
+          <div class="benefit-card" id="benefit-card" role="dialog" aria-modal="true" aria-label="Benefit explanation" tabindex="-1">
             <p class="benefit-card-text"></p>
           </div>
           <div class="benefit-card-overlay" id="benefit-card-overlay"></div>
@@ -398,7 +423,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="assets/logo_with_text.png" alt="BrainDock">
+          <img src="assets/logo_with_text.png" alt="BrainDock" loading="lazy">
           <p data-i18n="footer.brandDescription">AI-powered focus assistant that helps you build better habits.</p>
         </div>
         
@@ -420,7 +445,7 @@
         
         <!-- Language Selector -->
         <div class="language-selector">
-          <button class="language-toggle" aria-expanded="false" aria-haspopup="listbox">
+          <button class="language-toggle" id="footer-lang-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
             <svg class="globe-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <circle cx="12" cy="12" r="10"/>
               <line x1="2" y1="12" x2="22" y2="12"/>
@@ -431,7 +456,7 @@
               <path d="M6 9l6 6 6-6"/>
             </svg>
           </button>
-          <ul class="language-dropdown" role="listbox">
+          <ul class="language-dropdown" role="listbox" aria-labelledby="footer-lang-toggle">
             <li role="option" aria-selected="false" data-lang="en">English</li>
             <li role="option" aria-selected="false" data-lang="ja">日本語 (Japan)</li>
             <li role="option" aria-selected="false" data-lang="de">Deutsch (Germany)</li>

@@ -493,7 +493,8 @@
     "subtitle": "BrainDock uses AI to help you focus, work smarter and strengthen concentration.",
     "downloadBtn": "Download",
     "learnMoreBtn": "Learn More",
-    "note": "Available for macOS, Windows and Linux."
+    "note": "Available for macOS, Windows and Linux.",
+    "imageAlt": "BrainDock - AI connecting devices and mind"
   },
   "whyBrainDock": {
     "sectionTitle": "Why Use BrainDock?",

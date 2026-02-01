@@ -1,13 +1,129 @@
 /**
  * BrainDock Website - Shared JavaScript
- * Handles mobile menu toggle and FAQ accordion functionality
+ * Handles mobile menu toggle, responsive nav, and FAQ accordion functionality
  */
 
-// Mobile menu toggle
+// Mobile menu toggle and responsive navigation
 document.addEventListener('DOMContentLoaded', function() {
+  const nav = document.querySelector('.nav');
+  const navContainer = document.querySelector('.nav-container');
   const navToggle = document.querySelector('.nav-toggle');
   const navMobile = document.getElementById('nav-mobile');
-  
+  const navLinks = document.querySelector('.nav-links');
+  const navLogo = document.querySelector('.nav-logo');
+  const navCta = document.querySelector('.nav-cta');
+  const headerLangSelector = document.querySelector('.header-language-selector');
+
+  /**
+   * Dynamically check if navigation elements fit in the container.
+   * Adds 'nav-compact' class to nav when elements would overflow.
+   */
+  function checkNavFit() {
+    if (!navContainer || !navLinks || !navLogo) return;
+
+    // Temporarily remove compact mode to measure true widths
+    nav.classList.remove('nav-compact');
+
+    // Force a reflow to get accurate measurements
+    void navContainer.offsetWidth;
+
+    // Get the container's available width (accounting for padding)
+    const containerStyle = getComputedStyle(navContainer);
+    const containerPadding = parseFloat(containerStyle.paddingLeft) + parseFloat(containerStyle.paddingRight);
+    const availableWidth = navContainer.clientWidth - containerPadding;
+
+    // Measure each element's width
+    const logoWidth = navLogo.offsetWidth;
+    const linksWidth = navLinks.scrollWidth;
+    const ctaWidth = navCta ? navCta.offsetWidth : 0;
+    const langWidth = headerLangSelector ? headerLangSelector.offsetWidth : 0;
+
+    // Get gap size from CSS custom property or fallback
+    const gap = parseFloat(getComputedStyle(navContainer).gap) || 32;
+
+    // Calculate total required width (elements + gaps between them)
+    // Elements: logo, links, language, cta = 3 gaps between 4 elements
+    let elementCount = 1; // logo always present
+    if (linksWidth > 0) elementCount++;
+    if (langWidth > 0) elementCount++;
+    if (ctaWidth > 0) elementCount++;
+    const totalGaps = (elementCount - 1) * gap;
+
+    const requiredWidth = logoWidth + linksWidth + langWidth + ctaWidth + totalGaps;
+
+    // Add buffer for safety (20px)
+    const buffer = 20;
+
+    // If not enough space, switch to compact/mobile mode
+    if (requiredWidth + buffer > availableWidth) {
+      nav.classList.add('nav-compact');
+    }
+  }
+
+  // Mark that JS is handling responsive nav (for CSS fallback)
+  if (nav) {
+    nav.setAttribute('data-js-ready', 'true');
+  }
+
+  /**
+   * Dynamically check if hero CTA buttons fit in a row.
+   * Adds 'hero-compact' class to body when buttons would wrap.
+   */
+  const heroCtas = document.querySelector('.hero-ctas');
+  const heroCtaButtons = heroCtas ? heroCtas.querySelectorAll('.btn') : [];
+
+  function checkHeroCtasFit() {
+    if (!heroCtas || heroCtaButtons.length < 2) return;
+
+    // Temporarily remove compact mode to measure true widths
+    document.body.classList.remove('hero-compact');
+
+    // Force a reflow to get accurate measurements
+    void heroCtas.offsetWidth;
+
+    // Get the container's available width
+    const containerWidth = heroCtas.clientWidth;
+
+    // Measure total width of all buttons plus gaps
+    let totalButtonsWidth = 0;
+    heroCtaButtons.forEach(btn => {
+      totalButtonsWidth += btn.offsetWidth;
+    });
+
+    // Get gap between buttons
+    const gap = parseFloat(getComputedStyle(heroCtas).gap) || 16;
+    const totalGaps = (heroCtaButtons.length - 1) * gap;
+
+    const requiredWidth = totalButtonsWidth + totalGaps;
+
+    // Add buffer for safety (10px)
+    const buffer = 10;
+
+    // If not enough space, switch to compact/stacked mode
+    if (requiredWidth + buffer > containerWidth) {
+      document.body.classList.add('hero-compact');
+    }
+  }
+
+  // Run all responsive checks
+  function runAllResponsiveChecks() {
+    checkNavFit();
+    checkHeroCtasFit();
+  }
+
+  // Run checks on load and after fonts are ready
+  runAllResponsiveChecks();
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(runAllResponsiveChecks);
+  }
+
+  // Debounced resize handler for all responsive checks
+  let responsiveResizeTimeout;
+  window.addEventListener('resize', function() {
+    clearTimeout(responsiveResizeTimeout);
+    responsiveResizeTimeout = setTimeout(runAllResponsiveChecks, 50);
+  });
+
   if (navToggle && navMobile) {
     navToggle.addEventListener('click', function() {
       const isOpen = navMobile.classList.toggle('active');
@@ -32,12 +148,12 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Close mobile menu when viewport widens past mobile breakpoint (debounced)
-    let resizeTimeout;
+    // Close mobile menu when nav exits compact mode
+    let menuResizeTimeout;
     window.addEventListener('resize', function() {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(function() {
-        if (window.innerWidth >= 950 && navMobile.classList.contains('active')) {
+      clearTimeout(menuResizeTimeout);
+      menuResizeTimeout = setTimeout(function() {
+        if (!nav.classList.contains('nav-compact') && navMobile.classList.contains('active')) {
           navMobile.classList.remove('active');
           navToggle.setAttribute('aria-expanded', 'false');
         }
@@ -90,24 +206,39 @@ function initBenefitCards() {
   }
 
   let activeItem = null;
+  let previouslyFocusedElement = null;
 
   /**
    * Show the benefit card centered on screen.
+   * Manages focus for accessibility.
    */
   function showCard(item, explanation) {
+    // Store the previously focused element to restore later
+    previouslyFocusedElement = document.activeElement;
+    
     benefitCardText.textContent = explanation;
     benefitCard.classList.add('active');
     benefitCardOverlay.classList.add('active');
     activeItem = item;
+    
+    // Move focus to the card for accessibility
+    benefitCard.focus();
   }
 
   /**
    * Hide the benefit card.
+   * Restores focus to the previously focused element.
    */
   function hideCard() {
     benefitCard.classList.remove('active');
     benefitCardOverlay.classList.remove('active');
     activeItem = null;
+    
+    // Restore focus to the element that opened the card
+    if (previouslyFocusedElement) {
+      previouslyFocusedElement.focus();
+      previouslyFocusedElement = null;
+    }
   }
 
   benefitItems.forEach(item => {
@@ -135,15 +266,17 @@ function initBenefitCards() {
     });
   });
 
-  // Close card when clicking overlay
+  // Close card when clicking overlay (outside the card)
   benefitCardOverlay.addEventListener('click', hideCard);
 
-  // Close card when clicking the card itself
-  benefitCard.addEventListener('click', hideCard);
+  // Prevent clicks inside the card from closing it
+  benefitCard.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
 
   // Close card on Escape key
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
+    if (e.key === 'Escape' && benefitCard.classList.contains('active')) {
       hideCard();
     }
   });

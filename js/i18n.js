@@ -166,6 +166,15 @@ const I18n = {
       }
     });
 
+    // Update alt attributes on images
+    document.querySelectorAll('[data-i18n-alt]').forEach(element => {
+      const key = element.getAttribute('data-i18n-alt');
+      const translation = this.getTranslation(key);
+      if (translation) {
+        element.setAttribute('alt', translation);
+      }
+    });
+
     // Update the current language display in the toggle
     this.updateLanguageToggleDisplay();
   },

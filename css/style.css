@@ -404,9 +404,10 @@ p {
 }
 
 .nav-links {
-  display: none;
+  display: flex;
   gap: var(--space-xl);
   margin-left: auto;
+  white-space: nowrap; /* Prevent text wrapping within links */
 }
 
 .nav-links a {
@@ -414,6 +415,7 @@ p {
   font-weight: 500;
   color: var(--text-secondary);
   transition: color var(--transition-fast);
+  white-space: nowrap; /* Prevent text wrapping */
 }
 
 .nav-links a:hover {
@@ -421,12 +423,14 @@ p {
 }
 
 .nav-cta {
-  display: none;
+  display: inline-flex;
+  padding: 12px 28px;
+  white-space: nowrap; /* Prevent text wrapping */
 }
 
-/* Mobile menu toggle - positioned on right side */
+/* Mobile menu toggle - hidden by default, shown in compact mode */
 .nav-toggle {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 5px;
   background: none;
@@ -454,6 +458,9 @@ p {
   background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
   border-bottom: 1px solid var(--border-subtle);
   padding: var(--space-l);
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .nav-mobile.active {
@@ -469,23 +476,43 @@ p {
   border-bottom: 1px solid var(--border-subtle);
 }
 
-.nav-mobile a:last-child {
+.nav-mobile a:last-of-type {
   border-bottom: none;
 }
 
-/* Show desktop nav only when there's enough space for all links */
-@media (min-width: 950px) {
-  .nav-links {
-    display: flex;
-  }
+/* Compact/mobile navigation mode - triggered by JavaScript when elements overflow */
+.nav.nav-compact .nav-links {
+  display: none;
+}
 
-  .nav-cta {
-    display: inline-flex;
-    padding: 12px 28px;
-  }
+.nav.nav-compact .nav-cta {
+  display: none;
+}
 
-  .nav-toggle {
+.nav.nav-compact .header-language-selector {
+  display: none;
+}
+
+.nav.nav-compact .nav-toggle {
+  display: flex;
+}
+
+/* CSS-only fallback for browsers without JavaScript (uses a safe breakpoint) */
+@media (max-width: 1200px) {
+  .nav:not(.nav-compact):not([data-js-ready]) .nav-links {
     display: none;
+  }
+
+  .nav:not(.nav-compact):not([data-js-ready]) .nav-cta {
+    display: none;
+  }
+
+  .nav:not(.nav-compact):not([data-js-ready]) .header-language-selector {
+    display: none;
+  }
+
+  .nav:not(.nav-compact):not([data-js-ready]) .nav-toggle {
+    display: flex;
   }
 }
 
@@ -494,7 +521,7 @@ p {
    -------------------------------------------------------------------------- */
 .header-language-selector {
   position: relative;
-  display: none; /* Hidden on mobile */
+  display: block; /* Shown by default, hidden in compact mode via JS */
 }
 
 .header-language-toggle {
@@ -595,12 +622,7 @@ p {
   background-color: rgba(0, 0, 0, 0.02);
 }
 
-/* Show header language selector on desktop */
-@media (min-width: 950px) {
-  .header-language-selector {
-    display: block;
-  }
-}
+/* Header language selector visibility is now controlled by .nav-compact class via JavaScript */
 
 /* --------------------------------------------------------------------------
    Mobile Language Selector (in mobile menu)
@@ -663,7 +685,9 @@ p {
 }
 
 .mobile-language-dropdown.active {
-  max-height: 300px;
+  max-height: 200px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .mobile-language-dropdown li {
@@ -747,10 +771,15 @@ p {
 
 .hero-ctas {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: var(--space-m);
   align-items: center;
   justify-content: center;
+  flex-wrap: nowrap; /* Prevent wrapping - JS will detect overflow */
+}
+
+.hero-ctas .btn {
+  white-space: nowrap; /* Prevent button text from wrapping */
 }
 
 .hero-note {
@@ -770,10 +799,15 @@ p {
   height: auto;
 }
 
-@media (min-width: 768px) {
-  .hero-ctas {
-    flex-direction: row;
-    justify-content: center;
+/* Hero compact mode - triggered by JavaScript when CTA buttons would overflow */
+body.hero-compact .hero-ctas {
+  flex-direction: column;
+}
+
+/* CSS-only fallback for narrow screens without JavaScript */
+@media (max-width: 500px) {
+  body:not(.hero-compact) .hero-ctas {
+    flex-direction: column;
   }
 }
 
@@ -984,7 +1018,7 @@ p {
   transition: background-color var(--transition-fast);
 }
 
-.faq-question:hover {
+.faq-item:not(.active) .faq-question:hover {
   background-color: var(--bg-secondary);
 }
 
