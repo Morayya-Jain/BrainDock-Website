@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signing in... - BrainDock</title>
+  <link rel="icon" type="image/png" href="/assets/white-logo.png">
+  <link rel="apple-touch-icon" href="/assets/white-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-container">
+      <a href="/" class="auth-logo">
+        <img src="/assets/logo_with_text.png" alt="BrainDock">
+      </a>
+
+      <div class="auth-card">
+        <div class="auth-loading" id="loading-state">
+          <div class="auth-spinner"></div>
+          <p class="auth-loading-text">Completing sign in...</p>
+        </div>
+
+        <div class="auth-error" role="alert" hidden></div>
+
+        <p class="auth-footer" id="fallback-link" hidden>
+          <a href="/auth/login/">Back to login</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/pages/callback.js"></script>
+</body>
+</html>

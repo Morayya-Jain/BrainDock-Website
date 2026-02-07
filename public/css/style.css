@@ -403,11 +403,26 @@ p {
   width: auto;
 }
 
+.nav-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+  min-width: 0;
+}
+
 .nav-links {
   display: flex;
   gap: var(--space-xl);
-  margin-left: auto;
   white-space: nowrap; /* Prevent text wrapping within links */
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  flex-shrink: 0;
 }
 
 .nav-links a {
@@ -424,7 +439,8 @@ p {
 
 .nav-cta {
   display: inline-flex;
-  padding: 12px 28px;
+  padding: 10px 22px;
+  font-size: 0.875rem;
   white-space: nowrap; /* Prevent text wrapping */
 }
 
@@ -481,7 +497,15 @@ p {
 }
 
 /* Compact/mobile navigation mode - triggered by JavaScript when elements overflow */
+.nav.nav-compact .nav-center {
+  display: none;
+}
+
 .nav.nav-compact .nav-links {
+  display: none;
+}
+
+.nav.nav-compact .nav-actions {
   display: none;
 }
 
@@ -499,7 +523,15 @@ p {
 
 /* CSS-only fallback for browsers without JavaScript (uses a safe breakpoint) */
 @media (max-width: 1200px) {
+  .nav:not(.nav-compact):not([data-js-ready]) .nav-center {
+    display: none;
+  }
+
   .nav:not(.nav-compact):not([data-js-ready]) .nav-links {
+    display: none;
+  }
+
+  .nav:not(.nav-compact):not([data-js-ready]) .nav-actions {
     display: none;
   }
 
