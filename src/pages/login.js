@@ -1,6 +1,7 @@
 import { supabase } from '../supabase.js'
 import {
-  getRedirectPath,
+  captureDesktopSource,
+  handlePostAuthRedirect,
   showError,
   hideError,
   showLoading,
@@ -8,6 +9,9 @@ import {
   friendlyError,
 } from '../auth-helpers.js'
 import '../auth.css'
+
+// Persist ?source=desktop before it's lost to OAuth redirects
+captureDesktopSource()
 
 const form = document.getElementById('login-form')
 const loginBtn = document.getElementById('login-btn')
@@ -37,7 +41,7 @@ form.addEventListener('submit', async (e) => {
     return
   }
 
-  window.location.href = getRedirectPath()
+  await handlePostAuthRedirect(supabase)
 })
 
 // Google OAuth login

@@ -1,6 +1,7 @@
 import { supabase } from '../supabase.js'
 import {
-  getRedirectPath,
+  captureDesktopSource,
+  handlePostAuthRedirect,
   showError,
   hideError,
   showSuccess,
@@ -9,6 +10,9 @@ import {
   friendlyError,
 } from '../auth-helpers.js'
 import '../auth.css'
+
+// Persist ?source=desktop before it's lost to OAuth redirects
+captureDesktopSource()
 
 const form = document.getElementById('signup-form')
 const signupBtn = document.getElementById('signup-btn')
@@ -62,7 +66,8 @@ form.addEventListener('submit', async (e) => {
   // If Supabase returned a session, the user is auto-confirmed (go to dashboard).
   // If no session, email confirmation is required (show message).
   if (data.session) {
-    window.location.href = getRedirectPath()
+    await handlePostAuthRedirect(supabase)
+    return
   } else {
     form.hidden = true
     document.querySelector('.auth-divider').hidden = true

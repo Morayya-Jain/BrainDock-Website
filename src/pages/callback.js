@@ -1,5 +1,5 @@
 import { supabase } from '../supabase.js'
-import { showError } from '../auth-helpers.js'
+import { showError, handlePostAuthRedirect } from '../auth-helpers.js'
 import '../auth.css'
 
 const card = document.querySelector('.auth-card')
@@ -46,10 +46,10 @@ if (oauthError) {
   showFailure(oauthError)
 } else {
   // Listen for successful sign-in
-  const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+  const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event) => {
     if (event === 'SIGNED_IN') {
       subscription.unsubscribe()
-      window.location.href = '/dashboard/'
+      await handlePostAuthRedirect(supabase)
     }
   })
 

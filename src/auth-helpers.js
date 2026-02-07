@@ -1,15 +1,75 @@
 /**
  * Shared auth utilities used across all auth pages.
- * Handles redirects, error/loading UI.
+ * Handles redirects, error/loading UI, and desktop deep-link flow.
  */
+
+const DESKTOP_SOURCE_KEY = 'braindock_desktop'
 
 /**
  * Determine where to redirect after successful auth.
- * Always goes to dashboard. Desktop app linking is handled
- * via deep links (braindock:// URL scheme) separately.
+ * Always goes to dashboard (unless desktop flow overrides — see handlePostAuthRedirect).
  */
 export function getRedirectPath() {
   return '/dashboard/'
+}
+
+/**
+ * Capture ?source=desktop from the URL and persist in sessionStorage.
+ * Call this at the top of every auth page (login, signup).
+ * sessionStorage survives the OAuth redirect round-trip within the same tab.
+ */
+export function captureDesktopSource() {
+  const params = new URLSearchParams(window.location.search)
+  if (params.get('source') === 'desktop') {
+    sessionStorage.setItem(DESKTOP_SOURCE_KEY, 'true')
+  }
+}
+
+/**
+ * Redirect after successful auth.
+ * If the user came from the desktop app (?source=desktop), generates
+ * a one-time linking code via Edge Function and redirects to
+ * braindock://callback?code=... so the desktop app can log in.
+ * Otherwise redirects to the web dashboard.
+ *
+ * @param {import('@supabase/supabase-js').SupabaseClient} supabase
+ */
+export async function handlePostAuthRedirect(supabase) {
+  const isDesktop = sessionStorage.getItem(DESKTOP_SOURCE_KEY) === 'true'
+  if (!isDesktop) {
+    window.location.href = getRedirectPath()
+    return
+  }
+
+  // Clear the flag so refreshing the page goes to dashboard normally
+  sessionStorage.removeItem(DESKTOP_SOURCE_KEY)
+
+  try {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) {
+      window.location.href = getRedirectPath()
+      return
+    }
+
+    const { data, error } = await supabase.functions.invoke('generate-linking-code', {
+      body: {
+        access_token: session.access_token,
+        refresh_token: session.refresh_token,
+      },
+    })
+
+    if (error || !data?.code) {
+      console.error('Failed to generate linking code:', error || data)
+      window.location.href = getRedirectPath()
+      return
+    }
+
+    // Redirect to the desktop app via deep link
+    window.location.href = `braindock://callback?code=${encodeURIComponent(data.code)}`
+  } catch (err) {
+    console.error('Desktop linking error:', err)
+    window.location.href = getRedirectPath()
+  }
 }
 
 /**
