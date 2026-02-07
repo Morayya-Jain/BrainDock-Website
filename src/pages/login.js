@@ -35,23 +35,34 @@ function hasStoredSession() {
   return false
 }
 
-// If already logged in, handle redirect (including desktop linking flow).
-// We first check localStorage directly (synchronous, no race condition),
-// then retry getSession() until the Supabase client finishes initializing.
+// If already logged in, hide the form and show a loading state while we
+// wait for the Supabase client to initialize, then redirect.
 if (hasStoredSession()) {
+  const authCard = document.querySelector('.auth-card')
+  if (authCard) {
+    authCard.innerHTML = `
+      <div class="auth-loading">
+        <div class="auth-spinner"></div>
+        <p class="auth-loading-text">Signing you in...</p>
+      </div>
+    `
+  }
+
   ;(async () => {
     let session = null
-    // Retry getSession() with small delays until the client catches up
-    for (let attempt = 0; attempt < 10; attempt++) {
+    for (let attempt = 0; attempt < 5; attempt++) {
       try {
         const res = await supabase.auth.getSession()
         session = res.data?.session ?? null
       } catch (_) { /* ignore */ }
       if (session) break
-      await new Promise((r) => setTimeout(r, 300))
+      await new Promise((r) => setTimeout(r, 100))
     }
     if (session) {
       await handlePostAuthRedirect(supabase)
+    } else {
+      // Session expired or invalid - reload to show the login form
+      window.location.reload()
     }
   })()
 }
