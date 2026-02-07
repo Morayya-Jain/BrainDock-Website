@@ -47,17 +47,30 @@ function render(main, subscription) {
     <div class="dashboard-card">
       ${hasActive
         ? `
-        <p style="margin-bottom: var(--space-s);"><strong>Plan</strong> ${escapeHtml(tierName)}</p>
-        <p style="margin-bottom: var(--space-s); font-size: 0.9375rem; color: var(--text-secondary);">Status: ${escapeHtml(subscription.status)}</p>
-        ${periodStart ? `<p style="font-size: 0.875rem; color: var(--text-tertiary);">Current period: ${formatDate(periodStart)}${periodEnd ? ` to ${formatDate(periodEnd)}` : ''}</p>` : ''}
-        <a href="${base}/pricing/" class="btn btn-secondary" style="margin-top: var(--space-l);">Change plan</a>
+        <div style="display: flex; align-items: center; gap: var(--space-s); margin-bottom: var(--space-m);">
+          <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--success);"></span>
+          <strong style="font-size: 1.125rem;">${escapeHtml(tierName)}</strong>
+          <span style="font-size: 0.875rem; color: var(--success); font-weight: 500;">Active</span>
+        </div>
+        ${periodStart ? `<p style="font-size: 0.875rem; color: var(--text-tertiary); margin-bottom: var(--space-l);">Since ${formatDate(periodStart)}</p>` : ''}
         `
         : `
-        <p style="margin-bottom: var(--space-m);">You don't have an active subscription.</p>
-        <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-l);">Upgrade to unlock full features.</p>
-        <a href="${base}/pricing/" class="btn btn-primary">Upgrade</a>
+        <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-s);">No active subscription</h2>
+        <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-l);">Upgrade to get full access to the BrainDock desktop app. One-time payment of A$1.99.</p>
+        <a href="${base}/pricing/" class="btn btn-primary">Upgrade Now</a>
         `}
     </div>
+
+    ${hasActive ? `
+    <div class="dashboard-card" style="margin-top: var(--space-l); border-left: 4px solid var(--success);">
+      <h2 style="font-family: var(--font-serif); font-size: 1.125rem; font-weight: 600; margin-bottom: var(--space-s);">Download BrainDock</h2>
+      <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-l);">Download the desktop app and sign in with the same account to start using your paid features.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: var(--space-m);">
+        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg" class="btn btn-primary">Download for macOS</a>
+        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe" class="btn btn-secondary">Download for Windows</a>
+      </div>
+    </div>
+    ` : ''}
   `
 }
 

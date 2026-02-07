@@ -35,7 +35,7 @@ async function createCheckoutSession(tierId) {
 
 function formatPrice(cents, currency) {
   const c = (currency || 'aud').toLowerCase()
-  if (c === 'aud') return `$${(cents / 100).toFixed(2)} AUD`
+  if (c === 'aud') return `A$${(cents / 100).toFixed(2)}`
   return `$${(cents / 100).toFixed(2)}`
 }
 
@@ -46,7 +46,7 @@ function escapeHtml(str) {
   return div.innerHTML
 }
 
-function render(root, tiers, hasUser) {
+function render(root, tiers, hasUser, alreadyPaid) {
   const defaultTiers = tiers.length > 0 ? tiers : [
     { id: 'starter', name: 'starter', display_name: 'BrainDock Starter', price_cents: 199, currency: 'aud', billing_interval: 'one_time', features: { camera_monitoring: true, screen_monitoring: true, pdf_reports: true, max_daily_hours: 2 } },
   ]
@@ -77,9 +77,11 @@ function render(root, tiers, hasUser) {
                 <ul style="list-style: none; padding: 0; margin: 0 0 var(--space-xl);">
                   ${featList.map((f) => `<li style="padding: var(--space-xs) 0; font-size: 0.9375rem;">${escapeHtml(f)}</li>`).join('')}
                 </ul>
-                ${hasUser
-                  ? `<button type="button" class="btn btn-primary" data-tier-id="${escapeHtml(t.id)}" style="width: 100%;">Get Started</button>`
-                  : `<a href="/auth/signup/?next=/pricing/" class="btn btn-primary" style="width: 100%; text-align: center;">Get Started</a>`}
+                ${alreadyPaid
+                  ? `<a href="/dashboard/" class="btn btn-secondary" style="width: 100%; text-align: center;">Already subscribed</a>`
+                  : hasUser
+                    ? `<button type="button" class="btn btn-primary" data-tier-id="${escapeHtml(t.id)}" style="width: 100%;">Get Started</button>`
+                    : `<a href="/auth/signup/" class="btn btn-primary" style="width: 100%; text-align: center;">Get Started</a>`}
               </div>
             `
           }).join('')}
@@ -116,14 +118,23 @@ async function main() {
   root.innerHTML = '<div class="auth-page"><div class="auth-container"><p>Loading pricing...</p></div></div>'
 
   const { data: { session } } = await supabase.auth.getSession()
-  let tiers
+
+  let tiers = []
+  let alreadyPaid = false
   try {
     tiers = await fetchTiers()
+    if (session) {
+      const { data: sub } = await supabase
+        .from('subscriptions')
+        .select('id, status')
+        .in('status', ['active', 'trialing'])
+        .maybeSingle()
+      alreadyPaid = !!sub
+    }
   } catch (err) {
     console.error(err)
-    tiers = []
   }
-  render(root, tiers, !!session)
+  render(root, tiers, !!session, alreadyPaid)
 }
 
 main()

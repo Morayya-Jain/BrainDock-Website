@@ -57,9 +57,6 @@ function buildSidebarHTML(currentPath) {
         <li>
           <a href="${base}/how-to-use/" class="dashboard-sidebar-link ${currentPath === '/how-to-use' ? 'active' : ''}">How to Use</a>
         </li>
-        <li>
-          <a href="${base}/download/" class="dashboard-sidebar-link ${currentPath === '/download' ? 'active' : ''}">Download</a>
-        </li>
       </ul>
     </nav>
     <div class="dashboard-sidebar-footer">

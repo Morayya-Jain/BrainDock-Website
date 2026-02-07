@@ -142,11 +142,28 @@ function buildWeeklyChartData(sessions) {
 }
 
 /**
+ * Check if user has an active subscription.
+ */
+async function checkSubscription() {
+  const { data, error } = await supabase
+    .from('subscriptions')
+    .select('id, status, tier_id, subscription_tiers(display_name)')
+    .in('status', ['active', 'trialing'])
+    .maybeSingle()
+  if (error) {
+    console.error('Subscription check error:', error)
+    return null
+  }
+  return data
+}
+
+/**
  * Render the dashboard into main.
  */
-function render(main, user, sessions, stats, weeklyData) {
+function render(main, user, sessions, stats, weeklyData, subscription) {
   const name = user?.user_metadata?.full_name || user?.email || 'there'
   const todayStr = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' })
+  const isPaid = !!subscription
 
   const todayFocusRate = stats.today.durationSum > 0
     ? Math.round(stats.today.focusPercentageSum / stats.today.durationSum)
@@ -172,6 +189,27 @@ function render(main, user, sessions, stats, weeklyData) {
     return mode || '–'
   }
 
+  // Upgrade banner (shown when not paid)
+  const upgradeBanner = !isPaid ? `
+    <div class="dashboard-card" style="background: linear-gradient(135deg, var(--bg-surface) 0%, rgba(212,163,115,0.08) 100%); border-left: 4px solid var(--accent-highlight); margin-bottom: var(--space-xl);">
+      <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-s);">Upgrade to use BrainDock</h2>
+      <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-l);">Get full access to the desktop app for a one-time payment of A$1.99. Configure your settings here, then download the app to start tracking.</p>
+      <a href="/pricing/" class="btn btn-primary">Upgrade Now</a>
+    </div>
+  ` : ''
+
+  // Download CTA (shown when paid but no sessions yet, meaning they likely haven't downloaded)
+  const downloadCta = isPaid && sessions.length === 0 ? `
+    <div class="dashboard-card" style="border-left: 4px solid var(--success); margin-bottom: var(--space-xl);">
+      <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-s);">You're all set! Download BrainDock</h2>
+      <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-l);">Your subscription is active. Download the desktop app and sign in with the same account to start tracking your focus.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: var(--space-m);">
+        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg" class="btn btn-primary">Download for macOS</a>
+        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe" class="btn btn-secondary">Download for Windows</a>
+      </div>
+    </div>
+  ` : ''
+
   main.innerHTML = `
     <div class="dashboard-section">
       <h1 class="dashboard-page-title">Dashboard</h1>
@@ -179,6 +217,9 @@ function render(main, user, sessions, stats, weeklyData) {
         Welcome back, ${escapeHtml(name)} &middot; ${todayStr}
       </p>
     </div>
+
+    ${upgradeBanner}
+    ${downloadCta}
 
     <div class="dashboard-stat-cards">
       <div class="dashboard-stat-card">
@@ -292,10 +333,13 @@ async function main() {
   `
 
   try {
-    const sessions = await fetchSessionsForDashboard()
+    const [sessions, subscription] = await Promise.all([
+      fetchSessionsForDashboard(),
+      checkSubscription(),
+    ])
     const stats = computeDailyStats(sessions)
     const weeklyData = buildWeeklyChartData(sessions)
-    render(mainEl, result.user, sessions, stats, weeklyData)
+    render(mainEl, result.user, sessions, stats, weeklyData, subscription)
   } catch (err) {
     console.error(err)
     mainEl.innerHTML = `

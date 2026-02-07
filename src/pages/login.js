@@ -11,14 +11,50 @@ import {
 } from '../auth-helpers.js'
 import '../auth.css'
 
-// If already logged in, skip straight to dashboard
-;(async () => {
-  const { data: { session } } = await supabase.auth.getSession()
-  if (session) window.location.href = getRedirectPath()
-})()
-
-// Persist ?source=desktop before it's lost to OAuth redirects
+// Persist ?source=desktop FIRST (synchronous, before any async work)
 captureDesktopSource()
+
+/**
+ * Check localStorage directly for a Supabase session token.
+ * This is synchronous and works instantly, before the Supabase client
+ * finishes its async initialization. Avoids all race conditions.
+ */
+function hasStoredSession() {
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i)
+      if (key && key.startsWith('sb-') && key.endsWith('-auth-token')) {
+        const raw = localStorage.getItem(key)
+        if (raw) {
+          const parsed = JSON.parse(raw)
+          if (parsed?.access_token) return true
+        }
+      }
+    }
+  } catch (_) { /* ignore parse errors */ }
+  return false
+}
+
+// If already logged in, handle redirect (including desktop linking flow).
+// We first check localStorage directly (synchronous, no race condition),
+// then retry getSession() until the Supabase client finishes initializing.
+if (hasStoredSession()) {
+  ;(async () => {
+    let session = null
+    // Retry getSession() with small delays until the client catches up
+    for (let attempt = 0; attempt < 10; attempt++) {
+      try {
+        const res = await supabase.auth.getSession()
+        session = res.data?.session ?? null
+      } catch (_) { /* ignore */ }
+      if (session) break
+      await new Promise((r) => setTimeout(r, 300))
+    }
+    if (session) {
+      await handlePostAuthRedirect(supabase)
+    }
+  })()
+}
 
 const form = document.getElementById('login-form')
 const loginBtn = document.getElementById('login-btn')
