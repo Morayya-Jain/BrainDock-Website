@@ -54,7 +54,10 @@ export async function handlePostAuthRedirect(supabase, card = null) {
   sessionStorage.removeItem(DESKTOP_SOURCE_KEY)
 
   try {
-    const { data: { session } } = await supabase.auth.getSession()
+    // Refresh the session first to ensure the access token is valid.
+    // getSession() returns stale tokens; refreshSession() gets fresh ones.
+    const { data: refreshed } = await supabase.auth.refreshSession()
+    const session = refreshed?.session
     if (!session) {
       if (card) showError(card, 'Session expired. Please try logging in again.')
       else window.location.href = getRedirectPath()
