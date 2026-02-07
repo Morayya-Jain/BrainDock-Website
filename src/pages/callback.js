@@ -45,18 +45,37 @@ const oauthError = checkForOAuthError()
 if (oauthError) {
   showFailure(oauthError)
 } else {
-  // Listen for successful sign-in
-  const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event) => {
-    if (event === 'SIGNED_IN') {
+  let handled = false
+
+  async function completeAuth() {
+    if (handled) return
+    handled = true
+    loadingState.hidden = true
+    await handlePostAuthRedirect(supabase, card)
+  }
+
+  // Listen for auth state changes (SIGNED_IN or INITIAL_SESSION with a session)
+  const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+    if ((event === 'SIGNED_IN' || event === 'INITIAL_SESSION') && session) {
       subscription.unsubscribe()
-      await handlePostAuthRedirect(supabase, card)
+      await completeAuth()
     }
   })
 
-  // Fallback: if no auth event fires within 5 seconds, show an error
+  // Fallback: if no auth event fires within 3 seconds, check getSession() directly
+  setTimeout(async () => {
+    if (handled) return
+    const { data: { session } } = await supabase.auth.getSession()
+    if (session) {
+      subscription.unsubscribe()
+      await completeAuth()
+    }
+  }, 3000)
+
+  // Final fallback: if nothing worked after 8 seconds, show error
   setTimeout(() => {
-    if (document.visibilityState !== 'hidden' && !loadingState.hidden) {
+    if (!handled && document.visibilityState !== 'hidden' && !loadingState.hidden) {
       showFailure('Sign in could not be completed. Please try again.')
     }
-  }, 5000)
+  }, 8000)
 }

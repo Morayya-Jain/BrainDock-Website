@@ -77,9 +77,9 @@ export async function handlePostAuthRedirect(supabase, card = null) {
 
     const result = await resp.json().catch(() => ({}))
     if (!resp.ok || !result?.code) {
-      const msg = result?.error || result?.message || `Request failed (${resp.status})`
-      console.error('Failed to generate linking code:', msg)
-      if (card) showError(card, 'Could not connect to the desktop app. Please try again.')
+      const detail = result?.error || result?.message || result?.msg || `HTTP ${resp.status}`
+      console.error('Failed to generate linking code:', resp.status, detail, result)
+      if (card) showError(card, `Desktop login failed: ${detail}`)
       else window.location.href = getRedirectPath()
       return
     }
@@ -99,7 +99,7 @@ export async function handlePostAuthRedirect(supabase, card = null) {
     }, 2000)
   } catch (err) {
     console.error('Desktop linking error:', err)
-    if (card) showError(card, 'Could not connect to the desktop app. Please try again.')
+    if (card) showError(card, `Desktop login error: ${err.message || err}`)
     else window.location.href = getRedirectPath()
   }
 }
