@@ -1,5 +1,5 @@
 /**
- * General settings page: monitoring mode and vision provider.
+ * General settings page: monitoring mode.
  * Reads/writes user_settings table.
  */
 
@@ -19,7 +19,6 @@ async function saveSettings(userId, data) {
 
 function render(main, settings, userId) {
   const mode = settings?.monitoring_mode || 'camera_only'
-  const provider = settings?.vision_provider || 'gemini'
 
   main.innerHTML = `
     <h1 class="dashboard-page-title">General Settings</h1>
@@ -46,17 +45,6 @@ function render(main, settings, userId) {
         </div>
       </div>
 
-      <div class="dashboard-field">
-        <label class="dashboard-field-label" for="vision_provider">Vision provider</label>
-        <select id="vision_provider" class="dashboard-select">
-          <option value="gemini" ${provider === 'gemini' ? 'selected' : ''}>Gemini</option>
-          <option value="openai" ${provider === 'openai' ? 'selected' : ''}>OpenAI</option>
-        </select>
-        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: var(--space-s);">
-          Gemini is recommended (cheaper). OpenAI provides slightly different detection.
-        </p>
-      </div>
-
       <div style="margin-top: var(--space-xl);">
         <button type="button" class="btn btn-primary" id="settings-save-btn">Save Changes</button>
         <span class="dashboard-saved" id="settings-saved-msg" style="display: none;">Saved</span>
@@ -69,12 +57,10 @@ function render(main, settings, userId) {
 
   saveBtn.addEventListener('click', async () => {
     const newMode = main.querySelector('input[name="monitoring_mode"]:checked')?.value || 'camera_only'
-    const newProvider = main.querySelector('#vision_provider').value
     saveBtn.disabled = true
     try {
       await saveSettings(userId, {
         monitoring_mode: newMode,
-        vision_provider: newProvider,
       })
       savedMsg.style.display = 'inline'
       setTimeout(() => { savedMsg.style.display = 'none' }, 2000)

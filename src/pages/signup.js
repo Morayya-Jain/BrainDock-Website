@@ -58,7 +58,8 @@ if (hasStoredSession()) {
       await new Promise((r) => setTimeout(r, 100))
     }
     if (session) {
-      await handlePostAuthRedirect(supabase)
+      // Pass authCard so desktop linking code/errors can be displayed
+      await handlePostAuthRedirect(supabase, authCard)
     } else {
       window.location.reload()
     }
