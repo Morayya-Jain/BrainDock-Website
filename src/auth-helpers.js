@@ -9,9 +9,14 @@ const DESKTOP_SOURCE_KEY = 'braindock_desktop'
 
 /**
  * Determine where to redirect after successful auth.
- * Always goes to dashboard (unless desktop flow overrides — see handlePostAuthRedirect).
+ * Checks ?redirect= param first, then defaults to /dashboard/.
  */
 export function getRedirectPath() {
+  const params = new URLSearchParams(window.location.search)
+  const redirect = params.get('redirect')
+  if (redirect && redirect.startsWith('/') && !redirect.startsWith('//')) {
+    return redirect
+  }
   return '/dashboard/'
 }
 

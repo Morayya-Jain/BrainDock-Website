@@ -277,6 +277,39 @@
 }
 
 /* --------------------------------------------------------------------------
+   Terms Checkbox
+   -------------------------------------------------------------------------- */
+.auth-terms {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-s);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.auth-terms input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  accent-color: var(--accent-highlight);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.auth-terms a {
+  color: var(--accent-highlight);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-terms a:hover {
+  color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
    Callback / Loading Page
    -------------------------------------------------------------------------- */
 .auth-loading {

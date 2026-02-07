@@ -4,3 +4,9 @@
 
 [build.environment]
   NPM_CONFIG_REGISTRY = "https://registry.npmjs.org/"
+
+# Session detail: /sessions/:id serves detail page; JS parses id from pathname
+[[redirects]]
+  from = "/sessions/:id"
+  to = "/sessions/detail/index.html"
+  status = 200

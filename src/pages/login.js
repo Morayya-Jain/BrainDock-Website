@@ -1,6 +1,7 @@
 import { supabase } from '../supabase.js'
 import {
   captureDesktopSource,
+  getRedirectPath,
   handlePostAuthRedirect,
   showError,
   hideError,
@@ -9,6 +10,12 @@ import {
   friendlyError,
 } from '../auth-helpers.js'
 import '../auth.css'
+
+// If already logged in, skip straight to dashboard
+;(async () => {
+  const { data: { session } } = await supabase.auth.getSession()
+  if (session) window.location.href = getRedirectPath()
+})()
 
 // Persist ?source=desktop before it's lost to OAuth redirects
 captureDesktopSource()

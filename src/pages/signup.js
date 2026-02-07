@@ -1,6 +1,7 @@
 import { supabase } from '../supabase.js'
 import {
   captureDesktopSource,
+  getRedirectPath,
   handlePostAuthRedirect,
   showError,
   hideError,
@@ -10,6 +11,12 @@ import {
   friendlyError,
 } from '../auth-helpers.js'
 import '../auth.css'
+
+// If already logged in, skip straight to dashboard
+;(async () => {
+  const { data: { session } } = await supabase.auth.getSession()
+  if (session) window.location.href = getRedirectPath()
+})()
 
 // Persist ?source=desktop before it's lost to OAuth redirects
 captureDesktopSource()
@@ -35,6 +42,12 @@ form.addEventListener('submit', async (e) => {
 
   if (password.length < 6) {
     showError(card, 'Password must be at least 6 characters.')
+    return
+  }
+
+  const termsCheckbox = document.getElementById('terms')
+  if (!termsCheckbox?.checked) {
+    showError(card, 'Please agree to the Terms of Service to continue.')
     return
   }
 
@@ -79,6 +92,12 @@ form.addEventListener('submit', async (e) => {
 // Google OAuth signup
 googleBtn.addEventListener('click', async () => {
   hideError(card)
+
+  const termsCheckbox = document.getElementById('terms')
+  if (!termsCheckbox?.checked) {
+    showError(card, 'Please agree to the Terms of Service to continue.')
+    return
+  }
 
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
