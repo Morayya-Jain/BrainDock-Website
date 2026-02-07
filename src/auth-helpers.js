@@ -92,11 +92,14 @@ export async function handlePostAuthRedirect(supabase, card = null) {
       if (document.visibilityState !== 'hidden') {
         if (card) {
           showError(card, `If the app did not open, copy this code and paste it in BrainDock: ${result.code}`)
-        } else {
-          window.location.href = getRedirectPath()
         }
       }
     }, 2000)
+
+    // Redirect to dashboard after 5s regardless (user is authenticated on the web too)
+    setTimeout(() => {
+      window.location.href = getRedirectPath()
+    }, 5000)
   } catch (err) {
     console.error('Desktop linking error:', err)
     if (card) showError(card, `Desktop login error: ${err.message || err}`)
