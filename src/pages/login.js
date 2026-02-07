@@ -41,7 +41,7 @@ form.addEventListener('submit', async (e) => {
     return
   }
 
-  await handlePostAuthRedirect(supabase)
+  await handlePostAuthRedirect(supabase, card)
 })
 
 // Google OAuth login

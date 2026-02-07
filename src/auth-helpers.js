@@ -3,6 +3,8 @@
  * Handles redirects, error/loading UI, and desktop deep-link flow.
  */
 
+import { supabaseUrl, supabaseAnonKey } from './supabase.js'
+
 const DESKTOP_SOURCE_KEY = 'braindock_desktop'
 
 /**
@@ -31,10 +33,12 @@ export function captureDesktopSource() {
  * a one-time linking code via Edge Function and redirects to
  * braindock://callback?code=... so the desktop app can log in.
  * Otherwise redirects to the web dashboard.
+ * Uses raw fetch() for full control; shows visible errors when card is passed.
  *
  * @param {import('@supabase/supabase-js').SupabaseClient} supabase
+ * @param {HTMLElement | null} [card] - Optional .auth-card container for showing errors
  */
-export async function handlePostAuthRedirect(supabase) {
+export async function handlePostAuthRedirect(supabase, card = null) {
   const isDesktop = sessionStorage.getItem(DESKTOP_SOURCE_KEY) === 'true'
   if (!isDesktop) {
     window.location.href = getRedirectPath()
@@ -47,28 +51,56 @@ export async function handlePostAuthRedirect(supabase) {
   try {
     const { data: { session } } = await supabase.auth.getSession()
     if (!session) {
-      window.location.href = getRedirectPath()
+      if (card) showError(card, 'Session expired. Please try logging in again.')
+      else window.location.href = getRedirectPath()
       return
     }
 
-    const { data, error } = await supabase.functions.invoke('generate-linking-code', {
-      body: {
+    if (!supabaseUrl || !supabaseAnonKey) {
+      if (card) showError(card, 'App configuration error. Please try again later.')
+      else window.location.href = getRedirectPath()
+      return
+    }
+
+    const resp = await fetch(`${supabaseUrl}/functions/v1/generate-linking-code`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${session.access_token}`,
+        'apikey': supabaseAnonKey,
+      },
+      body: JSON.stringify({
         access_token: session.access_token,
         refresh_token: session.refresh_token,
-      },
+      }),
     })
 
-    if (error || !data?.code) {
-      console.error('Failed to generate linking code:', error || data)
-      window.location.href = getRedirectPath()
+    const result = await resp.json().catch(() => ({}))
+    if (!resp.ok || !result?.code) {
+      const msg = result?.error || result?.message || `Request failed (${resp.status})`
+      console.error('Failed to generate linking code:', msg)
+      if (card) showError(card, 'Could not connect to the desktop app. Please try again.')
+      else window.location.href = getRedirectPath()
       return
     }
 
-    // Redirect to the desktop app via deep link
-    window.location.href = `braindock://callback?code=${encodeURIComponent(data.code)}`
+    const deepLink = `braindock://callback?code=${encodeURIComponent(result.code)}`
+    window.location.href = deepLink
+
+    // If browser blocks custom scheme, page stays visible; show code after 2s
+    setTimeout(() => {
+      if (document.visibilityState !== 'hidden') {
+        if (card) {
+          showError(card, `If the app did not open, copy this code and paste it in BrainDock: ${result.code}`)
+        } else {
+          window.location.href = getRedirectPath()
+        }
+      }
+    }, 2000)
   } catch (err) {
     console.error('Desktop linking error:', err)
-    window.location.href = getRedirectPath()
+    if (card) showError(card, 'Could not connect to the desktop app. Please try again.')
+    else window.location.href = getRedirectPath()
   }
 }
 

@@ -49,7 +49,7 @@ if (oauthError) {
   const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event) => {
     if (event === 'SIGNED_IN') {
       subscription.unsubscribe()
-      await handlePostAuthRedirect(supabase)
+      await handlePostAuthRedirect(supabase, card)
     }
   })
 

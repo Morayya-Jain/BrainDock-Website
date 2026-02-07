@@ -66,7 +66,7 @@ form.addEventListener('submit', async (e) => {
   // If Supabase returned a session, the user is auto-confirmed (go to dashboard).
   // If no session, email confirmation is required (show message).
   if (data.session) {
-    await handlePostAuthRedirect(supabase)
+    await handlePostAuthRedirect(supabase, card)
     return
   } else {
     form.hidden = true
