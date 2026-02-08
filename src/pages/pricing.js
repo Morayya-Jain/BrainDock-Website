@@ -101,14 +101,20 @@ function render(root, packages, hasUser) {
       const packageId = btn.dataset.packageId
       btn.disabled = true
       btn.textContent = 'Loading...'
-      const { url, error } = await createCheckoutSession(packageId)
-      if (error) {
+      try {
+        const { url, error } = await createCheckoutSession(packageId)
+        if (error) {
+          btn.disabled = false
+          btn.textContent = 'Buy Now'
+          alert(error)
+          return
+        }
+        if (url) window.location.href = url
+      } catch (err) {
         btn.disabled = false
         btn.textContent = 'Buy Now'
-        alert(error)
-        return
+        alert('Network error. Please check your connection and try again.')
       }
-      if (url) window.location.href = url
     })
   })
 }

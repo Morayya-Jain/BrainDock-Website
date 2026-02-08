@@ -71,9 +71,7 @@ serve(async (req) => {
   }
 
   const origin = req.headers.get("origin") || "https://thebraindock.com"
-  const successUrl = packageId
-    ? `${origin}/account/subscription/?success=true`
-    : `${origin}/account/subscription/?success=true`
+  const successUrl = `${origin}/account/subscription/?success=true`
   const cancelUrl = `${origin}/pricing/?canceled=true`
 
   const supabaseAdmin = createClient(supabaseUrl, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? supabaseKey)
@@ -115,6 +113,8 @@ serve(async (req) => {
         success_url: successUrl,
         cancel_url: cancelUrl,
         client_reference_id: user.id,
+        customer_email: user.email,
+        allow_promotion_codes: true,
         metadata: { package_id: pkg.id, user_id: user.id },
       })
 
