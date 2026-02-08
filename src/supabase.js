@@ -1,3 +1,9 @@
+/**
+ * Supabase client for the frontend.
+ * Security: The anon key is loaded from env and is safe to expose in the client bundle.
+ * Supabase design treats the anon key as public; protection comes from RLS policies,
+ * auth checks, and server-side Edge Functions that use the service role key in env only.
+ */
 import { createClient } from '@supabase/supabase-js'
 
 export const supabaseUrl = import.meta.env.VITE_SUPABASE_URL

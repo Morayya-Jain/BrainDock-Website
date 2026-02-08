@@ -5,6 +5,7 @@
 
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
+import { isValidAppName, LIMITS } from '../validators.js'
 
 const QUICK_SITES = [
   { id: 'instagram', name: 'Instagram' },
@@ -88,7 +89,7 @@ function render(main, config, userId) {
       <h2 class="dashboard-section-title" style="margin-bottom: var(--space-m);">Custom URLs</h2>
       <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: var(--space-m);">Add domains to block (e.g. example.com)</p>
       <div style="display: flex; gap: var(--space-s); flex-wrap: wrap; margin-bottom: var(--space-m);">
-        <input type="text" id="custom-url-input" class="dashboard-input" placeholder="example.com" style="max-width: 200px;">
+        <input type="text" id="custom-url-input" class="dashboard-input" placeholder="example.com" maxlength="200" style="max-width: 200px;">
         <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-url-add">Add</button>
       </div>
       <div id="custom-urls-list"></div>
@@ -98,7 +99,7 @@ function render(main, config, userId) {
       <h2 class="dashboard-section-title" style="margin-bottom: var(--space-m);">Custom Apps</h2>
       <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: var(--space-m);">Add app names to block (e.g. Discord)</p>
       <div style="display: flex; gap: var(--space-s); flex-wrap: wrap; margin-bottom: var(--space-m);">
-        <input type="text" id="custom-app-input" class="dashboard-input" placeholder="App name" style="max-width: 200px;">
+        <input type="text" id="custom-app-input" class="dashboard-input" placeholder="App name" maxlength="${LIMITS.APP_NAME_MAX}" style="max-width: 200px;">
         <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-app-add">Add</button>
       </div>
       <div id="custom-apps-list"></div>
@@ -193,6 +194,10 @@ function render(main, config, userId) {
     const input = main.querySelector('#custom-app-input')
     const val = input.value.trim()
     if (!val) return
+    if (!isValidAppName(val)) {
+      alert(`App name must be 1-${LIMITS.APP_NAME_MAX} characters and cannot contain < or >.`)
+      return
+    }
     if (state.custom_apps.includes(val)) return
     state.custom_apps.push(val)
     input.value = ''

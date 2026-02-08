@@ -1025,68 +1025,93 @@
 /* --------------------------------------------------------------------------
    Pricing page (full website layout with header/footer)
    -------------------------------------------------------------------------- */
+/* Push footer to the bottom when pricing content is short */
+#pricing-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .pricing-main {
-  padding-top: 120px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
   padding-bottom: var(--space-xxxl);
-  min-height: 70vh;
   background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
 }
 
 .pricing-container {
-  max-width: 1100px;
+  max-width: 1300px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 var(--space-l);
+  padding: 0 var(--space-xl);
 }
 
 .pricing-header {
   text-align: center;
-  margin-bottom: var(--space-xxl);
+  margin-bottom: 140px;
 }
 
 .pricing-title {
   font-family: var(--font-serif);
-  font-size: 2.25rem;
+  font-size: 3rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: var(--space-s);
+  margin-bottom: var(--space-m);
 }
 
 .pricing-subtitle {
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 1.25rem;
   color: var(--text-secondary);
 }
 
 .pricing-grid {
   display: grid;
-  gap: var(--space-l);
+  gap: var(--space-xl);
   grid-template-columns: repeat(3, 1fr);
 }
 
 @media (max-width: 900px) {
+  .pricing-main {
+    padding-top: 100px;
+    align-items: flex-start;
+  }
+  .pricing-title {
+    font-size: 2.25rem;
+  }
+  .pricing-subtitle {
+    font-size: 1.1rem;
+  }
   .pricing-grid {
     grid-template-columns: 1fr;
-    max-width: 400px;
+    max-width: 440px;
     margin: 0 auto;
+    gap: var(--space-l);
   }
 }
 
 .pricing-card {
   display: flex;
   flex-direction: column;
-  padding: var(--space-xl);
+  align-items: flex-start;
+  min-height: 380px;
+  padding: 28px 56px 44px 40px;
+  text-align: left;
 }
 
 .pricing-card-title {
   font-family: var(--font-serif);
-  font-size: 1.625rem;
+  font-size: 2rem;
   font-weight: 700;
   margin-bottom: var(--space-s);
   color: var(--text-primary);
 }
 
 .pricing-card-price {
-  font-size: 1.75rem;
+  font-size: 2.25rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: var(--space-xs);
@@ -1094,21 +1119,25 @@
 }
 
 .pricing-card-per-hour {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: var(--text-tertiary);
-  margin-bottom: var(--space-l);
+  margin-bottom: var(--space-m);
   font-family: var(--font-sans);
 }
 
 .pricing-card-desc {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   color: var(--text-secondary);
-  margin-bottom: var(--space-xl);
+  margin-bottom: 0;
+  line-height: 1.6;
   flex: 1;
   font-family: var(--font-sans);
 }
 
 .pricing-card .btn {
-  width: 100%;
+  width: auto;
   margin-top: auto;
+  padding: 14px 36px;
+  font-size: 1.0625rem;
 }
+

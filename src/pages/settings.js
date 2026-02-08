@@ -6,6 +6,15 @@
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 
+const ALLOWED_MONITORING_MODES = ['camera_only', 'screen_only', 'both']
+
+function escapeHtml(str) {
+  if (str == null) return ''
+  const div = document.createElement('div')
+  div.textContent = str
+  return div.innerHTML
+}
+
 async function loadSettings() {
   const { data, error } = await supabase.from('user_settings').select('*').single()
   if (error) throw error
@@ -57,6 +66,10 @@ function render(main, settings, userId) {
 
   saveBtn.addEventListener('click', async () => {
     const newMode = main.querySelector('input[name="monitoring_mode"]:checked')?.value || 'camera_only'
+    if (!ALLOWED_MONITORING_MODES.includes(newMode)) {
+      alert('Invalid setting. Please try again.')
+      return
+    }
     saveBtn.disabled = true
     try {
       await saveSettings(userId, {
@@ -90,7 +103,7 @@ async function main() {
     mainEl.innerHTML = `
       <div class="dashboard-empty">
         <p class="dashboard-empty-title">Could not load settings</p>
-        <p>${err.message || 'Please try again.'}</p>
+        <p>${escapeHtml(err.message || 'Please try again.')}</p>
       </div>
     `
   }

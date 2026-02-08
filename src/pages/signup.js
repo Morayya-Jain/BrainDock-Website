@@ -11,6 +11,7 @@ import {
   hideLoading,
   friendlyError,
 } from '../auth-helpers.js'
+import { isValidName, isValidEmail, isValidPassword, LIMITS } from '../validators.js'
 import '../auth.css'
 
 // Persist ?source=desktop and ?redirect= FIRST (synchronous, before any async work)
@@ -102,9 +103,16 @@ form.addEventListener('submit', async (e) => {
     showError(card, 'Please fill in all fields.')
     return
   }
-
-  if (password.length < 6) {
-    showError(card, 'Password must be at least 6 characters.')
+  if (!isValidName(name)) {
+    showError(card, `Name must be 1-${LIMITS.NAME_MAX} characters and cannot contain < or >.`)
+    return
+  }
+  if (!isValidEmail(email)) {
+    showError(card, 'Please enter a valid email address.')
+    return
+  }
+  if (!isValidPassword(password)) {
+    showError(card, `Password must be ${LIMITS.PASSWORD_MIN}-${LIMITS.PASSWORD_MAX} characters.`)
     return
   }
 

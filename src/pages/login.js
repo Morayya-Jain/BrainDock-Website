@@ -9,6 +9,7 @@ import {
   hideLoading,
   friendlyError,
 } from '../auth-helpers.js'
+import { isValidEmail, isValidPassword, LIMITS } from '../validators.js'
 import '../auth.css'
 
 // Persist ?source=desktop and ?redirect= before they are lost to OAuth redirects
@@ -83,6 +84,14 @@ loginForm.addEventListener('submit', async (e) => {
 
   if (!email || !password) {
     showError(authCard, 'Please enter your email and password.')
+    return
+  }
+  if (!isValidEmail(email)) {
+    showError(authCard, 'Please enter a valid email address.')
+    return
+  }
+  if (!isValidPassword(password)) {
+    showError(authCard, `Password must be ${LIMITS.PASSWORD_MIN}-${LIMITS.PASSWORD_MAX} characters.`)
     return
   }
 

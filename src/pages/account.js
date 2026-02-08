@@ -4,6 +4,7 @@
 
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
+import { isValidName, sanitizeText, LIMITS } from '../validators.js'
 
 async function loadProfile(userId) {
   const { data, error } = await supabase.from('profiles').select('*').eq('id', userId).single()
@@ -36,7 +37,7 @@ function render(main, profile, userId) {
     <div class="dashboard-card">
       <div class="dashboard-field">
         <label class="dashboard-field-label" for="display_name">Display name</label>
-        <input type="text" id="display_name" class="dashboard-input" value="${escapeHtml(displayName)}" placeholder="Your name" style="max-width: 320px;">
+        <input type="text" id="display_name" class="dashboard-input" value="${escapeHtml(displayName)}" placeholder="Your name" maxlength="${LIMITS.NAME_MAX}" style="max-width: 320px;">
       </div>
       <div class="dashboard-field">
         <span class="dashboard-field-label">Email</span>
@@ -55,7 +56,11 @@ function render(main, profile, userId) {
   const input = main.querySelector('#display_name')
 
   saveBtn.addEventListener('click', async () => {
-    const name = input.value.trim()
+    const name = sanitizeText(input.value, LIMITS.NAME_MAX)
+    if (name && !isValidName(name)) {
+      alert(`Display name must be 1-${LIMITS.NAME_MAX} characters and cannot contain < or >.`)
+      return
+    }
     saveBtn.disabled = true
     try {
       await updateProfile(userId, { display_name: name || null })

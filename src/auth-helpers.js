@@ -182,6 +182,7 @@ export function showSuccess(container, message) {
 
 /**
  * Set a button to its loading state (disabled + spinner text).
+ * Disabling prevents double submission; call hideLoading after the request completes.
  * Stores original label so it can be restored.
  */
 export function showLoading(button) {

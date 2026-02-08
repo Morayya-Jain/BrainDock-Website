@@ -7,6 +7,7 @@ import {
   hideLoading,
   friendlyError,
 } from '../auth-helpers.js'
+import { isValidEmail } from '../validators.js'
 import '../auth.css'
 
 const form = document.getElementById('forgot-form')
@@ -21,6 +22,10 @@ form.addEventListener('submit', async (e) => {
 
   if (!email) {
     showError(card, 'Please enter your email address.')
+    return
+  }
+  if (!isValidEmail(email)) {
+    showError(card, 'Please enter a valid email address.')
     return
   }
 
