@@ -17,7 +17,9 @@ async function fetchCreditPackages() {
 }
 
 async function createCheckoutSession(packageId) {
-  const { data: { session } } = await supabase.auth.getSession()
+  // Refresh to get a non-expired access token (getSession returns stale/cached tokens)
+  const { data: refreshed } = await supabase.auth.refreshSession()
+  const session = refreshed?.session
   if (!session) return { url: null, error: 'Not signed in' }
   const resp = await fetch(`${supabaseUrl}/functions/v1/create-checkout-session`, {
     method: 'POST',
