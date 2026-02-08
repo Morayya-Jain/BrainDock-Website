@@ -398,6 +398,7 @@
   position: absolute;
   top: calc(100% + var(--space-s));
   right: 0;
+  z-index: 50;
   min-width: 220px;
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
@@ -805,6 +806,27 @@
   background: var(--success);
   border-radius: 6px;
   transition: width var(--transition-base);
+}
+
+/* --------------------------------------------------------------------------
+   Inline banners (success / info)
+   -------------------------------------------------------------------------- */
+.dashboard-banner {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  padding: var(--space-m) var(--space-l);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-xl);
+}
+.dashboard-banner-success {
+  background: rgba(52, 199, 89, 0.12);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+.dashboard-banner-info {
+  background: var(--bg-surface-elevated);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
 }
 
 /* --------------------------------------------------------------------------

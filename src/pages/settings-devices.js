@@ -60,7 +60,7 @@ function render(main, devices) {
               <div>
                 <strong>${escapeHtml(d.device_name || d.machine_id || 'Unknown device')}</strong><br>
                 <span style="font-size: 0.875rem; color: var(--text-secondary);">${escapeHtml(d.os || '')} &middot; Last active: ${formatRelativeTime(d.last_seen)}</span><br>
-                <span style="font-size: 0.8125rem; color: var(--text-tertiary);">App version: ${escapeHtml(d.app_version || '–')}</span>
+                <span style="font-size: 0.8125rem; color: var(--text-tertiary);">App version: ${escapeHtml(d.app_version || '-')}</span>
               </div>
               <button type="button" class="btn btn-secondary dashboard-btn-sm device-unlink-btn">Unlink</button>
             </li>

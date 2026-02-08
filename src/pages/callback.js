@@ -69,12 +69,15 @@ if (oauthError) {
     if (session) {
       subscription.unsubscribe()
       await completeAuth()
+    } else {
+      subscription.unsubscribe()
     }
   }, 3000)
 
   // Final fallback: if nothing worked after 8 seconds, show error
   setTimeout(() => {
     if (!handled && document.visibilityState !== 'hidden' && !loadingState.hidden) {
+      subscription.unsubscribe()
       showFailure('Sign in could not be completed. Please try again.')
     }
   }, 8000)

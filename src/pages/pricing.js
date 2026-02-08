@@ -235,9 +235,14 @@ function render(root, packages, hasUser) {
     </footer>
   `
 
+  // Initialize language so button labels are translated before we capture them for restore
+  if (typeof I18n !== 'undefined' && I18n.init) {
+    I18n.init()
+  }
+
   root.querySelectorAll('[data-package-id]').forEach((btn) => {
-    const originalLabel = btn.textContent
     btn.addEventListener('click', async () => {
+      const currentLabel = btn.textContent
       const packageId = btn.dataset.packageId
 
       if (!hasUser) {
@@ -254,16 +259,16 @@ function render(root, packages, hasUser) {
         const { url, error } = await createCheckoutSession(packageId)
         if (error) {
           btn.disabled = false
-          btn.textContent = originalLabel
+          btn.textContent = currentLabel
           alert(error)
           return
         }
         if (url) window.open(url, '_blank', 'noopener,noreferrer')
         btn.disabled = false
-        btn.textContent = originalLabel
+        btn.textContent = currentLabel
       } catch (err) {
         btn.disabled = false
-        btn.textContent = originalLabel
+        btn.textContent = currentLabel
         alert('Network error. Please check your connection and try again.')
       }
     })
@@ -278,11 +283,6 @@ function render(root, packages, hasUser) {
       navToggle.setAttribute('aria-expanded', !expanded)
       navMobile.classList.toggle('active')
     })
-  }
-
-  // Initialize language switching (uses global I18n from i18n.js)
-  if (typeof I18n !== 'undefined' && I18n.init) {
-    I18n.init()
   }
 }
 
@@ -303,8 +303,21 @@ async function main() {
   }
   render(root, packages, hasUser)
 
-  // Auto-checkout: if user just signed up and was redirected back with a package ID
   const params = new URLSearchParams(window.location.search)
+
+  if (params.get('canceled') === 'true') {
+    window.history.replaceState({}, '', '/pricing/')
+    const banner = document.createElement('div')
+    banner.className = 'dashboard-banner dashboard-banner-info'
+    banner.setAttribute('role', 'status')
+    banner.textContent = 'Checkout was cancelled.'
+    const container = root.querySelector('.pricing-container') || root
+    const firstChild = container.firstElementChild
+    if (firstChild) container.insertBefore(banner, firstChild)
+    else container.prepend(banner)
+  }
+
+  // Auto-checkout: if user just signed up and was redirected back with a package ID
   const autoCheckoutId = params.get('auto_checkout')
   if (autoCheckoutId && hasUser) {
     // Clean URL so refreshing doesn't re-trigger

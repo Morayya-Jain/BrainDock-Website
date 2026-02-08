@@ -1,6 +1,7 @@
 import { supabase } from '../supabase.js'
 import {
   captureDesktopSource,
+  captureRedirect,
   handlePostAuthRedirect,
   showError,
   hideError,
@@ -10,8 +11,9 @@ import {
 } from '../auth-helpers.js'
 import '../auth.css'
 
-// Persist ?source=desktop before it's lost to OAuth redirects
+// Persist ?source=desktop and ?redirect= before they are lost to OAuth redirects
 captureDesktopSource()
+captureRedirect()
 
 // If already logged in, skip the form and handle redirect immediately
 // (e.g. desktop app opened login page but user is already authenticated)
@@ -29,7 +31,10 @@ const authCard = document.querySelector('.auth-card')
   // If getSession didn't find one, wait for the client's INITIAL_SESSION event
   if (!session) {
     session = await new Promise((resolve) => {
-      const timeout = setTimeout(() => resolve(null), 2000)
+      const timeout = setTimeout(() => {
+        subscription.unsubscribe()
+        resolve(null)
+      }, 2000)
       const { data: { subscription } } = supabase.auth.onAuthStateChange(
         (event, sess) => {
           if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED') {
@@ -43,16 +48,12 @@ const authCard = document.querySelector('.auth-card')
   }
 
   if (session) {
-    // Show the same spinner used across the website (dashboard-boot style)
     loginForm.style.display = 'none'
     authCard.querySelector('.auth-title').textContent = 'Signing you in...'
     authCard.querySelector('.auth-subtitle').textContent = ''
     const spinnerWrap = document.createElement('div')
-    spinnerWrap.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:16px;padding:2rem 0;color:rgba(60,60,67,0.6);'
-    spinnerWrap.innerHTML = `
-      <div style="width:36px;height:36px;border:3px solid #E5E5EA;border-top-color:#D4A373;border-radius:50%;animation:dbspin 0.8s linear infinite;"></div>
-      <style>@keyframes dbspin{to{transform:rotate(360deg)}}</style>
-    `
+    spinnerWrap.className = 'auth-loading'
+    spinnerWrap.innerHTML = '<div class="auth-spinner"></div><p class="auth-loading-text">Signing you in...</p>'
     authCard.appendChild(spinnerWrap)
 
     // Refresh to get a non-expired access token before generating linking code
@@ -61,7 +62,7 @@ const authCard = document.querySelector('.auth-card')
       await handlePostAuthRedirect(supabase, authCard)
       return
     }
-    // Refresh failed — show the login form
+    // Refresh failed - show the login form
     loginForm.style.display = ''
     authCard.querySelector('.auth-title').textContent = 'Welcome back'
     authCard.querySelector('.auth-subtitle').textContent = 'Log in to your BrainDock account'

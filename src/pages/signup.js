@@ -1,7 +1,8 @@
 import { supabase } from '../supabase.js'
 import {
   captureDesktopSource,
-  getRedirectPath,
+  captureRedirect,
+  REDIRECT_STORAGE_KEY,
   handlePostAuthRedirect,
   showError,
   hideError,
@@ -12,8 +13,11 @@ import {
 } from '../auth-helpers.js'
 import '../auth.css'
 
-// Persist ?source=desktop FIRST (synchronous, before any async work)
+// Persist ?source=desktop and ?redirect= FIRST (synchronous, before any async work)
 captureDesktopSource()
+captureRedirect()
+
+const RELOAD_BAIL_KEY = 'braindock_signup_reload_bail'
 
 /**
  * Check localStorage directly for a Supabase session token.
@@ -35,8 +39,15 @@ function hasStoredSession() {
   return false
 }
 
-// If already logged in, hide the form and show a loading state
-if (hasStoredSession()) {
+// If we bailed out of reload loop (corrupt token), clear the flag and show form
+const wasBailed = !!sessionStorage.getItem(RELOAD_BAIL_KEY)
+if (wasBailed) {
+  sessionStorage.removeItem(RELOAD_BAIL_KEY)
+}
+
+// If already logged in (and not recovering from a bail), hide the form and show loading
+const reloadCountKey = 'braindock_signup_reload_count'
+if (hasStoredSession() && !wasBailed) {
   const authCard = document.querySelector('.auth-card')
   if (authCard) {
     authCard.innerHTML = `
@@ -58,10 +69,17 @@ if (hasStoredSession()) {
       await new Promise((r) => setTimeout(r, 100))
     }
     if (session) {
-      // Pass authCard so desktop linking code/errors can be displayed
       await handlePostAuthRedirect(supabase, authCard)
     } else {
-      window.location.reload()
+      const count = parseInt(sessionStorage.getItem(reloadCountKey) || '0', 10)
+      if (count >= 2) {
+        sessionStorage.removeItem(reloadCountKey)
+        sessionStorage.setItem(RELOAD_BAIL_KEY, '1')
+        window.location.href = '/auth/signup/'
+      } else {
+        sessionStorage.setItem(reloadCountKey, String(count + 1))
+        window.location.reload()
+      }
     }
   })()
 }
@@ -98,12 +116,19 @@ form.addEventListener('submit', async (e) => {
 
   showLoading(signupBtn)
 
+  const redirectParam = new URLSearchParams(window.location.search).get('redirect') ||
+    sessionStorage.getItem(REDIRECT_STORAGE_KEY) ||
+    ''
+  const callbackUrl = redirectParam
+    ? `${window.location.origin}/auth/callback/?redirect=${encodeURIComponent(redirectParam)}`
+    : `${window.location.origin}/auth/callback/`
+
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
       data: { full_name: name },
-      emailRedirectTo: `${window.location.origin}/auth/callback/`,
+      emailRedirectTo: callbackUrl,
     },
   })
 

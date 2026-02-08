@@ -25,7 +25,7 @@ function formatPrice(cents) {
 }
 
 function formatDate(iso) {
-  if (!iso) return '–'
+  if (!iso) return '-'
   return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
@@ -149,6 +149,16 @@ async function main() {
   try {
     const [credits, purchases] = await Promise.all([loadCredits(), loadPurchaseHistory()])
     render(mainEl, credits, purchases)
+
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('success') === 'true') {
+      window.history.replaceState({}, '', window.location.pathname)
+      const banner = document.createElement('div')
+      banner.className = 'dashboard-banner dashboard-banner-success'
+      banner.setAttribute('role', 'status')
+      banner.textContent = 'Payment successful. Your hours have been added.'
+      mainEl.prepend(banner)
+    }
   } catch (err) {
     console.error(err)
     mainEl.innerHTML = `

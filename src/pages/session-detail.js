@@ -46,7 +46,7 @@ function formatDuration(seconds) {
 }
 
 function formatTime(iso) {
-  if (!iso) return '–'
+  if (!iso) return '-'
   return new Date(iso).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', second: '2-digit' })
 }
 
@@ -54,7 +54,7 @@ function modeLabel(mode) {
   if (mode === 'camera_only') return 'Camera Only'
   if (mode === 'screen_only') return 'Screen Only'
   if (mode === 'both') return 'Camera + Screen'
-  return mode || '–'
+  return mode || '-'
 }
 
 function escapeHtml(str) {

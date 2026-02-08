@@ -200,7 +200,11 @@ function initSidebarFooterPopup() {
 }
 
 async function handleSignOut() {
-  await supabase.auth.signOut()
+  try {
+    await supabase.auth.signOut()
+  } catch (_) {
+    // Redirect even if signOut fails (e.g. network error) so user is not stuck
+  }
   window.location.href = '/'
 }
 
@@ -225,7 +229,10 @@ export async function initDashboardLayout(options = {}) {
   // and listen for the INITIAL_SESSION event (covers OAuth callback + refresh).
   if (!session) {
     session = await new Promise((resolve) => {
-      const timeout = setTimeout(() => resolve(null), 3000)
+      const timeout = setTimeout(() => {
+        subscription.unsubscribe()
+        resolve(null)
+      }, 3000)
       const { data: { subscription } } = supabase.auth.onAuthStateChange(
         (event, sess) => {
           if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED') {
@@ -235,7 +242,6 @@ export async function initDashboardLayout(options = {}) {
           }
         }
       )
-      // If the listener doesn't fire within 3s, resolve null
     })
   }
 

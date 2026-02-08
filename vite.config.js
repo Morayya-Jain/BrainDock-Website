@@ -29,7 +29,6 @@ export default defineConfig({
         settingsDevices: resolve(__dirname, 'settings/devices/index.html'),
         sessions: resolve(__dirname, 'sessions/index.html'),
         sessionDetail: resolve(__dirname, 'sessions/detail/index.html'),
-        account: resolve(__dirname, 'account/index.html'),
         accountSubscription: resolve(__dirname, 'account/subscription/index.html'),
         pricing: resolve(__dirname, 'pricing/index.html'),
         howToUse: resolve(__dirname, 'how-to-use/index.html'),

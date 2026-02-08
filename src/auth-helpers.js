@@ -6,12 +6,20 @@
 import { supabaseUrl, supabaseAnonKey } from './supabase.js'
 
 const DESKTOP_SOURCE_KEY = 'braindock_desktop'
+/** Used by signup to pass redirect into emailRedirectTo; also read in getRedirectPath(). */
+export const REDIRECT_STORAGE_KEY = 'braindock_redirect'
 
 /**
  * Determine where to redirect after successful auth.
- * Checks ?redirect= param first, then defaults to /dashboard/.
+ * Uses persisted redirect (sessionStorage) first, then ?redirect= param, then /dashboard/.
+ * Consumes the stored redirect so it is only used once.
  */
 export function getRedirectPath() {
+  const stored = sessionStorage.getItem(REDIRECT_STORAGE_KEY)
+  if (stored && stored.startsWith('/') && !stored.startsWith('//')) {
+    sessionStorage.removeItem(REDIRECT_STORAGE_KEY)
+    return stored
+  }
   const params = new URLSearchParams(window.location.search)
   const redirect = params.get('redirect')
   if (redirect && redirect.startsWith('/') && !redirect.startsWith('//')) {
@@ -29,6 +37,19 @@ export function captureDesktopSource() {
   const params = new URLSearchParams(window.location.search)
   if (params.get('source') === 'desktop') {
     sessionStorage.setItem(DESKTOP_SOURCE_KEY, 'true')
+  }
+}
+
+/**
+ * Capture ?redirect= from the URL and persist in sessionStorage.
+ * OAuth and email confirmation flows lose the URL, so we persist it and read it back in getRedirectPath().
+ * Call at the top of login and signup pages.
+ */
+export function captureRedirect() {
+  const params = new URLSearchParams(window.location.search)
+  const redirect = params.get('redirect')
+  if (redirect && redirect.startsWith('/') && !redirect.startsWith('//')) {
+    sessionStorage.setItem(REDIRECT_STORAGE_KEY, redirect)
   }
 }
 

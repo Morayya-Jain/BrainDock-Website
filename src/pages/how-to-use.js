@@ -26,9 +26,9 @@ function render(main) {
 
     <div class="dashboard-card" style="margin-bottom: var(--space-xl);">
       <h2 class="dashboard-section-title">Monitoring Modes Explained</h2>
-      <p style="margin-bottom: var(--space-m);"><strong>Camera</strong> – Detects when you are present at your desk and when you use gadgets (phone, tablet, etc.) via the webcam. Uses AI; no video is stored.</p>
-      <p style="margin-bottom: var(--space-m);"><strong>Screen</strong> – Monitors your active window or browser tab and checks it against your blocklist (distracting sites and apps). Runs locally and works offline.</p>
-      <p><strong>Both</strong> – Combines camera and screen monitoring for full coverage.</p>
+      <p style="margin-bottom: var(--space-m);"><strong>Camera</strong> - Detects when you are present at your desk and when you use gadgets (phone, tablet, etc.) via the webcam. Uses AI; no video is stored.</p>
+      <p style="margin-bottom: var(--space-m);"><strong>Screen</strong> - Monitors your active window or browser tab and checks it against your blocklist (distracting sites and apps). Runs locally and works offline.</p>
+      <p><strong>Both</strong> - Combines camera and screen monitoring for full coverage.</p>
     </div>
 
     <div class="dashboard-card" style="margin-bottom: var(--space-xl);">
@@ -40,17 +40,17 @@ function render(main) {
 
     <div class="dashboard-card" style="margin-bottom: var(--space-xl);">
       <h2 class="dashboard-section-title">Understanding Your Reports</h2>
-      <p style="margin-bottom: var(--space-m);"><strong>Focus time</strong> – Time spent at your desk with no distractions.</p>
-      <p style="margin-bottom: var(--space-m);"><strong>Away</strong> – Time away from the desk (e.g. stepped away).</p>
-      <p style="margin-bottom: var(--space-m);"><strong>Gadget / Screen distraction</strong> – Time spent on phones, tablets, or blocklisted sites.</p>
-      <p style="margin-bottom: var(--space-m);"><strong>Focus rate</strong> – Focus time as a percentage of active (non-paused) time.</p>
+      <p style="margin-bottom: var(--space-m);"><strong>Focus time</strong> - Time spent at your desk with no distractions.</p>
+      <p style="margin-bottom: var(--space-m);"><strong>Away</strong> - Time away from the desk (e.g. stepped away).</p>
+      <p style="margin-bottom: var(--space-m);"><strong>Gadget / Screen distraction</strong> - Time spent on phones, tablets, or blocklisted sites.</p>
+      <p style="margin-bottom: var(--space-m);"><strong>Focus rate</strong> - Focus time as a percentage of active (non-paused) time.</p>
       <p>After each session you can download a PDF report from the desktop app and view session history here on the dashboard.</p>
     </div>
 
     <div class="dashboard-card">
       <h2 class="dashboard-section-title">FAQ</h2>
       <p style="margin-bottom: var(--space-m);"><strong>Privacy: What does BrainDock see?</strong> Frames are analyzed by AI and never stored. No facial recognition; we only detect presence and gadget use.</p>
-      <p style="margin-bottom: var(--space-m);"><strong>Cost: How much does the AI detection cost?</strong> With Gemini (the default), detection typically costs around $0.01–0.03 per minute. You can switch to OpenAI in Settings → General.</p>
+      <p style="margin-bottom: var(--space-m);"><strong>Cost: How much does the AI detection cost?</strong> With Gemini (the default), detection typically costs around $0.01-0.03 per minute. You can switch to OpenAI in the desktop app if you prefer.</p>
       <p style="margin-bottom: var(--space-m);"><strong>Accuracy: Why was X detected or not detected?</strong> Detection depends on lighting, camera angle, and the AI model. You can turn off specific gadget types in Settings → Detection to reduce false positives.</p>
       <p><strong>Offline: What happens without internet?</strong> Screen-only mode works fully offline. Camera modes need internet for the vision API. Session data is uploaded when the session ends and you are back online.</p>
     </div>

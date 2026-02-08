@@ -194,7 +194,7 @@ function render(main, user, sessions, stats, weeklyData, credits) {
     if (mode === 'camera_only') return 'Camera'
     if (mode === 'screen_only') return 'Screen'
     if (mode === 'both') return 'Both'
-    return mode || '–'
+    return mode || '-'
   }
 
   // Credits widget: show remaining hours; if zero, show Buy Hours CTA
@@ -206,8 +206,8 @@ function render(main, user, sessions, stats, weeklyData, credits) {
           <p style="font-size: 1.5rem; font-weight: 600; color: var(--text-primary);">${formatDuration(remainingSec)}</p>
         </div>
         ${!hasCredits
-    ? `<a href="/pricing/" class="btn btn-primary">Buy Hours</a>`
-    : `<a href="/pricing/" class="btn btn-secondary">Get more hours</a>`}
+    ? `<a href="/pricing/" class="btn btn-primary" target="_blank" rel="noopener">Buy Hours</a>`
+    : `<a href="/pricing/" class="btn btn-secondary" target="_blank" rel="noopener">Get more hours</a>`}
       </div>
     </div>
   `
