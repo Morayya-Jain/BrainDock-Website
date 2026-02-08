@@ -56,9 +56,9 @@ function pricePerHour(cents, hours) {
 
 /** Tier label for display: 1 -> Pro, 10 -> Ultra, 30 -> Max */
 function tierDisplayName(hours) {
-  if (hours === 1) return 'BrainDock Pro'
-  if (hours === 10) return 'BrainDock Ultra'
-  if (hours === 30) return 'BrainDock Max'
+  if (hours === 1) return 'Pro'
+  if (hours === 10) return 'Ultra'
+  if (hours === 30) return 'Max'
   return null
 }
 
@@ -93,6 +93,26 @@ function render(root, packages, hasUser) {
             <a href="${origin}/#how-it-works" target="_blank" rel="noopener">How It Works</a>
             <a href="${origin}/#contact" target="_blank" rel="noopener">Contact Us</a>
           </div>
+          <div class="header-language-selector">
+            <button class="header-language-toggle" id="pricing-header-lang-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
+              <svg class="globe-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              <svg class="chevron-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+            <ul class="header-language-dropdown" id="pricing-header-lang-dropdown" role="listbox">
+              <li role="option" data-lang="en">English</li>
+              <li role="option" data-lang="ja">日本語 (Japan)</li>
+              <li role="option" data-lang="de">Deutsch (Germany)</li>
+              <li role="option" data-lang="fr">Francais (France)</li>
+              <li role="option" data-lang="zh">中文 (China)</li>
+              <li role="option" data-lang="hi">हिन्दी (India)</li>
+            </ul>
+          </div>
         </div>
         <div class="nav-actions">
           <a href="${origin}/#download" class="btn btn-primary nav-cta" target="_blank" rel="noopener">
@@ -114,6 +134,27 @@ function render(root, packages, hasUser) {
         <a href="${origin}/#how-it-works" target="_blank" rel="noopener">How It Works</a>
         <a href="${origin}/#contact" target="_blank" rel="noopener">Contact Us</a>
         <a href="${origin}/#download" target="_blank" rel="noopener">Download</a>
+        <div class="mobile-language-selector">
+          <button class="mobile-language-toggle" id="pricing-mobile-lang-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
+            <svg class="globe-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span class="mobile-language-current">English</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+          <ul class="mobile-language-dropdown" id="pricing-mobile-lang-dropdown" role="listbox">
+            <li role="option" data-lang="en">English</li>
+            <li role="option" data-lang="ja">日本語 (Japan)</li>
+            <li role="option" data-lang="de">Deutsch (Germany)</li>
+            <li role="option" data-lang="fr">Francais (France)</li>
+            <li role="option" data-lang="zh">中文 (China)</li>
+            <li role="option" data-lang="hi">हिन्दी (India)</li>
+          </ul>
+        </div>
       </div>
     </nav>
 
@@ -126,13 +167,11 @@ function render(root, packages, hasUser) {
         </div>
         <div class="pricing-grid">
           ${defaultPackages.map((pkg) => {
-            const isPopular = pkg.hours === 10
             const perHour = pricePerHour(pkg.price_cents, pkg.hours)
             const tierName = tierDisplayName(pkg.hours) || escapeHtml(pkg.display_name || pkg.name)
             const btnLabel = tierButtonLabel(pkg.hours)
             return `
-              <div class="dashboard-card pricing-card" style="position: relative; ${isPopular ? 'border: 2px solid var(--accent-primary, #0d9488);' : ''}">
-                ${isPopular ? '<span class="pricing-badge">Most Popular</span>' : ''}
+              <div class="dashboard-card pricing-card">
                 <h3 class="pricing-card-title">${tierName}</h3>
                 <p class="pricing-card-price">${formatPrice(pkg.price_cents, pkg.currency)}</p>
                 ${perHour ? `<p class="pricing-card-per-hour">A$${perHour} per hour</p>` : '<p class="pricing-card-per-hour"></p>'}
@@ -168,6 +207,27 @@ function render(root, packages, hasUser) {
         </div>
         <div class="footer-bottom">
           <p>&copy; 2026 BrainDock. All rights reserved.</p>
+          <div class="language-selector">
+            <button class="language-toggle" id="pricing-footer-lang-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
+              <svg class="globe-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              <span class="language-current">English</span>
+              <svg class="chevron-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+            <ul class="language-dropdown" id="pricing-footer-lang-dropdown" role="listbox">
+              <li role="option" data-lang="en">English</li>
+              <li role="option" data-lang="ja">日本語 (Japan)</li>
+              <li role="option" data-lang="de">Deutsch (Germany)</li>
+              <li role="option" data-lang="fr">Francais (France)</li>
+              <li role="option" data-lang="zh">中文 (China)</li>
+              <li role="option" data-lang="hi">हिन्दी (India)</li>
+            </ul>
+          </div>
         </div>
       </div>
     </footer>
@@ -208,6 +268,32 @@ function render(root, packages, hasUser) {
       navMobile.classList.toggle('active')
     })
   }
+
+  // Language selector toggles (header, mobile, footer)
+  initLangSelector('pricing-header-lang-toggle', 'pricing-header-lang-dropdown')
+  initLangSelector('pricing-mobile-lang-toggle', 'pricing-mobile-lang-dropdown')
+  initLangSelector('pricing-footer-lang-toggle', 'pricing-footer-lang-dropdown')
+}
+
+/** Wire up a language selector toggle + close on outside click. */
+function initLangSelector(toggleId, dropdownId) {
+  const toggle = document.getElementById(toggleId)
+  const dropdown = document.getElementById(dropdownId)
+  if (!toggle || !dropdown) return
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation()
+    const open = toggle.getAttribute('aria-expanded') === 'true'
+    toggle.setAttribute('aria-expanded', !open)
+    dropdown.classList.toggle('active')
+  })
+
+  document.addEventListener('click', () => {
+    toggle.setAttribute('aria-expanded', 'false')
+    dropdown.classList.remove('active')
+  })
+
+  dropdown.addEventListener('click', (e) => e.stopPropagation())
 }
 
 async function main() {

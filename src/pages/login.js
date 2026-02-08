@@ -43,15 +43,17 @@ const authCard = document.querySelector('.auth-card')
   }
 
   if (session) {
-    // Show spinner while auto-linking
+    // Show the same spinner used across the website (dashboard-boot style)
     loginForm.style.display = 'none'
     authCard.querySelector('.auth-title').textContent = 'Signing you in...'
     authCard.querySelector('.auth-subtitle').textContent = ''
-    const spinner = document.createElement('div')
-    spinner.className = 'dashboard-loading'
-    spinner.innerHTML = '<div class="dashboard-spinner"></div>'
-    spinner.style.cssText = 'display:flex;justify-content:center;padding:2rem 0;'
-    authCard.appendChild(spinner)
+    const spinnerWrap = document.createElement('div')
+    spinnerWrap.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:16px;padding:2rem 0;color:rgba(60,60,67,0.6);'
+    spinnerWrap.innerHTML = `
+      <div style="width:36px;height:36px;border:3px solid #E5E5EA;border-top-color:#D4A373;border-radius:50%;animation:dbspin 0.8s linear infinite;"></div>
+      <style>@keyframes dbspin{to{transform:rotate(360deg)}}</style>
+    `
+    authCard.appendChild(spinnerWrap)
 
     // Refresh to get a non-expired access token before generating linking code
     const { data: refreshed } = await supabase.auth.refreshSession()
@@ -63,7 +65,7 @@ const authCard = document.querySelector('.auth-card')
     loginForm.style.display = ''
     authCard.querySelector('.auth-title').textContent = 'Welcome back'
     authCard.querySelector('.auth-subtitle').textContent = 'Log in to your BrainDock account'
-    spinner.remove()
+    spinnerWrap.remove()
   }
 })()
 
