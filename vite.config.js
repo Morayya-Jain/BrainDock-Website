@@ -24,7 +24,6 @@ export default defineConfig({
         callback: resolve(__dirname, 'auth/callback/index.html'),
         forgotPassword: resolve(__dirname, 'auth/forgot-password/index.html'),
         dashboard: resolve(__dirname, 'dashboard/index.html'),
-        settings: resolve(__dirname, 'settings/index.html'),
         settingsBlocklist: resolve(__dirname, 'settings/blocklist/index.html'),
         settingsDetection: resolve(__dirname, 'settings/detection/index.html'),
         settingsDevices: resolve(__dirname, 'settings/devices/index.html'),

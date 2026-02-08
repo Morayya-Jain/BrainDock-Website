@@ -7,12 +7,19 @@ import { initDashboardLayout } from '../dashboard-layout.js'
 
 const PAGE_SIZE = 20
 
+/** Format seconds as "X hour(s)", "X min(s)", or "X sec(s)" */
 function formatDuration(seconds) {
-  if (seconds == null || seconds < 0) return '0m'
+  if (seconds == null || seconds < 0) return '0 sec'
   const h = Math.floor(seconds / 3600)
   const m = Math.floor((seconds % 3600) / 60)
-  if (h > 0) return `${h}h ${m}m`
-  return `${m}m`
+  const s = Math.floor(seconds % 60)
+  if (h > 0) {
+    return `${h} ${h === 1 ? 'hour' : 'hours'}${m > 0 ? ` ${m} ${m === 1 ? 'min' : 'mins'}` : ''}`
+  }
+  if (m > 0) {
+    return `${m} ${m === 1 ? 'min' : 'mins'}${s > 0 ? ` ${s} ${s === 1 ? 'sec' : 'secs'}` : ''}`
+  }
+  return `${s} ${s === 1 ? 'sec' : 'secs'}`
 }
 
 function modeLabel(mode) {

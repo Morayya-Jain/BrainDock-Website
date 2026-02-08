@@ -5,12 +5,19 @@
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 
+/** Format seconds as "X hour(s)", "X min(s)", or "X sec(s)" */
 function formatDuration(seconds) {
-  if (seconds == null || seconds < 0) return '0m'
+  if (seconds == null || seconds < 0) return '0 sec'
   const h = Math.floor(seconds / 3600)
   const m = Math.floor((seconds % 3600) / 60)
-  if (h > 0) return `${h}h ${m}m`
-  return `${m}m`
+  const s = Math.floor(seconds % 60)
+  if (h > 0) {
+    return `${h} ${h === 1 ? 'hour' : 'hours'}${m > 0 ? ` ${m} ${m === 1 ? 'min' : 'mins'}` : ''}`
+  }
+  if (m > 0) {
+    return `${m} ${m === 1 ? 'min' : 'mins'}${s > 0 ? ` ${s} ${s === 1 ? 'sec' : 'secs'}` : ''}`
+  }
+  return `${s} ${s === 1 ? 'sec' : 'secs'}`
 }
 
 function formatPrice(cents) {
@@ -65,7 +72,7 @@ function render(main, credits, purchases) {
 
     <div class="dashboard-card" style="margin-bottom: var(--space-xl);">
       <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-s);">Hours remaining</h2>
-      <p style="font-size: 2rem; font-weight: 600; color: var(--text-primary); margin-bottom: var(--space-m);">${formatDuration(remaining)}</p>
+      <p class="dashboard-stat-card-value" style="margin-bottom: var(--space-m);">${formatDuration(remaining)}</p>
       <a href="${base}/pricing/" class="btn btn-primary">Buy more hours</a>
     </div>
 

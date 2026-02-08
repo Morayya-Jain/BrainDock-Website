@@ -15,14 +15,6 @@ const QUICK_SITES = [
   { id: 'twitter', name: 'Twitter/X' },
 ]
 
-const PRESET_CATEGORIES = [
-  { id: 'social_media', name: 'Social Media', sites: 'Instagram, Facebook, Twitter, TikTok, Snapchat, etc.' },
-  { id: 'video_streaming', name: 'Video Streaming', sites: 'YouTube, Netflix, Disney+, Twitch, etc.' },
-  { id: 'gaming', name: 'Gaming', sites: 'Steam, Epic Games, Roblox, Discord, etc.' },
-  { id: 'messaging', name: 'Messaging', sites: 'Discord, WhatsApp Web, Telegram, etc.' },
-  { id: 'news_entertainment', name: 'News & Entertainment', sites: 'Reddit, BuzzFeed, 9GAG, etc.' },
-]
-
 const DEBOUNCE_MS = 800
 
 async function loadBlocklist() {
@@ -93,15 +85,10 @@ function render(main, config, userId) {
     </div>
 
     <div class="dashboard-card" style="margin-top: var(--space-l);">
-      <h2 class="dashboard-section-title" style="margin-bottom: var(--space-m);">Categories</h2>
-      <div id="categories-container"></div>
-    </div>
-
-    <div class="dashboard-card" style="margin-top: var(--space-l);">
       <h2 class="dashboard-section-title" style="margin-bottom: var(--space-m);">Custom URLs</h2>
       <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: var(--space-m);">Add domains to block (e.g. example.com)</p>
       <div style="display: flex; gap: var(--space-s); flex-wrap: wrap; margin-bottom: var(--space-m);">
-        <input type="text" id="custom-url-input" class="auth-input" placeholder="example.com" style="max-width: 200px;">
+        <input type="text" id="custom-url-input" class="dashboard-input" placeholder="example.com" style="max-width: 200px;">
         <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-url-add">Add</button>
       </div>
       <div id="custom-urls-list"></div>
@@ -111,7 +98,7 @@ function render(main, config, userId) {
       <h2 class="dashboard-section-title" style="margin-bottom: var(--space-m);">Custom Apps</h2>
       <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: var(--space-m);">Add app names to block (e.g. Discord)</p>
       <div style="display: flex; gap: var(--space-s); flex-wrap: wrap; margin-bottom: var(--space-m);">
-        <input type="text" id="custom-app-input" class="auth-input" placeholder="App name" style="max-width: 200px;">
+        <input type="text" id="custom-app-input" class="dashboard-input" placeholder="App name" style="max-width: 200px;">
         <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-app-add">Add</button>
       </div>
       <div id="custom-apps-list"></div>
@@ -139,28 +126,6 @@ function render(main, config, userId) {
       el.classList.toggle('active', next)
       el.setAttribute('aria-pressed', next)
       state.quick_blocks[id] = next
-      scheduleSave()
-    })
-  })
-
-  const catContainer = main.querySelector('#categories-container')
-  catContainer.innerHTML = PRESET_CATEGORIES.map((c) => `
-    <div class="dashboard-toggle">
-      <div>
-        <div class="dashboard-toggle-label">${escapeHtml(c.name)}</div>
-        <div class="dashboard-toggle-desc">${escapeHtml(c.sites)}</div>
-      </div>
-      <div class="dashboard-toggle-switch ${state.categories[c.id] ? 'active' : ''}" data-cat="${c.id}" role="button" tabindex="0" aria-pressed="${!!state.categories[c.id]}"></div>
-    </div>
-  `).join('')
-
-  catContainer.querySelectorAll('.dashboard-toggle-switch').forEach((el) => {
-    el.addEventListener('click', () => {
-      const id = el.dataset.cat
-      const next = !el.classList.contains('active')
-      el.classList.toggle('active', next)
-      el.setAttribute('aria-pressed', next)
-      state.categories[id] = next
       scheduleSave()
     })
   })

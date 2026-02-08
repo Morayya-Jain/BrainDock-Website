@@ -6,13 +6,19 @@
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 
-/** Format seconds as "Xh Ym" or "Xm" */
+/** Format seconds as "X hour(s)", "X min(s)", or "X sec(s)" */
 function formatDuration(seconds) {
-  if (seconds == null || seconds < 0) return '0m'
+  if (seconds == null || seconds < 0) return '0 sec'
   const h = Math.floor(seconds / 3600)
   const m = Math.floor((seconds % 3600) / 60)
-  if (h > 0) return `${h}h ${m}m`
-  return `${m}m`
+  const s = Math.floor(seconds % 60)
+  if (h > 0) {
+    return `${h} ${h === 1 ? 'hour' : 'hours'}${m > 0 ? ` ${m} ${m === 1 ? 'min' : 'mins'}` : ''}`
+  }
+  if (m > 0) {
+    return `${m} ${m === 1 ? 'min' : 'mins'}${s > 0 ? ` ${s} ${s === 1 ? 'sec' : 'secs'}` : ''}`
+  }
+  return `${s} ${s === 1 ? 'sec' : 'secs'}`
 }
 
 /** Format date for display (e.g. "Today, Feb 7 2026") */
@@ -202,7 +208,7 @@ function render(main, user, sessions, stats, weeklyData, credits) {
       <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-m);">
         <div>
           <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-xs);">Hours remaining</h2>
-          <p style="font-size: 1.5rem; font-weight: 600; color: var(--text-primary);">${formatDuration(remainingSec)}</p>
+          <p class="dashboard-stat-card-value" style="margin-bottom: 0;">${formatDuration(remainingSec)}</p>
         </div>
         ${!hasCredits
     ? `<a href="/pricing/" class="btn btn-primary">Buy Hours</a>`

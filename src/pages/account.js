@@ -36,7 +36,7 @@ function render(main, profile, userId) {
     <div class="dashboard-card">
       <div class="dashboard-field">
         <label class="dashboard-field-label" for="display_name">Display name</label>
-        <input type="text" id="display_name" class="auth-input" value="${escapeHtml(displayName)}" placeholder="Your name" style="max-width: 320px;">
+        <input type="text" id="display_name" class="dashboard-input" value="${escapeHtml(displayName)}" placeholder="Your name" style="max-width: 320px;">
       </div>
       <div class="dashboard-field">
         <span class="dashboard-field-label">Email</span>

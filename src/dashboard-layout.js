@@ -5,6 +5,16 @@
  */
 
 import { supabase } from './supabase.js'
+import {
+  createIcons,
+  LayoutDashboard,
+  Clock,
+  Settings,
+  ChevronDown,
+  ChevronRight,
+  CreditCard,
+  BookOpen,
+} from 'lucide/dist/cjs/lucide.js'
 import './dashboard.css'
 
 const LOGIN_PATH = '/auth/login/'
@@ -25,7 +35,6 @@ function getCurrentPath() {
 function buildSidebarHTML(currentPath) {
   const base = window.location.origin
   const settingsActive = currentPath.startsWith('/settings')
-  const accountActive = currentPath.startsWith('/account')
 
   return `
     <a href="${base}/" class="dashboard-sidebar-logo" aria-label="BrainDock home">
@@ -34,40 +43,96 @@ function buildSidebarHTML(currentPath) {
     <nav class="dashboard-sidebar-nav" aria-label="Dashboard navigation">
       <ul class="dashboard-sidebar-list">
         <li>
-          <a href="${base}${DASHBOARD_PATH}" class="dashboard-sidebar-link ${currentPath === '/dashboard' ? 'active' : ''}">Dashboard</a>
+          <a href="${base}${DASHBOARD_PATH}" class="dashboard-sidebar-link ${currentPath === '/dashboard' ? 'active' : ''}">
+            <i data-lucide="layout-dashboard" class="dashboard-sidebar-icon" aria-hidden="true"></i>
+            <span>Dashboard</span>
+          </a>
         </li>
         <li>
-          <a href="${base}/sessions/" class="dashboard-sidebar-link ${currentPath.startsWith('/sessions') ? 'active' : ''}">Sessions</a>
+          <a href="${base}/sessions/" class="dashboard-sidebar-link ${currentPath.startsWith('/sessions') ? 'active' : ''}">
+            <i data-lucide="clock" class="dashboard-sidebar-icon" aria-hidden="true"></i>
+            <span>Sessions</span>
+          </a>
         </li>
         <li class="dashboard-sidebar-group">
-          <button type="button" class="dashboard-sidebar-link dashboard-sidebar-expand ${settingsActive ? 'active' : ''}" aria-expanded="${settingsActive}" data-expands="settings-sub">Settings</button>
+          <button type="button" class="dashboard-sidebar-link dashboard-sidebar-expand ${settingsActive ? 'active' : ''}" aria-expanded="${settingsActive}" data-expands="settings-sub">
+            <span class="dashboard-sidebar-expand-inner">
+              <i data-lucide="settings" class="dashboard-sidebar-icon" aria-hidden="true"></i>
+              <span>Settings</span>
+            </span>
+            <i data-lucide="chevron-right" class="dashboard-sidebar-chevron" aria-hidden="true"></i>
+          </button>
           <ul id="settings-sub" class="dashboard-sidebar-sublist" ${settingsActive ? '' : 'hidden'}>
-            <li><a href="${base}/settings/" class="dashboard-sidebar-link ${currentPath === '/settings' ? 'active' : ''}">General</a></li>
             <li><a href="${base}/settings/blocklist/" class="dashboard-sidebar-link ${currentPath === '/settings/blocklist' ? 'active' : ''}">Blocklist</a></li>
             <li><a href="${base}/settings/detection/" class="dashboard-sidebar-link ${currentPath === '/settings/detection' ? 'active' : ''}">Detection</a></li>
             <li><a href="${base}/settings/devices/" class="dashboard-sidebar-link ${currentPath === '/settings/devices' ? 'active' : ''}">Devices</a></li>
           </ul>
         </li>
         <li>
-          <a href="${base}/account/" class="dashboard-sidebar-link ${currentPath === '/account' ? 'active' : ''}">Account</a>
+          <a href="${base}/account/subscription/" class="dashboard-sidebar-link ${currentPath === '/account/subscription' ? 'active' : ''}">
+            <i data-lucide="credit-card" class="dashboard-sidebar-icon" aria-hidden="true"></i>
+            <span>Credits</span>
+          </a>
         </li>
         <li>
-          <a href="${base}/account/subscription/" class="dashboard-sidebar-link ${currentPath === '/account/subscription' ? 'active' : ''}">Credits</a>
-        </li>
-        <li>
-          <a href="${base}/how-to-use/" class="dashboard-sidebar-link ${currentPath === '/how-to-use' ? 'active' : ''}">How to Use</a>
+          <a href="${base}/how-to-use/" class="dashboard-sidebar-link ${currentPath === '/how-to-use' ? 'active' : ''}">
+            <i data-lucide="book-open" class="dashboard-sidebar-icon" aria-hidden="true"></i>
+            <span>How to Use</span>
+          </a>
         </li>
       </ul>
     </nav>
     <div class="dashboard-sidebar-footer">
-      <p class="dashboard-sidebar-user" id="dashboard-sidebar-user-email"></p>
-      <button type="button" class="dashboard-sidebar-signout" id="dashboard-sidebar-signout">Sign Out</button>
+      <button type="button" class="dashboard-sidebar-footer-trigger" id="dashboard-sidebar-footer-trigger" aria-expanded="false" aria-haspopup="true">
+        <span class="dashboard-avatar dashboard-avatar-sm" id="dashboard-sidebar-avatar" aria-hidden="true"></span>
+        <span class="dashboard-sidebar-user" id="dashboard-sidebar-user-email"></span>
+      </button>
+      <div class="dashboard-sidebar-popup" id="dashboard-sidebar-popup" hidden>
+        <a href="${base}/" class="dashboard-sidebar-popup-link">Back to Website</a>
+        <button type="button" class="dashboard-sidebar-popup-signout" id="dashboard-sidebar-signout">Sign Out</button>
+      </div>
     </div>
   `
 }
 
 /**
- * Initialize sidebar expand/collapse and sign out.
+ * Get user avatar URL from metadata (OAuth providers like Google provide this).
+ */
+function getUserAvatarUrl(user) {
+  return user.user_metadata?.avatar_url || user.user_metadata?.picture || null
+}
+
+/**
+ * Get user initials for avatar (first letter of name or email).
+ */
+function getUserInitials(user) {
+  const name = user.user_metadata?.full_name || ''
+  const email = user.email || ''
+  if (name.trim()) {
+    const parts = name.trim().split(/\s+/)
+    if (parts.length >= 2) {
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase().slice(0, 2)
+    }
+    return name.trim().slice(0, 2).toUpperCase()
+  }
+  if (email) {
+    return email.slice(0, 2).toUpperCase()
+  }
+  return '?'
+}
+
+/**
+ * Render avatar element (image if URL exists, otherwise initials).
+ */
+function renderAvatar(avatarUrl, initials) {
+  if (avatarUrl) {
+    return `<img src="${escapeHtml(avatarUrl)}" alt="" class="dashboard-avatar-img" aria-hidden="true">`
+  }
+  return escapeHtml(initials)
+}
+
+/**
+ * Initialize sidebar expand/collapse, chevron, sign out, and mobile menu.
  */
 function initSidebarBehavior() {
   const expandBtn = document.querySelector('.dashboard-sidebar-expand')
@@ -77,16 +142,20 @@ function initSidebarBehavior() {
       const expanded = sublist.hidden
       sublist.hidden = !expanded
       expandBtn.setAttribute('aria-expanded', expanded)
+      expandBtn.classList.toggle('dashboard-sidebar-expand-open', expanded)
     })
+    if (sublist && !sublist.hidden) {
+      expandBtn.classList.add('dashboard-sidebar-expand-open')
+    }
   }
 
   const signoutBtn = document.getElementById('dashboard-sidebar-signout')
   if (signoutBtn) {
-    signoutBtn.addEventListener('click', async () => {
-      await supabase.auth.signOut()
-      window.location.href = '/'
-    })
+    signoutBtn.addEventListener('click', handleSignOut)
   }
+
+  // Sidebar footer popup (click profile to toggle)
+  initSidebarFooterPopup()
 
   // Mobile: toggle sidebar and close on overlay click
   const sidebarToggle = document.getElementById('dashboard-sidebar-toggle')
@@ -102,6 +171,37 @@ function initSidebarBehavior() {
       sidebar.classList.remove('open')
     })
   }
+}
+
+/**
+ * Initialize sidebar footer popup: toggle on profile click, close on outside click.
+ */
+function initSidebarFooterPopup() {
+  const trigger = document.getElementById('dashboard-sidebar-footer-trigger')
+  const popup = document.getElementById('dashboard-sidebar-popup')
+  if (!trigger || !popup) return
+
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation()
+    const open = popup.hidden
+    popup.hidden = !open
+    trigger.setAttribute('aria-expanded', !open)
+  })
+
+  // Close popup when clicking outside
+  document.addEventListener('click', () => {
+    if (!popup.hidden) {
+      popup.hidden = true
+      trigger.setAttribute('aria-expanded', 'false')
+    }
+  })
+
+  popup.addEventListener('click', (e) => e.stopPropagation())
+}
+
+async function handleSignOut() {
+  await supabase.auth.signOut()
+  window.location.href = '/'
 }
 
 /**
@@ -147,6 +247,10 @@ export async function initDashboardLayout(options = {}) {
 
   const user = session.user
   const currentPath = getCurrentPath()
+  const base = window.location.origin
+  const avatarUrl = getUserAvatarUrl(user)
+  const initials = getUserInitials(user)
+  const displayName = user.user_metadata?.full_name || user.email || 'Signed in'
 
   const app = document.createElement('div')
   app.className = 'dashboard-app'
@@ -157,15 +261,40 @@ export async function initDashboardLayout(options = {}) {
   sidebar.innerHTML = buildSidebarHTML(currentPath)
 
   const userEmailEl = sidebar.querySelector('#dashboard-sidebar-user-email')
-  if (userEmailEl) {
-    const email = user.email || ''
-    const name = user.user_metadata?.full_name || ''
-    userEmailEl.textContent = name || email || 'Signed in'
+  const sidebarAvatarEl = sidebar.querySelector('#dashboard-sidebar-avatar')
+  if (userEmailEl) userEmailEl.textContent = displayName
+  if (sidebarAvatarEl) {
+    sidebarAvatarEl.innerHTML = renderAvatar(avatarUrl, initials)
   }
 
   const main = document.createElement('main')
   main.className = 'dashboard-main'
   main.setAttribute('role', 'main')
+
+  // Top-right header (desktop): download button + profile dropdown
+  const headerWrap = document.createElement('div')
+  headerWrap.className = 'dashboard-header-wrap'
+  headerWrap.innerHTML = `
+    <a href="${base}/download/" class="dashboard-download-btn">
+      <span>Download</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+    </a>
+    <div class="dashboard-profile-wrap">
+      <button type="button" class="dashboard-profile-trigger" id="dashboard-profile-trigger" aria-expanded="false" aria-haspopup="true" aria-label="Account menu">
+        <span class="dashboard-avatar dashboard-avatar-md" id="dashboard-profile-avatar"></span>
+      </button>
+      <div class="dashboard-profile-dropdown" id="dashboard-profile-dropdown" hidden>
+        <p class="dashboard-profile-email" id="dashboard-profile-email">${escapeHtml(displayName)}</p>
+        <a href="${base}/" class="dashboard-profile-link">Back to Website</a>
+        <button type="button" class="dashboard-profile-signout" id="dashboard-profile-signout">Sign Out</button>
+      </div>
+    </div>
+  `
+  main.appendChild(headerWrap)
 
   const contentSelector = options.contentSelector || '#dashboard-content'
   const source = document.querySelector(contentSelector)
@@ -218,7 +347,54 @@ export async function initDashboardLayout(options = {}) {
     document.body.appendChild(app)
   }
 
+  createIcons({
+    icons: { LayoutDashboard, Clock, Settings, ChevronDown, ChevronRight, CreditCard, BookOpen },
+    attrs: { class: 'dashboard-sidebar-icon' },
+    root: app,
+  })
+
+  // Set profile avatar (top-right)
+  const profileAvatarEl = document.getElementById('dashboard-profile-avatar')
+  if (profileAvatarEl) {
+    profileAvatarEl.innerHTML = renderAvatar(avatarUrl, initials)
+  }
+
   initSidebarBehavior()
+  initProfileDropdown()
 
   return { user }
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div')
+  div.textContent = text
+  return div.innerHTML
+}
+
+/**
+ * Initialize top-right profile dropdown: toggle on trigger click, close on outside click.
+ */
+function initProfileDropdown() {
+  const trigger = document.getElementById('dashboard-profile-trigger')
+  const dropdown = document.getElementById('dashboard-profile-dropdown')
+  const signoutBtn = document.getElementById('dashboard-profile-signout')
+  if (!trigger || !dropdown) return
+
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation()
+    const open = dropdown.hidden
+    dropdown.hidden = !open
+    trigger.setAttribute('aria-expanded', !open)
+  })
+
+  signoutBtn?.addEventListener('click', handleSignOut)
+
+  document.addEventListener('click', () => {
+    if (!dropdown.hidden) {
+      dropdown.hidden = true
+      trigger.setAttribute('aria-expanded', 'false')
+    }
+  })
+
+  dropdown.addEventListener('click', (e) => e.stopPropagation())
 }

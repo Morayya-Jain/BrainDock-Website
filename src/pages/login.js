@@ -1,7 +1,6 @@
 import { supabase } from '../supabase.js'
 import {
   captureDesktopSource,
-  getRedirectPath,
   handlePostAuthRedirect,
   showError,
   hideError,
@@ -11,62 +10,17 @@ import {
 } from '../auth-helpers.js'
 import '../auth.css'
 
-// Persist ?source=desktop FIRST (synchronous, before any async work)
+// Persist ?source=desktop before it's lost to OAuth redirects
 captureDesktopSource()
 
-/**
- * Check localStorage directly for a Supabase session token.
- * This is synchronous and works instantly, before the Supabase client
- * finishes its async initialization. Avoids all race conditions.
- */
-function hasStoredSession() {
-  try {
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i)
-      if (key && key.startsWith('sb-') && key.endsWith('-auth-token')) {
-        const raw = localStorage.getItem(key)
-        if (raw) {
-          const parsed = JSON.parse(raw)
-          if (parsed?.access_token) return true
-        }
-      }
-    }
-  } catch (_) { /* ignore parse errors */ }
-  return false
-}
-
-// If already logged in, hide the form and show a loading state while we
-// wait for the Supabase client to initialize, then redirect.
-if (hasStoredSession()) {
-  const authCard = document.querySelector('.auth-card')
-  if (authCard) {
-    authCard.innerHTML = `
-      <div class="auth-loading">
-        <div class="auth-spinner"></div>
-        <p class="auth-loading-text">Signing you in...</p>
-      </div>
-    `
+// If already logged in, skip the form and handle redirect immediately
+// (e.g. desktop app opened login page but user is already authenticated)
+;(async () => {
+  const { data: { session } } = await supabase.auth.getSession()
+  if (session) {
+    await handlePostAuthRedirect(supabase, document.querySelector('.auth-card'))
   }
-
-  ;(async () => {
-    let session = null
-    for (let attempt = 0; attempt < 5; attempt++) {
-      try {
-        const res = await supabase.auth.getSession()
-        session = res.data?.session ?? null
-      } catch (_) { /* ignore */ }
-      if (session) break
-      await new Promise((r) => setTimeout(r, 100))
-    }
-    if (session) {
-      // Pass authCard so desktop linking code/errors can be displayed
-      await handlePostAuthRedirect(supabase, authCard)
-    } else {
-      // Session expired or invalid - reload to show the login form
-      window.location.reload()
-    }
-  })()
-}
+})()
 
 const form = document.getElementById('login-form')
 const loginBtn = document.getElementById('login-btn')

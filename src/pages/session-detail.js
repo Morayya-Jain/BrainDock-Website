@@ -30,12 +30,19 @@ function getSessionIdFromPath() {
   return last
 }
 
+/** Format seconds as "X hour(s)", "X min(s)", or "X sec(s)" */
 function formatDuration(seconds) {
-  if (seconds == null || seconds < 0) return '0s'
-  const m = Math.floor(seconds / 60)
+  if (seconds == null || seconds < 0) return '0 sec'
+  const h = Math.floor(seconds / 3600)
+  const m = Math.floor((seconds % 3600) / 60)
   const s = Math.floor(seconds % 60)
-  if (m > 0) return `${m}m ${s}s`
-  return `${s}s`
+  if (h > 0) {
+    return `${h} ${h === 1 ? 'hour' : 'hours'}${m > 0 ? ` ${m} ${m === 1 ? 'min' : 'mins'}` : ''}`
+  }
+  if (m > 0) {
+    return `${m} ${m === 1 ? 'min' : 'mins'}${s > 0 ? ` ${s} ${s === 1 ? 'sec' : 'secs'}` : ''}`
+  }
+  return `${s} ${s === 1 ? 'sec' : 'secs'}`
 }
 
 function formatTime(iso) {

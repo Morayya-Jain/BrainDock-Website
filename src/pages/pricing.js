@@ -4,6 +4,7 @@
  */
 
 import { supabase, supabaseUrl, supabaseAnonKey } from '../supabase.js'
+import '../auth.css'
 import '../dashboard.css'
 
 async function fetchCreditPackages() {
@@ -53,6 +54,14 @@ function pricePerHour(cents, hours) {
   return (cents / 100 / hours).toFixed(2)
 }
 
+/** Tier label for display: 1 -> Pro, 10 -> Ultra, 30 -> Max */
+function tierDisplayName(hours) {
+  if (hours === 1) return 'BrainDock Pro'
+  if (hours === 10) return 'BrainDock Ultra'
+  if (hours === 30) return 'BrainDock Max'
+  return null
+}
+
 function render(root, packages, hasUser) {
   const defaultPackages = packages.length > 0 ? packages : [
     { id: '1', name: '1_hour', display_name: '1 Hour', hours: 1, price_cents: 199, currency: 'aud' },
@@ -61,35 +70,36 @@ function render(root, packages, hasUser) {
   ]
 
   root.innerHTML = `
-    <div class="auth-page">
-      <div class="auth-container" style="max-width: 900px;">
-        <a href="/" class="auth-logo">
+    <div class="auth-page pricing-page">
+      <div class="auth-container pricing-container">
+        <a href="/" class="auth-logo pricing-logo">
           <img src="/assets/logo_with_text.png" alt="BrainDock">
         </a>
-        <div style="text-align: center; margin-bottom: var(--space-xl);">
-          <h1 class="auth-title">Buy Hours</h1>
-          <p class="auth-subtitle">Use camera or screen sessions — time is deducted from your balance. Top up anytime.</p>
+        <div class="pricing-header">
+          <h1 class="auth-title">Pricing</h1>
+          <p class="auth-subtitle">Use camera or screen sessions - time is deducted from your balance. Top up anytime.</p>
         </div>
-        <div style="display: grid; gap: var(--space-l); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
-          ${defaultPackages.map((pkg, idx) => {
+        <div class="pricing-grid">
+          ${defaultPackages.map((pkg) => {
             const isPopular = pkg.hours === 10
             const perHour = pricePerHour(pkg.price_cents, pkg.hours)
+            const tierName = tierDisplayName(pkg.hours) || escapeHtml(pkg.display_name || pkg.name)
             return `
-              <div class="dashboard-card" style="position: relative; ${isPopular ? 'border: 2px solid var(--accent-primary, #0d9488);' : ''}">
-                ${isPopular ? '<span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent-primary, #0d9488); color: white; font-size: 0.75rem; padding: 2px 8px; border-radius: 4px;">Most Popular</span>' : ''}
-                <h3 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: var(--space-s);">${escapeHtml(pkg.display_name || pkg.name)}</h3>
-                <p style="font-size: 1.5rem; font-weight: 600; color: var(--text-primary); margin-bottom: var(--space-xs);">${formatPrice(pkg.price_cents, pkg.currency)}</p>
-                ${perHour ? `<p style="font-size: 0.875rem; color: var(--text-tertiary); margin-bottom: var(--space-m);">A$${perHour} per hour</p>` : '<p style="margin-bottom: var(--space-m);"></p>'}
-                <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-xl);">${pkg.hours} hour${pkg.hours === 1 ? '' : 's'} of BrainDock — camera, screen, or both.</p>
+              <div class="dashboard-card pricing-card" style="position: relative; ${isPopular ? 'border: 2px solid var(--accent-primary, #0d9488);' : ''}">
+                ${isPopular ? '<span class="pricing-badge">Most Popular</span>' : ''}
+                <h3 class="pricing-card-title">${tierName}</h3>
+                <p class="pricing-card-price">${formatPrice(pkg.price_cents, pkg.currency)}</p>
+                ${perHour ? `<p class="pricing-card-per-hour">A$${perHour} per hour</p>` : '<p class="pricing-card-per-hour"></p>'}
+                <p class="pricing-card-desc">${pkg.hours} hour${pkg.hours === 1 ? '' : 's'} of BrainDock - camera, screen, or both.</p>
                 ${hasUser
-                  ? `<button type="button" class="btn btn-primary" data-package-id="${escapeHtml(pkg.id)}" style="width: 100%;">Buy Now</button>`
-                  : `<a href="/auth/signup/" class="btn btn-primary" style="width: 100%; text-align: center;">Sign up to buy</a>`}
+                  ? `<button type="button" class="btn btn-primary" data-package-id="${escapeHtml(pkg.id)}">Buy Now</button>`
+                  : `<a href="/auth/signup/" class="btn btn-primary">Sign up to buy</a>`}
               </div>
             `
           }).join('')}
         </div>
-        <p style="text-align: center; margin-top: var(--space-xl); font-size: 0.875rem; color: var(--text-tertiary);">One-time purchase. Hours never expire.</p>
-        <p style="text-align: center; margin-top: var(--space-m);">
+        <p class="pricing-footer-note">One-time purchase. Hours never expire.</p>
+        <p class="pricing-footer-link">
           ${hasUser ? '<a href="/dashboard/">Go to Dashboard</a>' : '<a href="/auth/login/">Log in</a>'}
         </p>
       </div>
@@ -109,7 +119,7 @@ function render(root, packages, hasUser) {
           alert(error)
           return
         }
-        if (url) window.open(url, '_blank')
+        if (url) window.open(url, '_blank', 'noopener,noreferrer')
       } catch (err) {
         btn.disabled = false
         btn.textContent = 'Buy Now'
