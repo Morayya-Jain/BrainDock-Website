@@ -487,6 +487,7 @@
     "howItWorks": "工作原理",
     "contact": "联系我们",
     "signup": "注册",
+    "pricing": "价格",
     "download": "下载"
   },
   "hero": {
@@ -570,6 +571,30 @@
     "macOS": "macOS",
     "windows": "Windows",
     "linux": "Linux"
+  },
+  "pricing": {
+    "title": "价格",
+    "subtitle": "使用相机或屏幕会话 - 时间从您的余额中扣除。随时充值。",
+    "tier": {
+      "1": {
+        "name": "Pro",
+        "perHour": "A$1.99/小时",
+        "desc": "1小时BrainDock - 相机、屏幕或两者。",
+        "btn": "获取Pro"
+      },
+      "10": {
+        "name": "Ultra",
+        "perHour": "A$1.50/小时",
+        "desc": "10小时BrainDock - 相机、屏幕或两者。",
+        "btn": "获取Ultra"
+      },
+      "30": {
+        "name": "Max",
+        "perHour": "A$1.17/小时",
+        "desc": "30小时BrainDock - 相机、屏幕或两者。",
+        "btn": "获取Max"
+      }
+    }
   },
   "faq": {
     "sectionTitle": "常见问题",

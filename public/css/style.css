@@ -1255,7 +1255,7 @@ body.hero-compact .hero-ctas {
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  height: 32px;
+  height: 36px;
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
@@ -1289,9 +1289,7 @@ body.hero-compact .hero-ctas {
 
 .language-current {
   white-space: nowrap;
-  line-height: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.3;
 }
 
 .language-toggle .chevron-icon {

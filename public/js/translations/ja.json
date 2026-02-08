@@ -487,6 +487,7 @@
     "howItWorks": "仕組み",
     "contact": "お問い合わせ",
     "signup": "新規登録",
+    "pricing": "料金",
     "download": "ダウンロード"
   },
   "hero": {
@@ -570,6 +571,30 @@
     "macOS": "macOS",
     "windows": "Windows",
     "linux": "Linux"
+  },
+  "pricing": {
+    "title": "料金",
+    "subtitle": "カメラまたは画面セッションを使用 - 残高から時間が差し引かれます。いつでもチャージ可能。",
+    "tier": {
+      "1": {
+        "name": "Pro",
+        "perHour": "A$1.99/時間",
+        "desc": "BrainDock 1時間分 - カメラ、画面、または両方。",
+        "btn": "Proを取得"
+      },
+      "10": {
+        "name": "Ultra",
+        "perHour": "A$1.50/時間",
+        "desc": "BrainDock 10時間分 - カメラ、画面、または両方。",
+        "btn": "Ultraを取得"
+      },
+      "30": {
+        "name": "Max",
+        "perHour": "A$1.17/時間",
+        "desc": "BrainDock 30時間分 - カメラ、画面、または両方。",
+        "btn": "Maxを取得"
+      }
+    }
   },
   "faq": {
     "sectionTitle": "よくある質問",

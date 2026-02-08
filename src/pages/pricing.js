@@ -80,7 +80,7 @@ function render(root, packages, hasUser) {
   const origin = window.location.origin
 
   root.innerHTML = `
-    <!-- Header (same as main website, without Sign Up) -->
+    <!-- Header (same as main website) -->
     <nav class="nav">
       <div class="container nav-container">
         <a href="${origin}/" class="nav-logo" target="_blank" rel="noopener">
@@ -88,11 +88,14 @@ function render(root, packages, hasUser) {
         </a>
         <div class="nav-center">
           <div class="nav-links">
-            <a href="${origin}/#why-braindock" target="_blank" rel="noopener">Why Use BrainDock</a>
-            <a href="${origin}/#features" target="_blank" rel="noopener">Features</a>
-            <a href="${origin}/#how-it-works" target="_blank" rel="noopener">How It Works</a>
-            <a href="${origin}/#contact" target="_blank" rel="noopener">Contact Us</a>
+            <a href="${origin}/#why-braindock" target="_blank" rel="noopener" data-i18n="nav.whyBrainDock">Why Use BrainDock</a>
+            <a href="${origin}/#features" target="_blank" rel="noopener" data-i18n="nav.features">Features</a>
+            <a href="${origin}/#how-it-works" target="_blank" rel="noopener" data-i18n="nav.howItWorks">How It Works</a>
+            <a href="/pricing/" data-i18n="nav.pricing">Pricing</a>
+            <a href="#pricing-contact" data-i18n="nav.contact">Contact Us</a>
           </div>
+        </div>
+        <div class="nav-actions">
           <div class="header-language-selector">
             <button class="header-language-toggle" id="pricing-header-lang-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
               <svg class="globe-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -113,10 +116,9 @@ function render(root, packages, hasUser) {
               <li role="option" data-lang="hi">हिन्दी (India)</li>
             </ul>
           </div>
-        </div>
-        <div class="nav-actions">
+          <a href="/auth/signup/" class="btn btn-secondary nav-cta" target="_blank" rel="noopener" data-i18n="nav.signup">Sign Up</a>
           <a href="${origin}/#download" class="btn btn-primary nav-cta" target="_blank" rel="noopener">
-            <span>Download</span>
+            <span data-i18n="nav.download">Download</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
               <polyline points="7 10 12 15 17 10"/>
@@ -129,11 +131,13 @@ function render(root, packages, hasUser) {
         </button>
       </div>
       <div class="nav-mobile" id="pricing-nav-mobile">
-        <a href="${origin}/#why-braindock" target="_blank" rel="noopener">Why Use BrainDock</a>
-        <a href="${origin}/#features" target="_blank" rel="noopener">Features</a>
-        <a href="${origin}/#how-it-works" target="_blank" rel="noopener">How It Works</a>
-        <a href="${origin}/#contact" target="_blank" rel="noopener">Contact Us</a>
-        <a href="${origin}/#download" target="_blank" rel="noopener">Download</a>
+        <a href="${origin}/#why-braindock" target="_blank" rel="noopener" data-i18n="nav.whyBrainDock">Why Use BrainDock</a>
+        <a href="${origin}/#features" target="_blank" rel="noopener" data-i18n="nav.features">Features</a>
+        <a href="${origin}/#how-it-works" target="_blank" rel="noopener" data-i18n="nav.howItWorks">How It Works</a>
+        <a href="/pricing/" data-i18n="nav.pricing">Pricing</a>
+        <a href="#pricing-contact" data-i18n="nav.contact">Contact Us</a>
+        <a href="/auth/signup/" target="_blank" rel="noopener" data-i18n="nav.signup">Sign Up</a>
+        <a href="${origin}/#download" target="_blank" rel="noopener" data-i18n="nav.download">Download</a>
         <div class="mobile-language-selector">
           <button class="mobile-language-toggle" id="pricing-mobile-lang-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
             <svg class="globe-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -162,8 +166,8 @@ function render(root, packages, hasUser) {
     <main class="pricing-main">
       <div class="container pricing-container">
         <div class="pricing-header">
-          <h1 class="pricing-title">Pricing</h1>
-          <p class="pricing-subtitle">Use camera or screen sessions - time is deducted from your balance. Top up anytime.</p>
+          <h1 class="pricing-title" data-i18n="pricing.title">Pricing</h1>
+          <p class="pricing-subtitle" data-i18n="pricing.subtitle">Use camera or screen sessions - time is deducted from your balance. Top up anytime.</p>
         </div>
         <div class="pricing-grid">
           ${defaultPackages.map((pkg) => {
@@ -172,13 +176,11 @@ function render(root, packages, hasUser) {
             const btnLabel = tierButtonLabel(pkg.hours)
             return `
               <div class="dashboard-card pricing-card">
-                <h3 class="pricing-card-title">${tierName}</h3>
+                <h3 class="pricing-card-title" data-i18n="pricing.tier.${pkg.hours}.name">${tierName}</h3>
                 <p class="pricing-card-price">${formatPrice(pkg.price_cents, pkg.currency)}</p>
-                ${perHour ? `<p class="pricing-card-per-hour">A$${perHour} per hour</p>` : '<p class="pricing-card-per-hour"></p>'}
-                <p class="pricing-card-desc">${pkg.hours} hour${pkg.hours === 1 ? '' : 's'} of BrainDock - camera, screen, or both.</p>
-                ${hasUser
-                  ? `<button type="button" class="btn btn-primary" data-package-id="${escapeHtml(pkg.id)}">${btnLabel}</button>`
-                  : `<a href="/auth/signup/" class="btn btn-primary">${btnLabel}</a>`}
+                ${perHour ? `<p class="pricing-card-per-hour" data-i18n="pricing.tier.${pkg.hours}.perHour">A$${perHour} per hour</p>` : '<p class="pricing-card-per-hour"></p>'}
+                <p class="pricing-card-desc" data-i18n="pricing.tier.${pkg.hours}.desc">${pkg.hours} hour${pkg.hours === 1 ? '' : 's'} of BrainDock - camera, screen, or both.</p>
+                <button type="button" class="btn btn-primary" data-package-id="${escapeHtml(pkg.id)}" data-i18n="pricing.tier.${pkg.hours}.btn">${btnLabel}</button>
               </div>
             `
           }).join('')}
@@ -192,21 +194,21 @@ function render(root, packages, hasUser) {
         <div class="footer-content">
           <div class="footer-brand">
             <img src="/assets/logo_with_text.png" alt="BrainDock" loading="lazy">
-            <p>AI-powered focus assistant that helps you build better habits.</p>
+            <p data-i18n="footer.brandDescription">AI-powered focus assistant that helps you build better habits.</p>
           </div>
           <div class="footer-links">
-            <h4>Legal</h4>
-            <a href="${origin}/privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-            <a href="${origin}/terms.html" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>
+            <h4 data-i18n="footer.legalTitle">Legal</h4>
+            <a href="${origin}/privacy.html" target="_blank" rel="noopener noreferrer" data-i18n="footer.privacyPolicy">Privacy Policy</a>
+            <a href="${origin}/terms.html" target="_blank" rel="noopener noreferrer" data-i18n="footer.termsOfService">Terms and Conditions</a>
           </div>
-          <div class="footer-contact">
-            <h4>Contact</h4>
+          <div class="footer-contact" id="pricing-contact">
+            <h4 data-i18n="footer.contactTitle">Contact</h4>
             <a href="mailto:morayya@thebraindock.com">morayya@thebraindock.com</a>
             <a href="mailto:help.thebraindock@gmail.com">help.thebraindock@gmail.com</a>
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2026 BrainDock. All rights reserved.</p>
+          <p data-i18n="footer.copyright">&copy; 2026 BrainDock. All rights reserved.</p>
           <div class="language-selector">
             <button class="language-toggle" id="pricing-footer-lang-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
               <svg class="globe-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -237,6 +239,15 @@ function render(root, packages, hasUser) {
     const originalLabel = btn.textContent
     btn.addEventListener('click', async () => {
       const packageId = btn.dataset.packageId
+
+      if (!hasUser) {
+        // Not logged in: redirect to signup, then come back with auto_checkout
+        const returnUrl = `/pricing/?auto_checkout=${encodeURIComponent(packageId)}`
+        window.location.href = `/auth/signup/?redirect=${encodeURIComponent(returnUrl)}`
+        return
+      }
+
+      // Logged in: go straight to Stripe checkout
       btn.disabled = true
       btn.textContent = 'Loading...'
       try {
@@ -269,31 +280,10 @@ function render(root, packages, hasUser) {
     })
   }
 
-  // Language selector toggles (header, mobile, footer)
-  initLangSelector('pricing-header-lang-toggle', 'pricing-header-lang-dropdown')
-  initLangSelector('pricing-mobile-lang-toggle', 'pricing-mobile-lang-dropdown')
-  initLangSelector('pricing-footer-lang-toggle', 'pricing-footer-lang-dropdown')
-}
-
-/** Wire up a language selector toggle + close on outside click. */
-function initLangSelector(toggleId, dropdownId) {
-  const toggle = document.getElementById(toggleId)
-  const dropdown = document.getElementById(dropdownId)
-  if (!toggle || !dropdown) return
-
-  toggle.addEventListener('click', (e) => {
-    e.stopPropagation()
-    const open = toggle.getAttribute('aria-expanded') === 'true'
-    toggle.setAttribute('aria-expanded', !open)
-    dropdown.classList.toggle('active')
-  })
-
-  document.addEventListener('click', () => {
-    toggle.setAttribute('aria-expanded', 'false')
-    dropdown.classList.remove('active')
-  })
-
-  dropdown.addEventListener('click', (e) => e.stopPropagation())
+  // Initialize language switching (uses global I18n from i18n.js)
+  if (typeof I18n !== 'undefined' && I18n.init) {
+    I18n.init()
+  }
 }
 
 async function main() {
@@ -303,6 +293,7 @@ async function main() {
   root.innerHTML = '<div class="auth-page"><div class="auth-container"><p>Loading pricing...</p></div></div>'
 
   const { data: { session } } = await supabase.auth.getSession()
+  const hasUser = !!session
 
   let packages = []
   try {
@@ -310,7 +301,27 @@ async function main() {
   } catch (err) {
     console.error(err)
   }
-  render(root, packages, !!session)
+  render(root, packages, hasUser)
+
+  // Auto-checkout: if user just signed up and was redirected back with a package ID
+  const params = new URLSearchParams(window.location.search)
+  const autoCheckoutId = params.get('auto_checkout')
+  if (autoCheckoutId && hasUser) {
+    // Clean URL so refreshing doesn't re-trigger
+    window.history.replaceState({}, '', '/pricing/')
+
+    // Auto-trigger checkout for the package they originally clicked
+    try {
+      const { url, error } = await createCheckoutSession(autoCheckoutId)
+      if (error) {
+        alert('Could not start checkout: ' + error)
+        return
+      }
+      if (url) window.open(url, '_blank', 'noopener,noreferrer')
+    } catch (err) {
+      alert('Network error. Please try clicking the button again.')
+    }
+  }
 }
 
 main()

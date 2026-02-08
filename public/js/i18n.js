@@ -88,12 +88,8 @@ const I18n = {
    * @returns {string} Base path
    */
   getBasePath() {
-    // Check if we're in a subdirectory
-    const path = window.location.pathname;
-    if (path.includes('/legal/') || path.includes('/pages/')) {
-      return '../';
-    }
-    return './';
+    // Use absolute path so translations load from any page location
+    return '/';
   },
 
   /**

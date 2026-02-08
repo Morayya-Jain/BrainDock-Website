@@ -487,6 +487,7 @@
     "howItWorks": "How It Works",
     "contact": "Contact Us",
     "signup": "Sign Up",
+    "pricing": "Pricing",
     "download": "Download"
   },
   "hero": {
@@ -571,6 +572,30 @@
     "macOS": "macOS",
     "windows": "Windows",
     "linux": "Linux"
+  },
+  "pricing": {
+    "title": "Pricing",
+    "subtitle": "Use camera or screen sessions - time is deducted from your balance. Top up anytime.",
+    "tier": {
+      "1": {
+        "name": "Pro",
+        "perHour": "A$1.99 per hour",
+        "desc": "1 hour of BrainDock - camera, screen, or both.",
+        "btn": "Get Pro"
+      },
+      "10": {
+        "name": "Ultra",
+        "perHour": "A$1.50 per hour",
+        "desc": "10 hours of BrainDock - camera, screen, or both.",
+        "btn": "Get Ultra"
+      },
+      "30": {
+        "name": "Max",
+        "perHour": "A$1.17 per hour",
+        "desc": "30 hours of BrainDock - camera, screen, or both.",
+        "btn": "Get Max"
+      }
+    }
   },
   "faq": {
     "sectionTitle": "Frequently Asked Questions",

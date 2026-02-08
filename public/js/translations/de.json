@@ -487,6 +487,7 @@
     "howItWorks": "So funktioniert es",
     "contact": "Kontakt",
     "signup": "Registrieren",
+    "pricing": "Preise",
     "download": "Herunterladen"
   },
   "hero": {
@@ -570,6 +571,30 @@
     "macOS": "macOS",
     "windows": "Windows",
     "linux": "Linux"
+  },
+  "pricing": {
+    "title": "Preise",
+    "subtitle": "Nutze Kamera- oder Bildschirmsitzungen - die Zeit wird von deinem Guthaben abgezogen. Jederzeit aufladen.",
+    "tier": {
+      "1": {
+        "name": "Pro",
+        "perHour": "A$1,99 pro Stunde",
+        "desc": "1 Stunde BrainDock - Kamera, Bildschirm oder beides.",
+        "btn": "Pro holen"
+      },
+      "10": {
+        "name": "Ultra",
+        "perHour": "A$1,50 pro Stunde",
+        "desc": "10 Stunden BrainDock - Kamera, Bildschirm oder beides.",
+        "btn": "Ultra holen"
+      },
+      "30": {
+        "name": "Max",
+        "perHour": "A$1,17 pro Stunde",
+        "desc": "30 Stunden BrainDock - Kamera, Bildschirm oder beides.",
+        "btn": "Max holen"
+      }
+    }
   },
   "faq": {
     "sectionTitle": "Häufig gestellte Fragen",

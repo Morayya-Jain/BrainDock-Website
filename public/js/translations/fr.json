@@ -487,6 +487,7 @@
     "howItWorks": "Comment ça marche",
     "contact": "Nous contacter",
     "signup": "S'inscrire",
+    "pricing": "Tarifs",
     "download": "Télécharger"
   },
   "hero": {
@@ -570,6 +571,30 @@
     "macOS": "macOS",
     "windows": "Windows",
     "linux": "Linux"
+  },
+  "pricing": {
+    "title": "Tarifs",
+    "subtitle": "Utilisez des sessions camera ou ecran - le temps est deduit de votre solde. Rechargez a tout moment.",
+    "tier": {
+      "1": {
+        "name": "Pro",
+        "perHour": "A$1,99 par heure",
+        "desc": "1 heure de BrainDock - camera, ecran ou les deux.",
+        "btn": "Obtenir Pro"
+      },
+      "10": {
+        "name": "Ultra",
+        "perHour": "A$1,50 par heure",
+        "desc": "10 heures de BrainDock - camera, ecran ou les deux.",
+        "btn": "Obtenir Ultra"
+      },
+      "30": {
+        "name": "Max",
+        "perHour": "A$1,17 par heure",
+        "desc": "30 heures de BrainDock - camera, ecran ou les deux.",
+        "btn": "Obtenir Max"
+      }
+    }
   },
   "faq": {
     "sectionTitle": "Questions fréquemment posées",
