@@ -185,13 +185,6 @@ function render(main, user, sessions, stats, weeklyData, credits) {
     ? Math.round(stats.yesterday.focusPercentageSum / stats.yesterday.durationSum)
     : 0
 
-  const focusDiff = stats.today.focusSeconds - stats.yesterday.focusSeconds
-  const focusDiffStr = focusDiff >= 0 ? `+${formatDuration(focusDiff)}` : formatDuration(Math.abs(focusDiff))
-  const distDiff = stats.today.distractions - stats.yesterday.distractions
-  const distDiffStr = distDiff > 0 ? `+${distDiff}` : distDiff < 0 ? `${distDiff}` : '0'
-  const rateDiff = todayFocusRate - yesterdayFocusRate
-  const rateDiffStr = rateDiff > 0 ? `+${rateDiff}%` : rateDiff < 0 ? `${rateDiff}%` : '0%'
-
   const recentSessions = sessions.slice(0, 5)
   const hasSessions = sessions.length > 0
 
@@ -217,17 +210,6 @@ function render(main, user, sessions, stats, weeklyData, credits) {
     </div>
   `
 
-  // Download CTA (shown when user has credits but no sessions yet)
-  const downloadCta = hasCredits && sessions.length === 0 ? `
-    <div class="dashboard-card" style="border-left: 4px solid var(--success); margin-bottom: var(--space-xl);">
-      <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-s);">You're all set! Download BrainDock</h2>
-      <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-l);">You have hours available. Download the desktop app and sign in with the same account to start tracking your focus.</p>
-      <div style="display: flex; flex-wrap: wrap; gap: var(--space-m);">
-        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg" class="btn btn-primary">Download for macOS</a>
-        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe" class="btn btn-secondary">Download for Windows</a>
-      </div>
-    </div>
-  ` : ''
 
   main.innerHTML = `
     <div class="dashboard-section">
@@ -238,7 +220,6 @@ function render(main, user, sessions, stats, weeklyData, credits) {
     </div>
 
     ${creditsWidget}
-    ${downloadCta}
 
     <div class="dashboard-stat-cards">
       <div class="dashboard-stat-card">
