@@ -1,7 +1,6 @@
 /**
- * Supabase Edge Function: create a Stripe Checkout session for a subscription tier.
- * Requires: STRIPE_SECRET_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY (or use anon + user JWT).
- * Body: { tier_id: string }
+ * Supabase Edge Function: create a Stripe Checkout session for a credit package or legacy tier.
+ * Body: { package_id: string } (credit pack) or { tier_id: string } (legacy)
  * Returns: { url: string } or { error: string }
  */
 
@@ -51,7 +50,7 @@ serve(async (req) => {
     )
   }
 
-  let body: { tier_id?: string }
+  let body: { package_id?: string; tier_id?: string }
   try {
     body = await req.json()
   } catch {
@@ -61,15 +60,77 @@ serve(async (req) => {
     )
   }
 
+  const packageId = body.package_id
   const tierId = body.tier_id
-  if (!tierId) {
+
+  if (!packageId && !tierId) {
     return new Response(
-      JSON.stringify({ error: "tier_id required" }),
+      JSON.stringify({ error: "package_id or tier_id required" }),
       { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     )
   }
 
+  const origin = req.headers.get("origin") || "https://thebraindock.com"
+  const successUrl = packageId
+    ? `${origin}/account/subscription/?success=true`
+    : `${origin}/account/subscription/?success=true`
+  const cancelUrl = `${origin}/pricing/?canceled=true`
+
   const supabaseAdmin = createClient(supabaseUrl, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? supabaseKey)
+  const stripe = new Stripe(stripeSecret, { apiVersion: "2024-11-20" })
+
+  if (packageId) {
+    const { data: pkg, error: pkgError } = await supabaseAdmin
+      .from("credit_packages")
+      .select("id, name, display_name, hours, price_cents, currency, stripe_price_id")
+      .eq("id", packageId)
+      .eq("is_active", true)
+      .single()
+
+    if (pkgError || !pkg) {
+      return new Response(
+        JSON.stringify({ error: "Credit package not found or inactive" }),
+        { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
+    }
+
+    try {
+      const lineItem: Stripe.Checkout.SessionCreateParams.LineItem = pkg.stripe_price_id
+        ? { price: pkg.stripe_price_id, quantity: 1 }
+        : {
+            price_data: {
+              currency: (pkg.currency || "aud").toLowerCase(),
+              unit_amount: pkg.price_cents,
+              product_data: {
+                name: pkg.display_name || pkg.name,
+                description: `${pkg.hours} hour${pkg.hours === 1 ? "" : "s"} of BrainDock`,
+              },
+            },
+            quantity: 1,
+          }
+
+      const session = await stripe.checkout.sessions.create({
+        mode: "payment",
+        line_items: [lineItem],
+        success_url: successUrl,
+        cancel_url: cancelUrl,
+        client_reference_id: user.id,
+        metadata: { package_id: pkg.id, user_id: user.id },
+      })
+
+      return new Response(
+        JSON.stringify({ url: session.url }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Stripe error"
+      return new Response(
+        JSON.stringify({ error: message }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
+    }
+  }
+
   const { data: tier, error: tierError } = await supabaseAdmin
     .from("subscription_tiers")
     .select("id, name, display_name, price_cents, currency, stripe_price_id, billing_interval")
@@ -83,12 +144,6 @@ serve(async (req) => {
       { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     )
   }
-
-  const origin = req.headers.get("origin") || "https://thebraindock.com"
-  const successUrl = `${origin}/account/subscription/?success=true`
-  const cancelUrl = `${origin}/pricing/?canceled=true`
-
-  const stripe = new Stripe(stripeSecret, { apiVersion: "2024-11-20" })
 
   try {
     const lineItem: Stripe.Checkout.SessionCreateParams.LineItem = tier.stripe_price_id

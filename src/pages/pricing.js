@@ -1,14 +1,14 @@
 /**
- * Public pricing page: lists tiers from subscription_tiers, Get Started creates Stripe Checkout.
+ * Public pricing page: lists credit packages (hour packs) from credit_packages.
  * No auth required to view; auth required to checkout.
  */
 
 import { supabase, supabaseUrl, supabaseAnonKey } from '../supabase.js'
 import '../dashboard.css'
 
-async function fetchTiers() {
+async function fetchCreditPackages() {
   const { data, error } = await supabase
-    .from('subscription_tiers')
+    .from('credit_packages')
     .select('*')
     .eq('is_active', true)
     .order('sort_order', { ascending: true })
@@ -16,7 +16,7 @@ async function fetchTiers() {
   return data || []
 }
 
-async function createCheckoutSession(tierId) {
+async function createCheckoutSession(packageId) {
   const { data: { session } } = await supabase.auth.getSession()
   if (!session) return { url: null, error: 'Not signed in' }
   const resp = await fetch(`${supabaseUrl}/functions/v1/create-checkout-session`, {
@@ -26,7 +26,7 @@ async function createCheckoutSession(tierId) {
       'Authorization': `Bearer ${session.access_token}`,
       'apikey': supabaseAnonKey,
     },
-    body: JSON.stringify({ tier_id: tierId }),
+    body: JSON.stringify({ package_id: packageId }),
   })
   const result = await resp.json().catch(() => ({}))
   if (!resp.ok) return { url: null, error: result?.error || result?.message || `HTTP ${resp.status}` }
@@ -46,47 +46,47 @@ function escapeHtml(str) {
   return div.innerHTML
 }
 
-function render(root, tiers, hasUser, alreadyPaid) {
-  const defaultTiers = tiers.length > 0 ? tiers : [
-    { id: 'starter', name: 'starter', display_name: 'BrainDock Starter', price_cents: 199, currency: 'aud', billing_interval: 'one_time', features: { camera_monitoring: true, screen_monitoring: true, pdf_reports: true, max_daily_hours: 2 } },
+function pricePerHour(cents, hours) {
+  if (!hours || hours < 1) return null
+  return (cents / 100 / hours).toFixed(2)
+}
+
+function render(root, packages, hasUser) {
+  const defaultPackages = packages.length > 0 ? packages : [
+    { id: '1', name: '1_hour', display_name: '1 Hour', hours: 1, price_cents: 199, currency: 'aud' },
+    { id: '2', name: '10_hours', display_name: '10 Hours', hours: 10, price_cents: 1499, currency: 'aud' },
+    { id: '3', name: '30_hours', display_name: '30 Hours', hours: 30, price_cents: 3499, currency: 'aud' },
   ]
 
   root.innerHTML = `
     <div class="auth-page">
-      <div class="auth-container" style="max-width: 800px;">
+      <div class="auth-container" style="max-width: 900px;">
         <a href="/" class="auth-logo">
           <img src="/assets/logo_with_text.png" alt="BrainDock">
         </a>
         <div style="text-align: center; margin-bottom: var(--space-xl);">
-          <h1 class="auth-title">Pricing</h1>
-          <p class="auth-subtitle">Simple, transparent pricing</p>
+          <h1 class="auth-title">Buy Hours</h1>
+          <p class="auth-subtitle">Use camera or screen sessions — time is deducted from your balance. Top up anytime.</p>
         </div>
-        <div style="display: grid; gap: var(--space-l); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-          ${defaultTiers.map((t) => {
-            const feats = t.features || {}
-            const featList = []
-            if (feats.camera_monitoring) featList.push('Camera tracking')
-            if (feats.screen_monitoring) featList.push('Screen tracking')
-            if (feats.pdf_reports) featList.push('PDF reports')
-            if (feats.max_daily_hours) featList.push(`${feats.max_daily_hours}hr daily limit`)
+        <div style="display: grid; gap: var(--space-l); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+          ${defaultPackages.map((pkg, idx) => {
+            const isPopular = pkg.hours === 10
+            const perHour = pricePerHour(pkg.price_cents, pkg.hours)
             return `
-              <div class="dashboard-card">
-                <h3 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: var(--space-s);">${escapeHtml(t.display_name || t.name)}</h3>
-                <p style="font-size: 1.5rem; font-weight: 600; color: var(--text-primary); margin-bottom: var(--space-m);">${formatPrice(t.price_cents, t.currency)}</p>
-                <p style="font-size: 0.875rem; color: var(--text-tertiary); margin-bottom: var(--space-l);">${t.billing_interval === 'one_time' ? 'One-time payment' : escapeHtml(t.billing_interval || '')}</p>
-                <ul style="list-style: none; padding: 0; margin: 0 0 var(--space-xl);">
-                  ${featList.map((f) => `<li style="padding: var(--space-xs) 0; font-size: 0.9375rem;">${escapeHtml(f)}</li>`).join('')}
-                </ul>
-                ${alreadyPaid
-                  ? `<a href="/dashboard/" class="btn btn-secondary" style="width: 100%; text-align: center;">Already subscribed</a>`
-                  : hasUser
-                    ? `<button type="button" class="btn btn-primary" data-tier-id="${escapeHtml(t.id)}" style="width: 100%;">Get Started</button>`
-                    : `<a href="/auth/signup/" class="btn btn-primary" style="width: 100%; text-align: center;">Get Started</a>`}
+              <div class="dashboard-card" style="position: relative; ${isPopular ? 'border: 2px solid var(--accent-primary, #0d9488);' : ''}">
+                ${isPopular ? '<span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent-primary, #0d9488); color: white; font-size: 0.75rem; padding: 2px 8px; border-radius: 4px;">Most Popular</span>' : ''}
+                <h3 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: var(--space-s);">${escapeHtml(pkg.display_name || pkg.name)}</h3>
+                <p style="font-size: 1.5rem; font-weight: 600; color: var(--text-primary); margin-bottom: var(--space-xs);">${formatPrice(pkg.price_cents, pkg.currency)}</p>
+                ${perHour ? `<p style="font-size: 0.875rem; color: var(--text-tertiary); margin-bottom: var(--space-m);">A$${perHour} per hour</p>` : '<p style="margin-bottom: var(--space-m);"></p>'}
+                <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-xl);">${pkg.hours} hour${pkg.hours === 1 ? '' : 's'} of BrainDock — camera, screen, or both.</p>
+                ${hasUser
+                  ? `<button type="button" class="btn btn-primary" data-package-id="${escapeHtml(pkg.id)}" style="width: 100%;">Buy Now</button>`
+                  : `<a href="/auth/signup/" class="btn btn-primary" style="width: 100%; text-align: center;">Sign up to buy</a>`}
               </div>
             `
           }).join('')}
         </div>
-        <p style="text-align: center; margin-top: var(--space-xl); font-size: 0.875rem; color: var(--text-tertiary);">More plans coming soon.</p>
+        <p style="text-align: center; margin-top: var(--space-xl); font-size: 0.875rem; color: var(--text-tertiary);">One-time purchase. Hours never expire.</p>
         <p style="text-align: center; margin-top: var(--space-m);">
           ${hasUser ? '<a href="/dashboard/">Go to Dashboard</a>' : '<a href="/auth/login/">Log in</a>'}
         </p>
@@ -94,15 +94,15 @@ function render(root, tiers, hasUser, alreadyPaid) {
     </div>
   `
 
-  root.querySelectorAll('[data-tier-id]').forEach((btn) => {
+  root.querySelectorAll('[data-package-id]').forEach((btn) => {
     btn.addEventListener('click', async () => {
-      const tierId = btn.dataset.tierId
+      const packageId = btn.dataset.packageId
       btn.disabled = true
       btn.textContent = 'Loading...'
-      const { url, error } = await createCheckoutSession(tierId)
+      const { url, error } = await createCheckoutSession(packageId)
       if (error) {
         btn.disabled = false
-        btn.textContent = 'Get Started'
+        btn.textContent = 'Buy Now'
         alert(error)
         return
       }
@@ -119,22 +119,13 @@ async function main() {
 
   const { data: { session } } = await supabase.auth.getSession()
 
-  let tiers = []
-  let alreadyPaid = false
+  let packages = []
   try {
-    tiers = await fetchTiers()
-    if (session) {
-      const { data: sub } = await supabase
-        .from('subscriptions')
-        .select('id, status')
-        .in('status', ['active', 'trialing'])
-        .maybeSingle()
-      alreadyPaid = !!sub
-    }
+    packages = await fetchCreditPackages()
   } catch (err) {
     console.error(err)
   }
-  render(root, tiers, !!session, alreadyPaid)
+  render(root, packages, !!session)
 }
 
 main()

@@ -1,21 +1,25 @@
 /**
- * Subscription status: current plan from subscriptions + subscription_tiers.
+ * Credits & Purchases: current balance from user_credits and purchase history from credit_purchases.
  */
 
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 
-async function loadSubscription(userId) {
-  const { data, error } = await supabase
-    .from('subscriptions')
-    .select('*, subscription_tiers(*)')
-    .eq('user_id', userId)
-    .single()
-  if (error) {
-    if (error.code === 'PGRST116') return null
-    throw error
-  }
-  return data
+function formatDuration(seconds) {
+  if (seconds == null || seconds < 0) return '0m'
+  const h = Math.floor(seconds / 3600)
+  const m = Math.floor((seconds % 3600) / 60)
+  if (h > 0) return `${h}h ${m}m`
+  return `${m}m`
+}
+
+function formatPrice(cents) {
+  return `A$${(cents / 100).toFixed(2)}`
+}
+
+function formatDate(iso) {
+  if (!iso) return '–'
+  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
 function escapeHtml(str) {
@@ -25,52 +29,82 @@ function escapeHtml(str) {
   return div.innerHTML
 }
 
-function formatDate(iso) {
-  if (!iso) return '–'
-  return new Date(iso).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+async function loadCredits() {
+  const { data, error } = await supabase
+    .from('user_credits')
+    .select('total_purchased_seconds, total_used_seconds')
+    .single()
+  if (error) {
+    if (error.code === 'PGRST116') return { total_purchased_seconds: 0, total_used_seconds: 0, remaining_seconds: 0 }
+    throw error
+  }
+  const purchased = data?.total_purchased_seconds ?? 0
+  const used = data?.total_used_seconds ?? 0
+  return { total_purchased_seconds: purchased, total_used_seconds: used, remaining_seconds: Math.max(0, purchased - used) }
 }
 
-function render(main, subscription) {
+async function loadPurchaseHistory() {
+  const { data, error } = await supabase
+    .from('credit_purchases')
+    .select('id, seconds_added, amount_cents, purchased_at, credit_packages(display_name, hours)')
+    .order('purchased_at', { ascending: false })
+    .limit(50)
+  if (error) throw error
+  return data || []
+}
+
+function render(main, credits, purchases) {
   const base = window.location.origin
-  const tier = subscription?.subscription_tiers
-  const hasActive = subscription && (subscription.status === 'active' || subscription.status === 'trialing')
-  const tierName = tier?.display_name || tier?.name || '–'
-  const periodStart = subscription?.current_period_start
-  const periodEnd = subscription?.current_period_end
+  const remaining = credits?.remaining_seconds ?? 0
 
   main.innerHTML = `
-    <h1 class="dashboard-page-title">Subscription</h1>
+    <h1 class="dashboard-page-title">Credits</h1>
     <p style="font-family: var(--font-sans); color: var(--text-secondary); margin-bottom: var(--space-xl);">
-      Your current plan and billing.
+      Your remaining hours and purchase history.
     </p>
 
-    <div class="dashboard-card">
-      ${hasActive
-        ? `
-        <div style="display: flex; align-items: center; gap: var(--space-s); margin-bottom: var(--space-m);">
-          <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--success);"></span>
-          <strong style="font-size: 1.125rem;">${escapeHtml(tierName)}</strong>
-          <span style="font-size: 0.875rem; color: var(--success); font-weight: 500;">Active</span>
-        </div>
-        ${periodStart ? `<p style="font-size: 0.875rem; color: var(--text-tertiary); margin-bottom: var(--space-l);">Since ${formatDate(periodStart)}</p>` : ''}
-        `
-        : `
-        <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-s);">No active subscription</h2>
-        <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-l);">Upgrade to get full access to the BrainDock desktop app. One-time payment of A$1.99.</p>
-        <a href="${base}/pricing/" class="btn btn-primary">Upgrade Now</a>
-        `}
+    <div class="dashboard-card" style="margin-bottom: var(--space-xl);">
+      <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-s);">Hours remaining</h2>
+      <p style="font-size: 2rem; font-weight: 600; color: var(--text-primary); margin-bottom: var(--space-m);">${formatDuration(remaining)}</p>
+      <a href="${base}/pricing/" class="btn btn-primary">Buy more hours</a>
     </div>
 
-    ${hasActive ? `
+    <div class="dashboard-card">
+      <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-m);">Purchase history</h2>
+      ${purchases.length === 0
+    ? `
+        <div class="dashboard-empty">
+          <p class="dashboard-empty-title">No purchases yet</p>
+          <p>Buy hour packs from the <a href="${base}/pricing/">pricing page</a> to get started.</p>
+        </div>
+      `
+    : `
+        <ul class="dashboard-list">
+          ${purchases.map((p) => {
+    const pkg = p.credit_packages
+    const name = pkg?.display_name || `${(p.seconds_added / 3600)} hours`
+    return `
+            <li class="dashboard-list-item">
+              <div>
+                <strong>${escapeHtml(name)}</strong>
+                <span style="font-size: 0.875rem; color: var(--text-secondary); margin-left: var(--space-s);">${formatPrice(p.amount_cents)}</span><br>
+                <span style="font-size: 0.8125rem; color: var(--text-tertiary);">${formatDate(p.purchased_at)}</span>
+              </div>
+            </li>
+          `
+  }).join('')}
+        </ul>
+      `}
+    </div>
+
     <div class="dashboard-card" style="margin-top: var(--space-l); border-left: 4px solid var(--success);">
       <h2 style="font-family: var(--font-serif); font-size: 1.125rem; font-weight: 600; margin-bottom: var(--space-s);">Download BrainDock</h2>
-      <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-l);">Download the desktop app and sign in with the same account to start using your paid features.</p>
+      <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-l);">Download the desktop app and sign in with the same account to use your hours.</p>
       <div style="display: flex; flex-wrap: wrap; gap: var(--space-m);">
         <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg" class="btn btn-primary">Download for macOS</a>
         <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe" class="btn btn-secondary">Download for Windows</a>
       </div>
     </div>
-    ` : ''}
   `
 }
 
@@ -81,16 +115,16 @@ async function main() {
   const mainEl = document.querySelector('.dashboard-main')
   if (!mainEl) return
 
-  mainEl.innerHTML = '<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>Loading subscription...</p></div>'
+  mainEl.innerHTML = '<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>Loading credits...</p></div>'
 
   try {
-    const subscription = await loadSubscription(result.user.id)
-    render(mainEl, subscription)
+    const [credits, purchases] = await Promise.all([loadCredits(), loadPurchaseHistory()])
+    render(mainEl, credits, purchases)
   } catch (err) {
     console.error(err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
-        <p class="dashboard-empty-title">Could not load subscription</p>
+        <p class="dashboard-empty-title">Could not load credits</p>
         <p>${escapeHtml(err.message || 'Please try again.')}</p>
       </div>
     `

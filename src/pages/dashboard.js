@@ -142,28 +142,35 @@ function buildWeeklyChartData(sessions) {
 }
 
 /**
- * Check if user has an active subscription.
+ * Fetch user's credit balance from user_credits.
  */
-async function checkSubscription() {
+async function fetchUserCredits() {
   const { data, error } = await supabase
-    .from('subscriptions')
-    .select('id, status, tier_id, subscription_tiers(display_name)')
-    .in('status', ['active', 'trialing'])
-    .maybeSingle()
+    .from('user_credits')
+    .select('total_purchased_seconds, total_used_seconds')
+    .single()
   if (error) {
-    console.error('Subscription check error:', error)
-    return null
+    if (error.code === 'PGRST116') return { total_purchased_seconds: 0, total_used_seconds: 0, remaining_seconds: 0 }
+    console.error('Credits fetch error:', error)
+    return { total_purchased_seconds: 0, total_used_seconds: 0, remaining_seconds: 0 }
   }
-  return data
+  const purchased = data?.total_purchased_seconds ?? 0
+  const used = data?.total_used_seconds ?? 0
+  return {
+    total_purchased_seconds: purchased,
+    total_used_seconds: used,
+    remaining_seconds: Math.max(0, purchased - used),
+  }
 }
 
 /**
  * Render the dashboard into main.
  */
-function render(main, user, sessions, stats, weeklyData, subscription) {
+function render(main, user, sessions, stats, weeklyData, credits) {
   const name = user?.user_metadata?.full_name || user?.email || 'there'
   const todayStr = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' })
-  const isPaid = !!subscription
+  const remainingSec = credits?.remaining_seconds ?? 0
+  const hasCredits = remainingSec > 0
 
   const todayFocusRate = stats.today.durationSum > 0
     ? Math.round(stats.today.focusPercentageSum / stats.today.durationSum)
@@ -189,20 +196,26 @@ function render(main, user, sessions, stats, weeklyData, subscription) {
     return mode || '–'
   }
 
-  // Upgrade banner (shown when not paid)
-  const upgradeBanner = !isPaid ? `
-    <div class="dashboard-card" style="background: linear-gradient(135deg, var(--bg-surface) 0%, rgba(212,163,115,0.08) 100%); border-left: 4px solid var(--accent-highlight); margin-bottom: var(--space-xl);">
-      <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-s);">Upgrade to use BrainDock</h2>
-      <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-l);">Get full access to the desktop app for a one-time payment of A$1.99. Configure your settings here, then download the app to start tracking.</p>
-      <a href="/pricing/" class="btn btn-primary">Upgrade Now</a>
+  // Credits widget: show remaining hours; if zero, show Buy Hours CTA
+  const creditsWidget = `
+    <div class="dashboard-card" style="margin-bottom: var(--space-xl);">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-m);">
+        <div>
+          <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-xs);">Hours remaining</h2>
+          <p style="font-size: 1.5rem; font-weight: 600; color: var(--text-primary);">${formatDuration(remainingSec)}</p>
+        </div>
+        ${!hasCredits
+    ? `<a href="/pricing/" class="btn btn-primary">Buy Hours</a>`
+    : `<a href="/pricing/" class="btn btn-secondary">Get more hours</a>`}
+      </div>
     </div>
-  ` : ''
+  `
 
-  // Download CTA (shown when paid but no sessions yet, meaning they likely haven't downloaded)
-  const downloadCta = isPaid && sessions.length === 0 ? `
+  // Download CTA (shown when user has credits but no sessions yet)
+  const downloadCta = hasCredits && sessions.length === 0 ? `
     <div class="dashboard-card" style="border-left: 4px solid var(--success); margin-bottom: var(--space-xl);">
       <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-s);">You're all set! Download BrainDock</h2>
-      <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-l);">Your subscription is active. Download the desktop app and sign in with the same account to start tracking your focus.</p>
+      <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-l);">You have hours available. Download the desktop app and sign in with the same account to start tracking your focus.</p>
       <div style="display: flex; flex-wrap: wrap; gap: var(--space-m);">
         <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg" class="btn btn-primary">Download for macOS</a>
         <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe" class="btn btn-secondary">Download for Windows</a>
@@ -218,7 +231,7 @@ function render(main, user, sessions, stats, weeklyData, subscription) {
       </p>
     </div>
 
-    ${upgradeBanner}
+    ${creditsWidget}
     ${downloadCta}
 
     <div class="dashboard-stat-cards">
@@ -333,13 +346,13 @@ async function main() {
   `
 
   try {
-    const [sessions, subscription] = await Promise.all([
+    const [sessions, credits] = await Promise.all([
       fetchSessionsForDashboard(),
-      checkSubscription(),
+      fetchUserCredits(),
     ])
     const stats = computeDailyStats(sessions)
     const weeklyData = buildWeeklyChartData(sessions)
-    render(mainEl, result.user, sessions, stats, weeklyData, subscription)
+    render(mainEl, result.user, sessions, stats, weeklyData, credits)
   } catch (err) {
     console.error(err)
     mainEl.innerHTML = `

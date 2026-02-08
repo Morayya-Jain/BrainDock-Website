@@ -52,7 +52,7 @@ function buildSidebarHTML(currentPath) {
           <a href="${base}/account/" class="dashboard-sidebar-link ${currentPath === '/account' ? 'active' : ''}">Account</a>
         </li>
         <li>
-          <a href="${base}/account/subscription/" class="dashboard-sidebar-link ${currentPath === '/account/subscription' ? 'active' : ''}">Subscription</a>
+          <a href="${base}/account/subscription/" class="dashboard-sidebar-link ${currentPath === '/account/subscription' ? 'active' : ''}">Credits</a>
         </li>
         <li>
           <a href="${base}/how-to-use/" class="dashboard-sidebar-link ${currentPath === '/how-to-use' ? 'active' : ''}">How to Use</a>
