@@ -343,21 +343,13 @@
   }
 }
 
-/* Top-right header (desktop only): download button + profile */
+/* Top-right header: download button + profile */
 .dashboard-header-wrap {
-  display: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 100;
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
   gap: var(--space-m);
-}
-
-@media (min-width: 768px) {
-  .dashboard-header-wrap {
-    display: flex;
-  }
+  margin-bottom: var(--space-l);
 }
 
 .dashboard-download-btn {

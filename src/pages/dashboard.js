@@ -204,8 +204,8 @@ function render(main, user, sessions, stats, weeklyData, credits) {
           <p class="dashboard-stat-card-value" style="margin-bottom: 0;">${formatDuration(remainingSec)}</p>
         </div>
         ${!hasCredits
-    ? `<a href="/pricing/" class="btn btn-primary">Buy Hours</a>`
-    : `<a href="/pricing/" class="btn btn-secondary">Get more hours</a>`}
+    ? `<a href="/pricing/" target="_blank" rel="noopener" class="btn btn-primary">Buy Hours</a>`
+    : `<a href="/pricing/" target="_blank" rel="noopener" class="btn btn-secondary">Get more hours</a>`}
       </div>
     </div>
   `
@@ -225,17 +225,14 @@ function render(main, user, sessions, stats, weeklyData, credits) {
       <div class="dashboard-stat-card">
         <div class="dashboard-stat-card-label">Today's Focus</div>
         <div class="dashboard-stat-card-value">${formatDuration(stats.today.focusSeconds)}</div>
-        <div class="dashboard-stat-card-sub">${focusDiff >= 0 ? focusDiffStr : '-' + formatDuration(Math.abs(focusDiff))} vs yesterday</div>
       </div>
       <div class="dashboard-stat-card">
         <div class="dashboard-stat-card-label">Today's Distractions</div>
         <div class="dashboard-stat-card-value">${stats.today.distractions}</div>
-        <div class="dashboard-stat-card-sub">${distDiffStr} vs yesterday</div>
       </div>
       <div class="dashboard-stat-card">
         <div class="dashboard-stat-card-label">Focus Rate</div>
         <div class="dashboard-stat-card-value">${todayFocusRate}%</div>
-        <div class="dashboard-stat-card-sub">${rateDiffStr} vs yesterday</div>
       </div>
     </div>
 

@@ -73,7 +73,7 @@ function render(main, credits, purchases) {
     <div class="dashboard-card" style="margin-bottom: var(--space-xl);">
       <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-s);">Hours remaining</h2>
       <p class="dashboard-stat-card-value" style="margin-bottom: var(--space-m);">${formatDuration(remaining)}</p>
-      <a href="${base}/pricing/" class="btn btn-primary">Buy more hours</a>
+      <a href="${base}/pricing/" target="_blank" rel="noopener" class="btn btn-primary">Buy more hours</a>
     </div>
 
     <div class="dashboard-card">
@@ -82,7 +82,7 @@ function render(main, credits, purchases) {
     ? `
         <div class="dashboard-empty">
           <p class="dashboard-empty-title">No purchases yet</p>
-          <p>Buy hour packs from the <a href="${base}/pricing/">pricing page</a> to get started.</p>
+          <p>Buy hour packs from the <a href="${base}/pricing/" target="_blank" rel="noopener">pricing page</a> to get started.</p>
         </div>
       `
     : `
@@ -121,14 +121,6 @@ function render(main, credits, purchases) {
       `}
     </div>
 
-    <div class="dashboard-card" style="margin-top: var(--space-l); border-left: 4px solid var(--success);">
-      <h2 style="font-family: var(--font-serif); font-size: 1.125rem; font-weight: 600; margin-bottom: var(--space-s);">Download BrainDock</h2>
-      <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-l);">Download the desktop app and sign in with the same account to use your hours.</p>
-      <div style="display: flex; flex-wrap: wrap; gap: var(--space-m);">
-        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg" class="btn btn-primary">Download for macOS</a>
-        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe" class="btn btn-secondary">Download for Windows</a>
-      </div>
-    </div>
   `
 
   // Make purchase rows expandable on click

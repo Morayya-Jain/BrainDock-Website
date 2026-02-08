@@ -15,6 +15,9 @@ captureDesktopSource()
 
 // If already logged in, skip the form and handle redirect immediately
 // (e.g. desktop app opened login page but user is already authenticated)
+const loginForm = document.getElementById('login-form')
+const authCard = document.querySelector('.auth-card')
+
 ;(async () => {
   // Wait for Supabase client to finish loading session from localStorage
   let session = null
@@ -40,30 +43,43 @@ captureDesktopSource()
   }
 
   if (session) {
+    // Show spinner while auto-linking
+    loginForm.style.display = 'none'
+    authCard.querySelector('.auth-title').textContent = 'Signing you in...'
+    authCard.querySelector('.auth-subtitle').textContent = ''
+    const spinner = document.createElement('div')
+    spinner.className = 'dashboard-loading'
+    spinner.innerHTML = '<div class="dashboard-spinner"></div>'
+    spinner.style.cssText = 'display:flex;justify-content:center;padding:2rem 0;'
+    authCard.appendChild(spinner)
+
     // Refresh to get a non-expired access token before generating linking code
     const { data: refreshed } = await supabase.auth.refreshSession()
     if (refreshed?.session) {
-      await handlePostAuthRedirect(supabase, document.querySelector('.auth-card'))
+      await handlePostAuthRedirect(supabase, authCard)
+      return
     }
+    // Refresh failed — show the login form
+    loginForm.style.display = ''
+    authCard.querySelector('.auth-title').textContent = 'Welcome back'
+    authCard.querySelector('.auth-subtitle').textContent = 'Log in to your BrainDock account'
+    spinner.remove()
   }
-  // If no session or refresh failed — just show the login form
 })()
 
-const form = document.getElementById('login-form')
 const loginBtn = document.getElementById('login-btn')
 const googleBtn = document.getElementById('google-btn')
-const card = document.querySelector('.auth-card')
 
 // Email + password login
-form.addEventListener('submit', async (e) => {
+loginForm.addEventListener('submit', async (e) => {
   e.preventDefault()
-  hideError(card)
+  hideError(authCard)
 
   const email = document.getElementById('email').value.trim()
   const password = document.getElementById('password').value
 
   if (!email || !password) {
-    showError(card, 'Please enter your email and password.')
+    showError(authCard, 'Please enter your email and password.')
     return
   }
 
@@ -73,16 +89,16 @@ form.addEventListener('submit', async (e) => {
 
   if (error) {
     hideLoading(loginBtn)
-    showError(card, friendlyError(error))
+    showError(authCard, friendlyError(error))
     return
   }
 
-  await handlePostAuthRedirect(supabase, card)
+  await handlePostAuthRedirect(supabase, authCard)
 })
 
 // Google OAuth login
 googleBtn.addEventListener('click', async () => {
-  hideError(card)
+  hideError(authCard)
 
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
@@ -92,6 +108,6 @@ googleBtn.addEventListener('click', async () => {
   })
 
   if (error) {
-    showError(card, friendlyError(error))
+    showError(authCard, friendlyError(error))
   }
 })
