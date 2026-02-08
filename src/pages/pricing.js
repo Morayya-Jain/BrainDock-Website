@@ -109,7 +109,7 @@ function render(root, packages, hasUser) {
           alert(error)
           return
         }
-        if (url) window.location.href = url
+        if (url) window.open(url, '_blank')
       } catch (err) {
         btn.disabled = false
         btn.textContent = 'Buy Now'
