@@ -77,7 +77,7 @@ serve(async (req) => {
   const cancelUrl = `${origin}/pricing/?canceled=true`
 
   const supabaseAdmin = createClient(supabaseUrl, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? supabaseKey)
-  const stripe = new Stripe(stripeSecret, { apiVersion: "2024-11-20" })
+  const stripe = new Stripe(stripeSecret, { apiVersion: "2023-10-16" })
 
   if (packageId) {
     const { data: pkg, error: pkgError } = await supabaseAdmin
