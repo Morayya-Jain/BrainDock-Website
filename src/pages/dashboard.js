@@ -6,19 +6,13 @@
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 
-/** Format seconds as "X hour(s)", "X min(s)", or "X sec(s)" */
+/** Format seconds as "Xh Ym" or "Xm" */
 function formatDuration(seconds) {
-  if (seconds == null || seconds < 0) return '0 sec'
+  if (seconds == null || seconds < 0) return '0m'
   const h = Math.floor(seconds / 3600)
   const m = Math.floor((seconds % 3600) / 60)
-  const s = Math.floor(seconds % 60)
-  if (h > 0) {
-    return `${h} ${h === 1 ? 'hour' : 'hours'}${m > 0 ? ` ${m} ${m === 1 ? 'min' : 'mins'}` : ''}`
-  }
-  if (m > 0) {
-    return `${m} ${m === 1 ? 'min' : 'mins'}${s > 0 ? ` ${s} ${s === 1 ? 'sec' : 'secs'}` : ''}`
-  }
-  return `${s} ${s === 1 ? 'sec' : 'secs'}`
+  if (h > 0) return `${h}h ${m}m`
+  return `${m}m`
 }
 
 /** Format date for display (e.g. "Today, Feb 7 2026") */
@@ -185,6 +179,14 @@ function render(main, user, sessions, stats, weeklyData, credits) {
     ? Math.round(stats.yesterday.focusPercentageSum / stats.yesterday.durationSum)
     : 0
 
+  // Comparison vs yesterday (assigned to stats to prevent tree-shaking)
+  stats._focusDiff = stats.today.focusSeconds - stats.yesterday.focusSeconds
+  stats._focusDiffStr = stats._focusDiff >= 0 ? `+${formatDuration(stats._focusDiff)}` : `-${formatDuration(Math.abs(stats._focusDiff))}`
+  stats._distDiff = stats.today.distractions - stats.yesterday.distractions
+  stats._distDiffStr = stats._distDiff > 0 ? `+${stats._distDiff}` : stats._distDiff < 0 ? `${stats._distDiff}` : '0'
+  stats._rateDiff = todayFocusRate - yesterdayFocusRate
+  stats._rateDiffStr = stats._rateDiff > 0 ? `+${stats._rateDiff}%` : stats._rateDiff < 0 ? `${stats._rateDiff}%` : '0%'
+
   const recentSessions = sessions.slice(0, 5)
   const hasSessions = sessions.length > 0
 
@@ -201,15 +203,14 @@ function render(main, user, sessions, stats, weeklyData, credits) {
       <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-m);">
         <div>
           <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-xs);">Hours remaining</h2>
-          <p class="dashboard-stat-card-value" style="margin-bottom: 0;">${formatDuration(remainingSec)}</p>
+          <p style="font-size: 1.5rem; font-weight: 600; color: var(--text-primary);">${formatDuration(remainingSec)}</p>
         </div>
         ${!hasCredits
-    ? `<a href="/pricing/" target="_blank" rel="noopener" class="btn btn-primary">Buy Hours</a>`
-    : `<a href="/pricing/" target="_blank" rel="noopener" class="btn btn-secondary">Get more hours</a>`}
+    ? `<a href="/pricing/" class="btn btn-primary">Buy Hours</a>`
+    : `<a href="/pricing/" class="btn btn-secondary">Get more hours</a>`}
       </div>
     </div>
   `
-
 
   main.innerHTML = `
     <div class="dashboard-section">
@@ -220,19 +221,32 @@ function render(main, user, sessions, stats, weeklyData, credits) {
     </div>
 
     ${creditsWidget}
+    ${hasCredits && !hasSessions ? `
+    <div class="dashboard-card" style="border-left: 4px solid var(--success); margin-bottom: var(--space-xl);">
+      <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-s);">You're all set! Download BrainDock</h2>
+      <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-l);">You have hours available. Download the desktop app and sign in with the same account to start tracking your focus.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: var(--space-m);">
+        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg" class="btn btn-primary">Download for macOS</a>
+        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe" class="btn btn-secondary">Download for Windows</a>
+      </div>
+    </div>
+    ` : ''}
 
     <div class="dashboard-stat-cards">
       <div class="dashboard-stat-card">
         <div class="dashboard-stat-card-label">Today's Focus</div>
         <div class="dashboard-stat-card-value">${formatDuration(stats.today.focusSeconds)}</div>
+        <div class="dashboard-stat-card-sub">${stats._focusDiffStr} vs yesterday</div>
       </div>
       <div class="dashboard-stat-card">
         <div class="dashboard-stat-card-label">Today's Distractions</div>
         <div class="dashboard-stat-card-value">${stats.today.distractions}</div>
+        <div class="dashboard-stat-card-sub">${stats._distDiffStr} vs yesterday</div>
       </div>
       <div class="dashboard-stat-card">
         <div class="dashboard-stat-card-label">Focus Rate</div>
         <div class="dashboard-stat-card-value">${todayFocusRate}%</div>
+        <div class="dashboard-stat-card-sub">${stats._rateDiffStr} vs yesterday</div>
       </div>
     </div>
 
