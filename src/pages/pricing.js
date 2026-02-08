@@ -96,26 +96,6 @@ function render(root, packages, hasUser) {
           </div>
         </div>
         <div class="nav-actions">
-          <div class="header-language-selector">
-            <button class="header-language-toggle" id="pricing-header-lang-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
-              <svg class="globe-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="2" y1="12" x2="22" y2="12"/>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              </svg>
-              <svg class="chevron-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M6 9l6 6 6-6"/>
-              </svg>
-            </button>
-            <ul class="header-language-dropdown" id="pricing-header-lang-dropdown" role="listbox">
-              <li role="option" data-lang="en">English</li>
-              <li role="option" data-lang="ja">日本語 (Japan)</li>
-              <li role="option" data-lang="de">Deutsch (Germany)</li>
-              <li role="option" data-lang="fr">Francais (France)</li>
-              <li role="option" data-lang="zh">中文 (China)</li>
-              <li role="option" data-lang="hi">हिन्दी (India)</li>
-            </ul>
-          </div>
           <a href="/auth/signup/" class="btn btn-secondary nav-cta" target="_blank" rel="noopener" data-i18n="nav.signup">Sign Up</a>
           <a href="${origin}/#download" class="btn btn-primary nav-cta" target="_blank" rel="noopener">
             <span data-i18n="nav.download">Download</span>
@@ -138,27 +118,6 @@ function render(root, packages, hasUser) {
         <a href="#pricing-contact" data-i18n="nav.contact">Contact Us</a>
         <a href="/auth/signup/" target="_blank" rel="noopener" data-i18n="nav.signup">Sign Up</a>
         <a href="${origin}/#download" target="_blank" rel="noopener" data-i18n="nav.download">Download</a>
-        <div class="mobile-language-selector">
-          <button class="mobile-language-toggle" id="pricing-mobile-lang-toggle" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
-            <svg class="globe-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"/>
-              <line x1="2" y1="12" x2="22" y2="12"/>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-            </svg>
-            <span class="mobile-language-current">English</span>
-            <svg class="chevron-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-          <ul class="mobile-language-dropdown" id="pricing-mobile-lang-dropdown" role="listbox">
-            <li role="option" data-lang="en">English</li>
-            <li role="option" data-lang="ja">日本語 (Japan)</li>
-            <li role="option" data-lang="de">Deutsch (Germany)</li>
-            <li role="option" data-lang="fr">Francais (France)</li>
-            <li role="option" data-lang="zh">中文 (China)</li>
-            <li role="option" data-lang="hi">हिन्दी (India)</li>
-          </ul>
-        </div>
       </div>
     </nav>
 

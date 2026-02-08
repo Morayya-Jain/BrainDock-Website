@@ -196,34 +196,18 @@ const I18n = {
 
   /**
    * Initialize the language toggle dropdown functionality.
-   * Handles header, footer, and mobile language selectors.
+   * Handles footer language selector.
    */
   initLanguageToggle() {
     // Footer language selector
     const footerToggle = document.querySelector('.language-toggle');
     const footerDropdown = document.querySelector('.language-dropdown');
     
-    // Header language selector
-    const headerToggle = document.querySelector('.header-language-toggle');
-    const headerDropdown = document.querySelector('.header-language-dropdown');
-    
-    // Mobile language selector
-    const mobileToggle = document.querySelector('.mobile-language-toggle');
-    const mobileDropdown = document.querySelector('.mobile-language-dropdown');
-    
     // Store all toggle/dropdown pairs for unified handling
     const selectors = [];
     
     if (footerToggle && footerDropdown) {
       selectors.push({ toggle: footerToggle, dropdown: footerDropdown });
-    }
-    
-    if (headerToggle && headerDropdown) {
-      selectors.push({ toggle: headerToggle, dropdown: headerDropdown });
-    }
-    
-    if (mobileToggle && mobileDropdown) {
-      selectors.push({ toggle: mobileToggle, dropdown: mobileDropdown });
     }
     
     if (selectors.length === 0) return;
@@ -286,7 +270,7 @@ const I18n = {
 
   /**
    * Update the language toggle to show current language.
-   * Handles header, footer, and mobile language selectors.
+   * Handles footer language selector.
    */
   updateLanguageToggleDisplay() {
     const langName = this.getTranslation(`language.${this.currentLang}`);
@@ -296,29 +280,9 @@ const I18n = {
     if (footerCurrentDisplay && langName) {
       footerCurrentDisplay.textContent = langName;
     }
-    
-    // Update mobile language selector display text
-    const mobileCurrentDisplay = document.querySelector('.mobile-language-current');
-    if (mobileCurrentDisplay && langName) {
-      mobileCurrentDisplay.textContent = langName;
-    }
 
     // Update selected state in footer dropdown
     document.querySelectorAll('.language-dropdown [data-lang]').forEach(option => {
-      const lang = option.getAttribute('data-lang');
-      option.classList.toggle('selected', lang === this.currentLang);
-      option.setAttribute('aria-selected', lang === this.currentLang);
-    });
-    
-    // Update selected state in header dropdown
-    document.querySelectorAll('.header-language-dropdown [data-lang]').forEach(option => {
-      const lang = option.getAttribute('data-lang');
-      option.classList.toggle('selected', lang === this.currentLang);
-      option.setAttribute('aria-selected', lang === this.currentLang);
-    });
-    
-    // Update selected state in mobile dropdown
-    document.querySelectorAll('.mobile-language-dropdown [data-lang]').forEach(option => {
       const lang = option.getAttribute('data-lang');
       option.classList.toggle('selected', lang === this.currentLang);
       option.setAttribute('aria-selected', lang === this.currentLang);

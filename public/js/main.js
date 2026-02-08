@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const navLinks = document.querySelector('.nav-links');
   const navLogo = document.querySelector('.nav-logo');
   const navCta = document.querySelector('.nav-cta');
-  const headerLangSelector = document.querySelector('.header-language-selector');
 
   /**
    * Dynamically check if navigation elements fit in the container.
@@ -36,20 +35,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoWidth = navLogo.offsetWidth;
     const linksWidth = navLinks.scrollWidth;
     const ctaWidth = navCta ? navCta.offsetWidth : 0;
-    const langWidth = headerLangSelector ? headerLangSelector.offsetWidth : 0;
 
     // Get gap size from CSS custom property or fallback
     const gap = parseFloat(getComputedStyle(navContainer).gap) || 32;
 
     // Calculate total required width (elements + gaps between them)
-    // Elements: logo, links, language, cta = 3 gaps between 4 elements
+    // Elements: logo, links, cta = 2 gaps between 3 elements
     let elementCount = 1; // logo always present
     if (linksWidth > 0) elementCount++;
-    if (langWidth > 0) elementCount++;
     if (ctaWidth > 0) elementCount++;
     const totalGaps = (elementCount - 1) * gap;
 
-    const requiredWidth = logoWidth + linksWidth + langWidth + ctaWidth + totalGaps;
+    const requiredWidth = logoWidth + linksWidth + ctaWidth + totalGaps;
 
     // Add buffer for safety (20px)
     const buffer = 20;

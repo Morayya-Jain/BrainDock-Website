@@ -421,7 +421,7 @@ p {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: var(--space-s);
+  gap: var(--space-m);
   flex-shrink: 0;
 }
 
@@ -513,10 +513,6 @@ p {
   display: none;
 }
 
-.nav.nav-compact .header-language-selector {
-  display: none;
-}
-
 .nav.nav-compact .nav-toggle {
   display: flex;
 }
@@ -539,209 +535,11 @@ p {
     display: none;
   }
 
-  .nav:not(.nav-compact):not([data-js-ready]) .header-language-selector {
-    display: none;
-  }
-
   .nav:not(.nav-compact):not([data-js-ready]) .nav-toggle {
     display: flex;
   }
 }
 
-/* --------------------------------------------------------------------------
-   Header Language Selector
-   -------------------------------------------------------------------------- */
-.header-language-selector {
-  position: relative;
-  display: block; /* Shown by default, hidden in compact mode via JS */
-}
-
-.header-language-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 8px 10px;
-  background-color: transparent;
-  border: 1px solid var(--border-subtle);
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color var(--transition-fast), border-color var(--transition-fast);
-}
-
-.header-language-toggle:hover {
-  background-color: rgba(0, 0, 0, 0.03);
-  border-color: var(--text-secondary);
-}
-
-.header-language-toggle:focus {
-  outline: none;
-  border-color: var(--text-primary);
-}
-
-.header-language-toggle .globe-icon {
-  width: 18px;
-  height: 18px;
-  stroke: var(--text-secondary);
-  stroke-width: 1.5;
-  fill: none;
-  transition: stroke var(--transition-fast);
-}
-
-.header-language-toggle:hover .globe-icon {
-  stroke: var(--text-primary);
-}
-
-.header-language-toggle .chevron-icon {
-  width: 14px;
-  height: 14px;
-  stroke: var(--text-secondary);
-  stroke-width: 2;
-  fill: none;
-  transition: transform var(--transition-fast), stroke var(--transition-fast);
-}
-
-.header-language-toggle:hover .chevron-icon {
-  stroke: var(--text-primary);
-}
-
-.header-language-toggle[aria-expanded="true"] .chevron-icon {
-  transform: rotate(180deg);
-}
-
-/* Header language dropdown */
-.header-language-dropdown {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  min-width: 140px;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  padding: var(--space-s) 0;
-  list-style: none;
-  margin: 0;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-8px);
-  transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  z-index: 101;
-}
-
-.header-language-dropdown.active {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.header-language-dropdown li {
-  padding: 10px 16px;
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
-}
-
-.header-language-dropdown li:hover {
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
-}
-
-.header-language-dropdown li.selected {
-  color: var(--text-primary);
-  font-weight: 500;
-  background-color: rgba(0, 0, 0, 0.02);
-}
-
-/* Header language selector visibility is now controlled by .nav-compact class via JavaScript */
-
-/* --------------------------------------------------------------------------
-   Mobile Language Selector (in mobile menu)
-   -------------------------------------------------------------------------- */
-.mobile-language-selector {
-  margin-top: var(--space-m);
-  padding-top: var(--space-m);
-  border-top: 1px solid var(--border-subtle);
-}
-
-.mobile-language-toggle {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  padding: var(--space-m) 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.mobile-language-toggle .globe-icon {
-  width: 20px;
-  height: 20px;
-  stroke: var(--text-primary);
-  stroke-width: 1.5;
-  fill: none;
-}
-
-.mobile-language-current {
-  flex: 1;
-  text-align: left;
-}
-
-.mobile-language-toggle .chevron-icon {
-  width: 16px;
-  height: 16px;
-  stroke: var(--text-secondary);
-  stroke-width: 2;
-  fill: none;
-  transition: transform var(--transition-fast);
-}
-
-.mobile-language-toggle[aria-expanded="true"] .chevron-icon {
-  transform: rotate(180deg);
-}
-
-/* Mobile language dropdown */
-.mobile-language-dropdown {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-}
-
-.mobile-language-dropdown.active {
-  max-height: 200px;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-}
-
-.mobile-language-dropdown li {
-  padding: var(--space-m) var(--space-l);
-  font-family: var(--font-sans);
-  font-size: 0.9375rem;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
-  border-radius: 8px;
-}
-
-.mobile-language-dropdown li:hover {
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
-}
-
-.mobile-language-dropdown li.selected {
-  color: var(--text-primary);
-  font-weight: 500;
-  background-color: rgba(0, 0, 0, 0.02);
-}
 
 /* --------------------------------------------------------------------------
    Hero Section - Fluid Scaling Design
