@@ -16,10 +16,11 @@ captureDesktopSource()
 // If already logged in, skip the form and handle redirect immediately
 // (e.g. desktop app opened login page but user is already authenticated)
 ;(async () => {
-  const { data: { session } } = await supabase.auth.getSession()
-  if (session) {
+  const { data: refreshed } = await supabase.auth.refreshSession()
+  if (refreshed?.session) {
     await handlePostAuthRedirect(supabase, document.querySelector('.auth-card'))
   }
+  // If refresh failed, session is truly expired — just show the login form
 })()
 
 const form = document.getElementById('login-form')

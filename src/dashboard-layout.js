@@ -71,7 +71,7 @@ function buildSidebarHTML(currentPath) {
         <li>
           <a href="${base}/account/subscription/" class="dashboard-sidebar-link ${currentPath === '/account/subscription' ? 'active' : ''}">
             <i data-lucide="credit-card" class="dashboard-sidebar-icon" aria-hidden="true"></i>
-            <span>Credits</span>
+            <span>Billing & Usage</span>
           </a>
         </li>
         <li>

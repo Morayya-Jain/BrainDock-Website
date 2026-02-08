@@ -1,5 +1,5 @@
 /**
- * Credits & Purchases: current balance from user_credits and purchase history from credit_purchases.
+ * Billing & Usage: current balance from user_credits and purchase history from credit_purchases.
  */
 
 import { supabase } from '../supabase.js'
@@ -65,7 +65,7 @@ function render(main, credits, purchases) {
   const remaining = credits?.remaining_seconds ?? 0
 
   main.innerHTML = `
-    <h1 class="dashboard-page-title">Credits</h1>
+    <h1 class="dashboard-page-title">Billing & Usage</h1>
     <p style="font-family: var(--font-sans); color: var(--text-secondary); margin-bottom: var(--space-xl);">
       Your remaining hours and purchase history.
     </p>
@@ -86,16 +86,33 @@ function render(main, credits, purchases) {
         </div>
       `
     : `
-        <ul class="dashboard-list">
+        <ul class="dashboard-list" id="purchase-history-list">
           ${purchases.map((p) => {
     const pkg = p.credit_packages
     const name = pkg?.display_name || `${(p.seconds_added / 3600)} hours`
+    const hours = p.seconds_added ? (p.seconds_added / 3600) : 0
     return `
-            <li class="dashboard-list-item">
-              <div>
-                <strong>${escapeHtml(name)}</strong>
-                <span style="font-size: 0.875rem; color: var(--text-secondary); margin-left: var(--space-s);">${formatPrice(p.amount_cents)}</span><br>
+            <li class="dashboard-list-item billing-purchase-row" data-purchase-id="${escapeHtml(p.id)}" style="cursor: pointer;">
+              <div style="flex: 1;">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-m);">
+                  <strong>${escapeHtml(name)}</strong>
+                  <span style="font-size: 0.875rem; color: var(--text-secondary);">${formatPrice(p.amount_cents)}</span>
+                </div>
                 <span style="font-size: 0.8125rem; color: var(--text-tertiary);">${formatDate(p.purchased_at)}</span>
+                <div class="billing-purchase-detail" id="detail-${escapeHtml(p.id)}" hidden style="margin-top: var(--space-m); padding-top: var(--space-m); border-top: 1px solid var(--border-subtle); font-family: var(--font-sans); font-size: 0.875rem; color: var(--text-secondary);">
+                  <div style="display: grid; grid-template-columns: auto 1fr; gap: var(--space-xs) var(--space-l);">
+                    <span style="color: var(--text-tertiary);">Package</span>
+                    <span>${escapeHtml(name)}</span>
+                    <span style="color: var(--text-tertiary);">Hours added</span>
+                    <span>${hours} ${hours === 1 ? 'hour' : 'hours'}</span>
+                    <span style="color: var(--text-tertiary);">Amount</span>
+                    <span>${formatPrice(p.amount_cents)}</span>
+                    <span style="color: var(--text-tertiary);">Date</span>
+                    <span>${formatDate(p.purchased_at)}</span>
+                    <span style="color: var(--text-tertiary);">Receipt</span>
+                    <span>Sent to your email</span>
+                  </div>
+                </div>
               </div>
             </li>
           `
@@ -113,6 +130,19 @@ function render(main, credits, purchases) {
       </div>
     </div>
   `
+
+  // Make purchase rows expandable on click
+  main.querySelectorAll('.billing-purchase-row').forEach((row) => {
+    row.addEventListener('click', () => {
+      const id = row.dataset.purchaseId
+      const detail = document.getElementById(`detail-${id}`)
+      if (!detail) return
+      const isOpen = !detail.hidden
+      // Close all other open details first
+      main.querySelectorAll('.billing-purchase-detail').forEach((d) => { d.hidden = true })
+      detail.hidden = isOpen
+    })
+  })
 }
 
 async function main() {
@@ -122,7 +152,7 @@ async function main() {
   const mainEl = document.querySelector('.dashboard-main')
   if (!mainEl) return
 
-  mainEl.innerHTML = '<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>Loading credits...</p></div>'
+  mainEl.innerHTML = '<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>Loading billing...</p></div>'
 
   try {
     const [credits, purchases] = await Promise.all([loadCredits(), loadPurchaseHistory()])
@@ -131,7 +161,7 @@ async function main() {
     console.error(err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
-        <p class="dashboard-empty-title">Could not load credits</p>
+        <p class="dashboard-empty-title">Could not load billing</p>
         <p>${escapeHtml(err.message || 'Please try again.')}</p>
       </div>
     `
