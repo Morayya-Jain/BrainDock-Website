@@ -15,6 +15,7 @@ const ICONS = {
   fileText: '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>',
   lightbulb: '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>',
   apple: '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>',
+  windows: '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>',
   helpCircle: '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
   check: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
 }
@@ -60,7 +61,7 @@ function render(main) {
           <div class="howto-mode-item" style="color: var(--accent-highlight)">
             ${ICONS.camera}
             <div class="howto-mode-label">Camera</div>
-            <div class="howto-mode-desc">Uses AI to notice when you step away or use a phone/tablet. No video is saved.</div>
+            <div class="howto-mode-desc">Uses AI to notice when you step away or pick up a phone/tablet. No video is saved.</div>
           </div>
           <div class="howto-mode-item" style="color: var(--accent-highlight)">
             ${ICONS.monitor}
@@ -100,9 +101,9 @@ function render(main) {
         <div class="howto-icon" style="color: var(--warning)">${ICONS.lightbulb}</div>
         <h2 class="dashboard-section-title">Tips for Best Results</h2>
         <div class="howto-tip">${ICONS.check}<span>Good lighting on your face helps accuracy.</span></div>
-        <div class="howto-tip">${ICONS.check}<span>Sit facing the camera, within 1&ndash;2 metres.</span></div>
+        <div class="howto-tip">${ICONS.check}<span>Sit facing the camera, within 1 to 2 metres.</span></div>
         <div class="howto-tip">${ICONS.check}<span>Keep one person in the frame at a time.</span></div>
-        <div class="howto-tip">${ICONS.check}<span>Only active gadget use is flagged &mdash; a phone on the desk while you work is fine.</span></div>
+        <div class="howto-tip">${ICONS.check}<span>Only active gadget use is flagged. A phone on the desk while you work is fine.</span></div>
       </div>
 
       <!-- First Launch (macOS) -->
@@ -115,30 +116,56 @@ function render(main) {
         <div class="howto-step"><span class="howto-step-num">3</span><span>When asked for camera access, click <strong>OK</strong> so BrainDock can help you stay focussed.</span></div>
       </div>
 
+      <!-- First Launch (Windows) -->
+      <div class="dashboard-card">
+        <div class="howto-icon" style="color: var(--text-primary)">${ICONS.windows}</div>
+        <h2 class="dashboard-section-title">First Launch (Windows)</h2>
+        <p>Windows SmartScreen may show a warning for apps from independent developers. To install BrainDock:</p>
+        <div class="howto-step"><span class="howto-step-num">1</span><span>Run <strong>BrainDock-Setup.exe</strong>. If SmartScreen appears, click <strong>More info</strong> then <strong>Run anyway</strong>.</span></div>
+        <div class="howto-step"><span class="howto-step-num">2</span><span>Follow the installer. A desktop shortcut and Start Menu entry will be created.</span></div>
+        <div class="howto-step"><span class="howto-step-num">3</span><span>When asked for camera access, click <strong>Allow</strong> so BrainDock can help you stay focussed.</span></div>
+      </div>
+
       <!-- FAQ -->
       <div class="dashboard-card">
         <div class="howto-icon" style="color: var(--text-secondary)">${ICONS.helpCircle}</div>
         <h2 class="dashboard-section-title">FAQ</h2>
 
         <details class="howto-faq">
-          <summary>What does BrainDock see?</summary>
-          <p>Camera frames are analysed by AI in real time and never saved. There is no facial recognition &mdash; BrainDock only notices whether you are at your desk and whether you are using a gadget.</p>
+          <summary>How do I pause or stop a session?</summary>
+          <p>Click the BrainDock icon in your menu bar or system tray, then choose Pause or Stop. You can resume a paused session at any time.</p>
         </details>
 
         <details class="howto-faq">
-          <summary>How much does AI analysis cost?</summary>
-          <p>With Gemini (the default), it typically costs around $0.01&ndash;0.03 per minute. You can switch to OpenAI in the desktop app if you prefer.</p>
+          <summary>How do I change my focus mode?</summary>
+          <p>Open the BrainDock popup from the menu bar or system tray and pick Camera, Screen, or Both before starting a session.</p>
         </details>
 
         <details class="howto-faq">
-          <summary>Why was something flagged (or not flagged)?</summary>
-          <p>Results depend on lighting, camera angle, and the AI model. You can turn off specific gadget types in Settings &rarr; Detection to reduce false positives.</p>
+          <summary>Where are my PDF reports saved?</summary>
+          <p>Reports are automatically saved to your Downloads folder when a session ends. You can also view session history on the Sessions page of this website.</p>
         </details>
 
         <details class="howto-faq">
-          <summary>What happens without internet?</summary>
-          <p>Screen-only mode works fully offline. Camera mode needs internet for the AI. Session data is uploaded when you are back online.</p>
+          <summary>How do I add a website or app to my blocklist?</summary>
+          <p>Go to Settings &rarr; Blocklist on this website. You can toggle common sites, enable categories, or type in a custom URL or app name. Your changes sync to the desktop app automatically.</p>
         </details>
+
+        <details class="howto-faq">
+          <summary>Can I use BrainDock on more than one computer?</summary>
+          <p>Yes. Install the app on each computer and sign in with the same account. Your settings and blocklist sync across all your devices.</p>
+        </details>
+
+        <details class="howto-faq">
+          <summary>Does screen-only mode work without internet?</summary>
+          <p>Yes. Screen-only mode runs entirely on your computer and does not need an internet connection. Camera mode needs internet for the AI.</p>
+        </details>
+
+        <details class="howto-faq">
+          <summary>A phone on my desk was incorrectly flagged. Why?</summary>
+          <p>BrainDock only flags active gadget use (e.g. scrolling or looking at a phone). If this still happens, try adjusting your camera angle or improving lighting. You can also turn off specific gadget types in Settings &rarr; Detection.</p>
+        </details>
+
       </div>
 
     </div>

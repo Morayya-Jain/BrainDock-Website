@@ -1512,7 +1512,7 @@
 .howto-mode-item {
   text-align: center;
   padding: var(--space-m);
-  border-radius: var(--radius-md);
+  border-radius: 16px;
   background: var(--bg-secondary);
 }
 
