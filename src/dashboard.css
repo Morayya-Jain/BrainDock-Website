@@ -601,6 +601,21 @@
   margin-bottom: var(--space-m);
 }
 
+.dashboard-input-hint {
+  font-size: 0.8125rem;
+  margin-top: 4px;
+  margin-bottom: var(--space-s);
+}
+.dashboard-input-hint--error {
+  color: var(--error);
+}
+.dashboard-input-hint--warning {
+  color: var(--warning);
+}
+.dashboard-input-hint--success {
+  color: var(--success);
+}
+
 .dashboard-card p {
   margin-bottom: var(--space-m);
 }

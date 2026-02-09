@@ -5,7 +5,7 @@
 
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
-import { isValidAppName, LIMITS } from '../validators.js'
+import { validateUrlPattern, validateAppPattern } from '../validators.js'
 
 const QUICK_SITES = [
   { id: 'instagram', name: 'Instagram' },
@@ -27,14 +27,6 @@ async function loadBlocklist() {
 async function saveBlocklist(userId, payload) {
   const { error } = await supabase.from('blocklist_configs').update(payload).eq('user_id', userId)
   if (error) throw error
-}
-
-/** Validate domain: allow example.com or sub.example.com */
-function isValidDomain(input) {
-  const s = input.trim().toLowerCase()
-  if (!s) return false
-  const part = /^([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)*[a-z0-9]([a-z0-9-]*[a-z0-9])?\.?$/
-  return part.test(s) && s.length < 200
 }
 
 function escapeHtml(str) {
@@ -90,9 +82,10 @@ function render(main, config, userId) {
         <h2 class="dashboard-section-title">Custom URLs</h2>
         <p class="dashboard-meta" style="margin-bottom: var(--space-m);">Add domains to block (e.g. example.com)</p>
         <div class="dashboard-input-row">
-          <input type="text" id="custom-url-input" class="dashboard-input dashboard-input--narrow" placeholder="example.com" maxlength="200">
+          <input type="text" id="custom-url-input" class="dashboard-input dashboard-input--narrow" placeholder="example.com" maxlength="253">
           <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-url-add">Add</button>
         </div>
+        <p id="custom-url-hint" class="dashboard-input-hint" role="status" aria-live="polite"></p>
         <div id="custom-urls-list"></div>
       </div>
 
@@ -100,9 +93,10 @@ function render(main, config, userId) {
         <h2 class="dashboard-section-title">Custom Apps</h2>
         <p class="dashboard-meta" style="margin-bottom: var(--space-m);">Add app names to block (e.g. Discord)</p>
         <div class="dashboard-input-row">
-          <input type="text" id="custom-app-input" class="dashboard-input dashboard-input--narrow" placeholder="App name" maxlength="${LIMITS.APP_NAME_MAX}">
+          <input type="text" id="custom-app-input" class="dashboard-input dashboard-input--narrow" placeholder="App name" maxlength="50">
           <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-app-add">Add</button>
         </div>
+        <p id="custom-app-hint" class="dashboard-input-hint" role="status" aria-live="polite"></p>
         <div id="custom-apps-list"></div>
       </div>
     </div>
@@ -176,35 +170,72 @@ function render(main, config, userId) {
   renderCustomUrls()
   renderCustomApps()
 
-  main.querySelector('#custom-url-add').addEventListener('click', () => {
+  function setHint(hintEl, message, type) {
+    if (!hintEl) return
+    hintEl.textContent = message || ''
+    hintEl.className = 'dashboard-input-hint' + (type ? ` dashboard-input-hint--${type}` : '')
+  }
+
+  async function addCustomUrl() {
     const input = main.querySelector('#custom-url-input')
+    const hintEl = main.querySelector('#custom-url-hint')
     const val = input.value.trim()
-    if (!val) return
-    if (!isValidDomain(val)) {
-      alert('Please enter a valid domain (e.g. example.com).')
+    if (!val) {
+      setHint(hintEl, '', '')
+      return
+    }
+    setHint(hintEl, 'Checking…', '')
+    const result = await validateUrlPattern(val)
+    if (!result.valid) {
+      setHint(hintEl, result.message, 'error')
       return
     }
     const normalized = val.toLowerCase()
-    if (state.custom_urls.includes(normalized)) return
-    state.custom_urls.push(normalized)
-    input.value = ''
-    renderCustomUrls()
-    scheduleSave()
-  })
-
-  main.querySelector('#custom-app-add').addEventListener('click', () => {
-    const input = main.querySelector('#custom-app-input')
-    const val = input.value.trim()
-    if (!val) return
-    if (!isValidAppName(val)) {
-      alert(`App name must be 1-${LIMITS.APP_NAME_MAX} characters and cannot contain < or >.`)
+    if (state.custom_urls.includes(normalized)) {
+      setHint(hintEl, '', '')
       return
     }
-    if (state.custom_apps.includes(val)) return
+    state.custom_urls.push(normalized)
+    input.value = ''
+    setHint(hintEl, result.isWarning ? result.message : 'Added.', result.isWarning ? 'warning' : 'success')
+    setTimeout(() => setHint(hintEl, '', ''), 3000)
+    renderCustomUrls()
+    scheduleSave()
+  }
+
+  function addCustomApp() {
+    const input = main.querySelector('#custom-app-input')
+    const hintEl = main.querySelector('#custom-app-hint')
+    const val = input.value.trim()
+    if (!val) {
+      setHint(hintEl, '', '')
+      return
+    }
+    const result = validateAppPattern(val)
+    if (!result.valid) {
+      setHint(hintEl, result.message, 'error')
+      return
+    }
+    if (state.custom_apps.includes(val)) {
+      setHint(hintEl, '', '')
+      return
+    }
     state.custom_apps.push(val)
     input.value = ''
+    setHint(hintEl, result.isWarning ? result.message : 'Added.', result.isWarning ? 'warning' : 'success')
+    setTimeout(() => setHint(hintEl, '', ''), 3000)
     renderCustomApps()
     scheduleSave()
+  }
+
+  main.querySelector('#custom-url-add').addEventListener('click', addCustomUrl)
+  main.querySelector('#custom-app-add').addEventListener('click', addCustomApp)
+
+  main.querySelector('#custom-url-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); addCustomUrl() }
+  })
+  main.querySelector('#custom-app-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); addCustomApp() }
   })
 }
 
