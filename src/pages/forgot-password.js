@@ -31,15 +31,20 @@ form.addEventListener('submit', async (e) => {
 
   showLoading(resetBtn)
 
-  const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${window.location.origin}/auth/login/`,
-  })
+  try {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/auth/login/`,
+    })
 
-  hideLoading(resetBtn)
-
-  if (error) {
-    showError(card, friendlyError(error))
+    if (error) {
+      showError(card, friendlyError(error))
+      return
+    }
+  } catch (err) {
+    showError(card, 'Network error. Please check your connection and try again.')
     return
+  } finally {
+    hideLoading(resetBtn)
   }
 
   // Hide the form and show success message

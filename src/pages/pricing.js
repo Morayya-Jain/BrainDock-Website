@@ -4,6 +4,7 @@
  */
 
 import { supabase, supabaseUrl, supabaseAnonKey } from '../supabase.js'
+import { escapeHtml, showInlineError } from '../utils.js'
 import '../auth.css'
 import '../dashboard.css'
 
@@ -40,13 +41,6 @@ function formatPrice(cents, currency) {
   const c = (currency || 'aud').toLowerCase()
   if (c === 'aud') return `A$${(cents / 100).toFixed(2)}`
   return `$${(cents / 100).toFixed(2)}`
-}
-
-function escapeHtml(str) {
-  if (str == null) return ''
-  const div = document.createElement('div')
-  div.textContent = str
-  return div.innerHTML
 }
 
 function pricePerHour(cents, hours) {
@@ -235,7 +229,7 @@ function render(root, packages, hasUser) {
               <li role="option" data-lang="en">English</li>
               <li role="option" data-lang="ja">日本語 (Japan)</li>
               <li role="option" data-lang="de">Deutsch (Germany)</li>
-              <li role="option" data-lang="fr">Francais (France)</li>
+              <li role="option" data-lang="fr">Français (France)</li>
               <li role="option" data-lang="zh">中文 (China)</li>
               <li role="option" data-lang="hi">हिन्दी (India)</li>
             </ul>
@@ -270,7 +264,7 @@ function render(root, packages, hasUser) {
         if (error) {
           btn.disabled = false
           btn.textContent = currentLabel
-          alert(error)
+          showInlineError(root, error)
           return
         }
         if (url) window.open(url, '_blank', 'noopener,noreferrer')
@@ -279,7 +273,7 @@ function render(root, packages, hasUser) {
       } catch (err) {
         btn.disabled = false
         btn.textContent = currentLabel
-        alert('Network error. Please check your connection and try again.')
+        showInlineError(root, 'Network error. Please check your connection and try again.')
       }
     })
   })
@@ -355,12 +349,12 @@ async function main() {
     try {
       const { url, error } = await createCheckoutSession(autoCheckoutId)
       if (error) {
-        alert('Could not start checkout: ' + error)
+        showInlineError(root, 'Could not start checkout: ' + error)
         return
       }
       if (url) window.open(url, '_blank', 'noopener,noreferrer')
     } catch (err) {
-      alert('Network error. Please try clicking the button again.')
+      showInlineError(root, 'Network error. Please try clicking the button again.')
     }
   }
 }

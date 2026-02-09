@@ -7,6 +7,7 @@
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { validateUrlPattern, validateAppPattern } from '../validators.js'
+import { escapeHtml } from '../utils.js'
 import {
   createIcons,
   Smartphone,
@@ -118,13 +119,6 @@ async function saveDetectionSettings(userId, enabledItems) {
   /** Persist detection item changes. */
   const { error } = await supabase.from('user_settings').update({ enabled_gadgets: enabledItems }).eq('user_id', userId)
   if (error) throw error
-}
-
-function escapeHtml(str) {
-  if (str == null) return ''
-  const div = document.createElement('div')
-  div.textContent = str
-  return div.innerHTML
 }
 
 // -- Render --
@@ -287,7 +281,8 @@ function render(main, blocklistConfig, detectionSettings, userId) {
     list.querySelectorAll('.dashboard-remove-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const u = btn.dataset.url
-        state.custom_urls.splice(state.custom_urls.indexOf(u), 1)
+        const idx = state.custom_urls.indexOf(u)
+        if (idx !== -1) state.custom_urls.splice(idx, 1)
         renderCustomUrls()
         scheduleBlocklistSave()
       })
@@ -309,7 +304,8 @@ function render(main, blocklistConfig, detectionSettings, userId) {
     list.querySelectorAll('.dashboard-remove-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const a = btn.dataset.app
-        state.custom_apps.splice(state.custom_apps.indexOf(a), 1)
+        const idx = state.custom_apps.indexOf(a)
+        if (idx !== -1) state.custom_apps.splice(idx, 1)
         renderCustomApps()
         scheduleBlocklistSave()
       })
@@ -446,7 +442,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
     modal.classList.remove('active')
   }
 
-  // Attach hover timers to all pills with descriptions
+  // Attach hover and focus handlers to all pills with descriptions
   main.querySelectorAll('.pill-toggle[data-desc]').forEach((el) => {
     el.addEventListener('mouseenter', () => {
       clearTimeout(hoverTimer)
@@ -455,6 +451,17 @@ function render(main, blocklistConfig, detectionSettings, userId) {
       }, 1000)
     })
     el.addEventListener('mouseleave', () => {
+      clearTimeout(hoverTimer)
+      hideDescModal()
+    })
+    // Show description on keyboard focus too (accessibility)
+    el.addEventListener('focus', () => {
+      clearTimeout(hoverTimer)
+      hoverTimer = setTimeout(() => {
+        showDescModal(el, el.dataset.name, el.dataset.desc)
+      }, 1000)
+    })
+    el.addEventListener('blur', () => {
       clearTimeout(hoverTimer)
       hideDescModal()
     })

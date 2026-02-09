@@ -4,21 +4,7 @@
 
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
-
-/** Format seconds as "X hour(s)", "X min(s)", or "X sec(s)" */
-function formatDuration(seconds) {
-  if (seconds == null || seconds < 0) return '0 sec'
-  const h = Math.floor(seconds / 3600)
-  const m = Math.floor((seconds % 3600) / 60)
-  const s = Math.floor(seconds % 60)
-  if (h > 0) {
-    return `${h} ${h === 1 ? 'hour' : 'hours'}${m > 0 ? ` ${m} ${m === 1 ? 'min' : 'mins'}` : ''}`
-  }
-  if (m > 0) {
-    return `${m} ${m === 1 ? 'min' : 'mins'}${s > 0 ? ` ${s} ${s === 1 ? 'sec' : 'secs'}` : ''}`
-  }
-  return `${s} ${s === 1 ? 'sec' : 'secs'}`
-}
+import { escapeHtml, formatDuration } from '../utils.js'
 
 function formatPrice(cents) {
   return `A$${(cents / 100).toFixed(2)}`
@@ -27,13 +13,6 @@ function formatPrice(cents) {
 function formatDate(iso) {
   if (!iso) return '-'
   return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-}
-
-function escapeHtml(str) {
-  if (str == null) return ''
-  const div = document.createElement('div')
-  div.textContent = str
-  return div.innerHTML
 }
 
 async function loadCredits() {
@@ -96,7 +75,7 @@ function render(main, credits, purchases) {
     const name = pkg?.display_name || `${(p.seconds_added / 3600)} hours`
     const hours = p.seconds_added ? (p.seconds_added / 3600) : 0
     return `
-            <li class="dashboard-list-item dashboard-list-item--clickable billing-purchase-row" data-purchase-id="${escapeHtml(p.id)}">
+            <li class="dashboard-list-item dashboard-list-item--clickable billing-purchase-row" tabindex="0" role="button" aria-expanded="false" data-purchase-id="${escapeHtml(p.id)}">
               <div style="flex: 1;">
                 <div class="dashboard-credits-widget">
                   <strong>${escapeHtml(name)}</strong>
@@ -127,16 +106,25 @@ function render(main, credits, purchases) {
 
   `
 
-  // Make purchase rows expandable on click
+  // Make purchase rows expandable on click and keyboard
   main.querySelectorAll('.billing-purchase-row').forEach((row) => {
-    row.addEventListener('click', () => {
+    function toggleRow() {
       const id = row.dataset.purchaseId
       const detail = document.getElementById(`detail-${id}`)
       if (!detail) return
       const isOpen = !detail.hidden
       // Close all other open details first
       main.querySelectorAll('.billing-purchase-detail').forEach((d) => { d.hidden = true })
+      main.querySelectorAll('.billing-purchase-row').forEach((r) => { r.setAttribute('aria-expanded', 'false') })
       detail.hidden = isOpen
+      row.setAttribute('aria-expanded', String(!isOpen))
+    }
+    row.addEventListener('click', toggleRow)
+    row.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        toggleRow()
+      }
     })
   })
 }

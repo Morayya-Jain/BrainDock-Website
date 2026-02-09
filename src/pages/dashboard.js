@@ -5,15 +5,7 @@
 
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
-
-/** Format seconds as "Xh Ym" or "Xm" */
-function formatDuration(seconds) {
-  if (seconds == null || seconds < 0) return '0m'
-  const h = Math.floor(seconds / 3600)
-  const m = Math.floor((seconds % 3600) / 60)
-  if (h > 0) return `${h}h ${m}m`
-  return `${m}m`
-}
+import { escapeHtml, formatDuration, modeLabel } from '../utils.js'
 
 /** Format date for display (e.g. "Today, Feb 7 2026") */
 function formatDateLabel(date) {
@@ -89,13 +81,13 @@ function computeDailyStats(sessions) {
     const screen = summary.screen_distraction_count ?? 0
     const focusPct = summary.focus_percentage ?? 0
 
-    if (start >= todayStart && start < todayEnd) {
+    if (start >= todayStart && start <= todayEnd) {
       stats.today.focusSeconds += present
       stats.today.distractions += gadgets + screen
       stats.today.focusPercentageSum += focusPct * durationSec
       stats.today.durationSum += durationSec
       stats.today.count += 1
-    } else if (start >= yesterdayStart && start < yesterdayEnd) {
+    } else if (start >= yesterdayStart && start <= yesterdayEnd) {
       stats.yesterday.focusSeconds += present
       stats.yesterday.distractions += gadgets + screen
       stats.yesterday.focusPercentageSum += focusPct * durationSec
@@ -181,7 +173,7 @@ function render(main, user, sessions, stats, weeklyData, credits) {
 
   // Comparison vs yesterday (assigned to stats to prevent tree-shaking)
   stats._focusDiff = stats.today.focusSeconds - stats.yesterday.focusSeconds
-  stats._focusDiffStr = stats._focusDiff >= 0 ? `+${formatDuration(stats._focusDiff)}` : `-${formatDuration(Math.abs(stats._focusDiff))}`
+  stats._focusDiffStr = stats._focusDiff >= 0 ? `+${formatDuration(stats._focusDiff, true)}` : `-${formatDuration(Math.abs(stats._focusDiff), true)}`
   stats._distDiff = stats.today.distractions - stats.yesterday.distractions
   stats._distDiffStr = stats._distDiff > 0 ? `+${stats._distDiff}` : stats._distDiff < 0 ? `${stats._distDiff}` : '0'
   stats._rateDiff = todayFocusRate - yesterdayFocusRate
@@ -190,20 +182,13 @@ function render(main, user, sessions, stats, weeklyData, credits) {
   const recentSessions = sessions.slice(0, 5)
   const hasSessions = sessions.length > 0
 
-  const modeLabel = (mode) => {
-    if (mode === 'camera_only') return 'Camera'
-    if (mode === 'screen_only') return 'Screen'
-    if (mode === 'both') return 'Both'
-    return mode || '-'
-  }
-
   // Credits widget: show remaining hours; if zero, show Buy Hours CTA
   const creditsWidget = `
     <div class="dashboard-card dashboard-credits-card">
       <div class="dashboard-credits-widget">
         <div>
           <h2 class="dashboard-credits-widget-heading">Hours remaining</h2>
-          <p class="dashboard-credits-widget-value">${formatDuration(remainingSec)}</p>
+          <p class="dashboard-credits-widget-value">${formatDuration(remainingSec, true)}</p>
         </div>
         ${!hasCredits
     ? `<a href="/pricing/" class="btn btn-primary" target="_blank" rel="noopener">Buy Hours</a>`
@@ -235,7 +220,7 @@ function render(main, user, sessions, stats, weeklyData, credits) {
     <div class="dashboard-stat-cards">
       <div class="dashboard-stat-card dashboard-stat-card--focus">
         <div class="dashboard-stat-card-label">Today's Focus</div>
-        <div class="dashboard-stat-card-value">${formatDuration(stats.today.focusSeconds)}</div>
+        <div class="dashboard-stat-card-value">${formatDuration(stats.today.focusSeconds, true)}</div>
         <div class="dashboard-stat-card-sub">${stats._focusDiffStr} vs yesterday</div>
       </div>
       <div class="dashboard-stat-card dashboard-stat-card--alert">
@@ -279,7 +264,7 @@ function render(main, user, sessions, stats, weeklyData, credits) {
                   <li class="dashboard-list-item">
                     <div>
                       <strong>${escapeHtml(s.session_name || 'Session')}</strong><br>
-                      <span class="dashboard-meta">${dayStr} ${timeStr} &middot; ${modeLabel(s.monitoring_mode)} &middot; ${formatDuration(duration)} active &middot; ${Math.round(pct)}% focus</span><br>
+                      <span class="dashboard-meta">${dayStr} ${timeStr} &middot; ${modeLabel(s.monitoring_mode, true)} &middot; ${formatDuration(duration, true)} active &middot; ${Math.round(pct)}% focus</span><br>
                       <span class="dashboard-meta-sub">${gadgets} gadgets &middot; ${screen} screen distractions</span>
                     </div>
                     <a href="/sessions/${escapeHtml(s.id)}" class="btn btn-secondary dashboard-btn-sm">View</a>
@@ -320,13 +305,6 @@ function render(main, user, sessions, stats, weeklyData, credits) {
       </div>
     </div>
   `
-}
-
-function escapeHtml(str) {
-  if (str == null) return ''
-  const div = document.createElement('div')
-  div.textContent = str
-  return div.innerHTML
 }
 
 async function main() {

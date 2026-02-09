@@ -158,7 +158,7 @@ function render(main) {
 
         <div class="howto-qa">
           <div class="howto-qa-q">A phone on my desk was incorrectly flagged. Why?</div>
-          <div class="howto-qa-a">BrainDock only flags active gadget use (e.g. scrolling or looking at a phone). If this still happens, try adjusting your camera angle or improving lighting. You can also turn off specific gadget types in Settings &rarr; Detection.</div>
+          <div class="howto-qa-a">BrainDock only flags active gadget use (e.g. scrolling or looking at a phone). If this still happens, try adjusting your camera angle or improving lighting. You can also turn off specific gadget types in Settings &rarr; Configuration.</div>
         </div>
       </div>
 

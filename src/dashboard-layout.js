@@ -5,6 +5,7 @@
  */
 
 import { supabase } from './supabase.js'
+import { escapeHtml } from './utils.js'
 import {
   createIcons,
   LayoutDashboard,
@@ -298,7 +299,6 @@ export async function initDashboardLayout(options = {}) {
 
   const main = document.createElement('main')
   main.className = 'dashboard-main'
-  main.setAttribute('role', 'main')
 
   // Fetch remaining credits for the pill (non-blocking, updates when ready)
   const remainingPromise = fetchRemainingSeconds()
@@ -405,12 +405,6 @@ export async function initDashboardLayout(options = {}) {
   })
 
   return { user }
-}
-
-function escapeHtml(text) {
-  const div = document.createElement('div')
-  div.textContent = text
-  return div.innerHTML
 }
 
 /**

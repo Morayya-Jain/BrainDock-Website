@@ -495,7 +495,7 @@
     "subtitle": "BrainDock utilise l'IA pour vous aider à vous concentrer, travailler plus intelligemment et renforcer votre concentration.",
     "downloadBtn": "Télécharger",
     "learnMoreBtn": "En savoir plus",
-    "note": "Disponible pour macOS, Windows et Linux."
+    "note": "Disponible pour macOS et Windows. Linux bientôt disponible."
   },
   "whyBrainDock": {
     "sectionTitle": "Pourquoi utiliser BrainDock ?",
@@ -567,7 +567,7 @@
   },
   "download": {
     "sectionTitle": "Télécharger BrainDock",
-    "sectionSubtitle": "Disponible pour macOS, Windows et Linux.",
+    "sectionSubtitle": "Disponible pour macOS et Windows. Linux bientôt disponible.",
     "macOS": "macOS",
     "windows": "Windows",
     "linux": "Linux"

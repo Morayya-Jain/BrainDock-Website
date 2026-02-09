@@ -495,7 +495,7 @@
     "subtitle": "BrainDock AI का उपयोग करके आपको फोकस करने, स्मार्ट तरीके से काम करने और एकाग्रता मजबूत करने में मदद करता है।",
     "downloadBtn": "डाउनलोड",
     "learnMoreBtn": "और जानें",
-    "note": "macOS, Windows और Linux के लिए उपलब्ध।"
+    "note": "macOS और Windows के लिए उपलब्ध। Linux जल्द आ रहा है।"
   },
   "whyBrainDock": {
     "sectionTitle": "BrainDock का उपयोग क्यों करें?",
@@ -567,7 +567,7 @@
   },
   "download": {
     "sectionTitle": "BrainDock डाउनलोड करें",
-    "sectionSubtitle": "macOS, Windows और Linux के लिए उपलब्ध।",
+    "sectionSubtitle": "macOS और Windows के लिए उपलब्ध। Linux जल्द आ रहा है।",
     "macOS": "macOS",
     "windows": "Windows",
     "linux": "Linux"

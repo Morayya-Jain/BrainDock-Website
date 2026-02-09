@@ -495,7 +495,7 @@
     "subtitle": "BrainDockはAIを使って集中力を高め、より賢く働き、集中力を強化します。",
     "downloadBtn": "ダウンロード",
     "learnMoreBtn": "詳細を見る",
-    "note": "macOS、Windows、Linuxに対応。"
+    "note": "macOSとWindowsに対応。Linux対応は近日公開。"
   },
   "whyBrainDock": {
     "sectionTitle": "BrainDockを使う理由",
@@ -567,7 +567,7 @@
   },
   "download": {
     "sectionTitle": "BrainDockをダウンロード",
-    "sectionSubtitle": "macOS、Windows、Linuxに対応。",
+    "sectionSubtitle": "macOSとWindowsに対応。Linux対応は近日公開。",
     "macOS": "macOS",
     "windows": "Windows",
     "linux": "Linux"

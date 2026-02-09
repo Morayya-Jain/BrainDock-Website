@@ -495,7 +495,7 @@
     "subtitle": "BrainDock nutzt KI, um dir zu helfen, dich zu konzentrieren, intelligenter zu arbeiten und die Konzentration zu stärken.",
     "downloadBtn": "Herunterladen",
     "learnMoreBtn": "Mehr erfahren",
-    "note": "Verfügbar für macOS, Windows und Linux."
+    "note": "Verfügbar für macOS und Windows. Linux kommt bald."
   },
   "whyBrainDock": {
     "sectionTitle": "Warum BrainDock nutzen?",
@@ -567,7 +567,7 @@
   },
   "download": {
     "sectionTitle": "BrainDock herunterladen",
-    "sectionSubtitle": "Verfügbar für macOS, Windows und Linux.",
+    "sectionSubtitle": "Verfügbar für macOS und Windows. Linux kommt bald.",
     "macOS": "macOS",
     "windows": "Windows",
     "linux": "Linux"

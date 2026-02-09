@@ -41,8 +41,10 @@
   --text-width: 680px;
 
   /* Components */
+  --radius-md: 12px;
   --btn-radius: 30px;
   --card-radius: 20px;
+  --bg-surface-elevated: #FAFAF8;
   --shadow-subtle: 0 4px 16px rgba(0, 0, 0, 0.06);
   --shadow-card: 0 6px 28px rgba(0, 0, 0, 0.035);
   --shadow-hover: 0 14px 40px rgba(0, 0, 0, 0.06);
@@ -1003,7 +1005,7 @@ body.hero-compact .hero-ctas {
 }
 
 .footer-bottom p {
-  font-weight: 450;
+  font-weight: 400;
 }
 
 @media (min-width: 768px) {

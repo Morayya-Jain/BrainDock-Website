@@ -5,6 +5,7 @@
 
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
+import { escapeHtml, formatDuration, modeLabel } from '../utils.js'
 
 const EVENT_TYPE_TO_LABEL = {
   present: 'Focused',
@@ -30,38 +31,9 @@ function getSessionIdFromPath() {
   return last
 }
 
-/** Format seconds as "X hour(s)", "X min(s)", or "X sec(s)" */
-function formatDuration(seconds) {
-  if (seconds == null || seconds < 0) return '0 sec'
-  const h = Math.floor(seconds / 3600)
-  const m = Math.floor((seconds % 3600) / 60)
-  const s = Math.floor(seconds % 60)
-  if (h > 0) {
-    return `${h} ${h === 1 ? 'hour' : 'hours'}${m > 0 ? ` ${m} ${m === 1 ? 'min' : 'mins'}` : ''}`
-  }
-  if (m > 0) {
-    return `${m} ${m === 1 ? 'min' : 'mins'}${s > 0 ? ` ${s} ${s === 1 ? 'sec' : 'secs'}` : ''}`
-  }
-  return `${s} ${s === 1 ? 'sec' : 'secs'}`
-}
-
 function formatTime(iso) {
   if (!iso) return '-'
   return new Date(iso).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', second: '2-digit' })
-}
-
-function modeLabel(mode) {
-  if (mode === 'camera_only') return 'Camera Only'
-  if (mode === 'screen_only') return 'Screen Only'
-  if (mode === 'both') return 'Camera + Screen'
-  return mode || '-'
-}
-
-function escapeHtml(str) {
-  if (str == null) return ''
-  const div = document.createElement('div')
-  div.textContent = str
-  return div.innerHTML
 }
 
 async function fetchSessionWithEvents(sessionId) {

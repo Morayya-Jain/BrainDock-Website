@@ -292,7 +292,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  white-space: nowrap;
 }
 
 .dashboard-sidebar-popup {
@@ -925,7 +924,7 @@
 }
 
 .dashboard-input--mid {
-  max-width: 320px;
+  max-width: 480px;
 }
 
 .billing-purchase-detail {

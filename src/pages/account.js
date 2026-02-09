@@ -5,6 +5,7 @@
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { isValidName, sanitizeText, LIMITS } from '../validators.js'
+import { escapeHtml, showInlineError } from '../utils.js'
 
 async function loadProfile(userId) {
   const { data, error } = await supabase.from('profiles').select('*').eq('id', userId).single()
@@ -15,13 +16,6 @@ async function loadProfile(userId) {
 async function updateProfile(userId, updates) {
   const { error } = await supabase.from('profiles').update(updates).eq('id', userId)
   if (error) throw error
-}
-
-function escapeHtml(str) {
-  if (str == null) return ''
-  const div = document.createElement('div')
-  div.textContent = str
-  return div.innerHTML
 }
 
 function render(main, profile, userId) {
@@ -58,7 +52,7 @@ function render(main, profile, userId) {
   saveBtn.addEventListener('click', async () => {
     const name = sanitizeText(input.value, LIMITS.NAME_MAX)
     if (name && !isValidName(name)) {
-      alert(`Display name must be 1-${LIMITS.NAME_MAX} characters and cannot contain < or >.`)
+      showInlineError(main, `Display name must be 1-${LIMITS.NAME_MAX} characters and cannot contain < or >.`)
       return
     }
     saveBtn.disabled = true
@@ -68,7 +62,7 @@ function render(main, profile, userId) {
       setTimeout(() => { savedMsg.style.display = 'none' }, 2000)
     } catch (err) {
       console.error(err)
-      alert('Failed to save. Please try again.')
+      showInlineError(main, 'Failed to save. Please try again.')
     } finally {
       saveBtn.disabled = false
     }
