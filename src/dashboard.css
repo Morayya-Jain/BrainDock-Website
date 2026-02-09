@@ -16,6 +16,8 @@
 @media (min-width: 768px) {
   .dashboard-app {
     flex-direction: row;
+    height: 100vh;
+    overflow: hidden;
   }
 }
 
@@ -88,6 +90,16 @@
     position: relative;
     transform: none;
     flex-shrink: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
+
+/* Main content scrolls independently on desktop */
+@media (min-width: 768px) {
+  .dashboard-main {
+    overflow-y: auto;
+    height: 100vh;
   }
 }
 
@@ -105,6 +117,8 @@
 .dashboard-sidebar-nav {
   flex: 1;
   padding: var(--space-m) 0;
+  overflow-y: auto; /* scroll nav items internally so footer stays pinned */
+  min-height: 0; /* allow flex child to shrink below content size */
 }
 
 .dashboard-sidebar-list {
@@ -1034,10 +1048,7 @@
 
 .pricing-main {
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 40px;
+  padding-top: 120px; /* Clear the 80px fixed nav + breathing room */
   padding-bottom: var(--space-xxxl);
   background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
 }
@@ -1077,7 +1088,6 @@
 @media (max-width: 900px) {
   .pricing-main {
     padding-top: 100px;
-    align-items: flex-start;
   }
   .pricing-title {
     font-size: 2.25rem;
