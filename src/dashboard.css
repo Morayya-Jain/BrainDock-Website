@@ -156,8 +156,10 @@
 
 .dashboard-sidebar-link.active {
   color: var(--text-primary);
-  background: rgba(212, 163, 115, 0.1);
-  border-left: 4px solid var(--accent-highlight);
+  background: rgba(212, 163, 115, 0.18);
+  border-radius: 10px;
+  margin: 0 var(--space-s);
+  width: auto;
 }
 
 .dashboard-sidebar-link .dashboard-sidebar-icon {
@@ -586,6 +588,73 @@
 
 .dashboard-card-stack--compact .dashboard-form-actions {
   margin-top: var(--space-m);
+}
+
+/* 2x2 card grid for configuration page on desktop */
+.dashboard-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-s);
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .dashboard-card-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.dashboard-card-grid > .dashboard-card {
+  padding: var(--space-m);
+}
+
+/* --------------------------------------------------------------------------
+   Pill toggles: clickable pill-shaped buttons for item/site toggles
+   Grey when inactive, soft red when active (blocked).
+   -------------------------------------------------------------------------- */
+.pill-toggle-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.pill-toggle:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* Active (blocked) state: soft red */
+.pill-toggle.active {
+  color: #c0392b;
+  background: rgba(231, 76, 60, 0.1);
+  border-color: rgba(231, 76, 60, 0.3);
+}
+
+.pill-toggle.active:hover {
+  background: rgba(231, 76, 60, 0.16);
+}
+
+.pill-toggle-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
 }
 
 .dashboard-chip {

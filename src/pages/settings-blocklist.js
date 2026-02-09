@@ -1,7 +1,7 @@
 /**
  * Configuration page: combines blocklist (quick toggles, custom URLs/apps)
  * and detection (item type toggles) into a single settings view.
- * Both sections auto-save with debounce. Cards use sticky stacking layout.
+ * Both sections auto-save with debounce. Toggles render as clickable pills.
  */
 
 import { supabase } from '../supabase.js'
@@ -18,11 +18,12 @@ import {
   Laptop,
   UtensilsCrossed,
   Camera,
+  Headphones,
   Instagram,
   Youtube,
   Film,
   MessageCircle,
-  Music,
+  Video,
   Twitter,
   Twitch,
   MessageSquare,
@@ -31,7 +32,6 @@ import {
   Linkedin,
   ShoppingCart,
   Pin,
-  Headphones,
   Globe,
   Newspaper,
   PlayCircle,
@@ -48,7 +48,7 @@ const QUICK_SITES = [
   { id: 'youtube', name: 'YouTube', icon: 'youtube' },
   { id: 'netflix', name: 'Netflix', icon: 'film' },
   { id: 'reddit', name: 'Reddit', icon: 'message-circle' },
-  { id: 'tiktok', name: 'TikTok', icon: 'music' },
+  { id: 'tiktok', name: 'TikTok', icon: 'video' },
   { id: 'twitter', name: 'Twitter/X', icon: 'twitter' },
   { id: 'twitch', name: 'Twitch', icon: 'twitch' },
   { id: 'discord', name: 'Discord', icon: 'message-square' },
@@ -73,22 +73,23 @@ const DEBOUNCE_MS = 800
 // -- Detection constants --
 
 const ITEM_PRESETS = [
-  { id: 'phone', name: 'Phone', description: 'Smartphones (5-7 inch devices)', icon: 'smartphone' },
-  { id: 'tablet', name: 'Tablet / iPad', description: 'Tablets and iPads (8+ inch)', icon: 'tablet' },
-  { id: 'controller', name: 'Game Controller', description: 'PS5, Xbox, generic controllers', icon: 'gamepad-2' },
-  { id: 'tv', name: 'TV / TV Remote', description: 'Television and remote control usage', icon: 'tv' },
-  { id: 'nintendo_switch', name: 'Nintendo Switch', description: 'Nintendo Switch handheld/docked', icon: 'gamepad' },
-  { id: 'smartwatch', name: 'Smartwatch', description: 'Apple Watch, Fitbit, Galaxy Watch', icon: 'watch' },
-  { id: 'laptop', name: 'Laptop', description: 'Secondary laptop or notebook', icon: 'laptop' },
-  { id: 'food', name: 'Food / Snacks', description: 'Food, drinks, and snacking', icon: 'utensils-crossed' },
-  { id: 'camera', name: 'Camera', description: 'DSLR, mirrorless, or action cameras', icon: 'camera' },
+  { id: 'phone', name: 'Phone', icon: 'smartphone' },
+  { id: 'tablet', name: 'Tablet / iPad', icon: 'tablet' },
+  { id: 'controller', name: 'Game Controller', icon: 'gamepad-2' },
+  { id: 'tv', name: 'TV / Remote', icon: 'tv' },
+  { id: 'nintendo_switch', name: 'Nintendo Switch', icon: 'gamepad' },
+  { id: 'smartwatch', name: 'Smartwatch', icon: 'watch' },
+  { id: 'laptop', name: 'Laptop', icon: 'laptop' },
+  { id: 'food', name: 'Food / Snacks', icon: 'utensils-crossed' },
+  { id: 'camera', name: 'Camera', icon: 'camera' },
+  { id: 'headphones', name: 'Headphones', icon: 'headphones' },
 ]
 
 // Icons needed by createIcons after render
 const PAGE_ICONS = {
-  Smartphone, Tablet, Gamepad2, Gamepad, Tv, Watch, Laptop, UtensilsCrossed, Camera,
-  Instagram, Youtube, Film, MessageCircle, Music, Twitter, Twitch, MessageSquare, Facebook, Zap,
-  Linkedin, ShoppingCart, Pin, Headphones, Globe, Newspaper, PlayCircle, Image,
+  Smartphone, Tablet, Gamepad2, Gamepad, Tv, Watch, Laptop, UtensilsCrossed, Camera, Headphones,
+  Instagram, Youtube, Film, MessageCircle, Video, Twitter, Twitch, MessageSquare, Facebook, Zap,
+  Linkedin, ShoppingCart, Pin, Globe, Newspaper, PlayCircle, Image,
 }
 
 // -- Data helpers --
@@ -175,10 +176,10 @@ function render(main, blocklistConfig, detectionSettings, userId) {
     }, DEBOUNCE_MS)
   }
 
-  /** Read currently-active item toggles. */
+  /** Read currently-active item pills. */
   function getEnabledItems() {
     const arr = []
-    main.querySelectorAll('.dashboard-toggle-switch[data-item].active').forEach((el) => {
+    main.querySelectorAll('.pill-toggle.active[data-item]').forEach((el) => {
       arr.push(el.dataset.item)
     })
     return arr
@@ -190,30 +191,27 @@ function render(main, blocklistConfig, detectionSettings, userId) {
       Configure what counts as a distraction. These settings are loaded by the desktop app when you start a session.
     </p>
 
-    <div class="dashboard-card-stack dashboard-card-stack--compact">
+    <div class="dashboard-card-grid">
 
-      <!-- Detection: item toggles -->
+      <!-- Detection: item pills -->
       <div class="dashboard-card">
         <h2 class="dashboard-section-title">Item Detection</h2>
-        <p class="dashboard-meta" style="margin-bottom: var(--space-s);">Which items the camera should detect as distractions.</p>
-        ${ITEM_PRESETS.map((g) => `
-          <div class="dashboard-toggle">
-            <div>
-              <div class="dashboard-toggle-label">
-                <i data-lucide="${g.icon}" class="dashboard-toggle-icon" aria-hidden="true"></i>
-                ${escapeHtml(g.name)}
-              </div>
-              <div class="dashboard-toggle-desc">${escapeHtml(g.description)}</div>
-            </div>
-            <div class="dashboard-toggle-switch ${itemSet.has(g.id) ? 'active' : ''}" data-item="${g.id}" role="button" tabindex="0" aria-pressed="${itemSet.has(g.id)}"></div>
-          </div>
-        `).join('')}
+        <p class="dashboard-meta" style="margin-bottom: var(--space-s);">Tap to block. Camera detects these as distractions.</p>
+        <div class="pill-toggle-wrap">
+          ${ITEM_PRESETS.map((g) => `
+            <button type="button" class="pill-toggle ${itemSet.has(g.id) ? 'active' : ''}" data-item="${g.id}" aria-pressed="${itemSet.has(g.id)}">
+              <i data-lucide="${g.icon}" class="pill-toggle-icon" aria-hidden="true"></i>
+              <span>${escapeHtml(g.name)}</span>
+            </button>
+          `).join('')}
+        </div>
       </div>
 
-      <!-- Blocklist: quick block toggles -->
+      <!-- Blocklist: quick block pills -->
       <div class="dashboard-card">
         <h2 class="dashboard-section-title">Quick Block</h2>
-        <div id="quick-blocks-container"></div>
+        <p class="dashboard-meta" style="margin-bottom: var(--space-s);">Tap to block a site.</p>
+        <div id="quick-blocks-container" class="pill-toggle-wrap"></div>
       </div>
 
       <!-- Blocklist: custom URLs -->
@@ -240,12 +238,11 @@ function render(main, blocklistConfig, detectionSettings, userId) {
         <div id="custom-apps-list"></div>
       </div>
     </div>
-
   `
 
-  // -- Detection interactivity (auto-save on toggle) --
+  // -- Detection interactivity (pill click toggles + auto-save) --
 
-  main.querySelectorAll('.dashboard-toggle-switch[data-item]').forEach((el) => {
+  main.querySelectorAll('.pill-toggle[data-item]').forEach((el) => {
     el.addEventListener('click', () => {
       el.classList.toggle('active')
       el.setAttribute('aria-pressed', el.classList.contains('active'))
@@ -253,22 +250,17 @@ function render(main, blocklistConfig, detectionSettings, userId) {
     })
   })
 
-  // -- Blocklist: quick block interactivity --
+  // -- Blocklist: quick block pills --
 
   const quickContainer = main.querySelector('#quick-blocks-container')
   quickContainer.innerHTML = QUICK_SITES.map((q) => `
-    <div class="dashboard-toggle">
-      <div>
-        <div class="dashboard-toggle-label">
-          <i data-lucide="${q.icon}" class="dashboard-toggle-icon" aria-hidden="true"></i>
-          ${escapeHtml(q.name)}
-        </div>
-      </div>
-      <div class="dashboard-toggle-switch ${state.quick_blocks[q.id] ? 'active' : ''}" data-quick="${q.id}" role="button" tabindex="0" aria-pressed="${!!state.quick_blocks[q.id]}"></div>
-    </div>
+    <button type="button" class="pill-toggle ${state.quick_blocks[q.id] ? 'active' : ''}" data-quick="${q.id}" aria-pressed="${!!state.quick_blocks[q.id]}">
+      <i data-lucide="${q.icon}" class="pill-toggle-icon" aria-hidden="true"></i>
+      <span>${escapeHtml(q.name)}</span>
+    </button>
   `).join('')
 
-  quickContainer.querySelectorAll('.dashboard-toggle-switch').forEach((el) => {
+  quickContainer.querySelectorAll('.pill-toggle[data-quick]').forEach((el) => {
     el.addEventListener('click', () => {
       const id = el.dataset.quick
       const next = !el.classList.contains('active')
