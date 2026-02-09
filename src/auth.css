@@ -22,6 +22,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--space-xl);
+  animation: fadeSlideIn 0.35s ease-out both;
 }
 
 /* --------------------------------------------------------------------------
@@ -162,7 +163,7 @@
 }
 
 .btn-google:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.97);
 }
 
 .btn-google:focus-visible {

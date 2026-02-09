@@ -43,9 +43,9 @@
   /* Components */
   --btn-radius: 30px;
   --card-radius: 20px;
-  --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.04);
-  --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.08);
+  --shadow-subtle: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 6px 28px rgba(0, 0, 0, 0.035);
+  --shadow-hover: 0 14px 40px rgba(0, 0, 0, 0.06);
 
   /* Transitions */
   --transition-fast: 150ms ease;
@@ -326,7 +326,7 @@ p {
 }
 
 .btn:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.97);
 }
 
 .btn:focus-visible {
@@ -932,6 +932,7 @@ body.hero-compact .hero-ctas {
   background-color: var(--text-primary);
   color: #FFFFFF;
   padding: var(--space-xxl) 0 var(--space-l);
+  border-radius: 40px 40px 0 0;
 }
 
 /* Increase padding for footer on mobile/tablet */
@@ -1420,7 +1421,26 @@ body.hero-compact .hero-ctas {
 }
 
 .popup-close:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.97);
+}
+
+/* --------------------------------------------------------------------------
+   Page entrance animation (shared by dashboard, auth, legal)
+   -------------------------------------------------------------------------- */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Legal pages fade in */
+.legal-page .legal-content {
+  animation: fadeSlideIn 0.35s ease-out both;
 }
 
 /* --------------------------------------------------------------------------

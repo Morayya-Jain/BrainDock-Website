@@ -148,17 +148,27 @@
   cursor: pointer;
   width: 100%;
   text-align: left;
-  transition: color var(--transition-fast), background-color var(--transition-fast);
+  position: relative;
+  transition: color var(--transition-fast);
 }
 
+/* Hover pill (light grey) */
 .dashboard-sidebar-link:hover {
   color: var(--text-primary);
-  background: var(--bg-secondary);
 }
 
+.dashboard-sidebar-link:hover::before {
+  content: '';
+  position: absolute;
+  inset: 2px 8px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  z-index: -1;
+}
+
+/* Active pill (warm gold) - overrides hover */
 .dashboard-sidebar-link.active {
   color: var(--text-primary);
-  position: relative;
 }
 
 .dashboard-sidebar-link.active::before {
@@ -168,6 +178,18 @@
   background: rgba(212, 163, 115, 0.18);
   border-radius: 10px;
   z-index: -1;
+  animation: pillAppear 0.3s ease-out both;
+}
+
+@keyframes pillAppear {
+  from {
+    opacity: 0;
+    transform: scaleX(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
 }
 
 .dashboard-sidebar-link .dashboard-sidebar-icon {
@@ -216,6 +238,7 @@
 .dashboard-sidebar-footer {
   padding: var(--space-m) var(--space-l);
   background: rgba(0, 0, 0, 0.06);
+  border-radius: 14px 14px 0 0;
   position: relative;
 }
 
@@ -385,6 +408,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: fadeSlideIn 0.35s ease-out both;
 }
 
 .dashboard-main > * {
@@ -459,6 +483,10 @@
 .dashboard-download-btn:hover {
   background: rgba(28, 28, 30, 0.9);
   transform: translateY(-1px);
+}
+
+.dashboard-download-btn:active {
+  transform: translateY(0) scale(0.97);
 }
 
 .dashboard-download-btn svg {
@@ -659,6 +687,10 @@
 
 .pill-toggle:hover {
   background: rgba(0, 0, 0, 0.06);
+}
+
+.pill-toggle:active {
+  transform: scale(0.95);
 }
 
 /* Active (blocked) state: soft red */
@@ -989,11 +1021,12 @@
   padding: var(--space-l);
   box-shadow: var(--shadow-card);
   border: 1px solid rgba(0, 0, 0, 0.02);
-  transition: box-shadow var(--transition-fast);
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 
 .dashboard-card:hover {
   box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
 }
 
 .dashboard-list {
@@ -1232,7 +1265,11 @@
   background: var(--border-subtle);
   border-radius: 12px;
   cursor: pointer;
-  transition: background var(--transition-fast);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.dashboard-toggle-switch:active {
+  transform: scale(0.93);
 }
 
 .dashboard-toggle-switch.active {
