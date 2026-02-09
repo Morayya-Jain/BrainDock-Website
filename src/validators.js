@@ -164,7 +164,7 @@ export function validateAppPattern(appName) {
 
     const appLower = app.toLowerCase()
     if (KNOWN_APPS.has(appLower)) return { valid: true, message: '', isWarning: false }
-    return { valid: true, message: `'${app}' is not a recognised app - please verify the name`, isWarning: true }
+    return { valid: false, message: `'${app}' is not a recognised app - please check the name`, isWarning: false }
   } catch (e) {
     return { valid: false, message: `Validation error: ${e.message}`, isWarning: false }
   }
