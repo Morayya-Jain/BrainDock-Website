@@ -664,14 +664,14 @@
 .pill-toggle-wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 }
 
 .pill-toggle {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 6px 14px;
+  padding: 9px 14px;
   font-family: var(--font-sans);
   font-size: 0.8125rem;
   font-weight: 500;
@@ -708,6 +708,65 @@
   width: 14px;
   height: 14px;
   flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Pill description popup (hover 2s to reveal, positioned near the pill)
+   -------------------------------------------------------------------------- */
+.pill-desc-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+  z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms ease, visibility 200ms;
+}
+
+.pill-desc-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.pill-desc-modal {
+  position: fixed;
+  z-index: 201;
+  background: var(--bg-surface);
+  border-radius: 14px;
+  padding: var(--space-m) var(--space-l);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 150ms ease, visibility 150ms, transform 150ms ease;
+}
+
+.pill-desc-modal.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.pill-desc-modal-title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.pill-desc-modal-text {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
 }
 
 
@@ -1556,8 +1615,8 @@
 
 .pricing-main {
   flex: 1;
-  padding-top: 120px; /* Clear the 80px fixed nav + breathing room */
-  padding-bottom: var(--space-xxxl);
+  padding-top: calc(80px + 5vh);
+  padding-bottom: 5vh;
   background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
 }
 
@@ -1565,49 +1624,47 @@
   max-width: 1300px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 var(--space-xl);
+  padding: 0 5vw;
 }
 
 .pricing-header {
   text-align: center;
-  margin-bottom: 140px;
+  margin-bottom: 5vh;
 }
 
 .pricing-title {
   font-family: var(--font-serif);
-  font-size: 3rem;
+  font-size: clamp(1.5rem, 1.4rem + 0.8vw, 2.5rem);
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: var(--space-m);
+  margin-bottom: 1vh;
 }
 
 .pricing-subtitle {
   font-family: var(--font-sans);
-  font-size: 1.25rem;
+  font-size: clamp(0.875rem, 0.82rem + 0.3vw, 1.05rem);
   color: var(--text-secondary);
 }
 
 .pricing-grid {
   display: grid;
-  gap: var(--space-xl);
+  gap: clamp(12px, 2vw, 28px);
   grid-template-columns: repeat(3, 1fr);
 }
 
-@media (max-width: 900px) {
-  .pricing-main {
-    padding-top: 100px;
+/* Two columns on mid-size screens */
+@media (max-width: 1100px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .pricing-title {
-    font-size: 2.25rem;
-  }
-  .pricing-subtitle {
-    font-size: 1.1rem;
-  }
+}
+
+/* Single column on small screens */
+@media (max-width: 640px) {
   .pricing-grid {
     grid-template-columns: 1fr;
     max-width: 440px;
     margin: 0 auto;
-    gap: var(--space-l);
   }
 }
 
@@ -1615,36 +1672,36 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 380px;
-  padding: 28px 56px 44px 40px;
+  min-height: clamp(340px, 40vh, 460px);
+  padding: clamp(16px, 1.8vw, 24px) clamp(18px, 2.5vw, 32px) clamp(24px, 2.5vw, 32px) clamp(18px, 2vw, 28px);
   text-align: left;
 }
 
 .pricing-card-title {
   font-family: var(--font-serif);
-  font-size: 2rem;
+  font-size: clamp(1.2rem, 1.1rem + 0.6vw, 1.65rem);
   font-weight: 700;
-  margin-bottom: var(--space-s);
+  margin-bottom: 1.2vh;
   color: var(--text-primary);
 }
 
 .pricing-card-price {
-  font-size: 2.25rem;
+  font-size: clamp(1.35rem, 1.2rem + 0.7vw, 1.85rem);
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: var(--space-xs);
+  margin-bottom: 0.3vh;
   font-family: var(--font-sans);
 }
 
 .pricing-card-per-hour {
-  font-size: 0.9375rem;
+  font-size: clamp(0.75rem, 0.72rem + 0.15vw, 0.85rem);
   color: var(--text-tertiary);
-  margin-bottom: var(--space-m);
+  margin-bottom: 1.2vh;
   font-family: var(--font-sans);
 }
 
 .pricing-card-desc {
-  font-size: 1rem;
+  font-size: clamp(0.8rem, 0.78rem + 0.2vw, 0.9375rem);
   color: var(--text-secondary);
   margin-bottom: 0;
   line-height: 1.6;
@@ -1655,8 +1712,23 @@
 .pricing-card .btn {
   width: auto;
   margin-top: auto;
-  padding: 14px 36px;
-  font-size: 1.0625rem;
+  padding: clamp(12px, 1.3vw, 16px) clamp(24px, 2.5vw, 36px);
+  font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
+}
+
+/* Pricing FAQ section */
+.pricing-faq {
+  max-width: 800px;
+  margin: 10vh auto 8vh;
+}
+
+.pricing-faq-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 1.15rem + 0.5vw, 1.75rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 4.5vh;
 }
 
 /* --------------------------------------------------------------------------

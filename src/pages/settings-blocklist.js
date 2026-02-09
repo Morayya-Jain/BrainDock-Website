@@ -44,28 +44,28 @@ const CROSS_SVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" s
 // -- Blocklist constants --
 
 const QUICK_SITES = [
-  { id: 'instagram', name: 'Instagram', icon: 'instagram' },
-  { id: 'youtube', name: 'YouTube', icon: 'youtube' },
-  { id: 'netflix', name: 'Netflix', icon: 'film' },
-  { id: 'reddit', name: 'Reddit', icon: 'message-circle' },
-  { id: 'tiktok', name: 'TikTok', icon: 'video' },
-  { id: 'twitter', name: 'Twitter/X', icon: 'twitter' },
-  { id: 'twitch', name: 'Twitch', icon: 'twitch' },
-  { id: 'discord', name: 'Discord', icon: 'message-square' },
-  { id: 'facebook', name: 'Facebook', icon: 'facebook' },
-  { id: 'snapchat', name: 'Snapchat', icon: 'zap' },
-  { id: 'linkedin', name: 'LinkedIn', icon: 'linkedin' },
-  { id: 'pinterest', name: 'Pinterest', icon: 'pin' },
-  { id: 'amazon', name: 'Amazon', icon: 'shopping-cart' },
-  { id: 'spotify', name: 'Spotify', icon: 'headphones' },
-  { id: 'hulu', name: 'Hulu', icon: 'play-circle' },
-  { id: 'disneyplus', name: 'Disney+', icon: 'play-circle' },
-  { id: 'primevideo', name: 'Prime Video', icon: 'play-circle' },
-  { id: 'whatsapp', name: 'WhatsApp Web', icon: 'message-circle' },
-  { id: 'telegram', name: 'Telegram', icon: 'message-square' },
-  { id: 'tumblr', name: 'Tumblr', icon: 'image' },
-  { id: 'threads', name: 'Threads', icon: 'globe' },
-  { id: 'news', name: 'News sites', icon: 'newspaper' },
+  { id: 'instagram', name: 'Instagram', icon: 'instagram', desc: 'Photo and video sharing social network by Meta.' },
+  { id: 'youtube', name: 'YouTube', icon: 'youtube', desc: 'Video streaming and sharing platform by Google.' },
+  { id: 'netflix', name: 'Netflix', icon: 'film', desc: 'Subscription streaming service for movies and TV shows.' },
+  { id: 'reddit', name: 'Reddit', icon: 'message-circle', desc: 'Community-driven forum with thousands of topic boards.' },
+  { id: 'tiktok', name: 'TikTok', icon: 'video', desc: 'Short-form video platform for entertainment and trends.' },
+  { id: 'twitter', name: 'Twitter/X', icon: 'twitter', desc: 'Microblogging platform for posts, news, and discussions.' },
+  { id: 'twitch', name: 'Twitch', icon: 'twitch', desc: 'Live streaming platform focused on gaming and entertainment.' },
+  { id: 'discord', name: 'Discord', icon: 'message-square', desc: 'Voice, video, and text chat app for communities.' },
+  { id: 'facebook', name: 'Facebook', icon: 'facebook', desc: 'Social network for connecting with friends and groups.' },
+  { id: 'snapchat', name: 'Snapchat', icon: 'zap', desc: 'Messaging app with disappearing photos and stories.' },
+  { id: 'linkedin', name: 'LinkedIn', icon: 'linkedin', desc: 'Professional networking and job search platform.' },
+  { id: 'pinterest', name: 'Pinterest', icon: 'pin', desc: 'Visual discovery platform for ideas and inspiration.' },
+  { id: 'amazon', name: 'Amazon', icon: 'shopping-cart', desc: 'Online shopping marketplace for just about everything.' },
+  { id: 'spotify', name: 'Spotify', icon: 'headphones', desc: 'Music and podcast streaming service.' },
+  { id: 'hulu', name: 'Hulu', icon: 'play-circle', desc: 'Streaming service for TV shows, movies, and originals.' },
+  { id: 'disneyplus', name: 'Disney+', icon: 'play-circle', desc: 'Disney, Pixar, Marvel, and Star Wars streaming.' },
+  { id: 'primevideo', name: 'Prime Video', icon: 'play-circle', desc: 'Amazon streaming service for movies and series.' },
+  { id: 'whatsapp', name: 'WhatsApp Web', icon: 'message-circle', desc: 'Browser version of the WhatsApp messaging app.' },
+  { id: 'telegram', name: 'Telegram', icon: 'message-square', desc: 'Cloud-based messaging app with channels and groups.' },
+  { id: 'tumblr', name: 'Tumblr', icon: 'image', desc: 'Microblogging platform for creative and visual content.' },
+  { id: 'threads', name: 'Threads', icon: 'globe', desc: 'Text-based social app by Meta, linked to Instagram.' },
+  { id: 'news', name: 'News sites', icon: 'newspaper', desc: 'General news websites like CNN, BBC, and others.' },
 ]
 
 const DEBOUNCE_MS = 800
@@ -73,16 +73,16 @@ const DEBOUNCE_MS = 800
 // -- Detection constants --
 
 const ITEM_PRESETS = [
-  { id: 'phone', name: 'Phone', icon: 'smartphone' },
-  { id: 'tablet', name: 'Tablet / iPad', icon: 'tablet' },
-  { id: 'controller', name: 'Game Controller', icon: 'gamepad-2' },
-  { id: 'tv', name: 'TV / Remote', icon: 'tv' },
-  { id: 'nintendo_switch', name: 'Nintendo Switch', icon: 'gamepad' },
-  { id: 'smartwatch', name: 'Smartwatch', icon: 'watch' },
-  { id: 'laptop', name: 'Laptop', icon: 'laptop' },
-  { id: 'food', name: 'Food / Snacks', icon: 'utensils-crossed' },
-  { id: 'camera', name: 'Camera', icon: 'camera' },
-  { id: 'headphones', name: 'Headphones', icon: 'headphones' },
+  { id: 'phone', name: 'Phone', icon: 'smartphone', desc: 'Any smartphone - iPhone, Android, or similar 5-7 inch handheld device.' },
+  { id: 'tablet', name: 'Tablet / iPad', icon: 'tablet', desc: 'Tablets and iPads - larger 8+ inch touchscreen devices.' },
+  { id: 'controller', name: 'Game Controller', icon: 'gamepad-2', desc: 'Gaming controllers like PS5, Xbox, or generic Bluetooth gamepads.' },
+  { id: 'tv', name: 'TV / Remote', icon: 'tv', desc: 'Television screen or a TV remote control in view.' },
+  { id: 'nintendo_switch', name: 'Nintendo Switch', icon: 'gamepad', desc: 'Nintendo Switch console in handheld or tabletop mode.' },
+  { id: 'smartwatch', name: 'Smartwatch', icon: 'watch', desc: 'Wrist-worn smart devices like Apple Watch, Fitbit, or Galaxy Watch.' },
+  { id: 'laptop', name: 'Laptop', icon: 'laptop', desc: 'A secondary laptop or notebook visible alongside your main screen.' },
+  { id: 'camera', name: 'Camera', icon: 'camera', desc: 'Standalone cameras - DSLR, mirrorless, or action cameras.' },
+  { id: 'headphones', name: 'Headphones', icon: 'headphones', desc: 'Over-ear headphones or visible earbuds being worn.' },
+  { id: 'food', name: 'Food / Snacks', icon: 'utensils-crossed', desc: 'Food, drinks, or snacks visible on your desk.' },
 ]
 
 // Icons needed by createIcons after render
@@ -195,11 +195,11 @@ function render(main, blocklistConfig, detectionSettings, userId) {
 
       <!-- Detection: item pills -->
       <div class="dashboard-card">
-        <h2 class="dashboard-section-title">Item Detection</h2>
-        <p class="dashboard-meta" style="margin-bottom: var(--space-s);">Tap to block. Camera detects these as distractions.</p>
+        <h2 class="dashboard-section-title" style="margin-bottom: var(--space-xs);">Items to Notify</h2>
+        <p class="dashboard-meta" style="margin-bottom: var(--space-l);">Select items you want to add to your list.</p>
         <div class="pill-toggle-wrap">
           ${ITEM_PRESETS.map((g) => `
-            <button type="button" class="pill-toggle ${itemSet.has(g.id) ? 'active' : ''}" data-item="${g.id}" aria-pressed="${itemSet.has(g.id)}">
+            <button type="button" class="pill-toggle ${itemSet.has(g.id) ? 'active' : ''}" data-item="${g.id}" data-desc="${escapeHtml(g.desc)}" data-name="${escapeHtml(g.name)}" aria-pressed="${itemSet.has(g.id)}">
               <i data-lucide="${g.icon}" class="pill-toggle-icon" aria-hidden="true"></i>
               <span>${escapeHtml(g.name)}</span>
             </button>
@@ -209,16 +209,16 @@ function render(main, blocklistConfig, detectionSettings, userId) {
 
       <!-- Blocklist: quick block pills -->
       <div class="dashboard-card">
-        <h2 class="dashboard-section-title">Quick Block</h2>
-        <p class="dashboard-meta" style="margin-bottom: var(--space-s);">Tap to block a site.</p>
+        <h2 class="dashboard-section-title" style="margin-bottom: var(--space-xs);">Websites to Notify</h2>
+        <p class="dashboard-meta" style="margin-bottom: var(--space-l);">Select websites you want to add to your list.</p>
         <div id="quick-blocks-container" class="pill-toggle-wrap"></div>
       </div>
 
       <!-- Custom URLs + Custom Apps side by side -->
       <div class="dashboard-card-row">
         <div class="dashboard-card">
-          <h2 class="dashboard-section-title">Custom URLs</h2>
-          <p class="dashboard-meta" style="margin-bottom: var(--space-s);">Add domains to block (e.g. example.com)</p>
+          <h2 class="dashboard-section-title" style="margin-bottom: var(--space-xs);">Custom URLs</h2>
+          <p class="dashboard-meta" style="margin-bottom: var(--space-m);">Add domains to your list.</p>
           <div class="dashboard-input-row">
             <input type="text" id="custom-url-input" class="dashboard-input dashboard-input--narrow" placeholder="example.com" maxlength="253">
             <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-url-add">Add</button>
@@ -228,8 +228,8 @@ function render(main, blocklistConfig, detectionSettings, userId) {
         </div>
 
         <div class="dashboard-card">
-          <h2 class="dashboard-section-title">Custom Apps</h2>
-          <p class="dashboard-meta" style="margin-bottom: var(--space-s);">Add app names to block (e.g. Discord)</p>
+          <h2 class="dashboard-section-title" style="margin-bottom: var(--space-xs);">Custom Apps</h2>
+          <p class="dashboard-meta" style="margin-bottom: var(--space-m);">Add app names to your list.</p>
           <div class="dashboard-input-row">
             <input type="text" id="custom-app-input" class="dashboard-input dashboard-input--narrow" placeholder="App name" maxlength="50">
             <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-app-add">Add</button>
@@ -255,7 +255,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
 
   const quickContainer = main.querySelector('#quick-blocks-container')
   quickContainer.innerHTML = QUICK_SITES.map((q) => `
-    <button type="button" class="pill-toggle ${state.quick_blocks[q.id] ? 'active' : ''}" data-quick="${q.id}" aria-pressed="${!!state.quick_blocks[q.id]}">
+    <button type="button" class="pill-toggle ${state.quick_blocks[q.id] ? 'active' : ''}" data-quick="${q.id}" data-desc="${escapeHtml(q.desc)}" data-name="${escapeHtml(q.name)}" aria-pressed="${!!state.quick_blocks[q.id]}">
       <i data-lucide="${q.icon}" class="pill-toggle-icon" aria-hidden="true"></i>
       <span>${escapeHtml(q.name)}</span>
     </button>
@@ -399,6 +399,69 @@ function render(main, blocklistConfig, detectionSettings, userId) {
     if (!e.target.value.trim()) {
       setHint(main.querySelector('#custom-app-hint'), '', '')
     }
+  })
+
+  // -- Pill hover description popup (shows after 2s hover, near the pill) --
+
+  // Append overlay + modal to document.body so they cover the full viewport
+  const overlay = document.createElement('div')
+  overlay.className = 'pill-desc-overlay'
+  overlay.setAttribute('aria-hidden', 'true')
+  document.body.appendChild(overlay)
+
+  const modal = document.createElement('div')
+  modal.className = 'pill-desc-modal'
+  modal.setAttribute('role', 'dialog')
+  modal.innerHTML = `
+    <h3 class="pill-desc-modal-title" id="pill-desc-title"></h3>
+    <p class="pill-desc-modal-text" id="pill-desc-text"></p>
+  `
+  document.body.appendChild(modal)
+
+  let hoverTimer = null
+
+  /** Position the modal near the pill element and show it. */
+  function showDescModal(pillEl, name, desc) {
+    document.getElementById('pill-desc-title').textContent = name
+    document.getElementById('pill-desc-text').textContent = desc
+
+    // Get pill position and place modal just below it
+    const rect = pillEl.getBoundingClientRect()
+    const modalWidth = 300
+    let left = rect.left + (rect.width / 2) - (modalWidth / 2)
+
+    // Keep modal within viewport horizontally
+    left = Math.max(12, Math.min(left, window.innerWidth - modalWidth - 12))
+
+    modal.style.left = `${left}px`
+    modal.style.top = `${rect.bottom + 8}px`
+    modal.style.width = `${modalWidth}px`
+
+    overlay.classList.add('active')
+    modal.classList.add('active')
+  }
+
+  function hideDescModal() {
+    overlay.classList.remove('active')
+    modal.classList.remove('active')
+  }
+
+  // Attach hover timers to all pills with descriptions
+  main.querySelectorAll('.pill-toggle[data-desc]').forEach((el) => {
+    el.addEventListener('mouseenter', () => {
+      clearTimeout(hoverTimer)
+      hoverTimer = setTimeout(() => {
+        showDescModal(el, el.dataset.name, el.dataset.desc)
+      }, 1000)
+    })
+    el.addEventListener('mouseleave', () => {
+      clearTimeout(hoverTimer)
+      hideDescModal()
+    })
+    // Clicking the pill toggles it - don't show modal on click
+    el.addEventListener('click', () => {
+      clearTimeout(hoverTimer)
+    })
   })
 
   // Render Lucide icons inside the page content

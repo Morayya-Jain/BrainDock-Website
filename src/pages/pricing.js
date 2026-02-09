@@ -144,6 +144,57 @@ function render(root, packages, hasUser) {
             `
           }).join('')}
         </div>
+
+        <!-- Pricing Q&A -->
+        <section class="pricing-faq">
+          <h2 class="pricing-faq-title">Questions & Answers</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                <span>Which plan should I choose?</span>
+                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="faq-answer" role="region">
+                <div class="faq-answer-inner">
+                  <p>If you're just getting started, Pro (1 hour) lets you try BrainDock without a big commitment. For regular use, Ultra (10 hours) offers a better per-hour rate. Max (30 hours) is the best value if you plan to use BrainDock daily.</p>
+                </div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                <span>How does the credit system work?</span>
+                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="faq-answer" role="region">
+                <div class="faq-answer-inner">
+                  <p>You purchase a pack of hours upfront. Each time you run a focus session - whether using your camera, screen monitoring, or both - time is deducted from your balance. You can top up anytime, and your hours never expire.</p>
+                </div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                <span>Can I switch between camera and screen sessions?</span>
+                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="faq-answer" role="region">
+                <div class="faq-answer-inner">
+                  <p>Yes. Your hours work across all session types. Use camera-based focus tracking, screen monitoring, or both at the same time - it all draws from the same balance.</p>
+                </div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                <span>What happens when I run out of hours?</span>
+                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="faq-answer" role="region">
+                <div class="faq-answer-inner">
+                  <p>Your session will end and you can top up with another pack right away. Any session data you've already recorded stays in your dashboard - nothing is lost.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
 
@@ -229,6 +280,24 @@ function render(root, packages, hasUser) {
         btn.disabled = false
         btn.textContent = currentLabel
         alert('Network error. Please check your connection and try again.')
+      }
+    })
+  })
+
+  // FAQ accordion toggle
+  root.querySelectorAll('.faq-question').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item')
+      const isOpen = item.classList.contains('active')
+      // Close all others first
+      root.querySelectorAll('.faq-item.active').forEach((el) => {
+        el.classList.remove('active')
+        el.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false')
+      })
+      // Toggle the clicked one
+      if (!isOpen) {
+        item.classList.add('active')
+        btn.setAttribute('aria-expanded', 'true')
       }
     })
   })
