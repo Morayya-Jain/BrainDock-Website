@@ -73,7 +73,9 @@
   z-index: 200;
   width: 260px;
   background: var(--bg-surface);
-  border-right: 1px solid var(--border-subtle);
+  border-right: none;
+  border-radius: 0 28px 28px 0;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
   transform: translateX(-100%);
@@ -156,10 +158,16 @@
 
 .dashboard-sidebar-link.active {
   color: var(--text-primary);
+  position: relative;
+}
+
+.dashboard-sidebar-link.active::before {
+  content: '';
+  position: absolute;
+  inset: 2px 8px;
   background: rgba(212, 163, 115, 0.18);
   border-radius: 10px;
-  margin: 0 var(--space-s);
-  width: auto;
+  z-index: -1;
 }
 
 .dashboard-sidebar-link .dashboard-sidebar-icon {
@@ -214,7 +222,7 @@
 .dashboard-sidebar-footer-trigger {
   display: flex;
   align-items: center;
-  gap: var(--space-s);
+  gap: var(--space-m);
   width: 100%;
   padding: var(--space-s) var(--space-s);
   border: none;
@@ -226,7 +234,7 @@
 }
 
 .dashboard-sidebar-footer-trigger:hover {
-  background: var(--bg-secondary);
+  background: rgba(0, 0, 0, 0.06);
 }
 
 .dashboard-avatar-footer {
@@ -590,22 +598,35 @@
   margin-top: var(--space-m);
 }
 
-/* 2x2 card grid for configuration page on desktop */
+/* Card stack for configuration page */
 .dashboard-card-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-s);
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-l);
 }
 
-@media (min-width: 900px) {
-  .dashboard-card-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.dashboard-card-grid > .dashboard-card {
+.dashboard-card-grid > .dashboard-card,
+.dashboard-card-row > .dashboard-card {
   padding: var(--space-m);
+}
+
+/* Side-by-side card pair (e.g. Custom URLs + Custom Apps) */
+.dashboard-card-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-l);
+}
+
+@media (min-width: 700px) {
+  .dashboard-card-row {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .dashboard-card-row > .dashboard-card {
+    flex: 1;
+    min-width: 0;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -656,6 +677,7 @@
   height: 14px;
   flex-shrink: 0;
 }
+
 
 .dashboard-chip {
   display: inline-flex;

@@ -214,28 +214,29 @@ function render(main, blocklistConfig, detectionSettings, userId) {
         <div id="quick-blocks-container" class="pill-toggle-wrap"></div>
       </div>
 
-      <!-- Blocklist: custom URLs -->
-      <div class="dashboard-card">
-        <h2 class="dashboard-section-title">Custom URLs</h2>
-        <p class="dashboard-meta" style="margin-bottom: var(--space-s);">Add domains to block (e.g. example.com)</p>
-        <div class="dashboard-input-row">
-          <input type="text" id="custom-url-input" class="dashboard-input dashboard-input--narrow" placeholder="example.com" maxlength="253">
-          <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-url-add">Add</button>
+      <!-- Custom URLs + Custom Apps side by side -->
+      <div class="dashboard-card-row">
+        <div class="dashboard-card">
+          <h2 class="dashboard-section-title">Custom URLs</h2>
+          <p class="dashboard-meta" style="margin-bottom: var(--space-s);">Add domains to block (e.g. example.com)</p>
+          <div class="dashboard-input-row">
+            <input type="text" id="custom-url-input" class="dashboard-input dashboard-input--narrow" placeholder="example.com" maxlength="253">
+            <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-url-add">Add</button>
+          </div>
+          <p id="custom-url-hint" class="dashboard-input-hint" role="status" aria-live="polite"></p>
+          <div id="custom-urls-list"></div>
         </div>
-        <p id="custom-url-hint" class="dashboard-input-hint" role="status" aria-live="polite"></p>
-        <div id="custom-urls-list"></div>
-      </div>
 
-      <!-- Blocklist: custom apps -->
-      <div class="dashboard-card">
-        <h2 class="dashboard-section-title">Custom Apps</h2>
-        <p class="dashboard-meta" style="margin-bottom: var(--space-s);">Add app names to block (e.g. Discord)</p>
-        <div class="dashboard-input-row">
-          <input type="text" id="custom-app-input" class="dashboard-input dashboard-input--narrow" placeholder="App name" maxlength="50">
-          <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-app-add">Add</button>
+        <div class="dashboard-card">
+          <h2 class="dashboard-section-title">Custom Apps</h2>
+          <p class="dashboard-meta" style="margin-bottom: var(--space-s);">Add app names to block (e.g. Discord)</p>
+          <div class="dashboard-input-row">
+            <input type="text" id="custom-app-input" class="dashboard-input dashboard-input--narrow" placeholder="App name" maxlength="50">
+            <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-app-add">Add</button>
+          </div>
+          <p id="custom-app-hint" class="dashboard-input-hint" role="status" aria-live="polite"></p>
+          <div id="custom-apps-list"></div>
         </div>
-        <p id="custom-app-hint" class="dashboard-input-hint" role="status" aria-live="polite"></p>
-        <div id="custom-apps-list"></div>
       </div>
     </div>
   `
