@@ -212,7 +212,7 @@
 .dashboard-sidebar-footer-trigger {
   display: flex;
   align-items: center;
-  gap: var(--space-s);
+  gap: var(--space-m);
   width: 100%;
   padding: var(--space-s);
   border: none;
@@ -229,8 +229,8 @@
 
 .dashboard-sidebar-user {
   font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  color: var(--text-tertiary);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
   word-break: break-all;
   flex: 1;
   min-width: 0;
@@ -304,9 +304,9 @@
 }
 
 .dashboard-avatar-sm {
-  width: 28px;
-  height: 28px;
-  font-size: 0.75rem;
+  width: 34px;
+  height: 34px;
+  font-size: 0.8125rem;
 }
 
 .dashboard-avatar-md {
@@ -1443,6 +1443,39 @@
 /* --------------------------------------------------------------------------
    How-to-use page
    -------------------------------------------------------------------------- */
+
+/* 3D stacking scroll: cards stick and recede as the next card scrolls over them.
+   JS drives scale + opacity. No translateZ (avoids sticky/perspective conflicts). */
+.howto-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-l);
+}
+
+.howto-stack > .dashboard-card {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  transform-origin: center top;
+  will-change: transform, opacity;
+}
+
+/* Stagger sticky top so covered cards peek out beneath */
+.howto-stack > .dashboard-card:nth-child(1) { top: 0px; z-index: 1; }
+.howto-stack > .dashboard-card:nth-child(2) { top: 14px; z-index: 2; }
+.howto-stack > .dashboard-card:nth-child(3) { top: 28px; z-index: 3; }
+.howto-stack > .dashboard-card:nth-child(4) { top: 42px; z-index: 4; }
+.howto-stack > .dashboard-card:nth-child(5) { top: 56px; z-index: 5; }
+.howto-stack > .dashboard-card:nth-child(6) { top: 70px; z-index: 6; }
+
+@media (max-width: 640px) {
+  .howto-stack > .dashboard-card:nth-child(2) { top: 10px; }
+  .howto-stack > .dashboard-card:nth-child(3) { top: 20px; }
+  .howto-stack > .dashboard-card:nth-child(4) { top: 30px; }
+  .howto-stack > .dashboard-card:nth-child(5) { top: 40px; }
+  .howto-stack > .dashboard-card:nth-child(6) { top: 50px; }
+}
+
 .howto-icon {
   margin-bottom: var(--space-m);
 }
@@ -1556,51 +1589,77 @@
   top: 2px;
 }
 
-/* FAQ collapsible sections */
-.howto-faq {
+/* Platform tab toggle (macOS / Windows) */
+.howto-platform-tabs {
+  display: flex;
+  gap: var(--space-xs);
+  margin: var(--space-m) 0 var(--space-m);
+}
+
+.howto-platform-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: color var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.howto-platform-tab:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-highlight);
+}
+
+.howto-platform-tab.active {
+  color: #fff;
+  background: var(--accent-highlight);
+  border-color: var(--accent-highlight);
+}
+
+.howto-platform-panel {
+  display: none;
+}
+
+.howto-platform-panel.active {
+  display: block;
+}
+
+/* Inline Q&A (replaces accordion FAQ) */
+.howto-qa {
   border-bottom: 1px solid var(--border-subtle);
   padding: var(--space-m) 0;
 }
 
-.howto-faq:last-of-type {
+.howto-qa:last-of-type {
   border-bottom: none;
 }
 
-.howto-faq summary {
+.howto-qa-q {
   font-family: var(--font-sans);
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--text-primary);
-  cursor: pointer;
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-m);
+  margin-bottom: 4px;
 }
 
-.howto-faq summary::-webkit-details-marker {
-  display: none;
-}
-
-.howto-faq summary::after {
-  content: '+';
-  font-size: 1.25rem;
-  font-weight: 400;
-  color: var(--text-tertiary);
-  flex-shrink: 0;
-  transition: transform var(--transition-fast);
-}
-
-.howto-faq[open] summary::after {
-  content: '\2212';
-}
-
-.howto-faq p {
+.howto-qa-a {
   font-family: var(--font-sans);
   font-size: 0.875rem;
   color: var(--text-secondary);
   line-height: 1.6;
-  margin-top: var(--space-s);
+}
+
+/* Separator inside a card */
+.howto-divider {
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  margin: var(--space-m) 0;
 }
 
