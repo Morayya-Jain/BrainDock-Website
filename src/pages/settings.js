@@ -31,7 +31,7 @@ function render(main, settings, userId) {
 
   main.innerHTML = `
     <h1 class="dashboard-page-title">General Settings</h1>
-    <p style="font-family: var(--font-sans); color: var(--text-secondary); margin-bottom: var(--space-xl);">
+    <p class="dashboard-page-subtitle">
       These defaults apply when you start a new session in the desktop app. You can still override the mode from the menu bar.
     </p>
 
@@ -54,7 +54,7 @@ function render(main, settings, userId) {
         </div>
       </div>
 
-      <div style="margin-top: var(--space-xl);">
+      <div class="dashboard-form-actions">
         <button type="button" class="btn btn-primary" id="settings-save-btn">Save Changes</button>
         <span class="dashboard-saved" id="settings-saved-msg" style="display: none;">Saved</span>
       </div>

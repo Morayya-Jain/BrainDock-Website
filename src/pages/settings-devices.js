@@ -40,7 +40,7 @@ function render(main, devices) {
 
   main.innerHTML = `
     <h1 class="dashboard-page-title">Linked Devices</h1>
-    <p style="font-family: var(--font-sans); color: var(--text-secondary); margin-bottom: var(--space-xl);">
+    <p class="dashboard-page-subtitle">
       Devices where you have signed in with BrainDock. Unlinking will require signing in again on that device.
     </p>
 
@@ -50,7 +50,7 @@ function render(main, devices) {
         <div class="dashboard-empty">
           <p class="dashboard-empty-title">No linked devices</p>
           <p>Download BrainDock and sign in to link a device.</p>
-          <a href="${base}/download/" class="btn btn-primary" style="margin-top: var(--space-m);">Download BrainDock</a>
+          <a href="${base}/download/" class="btn btn-primary dashboard-empty-cta">Download BrainDock</a>
         </div>
         `
         : `
@@ -59,18 +59,18 @@ function render(main, devices) {
             <li class="dashboard-list-item" data-device-id="${escapeHtml(d.id)}">
               <div>
                 <strong>${escapeHtml(d.device_name || d.machine_id || 'Unknown device')}</strong><br>
-                <span style="font-size: 0.875rem; color: var(--text-secondary);">${escapeHtml(d.os || '')} &middot; Last active: ${formatRelativeTime(d.last_seen)}</span><br>
-                <span style="font-size: 0.8125rem; color: var(--text-tertiary);">App version: ${escapeHtml(d.app_version || '-')}</span>
+                <span class="dashboard-meta">${escapeHtml(d.os || '')} &middot; Last active: ${formatRelativeTime(d.last_seen)}</span><br>
+                <span class="dashboard-meta-sub">App version: ${escapeHtml(d.app_version || '-')}</span>
               </div>
               <button type="button" class="btn btn-secondary dashboard-btn-sm device-unlink-btn">Unlink</button>
             </li>
           `).join('')}
         </ul>
         `}
-      <p style="margin-top: var(--space-l); font-size: 0.875rem; color: var(--text-secondary);">
+      <p class="dashboard-meta dashboard-devices-footer">
         To link a new device, download BrainDock and sign in with your account.
       </p>
-      <a href="${base}/download/" class="btn btn-secondary" style="margin-top: var(--space-s);">Download BrainDock</a>
+      <a href="${base}/download/" class="btn btn-secondary dashboard-devices-download-link">Download BrainDock</a>
     </div>
   `
 

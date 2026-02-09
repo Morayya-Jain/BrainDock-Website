@@ -76,36 +76,38 @@ function render(main, config, userId) {
 
   main.innerHTML = `
     <h1 class="dashboard-page-title">Blocklist</h1>
-    <p style="font-family: var(--font-sans); color: var(--text-secondary); margin-bottom: var(--space-xl);">
+    <p class="dashboard-page-subtitle">
       Choose which sites and apps count as distractions during screen monitoring. The desktop app loads these settings when you start a session.
     </p>
 
-    <div class="dashboard-card">
-      <h2 class="dashboard-section-title" style="margin-bottom: var(--space-m);">Quick Block</h2>
-      <div id="quick-blocks-container"></div>
-    </div>
-
-    <div class="dashboard-card" style="margin-top: var(--space-l);">
-      <h2 class="dashboard-section-title" style="margin-bottom: var(--space-m);">Custom URLs</h2>
-      <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: var(--space-m);">Add domains to block (e.g. example.com)</p>
-      <div style="display: flex; gap: var(--space-s); flex-wrap: wrap; margin-bottom: var(--space-m);">
-        <input type="text" id="custom-url-input" class="dashboard-input" placeholder="example.com" maxlength="200" style="max-width: 200px;">
-        <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-url-add">Add</button>
+    <div class="dashboard-card-stack">
+      <div class="dashboard-card">
+        <h2 class="dashboard-section-title">Quick Block</h2>
+        <div id="quick-blocks-container"></div>
       </div>
-      <div id="custom-urls-list"></div>
-    </div>
 
-    <div class="dashboard-card" style="margin-top: var(--space-l);">
-      <h2 class="dashboard-section-title" style="margin-bottom: var(--space-m);">Custom Apps</h2>
-      <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: var(--space-m);">Add app names to block (e.g. Discord)</p>
-      <div style="display: flex; gap: var(--space-s); flex-wrap: wrap; margin-bottom: var(--space-m);">
-        <input type="text" id="custom-app-input" class="dashboard-input" placeholder="App name" maxlength="${LIMITS.APP_NAME_MAX}" style="max-width: 200px;">
-        <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-app-add">Add</button>
+      <div class="dashboard-card">
+        <h2 class="dashboard-section-title">Custom URLs</h2>
+        <p class="dashboard-meta" style="margin-bottom: var(--space-m);">Add domains to block (e.g. example.com)</p>
+        <div class="dashboard-input-row">
+          <input type="text" id="custom-url-input" class="dashboard-input dashboard-input--narrow" placeholder="example.com" maxlength="200">
+          <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-url-add">Add</button>
+        </div>
+        <div id="custom-urls-list"></div>
       </div>
-      <div id="custom-apps-list"></div>
+
+      <div class="dashboard-card">
+        <h2 class="dashboard-section-title">Custom Apps</h2>
+        <p class="dashboard-meta" style="margin-bottom: var(--space-m);">Add app names to block (e.g. Discord)</p>
+        <div class="dashboard-input-row">
+          <input type="text" id="custom-app-input" class="dashboard-input dashboard-input--narrow" placeholder="App name" maxlength="${LIMITS.APP_NAME_MAX}">
+          <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-app-add">Add</button>
+        </div>
+        <div id="custom-apps-list"></div>
+      </div>
     </div>
 
-    <p style="margin-top: var(--space-l); font-size: 0.875rem; color: var(--text-tertiary);">
+    <p class="dashboard-meta-sub" style="margin-top: var(--space-l);">
       <span class="dashboard-saved" id="blocklist-saved-msg" style="display: none;">Saved</span>
     </p>
   `
@@ -134,9 +136,9 @@ function render(main, config, userId) {
   function renderCustomUrls() {
     const list = main.querySelector('#custom-urls-list')
     list.innerHTML = state.custom_urls.length === 0
-      ? '<p style="font-size: 0.875rem; color: var(--text-tertiary);">No custom URLs added.</p>'
+      ? '<p class="dashboard-meta-sub">No custom URLs added.</p>'
       : state.custom_urls.map((u) => `
-          <span style="display: inline-flex; align-items: center; gap: var(--space-s); margin: var(--space-xs) var(--space-xs) var(--space-xs) 0; padding: 6px 12px; background: var(--bg-secondary); border-radius: 8px; font-size: 0.875rem;">
+          <span class="dashboard-chip">
             ${escapeHtml(u)}
             <button type="button" class="dashboard-remove-btn" data-url="${escapeHtml(u)}" aria-label="Remove">Remove</button>
           </span>
@@ -154,9 +156,9 @@ function render(main, config, userId) {
   function renderCustomApps() {
     const list = main.querySelector('#custom-apps-list')
     list.innerHTML = state.custom_apps.length === 0
-      ? '<p style="font-size: 0.875rem; color: var(--text-tertiary);">No custom apps added.</p>'
+      ? '<p class="dashboard-meta-sub">No custom apps added.</p>'
       : state.custom_apps.map((a) => `
-          <span style="display: inline-flex; align-items: center; gap: var(--space-s); margin: var(--space-xs) var(--space-xs) var(--space-xs) 0; padding: 6px 12px; background: var(--bg-secondary); border-radius: 8px; font-size: 0.875rem;">
+          <span class="dashboard-chip">
             ${escapeHtml(a)}
             <button type="button" class="dashboard-remove-btn" data-app="${escapeHtml(a)}" aria-label="Remove">Remove</button>
           </span>

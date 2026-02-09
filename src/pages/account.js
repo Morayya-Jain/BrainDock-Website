@@ -30,21 +30,21 @@ function render(main, profile, userId) {
 
   main.innerHTML = `
     <h1 class="dashboard-page-title">Account</h1>
-    <p style="font-family: var(--font-sans); color: var(--text-secondary); margin-bottom: var(--space-xl);">
+    <p class="dashboard-page-subtitle">
       Your profile information.
     </p>
 
     <div class="dashboard-card">
       <div class="dashboard-field">
         <label class="dashboard-field-label" for="display_name">Display name</label>
-        <input type="text" id="display_name" class="dashboard-input" value="${escapeHtml(displayName)}" placeholder="Your name" maxlength="${LIMITS.NAME_MAX}" style="max-width: 320px;">
+        <input type="text" id="display_name" class="dashboard-input dashboard-input--mid" value="${escapeHtml(displayName)}" placeholder="Your name" maxlength="${LIMITS.NAME_MAX}">
       </div>
       <div class="dashboard-field">
         <span class="dashboard-field-label">Email</span>
-        <p style="font-family: var(--font-sans); color: var(--text-secondary); margin-top: var(--space-xs);">${escapeHtml(email)}</p>
-        <p style="font-size: 0.8125rem; color: var(--text-tertiary);">Email is managed by your account provider and cannot be changed here.</p>
+        <p class="dashboard-meta" style="margin-top: var(--space-xs);">${escapeHtml(email)}</p>
+        <p class="dashboard-meta-sub">Email is managed by your account provider and cannot be changed here.</p>
       </div>
-      <div style="margin-top: var(--space-xl);">
+      <div class="dashboard-form-actions">
         <button type="button" class="btn btn-primary" id="account-save-btn">Save Changes</button>
         <span class="dashboard-saved" id="account-saved-msg" style="display: none;">Saved</span>
       </div>

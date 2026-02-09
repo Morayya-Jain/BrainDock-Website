@@ -79,9 +79,9 @@ function render(main, sessions, page, total, goToPage) {
               <li class="dashboard-list-item">
                 <div>
                   <strong>${escapeHtml(name)}</strong><br>
-                  <span style="font-size: 0.875rem; color: var(--text-secondary);">${dateStr}</span><br>
-                  <span style="font-size: 0.875rem; color: var(--text-secondary);">${modeLabel(s.monitoring_mode)} &middot; ${formatDuration(activeSec)} active &middot; ${Math.round(pct)}% focus</span><br>
-                  <span style="font-size: 0.8125rem; color: var(--text-tertiary);">${gadgets} gadgets &middot; ${screen} screen distractions</span>
+                  <span class="dashboard-meta">${dateStr}</span><br>
+                  <span class="dashboard-meta">${modeLabel(s.monitoring_mode)} &middot; ${formatDuration(activeSec)} active &middot; ${Math.round(pct)}% focus</span><br>
+                  <span class="dashboard-meta-sub">${gadgets} gadgets &middot; ${screen} screen distractions</span>
                 </div>
                 <a href="${base}/sessions/${escapeHtml(s.id)}" class="btn btn-secondary dashboard-btn-sm">View</a>
               </li>

@@ -66,18 +66,22 @@ function render(main, credits, purchases) {
 
   main.innerHTML = `
     <h1 class="dashboard-page-title">Billing & Usage</h1>
-    <p style="font-family: var(--font-sans); color: var(--text-secondary); margin-bottom: var(--space-xl);">
+    <p class="dashboard-page-subtitle">
       Your remaining hours and purchase history.
     </p>
 
-    <div class="dashboard-card" style="margin-bottom: var(--space-xl);">
-      <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-s);">Hours remaining</h2>
-      <p class="dashboard-stat-card-value" style="margin-bottom: var(--space-m);">${formatDuration(remaining)}</p>
-      <a href="${base}/pricing/" target="_blank" rel="noopener" class="btn btn-primary">Buy more hours</a>
+    <div class="dashboard-card dashboard-credits-card">
+      <div class="dashboard-credits-widget">
+        <div>
+          <h2 class="dashboard-credits-widget-heading">Hours remaining</h2>
+          <p class="dashboard-credits-widget-value">${formatDuration(remaining)}</p>
+        </div>
+        <a href="${base}/pricing/" target="_blank" rel="noopener" class="btn btn-primary">Buy more hours</a>
+      </div>
     </div>
 
     <div class="dashboard-card">
-      <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-m);">Purchase history</h2>
+      <h2 class="dashboard-section-title">Purchase history</h2>
       ${purchases.length === 0
     ? `
         <div class="dashboard-empty">
@@ -92,24 +96,24 @@ function render(main, credits, purchases) {
     const name = pkg?.display_name || `${(p.seconds_added / 3600)} hours`
     const hours = p.seconds_added ? (p.seconds_added / 3600) : 0
     return `
-            <li class="dashboard-list-item billing-purchase-row" data-purchase-id="${escapeHtml(p.id)}" style="cursor: pointer;">
+            <li class="dashboard-list-item dashboard-list-item--clickable billing-purchase-row" data-purchase-id="${escapeHtml(p.id)}">
               <div style="flex: 1;">
-                <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-m);">
+                <div class="dashboard-credits-widget">
                   <strong>${escapeHtml(name)}</strong>
-                  <span style="font-size: 0.875rem; color: var(--text-secondary);">${formatPrice(p.amount_cents)}</span>
+                  <span class="dashboard-meta">${formatPrice(p.amount_cents)}</span>
                 </div>
-                <span style="font-size: 0.8125rem; color: var(--text-tertiary);">${formatDate(p.purchased_at)}</span>
-                <div class="billing-purchase-detail" id="detail-${escapeHtml(p.id)}" hidden style="margin-top: var(--space-m); padding-top: var(--space-m); border-top: 1px solid var(--border-subtle); font-family: var(--font-sans); font-size: 0.875rem; color: var(--text-secondary);">
-                  <div style="display: grid; grid-template-columns: auto 1fr; gap: var(--space-xs) var(--space-l);">
-                    <span style="color: var(--text-tertiary);">Package</span>
+                <span class="dashboard-meta-sub">${formatDate(p.purchased_at)}</span>
+                <div class="billing-purchase-detail" id="detail-${escapeHtml(p.id)}" hidden>
+                  <div class="billing-purchase-detail-grid">
+                    <span class="billing-detail-label">Package</span>
                     <span>${escapeHtml(name)}</span>
-                    <span style="color: var(--text-tertiary);">Hours added</span>
+                    <span class="billing-detail-label">Hours added</span>
                     <span>${hours} ${hours === 1 ? 'hour' : 'hours'}</span>
-                    <span style="color: var(--text-tertiary);">Amount</span>
+                    <span class="billing-detail-label">Amount</span>
                     <span>${formatPrice(p.amount_cents)}</span>
-                    <span style="color: var(--text-tertiary);">Date</span>
+                    <span class="billing-detail-label">Date</span>
                     <span>${formatDate(p.purchased_at)}</span>
-                    <span style="color: var(--text-tertiary);">Receipt</span>
+                    <span class="billing-detail-label">Receipt</span>
                     <span>Sent to your email</span>
                   </div>
                 </div>

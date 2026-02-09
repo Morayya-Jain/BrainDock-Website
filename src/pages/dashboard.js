@@ -199,11 +199,11 @@ function render(main, user, sessions, stats, weeklyData, credits) {
 
   // Credits widget: show remaining hours; if zero, show Buy Hours CTA
   const creditsWidget = `
-    <div class="dashboard-card" style="margin-bottom: var(--space-xl);">
-      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-m);">
+    <div class="dashboard-card dashboard-credits-card">
+      <div class="dashboard-credits-widget">
         <div>
-          <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-xs);">Hours remaining</h2>
-          <p style="font-size: 1.5rem; font-weight: 600; color: var(--text-primary);">${formatDuration(remainingSec)}</p>
+          <h2 class="dashboard-credits-widget-heading">Hours remaining</h2>
+          <p class="dashboard-credits-widget-value">${formatDuration(remainingSec)}</p>
         </div>
         ${!hasCredits
     ? `<a href="/pricing/" class="btn btn-primary" target="_blank" rel="noopener">Buy Hours</a>`
@@ -215,16 +215,16 @@ function render(main, user, sessions, stats, weeklyData, credits) {
   main.innerHTML = `
     <div class="dashboard-section">
       <h1 class="dashboard-page-title">Dashboard</h1>
-      <p style="font-family: var(--font-sans); color: var(--text-secondary); margin-bottom: var(--space-xl);">
+      <p class="dashboard-page-subtitle">
         Welcome back, ${escapeHtml(name)} &middot; ${todayStr}
       </p>
     </div>
 
     ${creditsWidget}
     ${hasCredits && !hasSessions ? `
-    <div class="dashboard-card" style="border-left: 4px solid var(--success); margin-bottom: var(--space-xl);">
-      <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-s);">You're all set! Download BrainDock</h2>
-      <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: var(--space-l);">You have hours available. Download the desktop app and sign in with the same account to start tracking your focus.</p>
+    <div class="dashboard-card dashboard-card--accent" style="margin-bottom: var(--space-xl);">
+      <h2 class="dashboard-section-title" style="margin-bottom: var(--space-s);">You're all set! Download BrainDock</h2>
+      <p class="dashboard-meta" style="margin-bottom: var(--space-l);">You have hours available. Download the desktop app and sign in with the same account to start tracking your focus.</p>
       <div style="display: flex; flex-wrap: wrap; gap: var(--space-m);">
         <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg" class="btn btn-primary">Download for macOS</a>
         <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe" class="btn btn-secondary">Download for Windows</a>
@@ -233,17 +233,17 @@ function render(main, user, sessions, stats, weeklyData, credits) {
     ` : ''}
 
     <div class="dashboard-stat-cards">
-      <div class="dashboard-stat-card">
+      <div class="dashboard-stat-card dashboard-stat-card--focus">
         <div class="dashboard-stat-card-label">Today's Focus</div>
         <div class="dashboard-stat-card-value">${formatDuration(stats.today.focusSeconds)}</div>
         <div class="dashboard-stat-card-sub">${stats._focusDiffStr} vs yesterday</div>
       </div>
-      <div class="dashboard-stat-card">
+      <div class="dashboard-stat-card dashboard-stat-card--alert">
         <div class="dashboard-stat-card-label">Today's Distractions</div>
         <div class="dashboard-stat-card-value">${stats.today.distractions}</div>
         <div class="dashboard-stat-card-sub">${stats._distDiffStr} vs yesterday</div>
       </div>
-      <div class="dashboard-stat-card">
+      <div class="dashboard-stat-card dashboard-stat-card--rate">
         <div class="dashboard-stat-card-label">Focus Rate</div>
         <div class="dashboard-stat-card-value">${todayFocusRate}%</div>
         <div class="dashboard-stat-card-sub">${stats._rateDiffStr} vs yesterday</div>
@@ -279,8 +279,8 @@ function render(main, user, sessions, stats, weeklyData, credits) {
                   <li class="dashboard-list-item">
                     <div>
                       <strong>${escapeHtml(s.session_name || 'Session')}</strong><br>
-                      <span style="font-size: 0.875rem; color: var(--text-secondary);">${dayStr} ${timeStr} &middot; ${modeLabel(s.monitoring_mode)} &middot; ${formatDuration(duration)} active &middot; ${Math.round(pct)}% focus</span><br>
-                      <span style="font-size: 0.8125rem; color: var(--text-tertiary);">${gadgets} gadgets &middot; ${screen} screen distractions</span>
+                      <span class="dashboard-meta">${dayStr} ${timeStr} &middot; ${modeLabel(s.monitoring_mode)} &middot; ${formatDuration(duration)} active &middot; ${Math.round(pct)}% focus</span><br>
+                      <span class="dashboard-meta-sub">${gadgets} gadgets &middot; ${screen} screen distractions</span>
                     </div>
                     <a href="/sessions/${escapeHtml(s.id)}" class="btn btn-secondary dashboard-btn-sm">View</a>
                   </li>
@@ -315,7 +315,7 @@ function render(main, user, sessions, stats, weeklyData, credits) {
               )
               .join('')}
           </div>
-          <p style="font-size: 0.8125rem; color: var(--text-tertiary); text-align: center; margin-top: var(--space-s);">Focus time by day</p>
+          <p class="dashboard-chart-caption">Focus time by day</p>
           `}
       </div>
     </div>

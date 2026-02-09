@@ -122,15 +122,13 @@ function render(main, session, events) {
   const name = session.session_name || `Session ${startDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
 
   main.innerHTML = `
-    <p style="margin-bottom: var(--space-m);">
-      <a href="${base}/sessions/" style="font-size: 0.9375rem; color: var(--text-secondary);">Back to Sessions</a>
-    </p>
+    <a href="${base}/sessions/" class="dashboard-back-link">Back to Sessions</a>
     <h1 class="dashboard-page-title">${escapeHtml(name)}</h1>
-    <p style="font-family: var(--font-sans); color: var(--text-secondary); margin-bottom: var(--space-xl);">
+    <p class="dashboard-page-subtitle">
       ${dateStr} &middot; ${modeLabel(session.monitoring_mode)}
     </p>
 
-    <div class="dashboard-stat-cards" style="grid-template-columns: repeat(2, 1fr);">
+    <div class="dashboard-stat-cards dashboard-stat-cards--2col">
       <div class="dashboard-stat-card">
         <div class="dashboard-stat-card-label">Focus</div>
         <div class="dashboard-stat-card-value">${formatDuration(presentSec)}</div>
@@ -162,7 +160,7 @@ function render(main, session, events) {
       <h2 class="dashboard-section-title">Timeline</h2>
       <div class="dashboard-card">
         ${segments.length === 0
-          ? '<p style="font-size: 0.875rem; color: var(--text-tertiary);">No event data for this session.</p>'
+          ? '<p class="dashboard-meta-sub">No event data for this session.</p>'
           : `
           <div class="dashboard-timeline-bar">
             ${segments.map((seg, i) => `
@@ -170,11 +168,11 @@ function render(main, session, events) {
             `).join('')}
           </div>
           <div class="dashboard-timeline-legend">
-            <span><i style="background: #059669;"></i> Focused</span>
-            <span><i style="background: #C4841D;"></i> Away</span>
-            <span><i style="background: #DC2626;"></i> Gadget</span>
-            <span><i style="background: #7C3AED;"></i> Screen</span>
-            <span><i style="background: #6B7280;"></i> Paused</span>
+            <span><i class="legend-focused"></i> Focused</span>
+            <span><i class="legend-away"></i> Away</span>
+            <span><i class="legend-gadget"></i> Gadget</span>
+            <span><i class="legend-screen"></i> Screen</span>
+            <span><i class="legend-paused"></i> Paused</span>
           </div>
           `}
       </div>
@@ -184,7 +182,7 @@ function render(main, session, events) {
       <h2 class="dashboard-section-title">Event Log</h2>
       <div class="dashboard-table-wrap">
         ${events.length === 0
-          ? '<p style="padding: var(--space-l); font-size: 0.875rem; color: var(--text-tertiary);">No events recorded.</p>'
+          ? '<p class="dashboard-meta-sub dashboard-table-empty">No events recorded.</p>'
           : `
           <table class="dashboard-table">
             <thead>

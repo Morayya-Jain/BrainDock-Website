@@ -39,7 +39,7 @@ function render(main, settings, userId) {
 
   main.innerHTML = `
     <h1 class="dashboard-page-title">Detection</h1>
-    <p style="font-family: var(--font-sans); color: var(--text-secondary); margin-bottom: var(--space-xl);">
+    <p class="dashboard-page-subtitle">
       Choose which gadget types the camera should count as distractions. Only enabled types are detected.
     </p>
 
@@ -54,7 +54,7 @@ function render(main, settings, userId) {
         </div>
       `).join('')}
 
-      <div style="margin-top: var(--space-xl);">
+      <div class="dashboard-form-actions">
         <button type="button" class="btn btn-primary" id="detection-save-btn">Save Changes</button>
         <span class="dashboard-saved" id="detection-saved-msg" style="display: none;">Saved</span>
       </div>
