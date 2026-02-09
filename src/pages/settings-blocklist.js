@@ -1,31 +1,121 @@
 /**
- * Blocklist settings: quick toggles, categories, custom URLs and apps.
- * Reads/writes blocklist_configs table. Auto-save with debounce.
+ * Configuration page: combines blocklist (quick toggles, custom URLs/apps)
+ * and detection (item type toggles) into a single settings view.
+ * Both sections auto-save with debounce. Cards use sticky stacking layout.
  */
 
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { validateUrlPattern, validateAppPattern } from '../validators.js'
+import {
+  createIcons,
+  Smartphone,
+  Tablet,
+  Gamepad2,
+  Gamepad,
+  Tv,
+  Watch,
+  Laptop,
+  UtensilsCrossed,
+  Camera,
+  Instagram,
+  Youtube,
+  Film,
+  MessageCircle,
+  Music,
+  Twitter,
+  Twitch,
+  MessageSquare,
+  Facebook,
+  Zap,
+  Linkedin,
+  ShoppingCart,
+  Pin,
+  Headphones,
+  Globe,
+  Newspaper,
+  PlayCircle,
+  Image,
+} from 'lucide/dist/cjs/lucide.js'
+
+// Small inline SVG for remove (X) buttons on chips
+const CROSS_SVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`
+
+// -- Blocklist constants --
 
 const QUICK_SITES = [
-  { id: 'instagram', name: 'Instagram' },
-  { id: 'youtube', name: 'YouTube' },
-  { id: 'netflix', name: 'Netflix' },
-  { id: 'reddit', name: 'Reddit' },
-  { id: 'tiktok', name: 'TikTok' },
-  { id: 'twitter', name: 'Twitter/X' },
+  { id: 'instagram', name: 'Instagram', icon: 'instagram' },
+  { id: 'youtube', name: 'YouTube', icon: 'youtube' },
+  { id: 'netflix', name: 'Netflix', icon: 'film' },
+  { id: 'reddit', name: 'Reddit', icon: 'message-circle' },
+  { id: 'tiktok', name: 'TikTok', icon: 'music' },
+  { id: 'twitter', name: 'Twitter/X', icon: 'twitter' },
+  { id: 'twitch', name: 'Twitch', icon: 'twitch' },
+  { id: 'discord', name: 'Discord', icon: 'message-square' },
+  { id: 'facebook', name: 'Facebook', icon: 'facebook' },
+  { id: 'snapchat', name: 'Snapchat', icon: 'zap' },
+  { id: 'linkedin', name: 'LinkedIn', icon: 'linkedin' },
+  { id: 'pinterest', name: 'Pinterest', icon: 'pin' },
+  { id: 'amazon', name: 'Amazon', icon: 'shopping-cart' },
+  { id: 'spotify', name: 'Spotify', icon: 'headphones' },
+  { id: 'hulu', name: 'Hulu', icon: 'play-circle' },
+  { id: 'disneyplus', name: 'Disney+', icon: 'play-circle' },
+  { id: 'primevideo', name: 'Prime Video', icon: 'play-circle' },
+  { id: 'whatsapp', name: 'WhatsApp Web', icon: 'message-circle' },
+  { id: 'telegram', name: 'Telegram', icon: 'message-square' },
+  { id: 'tumblr', name: 'Tumblr', icon: 'image' },
+  { id: 'threads', name: 'Threads', icon: 'globe' },
+  { id: 'news', name: 'News sites', icon: 'newspaper' },
 ]
 
 const DEBOUNCE_MS = 800
 
+// -- Detection constants --
+
+const ITEM_PRESETS = [
+  { id: 'phone', name: 'Phone', description: 'Smartphones (5-7 inch devices)', icon: 'smartphone' },
+  { id: 'tablet', name: 'Tablet / iPad', description: 'Tablets and iPads (8+ inch)', icon: 'tablet' },
+  { id: 'controller', name: 'Game Controller', description: 'PS5, Xbox, generic controllers', icon: 'gamepad-2' },
+  { id: 'tv', name: 'TV / TV Remote', description: 'Television and remote control usage', icon: 'tv' },
+  { id: 'nintendo_switch', name: 'Nintendo Switch', description: 'Nintendo Switch handheld/docked', icon: 'gamepad' },
+  { id: 'smartwatch', name: 'Smartwatch', description: 'Apple Watch, Fitbit, Galaxy Watch', icon: 'watch' },
+  { id: 'laptop', name: 'Laptop', description: 'Secondary laptop or notebook', icon: 'laptop' },
+  { id: 'food', name: 'Food / Snacks', description: 'Food, drinks, and snacking', icon: 'utensils-crossed' },
+  { id: 'camera', name: 'Camera', description: 'DSLR, mirrorless, or action cameras', icon: 'camera' },
+]
+
+// Icons needed by createIcons after render
+const PAGE_ICONS = {
+  Smartphone, Tablet, Gamepad2, Gamepad, Tv, Watch, Laptop, UtensilsCrossed, Camera,
+  Instagram, Youtube, Film, MessageCircle, Music, Twitter, Twitch, MessageSquare, Facebook, Zap,
+  Linkedin, ShoppingCart, Pin, Headphones, Globe, Newspaper, PlayCircle, Image,
+}
+
+// -- Data helpers --
+
 async function loadBlocklist() {
+  /** Load blocklist config from Supabase. */
   const { data, error } = await supabase.from('blocklist_configs').select('*').single()
   if (error) throw error
   return data
 }
 
 async function saveBlocklist(userId, payload) {
+  /** Persist blocklist changes. */
   const { error } = await supabase.from('blocklist_configs').update(payload).eq('user_id', userId)
+  if (error) throw error
+}
+
+async function loadDetectionSettings() {
+  /** Load detection item settings from Supabase. */
+  const { data, error } = await supabase.from('user_settings').select('enabled_gadgets').single()
+  if (error) throw error
+  return data
+}
+
+async function saveDetectionSettings(userId, enabledItems) {
+  /** Persist detection item changes. */
+  const { error } = await supabase.from('user_settings').update({ enabled_gadgets: enabledItems }).eq('user_id', userId)
   if (error) throw error
 }
 
@@ -36,18 +126,28 @@ function escapeHtml(str) {
   return div.innerHTML
 }
 
-function render(main, config, userId) {
+// -- Render --
+
+function render(main, blocklistConfig, detectionSettings, userId) {
+  // Blocklist state
   const state = {
-    quick_blocks: { ...(config?.quick_blocks || {}) },
-    categories: { ...(config?.categories || {}) },
-    custom_urls: Array.isArray(config?.custom_urls) ? [...config.custom_urls] : [],
-    custom_apps: Array.isArray(config?.custom_apps) ? [...config.custom_apps] : [],
+    quick_blocks: { ...(blocklistConfig?.quick_blocks || {}) },
+    categories: { ...(blocklistConfig?.categories || {}) },
+    custom_urls: Array.isArray(blocklistConfig?.custom_urls) ? [...blocklistConfig.custom_urls] : [],
+    custom_apps: Array.isArray(blocklistConfig?.custom_apps) ? [...blocklistConfig.custom_apps] : [],
   }
 
-  let saveTimeout = null
-  function scheduleSave() {
-    clearTimeout(saveTimeout)
-    saveTimeout = setTimeout(async () => {
+  // Detection state
+  const enabledItems = Array.isArray(detectionSettings?.enabled_gadgets)
+    ? detectionSettings.enabled_gadgets
+    : ['phone']
+  const itemSet = new Set(enabledItems)
+
+  // Auto-save blocklist with debounce
+  let blocklistSaveTimeout = null
+  function scheduleBlocklistSave() {
+    clearTimeout(blocklistSaveTimeout)
+    blocklistSaveTimeout = setTimeout(async () => {
       try {
         await saveBlocklist(userId, {
           quick_blocks: state.quick_blocks,
@@ -55,32 +155,71 @@ function render(main, config, userId) {
           custom_urls: state.custom_urls,
           custom_apps: state.custom_apps,
         })
-        const msg = main.querySelector('#blocklist-saved-msg')
-        if (msg) {
-          msg.style.display = 'inline'
-          setTimeout(() => { msg.style.display = 'none' }, 2000)
-        }
       } catch (err) {
         console.error(err)
       }
     }, DEBOUNCE_MS)
   }
 
+  // Auto-save detection with debounce
+  let detectionSaveTimeout = null
+  function scheduleDetectionSave() {
+    clearTimeout(detectionSaveTimeout)
+    detectionSaveTimeout = setTimeout(async () => {
+      try {
+        const enabled = getEnabledItems()
+        await saveDetectionSettings(userId, enabled)
+      } catch (err) {
+        console.error(err)
+      }
+    }, DEBOUNCE_MS)
+  }
+
+  /** Read currently-active item toggles. */
+  function getEnabledItems() {
+    const arr = []
+    main.querySelectorAll('.dashboard-toggle-switch[data-item].active').forEach((el) => {
+      arr.push(el.dataset.item)
+    })
+    return arr
+  }
+
   main.innerHTML = `
-    <h1 class="dashboard-page-title">Blocklist</h1>
+    <h1 class="dashboard-page-title">Configuration</h1>
     <p class="dashboard-page-subtitle">
-      Choose which sites and apps count as distractions during screen monitoring. The desktop app loads these settings when you start a session.
+      Configure what counts as a distraction. These settings are loaded by the desktop app when you start a session.
     </p>
 
-    <div class="dashboard-card-stack">
+    <div class="dashboard-card-stack dashboard-card-stack--compact">
+
+      <!-- Detection: item toggles -->
+      <div class="dashboard-card">
+        <h2 class="dashboard-section-title">Item Detection</h2>
+        <p class="dashboard-meta" style="margin-bottom: var(--space-s);">Which items the camera should detect as distractions.</p>
+        ${ITEM_PRESETS.map((g) => `
+          <div class="dashboard-toggle">
+            <div>
+              <div class="dashboard-toggle-label">
+                <i data-lucide="${g.icon}" class="dashboard-toggle-icon" aria-hidden="true"></i>
+                ${escapeHtml(g.name)}
+              </div>
+              <div class="dashboard-toggle-desc">${escapeHtml(g.description)}</div>
+            </div>
+            <div class="dashboard-toggle-switch ${itemSet.has(g.id) ? 'active' : ''}" data-item="${g.id}" role="button" tabindex="0" aria-pressed="${itemSet.has(g.id)}"></div>
+          </div>
+        `).join('')}
+      </div>
+
+      <!-- Blocklist: quick block toggles -->
       <div class="dashboard-card">
         <h2 class="dashboard-section-title">Quick Block</h2>
         <div id="quick-blocks-container"></div>
       </div>
 
+      <!-- Blocklist: custom URLs -->
       <div class="dashboard-card">
         <h2 class="dashboard-section-title">Custom URLs</h2>
-        <p class="dashboard-meta" style="margin-bottom: var(--space-m);">Add domains to block (e.g. example.com)</p>
+        <p class="dashboard-meta" style="margin-bottom: var(--space-s);">Add domains to block (e.g. example.com)</p>
         <div class="dashboard-input-row">
           <input type="text" id="custom-url-input" class="dashboard-input dashboard-input--narrow" placeholder="example.com" maxlength="253">
           <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-url-add">Add</button>
@@ -89,9 +228,10 @@ function render(main, config, userId) {
         <div id="custom-urls-list"></div>
       </div>
 
+      <!-- Blocklist: custom apps -->
       <div class="dashboard-card">
         <h2 class="dashboard-section-title">Custom Apps</h2>
-        <p class="dashboard-meta" style="margin-bottom: var(--space-m);">Add app names to block (e.g. Discord)</p>
+        <p class="dashboard-meta" style="margin-bottom: var(--space-s);">Add app names to block (e.g. Discord)</p>
         <div class="dashboard-input-row">
           <input type="text" id="custom-app-input" class="dashboard-input dashboard-input--narrow" placeholder="App name" maxlength="50">
           <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-app-add">Add</button>
@@ -101,16 +241,28 @@ function render(main, config, userId) {
       </div>
     </div>
 
-    <p class="dashboard-meta-sub" style="margin-top: var(--space-l);">
-      <span class="dashboard-saved" id="blocklist-saved-msg" style="display: none;">Saved</span>
-    </p>
   `
+
+  // -- Detection interactivity (auto-save on toggle) --
+
+  main.querySelectorAll('.dashboard-toggle-switch[data-item]').forEach((el) => {
+    el.addEventListener('click', () => {
+      el.classList.toggle('active')
+      el.setAttribute('aria-pressed', el.classList.contains('active'))
+      scheduleDetectionSave()
+    })
+  })
+
+  // -- Blocklist: quick block interactivity --
 
   const quickContainer = main.querySelector('#quick-blocks-container')
   quickContainer.innerHTML = QUICK_SITES.map((q) => `
     <div class="dashboard-toggle">
       <div>
-        <div class="dashboard-toggle-label">${escapeHtml(q.name)}</div>
+        <div class="dashboard-toggle-label">
+          <i data-lucide="${q.icon}" class="dashboard-toggle-icon" aria-hidden="true"></i>
+          ${escapeHtml(q.name)}
+        </div>
       </div>
       <div class="dashboard-toggle-switch ${state.quick_blocks[q.id] ? 'active' : ''}" data-quick="${q.id}" role="button" tabindex="0" aria-pressed="${!!state.quick_blocks[q.id]}"></div>
     </div>
@@ -123,9 +275,11 @@ function render(main, config, userId) {
       el.classList.toggle('active', next)
       el.setAttribute('aria-pressed', next)
       state.quick_blocks[id] = next
-      scheduleSave()
+      scheduleBlocklistSave()
     })
   })
+
+  // -- Blocklist: custom URL list --
 
   function renderCustomUrls() {
     const list = main.querySelector('#custom-urls-list')
@@ -134,7 +288,7 @@ function render(main, config, userId) {
       : state.custom_urls.map((u) => `
           <span class="dashboard-chip">
             ${escapeHtml(u)}
-            <button type="button" class="dashboard-remove-btn" data-url="${escapeHtml(u)}" aria-label="Remove">Remove</button>
+            <button type="button" class="dashboard-remove-btn" data-url="${escapeHtml(u)}" aria-label="Remove ${escapeHtml(u)}">${CROSS_SVG}</button>
           </span>
         `).join('')
     list.querySelectorAll('.dashboard-remove-btn').forEach((btn) => {
@@ -142,10 +296,12 @@ function render(main, config, userId) {
         const u = btn.dataset.url
         state.custom_urls.splice(state.custom_urls.indexOf(u), 1)
         renderCustomUrls()
-        scheduleSave()
+        scheduleBlocklistSave()
       })
     })
   }
+
+  // -- Blocklist: custom app list --
 
   function renderCustomApps() {
     const list = main.querySelector('#custom-apps-list')
@@ -154,7 +310,7 @@ function render(main, config, userId) {
       : state.custom_apps.map((a) => `
           <span class="dashboard-chip">
             ${escapeHtml(a)}
-            <button type="button" class="dashboard-remove-btn" data-app="${escapeHtml(a)}" aria-label="Remove">Remove</button>
+            <button type="button" class="dashboard-remove-btn" data-app="${escapeHtml(a)}" aria-label="Remove ${escapeHtml(a)}">${CROSS_SVG}</button>
           </span>
         `).join('')
     list.querySelectorAll('.dashboard-remove-btn').forEach((btn) => {
@@ -162,13 +318,15 @@ function render(main, config, userId) {
         const a = btn.dataset.app
         state.custom_apps.splice(state.custom_apps.indexOf(a), 1)
         renderCustomApps()
-        scheduleSave()
+        scheduleBlocklistSave()
       })
     })
   }
 
   renderCustomUrls()
   renderCustomApps()
+
+  // -- Blocklist: add helpers --
 
   function setHint(hintEl, message, type) {
     if (!hintEl) return
@@ -184,7 +342,7 @@ function render(main, config, userId) {
       setHint(hintEl, '', '')
       return
     }
-    setHint(hintEl, 'Checking…', '')
+    setHint(hintEl, 'Checking...', '')
     const result = await validateUrlPattern(val)
     if (!result.valid) {
       setHint(hintEl, result.message, 'error')
@@ -200,7 +358,7 @@ function render(main, config, userId) {
     setHint(hintEl, result.isWarning ? result.message : 'Added.', result.isWarning ? 'warning' : 'success')
     setTimeout(() => setHint(hintEl, '', ''), 3000)
     renderCustomUrls()
-    scheduleSave()
+    scheduleBlocklistSave()
   }
 
   function addCustomApp() {
@@ -225,7 +383,7 @@ function render(main, config, userId) {
     setHint(hintEl, result.isWarning ? result.message : 'Added.', result.isWarning ? 'warning' : 'success')
     setTimeout(() => setHint(hintEl, '', ''), 3000)
     renderCustomApps()
-    scheduleSave()
+    scheduleBlocklistSave()
   }
 
   main.querySelector('#custom-url-add').addEventListener('click', addCustomUrl)
@@ -237,7 +395,24 @@ function render(main, config, userId) {
   main.querySelector('#custom-app-input').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') { e.preventDefault(); addCustomApp() }
   })
+
+  // Clear error hints when the user empties the input
+  main.querySelector('#custom-url-input').addEventListener('input', (e) => {
+    if (!e.target.value.trim()) {
+      setHint(main.querySelector('#custom-url-hint'), '', '')
+    }
+  })
+  main.querySelector('#custom-app-input').addEventListener('input', (e) => {
+    if (!e.target.value.trim()) {
+      setHint(main.querySelector('#custom-app-hint'), '', '')
+    }
+  })
+
+  // Render Lucide icons inside the page content
+  createIcons({ icons: PAGE_ICONS, root: main })
 }
+
+// -- Entry point --
 
 async function main() {
   const result = await initDashboardLayout()
@@ -246,16 +421,20 @@ async function main() {
   const mainEl = document.querySelector('.dashboard-main')
   if (!mainEl) return
 
-  mainEl.innerHTML = '<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>Loading blocklist...</p></div>'
+  mainEl.innerHTML = '<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>Loading configuration...</p></div>'
 
   try {
-    const config = await loadBlocklist()
-    render(mainEl, config, result.user.id)
+    // Load blocklist and detection data in parallel
+    const [blocklistConfig, detectionSettings] = await Promise.all([
+      loadBlocklist(),
+      loadDetectionSettings(),
+    ])
+    render(mainEl, blocklistConfig, detectionSettings, result.user.id)
   } catch (err) {
     console.error(err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
-        <p class="dashboard-empty-title">Could not load blocklist</p>
+        <p class="dashboard-empty-title">Could not load configuration</p>
         <p>${escapeHtml(err.message || 'Please try again.')}</p>
       </div>
     `

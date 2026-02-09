@@ -11,14 +11,47 @@ import {
   Clock,
   Settings,
   ChevronDown,
-  ChevronRight,
+  Smartphone,
   CreditCard,
   BookOpen,
+  Hourglass,
 } from 'lucide/dist/cjs/lucide.js'
 import './dashboard.css'
 
 const LOGIN_PATH = '/auth/login/'
 const DASHBOARD_PATH = '/dashboard/'
+
+/**
+ * Fetch remaining credit seconds from user_credits table.
+ */
+async function fetchRemainingSeconds() {
+  try {
+    const { data, error } = await supabase
+      .from('user_credits')
+      .select('total_purchased_seconds, total_used_seconds')
+      .single()
+    if (error) return 0
+    const purchased = data?.total_purchased_seconds ?? 0
+    const used = data?.total_used_seconds ?? 0
+    return Math.max(0, purchased - used)
+  } catch (_) {
+    return 0
+  }
+}
+
+/**
+ * Format seconds into human-readable duration for the pill display.
+ * Examples: "2 hours", "45 min", "0 sec"
+ */
+function formatPillDuration(seconds) {
+  if (seconds == null || seconds < 0) return '0 sec'
+  const h = Math.floor(seconds / 3600)
+  const m = Math.floor((seconds % 3600) / 60)
+  const s = Math.floor(seconds % 60)
+  if (h > 0) return `${h} ${h === 1 ? 'hour' : 'hours'}`
+  if (m > 0) return `${m} min`
+  return `${s} sec`
+}
 
 /**
  * Get current path for sidebar active state (e.g. /settings/blocklist).
@@ -34,7 +67,6 @@ function getCurrentPath() {
  */
 function buildSidebarHTML(currentPath) {
   const base = window.location.origin
-  const settingsActive = currentPath.startsWith('/settings')
 
   return `
     <a href="${base}/" class="dashboard-sidebar-logo" aria-label="BrainDock home">
@@ -42,6 +74,18 @@ function buildSidebarHTML(currentPath) {
     </a>
     <nav class="dashboard-sidebar-nav" aria-label="Dashboard navigation">
       <ul class="dashboard-sidebar-list">
+        <li>
+          <a href="${base}/settings/blocklist/" class="dashboard-sidebar-link ${currentPath === '/settings/blocklist' ? 'active' : ''}">
+            <i data-lucide="settings" class="dashboard-sidebar-icon" aria-hidden="true"></i>
+            <span>Configuration</span>
+          </a>
+        </li>
+        <li>
+          <a href="${base}/how-to-use/" class="dashboard-sidebar-link ${currentPath === '/how-to-use' ? 'active' : ''}">
+            <i data-lucide="book-open" class="dashboard-sidebar-icon" aria-hidden="true"></i>
+            <span>How to Use</span>
+          </a>
+        </li>
         <li>
           <a href="${base}${DASHBOARD_PATH}" class="dashboard-sidebar-link ${currentPath === '/dashboard' ? 'active' : ''}">
             <i data-lucide="layout-dashboard" class="dashboard-sidebar-icon" aria-hidden="true"></i>
@@ -54,20 +98,6 @@ function buildSidebarHTML(currentPath) {
             <span>Sessions</span>
           </a>
         </li>
-        <li class="dashboard-sidebar-group">
-          <button type="button" class="dashboard-sidebar-link dashboard-sidebar-expand ${settingsActive ? 'active' : ''}" aria-expanded="${settingsActive}" data-expands="settings-sub">
-            <span class="dashboard-sidebar-expand-inner">
-              <i data-lucide="settings" class="dashboard-sidebar-icon" aria-hidden="true"></i>
-              <span>Settings</span>
-            </span>
-            <i data-lucide="chevron-right" class="dashboard-sidebar-chevron" aria-hidden="true"></i>
-          </button>
-          <ul id="settings-sub" class="dashboard-sidebar-sublist" ${settingsActive ? '' : 'hidden'}>
-            <li><a href="${base}/settings/blocklist/" class="dashboard-sidebar-link ${currentPath === '/settings/blocklist' ? 'active' : ''}">Blocklist</a></li>
-            <li><a href="${base}/settings/detection/" class="dashboard-sidebar-link ${currentPath === '/settings/detection' ? 'active' : ''}">Detection</a></li>
-            <li><a href="${base}/settings/devices/" class="dashboard-sidebar-link ${currentPath === '/settings/devices' ? 'active' : ''}">Devices</a></li>
-          </ul>
-        </li>
         <li>
           <a href="${base}/account/subscription/" class="dashboard-sidebar-link ${currentPath === '/account/subscription' ? 'active' : ''}">
             <i data-lucide="credit-card" class="dashboard-sidebar-icon" aria-hidden="true"></i>
@@ -75,17 +105,20 @@ function buildSidebarHTML(currentPath) {
           </a>
         </li>
         <li>
-          <a href="${base}/how-to-use/" class="dashboard-sidebar-link ${currentPath === '/how-to-use' ? 'active' : ''}">
-            <i data-lucide="book-open" class="dashboard-sidebar-icon" aria-hidden="true"></i>
-            <span>How to Use</span>
+          <a href="${base}/settings/devices/" class="dashboard-sidebar-link ${currentPath === '/settings/devices' ? 'active' : ''}">
+            <i data-lucide="smartphone" class="dashboard-sidebar-icon" aria-hidden="true"></i>
+            <span>Linked Devices</span>
           </a>
         </li>
       </ul>
     </nav>
     <div class="dashboard-sidebar-footer">
       <button type="button" class="dashboard-sidebar-footer-trigger" id="dashboard-sidebar-footer-trigger" aria-expanded="false" aria-haspopup="true">
-        <span class="dashboard-avatar dashboard-avatar-sm" id="dashboard-sidebar-avatar" aria-hidden="true"></span>
-        <span class="dashboard-sidebar-user" id="dashboard-sidebar-user-email"></span>
+        <span class="dashboard-avatar dashboard-avatar-footer" id="dashboard-sidebar-avatar" aria-hidden="true"></span>
+        <span class="dashboard-sidebar-user-info">
+          <span class="dashboard-sidebar-user-name" id="dashboard-sidebar-user-name"></span>
+          <span class="dashboard-sidebar-user-email" id="dashboard-sidebar-user-email"></span>
+        </span>
       </button>
       <div class="dashboard-sidebar-popup" id="dashboard-sidebar-popup" hidden>
         <a href="${base}/" class="dashboard-sidebar-popup-link">Back to Website</a>
@@ -132,23 +165,9 @@ function renderAvatar(avatarUrl, initials) {
 }
 
 /**
- * Initialize sidebar expand/collapse, chevron, sign out, and mobile menu.
+ * Initialize sidebar sign out, footer popup, and mobile menu.
  */
 function initSidebarBehavior() {
-  const expandBtn = document.querySelector('.dashboard-sidebar-expand')
-  const sublist = document.getElementById('settings-sub')
-  if (expandBtn && sublist) {
-    expandBtn.addEventListener('click', () => {
-      const expanded = sublist.hidden
-      sublist.hidden = !expanded
-      expandBtn.setAttribute('aria-expanded', expanded)
-      expandBtn.classList.toggle('dashboard-sidebar-expand-open', expanded)
-    })
-    if (sublist && !sublist.hidden) {
-      expandBtn.classList.add('dashboard-sidebar-expand-open')
-    }
-  }
-
   const signoutBtn = document.getElementById('dashboard-sidebar-signout')
   if (signoutBtn) {
     signoutBtn.addEventListener('click', handleSignOut)
@@ -266,9 +285,13 @@ export async function initDashboardLayout(options = {}) {
   sidebar.setAttribute('aria-label', 'Navigation')
   sidebar.innerHTML = buildSidebarHTML(currentPath)
 
+  const userNameEl = sidebar.querySelector('#dashboard-sidebar-user-name')
   const userEmailEl = sidebar.querySelector('#dashboard-sidebar-user-email')
   const sidebarAvatarEl = sidebar.querySelector('#dashboard-sidebar-avatar')
-  if (userEmailEl) userEmailEl.textContent = displayName
+  // Show full name as primary, email as secondary
+  const fullName = user.user_metadata?.full_name || ''
+  if (userNameEl) userNameEl.textContent = fullName || user.email || 'Signed in'
+  if (userEmailEl) userEmailEl.textContent = fullName ? (user.email || '') : ''
   if (sidebarAvatarEl) {
     sidebarAvatarEl.innerHTML = renderAvatar(avatarUrl, initials)
   }
@@ -277,10 +300,17 @@ export async function initDashboardLayout(options = {}) {
   main.className = 'dashboard-main'
   main.setAttribute('role', 'main')
 
-  // Top-right header (desktop): download button + profile dropdown
+  // Fetch remaining credits for the pill (non-blocking, updates when ready)
+  const remainingPromise = fetchRemainingSeconds()
+
+  // Top-right header (desktop): remaining pill + download button + profile dropdown
   const headerWrap = document.createElement('div')
   headerWrap.className = 'dashboard-header-wrap'
   headerWrap.innerHTML = `
+    <a href="${base}/account/subscription/" class="dashboard-remaining-pill" id="dashboard-remaining-pill" title="Remaining session time">
+      <i data-lucide="hourglass" class="dashboard-remaining-pill-icon" aria-hidden="true"></i>
+      <span id="dashboard-remaining-text">...</span>
+    </a>
     <a href="${base}/download/" class="dashboard-download-btn">
       <span>Download</span>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -354,7 +384,7 @@ export async function initDashboardLayout(options = {}) {
   }
 
   createIcons({
-    icons: { LayoutDashboard, Clock, Settings, ChevronDown, ChevronRight, CreditCard, BookOpen },
+    icons: { LayoutDashboard, Clock, Settings, ChevronDown, Smartphone, CreditCard, BookOpen, Hourglass },
     attrs: { class: 'dashboard-sidebar-icon' },
     root: app,
   })
@@ -367,6 +397,12 @@ export async function initDashboardLayout(options = {}) {
 
   initSidebarBehavior()
   initProfileDropdown()
+
+  // Populate remaining-time pill once credits load
+  remainingPromise.then((seconds) => {
+    const textEl = document.getElementById('dashboard-remaining-text')
+    if (textEl) textEl.textContent = formatPillDuration(seconds)
+  })
 
   return { user }
 }

@@ -25,7 +25,7 @@ export function getRedirectPath() {
   if (redirect && redirect.startsWith('/') && !redirect.startsWith('//')) {
     return redirect
   }
-  return '/dashboard/'
+  return '/settings/blocklist/'
 }
 
 /**

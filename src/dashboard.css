@@ -205,19 +205,19 @@
 
 .dashboard-sidebar-footer {
   padding: var(--space-m) var(--space-l);
-  border-top: 1px solid var(--border-subtle);
+  background: rgba(0, 0, 0, 0.06);
   position: relative;
 }
 
 .dashboard-sidebar-footer-trigger {
   display: flex;
   align-items: center;
-  gap: var(--space-m);
+  gap: var(--space-s);
   width: 100%;
-  padding: var(--space-s);
+  padding: var(--space-s) var(--space-s);
   border: none;
   background: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   text-align: left;
   transition: background-color var(--transition-fast);
@@ -227,15 +227,38 @@
   background: var(--bg-secondary);
 }
 
-.dashboard-sidebar-user {
-  font-family: var(--font-sans);
+.dashboard-avatar-footer {
+  width: 38px;
+  height: 38px;
   font-size: 0.875rem;
-  color: var(--text-secondary);
-  word-break: break-all;
+  flex-shrink: 0;
+}
+
+.dashboard-sidebar-user-info {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   min-width: 0;
+  text-align: left;
+}
+
+.dashboard-sidebar-user-name {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dashboard-sidebar-user-email {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   white-space: nowrap;
 }
 
@@ -369,13 +392,42 @@
   }
 }
 
-/* Top-right header: download button + profile */
+/* Top-right header: remaining pill + download button + profile */
 .dashboard-header-wrap {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: var(--space-m);
   margin-bottom: var(--space-l);
+}
+
+/* Pill showing remaining session time */
+.dashboard-remaining-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.dashboard-remaining-pill:hover {
+  background: var(--bg-surface);
+  border-color: var(--accent-highlight);
+}
+
+.dashboard-remaining-pill-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
 }
 
 .dashboard-download-btn {
@@ -523,6 +575,19 @@
   gap: var(--space-l);
 }
 
+/* Compact variant: tighter spacing for combined config pages */
+.dashboard-card-stack--compact {
+  gap: var(--space-s);
+}
+
+.dashboard-card-stack--compact .dashboard-card {
+  padding: var(--space-m);
+}
+
+.dashboard-card-stack--compact .dashboard-form-actions {
+  margin-top: var(--space-m);
+}
+
 .dashboard-chip {
   display: inline-flex;
   align-items: center;
@@ -570,8 +635,9 @@
 }
 
 .dashboard-credits-widget-value {
+  font-family: var(--font-sans);
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-primary);
 }
 
@@ -628,6 +694,18 @@
   margin-top: var(--space-m);
 }
 
+.dashboard-device-info {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-s);
+}
+
+.dashboard-device-os-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--text-secondary);
+}
+
 .dashboard-devices-footer {
   margin-top: var(--space-l);
 }
@@ -661,7 +739,7 @@
 }
 
 .dashboard-input--narrow {
-  max-width: 200px;
+  max-width: 320px;
 }
 
 .dashboard-input--mid {
@@ -915,13 +993,16 @@
 }
 
 .dashboard-remove-btn {
-  padding: 2px 8px;
-  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
   color: var(--text-secondary);
   background: none;
   border: none;
   cursor: pointer;
   border-radius: 4px;
+  line-height: 0;
 }
 
 .dashboard-remove-btn:hover {
@@ -1029,10 +1110,20 @@
 }
 
 .dashboard-toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--font-sans);
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--text-primary);
+}
+
+/* Small icon inline with toggle label text */
+.dashboard-toggle-icon {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
 }
 
 .dashboard-toggle-desc {
