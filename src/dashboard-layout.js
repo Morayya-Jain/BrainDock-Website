@@ -159,7 +159,7 @@ function getUserInitials(user) {
  */
 function renderAvatar(avatarUrl, initials) {
   if (avatarUrl) {
-    return `<img src="${escapeHtml(avatarUrl)}" alt="" class="dashboard-avatar-img" aria-hidden="true">`
+    return `<img src="${escapeHtml(avatarUrl)}" alt="" class="dashboard-avatar-img" referrerpolicy="no-referrer" aria-hidden="true" onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(initials)}'">`
   }
   return escapeHtml(initials)
 }
