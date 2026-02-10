@@ -68,8 +68,8 @@ function computeDailyStats(sessions) {
   const yesterdayEnd = yesterdayStart + 24 * 60 * 60 * 1000 - 1
 
   const stats = {
-    today: { focusSeconds: 0, distractions: 0, focusPercentageSum: 0, durationSum: 0, count: 0 },
-    yesterday: { focusSeconds: 0, distractions: 0, focusPercentageSum: 0, durationSum: 0, count: 0 },
+    today: { focusSeconds: 0, distractionSeconds: 0, focusPercentageSum: 0, durationSum: 0, count: 0 },
+    yesterday: { focusSeconds: 0, distractionSeconds: 0, focusPercentageSum: 0, durationSum: 0, count: 0 },
   }
 
   for (const s of sessions) {
@@ -78,19 +78,19 @@ function computeDailyStats(sessions) {
     const durationSec = Math.max(0, (end - start) / 1000)
     const summary = s.summary_stats || {}
     const present = summary.present_seconds ?? 0
-    const gadgets = summary.gadget_count ?? 0
-    const screen = summary.screen_distraction_count ?? 0
+    const gadgetSec = summary.gadget_seconds ?? 0
+    const screenSec = summary.screen_distraction_seconds ?? 0
     const focusPct = summary.focus_percentage ?? 0
 
     if (start >= todayStart && start <= todayEnd) {
       stats.today.focusSeconds += present
-      stats.today.distractions += gadgets + screen
+      stats.today.distractionSeconds += gadgetSec + screenSec
       stats.today.focusPercentageSum += focusPct * durationSec
       stats.today.durationSum += durationSec
       stats.today.count += 1
     } else if (start >= yesterdayStart && start <= yesterdayEnd) {
       stats.yesterday.focusSeconds += present
-      stats.yesterday.distractions += gadgets + screen
+      stats.yesterday.distractionSeconds += gadgetSec + screenSec
       stats.yesterday.focusPercentageSum += focusPct * durationSec
       stats.yesterday.durationSum += durationSec
       stats.yesterday.count += 1
@@ -160,79 +160,52 @@ async function fetchUserCredits() {
  * Render the dashboard into main.
  */
 function render(main, user, sessions, stats, weeklyData, credits) {
-  const name = user?.user_metadata?.full_name || user?.email || 'there'
-  const todayStr = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' })
   const remainingSec = credits?.remaining_seconds ?? 0
   const hasCredits = remainingSec > 0
 
   const todayFocusRate = stats.today.durationSum > 0
     ? Math.round(stats.today.focusPercentageSum / stats.today.durationSum)
     : 0
-  const yesterdayFocusRate = stats.yesterday.durationSum > 0
-    ? Math.round(stats.yesterday.focusPercentageSum / stats.yesterday.durationSum)
-    : 0
-
-  // Comparison vs yesterday (assigned to stats to prevent tree-shaking)
-  stats._focusDiff = stats.today.focusSeconds - stats.yesterday.focusSeconds
-  stats._focusDiffStr = stats._focusDiff >= 0 ? `+${formatDuration(stats._focusDiff, true)}` : `-${formatDuration(Math.abs(stats._focusDiff), true)}`
-  stats._distDiff = stats.today.distractions - stats.yesterday.distractions
-  stats._distDiffStr = stats._distDiff > 0 ? `+${stats._distDiff}` : stats._distDiff < 0 ? `${stats._distDiff}` : '0'
-  stats._rateDiff = todayFocusRate - yesterdayFocusRate
-  stats._rateDiffStr = stats._rateDiff > 0 ? `+${stats._rateDiff}%` : stats._rateDiff < 0 ? `${stats._rateDiff}%` : '0%'
 
   const recentSessions = sessions.slice(0, 5)
   const hasSessions = sessions.length > 0
 
-  // Credits widget: show remaining hours; if zero, show Buy Hours CTA
-  const creditsWidget = `
-    <div class="dashboard-card dashboard-credits-card">
-      <div class="dashboard-credits-widget">
-        <div>
-          <h2 class="dashboard-credits-widget-heading">${t('dashboard.common.hoursRemaining', 'Hours remaining')}</h2>
-          <p class="dashboard-credits-widget-value">${formatDuration(remainingSec, true)}</p>
-        </div>
-        ${!hasCredits
-    ? `<a href="/pricing/" class="btn btn-primary" target="_blank" rel="noopener">${t('dashboard.actions.buyHours', 'Buy Hours')}</a>`
-    : `<a href="/pricing/" class="btn btn-secondary" target="_blank" rel="noopener">${t('dashboard.actions.getMoreHours', 'Get more hours')}</a>`}
-      </div>
-    </div>
-  `
-
   main.innerHTML = `
-    <div class="dashboard-section">
-      <h1 class="dashboard-page-title">${t('dashboard.home.title', 'Dashboard')}</h1>
-      <p class="dashboard-page-subtitle">
-        ${t('dashboard.home.welcome', 'Welcome back,')} ${escapeHtml(name)} &middot; ${todayStr}
-      </p>
-    </div>
+    <h1 class="dashboard-page-title">${t('dashboard.home.title', 'Dashboard')}</h1>
 
-    ${creditsWidget}
     ${hasCredits && !hasSessions ? `
     <div class="dashboard-card dashboard-card--accent" style="margin-bottom: var(--space-xl);">
       <h2 class="dashboard-section-title" style="margin-bottom: var(--space-s);">${t('dashboard.home.allSetTitle', "You're all set! Download BrainDock")}</h2>
       <p class="dashboard-meta" style="margin-bottom: var(--space-l);">${t('dashboard.home.allSetDesc', 'You have hours available. Download the desktop app and sign in with the same account to start tracking your focus.')}</p>
-      <div style="display: flex; flex-wrap: wrap; gap: var(--space-m);">
-        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg" class="btn btn-primary">${t('dashboard.home.downloadMac', 'Download for macOS')}</a>
-        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe" class="btn btn-secondary">${t('dashboard.home.downloadWin', 'Download for Windows')}</a>
+      <div class="download-buttons">
+        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg" class="btn btn-primary btn-download">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          ${t('dashboard.home.downloadMac', 'macOS')}
+        </a>
+        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe" class="btn btn-primary btn-download">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+          </svg>
+          ${t('dashboard.home.downloadWin', 'Windows')}
+        </a>
       </div>
     </div>
     ` : ''}
 
     <div class="dashboard-stat-cards">
-      <div class="dashboard-stat-card dashboard-stat-card--focus">
-        <div class="dashboard-stat-card-label">${t('dashboard.home.todaysFocus', "Today's Focus")}</div>
-        <div class="dashboard-stat-card-value">${formatDuration(stats.today.focusSeconds, true)}</div>
-        <div class="dashboard-stat-card-sub">${stats._focusDiffStr} ${t('dashboard.common.vsYesterday', 'vs yesterday')}</div>
+      <div class="dashboard-stat-card">
+        <div class="dashboard-stat-card-label">${t('dashboard.home.todaysFocusTime', "Today's Focus Time")}</div>
+        <div class="dashboard-stat-card-value">${formatDuration(stats.today.focusSeconds)}</div>
       </div>
-      <div class="dashboard-stat-card dashboard-stat-card--alert">
-        <div class="dashboard-stat-card-label">${t('dashboard.home.todaysDistractions', "Today's Distractions")}</div>
-        <div class="dashboard-stat-card-value">${stats.today.distractions}</div>
-        <div class="dashboard-stat-card-sub">${stats._distDiffStr} ${t('dashboard.common.vsYesterday', 'vs yesterday')}</div>
+      <div class="dashboard-stat-card">
+        <div class="dashboard-stat-card-label">${t('dashboard.home.todaysDistractionTime', "Today's Distraction Time")}</div>
+        <div class="dashboard-stat-card-value">${formatDuration(stats.today.distractionSeconds)}</div>
       </div>
-      <div class="dashboard-stat-card dashboard-stat-card--rate">
+      <div class="dashboard-stat-card">
         <div class="dashboard-stat-card-label">${t('dashboard.home.focusRate', 'Focus Rate')}</div>
         <div class="dashboard-stat-card-value">${todayFocusRate}%</div>
-        <div class="dashboard-stat-card-sub">${stats._rateDiffStr} ${t('dashboard.common.vsYesterday', 'vs yesterday')}</div>
       </div>
     </div>
 

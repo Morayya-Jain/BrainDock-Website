@@ -3,6 +3,14 @@
  * Handles mobile menu toggle, responsive nav, and FAQ accordion functionality
  */
 
+/** Detect user's OS and return the matching direct download URL. */
+function getDownloadUrl() {
+  const ua = navigator.userAgent || ''
+  if (/Mac|iPhone|iPad|iPod/.test(ua)) return 'https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg'
+  if (/Win/.test(ua)) return 'https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe'
+  return null // unknown OS - keep default #download anchor
+}
+
 // Mobile menu toggle and responsive navigation
 document.addEventListener('DOMContentLoaded', function() {
   const nav = document.querySelector('.nav');
@@ -12,6 +20,13 @@ document.addEventListener('DOMContentLoaded', function() {
   const navLinks = document.querySelector('.nav-links');
   const navLogo = document.querySelector('.nav-logo');
   const navCta = document.querySelector('.nav-cta');
+
+  // Point header download button directly to OS-specific download
+  const downloadUrl = getDownloadUrl()
+  if (downloadUrl) {
+    const navDownloadBtn = document.querySelector('a[href="#download"].btn-primary.nav-cta')
+    if (navDownloadBtn) navDownloadBtn.href = downloadUrl
+  }
 
   /**
    * Dynamically check if navigation elements fit in the container.

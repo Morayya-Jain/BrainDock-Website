@@ -4,6 +4,18 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
+   Dashboard button overrides: accent colour instead of black
+   -------------------------------------------------------------------------- */
+.dashboard-app .btn-primary {
+  background-color: #c4935f;
+  color: #FFFFFF;
+}
+
+.dashboard-app .btn-primary:hover {
+  background-color: #b8854f;
+}
+
+/* --------------------------------------------------------------------------
    Layout: app shell
    -------------------------------------------------------------------------- */
 .dashboard-app {
@@ -127,6 +139,12 @@
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+/* Download button inside sidebar - matches main site nav-cta, centred */
+.dashboard-sidebar-download {
+  display: flex;
+  margin: var(--space-m) 32px 0;
 }
 
 .dashboard-sidebar-list > li {
@@ -463,35 +481,6 @@
   flex-shrink: 0;
 }
 
-.dashboard-download-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
-  padding: var(--space-s) var(--space-m);
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--bg-surface);
-  background: var(--text-primary);
-  border: none;
-  border-radius: var(--btn-radius);
-  text-decoration: none;
-  transition: background-color var(--transition-fast), transform var(--transition-fast);
-}
-
-.dashboard-download-btn:hover {
-  background: rgba(28, 28, 30, 0.9);
-  transform: translateY(-1px);
-}
-
-.dashboard-download-btn:active {
-  transform: translateY(0) scale(0.97);
-}
-
-.dashboard-download-btn svg {
-  flex-shrink: 0;
-}
-
 .dashboard-profile-wrap {
   position: relative;
 }
@@ -570,16 +559,16 @@
 
 .dashboard-page-title {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: var(--space-m);
+  margin-bottom: var(--space-l);
 }
 
 @media (min-width: 768px) {
   .dashboard-page-title {
-    font-size: 2rem;
-    margin-bottom: var(--space-l);
+    font-size: 2.25rem;
+    margin-bottom: var(--space-xl);
   }
 }
 
@@ -807,17 +796,9 @@
   gap: var(--space-m);
 }
 
-.dashboard-credits-widget-heading {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: var(--space-xs);
-  color: var(--text-primary);
-}
-
 .dashboard-credits-widget-value {
-  font-family: var(--font-sans);
-  font-size: 1.5rem;
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
   font-weight: 700;
   color: var(--text-primary);
 }
@@ -896,21 +877,15 @@
   margin-top: var(--space-s);
 }
 
-.dashboard-download-grid {
-  display: grid;
-  gap: var(--space-l);
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+/* Override main-site .btn-download inside dashboard (narrower content area due to sidebar) */
+.dashboard-main .download-buttons {
+  flex-wrap: wrap;
 }
 
-.dashboard-download-option {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-s);
-}
-
-.dashboard-download-option:disabled {
-  opacity: 0.8;
+.dashboard-main .btn-download {
+  white-space: nowrap;
+  min-width: 160px;
+  width: auto;
 }
 
 .dashboard-download-footer {
@@ -988,41 +963,16 @@
   transition: box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 
-.dashboard-stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  border-radius: var(--card-radius) var(--card-radius) 0 0;
-  background: var(--accent-highlight);
-}
-
 .dashboard-stat-card:hover {
   box-shadow: var(--shadow-hover);
   transform: translateY(-1px);
 }
 
-.dashboard-stat-card--focus::before {
-  background: var(--accent-highlight);
-}
-
-.dashboard-stat-card--alert::before {
-  background: var(--warning);
-}
-
-.dashboard-stat-card--rate::before {
-  background: var(--success);
-}
-
 .dashboard-stat-card-label {
   font-family: var(--font-sans);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
   margin-bottom: var(--space-xs);
 }
 
@@ -1095,29 +1045,19 @@
 
 .dashboard-list-item {
   position: relative;
-  padding: var(--space-m) 0;
+  padding: var(--space-m) var(--space-m);
   border-bottom: 1px solid var(--border-subtle);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-m);
+  border-radius: 10px;
   transition: background-color var(--transition-fast);
 }
 
 .dashboard-list-item:hover {
-  background: rgba(212, 163, 115, 0.04);
-}
-
-.dashboard-list-item:hover::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--accent-highlight);
-  border-radius: 0 2px 2px 0;
+  background: rgba(212, 163, 115, 0.18);
 }
 
 .dashboard-list-item:last-child {

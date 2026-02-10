@@ -52,11 +52,8 @@ function render(main, credits, purchases) {
 
     <div class="dashboard-card dashboard-credits-card">
       <div class="dashboard-credits-widget">
-        <div>
-          <h2 class="dashboard-credits-widget-heading">${t('dashboard.common.hoursRemaining', 'Hours remaining')}</h2>
-          <p class="dashboard-credits-widget-value">${formatDuration(remaining)}</p>
-        </div>
-        <a href="${base}/pricing/" target="_blank" rel="noopener" class="btn btn-primary">${t('dashboard.actions.buyMoreHours', 'Buy more hours')}</a>
+        <p class="dashboard-credits-widget-value">${formatDuration(remaining)} ${t('dashboard.common.remaining', 'remaining')}</p>
+        <a href="${base}/pricing/" target="_blank" rel="noopener" class="btn btn-secondary">${t('dashboard.actions.getMoreHours', 'Get More Hours')}</a>
       </div>
     </div>
 

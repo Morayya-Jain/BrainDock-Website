@@ -30,6 +30,17 @@ import './dashboard.css'
 const LOGIN_PATH = '/auth/login/'
 const DASHBOARD_PATH = '/dashboard/'
 
+const MACOS_URL = 'https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg'
+const WINDOWS_URL = 'https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe'
+
+/** Detect user's OS and return the matching download URL. Falls back to /download/ page. */
+function getDownloadUrl() {
+  const ua = navigator.userAgent || ''
+  if (/Mac|iPhone|iPad|iPod/.test(ua)) return MACOS_URL
+  if (/Win/.test(ua)) return WINDOWS_URL
+  return '/download/'
+}
+
 /**
  * Fetch remaining credit seconds from user_credits table.
  */
@@ -120,6 +131,14 @@ function buildSidebarHTML(currentPath) {
           </a>
         </li>
       </ul>
+      <a href="${getDownloadUrl()}" class="btn btn-primary nav-cta dashboard-sidebar-download">
+        <span>${t('dashboard.nav.download', 'Download')}</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+      </a>
     </nav>
     <div class="dashboard-sidebar-footer">
       <button type="button" class="dashboard-sidebar-footer-trigger" id="dashboard-sidebar-footer-trigger" aria-expanded="false" aria-haspopup="true">
@@ -321,14 +340,6 @@ export async function initDashboardLayout(options = {}) {
     <a href="${base}/account/subscription/" class="dashboard-remaining-pill" id="dashboard-remaining-pill" title="Remaining session time">
       <i data-lucide="hourglass" class="dashboard-remaining-pill-icon" aria-hidden="true"></i>
       <span id="dashboard-remaining-text">...</span>
-    </a>
-    <a href="${base}/download/" class="dashboard-download-btn">
-      <span>${t('dashboard.actions.download', 'Download')}</span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/>
-        <line x1="12" y1="15" x2="12" y2="3"/>
-      </svg>
     </a>
     <div class="dashboard-profile-wrap">
       <button type="button" class="dashboard-profile-trigger" id="dashboard-profile-trigger" aria-expanded="false" aria-haspopup="true" aria-label="Account menu">

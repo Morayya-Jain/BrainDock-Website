@@ -71,7 +71,14 @@ function render(main, devices) {
         <div class="dashboard-empty">
           <p class="dashboard-empty-title">${t('dashboard.devices.noDevicesTitle', 'No linked devices')}</p>
           <p>${t('dashboard.devices.noDevicesDesc', 'Download BrainDock and sign in to link a device.')}</p>
-          <a href="${base}/download/" class="btn btn-primary dashboard-empty-cta">${t('dashboard.devices.downloadBrainDock', 'Download BrainDock')}</a>
+          <a href="${base}/download/" class="btn btn-primary dashboard-empty-cta">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            ${t('dashboard.devices.downloadBrainDock', 'Download BrainDock')}
+          </a>
         </div>
         `
         : `
@@ -94,7 +101,14 @@ function render(main, devices) {
       <p class="dashboard-meta dashboard-devices-footer">
         ${t('dashboard.devices.linkNewDevice', 'To link a new device, download BrainDock and sign in with your account.')}
       </p>
-      <a href="${base}/download/" class="btn btn-secondary dashboard-devices-download-link">${t('dashboard.devices.downloadBrainDock', 'Download BrainDock')}</a>
+      <a href="${base}/download/" class="btn btn-primary dashboard-devices-download-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        ${t('dashboard.devices.downloadBrainDock', 'Download BrainDock')}
+      </a>
     </div>
   `
 
