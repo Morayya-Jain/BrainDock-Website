@@ -5,7 +5,7 @@
 
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
-import { escapeHtml, formatDuration, modeLabel } from '../utils.js'
+import { escapeHtml, formatDuration, modeLabel, focusLevelClass } from '../utils.js'
 import { t } from '../dashboard-i18n.js'
 
 /** Format date for display (e.g. "Today, Feb 7 2026") */
@@ -174,9 +174,9 @@ function render(main, user, sessions, stats, weeklyData, credits) {
     <h1 class="dashboard-page-title">${t('dashboard.home.title', 'Dashboard')}</h1>
 
     ${hasCredits && !hasSessions ? `
-    <div class="dashboard-card dashboard-card--accent" style="margin-bottom: var(--space-xl);">
-      <h2 class="dashboard-section-title" style="margin-bottom: var(--space-s);">${t('dashboard.home.allSetTitle', "You're all set! Download BrainDock")}</h2>
-      <p class="dashboard-meta" style="margin-bottom: var(--space-l);">${t('dashboard.home.allSetDesc', 'You have hours available. Download the desktop app and sign in with the same account to start tracking your focus.')}</p>
+    <div class="dashboard-card dashboard-card--accent mb-xl">
+      <h2 class="dashboard-section-title mb-s">${t('dashboard.home.allSetTitle', "You're all set! Download BrainDock")}</h2>
+      <p class="dashboard-meta mb-l">${t('dashboard.home.allSetDesc', 'You have hours available. Download the desktop app and sign in with the same account to start tracking your focus.')}</p>
       <div class="download-buttons">
         <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg" class="btn btn-primary btn-download">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -196,15 +196,15 @@ function render(main, user, sessions, stats, weeklyData, credits) {
 
     <div class="dashboard-stat-cards">
       <div class="dashboard-stat-card">
-        <div class="dashboard-stat-card-label">${t('dashboard.home.todaysFocusTime', "Today's Focus Time")}</div>
+        <div class="dashboard-stat-card-label">${t('dashboard.home.dailyFocusTime', 'Daily Focus Time')}</div>
         <div class="dashboard-stat-card-value">${formatDuration(stats.today.focusSeconds)}</div>
       </div>
       <div class="dashboard-stat-card">
-        <div class="dashboard-stat-card-label">${t('dashboard.home.todaysDistractionTime', "Today's Distraction Time")}</div>
+        <div class="dashboard-stat-card-label">${t('dashboard.home.dailyDistractionTime', 'Daily Distraction Time')}</div>
         <div class="dashboard-stat-card-value">${formatDuration(stats.today.distractionSeconds)}</div>
       </div>
       <div class="dashboard-stat-card">
-        <div class="dashboard-stat-card-label">${t('dashboard.home.focusRate', 'Focus Rate')}</div>
+        <div class="dashboard-stat-card-label">${t('dashboard.home.dailyFocusRate', 'Daily Focus Rate')}</div>
         <div class="dashboard-stat-card-value">${todayFocusRate}%</div>
       </div>
     </div>
@@ -235,7 +235,7 @@ function render(main, user, sessions, stats, weeklyData, credits) {
                 const timeStr = start.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })
                 const dayStr = formatDateLabel(s.start_time)
                 return `
-                  <li class="dashboard-list-item">
+                  <li class="dashboard-list-item ${focusLevelClass(Math.round(pct))}">
                     <div>
                       <strong>${escapeHtml(s.session_name || t('dashboard.common.session', 'Session'))}</strong><br>
                       <span class="dashboard-meta">${dayStr} ${timeStr} &middot; ${modeLabel(s.monitoring_mode, true)} &middot; ${formatDuration(duration, true)} ${t('dashboard.common.active', 'active')} &middot; ${Math.round(pct)}% ${t('dashboard.common.focus', 'focus')}</span><br>
@@ -267,6 +267,7 @@ function render(main, user, sessions, stats, weeklyData, credits) {
               .map(
                 (d) => `
               <div class="dashboard-chart-bar-wrap">
+                ${d.focusSeconds > 0 ? `<span class="dashboard-chart-value">${formatDuration(d.focusSeconds, true)}</span>` : ''}
                 <div class="dashboard-chart-bar" style="height: ${d.heightPct}%;"></div>
                 <span class="dashboard-chart-label">${escapeHtml(d.label)}</span>
               </div>

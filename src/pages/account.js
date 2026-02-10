@@ -36,7 +36,7 @@ function render(main, profile, userId) {
       </div>
       <div class="dashboard-field">
         <span class="dashboard-field-label">${t('dashboard.account.email', 'Email')}</span>
-        <p class="dashboard-meta" style="margin-top: var(--space-xs);">${escapeHtml(email)}</p>
+        <p class="dashboard-meta mt-xs">${escapeHtml(email)}</p>
         <p class="dashboard-meta-sub">${t('dashboard.account.emailManaged', 'Email is managed by your account provider and cannot be changed here.')}</p>
       </div>
       <div class="dashboard-form-actions">

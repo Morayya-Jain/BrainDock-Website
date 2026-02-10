@@ -32,14 +32,14 @@ function render(main) {
 
       <!-- 1. Get Set Up -->
       <div class="dashboard-card">
-        <div class="howto-icon" style="color: var(--accent-highlight)">${ICONS.download}</div>
+        <div class="howto-icon howto-icon--accent">${ICONS.download}</div>
         <h2 class="dashboard-section-title">${t('dashboard.howToUse.getSetUp', 'Get Set Up')}</h2>
         <div class="howto-step"><span class="howto-step-num">1</span><span>${t('dashboard.howToUse.step1Download', 'Download the app from the <a href="%URL%/download/">Download</a> page.').replace('%URL%', base)}</span></div>
         <div class="howto-step"><span class="howto-step-num">2</span><span>${t('dashboard.howToUse.step2Account', 'Create an account or sign in on this website.')}</span></div>
         <div class="howto-step"><span class="howto-step-num">3</span><span>${t('dashboard.howToUse.step3SignIn', 'Open BrainDock and sign in with the same account (or use the login code from this site).')}</span></div>
 
         <hr class="howto-divider">
-        <p class="dashboard-meta" style="margin-bottom: var(--space-s);">${t('dashboard.howToUse.firstLaunch', 'First launch on your platform:')}</p>
+        <p class="dashboard-meta mb-s">${t('dashboard.howToUse.firstLaunch', 'First launch on your platform:')}</p>
         <div class="howto-platform-tabs">
           <button type="button" class="howto-platform-tab active" data-platform="macos">${ICONS.appleSmall} macOS</button>
           <button type="button" class="howto-platform-tab" data-platform="windows">${ICONS.windowsSmall} Windows</button>
@@ -58,36 +58,36 @@ function render(main) {
 
       <!-- 2. Start a Session -->
       <div class="dashboard-card">
-        <div class="howto-icon" style="color: var(--success)">${ICONS.play}</div>
+        <div class="howto-icon howto-icon--success">${ICONS.play}</div>
         <h2 class="dashboard-section-title">${t('dashboard.howToUse.startSession', 'Start a Session')}</h2>
         <div class="howto-step"><span class="howto-step-num">1</span><span>${t('dashboard.howToUse.sessionStep1', 'Click the BrainDock icon in the menu bar (macOS) or system tray (Windows).')}</span></div>
         <div class="howto-step"><span class="howto-step-num">2</span><span>${t('dashboard.howToUse.sessionStep2', 'Pick your mode: Camera, Screen, or Both.')}</span></div>
         <div class="howto-step"><span class="howto-step-num">3</span><span>${t('dashboard.howToUse.sessionStep3', 'Press "Start Session". Pause or stop any time from the menu.')}</span></div>
-        <p class="dashboard-meta" style="margin-top: var(--space-m); margin-bottom: var(--space-s);">${t('dashboard.howToUse.statusColours', 'Status colours:')}</p>
+        <p class="dashboard-meta mt-m mb-s">${t('dashboard.howToUse.statusColours', 'Status colours:')}</p>
         <div class="howto-status-row">
-          <span class="howto-status-item"><span class="howto-dot" style="background: var(--success)"></span> ${t('dashboard.howToUse.statusFocussed', 'Focussed')}</span>
-          <span class="howto-status-item"><span class="howto-dot" style="background: var(--warning)"></span> ${t('dashboard.howToUse.statusAway', 'Away')}</span>
-          <span class="howto-status-item"><span class="howto-dot" style="background: var(--error)"></span> ${t('dashboard.howToUse.statusGadget', 'Gadget')}</span>
-          <span class="howto-status-item"><span class="howto-dot" style="background: #7C3AED"></span> ${t('dashboard.howToUse.statusScreen', 'Screen')}</span>
+          <span class="howto-status-item"><span class="howto-dot howto-dot--focused"></span> ${t('dashboard.howToUse.statusFocussed', 'Focussed')}</span>
+          <span class="howto-status-item"><span class="howto-dot howto-dot--away"></span> ${t('dashboard.howToUse.statusAway', 'Away')}</span>
+          <span class="howto-status-item"><span class="howto-dot howto-dot--gadget"></span> ${t('dashboard.howToUse.statusGadget', 'Gadget')}</span>
+          <span class="howto-status-item"><span class="howto-dot howto-dot--screen"></span> ${t('dashboard.howToUse.statusScreen', 'Screen')}</span>
         </div>
       </div>
 
       <!-- 3. Focus Modes + Tips -->
       <div class="dashboard-card">
-        <div class="howto-icon" style="color: var(--accent-highlight)">${ICONS.lightbulb}</div>
+        <div class="howto-icon howto-icon--accent">${ICONS.lightbulb}</div>
         <h2 class="dashboard-section-title">${t('dashboard.howToUse.focusModes', 'Focus Modes')}</h2>
         <div class="howto-modes">
-          <div class="howto-mode-item" style="color: var(--accent-highlight)">
+          <div class="howto-mode-item howto-icon--accent">
             ${ICONS.camera}
             <div class="howto-mode-label">${t('dashboard.howToUse.modeCamera', 'Camera')}</div>
             <div class="howto-mode-desc">${t('dashboard.howToUse.modeCameraDesc', 'Uses AI to notice when you step away or pick up a phone/tablet. No video is saved.')}</div>
           </div>
-          <div class="howto-mode-item" style="color: var(--accent-highlight)">
+          <div class="howto-mode-item howto-icon--accent">
             ${ICONS.monitor}
             <div class="howto-mode-label">${t('dashboard.howToUse.modeScreen', 'Screen')}</div>
             <div class="howto-mode-desc">${t('dashboard.howToUse.modeScreenDesc', 'Checks your active window against your blocklist. Works offline.')}</div>
           </div>
-          <div class="howto-mode-item" style="color: var(--accent-highlight)">
+          <div class="howto-mode-item howto-icon--accent">
             ${ICONS.layers}
             <div class="howto-mode-label">${t('dashboard.howToUse.modeBoth', 'Both')}</div>
             <div class="howto-mode-desc">${t('dashboard.howToUse.modeBothDesc', 'Camera and screen combined for full coverage.')}</div>
@@ -95,7 +95,7 @@ function render(main) {
         </div>
 
         <hr class="howto-divider">
-        <p class="dashboard-meta" style="margin-bottom: var(--space-s);"><strong>${t('dashboard.howToUse.tips', 'Tips')}</strong></p>
+        <p class="dashboard-meta mb-s"><strong>${t('dashboard.howToUse.tips', 'Tips')}</strong></p>
         <div class="howto-tip">${ICONS.check}<span>${t('dashboard.howToUse.tip1', 'Good lighting on your face helps accuracy.')}</span></div>
         <div class="howto-tip">${ICONS.check}<span>${t('dashboard.howToUse.tip2', 'Sit facing the camera, within 1 to 2 metres.')}</span></div>
         <div class="howto-tip">${ICONS.check}<span>${t('dashboard.howToUse.tip3', 'Keep one person in the frame at a time.')}</span></div>
@@ -104,7 +104,7 @@ function render(main) {
 
       <!-- 4. Your Blocklist -->
       <div class="dashboard-card">
-        <div class="howto-icon" style="color: var(--accent-highlight)">${ICONS.shield}</div>
+        <div class="howto-icon howto-icon--accent">${ICONS.shield}</div>
         <h2 class="dashboard-section-title">${t('dashboard.howToUse.yourBlocklist', 'Your Blocklist')}</h2>
         <p>${t('dashboard.howToUse.blocklistDesc', 'Choose which sites and apps count as off-task in <a href="%URL%/settings/blocklist/">Settings &rarr; Blocklist</a>.').replace('%URL%', base)}</p>
         <p>${t('dashboard.howToUse.blocklistDesc2', 'Use Quick Block for common sites, enable whole categories, or add your own URLs and app names. Changes sync to the app when you start your next session.')}</p>
@@ -112,19 +112,19 @@ function render(main) {
 
       <!-- 5. Your Reports -->
       <div class="dashboard-card">
-        <div class="howto-icon" style="color: var(--accent-highlight)">${ICONS.fileText}</div>
+        <div class="howto-icon howto-icon--accent">${ICONS.fileText}</div>
         <h2 class="dashboard-section-title">${t('dashboard.howToUse.yourReports', 'Your Reports')}</h2>
         <p>${t('dashboard.howToUse.reportsIntro', 'After each session a PDF is saved to your Downloads folder. It includes:')}</p>
         <div class="howto-tip">${ICONS.check}<span>${t('dashboard.howToUse.reportItem1', 'Session duration and focus percentage')}</span></div>
         <div class="howto-tip">${ICONS.check}<span>${t('dashboard.howToUse.reportItem2', 'Away time and gadget/screen events')}</span></div>
         <div class="howto-tip">${ICONS.check}<span>${t('dashboard.howToUse.reportItem3', 'A visual timeline of your session')}</span></div>
         <div class="howto-tip">${ICONS.check}<span>${t('dashboard.howToUse.reportItem4', 'AI-generated insights and personalised suggestions')}</span></div>
-        <p style="margin-top: var(--space-m);">${t('dashboard.howToUse.reportsCta', 'You can also view past sessions on the <a href="%URL%/sessions/">Sessions</a> page.').replace('%URL%', base)}</p>
+        <p class="mt-m">${t('dashboard.howToUse.reportsCta', 'You can also view past sessions on the <a href="%URL%/sessions/">Sessions</a> page.').replace('%URL%', base)}</p>
       </div>
 
       <!-- 6. FAQ -->
       <div class="dashboard-card">
-        <div class="howto-icon" style="color: var(--text-secondary)">${ICONS.helpCircle}</div>
+        <div class="howto-icon howto-icon--muted">${ICONS.helpCircle}</div>
         <h2 class="dashboard-section-title">${t('dashboard.howToUse.faqTitle', 'FAQ')}</h2>
 
         <div class="howto-qa">

@@ -21,7 +21,6 @@ import {
   Headphones,
   Instagram,
   Youtube,
-  Twitter,
   Twitch,
   Facebook,
   Linkedin,
@@ -46,6 +45,7 @@ const BRAND_SVGS = {
   threads: `<svg class="pill-toggle-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"/></svg>`,
   netflix: `<svg class="pill-toggle-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m5.398 0 8.348 23.602c2.346.059 4.856.398 4.856.398L10.113 0H5.398zm8.489 0v9.172l4.715 13.33V0h-4.715zM5.398 1.5V24c1.873-.225 2.81-.312 4.715-.398V14.83L5.398 1.5z"/></svg>`,
   amazon: `<svg class="pill-toggle-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M10.813 11.968c.157.083.36.074.5-.05l.005.005a90 90 0 0 1 1.623-1.405c.173-.143.143-.372.006-.563l-.125-.17c-.345-.465-.673-.906-.673-1.791v-3.3l.001-.335c.008-1.265.014-2.421-.933-3.305C10.404.274 9.06 0 8.03 0 6.017 0 3.77.75 3.296 3.24c-.047.264.143.404.316.443l2.054.22c.19-.009.33-.196.366-.387.176-.857.896-1.271 1.703-1.271.435 0 .929.16 1.188.55.264.39.26.91.257 1.376v.432q-.3.033-.621.065c-1.113.114-2.397.246-3.36.67C3.873 5.91 2.94 7.08 2.94 8.798c0 2.2 1.387 3.298 3.168 3.298 1.506 0 2.328-.354 3.489-1.54l.167.246c.274.405.456.675 1.047 1.166ZM6.03 8.431C6.03 6.627 7.647 6.3 9.177 6.3v.57c.001.776.002 1.434-.396 2.133-.336.595-.87.961-1.465.961-.812 0-1.286-.619-1.286-1.533M.435 12.174c2.629 1.603 6.698 4.084 13.183.997.28-.116.475.078.199.431C13.538 13.96 11.312 16 7.57 16 3.832 16 .968 13.446.094 12.386c-.24-.275.036-.4.199-.299z"/><path d="M13.828 11.943c.567-.07 1.468-.027 1.645.204.135.176-.004.966-.233 1.533-.23.563-.572.961-.762 1.115s-.333.094-.23-.137c.105-.23.684-1.663.455-1.963-.213-.278-1.177-.177-1.625-.13l-.09.009q-.142.013-.233.024c-.193.021-.245.027-.274-.032-.074-.209.779-.556 1.347-.623"/></svg>`,
+  twitter: `<svg class="pill-toggle-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg>`,
 }
 
 // Custom SVGs for detection items (Lucide's tablet and smartphone look identical at 14px)
@@ -55,29 +55,31 @@ const ITEM_SVGS = {
 }
 
 // -- Blocklist constants --
+// Entries with an id matching a BRAND_SVGS key use custom brand icons;
+// their `icon` field is only a Lucide fallback and not normally rendered.
 
 const QUICK_SITES = [
   { id: 'instagram', name: 'Instagram', icon: 'instagram', desc: 'Photo and video sharing social network by Meta.' },
   { id: 'youtube', name: 'YouTube', icon: 'youtube', desc: 'Video streaming and sharing platform by Google.' },
-  { id: 'netflix', name: 'Netflix', icon: 'film', desc: 'Subscription streaming service for movies and TV shows.' },
-  { id: 'spotify', name: 'Spotify', icon: 'headphones', desc: 'Music and podcast streaming service.' },
-  { id: 'tiktok', name: 'TikTok', icon: 'video', desc: 'Short-form video platform for entertainment and trends.' },
-  { id: 'twitter', name: 'Twitter/X', icon: 'twitter', desc: 'Microblogging platform for posts, news, and discussions.' },
+  { id: 'netflix', name: 'Netflix', desc: 'Subscription streaming service for movies and TV shows.' },
+  { id: 'spotify', name: 'Spotify', desc: 'Music and podcast streaming service.' },
+  { id: 'tiktok', name: 'TikTok', desc: 'Short-form video platform for entertainment and trends.' },
+  { id: 'twitter', name: 'Twitter/X', desc: 'Microblogging platform for posts, news, and discussions.' },
   { id: 'twitch', name: 'Twitch', icon: 'twitch', desc: 'Live streaming platform focused on gaming and entertainment.' },
-  { id: 'reddit', name: 'Reddit', icon: 'message-circle', desc: 'Community-driven forum with thousands of topic boards.' },
+  { id: 'reddit', name: 'Reddit', desc: 'Community-driven forum with thousands of topic boards.' },
   { id: 'facebook', name: 'Facebook', icon: 'facebook', desc: 'Social network for connecting with friends and groups.' },
-  { id: 'snapchat', name: 'Snapchat', icon: 'zap', desc: 'Messaging app with disappearing photos and stories.' },
+  { id: 'snapchat', name: 'Snapchat', desc: 'Messaging app with disappearing photos and stories.' },
   { id: 'linkedin', name: 'LinkedIn', icon: 'linkedin', desc: 'Professional networking and job search platform.' },
-  { id: 'pinterest', name: 'Pinterest', icon: 'pin', desc: 'Visual discovery platform for ideas and inspiration.' },
-  { id: 'amazon', name: 'Amazon', icon: 'shopping-cart', desc: 'Online shopping marketplace for just about everything.' },
+  { id: 'pinterest', name: 'Pinterest', desc: 'Visual discovery platform for ideas and inspiration.' },
+  { id: 'amazon', name: 'Amazon', desc: 'Online shopping marketplace for just about everything.' },
   { id: 'primevideo', name: 'Prime Video', icon: 'play-circle', desc: 'Amazon streaming service for movies and series.' },
   { id: 'hulu', name: 'Hulu', icon: 'play-circle', desc: 'Streaming service for TV shows, movies, and originals.' },
   { id: 'disneyplus', name: 'Disney+', icon: 'play-circle', desc: 'Disney, Pixar, Marvel, and Star Wars streaming.' },
-  { id: 'discord', name: 'Discord', icon: 'message-square', desc: 'Voice, video, and text chat app for communities.' },
-  { id: 'whatsapp', name: 'WhatsApp Web', icon: 'message-circle', desc: 'Browser version of the WhatsApp messaging app.' },
-  { id: 'telegram', name: 'Telegram', icon: 'message-square', desc: 'Cloud-based messaging app with channels and groups.' },
-  { id: 'tumblr', name: 'Tumblr', icon: 'image', desc: 'Microblogging platform for creative and visual content.' },
-  { id: 'threads', name: 'Threads', icon: 'globe', desc: 'Text-based social app by Meta, linked to Instagram.' },
+  { id: 'discord', name: 'Discord', desc: 'Voice, video, and text chat app for communities.' },
+  { id: 'whatsapp', name: 'WhatsApp Web', desc: 'Browser version of the WhatsApp messaging app.' },
+  { id: 'telegram', name: 'Telegram', desc: 'Cloud-based messaging app with channels and groups.' },
+  { id: 'tumblr', name: 'Tumblr', desc: 'Microblogging platform for creative and visual content.' },
+  { id: 'threads', name: 'Threads', desc: 'Text-based social app by Meta, linked to Instagram.' },
   { id: 'news', name: 'News sites', icon: 'newspaper', desc: 'General news websites like CNN, BBC, and others.' },
 ]
 
@@ -101,7 +103,7 @@ const ITEM_PRESETS = [
 // Icons needed by createIcons after render
 const PAGE_ICONS = {
   Smartphone, Gamepad2, Gamepad, Watch, Laptop, UtensilsCrossed, Camera, Headphones,
-  Instagram, Youtube, Twitter, Twitch, Facebook,
+  Instagram, Youtube, Twitch, Facebook,
   Linkedin, Newspaper, PlayCircle,
 }
 
@@ -201,8 +203,8 @@ function render(main, blocklistConfig, detectionSettings, userId) {
 
       <!-- Detection: item pills -->
       <div class="dashboard-card">
-        <h2 class="dashboard-section-title" style="margin-bottom: var(--space-xs);">${t('dashboard.config.itemsTitle', 'Items to Notify')}</h2>
-        <p class="dashboard-meta" style="margin-bottom: var(--space-l);">${t('dashboard.config.itemsDesc', 'Select items you want to add to your list.')}</p>
+        <h2 class="dashboard-section-title mb-xs">${t('dashboard.config.itemsTitle', 'Items to Notify')}</h2>
+        <p class="dashboard-meta mb-l">${t('dashboard.config.itemsDesc', 'Select items you want to add to your list.')}</p>
         <div class="pill-toggle-wrap">
           ${ITEM_PRESETS.map((g) => `
             <button type="button" class="pill-toggle ${itemSet.has(g.id) ? 'active' : ''}" data-item="${g.id}" data-desc="${escapeHtml(g.desc)}" data-name="${escapeHtml(g.name)}" aria-pressed="${itemSet.has(g.id)}">
@@ -215,16 +217,16 @@ function render(main, blocklistConfig, detectionSettings, userId) {
 
       <!-- Blocklist: quick block pills -->
       <div class="dashboard-card">
-        <h2 class="dashboard-section-title" style="margin-bottom: var(--space-xs);">${t('dashboard.config.websitesTitle', 'Websites to Notify')}</h2>
-        <p class="dashboard-meta" style="margin-bottom: var(--space-l);">${t('dashboard.config.websitesDesc', 'Select websites you want to add to your list.')}</p>
+        <h2 class="dashboard-section-title mb-xs">${t('dashboard.config.websitesTitle', 'Websites to Notify')}</h2>
+        <p class="dashboard-meta mb-l">${t('dashboard.config.websitesDesc', 'Select websites you want to add to your list.')}</p>
         <div id="quick-blocks-container" class="pill-toggle-wrap"></div>
       </div>
 
       <!-- Custom URLs + Custom Apps side by side -->
       <div class="dashboard-card-row">
         <div class="dashboard-card">
-          <h2 class="dashboard-section-title" style="margin-bottom: var(--space-xs);">${t('dashboard.config.customUrls', 'Custom URLs')}</h2>
-          <p class="dashboard-meta" style="margin-bottom: var(--space-m);">${t('dashboard.config.customUrlsDesc', 'Add domains to your list.')}</p>
+          <h2 class="dashboard-section-title mb-xs">${t('dashboard.config.customUrls', 'Custom URLs')}</h2>
+          <p class="dashboard-meta mb-m">${t('dashboard.config.customUrlsDesc', 'Add domains to your list.')}</p>
           <div class="dashboard-input-row">
             <input type="text" id="custom-url-input" class="dashboard-input dashboard-input--narrow" placeholder="example.com" maxlength="253">
             <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-url-add">${t('dashboard.actions.add', 'Add')}</button>
@@ -234,8 +236,8 @@ function render(main, blocklistConfig, detectionSettings, userId) {
         </div>
 
         <div class="dashboard-card">
-          <h2 class="dashboard-section-title" style="margin-bottom: var(--space-xs);">${t('dashboard.config.customApps', 'Custom Apps')}</h2>
-          <p class="dashboard-meta" style="margin-bottom: var(--space-m);">${t('dashboard.config.customAppsDesc', 'Add app names to your list.')}</p>
+          <h2 class="dashboard-section-title mb-xs">${t('dashboard.config.customApps', 'Custom Apps')}</h2>
+          <p class="dashboard-meta mb-m">${t('dashboard.config.customAppsDesc', 'Add app names to your list.')}</p>
           <div class="dashboard-input-row">
             <input type="text" id="custom-app-input" class="dashboard-input dashboard-input--narrow" placeholder="App name" maxlength="50">
             <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-app-add">${t('dashboard.actions.add', 'Add')}</button>

@@ -78,3 +78,13 @@ export function modeLabel(mode, short = false) {
   }
   return mode || '-'
 }
+
+/**
+ * Return a CSS class suffix based on focus percentage.
+ * 80%+ = high (green), 50-79% = mid (amber), <50% = low (red).
+ */
+export function focusLevelClass(pct) {
+  if (pct >= 80) return 'dashboard-list-item--focus-high'
+  if (pct >= 50) return 'dashboard-list-item--focus-mid'
+  return 'dashboard-list-item--focus-low'
+}

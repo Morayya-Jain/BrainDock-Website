@@ -921,6 +921,17 @@
   color: var(--text-tertiary);
 }
 
+/* Expand chevron on purchase rows */
+.billing-expand-icon {
+  flex-shrink: 0;
+  color: var(--text-tertiary);
+  transition: transform var(--transition-fast);
+}
+
+.billing-purchase-row[aria-expanded="true"] .billing-expand-icon {
+  transform: rotate(180deg);
+}
+
 /* --------------------------------------------------------------------------
    Stat cards
    -------------------------------------------------------------------------- */
@@ -978,10 +989,12 @@
 
 .dashboard-stat-card-value {
   font-family: var(--font-serif);
-  font-size: 1.75rem;
+  font-size: clamp(1.1rem, 4vw, 1.75rem);
   font-weight: 700;
   color: var(--text-primary);
-  line-height: 1.2;
+  line-height: 1.3;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .dashboard-stat-card-sub {
@@ -1029,10 +1042,14 @@
   padding: var(--space-l);
   box-shadow: var(--shadow-card);
   border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+/* Opt-in hover lift - only for cards that are actually clickable */
+.dashboard-card--interactive {
   transition: box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 
-.dashboard-card:hover {
+.dashboard-card--interactive:hover {
   box-shadow: var(--shadow-hover);
   transform: translateY(-2px);
 }
@@ -1060,23 +1077,57 @@
   background: rgba(212, 163, 115, 0.18);
 }
 
+/* Focus quality color indicators on session list items */
+.dashboard-list-item--focus-high::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: var(--success);
+  border-radius: 0 3px 3px 0;
+}
+
+.dashboard-list-item--focus-mid::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: var(--warning);
+  border-radius: 0 3px 3px 0;
+}
+
+.dashboard-list-item--focus-low::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: var(--error);
+  border-radius: 0 3px 3px 0;
+}
+
 .dashboard-list-item:last-child {
   border-bottom: none;
 }
 
 /* --------------------------------------------------------------------------
-   Tables
+   Tables (styled to blend with the card/list aesthetic)
    -------------------------------------------------------------------------- */
 .dashboard-table-wrap {
   overflow-x: auto;
   border-radius: var(--card-radius);
-  border: 1px solid var(--border-subtle);
   background: var(--bg-surface);
 }
 
 .dashboard-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   font-family: var(--font-sans);
   font-size: 0.9375rem;
 }
@@ -1090,8 +1141,11 @@
 
 .dashboard-table th {
   font-weight: 600;
-  color: var(--text-primary);
-  background: var(--bg-secondary);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-tertiary);
+  background: transparent;
 }
 
 .dashboard-table td {
@@ -1102,8 +1156,21 @@
   border-bottom: none;
 }
 
-.dashboard-table tr:hover td {
-  background: rgba(0, 0, 0, 0.03);
+/* Warm hover matching list items */
+.dashboard-table tbody tr {
+  transition: background-color var(--transition-fast);
+}
+
+.dashboard-table tbody tr:hover {
+  background: rgba(212, 163, 115, 0.18);
+}
+
+.dashboard-table tbody tr:hover td:first-child {
+  border-radius: 10px 0 0 10px;
+}
+
+.dashboard-table tbody tr:hover td:last-child {
+  border-radius: 0 10px 10px 0;
 }
 
 /* --------------------------------------------------------------------------
@@ -1374,7 +1441,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
   gap: var(--space-xs);
+  height: 100%;
+}
+
+.dashboard-chart-value {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
 }
 
 .dashboard-chart-bar {
@@ -1384,7 +1461,6 @@
   min-height: 4px;
   background: linear-gradient(180deg, #E8C9A0 0%, var(--accent-highlight) 100%);
   border-radius: 6px 6px 0 0;
-  align-self: flex-end;
   transition: height var(--transition-base);
 }
 
@@ -1482,28 +1558,34 @@
   margin-top: var(--space-xl);
   font-family: var(--font-sans);
   font-size: 0.9375rem;
+  font-weight: 500;
   color: var(--text-secondary);
 }
 
 .dashboard-pagination button {
-  padding: var(--space-s) var(--space-m);
+  padding: 10px 20px;
   font-family: var(--font-sans);
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-primary);
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 8px;
+  background: transparent;
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--btn-radius);
   cursor: pointer;
-  transition: border-color var(--transition-fast);
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
 }
 
 .dashboard-pagination button:hover:not(:disabled) {
-  border-color: var(--accent-highlight);
+  border-color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.dashboard-pagination button:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
 }
 
 .dashboard-pagination button:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
@@ -1765,6 +1847,11 @@
   flex-shrink: 0;
 }
 
+.howto-dot--focused { background: var(--success); }
+.howto-dot--away    { background: var(--warning); }
+.howto-dot--gadget  { background: var(--error); }
+.howto-dot--screen  { background: #7C3AED; }
+
 .howto-modes {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -1973,4 +2060,29 @@
     right: 16px;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Utility classes (replace inline styles)
+   -------------------------------------------------------------------------- */
+.mb-xs { margin-bottom: var(--space-xs); }
+.mb-s  { margin-bottom: var(--space-s); }
+.mb-m  { margin-bottom: var(--space-m); }
+.mb-l  { margin-bottom: var(--space-l); }
+.mb-xl { margin-bottom: var(--space-xl); }
+.mt-xs { margin-top: var(--space-xs); }
+.mt-m  { margin-top: var(--space-m); }
+.mt-l  { margin-top: var(--space-l); }
+
+.d-flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m);
+}
+
+.flex-1 { flex: 1; }
+
+/* How-to-use icon color variants */
+.howto-icon--accent  { color: var(--accent-highlight); }
+.howto-icon--success { color: var(--success); }
+.howto-icon--muted   { color: var(--text-secondary); }
 

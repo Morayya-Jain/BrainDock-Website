@@ -40,6 +40,9 @@ async function loadPurchaseHistory() {
   return data || []
 }
 
+// Inline SVG chevron for expandable rows
+const CHEVRON_SVG = `<svg class="billing-expand-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>`
+
 function render(main, credits, purchases) {
   const base = window.location.origin
   const remaining = credits?.remaining_seconds ?? 0
@@ -74,7 +77,7 @@ function render(main, credits, purchases) {
     const hours = p.seconds_added ? (p.seconds_added / 3600) : 0
     return `
             <li class="dashboard-list-item dashboard-list-item--clickable billing-purchase-row" tabindex="0" role="button" aria-expanded="false" data-purchase-id="${escapeHtml(p.id)}">
-              <div style="flex: 1;">
+              <div class="flex-1">
                 <div class="dashboard-credits-widget">
                   <strong>${escapeHtml(name)}</strong>
                   <span class="dashboard-meta">${formatPrice(p.amount_cents)}</span>
@@ -95,6 +98,7 @@ function render(main, credits, purchases) {
                   </div>
                 </div>
               </div>
+              ${CHEVRON_SVG}
             </li>
           `
   }).join('')}
