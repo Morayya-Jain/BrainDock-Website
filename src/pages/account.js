@@ -6,6 +6,7 @@ import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { isValidName, sanitizeText, LIMITS } from '../validators.js'
 import { escapeHtml, showInlineError } from '../utils.js'
+import { t } from '../dashboard-i18n.js'
 
 async function loadProfile(userId) {
   const { data, error } = await supabase.from('profiles').select('*').eq('id', userId).single()
@@ -23,24 +24,24 @@ function render(main, profile, userId) {
   const email = profile?.email ?? ''
 
   main.innerHTML = `
-    <h1 class="dashboard-page-title">Account</h1>
+    <h1 class="dashboard-page-title">${t('dashboard.account.title', 'Account')}</h1>
     <p class="dashboard-page-subtitle">
-      Your profile information.
+      ${t('dashboard.account.subtitle', 'Your profile information.')}
     </p>
 
     <div class="dashboard-card">
       <div class="dashboard-field">
-        <label class="dashboard-field-label" for="display_name">Display name</label>
-        <input type="text" id="display_name" class="dashboard-input dashboard-input--mid" value="${escapeHtml(displayName)}" placeholder="Your name" maxlength="${LIMITS.NAME_MAX}">
+        <label class="dashboard-field-label" for="display_name">${t('dashboard.account.displayName', 'Display name')}</label>
+        <input type="text" id="display_name" class="dashboard-input dashboard-input--mid" value="${escapeHtml(displayName)}" placeholder="${t('dashboard.account.yourName', 'Your name')}" maxlength="${LIMITS.NAME_MAX}">
       </div>
       <div class="dashboard-field">
-        <span class="dashboard-field-label">Email</span>
+        <span class="dashboard-field-label">${t('dashboard.account.email', 'Email')}</span>
         <p class="dashboard-meta" style="margin-top: var(--space-xs);">${escapeHtml(email)}</p>
-        <p class="dashboard-meta-sub">Email is managed by your account provider and cannot be changed here.</p>
+        <p class="dashboard-meta-sub">${t('dashboard.account.emailManaged', 'Email is managed by your account provider and cannot be changed here.')}</p>
       </div>
       <div class="dashboard-form-actions">
-        <button type="button" class="btn btn-primary" id="account-save-btn">Save Changes</button>
-        <span class="dashboard-saved" id="account-saved-msg" style="display: none;">Saved</span>
+        <button type="button" class="btn btn-primary" id="account-save-btn">${t('dashboard.actions.saveChanges', 'Save Changes')}</button>
+        <span class="dashboard-saved" id="account-saved-msg" style="display: none;">${t('dashboard.actions.saved', 'Saved')}</span>
       </div>
     </div>
   `
@@ -62,7 +63,7 @@ function render(main, profile, userId) {
       setTimeout(() => { savedMsg.style.display = 'none' }, 2000)
     } catch (err) {
       console.error(err)
-      showInlineError(main, 'Failed to save. Please try again.')
+      showInlineError(main, t('dashboard.account.saveFailed', 'Failed to save. Please try again.'))
     } finally {
       saveBtn.disabled = false
     }
@@ -76,7 +77,7 @@ async function main() {
   const mainEl = document.querySelector('.dashboard-main')
   if (!mainEl) return
 
-  mainEl.innerHTML = '<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>Loading account...</p></div>'
+  mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.account.loading', 'Loading account...')}</p></div>`
 
   try {
     const profile = await loadProfile(result.user.id)
@@ -85,8 +86,8 @@ async function main() {
     console.error(err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
-        <p class="dashboard-empty-title">Could not load profile</p>
-        <p>${escapeHtml(err.message || 'Please try again.')}</p>
+        <p class="dashboard-empty-title">${t('dashboard.account.errorTitle', 'Could not load profile')}</p>
+        <p>${escapeHtml(err.message || t('dashboard.common.tryAgain', 'Please try again.'))}</p>
       </div>
     `
   }

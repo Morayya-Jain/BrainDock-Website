@@ -6,6 +6,7 @@
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { escapeHtml, showInlineError } from '../utils.js'
+import { t } from '../dashboard-i18n.js'
 
 // Inline SVGs for OS icons (kept small and simple)
 const APPLE_SVG = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>`
@@ -44,14 +45,14 @@ async function unlinkDevice(deviceId) {
 
 function formatRelativeTime(iso) {
   /** Human-readable relative time from ISO string. */
-  if (!iso) return 'Never'
+  if (!iso) return t('dashboard.devices.never', 'Never')
   const d = new Date(iso)
   const now = new Date()
   const sec = Math.floor((now - d) / 1000)
-  if (sec < 60) return 'Just now'
-  if (sec < 3600) return `${Math.floor(sec / 60)} min ago`
-  if (sec < 86400) return `${Math.floor(sec / 3600)} hours ago`
-  if (sec < 604800) return `${Math.floor(sec / 86400)} days ago`
+  if (sec < 60) return t('dashboard.devices.justNow', 'Just now')
+  if (sec < 3600) return `${Math.floor(sec / 60)} ${t('dashboard.devices.minAgo', 'min ago')}`
+  if (sec < 86400) return `${Math.floor(sec / 3600)} ${t('dashboard.devices.hoursAgo', 'hours ago')}`
+  if (sec < 604800) return `${Math.floor(sec / 86400)} ${t('dashboard.devices.daysAgo', 'days ago')}`
   return d.toLocaleDateString()
 }
 
@@ -59,18 +60,18 @@ function render(main, devices) {
   const base = window.location.origin
 
   main.innerHTML = `
-    <h1 class="dashboard-page-title">Linked Devices</h1>
+    <h1 class="dashboard-page-title">${t('dashboard.devices.title', 'Linked Devices')}</h1>
     <p class="dashboard-page-subtitle">
-      Devices where you have signed in with BrainDock. Unlinking will require signing in again on that device.
+      ${t('dashboard.devices.subtitle', 'Devices where you have signed in with BrainDock. Unlinking will require signing in again on that device.')}
     </p>
 
     <div class="dashboard-card">
       ${devices.length === 0
         ? `
         <div class="dashboard-empty">
-          <p class="dashboard-empty-title">No linked devices</p>
-          <p>Download BrainDock and sign in to link a device.</p>
-          <a href="${base}/download/" class="btn btn-primary dashboard-empty-cta">Download BrainDock</a>
+          <p class="dashboard-empty-title">${t('dashboard.devices.noDevicesTitle', 'No linked devices')}</p>
+          <p>${t('dashboard.devices.noDevicesDesc', 'Download BrainDock and sign in to link a device.')}</p>
+          <a href="${base}/download/" class="btn btn-primary dashboard-empty-cta">${t('dashboard.devices.downloadBrainDock', 'Download BrainDock')}</a>
         </div>
         `
         : `
@@ -80,20 +81,20 @@ function render(main, devices) {
               <div class="dashboard-device-info">
                 <span class="dashboard-device-os-icon">${getOsIcon(d.os)}</span>
                 <div>
-                  <strong>${escapeHtml(d.device_name || d.machine_id || 'Unknown device')}</strong><br>
-                  <span class="dashboard-meta">${escapeHtml(d.os || '')} &middot; Last active: ${formatRelativeTime(d.last_seen)}</span><br>
-                  <span class="dashboard-meta-sub">App version: ${escapeHtml(d.app_version || '-')}</span>
+                  <strong>${escapeHtml(d.device_name || d.machine_id || t('dashboard.devices.unknownDevice', 'Unknown device'))}</strong><br>
+                  <span class="dashboard-meta">${escapeHtml(d.os || '')} &middot; ${t('dashboard.devices.lastActive', 'Last active:')} ${formatRelativeTime(d.last_seen)}</span><br>
+                  <span class="dashboard-meta-sub">${t('dashboard.devices.appVersion', 'App version:')} ${escapeHtml(d.app_version || '-')}</span>
                 </div>
               </div>
-              <button type="button" class="btn btn-secondary dashboard-btn-sm device-unlink-btn">Unlink</button>
+              <button type="button" class="btn btn-secondary dashboard-btn-sm device-unlink-btn">${t('dashboard.actions.unlink', 'Unlink')}</button>
             </li>
           `).join('')}
         </ul>
         `}
       <p class="dashboard-meta dashboard-devices-footer">
-        To link a new device, download BrainDock and sign in with your account.
+        ${t('dashboard.devices.linkNewDevice', 'To link a new device, download BrainDock and sign in with your account.')}
       </p>
-      <a href="${base}/download/" class="btn btn-secondary dashboard-devices-download-link">Download BrainDock</a>
+      <a href="${base}/download/" class="btn btn-secondary dashboard-devices-download-link">${t('dashboard.devices.downloadBrainDock', 'Download BrainDock')}</a>
     </div>
   `
 
@@ -101,14 +102,14 @@ function render(main, devices) {
     btn.addEventListener('click', async () => {
       const li = btn.closest('[data-device-id]')
       const id = li?.dataset.deviceId
-      if (!id || !confirm('Unlink this device? You will need to sign in again on it.')) return
+      if (!id || !confirm(t('dashboard.devices.unlinkConfirm', 'Unlink this device? You will need to sign in again on it.'))) return
       btn.disabled = true
       try {
         await unlinkDevice(id)
         li.remove()
       } catch (err) {
         console.error(err)
-        showInlineError(main, 'Failed to unlink. Please try again.')
+        showInlineError(main, t('dashboard.devices.unlinkFailed', 'Failed to unlink. Please try again.'))
         btn.disabled = false
       }
     })
@@ -122,7 +123,7 @@ async function main() {
   const mainEl = document.querySelector('.dashboard-main')
   if (!mainEl) return
 
-  mainEl.innerHTML = '<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>Loading devices...</p></div>'
+  mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.devices.loading', 'Loading devices...')}</p></div>`
 
   try {
     const devices = await loadDevices()
@@ -131,8 +132,8 @@ async function main() {
     console.error(err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
-        <p class="dashboard-empty-title">Could not load devices</p>
-        <p>${escapeHtml(err.message || 'Please try again.')}</p>
+        <p class="dashboard-empty-title">${t('dashboard.devices.errorTitle', 'Could not load devices')}</p>
+        <p>${escapeHtml(err.message || t('dashboard.common.tryAgain', 'Please try again.'))}</p>
       </div>
     `
   }

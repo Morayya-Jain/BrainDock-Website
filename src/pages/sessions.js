@@ -5,6 +5,7 @@
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { escapeHtml, formatDuration, modeLabel } from '../utils.js'
+import { t } from '../dashboard-i18n.js'
 
 const PAGE_SIZE = 20
 
@@ -25,14 +26,14 @@ function render(main, sessions, page, total, goToPage) {
   const base = window.location.origin
 
   main.innerHTML = `
-    <h1 class="dashboard-page-title">Session History</h1>
+    <h1 class="dashboard-page-title">${t('dashboard.sessionList.title', 'Session History')}</h1>
 
     <div class="dashboard-card">
       ${sessions.length === 0
         ? `
         <div class="dashboard-empty">
-          <p class="dashboard-empty-title">No sessions yet</p>
-          <p>Complete a session with the BrainDock desktop app to see your history here.</p>
+          <p class="dashboard-empty-title">${t('dashboard.sessionList.noSessionsTitle', 'No sessions yet')}</p>
+          <p>${t('dashboard.sessionList.noSessionsDesc', 'Complete a session with the BrainDock desktop app to see your history here.')}</p>
         </div>
         `
         : `
@@ -45,26 +46,26 @@ function render(main, sessions, page, total, goToPage) {
             const screen = summary.screen_distraction_count ?? 0
             const start = new Date(s.start_time)
             const dateStr = start.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
-            const name = s.session_name || `Session ${start.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
+            const name = s.session_name || `${t('dashboard.common.session', 'Session')} ${start.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
             const activeSec = s.active_seconds ?? (summary.present_seconds ?? 0) + (summary.away_seconds ?? 0) + (summary.gadget_seconds ?? 0) + (summary.screen_distraction_seconds ?? 0)
             return `
               <li class="dashboard-list-item">
                 <div>
                   <strong>${escapeHtml(name)}</strong><br>
                   <span class="dashboard-meta">${dateStr}</span><br>
-                  <span class="dashboard-meta">${modeLabel(s.monitoring_mode)} &middot; ${formatDuration(activeSec)} active &middot; ${Math.round(pct)}% focus</span><br>
-                  <span class="dashboard-meta-sub">${gadgets} gadgets &middot; ${screen} screen distractions</span>
+                  <span class="dashboard-meta">${modeLabel(s.monitoring_mode)} &middot; ${formatDuration(activeSec)} ${t('dashboard.common.active', 'active')} &middot; ${Math.round(pct)}% ${t('dashboard.common.focus', 'focus')}</span><br>
+                  <span class="dashboard-meta-sub">${gadgets} ${t('dashboard.common.gadgets', 'gadgets')} &middot; ${screen} ${t('dashboard.common.screenDistractions', 'screen distractions')}</span>
                 </div>
-                <a href="${base}/sessions/${escapeHtml(s.id)}" class="btn btn-secondary dashboard-btn-sm">View</a>
+                <a href="${base}/sessions/${escapeHtml(s.id)}" class="btn btn-secondary dashboard-btn-sm">${t('dashboard.actions.view', 'View')}</a>
               </li>
             `
           }).join('')}
         </ul>
 
         <div class="dashboard-pagination">
-          <button type="button" id="sessions-prev" ${page <= 1 ? 'disabled' : ''}>Previous</button>
-          <span>Page ${page} of ${totalPages}</span>
-          <button type="button" id="sessions-next" ${page >= totalPages ? 'disabled' : ''}>Next</button>
+          <button type="button" id="sessions-prev" ${page <= 1 ? 'disabled' : ''}>${t('dashboard.actions.previous', 'Previous')}</button>
+          <span>${t('dashboard.common.page', 'Page')} ${page} ${t('dashboard.common.of', 'of')} ${totalPages}</span>
+          <button type="button" id="sessions-next" ${page >= totalPages ? 'disabled' : ''}>${t('dashboard.actions.next', 'Next')}</button>
         </div>
         `}
     </div>
@@ -87,7 +88,7 @@ async function main() {
 
   async function loadPage(page) {
     currentPage = page
-    mainEl.innerHTML = '<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>Loading sessions...</p></div>'
+    mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.sessionList.loading', 'Loading sessions...')}</p></div>`
     try {
       const { sessions, total } = await fetchSessionsWithCount(page)
       render(mainEl, sessions, page, total, loadPage)
@@ -95,8 +96,8 @@ async function main() {
       console.error(err)
       mainEl.innerHTML = `
         <div class="dashboard-empty">
-          <p class="dashboard-empty-title">Could not load sessions</p>
-          <p>${escapeHtml(err.message || 'Please try again.')}</p>
+          <p class="dashboard-empty-title">${t('dashboard.sessionList.errorTitle', 'Could not load sessions')}</p>
+          <p>${escapeHtml(err.message || t('dashboard.common.tryAgain', 'Please try again.'))}</p>
         </div>
       `
     }

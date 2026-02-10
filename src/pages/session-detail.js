@@ -6,13 +6,17 @@
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { escapeHtml, formatDuration, modeLabel } from '../utils.js'
+import { t } from '../dashboard-i18n.js'
 
-const EVENT_TYPE_TO_LABEL = {
-  present: 'Focused',
-  away: 'Away',
-  gadget_suspected: 'Gadget',
-  screen_distraction: 'Screen distraction',
-  paused: 'Paused',
+function eventLabel(type) {
+  const labels = {
+    present: t('dashboard.sessionDetail.focused', 'Focused'),
+    away: t('dashboard.sessionDetail.away', 'Away'),
+    gadget_suspected: t('dashboard.sessionDetail.gadget', 'Gadget'),
+    screen_distraction: t('dashboard.sessionDetail.screenDistraction', 'Screen distraction'),
+    paused: t('dashboard.sessionDetail.paused', 'Paused'),
+  }
+  return labels[type] || type
 }
 
 const EVENT_TYPE_TO_TIMELINE_CLASS = {
@@ -91,10 +95,10 @@ function render(main, session, events) {
 
   const startDate = new Date(session.start_time)
   const dateStr = startDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })
-  const name = session.session_name || `Session ${startDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
+  const name = session.session_name || `${t('dashboard.common.session', 'Session')} ${startDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
 
   main.innerHTML = `
-    <a href="${base}/sessions/" class="dashboard-back-link">Back to Sessions</a>
+    <a href="${base}/sessions/" class="dashboard-back-link">${t('dashboard.common.backToSessions', 'Back to Sessions')}</a>
     <h1 class="dashboard-page-title">${escapeHtml(name)}</h1>
     <p class="dashboard-page-subtitle">
       ${dateStr} &middot; ${modeLabel(session.monitoring_mode)}
@@ -102,25 +106,25 @@ function render(main, session, events) {
 
     <div class="dashboard-stat-cards dashboard-stat-cards--2col">
       <div class="dashboard-stat-card">
-        <div class="dashboard-stat-card-label">Focus</div>
+        <div class="dashboard-stat-card-label">${t('dashboard.sessionDetail.focusLabel', 'Focus')}</div>
         <div class="dashboard-stat-card-value">${formatDuration(presentSec)}</div>
       </div>
       <div class="dashboard-stat-card">
-        <div class="dashboard-stat-card-label">Away</div>
+        <div class="dashboard-stat-card-label">${t('dashboard.sessionDetail.awayLabel', 'Away')}</div>
         <div class="dashboard-stat-card-value">${formatDuration(awaySec)}</div>
       </div>
       <div class="dashboard-stat-card">
-        <div class="dashboard-stat-card-label">Gadgets</div>
+        <div class="dashboard-stat-card-label">${t('dashboard.sessionDetail.gadgetsLabel', 'Gadgets')}</div>
         <div class="dashboard-stat-card-value">${formatDuration(gadgetSec)}</div>
       </div>
       <div class="dashboard-stat-card">
-        <div class="dashboard-stat-card-label">Paused</div>
+        <div class="dashboard-stat-card-label">${t('dashboard.sessionDetail.pausedLabel', 'Paused')}</div>
         <div class="dashboard-stat-card-value">${formatDuration(pausedSec)}</div>
       </div>
     </div>
 
     <div class="dashboard-section">
-      <h2 class="dashboard-section-title">Focus Rate: ${focusRate}%</h2>
+      <h2 class="dashboard-section-title">${t('dashboard.sessionDetail.focusRateLabel', 'Focus Rate:')} ${focusRate}%</h2>
       <div class="dashboard-progress-wrap">
         <div class="dashboard-progress-bar">
           <div class="dashboard-progress-fill" style="width: ${focusRate}%;"></div>
@@ -129,10 +133,10 @@ function render(main, session, events) {
     </div>
 
     <div class="dashboard-section">
-      <h2 class="dashboard-section-title">Timeline</h2>
+      <h2 class="dashboard-section-title">${t('dashboard.sessionDetail.timeline', 'Timeline')}</h2>
       <div class="dashboard-card">
         ${segments.length === 0
-          ? '<p class="dashboard-meta-sub">No event data for this session.</p>'
+          ? `<p class="dashboard-meta-sub">${t('dashboard.sessionDetail.noEventData', 'No event data for this session.')}</p>`
           : `
           <div class="dashboard-timeline-bar">
             ${segments.map((seg, i) => `
@@ -140,29 +144,29 @@ function render(main, session, events) {
             `).join('')}
           </div>
           <div class="dashboard-timeline-legend">
-            <span><i class="legend-focused"></i> Focused</span>
-            <span><i class="legend-away"></i> Away</span>
-            <span><i class="legend-gadget"></i> Gadget</span>
-            <span><i class="legend-screen"></i> Screen</span>
-            <span><i class="legend-paused"></i> Paused</span>
+            <span><i class="legend-focused"></i> ${t('dashboard.sessionDetail.legendFocused', 'Focused')}</span>
+            <span><i class="legend-away"></i> ${t('dashboard.sessionDetail.legendAway', 'Away')}</span>
+            <span><i class="legend-gadget"></i> ${t('dashboard.sessionDetail.legendGadget', 'Gadget')}</span>
+            <span><i class="legend-screen"></i> ${t('dashboard.sessionDetail.legendScreen', 'Screen')}</span>
+            <span><i class="legend-paused"></i> ${t('dashboard.sessionDetail.legendPaused', 'Paused')}</span>
           </div>
           `}
       </div>
     </div>
 
     <div class="dashboard-section">
-      <h2 class="dashboard-section-title">Event Log</h2>
+      <h2 class="dashboard-section-title">${t('dashboard.sessionDetail.eventLog', 'Event Log')}</h2>
       <div class="dashboard-table-wrap">
         ${events.length === 0
-          ? '<p class="dashboard-meta-sub dashboard-table-empty">No events recorded.</p>'
+          ? `<p class="dashboard-meta-sub dashboard-table-empty">${t('dashboard.sessionDetail.noEventsRecorded', 'No events recorded.')}</p>`
           : `
           <table class="dashboard-table">
             <thead>
               <tr>
-                <th>Start</th>
-                <th>End</th>
-                <th>Type</th>
-                <th>Duration</th>
+                <th>${t('dashboard.sessionDetail.thStart', 'Start')}</th>
+                <th>${t('dashboard.sessionDetail.thEnd', 'End')}</th>
+                <th>${t('dashboard.sessionDetail.thType', 'Type')}</th>
+                <th>${t('dashboard.sessionDetail.thDuration', 'Duration')}</th>
               </tr>
             </thead>
             <tbody>
@@ -170,7 +174,7 @@ function render(main, session, events) {
                 <tr>
                   <td>${formatTime(e.start_time)}</td>
                   <td>${formatTime(e.end_time)}</td>
-                  <td>${escapeHtml(EVENT_TYPE_TO_LABEL[e.event_type] || e.event_type)}</td>
+                  <td>${escapeHtml(eventLabel(e.event_type))}</td>
                   <td>${formatDuration(e.duration_seconds)}</td>
                 </tr>
               `).join('')}
@@ -195,15 +199,15 @@ async function main() {
   const mainEl = document.querySelector('.dashboard-main')
   if (!mainEl) return
 
-  mainEl.innerHTML = '<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>Loading session...</p></div>'
+  mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.sessionDetail.loading', 'Loading session...')}</p></div>`
 
   try {
     const { session, events } = await fetchSessionWithEvents(sessionId)
     if (!session) {
       mainEl.innerHTML = `
         <div class="dashboard-empty">
-          <p class="dashboard-empty-title">Session not found</p>
-          <p><a href="/sessions/">Back to Sessions</a></p>
+          <p class="dashboard-empty-title">${t('dashboard.sessionDetail.notFound', 'Session not found')}</p>
+          <p><a href="/sessions/">${t('dashboard.common.backToSessions', 'Back to Sessions')}</a></p>
         </div>
       `
       return
@@ -213,9 +217,9 @@ async function main() {
     console.error(err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
-        <p class="dashboard-empty-title">Could not load session</p>
+        <p class="dashboard-empty-title">${t('dashboard.sessionDetail.errorTitle', 'Could not load session')}</p>
         <p>${escapeHtml(err.message || 'Please try again.')}</p>
-        <p><a href="/sessions/">Back to Sessions</a></p>
+        <p><a href="/sessions/">${t('dashboard.common.backToSessions', 'Back to Sessions')}</a></p>
       </div>
     `
   }

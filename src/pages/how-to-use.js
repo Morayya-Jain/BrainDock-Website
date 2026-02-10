@@ -3,6 +3,7 @@
  */
 
 import { initDashboardLayout } from '../dashboard-layout.js'
+import { t } from '../dashboard-i18n.js'
 
 // Inline SVG icons (Lucide-style, 24x24 viewBox)
 const ICONS = {
@@ -24,141 +25,141 @@ function render(main) {
   const base = window.location.origin
 
   main.innerHTML = `
-    <h1 class="dashboard-page-title">How to Use BrainDock</h1>
-    <p class="dashboard-page-subtitle">A simple guide to get you started.</p>
+    <h1 class="dashboard-page-title">${t('dashboard.howToUse.title', 'How to Use BrainDock')}</h1>
+    <p class="dashboard-page-subtitle">${t('dashboard.howToUse.subtitle', 'A simple guide to get you started.')}</p>
 
     <div class="howto-stack">
 
       <!-- 1. Get Set Up -->
       <div class="dashboard-card">
         <div class="howto-icon" style="color: var(--accent-highlight)">${ICONS.download}</div>
-        <h2 class="dashboard-section-title">Get Set Up</h2>
-        <div class="howto-step"><span class="howto-step-num">1</span><span>Download the app from the <a href="${base}/download/">Download</a> page.</span></div>
-        <div class="howto-step"><span class="howto-step-num">2</span><span>Create an account or sign in on this website.</span></div>
-        <div class="howto-step"><span class="howto-step-num">3</span><span>Open BrainDock and sign in with the same account (or use the login code from this site).</span></div>
+        <h2 class="dashboard-section-title">${t('dashboard.howToUse.getSetUp', 'Get Set Up')}</h2>
+        <div class="howto-step"><span class="howto-step-num">1</span><span>${t('dashboard.howToUse.step1Download', 'Download the app from the <a href="%URL%/download/">Download</a> page.').replace('%URL%', base)}</span></div>
+        <div class="howto-step"><span class="howto-step-num">2</span><span>${t('dashboard.howToUse.step2Account', 'Create an account or sign in on this website.')}</span></div>
+        <div class="howto-step"><span class="howto-step-num">3</span><span>${t('dashboard.howToUse.step3SignIn', 'Open BrainDock and sign in with the same account (or use the login code from this site).')}</span></div>
 
         <hr class="howto-divider">
-        <p class="dashboard-meta" style="margin-bottom: var(--space-s);">First launch on your platform:</p>
+        <p class="dashboard-meta" style="margin-bottom: var(--space-s);">${t('dashboard.howToUse.firstLaunch', 'First launch on your platform:')}</p>
         <div class="howto-platform-tabs">
           <button type="button" class="howto-platform-tab active" data-platform="macos">${ICONS.appleSmall} macOS</button>
           <button type="button" class="howto-platform-tab" data-platform="windows">${ICONS.windowsSmall} Windows</button>
         </div>
         <div class="howto-platform-panel active" id="platform-macos">
-          <div class="howto-step"><span class="howto-step-num">1</span><span><strong>Right-click</strong> (or Control-click) on BrainDock.app and choose <strong>Open</strong>.</span></div>
-          <div class="howto-step"><span class="howto-step-num">2</span><span>Click "Open" in the dialog. This only happens once.</span></div>
-          <div class="howto-step"><span class="howto-step-num">3</span><span>When asked for camera access, click <strong>OK</strong>.</span></div>
+          <div class="howto-step"><span class="howto-step-num">1</span><span>${t('dashboard.howToUse.macStep1', '<strong>Right-click</strong> (or Control-click) on BrainDock.app and choose <strong>Open</strong>.')}</span></div>
+          <div class="howto-step"><span class="howto-step-num">2</span><span>${t('dashboard.howToUse.macStep2', 'Click "Open" in the dialog. This only happens once.')}</span></div>
+          <div class="howto-step"><span class="howto-step-num">3</span><span>${t('dashboard.howToUse.macStep3', 'When asked for camera access, click <strong>OK</strong>.')}</span></div>
         </div>
         <div class="howto-platform-panel" id="platform-windows">
-          <div class="howto-step"><span class="howto-step-num">1</span><span>Run <strong>BrainDock-Setup.exe</strong>. If SmartScreen appears, click <strong>More info</strong> then <strong>Run anyway</strong>.</span></div>
-          <div class="howto-step"><span class="howto-step-num">2</span><span>Follow the installer. A desktop shortcut and Start Menu entry will be created.</span></div>
-          <div class="howto-step"><span class="howto-step-num">3</span><span>When asked for camera access, click <strong>Allow</strong>.</span></div>
+          <div class="howto-step"><span class="howto-step-num">1</span><span>${t('dashboard.howToUse.winStep1', 'Run <strong>BrainDock-Setup.exe</strong>. If SmartScreen appears, click <strong>More info</strong> then <strong>Run anyway</strong>.')}</span></div>
+          <div class="howto-step"><span class="howto-step-num">2</span><span>${t('dashboard.howToUse.winStep2', 'Follow the installer. A desktop shortcut and Start Menu entry will be created.')}</span></div>
+          <div class="howto-step"><span class="howto-step-num">3</span><span>${t('dashboard.howToUse.winStep3', 'When asked for camera access, click <strong>Allow</strong>.')}</span></div>
         </div>
       </div>
 
       <!-- 2. Start a Session -->
       <div class="dashboard-card">
         <div class="howto-icon" style="color: var(--success)">${ICONS.play}</div>
-        <h2 class="dashboard-section-title">Start a Session</h2>
-        <div class="howto-step"><span class="howto-step-num">1</span><span>Click the BrainDock icon in the menu bar (macOS) or system tray (Windows).</span></div>
-        <div class="howto-step"><span class="howto-step-num">2</span><span>Pick your mode: Camera, Screen, or Both.</span></div>
-        <div class="howto-step"><span class="howto-step-num">3</span><span>Press "Start Session". Pause or stop any time from the menu.</span></div>
-        <p class="dashboard-meta" style="margin-top: var(--space-m); margin-bottom: var(--space-s);">Status colours:</p>
+        <h2 class="dashboard-section-title">${t('dashboard.howToUse.startSession', 'Start a Session')}</h2>
+        <div class="howto-step"><span class="howto-step-num">1</span><span>${t('dashboard.howToUse.sessionStep1', 'Click the BrainDock icon in the menu bar (macOS) or system tray (Windows).')}</span></div>
+        <div class="howto-step"><span class="howto-step-num">2</span><span>${t('dashboard.howToUse.sessionStep2', 'Pick your mode: Camera, Screen, or Both.')}</span></div>
+        <div class="howto-step"><span class="howto-step-num">3</span><span>${t('dashboard.howToUse.sessionStep3', 'Press "Start Session". Pause or stop any time from the menu.')}</span></div>
+        <p class="dashboard-meta" style="margin-top: var(--space-m); margin-bottom: var(--space-s);">${t('dashboard.howToUse.statusColours', 'Status colours:')}</p>
         <div class="howto-status-row">
-          <span class="howto-status-item"><span class="howto-dot" style="background: var(--success)"></span> Focussed</span>
-          <span class="howto-status-item"><span class="howto-dot" style="background: var(--warning)"></span> Away</span>
-          <span class="howto-status-item"><span class="howto-dot" style="background: var(--error)"></span> Gadget</span>
-          <span class="howto-status-item"><span class="howto-dot" style="background: #7C3AED"></span> Screen</span>
+          <span class="howto-status-item"><span class="howto-dot" style="background: var(--success)"></span> ${t('dashboard.howToUse.statusFocussed', 'Focussed')}</span>
+          <span class="howto-status-item"><span class="howto-dot" style="background: var(--warning)"></span> ${t('dashboard.howToUse.statusAway', 'Away')}</span>
+          <span class="howto-status-item"><span class="howto-dot" style="background: var(--error)"></span> ${t('dashboard.howToUse.statusGadget', 'Gadget')}</span>
+          <span class="howto-status-item"><span class="howto-dot" style="background: #7C3AED"></span> ${t('dashboard.howToUse.statusScreen', 'Screen')}</span>
         </div>
       </div>
 
       <!-- 3. Focus Modes + Tips -->
       <div class="dashboard-card">
         <div class="howto-icon" style="color: var(--accent-highlight)">${ICONS.lightbulb}</div>
-        <h2 class="dashboard-section-title">Focus Modes</h2>
+        <h2 class="dashboard-section-title">${t('dashboard.howToUse.focusModes', 'Focus Modes')}</h2>
         <div class="howto-modes">
           <div class="howto-mode-item" style="color: var(--accent-highlight)">
             ${ICONS.camera}
-            <div class="howto-mode-label">Camera</div>
-            <div class="howto-mode-desc">Uses AI to notice when you step away or pick up a phone/tablet. No video is saved.</div>
+            <div class="howto-mode-label">${t('dashboard.howToUse.modeCamera', 'Camera')}</div>
+            <div class="howto-mode-desc">${t('dashboard.howToUse.modeCameraDesc', 'Uses AI to notice when you step away or pick up a phone/tablet. No video is saved.')}</div>
           </div>
           <div class="howto-mode-item" style="color: var(--accent-highlight)">
             ${ICONS.monitor}
-            <div class="howto-mode-label">Screen</div>
-            <div class="howto-mode-desc">Checks your active window against your blocklist. Works offline.</div>
+            <div class="howto-mode-label">${t('dashboard.howToUse.modeScreen', 'Screen')}</div>
+            <div class="howto-mode-desc">${t('dashboard.howToUse.modeScreenDesc', 'Checks your active window against your blocklist. Works offline.')}</div>
           </div>
           <div class="howto-mode-item" style="color: var(--accent-highlight)">
             ${ICONS.layers}
-            <div class="howto-mode-label">Both</div>
-            <div class="howto-mode-desc">Camera and screen combined for full coverage.</div>
+            <div class="howto-mode-label">${t('dashboard.howToUse.modeBoth', 'Both')}</div>
+            <div class="howto-mode-desc">${t('dashboard.howToUse.modeBothDesc', 'Camera and screen combined for full coverage.')}</div>
           </div>
         </div>
 
         <hr class="howto-divider">
-        <p class="dashboard-meta" style="margin-bottom: var(--space-s);"><strong>Tips</strong></p>
-        <div class="howto-tip">${ICONS.check}<span>Good lighting on your face helps accuracy.</span></div>
-        <div class="howto-tip">${ICONS.check}<span>Sit facing the camera, within 1 to 2 metres.</span></div>
-        <div class="howto-tip">${ICONS.check}<span>Keep one person in the frame at a time.</span></div>
-        <div class="howto-tip">${ICONS.check}<span>Only active gadget use is flagged. A phone on the desk while you work is fine.</span></div>
+        <p class="dashboard-meta" style="margin-bottom: var(--space-s);"><strong>${t('dashboard.howToUse.tips', 'Tips')}</strong></p>
+        <div class="howto-tip">${ICONS.check}<span>${t('dashboard.howToUse.tip1', 'Good lighting on your face helps accuracy.')}</span></div>
+        <div class="howto-tip">${ICONS.check}<span>${t('dashboard.howToUse.tip2', 'Sit facing the camera, within 1 to 2 metres.')}</span></div>
+        <div class="howto-tip">${ICONS.check}<span>${t('dashboard.howToUse.tip3', 'Keep one person in the frame at a time.')}</span></div>
+        <div class="howto-tip">${ICONS.check}<span>${t('dashboard.howToUse.tip4', 'Only active gadget use is flagged. A phone on the desk while you work is fine.')}</span></div>
       </div>
 
       <!-- 4. Your Blocklist -->
       <div class="dashboard-card">
         <div class="howto-icon" style="color: var(--accent-highlight)">${ICONS.shield}</div>
-        <h2 class="dashboard-section-title">Your Blocklist</h2>
-        <p>Choose which sites and apps count as off-task in <a href="${base}/settings/blocklist/">Settings &rarr; Blocklist</a>.</p>
-        <p>Use Quick Block for common sites, enable whole categories, or add your own URLs and app names. Changes sync to the app when you start your next session.</p>
+        <h2 class="dashboard-section-title">${t('dashboard.howToUse.yourBlocklist', 'Your Blocklist')}</h2>
+        <p>${t('dashboard.howToUse.blocklistDesc', 'Choose which sites and apps count as off-task in <a href="%URL%/settings/blocklist/">Settings &rarr; Blocklist</a>.').replace('%URL%', base)}</p>
+        <p>${t('dashboard.howToUse.blocklistDesc2', 'Use Quick Block for common sites, enable whole categories, or add your own URLs and app names. Changes sync to the app when you start your next session.')}</p>
       </div>
 
       <!-- 5. Your Reports -->
       <div class="dashboard-card">
         <div class="howto-icon" style="color: var(--accent-highlight)">${ICONS.fileText}</div>
-        <h2 class="dashboard-section-title">Your Reports</h2>
-        <p>After each session a PDF is saved to your Downloads folder. It includes:</p>
-        <div class="howto-tip">${ICONS.check}<span>Session duration and focus percentage</span></div>
-        <div class="howto-tip">${ICONS.check}<span>Away time and gadget/screen events</span></div>
-        <div class="howto-tip">${ICONS.check}<span>A visual timeline of your session</span></div>
-        <div class="howto-tip">${ICONS.check}<span>AI-generated insights and personalised suggestions</span></div>
-        <p style="margin-top: var(--space-m);">You can also view past sessions on the <a href="${base}/sessions/">Sessions</a> page.</p>
+        <h2 class="dashboard-section-title">${t('dashboard.howToUse.yourReports', 'Your Reports')}</h2>
+        <p>${t('dashboard.howToUse.reportsIntro', 'After each session a PDF is saved to your Downloads folder. It includes:')}</p>
+        <div class="howto-tip">${ICONS.check}<span>${t('dashboard.howToUse.reportItem1', 'Session duration and focus percentage')}</span></div>
+        <div class="howto-tip">${ICONS.check}<span>${t('dashboard.howToUse.reportItem2', 'Away time and gadget/screen events')}</span></div>
+        <div class="howto-tip">${ICONS.check}<span>${t('dashboard.howToUse.reportItem3', 'A visual timeline of your session')}</span></div>
+        <div class="howto-tip">${ICONS.check}<span>${t('dashboard.howToUse.reportItem4', 'AI-generated insights and personalised suggestions')}</span></div>
+        <p style="margin-top: var(--space-m);">${t('dashboard.howToUse.reportsCta', 'You can also view past sessions on the <a href="%URL%/sessions/">Sessions</a> page.').replace('%URL%', base)}</p>
       </div>
 
       <!-- 6. FAQ -->
       <div class="dashboard-card">
         <div class="howto-icon" style="color: var(--text-secondary)">${ICONS.helpCircle}</div>
-        <h2 class="dashboard-section-title">FAQ</h2>
+        <h2 class="dashboard-section-title">${t('dashboard.howToUse.faqTitle', 'FAQ')}</h2>
 
         <div class="howto-qa">
-          <div class="howto-qa-q">How do I pause or stop a session?</div>
-          <div class="howto-qa-a">Click the BrainDock icon in your menu bar or system tray, then choose Pause or Stop. You can resume a paused session at any time.</div>
+          <div class="howto-qa-q">${t('dashboard.howToUse.faq1Q', 'How do I pause or stop a session?')}</div>
+          <div class="howto-qa-a">${t('dashboard.howToUse.faq1A', 'Click the BrainDock icon in your menu bar or system tray, then choose Pause or Stop. You can resume a paused session at any time.')}</div>
         </div>
 
         <div class="howto-qa">
-          <div class="howto-qa-q">How do I change my focus mode?</div>
-          <div class="howto-qa-a">Open the BrainDock popup from the menu bar or system tray and pick Camera, Screen, or Both before starting a session.</div>
+          <div class="howto-qa-q">${t('dashboard.howToUse.faq2Q', 'How do I change my focus mode?')}</div>
+          <div class="howto-qa-a">${t('dashboard.howToUse.faq2A', 'Open the BrainDock popup from the menu bar or system tray and pick Camera, Screen, or Both before starting a session.')}</div>
         </div>
 
         <div class="howto-qa">
-          <div class="howto-qa-q">Where are my PDF reports saved?</div>
-          <div class="howto-qa-a">Reports are automatically saved to your Downloads folder when a session ends. You can also view session history on the Sessions page of this website.</div>
+          <div class="howto-qa-q">${t('dashboard.howToUse.faq3Q', 'Where are my PDF reports saved?')}</div>
+          <div class="howto-qa-a">${t('dashboard.howToUse.faq3A', 'Reports are automatically saved to your Downloads folder when a session ends. You can also view session history on the Sessions page of this website.')}</div>
         </div>
 
         <div class="howto-qa">
-          <div class="howto-qa-q">How do I add a website or app to my blocklist?</div>
-          <div class="howto-qa-a">Go to Settings &rarr; Blocklist on this website. You can toggle common sites, enable categories, or type in a custom URL or app name. Your changes sync to the desktop app automatically.</div>
+          <div class="howto-qa-q">${t('dashboard.howToUse.faq4Q', 'How do I add a website or app to my blocklist?')}</div>
+          <div class="howto-qa-a">${t('dashboard.howToUse.faq4A', 'Go to Settings &rarr; Blocklist on this website. You can toggle common sites, enable categories, or type in a custom URL or app name. Your changes sync to the desktop app automatically.')}</div>
         </div>
 
         <div class="howto-qa">
-          <div class="howto-qa-q">Can I use BrainDock on more than one computer?</div>
-          <div class="howto-qa-a">Yes. Install the app on each computer and sign in with the same account. Your settings and blocklist sync across all your devices.</div>
+          <div class="howto-qa-q">${t('dashboard.howToUse.faq5Q', 'Can I use BrainDock on more than one computer?')}</div>
+          <div class="howto-qa-a">${t('dashboard.howToUse.faq5A', 'Yes. Install the app on each computer and sign in with the same account. Your settings and blocklist sync across all your devices.')}</div>
         </div>
 
         <div class="howto-qa">
-          <div class="howto-qa-q">Does screen-only mode work without internet?</div>
-          <div class="howto-qa-a">Yes. Screen-only mode runs entirely on your computer and does not need an internet connection. Camera mode needs internet for the AI.</div>
+          <div class="howto-qa-q">${t('dashboard.howToUse.faq6Q', 'Does screen-only mode work without internet?')}</div>
+          <div class="howto-qa-a">${t('dashboard.howToUse.faq6A', 'Yes. Screen-only mode runs entirely on your computer and does not need an internet connection. Camera mode needs internet for the AI.')}</div>
         </div>
 
         <div class="howto-qa">
-          <div class="howto-qa-q">A phone on my desk was incorrectly flagged. Why?</div>
-          <div class="howto-qa-a">BrainDock only flags active gadget use (e.g. scrolling or looking at a phone). If this still happens, try adjusting your camera angle or improving lighting. You can also turn off specific gadget types in Settings &rarr; Configuration.</div>
+          <div class="howto-qa-q">${t('dashboard.howToUse.faq7Q', 'A phone on my desk was incorrectly flagged. Why?')}</div>
+          <div class="howto-qa-a">${t('dashboard.howToUse.faq7A', 'BrainDock only flags active gadget use (e.g. scrolling or looking at a phone). If this still happens, try adjusting your camera angle or improving lighting. You can also turn off specific gadget types in Settings &rarr; Configuration.')}</div>
         </div>
       </div>
 

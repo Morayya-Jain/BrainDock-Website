@@ -8,6 +8,7 @@ import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { validateUrlPattern, validateAppPattern } from '../validators.js'
 import { escapeHtml } from '../utils.js'
+import { t } from '../dashboard-i18n.js'
 import {
   createIcons,
   Smartphone,
@@ -180,17 +181,17 @@ function render(main, blocklistConfig, detectionSettings, userId) {
   }
 
   main.innerHTML = `
-    <h1 class="dashboard-page-title">Configuration</h1>
+    <h1 class="dashboard-page-title">${t('dashboard.config.title', 'Configuration')}</h1>
     <p class="dashboard-page-subtitle">
-      Configure what counts as a distraction. These settings are loaded by the desktop app when you start a session.
+      ${t('dashboard.config.subtitle', 'Configure what counts as a distraction. These settings are loaded by the desktop app when you start a session.')}
     </p>
 
     <div class="dashboard-card-grid">
 
       <!-- Detection: item pills -->
       <div class="dashboard-card">
-        <h2 class="dashboard-section-title" style="margin-bottom: var(--space-xs);">Items to Notify</h2>
-        <p class="dashboard-meta" style="margin-bottom: var(--space-l);">Select items you want to add to your list.</p>
+        <h2 class="dashboard-section-title" style="margin-bottom: var(--space-xs);">${t('dashboard.config.itemsTitle', 'Items to Notify')}</h2>
+        <p class="dashboard-meta" style="margin-bottom: var(--space-l);">${t('dashboard.config.itemsDesc', 'Select items you want to add to your list.')}</p>
         <div class="pill-toggle-wrap">
           ${ITEM_PRESETS.map((g) => `
             <button type="button" class="pill-toggle ${itemSet.has(g.id) ? 'active' : ''}" data-item="${g.id}" data-desc="${escapeHtml(g.desc)}" data-name="${escapeHtml(g.name)}" aria-pressed="${itemSet.has(g.id)}">
@@ -203,30 +204,30 @@ function render(main, blocklistConfig, detectionSettings, userId) {
 
       <!-- Blocklist: quick block pills -->
       <div class="dashboard-card">
-        <h2 class="dashboard-section-title" style="margin-bottom: var(--space-xs);">Websites to Notify</h2>
-        <p class="dashboard-meta" style="margin-bottom: var(--space-l);">Select websites you want to add to your list.</p>
+        <h2 class="dashboard-section-title" style="margin-bottom: var(--space-xs);">${t('dashboard.config.websitesTitle', 'Websites to Notify')}</h2>
+        <p class="dashboard-meta" style="margin-bottom: var(--space-l);">${t('dashboard.config.websitesDesc', 'Select websites you want to add to your list.')}</p>
         <div id="quick-blocks-container" class="pill-toggle-wrap"></div>
       </div>
 
       <!-- Custom URLs + Custom Apps side by side -->
       <div class="dashboard-card-row">
         <div class="dashboard-card">
-          <h2 class="dashboard-section-title" style="margin-bottom: var(--space-xs);">Custom URLs</h2>
-          <p class="dashboard-meta" style="margin-bottom: var(--space-m);">Add domains to your list.</p>
+          <h2 class="dashboard-section-title" style="margin-bottom: var(--space-xs);">${t('dashboard.config.customUrls', 'Custom URLs')}</h2>
+          <p class="dashboard-meta" style="margin-bottom: var(--space-m);">${t('dashboard.config.customUrlsDesc', 'Add domains to your list.')}</p>
           <div class="dashboard-input-row">
             <input type="text" id="custom-url-input" class="dashboard-input dashboard-input--narrow" placeholder="example.com" maxlength="253">
-            <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-url-add">Add</button>
+            <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-url-add">${t('dashboard.actions.add', 'Add')}</button>
           </div>
           <p id="custom-url-hint" class="dashboard-input-hint" role="status" aria-live="polite"></p>
           <div id="custom-urls-list"></div>
         </div>
 
         <div class="dashboard-card">
-          <h2 class="dashboard-section-title" style="margin-bottom: var(--space-xs);">Custom Apps</h2>
-          <p class="dashboard-meta" style="margin-bottom: var(--space-m);">Add app names to your list.</p>
+          <h2 class="dashboard-section-title" style="margin-bottom: var(--space-xs);">${t('dashboard.config.customApps', 'Custom Apps')}</h2>
+          <p class="dashboard-meta" style="margin-bottom: var(--space-m);">${t('dashboard.config.customAppsDesc', 'Add app names to your list.')}</p>
           <div class="dashboard-input-row">
             <input type="text" id="custom-app-input" class="dashboard-input dashboard-input--narrow" placeholder="App name" maxlength="50">
-            <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-app-add">Add</button>
+            <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-app-add">${t('dashboard.actions.add', 'Add')}</button>
           </div>
           <p id="custom-app-hint" class="dashboard-input-hint" role="status" aria-live="polite"></p>
           <div id="custom-apps-list"></div>
@@ -271,7 +272,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
   function renderCustomUrls() {
     const list = main.querySelector('#custom-urls-list')
     list.innerHTML = state.custom_urls.length === 0
-      ? '<p class="dashboard-meta-sub">No custom URLs added.</p>'
+      ? `<p class="dashboard-meta-sub">${t('dashboard.config.noCustomUrls', 'No custom URLs added.')}</p>`
       : state.custom_urls.map((u) => `
           <span class="dashboard-chip">
             ${escapeHtml(u)}
@@ -294,7 +295,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
   function renderCustomApps() {
     const list = main.querySelector('#custom-apps-list')
     list.innerHTML = state.custom_apps.length === 0
-      ? '<p class="dashboard-meta-sub">No custom apps added.</p>'
+      ? `<p class="dashboard-meta-sub">${t('dashboard.config.noCustomApps', 'No custom apps added.')}</p>`
       : state.custom_apps.map((a) => `
           <span class="dashboard-chip">
             ${escapeHtml(a)}
@@ -331,7 +332,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
       setHint(hintEl, '', '')
       return
     }
-    setHint(hintEl, 'Checking...', '')
+    setHint(hintEl, t('dashboard.config.checking', 'Checking...'), '')
     const result = await validateUrlPattern(val)
     if (!result.valid) {
       setHint(hintEl, result.message, 'error')
@@ -344,7 +345,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
     }
     state.custom_urls.push(normalized)
     input.value = ''
-    setHint(hintEl, result.isWarning ? result.message : 'Added.', result.isWarning ? 'warning' : 'success')
+    setHint(hintEl, result.isWarning ? result.message : t('dashboard.config.added', 'Added.'), result.isWarning ? 'warning' : 'success')
     setTimeout(() => setHint(hintEl, '', ''), 3000)
     renderCustomUrls()
     scheduleBlocklistSave()
@@ -369,7 +370,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
     }
     state.custom_apps.push(val)
     input.value = ''
-    setHint(hintEl, result.isWarning ? result.message : 'Added.', result.isWarning ? 'warning' : 'success')
+    setHint(hintEl, result.isWarning ? result.message : t('dashboard.config.added', 'Added.'), result.isWarning ? 'warning' : 'success')
     setTimeout(() => setHint(hintEl, '', ''), 3000)
     renderCustomApps()
     scheduleBlocklistSave()
@@ -484,7 +485,7 @@ async function main() {
   const mainEl = document.querySelector('.dashboard-main')
   if (!mainEl) return
 
-  mainEl.innerHTML = '<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>Loading configuration...</p></div>'
+  mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.config.loading', 'Loading configuration...')}</p></div>`
 
   try {
     // Load blocklist and detection data in parallel
@@ -497,8 +498,8 @@ async function main() {
     console.error(err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
-        <p class="dashboard-empty-title">Could not load configuration</p>
-        <p>${escapeHtml(err.message || 'Please try again.')}</p>
+        <p class="dashboard-empty-title">${t('dashboard.config.errorTitle', 'Could not load configuration')}</p>
+        <p>${escapeHtml(err.message || t('dashboard.common.tryAgain', 'Please try again.'))}</p>
       </div>
     `
   }

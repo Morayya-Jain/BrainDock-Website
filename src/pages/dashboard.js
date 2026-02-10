@@ -6,6 +6,7 @@
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { escapeHtml, formatDuration, modeLabel } from '../utils.js'
+import { t } from '../dashboard-i18n.js'
 
 /** Format date for display (e.g. "Today, Feb 7 2026") */
 function formatDateLabel(date) {
@@ -13,10 +14,10 @@ function formatDateLabel(date) {
   today.setHours(0, 0, 0, 0)
   const d = new Date(date)
   d.setHours(0, 0, 0, 0)
-  if (d.getTime() === today.getTime()) return 'Today'
+  if (d.getTime() === today.getTime()) return t('dashboard.common.today', 'Today')
   const yesterday = new Date(today)
   yesterday.setDate(yesterday.getDate() - 1)
-  if (d.getTime() === yesterday.getTime()) return 'Yesterday'
+  if (d.getTime() === yesterday.getTime()) return t('dashboard.common.yesterday', 'Yesterday')
   return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
 }
 
@@ -187,65 +188,65 @@ function render(main, user, sessions, stats, weeklyData, credits) {
     <div class="dashboard-card dashboard-credits-card">
       <div class="dashboard-credits-widget">
         <div>
-          <h2 class="dashboard-credits-widget-heading">Hours remaining</h2>
+          <h2 class="dashboard-credits-widget-heading">${t('dashboard.common.hoursRemaining', 'Hours remaining')}</h2>
           <p class="dashboard-credits-widget-value">${formatDuration(remainingSec, true)}</p>
         </div>
         ${!hasCredits
-    ? `<a href="/pricing/" class="btn btn-primary" target="_blank" rel="noopener">Buy Hours</a>`
-    : `<a href="/pricing/" class="btn btn-secondary" target="_blank" rel="noopener">Get more hours</a>`}
+    ? `<a href="/pricing/" class="btn btn-primary" target="_blank" rel="noopener">${t('dashboard.actions.buyHours', 'Buy Hours')}</a>`
+    : `<a href="/pricing/" class="btn btn-secondary" target="_blank" rel="noopener">${t('dashboard.actions.getMoreHours', 'Get more hours')}</a>`}
       </div>
     </div>
   `
 
   main.innerHTML = `
     <div class="dashboard-section">
-      <h1 class="dashboard-page-title">Dashboard</h1>
+      <h1 class="dashboard-page-title">${t('dashboard.home.title', 'Dashboard')}</h1>
       <p class="dashboard-page-subtitle">
-        Welcome back, ${escapeHtml(name)} &middot; ${todayStr}
+        ${t('dashboard.home.welcome', 'Welcome back,')} ${escapeHtml(name)} &middot; ${todayStr}
       </p>
     </div>
 
     ${creditsWidget}
     ${hasCredits && !hasSessions ? `
     <div class="dashboard-card dashboard-card--accent" style="margin-bottom: var(--space-xl);">
-      <h2 class="dashboard-section-title" style="margin-bottom: var(--space-s);">You're all set! Download BrainDock</h2>
-      <p class="dashboard-meta" style="margin-bottom: var(--space-l);">You have hours available. Download the desktop app and sign in with the same account to start tracking your focus.</p>
+      <h2 class="dashboard-section-title" style="margin-bottom: var(--space-s);">${t('dashboard.home.allSetTitle', "You're all set! Download BrainDock")}</h2>
+      <p class="dashboard-meta" style="margin-bottom: var(--space-l);">${t('dashboard.home.allSetDesc', 'You have hours available. Download the desktop app and sign in with the same account to start tracking your focus.')}</p>
       <div style="display: flex; flex-wrap: wrap; gap: var(--space-m);">
-        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg" class="btn btn-primary">Download for macOS</a>
-        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe" class="btn btn-secondary">Download for Windows</a>
+        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg" class="btn btn-primary">${t('dashboard.home.downloadMac', 'Download for macOS')}</a>
+        <a href="https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe" class="btn btn-secondary">${t('dashboard.home.downloadWin', 'Download for Windows')}</a>
       </div>
     </div>
     ` : ''}
 
     <div class="dashboard-stat-cards">
       <div class="dashboard-stat-card dashboard-stat-card--focus">
-        <div class="dashboard-stat-card-label">Today's Focus</div>
+        <div class="dashboard-stat-card-label">${t('dashboard.home.todaysFocus', "Today's Focus")}</div>
         <div class="dashboard-stat-card-value">${formatDuration(stats.today.focusSeconds, true)}</div>
-        <div class="dashboard-stat-card-sub">${stats._focusDiffStr} vs yesterday</div>
+        <div class="dashboard-stat-card-sub">${stats._focusDiffStr} ${t('dashboard.common.vsYesterday', 'vs yesterday')}</div>
       </div>
       <div class="dashboard-stat-card dashboard-stat-card--alert">
-        <div class="dashboard-stat-card-label">Today's Distractions</div>
+        <div class="dashboard-stat-card-label">${t('dashboard.home.todaysDistractions', "Today's Distractions")}</div>
         <div class="dashboard-stat-card-value">${stats.today.distractions}</div>
-        <div class="dashboard-stat-card-sub">${stats._distDiffStr} vs yesterday</div>
+        <div class="dashboard-stat-card-sub">${stats._distDiffStr} ${t('dashboard.common.vsYesterday', 'vs yesterday')}</div>
       </div>
       <div class="dashboard-stat-card dashboard-stat-card--rate">
-        <div class="dashboard-stat-card-label">Focus Rate</div>
+        <div class="dashboard-stat-card-label">${t('dashboard.home.focusRate', 'Focus Rate')}</div>
         <div class="dashboard-stat-card-value">${todayFocusRate}%</div>
-        <div class="dashboard-stat-card-sub">${stats._rateDiffStr} vs yesterday</div>
+        <div class="dashboard-stat-card-sub">${stats._rateDiffStr} ${t('dashboard.common.vsYesterday', 'vs yesterday')}</div>
       </div>
     </div>
 
     <div class="dashboard-section">
       <div class="dashboard-section-header">
-        <h2 class="dashboard-section-title">Recent Sessions</h2>
-        ${hasSessions ? '<a href="/sessions/" class="btn btn-secondary dashboard-btn-sm">View All</a>' : ''}
+        <h2 class="dashboard-section-title">${t('dashboard.home.recentSessions', 'Recent Sessions')}</h2>
+        ${hasSessions ? `<a href="/sessions/" class="btn btn-secondary dashboard-btn-sm">${t('dashboard.actions.viewAll', 'View All')}</a>` : ''}
       </div>
       <div class="dashboard-card">
         ${!hasSessions
           ? `
           <div class="dashboard-empty">
-            <p class="dashboard-empty-title">No sessions yet</p>
-            <p>Start tracking with the BrainDock app to see your focus stats here.</p>
+            <p class="dashboard-empty-title">${t('dashboard.home.noSessionsTitle', 'No sessions yet')}</p>
+            <p>${t('dashboard.home.noSessionsDesc', 'Start tracking with the BrainDock app to see your focus stats here.')}</p>
           </div>
           `
           : `
@@ -263,11 +264,11 @@ function render(main, user, sessions, stats, weeklyData, credits) {
                 return `
                   <li class="dashboard-list-item">
                     <div>
-                      <strong>${escapeHtml(s.session_name || 'Session')}</strong><br>
-                      <span class="dashboard-meta">${dayStr} ${timeStr} &middot; ${modeLabel(s.monitoring_mode, true)} &middot; ${formatDuration(duration, true)} active &middot; ${Math.round(pct)}% focus</span><br>
-                      <span class="dashboard-meta-sub">${gadgets} gadgets &middot; ${screen} screen distractions</span>
+                      <strong>${escapeHtml(s.session_name || t('dashboard.common.session', 'Session'))}</strong><br>
+                      <span class="dashboard-meta">${dayStr} ${timeStr} &middot; ${modeLabel(s.monitoring_mode, true)} &middot; ${formatDuration(duration, true)} ${t('dashboard.common.active', 'active')} &middot; ${Math.round(pct)}% ${t('dashboard.common.focus', 'focus')}</span><br>
+                      <span class="dashboard-meta-sub">${gadgets} ${t('dashboard.common.gadgets', 'gadgets')} &middot; ${screen} ${t('dashboard.common.screenDistractions', 'screen distractions')}</span>
                     </div>
-                    <a href="/sessions/${escapeHtml(s.id)}" class="btn btn-secondary dashboard-btn-sm">View</a>
+                    <a href="/sessions/${escapeHtml(s.id)}" class="btn btn-secondary dashboard-btn-sm">${t('dashboard.actions.view', 'View')}</a>
                   </li>
                 `
               })
@@ -278,13 +279,13 @@ function render(main, user, sessions, stats, weeklyData, credits) {
     </div>
 
     <div class="dashboard-section">
-      <h2 class="dashboard-section-title">This Week</h2>
+      <h2 class="dashboard-section-title">${t('dashboard.home.thisWeek', 'This Week')}</h2>
       <div class="dashboard-card">
         ${!hasSessions
           ? `
           <div class="dashboard-empty">
-            <p class="dashboard-empty-title">No data yet</p>
-            <p>Complete a session with the desktop app to see your weekly focus.</p>
+            <p class="dashboard-empty-title">${t('dashboard.home.noDataTitle', 'No data yet')}</p>
+            <p>${t('dashboard.home.noDataDesc', 'Complete a session with the desktop app to see your weekly focus.')}</p>
           </div>
           `
           : `
@@ -300,7 +301,7 @@ function render(main, user, sessions, stats, weeklyData, credits) {
               )
               .join('')}
           </div>
-          <p class="dashboard-chart-caption">Focus time by day</p>
+          <p class="dashboard-chart-caption">${t('dashboard.home.focusTimeByDay', 'Focus time by day')}</p>
           `}
       </div>
     </div>
@@ -317,7 +318,7 @@ async function main() {
   mainEl.innerHTML = `
     <div class="dashboard-loading">
       <div class="dashboard-spinner"></div>
-      <p>Loading dashboard...</p>
+      <p>${t('dashboard.home.loading', 'Loading dashboard...')}</p>
     </div>
   `
 
@@ -333,7 +334,7 @@ async function main() {
     console.error(err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
-        <p class="dashboard-empty-title">Something went wrong</p>
+        <p class="dashboard-empty-title">${t('dashboard.common.somethingWentWrong', 'Something went wrong')}</p>
         <p>${escapeHtml(err.message || 'Failed to load dashboard.')}</p>
       </div>
     `

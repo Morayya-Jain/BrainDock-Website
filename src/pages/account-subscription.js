@@ -5,6 +5,7 @@
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { escapeHtml, formatDuration } from '../utils.js'
+import { t } from '../dashboard-i18n.js'
 
 function formatPrice(cents) {
   return `A$${(cents / 100).toFixed(2)}`
@@ -44,28 +45,28 @@ function render(main, credits, purchases) {
   const remaining = credits?.remaining_seconds ?? 0
 
   main.innerHTML = `
-    <h1 class="dashboard-page-title">Billing & Usage</h1>
+    <h1 class="dashboard-page-title">${t('dashboard.billing.title', 'Billing & Usage')}</h1>
     <p class="dashboard-page-subtitle">
-      Your remaining hours and purchase history.
+      ${t('dashboard.billing.subtitle', 'Your remaining hours and purchase history.')}
     </p>
 
     <div class="dashboard-card dashboard-credits-card">
       <div class="dashboard-credits-widget">
         <div>
-          <h2 class="dashboard-credits-widget-heading">Hours remaining</h2>
+          <h2 class="dashboard-credits-widget-heading">${t('dashboard.common.hoursRemaining', 'Hours remaining')}</h2>
           <p class="dashboard-credits-widget-value">${formatDuration(remaining)}</p>
         </div>
-        <a href="${base}/pricing/" target="_blank" rel="noopener" class="btn btn-primary">Buy more hours</a>
+        <a href="${base}/pricing/" target="_blank" rel="noopener" class="btn btn-primary">${t('dashboard.actions.buyMoreHours', 'Buy more hours')}</a>
       </div>
     </div>
 
     <div class="dashboard-card">
-      <h2 class="dashboard-section-title">Purchase history</h2>
+      <h2 class="dashboard-section-title">${t('dashboard.billing.purchaseHistory', 'Purchase history')}</h2>
       ${purchases.length === 0
     ? `
         <div class="dashboard-empty">
-          <p class="dashboard-empty-title">No purchases yet</p>
-          <p>Buy hour packs from the <a href="${base}/pricing/" target="_blank" rel="noopener">pricing page</a> to get started.</p>
+          <p class="dashboard-empty-title">${t('dashboard.billing.noPurchasesTitle', 'No purchases yet')}</p>
+          <p>${t('dashboard.billing.noPurchasesBefore', 'Buy hour packs from the')} <a href="${base}/pricing/" target="_blank" rel="noopener">${t('dashboard.billing.pricingPage', 'pricing page')}</a> ${t('dashboard.billing.noPurchasesAfter', 'to get started.')}</p>
         </div>
       `
     : `
@@ -84,16 +85,16 @@ function render(main, credits, purchases) {
                 <span class="dashboard-meta-sub">${formatDate(p.purchased_at)}</span>
                 <div class="billing-purchase-detail" id="detail-${escapeHtml(p.id)}" hidden>
                   <div class="billing-purchase-detail-grid">
-                    <span class="billing-detail-label">Package</span>
+                    <span class="billing-detail-label">${t('dashboard.billing.package', 'Package')}</span>
                     <span>${escapeHtml(name)}</span>
-                    <span class="billing-detail-label">Hours added</span>
-                    <span>${hours} ${hours === 1 ? 'hour' : 'hours'}</span>
-                    <span class="billing-detail-label">Amount</span>
+                    <span class="billing-detail-label">${t('dashboard.billing.hoursAdded', 'Hours added')}</span>
+                    <span>${hours} ${hours === 1 ? t('dashboard.time.hour', 'hour') : t('dashboard.time.hours', 'hours')}</span>
+                    <span class="billing-detail-label">${t('dashboard.billing.amount', 'Amount')}</span>
                     <span>${formatPrice(p.amount_cents)}</span>
-                    <span class="billing-detail-label">Date</span>
+                    <span class="billing-detail-label">${t('dashboard.billing.date', 'Date')}</span>
                     <span>${formatDate(p.purchased_at)}</span>
-                    <span class="billing-detail-label">Receipt</span>
-                    <span>Sent to your email</span>
+                    <span class="billing-detail-label">${t('dashboard.billing.receipt', 'Receipt')}</span>
+                    <span>${t('dashboard.billing.sentToEmail', 'Sent to your email')}</span>
                   </div>
                 </div>
               </div>
@@ -136,7 +137,7 @@ async function main() {
   const mainEl = document.querySelector('.dashboard-main')
   if (!mainEl) return
 
-  mainEl.innerHTML = '<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>Loading billing...</p></div>'
+  mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.billing.loading', 'Loading billing...')}</p></div>`
 
   try {
     const [credits, purchases] = await Promise.all([loadCredits(), loadPurchaseHistory()])
@@ -148,15 +149,15 @@ async function main() {
       const banner = document.createElement('div')
       banner.className = 'dashboard-banner dashboard-banner-success'
       banner.setAttribute('role', 'status')
-      banner.textContent = 'Payment successful. Your hours have been added.'
+      banner.textContent = t('dashboard.billing.paymentSuccess', 'Payment successful. Your hours have been added.')
       mainEl.prepend(banner)
     }
   } catch (err) {
     console.error(err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
-        <p class="dashboard-empty-title">Could not load billing</p>
-        <p>${escapeHtml(err.message || 'Please try again.')}</p>
+        <p class="dashboard-empty-title">${t('dashboard.billing.errorTitle', 'Could not load billing')}</p>
+        <p>${escapeHtml(err.message || t('dashboard.common.tryAgain', 'Please try again.'))}</p>
       </div>
     `
   }

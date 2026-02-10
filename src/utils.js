@@ -2,6 +2,8 @@
  * Shared utility functions used across dashboard pages.
  */
 
+import { t } from './dashboard-i18n.js'
+
 const ESCAPE_MAP = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }
 
 /**
@@ -19,23 +21,23 @@ export function escapeHtml(str) {
  * Verbose: "2 hours 30 mins" or "45 mins 10 secs" (for session lists).
  */
 export function formatDuration(seconds, compact = false) {
-  if (seconds == null || seconds < 0) return compact ? '0m' : '0 sec'
+  if (seconds == null || seconds < 0) return compact ? `0${t('dashboard.time.m', 'm')}` : `0 ${t('dashboard.time.sec', 'sec')}`
   const h = Math.floor(seconds / 3600)
   const m = Math.floor((seconds % 3600) / 60)
   const s = Math.floor(seconds % 60)
 
   if (compact) {
-    if (h > 0) return `${h}h ${m}m`
-    return `${m}m`
+    if (h > 0) return `${h}${t('dashboard.time.h', 'h')} ${m}${t('dashboard.time.m', 'm')}`
+    return `${m}${t('dashboard.time.m', 'm')}`
   }
 
   if (h > 0) {
-    return `${h} ${h === 1 ? 'hour' : 'hours'}${m > 0 ? ` ${m} ${m === 1 ? 'min' : 'mins'}` : ''}`
+    return `${h} ${h === 1 ? t('dashboard.time.hour', 'hour') : t('dashboard.time.hours', 'hours')}${m > 0 ? ` ${m} ${m === 1 ? t('dashboard.time.min', 'min') : t('dashboard.time.mins', 'mins')}` : ''}`
   }
   if (m > 0) {
-    return `${m} ${m === 1 ? 'min' : 'mins'}${s > 0 ? ` ${s} ${s === 1 ? 'sec' : 'secs'}` : ''}`
+    return `${m} ${m === 1 ? t('dashboard.time.min', 'min') : t('dashboard.time.mins', 'mins')}${s > 0 ? ` ${s} ${s === 1 ? t('dashboard.time.sec', 'sec') : t('dashboard.time.secs', 'secs')}` : ''}`
   }
-  return `${s} ${s === 1 ? 'sec' : 'secs'}`
+  return `${s} ${s === 1 ? t('dashboard.time.sec', 'sec') : t('dashboard.time.secs', 'secs')}`
 }
 
 /**
@@ -66,13 +68,13 @@ export function showInlineError(container, message, durationMs = 5000) {
  */
 export function modeLabel(mode, short = false) {
   if (short) {
-    if (mode === 'camera_only') return 'Camera'
-    if (mode === 'screen_only') return 'Screen'
-    if (mode === 'both') return 'Both'
+    if (mode === 'camera_only') return t('dashboard.modes.camera', 'Camera')
+    if (mode === 'screen_only') return t('dashboard.modes.screen', 'Screen')
+    if (mode === 'both') return t('dashboard.modes.both', 'Both')
   } else {
-    if (mode === 'camera_only') return 'Camera Only'
-    if (mode === 'screen_only') return 'Screen Only'
-    if (mode === 'both') return 'Camera + Screen'
+    if (mode === 'camera_only') return t('dashboard.modes.cameraOnly', 'Camera Only')
+    if (mode === 'screen_only') return t('dashboard.modes.screenOnly', 'Screen Only')
+    if (mode === 'both') return t('dashboard.modes.cameraPlusScreen', 'Camera + Screen')
   }
   return mode || '-'
 }

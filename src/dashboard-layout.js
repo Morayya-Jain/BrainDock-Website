@@ -7,6 +7,14 @@
 import { supabase } from './supabase.js'
 import { escapeHtml } from './utils.js'
 import {
+  initDashboardI18n,
+  t,
+  getCurrentLang,
+  changeLang,
+  SUPPORTED_LANGUAGES,
+  LANGUAGE_LABELS,
+} from './dashboard-i18n.js'
+import {
   createIcons,
   LayoutDashboard,
   Clock,
@@ -45,13 +53,13 @@ async function fetchRemainingSeconds() {
  * Examples: "2 hours", "45 min", "0 sec"
  */
 function formatPillDuration(seconds) {
-  if (seconds == null || seconds < 0) return '0 sec'
+  if (seconds == null || seconds < 0) return `0 ${t('dashboard.time.sec', 'sec')}`
   const h = Math.floor(seconds / 3600)
   const m = Math.floor((seconds % 3600) / 60)
   const s = Math.floor(seconds % 60)
-  if (h > 0) return `${h} ${h === 1 ? 'hour' : 'hours'}`
-  if (m > 0) return `${m} min`
-  return `${s} sec`
+  if (h > 0) return `${h} ${h === 1 ? t('dashboard.time.hour', 'hour') : t('dashboard.time.hours', 'hours')}`
+  if (m > 0) return `${m} ${t('dashboard.time.min', 'min')}`
+  return `${s} ${t('dashboard.time.sec', 'sec')}`
 }
 
 /**
@@ -78,37 +86,37 @@ function buildSidebarHTML(currentPath) {
         <li>
           <a href="${base}/settings/blocklist/" class="dashboard-sidebar-link ${currentPath === '/settings/blocklist' ? 'active' : ''}">
             <i data-lucide="settings" class="dashboard-sidebar-icon" aria-hidden="true"></i>
-            <span>Configuration</span>
+            <span>${t('dashboard.nav.configuration', 'Configuration')}</span>
           </a>
         </li>
         <li>
           <a href="${base}/how-to-use/" class="dashboard-sidebar-link ${currentPath === '/how-to-use' ? 'active' : ''}">
             <i data-lucide="book-open" class="dashboard-sidebar-icon" aria-hidden="true"></i>
-            <span>How to Use</span>
+            <span>${t('dashboard.nav.howToUse', 'How to Use')}</span>
           </a>
         </li>
         <li>
           <a href="${base}${DASHBOARD_PATH}" class="dashboard-sidebar-link ${currentPath === '/dashboard' ? 'active' : ''}">
             <i data-lucide="layout-dashboard" class="dashboard-sidebar-icon" aria-hidden="true"></i>
-            <span>Dashboard</span>
+            <span>${t('dashboard.nav.dashboard', 'Dashboard')}</span>
           </a>
         </li>
         <li>
           <a href="${base}/sessions/" class="dashboard-sidebar-link ${currentPath.startsWith('/sessions') ? 'active' : ''}">
             <i data-lucide="clock" class="dashboard-sidebar-icon" aria-hidden="true"></i>
-            <span>Sessions</span>
+            <span>${t('dashboard.nav.sessions', 'Sessions')}</span>
           </a>
         </li>
         <li>
           <a href="${base}/account/subscription/" class="dashboard-sidebar-link ${currentPath === '/account/subscription' ? 'active' : ''}">
             <i data-lucide="credit-card" class="dashboard-sidebar-icon" aria-hidden="true"></i>
-            <span>Billing & Usage</span>
+            <span>${t('dashboard.nav.billingUsage', 'Billing & Usage')}</span>
           </a>
         </li>
         <li>
           <a href="${base}/settings/devices/" class="dashboard-sidebar-link ${currentPath === '/settings/devices' ? 'active' : ''}">
             <i data-lucide="smartphone" class="dashboard-sidebar-icon" aria-hidden="true"></i>
-            <span>Linked Devices</span>
+            <span>${t('dashboard.nav.linkedDevices', 'Linked Devices')}</span>
           </a>
         </li>
       </ul>
@@ -122,8 +130,8 @@ function buildSidebarHTML(currentPath) {
         </span>
       </button>
       <div class="dashboard-sidebar-popup" id="dashboard-sidebar-popup" hidden>
-        <a href="${base}/" class="dashboard-sidebar-popup-link">Back to Website</a>
-        <button type="button" class="dashboard-sidebar-popup-signout" id="dashboard-sidebar-signout">Sign Out</button>
+        <a href="${base}/" class="dashboard-sidebar-popup-link">${t('dashboard.actions.backToWebsite', 'Back to Website')}</a>
+        <button type="button" class="dashboard-sidebar-popup-signout" id="dashboard-sidebar-signout">${t('dashboard.actions.signOut', 'Sign Out')}</button>
       </div>
     </div>
   `
@@ -237,6 +245,9 @@ async function handleSignOut() {
  * @returns {Promise<{ user: import('@supabase/supabase-js').User } | null>}
  */
 export async function initDashboardLayout(options = {}) {
+  // Load translations before building any UI so t() calls work
+  await initDashboardI18n()
+
   // Try getSession first (reads localStorage, instant). If that fails,
   // wait for onAuthStateChange which fires once the client finishes init.
   let session = null
@@ -312,7 +323,7 @@ export async function initDashboardLayout(options = {}) {
       <span id="dashboard-remaining-text">...</span>
     </a>
     <a href="${base}/download/" class="dashboard-download-btn">
-      <span>Download</span>
+      <span>${t('dashboard.actions.download', 'Download')}</span>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
         <polyline points="7 10 12 15 17 10"/>
@@ -325,8 +336,8 @@ export async function initDashboardLayout(options = {}) {
       </button>
       <div class="dashboard-profile-dropdown" id="dashboard-profile-dropdown" hidden>
         <p class="dashboard-profile-email" id="dashboard-profile-email">${escapeHtml(displayName)}</p>
-        <a href="${base}/" class="dashboard-profile-link">Back to Website</a>
-        <button type="button" class="dashboard-profile-signout" id="dashboard-profile-signout">Sign Out</button>
+        <a href="${base}/" class="dashboard-profile-link">${t('dashboard.actions.backToWebsite', 'Back to Website')}</a>
+        <button type="button" class="dashboard-profile-signout" id="dashboard-profile-signout">${t('dashboard.actions.signOut', 'Sign Out')}</button>
       </div>
     </div>
   `
@@ -397,6 +408,7 @@ export async function initDashboardLayout(options = {}) {
 
   initSidebarBehavior()
   initProfileDropdown()
+  initLangToggle()
 
   // Populate remaining-time pill once credits load
   remainingPromise.then((seconds) => {
@@ -432,5 +444,79 @@ function initProfileDropdown() {
     }
   })
 
+  dropdown.addEventListener('click', (e) => e.stopPropagation())
+}
+
+/**
+ * Create and wire up the floating language toggle (bottom-right FAB).
+ */
+function initLangToggle() {
+  const lang = getCurrentLang()
+
+  // Build the floating toggle + dropdown
+  const wrap = document.createElement('div')
+  wrap.className = 'dashboard-lang-fab'
+  wrap.innerHTML = `
+    <button type="button" class="dashboard-lang-fab-btn" id="dashboard-lang-btn"
+            aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
+      <svg class="dashboard-lang-globe" width="20" height="20" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+        <path d="M2 12h20"/>
+      </svg>
+      <span class="dashboard-lang-fab-label">${escapeHtml(LANGUAGE_LABELS[lang] || lang)}</span>
+    </button>
+    <ul class="dashboard-lang-dropdown" id="dashboard-lang-dropdown" role="listbox" hidden>
+      ${SUPPORTED_LANGUAGES.map((code) => `
+        <li role="option" data-lang="${code}" aria-selected="${code === lang}"
+            class="${code === lang ? 'selected' : ''}">${escapeHtml(LANGUAGE_LABELS[code] || code)}</li>
+      `).join('')}
+    </ul>
+  `
+  document.body.appendChild(wrap)
+
+  // Toggle dropdown
+  const btn = document.getElementById('dashboard-lang-btn')
+  const dropdown = document.getElementById('dashboard-lang-dropdown')
+  if (!btn || !dropdown) return
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation()
+    const open = dropdown.hidden
+    dropdown.hidden = !open
+    btn.setAttribute('aria-expanded', !open)
+  })
+
+  // Language selection
+  dropdown.querySelectorAll('[data-lang]').forEach((option) => {
+    option.addEventListener('click', (e) => {
+      e.stopPropagation()
+      const newLang = option.getAttribute('data-lang')
+      if (newLang && newLang !== lang) {
+        changeLang(newLang)
+      }
+      dropdown.hidden = true
+      btn.setAttribute('aria-expanded', 'false')
+    })
+  })
+
+  // Close on outside click
+  document.addEventListener('click', () => {
+    if (!dropdown.hidden) {
+      dropdown.hidden = true
+      btn.setAttribute('aria-expanded', 'false')
+    }
+  })
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !dropdown.hidden) {
+      dropdown.hidden = true
+      btn.setAttribute('aria-expanded', 'false')
+    }
+  })
+
+  // Prevent dropdown clicks from bubbling
   dropdown.addEventListener('click', (e) => e.stopPropagation())
 }
