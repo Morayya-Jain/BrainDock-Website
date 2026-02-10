@@ -6,7 +6,7 @@
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { escapeHtml, formatDuration, modeLabel } from '../utils.js'
-import { t } from '../dashboard-i18n.js'
+import { t, getLocale } from '../dashboard-i18n.js'
 
 function eventLabel(type) {
   const labels = {
@@ -37,7 +37,7 @@ function getSessionIdFromPath() {
 
 function formatTime(iso) {
   if (!iso) return '-'
-  return new Date(iso).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', second: '2-digit' })
+  return new Date(iso).toLocaleTimeString(getLocale(), { hour: 'numeric', minute: '2-digit', second: '2-digit' })
 }
 
 async function fetchSessionWithEvents(sessionId) {
@@ -94,8 +94,8 @@ function render(main, session, events) {
   const segmentWidths = totalSec > 0 ? segments.map((s) => (s.durationSeconds / totalSec) * 100) : []
 
   const startDate = new Date(session.start_time)
-  const dateStr = startDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })
-  const name = session.session_name || `${t('dashboard.common.session', 'Session')} ${startDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
+  const dateStr = startDate.toLocaleDateString(getLocale(), { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })
+  const name = session.session_name || `${t('dashboard.common.session', 'Session')} ${startDate.toLocaleTimeString(getLocale(), { hour: 'numeric', minute: '2-digit' })}`
 
   main.innerHTML = `
     <a href="${base}/sessions/" class="dashboard-back-link">${t('dashboard.common.backToSessions', 'Back to Sessions')}</a>

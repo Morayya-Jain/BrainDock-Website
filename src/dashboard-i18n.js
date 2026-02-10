@@ -30,6 +30,17 @@ export function getCurrentLang() {
   return currentLang
 }
 
+/** Map app language codes to BCP 47 locale strings for date/time formatting. */
+const LOCALE_MAP = { en: 'en-AU', ja: 'ja-JP', de: 'de-DE', fr: 'fr-FR', zh: 'zh-CN', hi: 'hi-IN' }
+
+/**
+ * Get the BCP 47 locale string for the current language.
+ * Used by toLocaleDateString / toLocaleTimeString.
+ */
+export function getLocale() {
+  return LOCALE_MAP[currentLang] || 'en-AU'
+}
+
 /**
  * Initialise the dashboard i18n system.
  * Reads the saved language preference and fetches the translation JSON.

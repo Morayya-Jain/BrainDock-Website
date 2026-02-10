@@ -4,15 +4,33 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
+   Dashboard-specific design tokens
+   -------------------------------------------------------------------------- */
+:root {
+  --accent-dashboard:       #c4935f;
+  --accent-dashboard-hover: #b8854f;
+  --color-focused:  #059669;
+  --color-away:     #C4841D;
+  --color-gadget:   #DC2626;
+  --color-screen:   #7C3AED;
+  --color-paused:   #6B7280;
+  --color-idle:     #9CA3AF;
+  --color-pill-active:       #c0392b;
+  --color-pill-active-bg:    rgba(231, 76, 60, 0.1);
+  --color-pill-active-border: rgba(231, 76, 60, 0.3);
+  --color-pill-active-hover:  rgba(231, 76, 60, 0.16);
+}
+
+/* --------------------------------------------------------------------------
    Dashboard button overrides: accent colour instead of black
    -------------------------------------------------------------------------- */
 .dashboard-app .btn-primary {
-  background-color: #c4935f;
+  background-color: var(--accent-dashboard);
   color: #FFFFFF;
 }
 
 .dashboard-app .btn-primary:hover {
-  background-color: #b8854f;
+  background-color: var(--accent-dashboard-hover);
 }
 
 /* --------------------------------------------------------------------------
@@ -683,13 +701,13 @@
 
 /* Active (blocked) state: soft red */
 .pill-toggle.active {
-  color: #c0392b;
-  background: rgba(231, 76, 60, 0.1);
-  border-color: rgba(231, 76, 60, 0.3);
+  color: var(--color-pill-active);
+  background: var(--color-pill-active-bg);
+  border-color: var(--color-pill-active-border);
 }
 
 .pill-toggle.active:hover {
-  background: rgba(231, 76, 60, 0.16);
+  background: var(--color-pill-active-hover);
 }
 
 .pill-toggle-icon {
@@ -1358,6 +1376,11 @@
   transform: translateX(20px);
 }
 
+.dashboard-toggle-switch:focus-visible {
+  outline: 2px solid var(--accent-highlight);
+  outline-offset: 2px;
+}
+
 /* --------------------------------------------------------------------------
    Progress bar / gauge
    -------------------------------------------------------------------------- */
@@ -1398,6 +1421,11 @@
   background: var(--bg-surface-elevated);
   color: var(--text-secondary);
   border: 1px solid var(--border-subtle);
+}
+.dashboard-inline-error {
+  background: rgba(255, 59, 48, 0.1);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 59, 48, 0.3);
 }
 
 /* --------------------------------------------------------------------------
@@ -1491,29 +1519,29 @@
   transition: min-width 0.1s ease;
 }
 
-/* Event type colors (semantic, match existing palette) */
+/* Event type colors (semantic, from design tokens) */
 .dashboard-timeline-segment.focused {
-  background: #059669;
+  background: var(--color-focused);
 }
 
 .dashboard-timeline-segment.away {
-  background: #C4841D;
+  background: var(--color-away);
 }
 
 .dashboard-timeline-segment.gadget {
-  background: #DC2626;
+  background: var(--color-gadget);
 }
 
 .dashboard-timeline-segment.screen {
-  background: #7C3AED;
+  background: var(--color-screen);
 }
 
 .dashboard-timeline-segment.paused {
-  background: #6B7280;
+  background: var(--color-paused);
 }
 
 .dashboard-timeline-segment.idle {
-  background: #9CA3AF;
+  background: var(--color-idle);
 }
 
 .dashboard-timeline-legend {
@@ -1537,11 +1565,11 @@
   border-radius: 2px;
 }
 
-.dashboard-timeline-legend i.legend-focused { background: #059669; }
-.dashboard-timeline-legend i.legend-away { background: #C4841D; }
-.dashboard-timeline-legend i.legend-gadget { background: #DC2626; }
-.dashboard-timeline-legend i.legend-screen { background: #7C3AED; }
-.dashboard-timeline-legend i.legend-paused { background: #6B7280; }
+.dashboard-timeline-legend i.legend-focused { background: var(--color-focused); }
+.dashboard-timeline-legend i.legend-away { background: var(--color-away); }
+.dashboard-timeline-legend i.legend-gadget { background: var(--color-gadget); }
+.dashboard-timeline-legend i.legend-screen { background: var(--color-screen); }
+.dashboard-timeline-legend i.legend-paused { background: var(--color-paused); }
 
 .dashboard-table-empty {
   padding: var(--space-l);
@@ -1850,7 +1878,7 @@
 .howto-dot--focused { background: var(--success); }
 .howto-dot--away    { background: var(--warning); }
 .howto-dot--gadget  { background: var(--error); }
-.howto-dot--screen  { background: #7C3AED; }
+.howto-dot--screen  { background: var(--color-screen); }
 
 .howto-modes {
   display: grid;
@@ -2085,4 +2113,16 @@
 .howto-icon--accent  { color: var(--accent-highlight); }
 .howto-icon--success { color: var(--success); }
 .howto-icon--muted   { color: var(--text-secondary); }
+
+/* --------------------------------------------------------------------------
+   Respect user's motion preferences
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 

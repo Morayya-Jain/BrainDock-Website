@@ -5,7 +5,7 @@
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { escapeHtml, formatDuration, modeLabel, focusLevelClass } from '../utils.js'
-import { t } from '../dashboard-i18n.js'
+import { t, getLocale } from '../dashboard-i18n.js'
 
 const PAGE_SIZE = 20
 
@@ -45,8 +45,8 @@ function render(main, sessions, page, total, goToPage) {
             const gadgets = summary.gadget_count ?? 0
             const screen = summary.screen_distraction_count ?? 0
             const start = new Date(s.start_time)
-            const dateStr = start.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
-            const name = s.session_name || `${t('dashboard.common.session', 'Session')} ${start.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
+            const dateStr = start.toLocaleDateString(getLocale(), { month: 'long', day: 'numeric', year: 'numeric' })
+            const name = s.session_name || `${t('dashboard.common.session', 'Session')} ${start.toLocaleTimeString(getLocale(), { hour: 'numeric', minute: '2-digit' })}`
             const activeSec = s.active_seconds ?? (summary.present_seconds ?? 0) + (summary.away_seconds ?? 0) + (summary.gadget_seconds ?? 0) + (summary.screen_distraction_seconds ?? 0)
             return `
               <li class="dashboard-list-item ${focusLevelClass(Math.round(pct))}">

@@ -25,13 +25,12 @@ import {
   BookOpen,
   Hourglass,
 } from 'lucide/dist/cjs/lucide.js'
+import { MACOS_URL, WINDOWS_URL } from './constants.js'
+import { fetchRemainingSeconds } from './credits.js'
 import './dashboard.css'
 
 const LOGIN_PATH = '/auth/login/'
 const DASHBOARD_PATH = '/dashboard/'
-
-const MACOS_URL = 'https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg'
-const WINDOWS_URL = 'https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe'
 
 /** Detect user's OS and return the matching download URL. Falls back to /download/ page. */
 function getDownloadUrl() {
@@ -39,24 +38,6 @@ function getDownloadUrl() {
   if (/Mac|iPhone|iPad|iPod/.test(ua)) return MACOS_URL
   if (/Win/.test(ua)) return WINDOWS_URL
   return '/download/'
-}
-
-/**
- * Fetch remaining credit seconds from user_credits table.
- */
-async function fetchRemainingSeconds() {
-  try {
-    const { data, error } = await supabase
-      .from('user_credits')
-      .select('total_purchased_seconds, total_used_seconds')
-      .single()
-    if (error) return 0
-    const purchased = data?.total_purchased_seconds ?? 0
-    const used = data?.total_used_seconds ?? 0
-    return Math.max(0, purchased - used)
-  } catch (_) {
-    return 0
-  }
 }
 
 /**
@@ -187,9 +168,27 @@ function getUserInitials(user) {
  */
 function renderAvatar(avatarUrl, initials) {
   if (avatarUrl) {
-    return `<img src="${escapeHtml(avatarUrl)}" alt="" class="dashboard-avatar-img" referrerpolicy="no-referrer" aria-hidden="true" onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(initials)}'">`
+    return `<img src="${escapeHtml(avatarUrl)}" alt="" class="dashboard-avatar-img" referrerpolicy="no-referrer" aria-hidden="true" data-fallback-initials="${escapeHtml(initials)}">`
   }
   return escapeHtml(initials)
+}
+
+/**
+ * Attach error handlers to avatar images so they fall back to initials.
+ * Uses JS event listeners instead of inline onerror to comply with CSP.
+ * Also handles the case where the image already failed before the listener was attached.
+ */
+function initAvatarFallbacks(root) {
+  root.querySelectorAll('.dashboard-avatar-img[data-fallback-initials]').forEach((img) => {
+    function fallback() {
+      const initials = img.getAttribute('data-fallback-initials') || '?'
+      img.style.display = 'none'
+      img.parentElement.textContent = initials
+    }
+    img.addEventListener('error', fallback)
+    // If the image already failed before the listener was attached, trigger fallback now
+    if (img.complete && img.naturalWidth === 0) fallback()
+  })
 }
 
 /**
@@ -232,7 +231,7 @@ function initSidebarFooterPopup() {
     e.stopPropagation()
     const open = popup.hidden
     popup.hidden = !open
-    trigger.setAttribute('aria-expanded', !open)
+    trigger.setAttribute('aria-expanded', open)
   })
 
   // Close popup when clicking outside
@@ -417,6 +416,9 @@ export async function initDashboardLayout(options = {}) {
     profileAvatarEl.innerHTML = renderAvatar(avatarUrl, initials)
   }
 
+  // Attach avatar error fallbacks (CSP-safe, no inline handlers)
+  initAvatarFallbacks(app)
+
   initSidebarBehavior()
   initProfileDropdown()
   initLangToggle()
@@ -443,7 +445,7 @@ function initProfileDropdown() {
     e.stopPropagation()
     const open = dropdown.hidden
     dropdown.hidden = !open
-    trigger.setAttribute('aria-expanded', !open)
+    trigger.setAttribute('aria-expanded', open)
   })
 
   signoutBtn?.addEventListener('click', handleSignOut)
@@ -496,7 +498,7 @@ function initLangToggle() {
     e.stopPropagation()
     const open = dropdown.hidden
     dropdown.hidden = !open
-    btn.setAttribute('aria-expanded', !open)
+    btn.setAttribute('aria-expanded', open)
   })
 
   // Language selection

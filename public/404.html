@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>General Settings - BrainDock</title>
+  <meta name="robots" content="noindex, nofollow">
+  <title>Page Not Found - BrainDock</title>
   <link rel="icon" type="image/png" href="/assets/white-logo.png">
   <link rel="apple-touch-icon" href="/assets/white-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,34 +12,44 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .dashboard-boot {
+    .error-page {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
       gap: 16px;
+      text-align: center;
+      padding: var(--space-xl);
       background: linear-gradient(to right, #C7C6C3 0%, #FDFCF9 45%);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: rgba(60, 60, 67, 0.6);
     }
-    .dashboard-boot-spinner {
-      width: 36px; height: 36px;
-      border: 3px solid #E5E5EA;
-      border-top-color: #D4A373;
-      border-radius: 50%;
-      animation: dbspin 0.8s linear infinite;
+    .error-page h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
     }
-    @keyframes dbspin { to { transform: rotate(360deg); } }
+    .error-page p {
+      font-family: var(--font-sans);
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 420px;
+      margin: 0;
+    }
+    .error-page .btn {
+      margin-top: var(--space-m);
+    }
   </style>
 </head>
 <body>
-  <!-- Visible immediately while JS initializes -->
-  <div class="dashboard-boot" id="dashboard-boot">
-    <div class="dashboard-boot-spinner"></div>
-    <p>Loading...</p>
+  <div class="error-page">
+    <a href="/" aria-label="BrainDock home">
+      <img src="/assets/logo_with_text.png" alt="BrainDock" width="180">
+    </a>
+    <h1>Page not found</h1>
+    <p>The page you are looking for does not exist or has been moved.</p>
+    <a href="/" class="btn btn-primary">Back to Home</a>
   </div>
-  <div id="dashboard-content" style="display:none;"></div>
-  <script type="module" src="/src/pages/settings.js"></script>
 </body>
 </html>

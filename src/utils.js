@@ -52,13 +52,20 @@ export function showInlineError(container, message, durationMs = 5000) {
   const banner = document.createElement('div')
   banner.className = 'dashboard-banner dashboard-inline-error'
   banner.setAttribute('role', 'alert')
-  banner.style.background = 'rgba(255, 59, 48, 0.1)'
-  banner.style.color = 'var(--text-primary)'
-  banner.style.border = '1px solid rgba(255, 59, 48, 0.3)'
   banner.textContent = message
   container.prepend(banner)
 
   setTimeout(() => banner.remove(), durationMs)
+}
+
+/**
+ * Format price in cents to a human-readable string.
+ * Defaults to AUD. Handles other currencies with a simple $ prefix.
+ */
+export function formatPrice(cents, currency = 'aud') {
+  const c = (currency || 'aud').toLowerCase()
+  if (c === 'aud') return `A$${(cents / 100).toFixed(2)}`
+  return `$${(cents / 100).toFixed(2)}`
 }
 
 /**

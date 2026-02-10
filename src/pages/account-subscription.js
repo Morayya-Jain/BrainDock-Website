@@ -4,30 +4,13 @@
 
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
-import { escapeHtml, formatDuration } from '../utils.js'
-import { t } from '../dashboard-i18n.js'
-
-function formatPrice(cents) {
-  return `A$${(cents / 100).toFixed(2)}`
-}
+import { escapeHtml, formatDuration, formatPrice } from '../utils.js'
+import { t, getLocale } from '../dashboard-i18n.js'
+import { fetchUserCredits } from '../credits.js'
 
 function formatDate(iso) {
   if (!iso) return '-'
-  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-}
-
-async function loadCredits() {
-  const { data, error } = await supabase
-    .from('user_credits')
-    .select('total_purchased_seconds, total_used_seconds')
-    .single()
-  if (error) {
-    if (error.code === 'PGRST116') return { total_purchased_seconds: 0, total_used_seconds: 0, remaining_seconds: 0 }
-    throw error
-  }
-  const purchased = data?.total_purchased_seconds ?? 0
-  const used = data?.total_used_seconds ?? 0
-  return { total_purchased_seconds: purchased, total_used_seconds: used, remaining_seconds: Math.max(0, purchased - used) }
+  return new Date(iso).toLocaleDateString(getLocale(), { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
 async function loadPurchaseHistory() {
@@ -141,7 +124,7 @@ async function main() {
   mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.billing.loading', 'Loading billing...')}</p></div>`
 
   try {
-    const [credits, purchases] = await Promise.all([loadCredits(), loadPurchaseHistory()])
+    const [credits, purchases] = await Promise.all([fetchUserCredits(), loadPurchaseHistory()])
     render(mainEl, credits, purchases)
 
     const params = new URLSearchParams(window.location.search)

@@ -4,7 +4,7 @@
  */
 
 import { supabase, supabaseUrl, supabaseAnonKey } from '../supabase.js'
-import { escapeHtml, showInlineError } from '../utils.js'
+import { escapeHtml, showInlineError, formatPrice } from '../utils.js'
 import '../auth.css'
 import '../dashboard.css'
 
@@ -35,12 +35,6 @@ async function createCheckoutSession(packageId) {
   const result = await resp.json().catch(() => ({}))
   if (!resp.ok) return { url: null, error: result?.error || result?.message || `HTTP ${resp.status}` }
   return { url: result?.url || null, error: result?.url ? null : 'No checkout URL returned' }
-}
-
-function formatPrice(cents, currency) {
-  const c = (currency || 'aud').toLowerCase()
-  if (c === 'aud') return `A$${(cents / 100).toFixed(2)}`
-  return `$${(cents / 100).toFixed(2)}`
 }
 
 function pricePerHour(cents, hours) {
