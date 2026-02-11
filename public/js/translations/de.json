@@ -497,6 +497,43 @@
     "learnMoreBtn": "Mehr erfahren",
     "note": "Verfügbar für macOS und Windows. Linux kommt bald."
   },
+  "madeForYou": {
+    "sectionTitle": "BrainDock is made<br><span class=\"mfy-heading-accent\">for you</span>",
+    "learnMore": "Learn more",
+    "download": "Download",
+    "audiences": {
+      "students": {
+        "pill": "Students",
+        "title": "BrainDock for <em>Students</em>",
+        "description": "Focus smarter, not harder. BrainDock helps students maintain concentration during study sessions, reducing distractions and building lasting focus habits."
+      },
+      "developers": {
+        "pill": "Developers",
+        "title": "BrainDock for <em>Developers</em>",
+        "description": "Deep work is everything. BrainDock quietly monitors for context switches and device distractions, helping you stay in flow state during coding sessions."
+      },
+      "creators": {
+        "pill": "Creators",
+        "title": "BrainDock for <em>Creators</em>",
+        "description": "Whether you're designing, writing, or editing, BrainDock helps you stay in the creative zone by noticing when devices pull your attention away."
+      },
+      "leaders": {
+        "pill": "Leaders",
+        "title": "BrainDock for <em>Leaders</em>",
+        "description": "Set the standard for your team. BrainDock helps managers and executives protect deep work time, making meetings and strategic thinking more productive."
+      },
+      "teams": {
+        "pill": "Teams",
+        "title": "BrainDock for <em>Teams</em>",
+        "description": "Give your team the tools to focus. BrainDock helps teams reduce distractions during work sessions, improving collective productivity and output quality."
+      },
+      "sales": {
+        "pill": "Sales",
+        "title": "BrainDock for <em>Sales</em>",
+        "description": "Preparation and follow-up demand focus. BrainDock helps sales professionals stay locked in during research, outreach, and CRM work."
+      }
+    }
+  },
   "whyBrainDock": {
     "sectionTitle": "Warum BrainDock nutzen?",
     "benefits": {

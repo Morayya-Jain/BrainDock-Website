@@ -30,7 +30,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
@@ -164,6 +164,112 @@
           </div>
           <div class="benefit-card-overlay" id="benefit-card-overlay"></div>
         </div>
+
+        <!-- Made For You - Dark Card -->
+        <div class="mfy-card">
+          <div class="mfy-wrapper">
+            <!-- Left column: heading + pills -->
+            <div class="mfy-left">
+              <h2 class="mfy-heading" data-i18n-html="madeForYou.sectionTitle">BrainDock is made<br><span class="mfy-heading-accent">for you</span></h2>
+              <div class="mfy-pills" role="tablist" aria-label="Audience categories">
+                <button class="mfy-pill active" role="tab" aria-selected="true" aria-controls="mfy-panel-students" id="mfy-tab-students" data-audience="students" tabindex="0">
+                  <span data-i18n="madeForYou.audiences.students.pill">Students</span>
+                </button>
+                <button class="mfy-pill" role="tab" aria-selected="false" aria-controls="mfy-panel-developers" id="mfy-tab-developers" data-audience="developers" tabindex="-1">
+                  <span data-i18n="madeForYou.audiences.developers.pill">Developers</span>
+                </button>
+                <button class="mfy-pill" role="tab" aria-selected="false" aria-controls="mfy-panel-creators" id="mfy-tab-creators" data-audience="creators" tabindex="-1">
+                  <span data-i18n="madeForYou.audiences.creators.pill">Creators</span>
+                </button>
+                <button class="mfy-pill" role="tab" aria-selected="false" aria-controls="mfy-panel-leaders" id="mfy-tab-leaders" data-audience="leaders" tabindex="-1">
+                  <span data-i18n="madeForYou.audiences.leaders.pill">Leaders</span>
+                </button>
+                <button class="mfy-pill" role="tab" aria-selected="false" aria-controls="mfy-panel-teams" id="mfy-tab-teams" data-audience="teams" tabindex="-1">
+                  <span data-i18n="madeForYou.audiences.teams.pill">Teams</span>
+                </button>
+                <button class="mfy-pill" role="tab" aria-selected="false" aria-controls="mfy-panel-sales" id="mfy-tab-sales" data-audience="sales" tabindex="-1">
+                  <span data-i18n="madeForYou.audiences.sales.pill">Sales</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Right column: content panels -->
+            <div class="mfy-right">
+              <div class="mfy-panel active" role="tabpanel" id="mfy-panel-students" aria-labelledby="mfy-tab-students">
+                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.students.title">BrainDock for <em>Students</em></h3>
+                <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.students.description">Focus smarter, not harder. BrainDock helps students maintain concentration during study sessions, reducing distractions and building lasting focus habits.</p>
+                <div class="mfy-panel-actions">
+                  <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
+                  <a href="#download" class="btn btn-primary mfy-download-btn">
+                    <span data-i18n="madeForYou.download">Download</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <div class="mfy-panel" role="tabpanel" id="mfy-panel-developers" aria-labelledby="mfy-tab-developers">
+                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.developers.title">BrainDock for <em>Developers</em></h3>
+                <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.developers.description">Deep work is everything. BrainDock quietly monitors for context switches and device distractions, helping you stay in flow state during coding sessions.</p>
+                <div class="mfy-panel-actions">
+                  <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
+                  <a href="#download" class="btn btn-primary mfy-download-btn">
+                    <span data-i18n="madeForYou.download">Download</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <div class="mfy-panel" role="tabpanel" id="mfy-panel-creators" aria-labelledby="mfy-tab-creators">
+                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.creators.title">BrainDock for <em>Creators</em></h3>
+                <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.creators.description">Whether you're designing, writing, or editing, BrainDock helps you stay in the creative zone by noticing when devices pull your attention away.</p>
+                <div class="mfy-panel-actions">
+                  <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
+                  <a href="#download" class="btn btn-primary mfy-download-btn">
+                    <span data-i18n="madeForYou.download">Download</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <div class="mfy-panel" role="tabpanel" id="mfy-panel-leaders" aria-labelledby="mfy-tab-leaders">
+                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.leaders.title">BrainDock for <em>Leaders</em></h3>
+                <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.leaders.description">Set the standard for your team. BrainDock helps managers and executives protect deep work time, making meetings and strategic thinking more productive.</p>
+                <div class="mfy-panel-actions">
+                  <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
+                  <a href="#download" class="btn btn-primary mfy-download-btn">
+                    <span data-i18n="madeForYou.download">Download</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <div class="mfy-panel" role="tabpanel" id="mfy-panel-teams" aria-labelledby="mfy-tab-teams">
+                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.teams.title">BrainDock for <em>Teams</em></h3>
+                <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.teams.description">Give your team the tools to focus. BrainDock helps teams reduce distractions during work sessions, improving collective productivity and output quality.</p>
+                <div class="mfy-panel-actions">
+                  <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
+                  <a href="#download" class="btn btn-primary mfy-download-btn">
+                    <span data-i18n="madeForYou.download">Download</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <div class="mfy-panel" role="tabpanel" id="mfy-panel-sales" aria-labelledby="mfy-tab-sales">
+                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.sales.title">BrainDock for <em>Sales</em></h3>
+                <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.sales.description">Preparation and follow-up demand focus. BrainDock helps sales professionals stay locked in during research, outreach, and CRM work.</p>
+                <div class="mfy-panel-actions">
+                  <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
+                  <a href="#download" class="btn btn-primary mfy-download-btn">
+                    <span data-i18n="madeForYou.download">Download</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 

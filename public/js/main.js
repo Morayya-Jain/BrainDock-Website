@@ -199,6 +199,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Benefit card popup functionality
   initBenefitCards();
 
+  // Made For You audience pill switcher
+  initMadeForYou();
+
   // Linux coming soon popup
   initComingSoonPopup();
 });
@@ -292,6 +295,78 @@ function initBenefitCards() {
       hideCard();
     }
   });
+}
+
+/**
+ * Initialize the "Made For You" audience pill switcher.
+ * Implements WAI-ARIA Tabs pattern with arrow key navigation.
+ * Also rewrites download buttons to OS-specific URLs.
+ */
+function initMadeForYou() {
+  const pills = document.querySelectorAll('.mfy-pill');
+  const panels = document.querySelectorAll('.mfy-panel');
+
+  if (!pills.length || !panels.length) return;
+
+  /** Activate a pill and show its corresponding panel. */
+  function activateTab(pill) {
+    // Deactivate all pills
+    pills.forEach(p => {
+      p.classList.remove('active');
+      p.setAttribute('aria-selected', 'false');
+      p.setAttribute('tabindex', '-1');
+    });
+
+    // Hide all panels
+    panels.forEach(p => p.classList.remove('active'));
+
+    // Activate the selected pill
+    pill.classList.add('active');
+    pill.setAttribute('aria-selected', 'true');
+    pill.setAttribute('tabindex', '0');
+    pill.focus();
+
+    // Show the matching panel
+    const panelId = pill.getAttribute('aria-controls');
+    const panel = document.getElementById(panelId);
+    if (panel) panel.classList.add('active');
+  }
+
+  // Click handler for each pill
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => activateTab(pill));
+  });
+
+  // Arrow key navigation (WAI-ARIA Tabs pattern)
+  pills.forEach((pill, index) => {
+    pill.addEventListener('keydown', (e) => {
+      let newIndex;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        newIndex = (index + 1) % pills.length;
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        newIndex = (index - 1 + pills.length) % pills.length;
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        newIndex = 0;
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        newIndex = pills.length - 1;
+      }
+      if (newIndex !== undefined) {
+        activateTab(pills[newIndex]);
+      }
+    });
+  });
+
+  // Rewrite download buttons to OS-specific URL (same as nav CTA)
+  const downloadUrl = getDownloadUrl();
+  if (downloadUrl) {
+    document.querySelectorAll('.mfy-download-btn').forEach(btn => {
+      btn.href = downloadUrl;
+    });
+  }
 }
 
 /**

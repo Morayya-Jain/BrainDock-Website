@@ -24,7 +24,7 @@
   --error: #FF3B30;
 
   /* Typography */
-  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-serif: Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* Spacing */
@@ -655,7 +655,7 @@ body.hero-compact .hero-ctas {
   .hero-content {
     text-align: left;
     flex: 1;
-    max-width: 520px; /* Fixed max, scales down with flex */
+    max-width: 580px; /* Fixed max, scales down with flex */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -682,7 +682,7 @@ body.hero-compact .hero-ctas {
     flex: 0 1 720px; /* Starts at 720px max, shrinks if needed */
     max-width: min(720px, min(45vw, 70vh));
     width: auto;
-    margin-right: 40px; /* Shift image slightly left */
+    margin-right: clamp(10px, 2vw, 24px); /* Slight right shift, scales with viewport */
   }
 }
 
@@ -691,6 +691,187 @@ body.hero-compact .hero-ctas {
    -------------------------------------------------------------------------- */
 .why-braindock {
   background: linear-gradient(to right, var(--bg-secondary-dark) 0%, var(--bg-secondary-light) 45%);
+}
+
+/* --------------------------------------------------------------------------
+   Made For You - Dark Card
+   -------------------------------------------------------------------------- */
+.mfy-card {
+  background: #242220;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  margin-top: var(--space-xxl);
+}
+
+.mfy-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  padding: 4rem 3rem;
+  align-items: start;
+}
+
+/* Left column */
+.mfy-heading {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #f5f0e8;
+  letter-spacing: -0.02em;
+  font-family: var(--font-serif);
+  margin-bottom: 3rem;
+}
+
+.mfy-heading-accent {
+  color: var(--accent-highlight);
+}
+
+/* Pills */
+.mfy-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.mfy-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.25rem;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+.mfy-pill:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
+}
+
+.mfy-pill:focus-visible {
+  outline: 2px solid var(--accent-highlight);
+  outline-offset: 2px;
+}
+
+.mfy-pill.active {
+  background: var(--accent-highlight);
+  border-color: var(--accent-highlight);
+  color: #1C1C1E;
+  font-weight: 600;
+}
+
+/* Right column - panels */
+.mfy-right {
+  position: relative;
+  min-height: 280px;
+}
+
+.mfy-panel {
+  display: none;
+  animation: mfyFadeIn 0.35s ease;
+}
+
+.mfy-panel.active {
+  display: block;
+}
+
+@keyframes mfyFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.mfy-panel-title {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 600;
+  color: #f5f0e8;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-serif);
+}
+
+.mfy-panel-title em {
+  font-style: italic;
+  text-decoration: underline;
+  text-decoration-color: var(--accent-highlight);
+  text-underline-offset: 6px;
+}
+
+.mfy-panel-desc {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.65;
+  margin-bottom: 2rem;
+  max-width: 520px;
+}
+
+.mfy-panel-actions {
+  display: flex;
+  gap: var(--space-m);
+  flex-wrap: wrap;
+}
+
+/* Buttons - matching site pill shape (14px 28px, 30px radius) */
+.mfy-panel-actions .btn {
+  padding: 14px 28px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--btn-radius);
+}
+
+.mfy-panel-actions .btn-outline {
+  background: transparent;
+  color: #FFFFFF;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.mfy-panel-actions .btn-outline:hover {
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+}
+
+.mfy-panel-actions .btn-primary {
+  background: #FFFFFF;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-subtle);
+  border: none;
+}
+
+.mfy-panel-actions .btn-primary:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+/* Responsive - single column on mobile */
+@media (max-width: 768px) {
+  .mfy-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .mfy-heading {
+    font-size: 2.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .mfy-right {
+    min-height: auto;
+  }
+
+  .mfy-panel-actions {
+    flex-direction: column;
+  }
+
+  .mfy-panel-actions .btn {
+    text-align: center;
+    justify-content: center;
+  }
 }
 
 /* --------------------------------------------------------------------------
