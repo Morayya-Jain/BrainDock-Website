@@ -813,9 +813,9 @@ body.hero-compact .hero-ctas {
 }
 
 .mfy-heading {
-  font-size: clamp(3.75rem, 8vw, 7rem);
+  font-size: clamp(4.25rem, 9vw, 8rem);
   font-weight: 700;
-  line-height: 1.05;
+  line-height: 1.02;
   color: #f5f0e8;
   letter-spacing: -0.02em;
   font-family: var(--font-serif);
@@ -962,7 +962,7 @@ body.hero-compact .hero-ctas {
   }
 
   .mfy-heading {
-    font-size: 3rem;
+    font-size: 3.25rem;
     margin-bottom: 2rem;
   }
 

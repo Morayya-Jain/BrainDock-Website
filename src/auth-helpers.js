@@ -211,7 +211,7 @@ export function friendlyError(error) {
     return 'An account with this email already exists. Try logging in instead.'
   }
   if (msg.includes('Password should be at least')) {
-    return 'Password must be at least 6 characters.'
+    return 'Password must be at least 8 characters.'
   }
   if (msg.includes('Email rate limit exceeded')) {
     return 'Too many attempts. Please wait a moment and try again.'

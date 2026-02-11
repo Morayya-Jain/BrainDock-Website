@@ -13,7 +13,7 @@ const GENERIC_TERMS = new Set(['app', 'web', 'the', 'new', 'my', 'get', 'go'])
 const DNS_FETCH_TIMEOUT_MS = 3000
 const EMAIL_MAX = 254
 const NAME_MAX = 200
-const PASSWORD_MIN = 6
+const PASSWORD_MIN = 8
 const PASSWORD_MAX = 128
 const APP_NAME_MAX = 100
 
