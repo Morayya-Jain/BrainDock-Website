@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function runAllResponsiveChecks() {
     checkNavFit();
     checkHeroCtasFit();
+    drawRoadmapPath();
   }
 
   // Run checks on load and after fonts are ready
@@ -196,8 +197,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Benefit card popup functionality
-  initBenefitCards();
+  // Roadmap S-curve path
+  drawRoadmapPath();
 
   // Made For You audience pill switcher
   initMadeForYou();
@@ -207,94 +208,58 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * Initialize benefit card popups for the "Why Use BrainDock?" section.
- * Shows floating card on click/tap. Centers card if it won't fit beside the item.
+ * Draw the organic S-curve SVG path connecting roadmap dots.
+ * Measures dot positions dynamically so the path adapts to any content height.
+ * Only active on desktop (768px+); mobile uses a CSS fallback line.
  */
-function initBenefitCards() {
-  const benefitItems = document.querySelectorAll('.benefits-list li[data-explanation]');
-  const benefitCard = document.getElementById('benefit-card');
-  const benefitCardText = benefitCard?.querySelector('.benefit-card-text');
-  const benefitCardOverlay = document.getElementById('benefit-card-overlay');
-  
-  if (!benefitItems.length || !benefitCard || !benefitCardText || !benefitCardOverlay) {
+function drawRoadmapPath() {
+  const container = document.querySelector('.roadmap-container');
+  const svg = document.querySelector('.roadmap-svg');
+  const path = document.querySelector('.roadmap-path');
+  const dots = document.querySelectorAll('.roadmap-dot');
+
+  if (!container || !svg || !path || dots.length < 2) return;
+
+  // Only draw the SVG curve on desktop (768px+)
+  if (window.innerWidth < 768) {
+    path.removeAttribute('d');
     return;
   }
 
-  let activeItem = null;
-  let previouslyFocusedElement = null;
+  const containerRect = container.getBoundingClientRect();
 
-  /**
-   * Show the benefit card centered on screen.
-   * Manages focus for accessibility.
-   */
-  function showCard(item, explanation) {
-    // Store the previously focused element to restore later
-    previouslyFocusedElement = document.activeElement;
-    
-    benefitCardText.textContent = explanation;
-    benefitCard.classList.add('active');
-    benefitCardOverlay.classList.add('active');
-    activeItem = item;
-    
-    // Move focus to the card for accessibility
-    benefitCard.focus();
-  }
-
-  /**
-   * Hide the benefit card.
-   * Restores focus to the previously focused element.
-   */
-  function hideCard() {
-    benefitCard.classList.remove('active');
-    benefitCardOverlay.classList.remove('active');
-    activeItem = null;
-    
-    // Restore focus to the element that opened the card
-    if (previouslyFocusedElement) {
-      previouslyFocusedElement.focus();
-      previouslyFocusedElement = null;
-    }
-  }
-
-  benefitItems.forEach(item => {
-    const explanation = item.getAttribute('data-explanation');
-
-    // Click/tap to show or hide
-    item.addEventListener('click', () => {
-      if (activeItem === item) {
-        hideCard();
-      } else {
-        showCard(item, explanation);
-      }
-    });
-
-    // Keyboard activation (Enter/Space) for accessibility
-    item.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        if (activeItem === item) {
-          hideCard();
-        } else {
-          showCard(item, explanation);
-        }
-      }
+  // Collect the center coordinates of each dot relative to the container
+  const points = [];
+  dots.forEach(dot => {
+    const dotRect = dot.getBoundingClientRect();
+    points.push({
+      x: dotRect.left + dotRect.width / 2 - containerRect.left,
+      y: dotRect.top + dotRect.height / 2 - containerRect.top
     });
   });
 
-  // Close card when clicking overlay (outside the card)
-  benefitCardOverlay.addEventListener('click', hideCard);
+  // Build the SVG path using cubic Bezier curves
+  // Start at the first dot
+  let d = `M ${points[0].x},${points[0].y}`;
 
-  // Prevent clicks inside the card from closing it
-  benefitCard.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
+  // Connect each consecutive pair with a smooth S-curve
+  for (let i = 0; i < points.length - 1; i++) {
+    const current = points[i];
+    const next = points[i + 1];
+    const verticalGap = (next.y - current.y) / 2;
 
-  // Close card on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && benefitCard.classList.contains('active')) {
-      hideCard();
-    }
-  });
+    // Control points create a vertical-tangent curve (smooth S shape)
+    const cp1x = current.x;
+    const cp1y = current.y + verticalGap;
+    const cp2x = next.x;
+    const cp2y = next.y - verticalGap;
+
+    d += ` C ${cp1x},${cp1y} ${cp2x},${cp2y} ${next.x},${next.y}`;
+  }
+
+  // Update the SVG viewBox to match the container dimensions
+  svg.setAttribute('viewBox', `0 0 ${containerRect.width} ${containerRect.height}`);
+  path.setAttribute('d', d);
 }
 
 /**

@@ -499,68 +499,75 @@
     "imageAlt": "BrainDock - AI connecting devices and mind"
   },
   "madeForYou": {
-    "sectionTitle": "BrainDock is made<br><span class=\"mfy-heading-accent\">for you</span>",
+    "sectionTitle": "BrainDock is made<br><span class=\"mfy-heading-accent\">for you.</span>",
     "learnMore": "Learn more",
     "download": "Download",
     "audiences": {
       "students": {
         "pill": "Students",
-        "title": "BrainDock for <em>Students</em>",
+        "title": "For <em>Students</em>",
         "description": "Focus smarter, not harder. BrainDock helps students maintain concentration during study sessions, reducing distractions and building lasting focus habits."
       },
       "developers": {
         "pill": "Developers",
-        "title": "BrainDock for <em>Developers</em>",
+        "title": "For <em>Developers</em>",
         "description": "Deep work is everything. BrainDock quietly monitors for context switches and device distractions, helping you stay in flow state during coding sessions."
       },
       "creators": {
         "pill": "Creators",
-        "title": "BrainDock for <em>Creators</em>",
+        "title": "For <em>Creators</em>",
         "description": "Whether you're designing, writing, or editing, BrainDock helps you stay in the creative zone by noticing when devices pull your attention away."
       },
       "leaders": {
         "pill": "Leaders",
-        "title": "BrainDock for <em>Leaders</em>",
+        "title": "For <em>Leaders</em>",
         "description": "Set the standard for your team. BrainDock helps managers and executives protect deep work time, making meetings and strategic thinking more productive."
       },
       "teams": {
         "pill": "Teams",
-        "title": "BrainDock for <em>Teams</em>",
+        "title": "For <em>Teams</em>",
         "description": "Give your team the tools to focus. BrainDock helps teams reduce distractions during work sessions, improving collective productivity and output quality."
       },
       "sales": {
         "pill": "Sales",
-        "title": "BrainDock for <em>Sales</em>",
+        "title": "For <em>Sales</em>",
         "description": "Preparation and follow-up demand focus. BrainDock helps sales professionals stay locked in during research, outreach, and CRM work."
       }
     }
   },
   "whyBrainDock": {
     "sectionTitle": "Why Use BrainDock?",
+    "sectionSubtitle": "Built to protect your focus, every session.",
     "benefits": {
       "focusWhenItCounts": {
         "title": "Focus When It Counts",
-        "explanation": "BrainDock helps you stay on track during studying, work sessions, and deadlines; minimizing distractions and guiding you back quickly when attention drifts."
+        "explanation": "BrainDock helps you stay on track during studying, work sessions, and deadlines; minimizing distractions and guiding you back quickly when attention drifts.",
+        "text": "Stay on track during work and study, with gentle guidance when attention drifts."
       },
       "enableDeepWork": {
         "title": "Enable Deep Work",
-        "explanation": "Protects uninterrupted focus time so you can think clearly, work smarter, and finish meaningful tasks faster."
+        "explanation": "Protects uninterrupted focus time so you can think clearly, work smarter, and finish meaningful tasks faster.",
+        "text": "Protect your deep focus time so you can think clearly and finish meaningful tasks."
       },
       "distractionsToAwareness": {
         "title": "Distractions To Awareness",
-        "explanation": "Helps you recognize when and why you get pulled away, so you can reset sooner and build healthier screen habits."
+        "explanation": "Helps you recognize when and why you get pulled away, so you can reset sooner and build healthier screen habits.",
+        "text": "Notice what pulls you away and build healthier attention habits over time."
       },
       "tailoredAiGuidance": {
         "title": "Tailored AI Guidance",
-        "explanation": "AI-driven nudges adapt to your goals and routines, offering support that feels personal, not pushy."
+        "explanation": "AI-driven nudges adapt to your goals and routines, offering support that feels personal, not pushy.",
+        "text": "Get AI-powered nudges that adapt to your goals and feel personal."
       },
       "buildLastingFocus": {
         "title": "Build Lasting Focus",
-        "explanation": "Builds stronger attention through consistent practice, making it easier to focus for longer periods."
+        "explanation": "Builds stronger attention through consistent practice, making it easier to focus for longer periods.",
+        "text": "Build stronger focus through consistent practice - easier with every session."
       },
       "confidenceFromResults": {
         "title": "Confidence From Results",
-        "explanation": "As you complete more of what matters, you'll feel more in control of your day and goals, gaining more confidence in yourself."
+        "explanation": "As you complete more of what matters, you'll feel more in control of your day and goals, gaining more confidence in yourself.",
+        "text": "Complete more of what matters and feel in control of your day."
       }
     }
   },

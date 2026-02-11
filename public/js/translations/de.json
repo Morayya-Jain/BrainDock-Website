@@ -498,39 +498,39 @@
     "note": "Verfügbar für macOS und Windows. Linux kommt bald."
   },
   "madeForYou": {
-    "sectionTitle": "BrainDock is made<br><span class=\"mfy-heading-accent\">for you</span>",
-    "learnMore": "Learn more",
-    "download": "Download",
+    "sectionTitle": "BrainDock ist gemacht<br><span class=\"mfy-heading-accent\">für dich.</span>",
+    "learnMore": "Mehr erfahren",
+    "download": "Herunterladen",
     "audiences": {
       "students": {
-        "pill": "Students",
-        "title": "BrainDock for <em>Students</em>",
-        "description": "Focus smarter, not harder. BrainDock helps students maintain concentration during study sessions, reducing distractions and building lasting focus habits."
+        "pill": "Studierende",
+        "title": "Für <em>Studierende</em>",
+        "description": "Lerne smarter, nicht härter. BrainDock hilft Studierenden, die Konzentration während Lernsitzungen aufrechtzuerhalten, Ablenkungen zu reduzieren und dauerhafte Fokusgewohnheiten aufzubauen."
       },
       "developers": {
-        "pill": "Developers",
-        "title": "BrainDock for <em>Developers</em>",
-        "description": "Deep work is everything. BrainDock quietly monitors for context switches and device distractions, helping you stay in flow state during coding sessions."
+        "pill": "Entwickler",
+        "title": "Für <em>Entwickler</em>",
+        "description": "Deep Work ist alles. BrainDock überwacht leise Kontextwechsel und Geräteablenkungen und hilft dir, während Programmiersitzungen im Flow-Zustand zu bleiben."
       },
       "creators": {
-        "pill": "Creators",
-        "title": "BrainDock for <em>Creators</em>",
-        "description": "Whether you're designing, writing, or editing, BrainDock helps you stay in the creative zone by noticing when devices pull your attention away."
+        "pill": "Kreative",
+        "title": "Für <em>Kreative</em>",
+        "description": "Ob du designst, schreibst oder bearbeitest - BrainDock hilft dir, in der kreativen Zone zu bleiben, indem es erkennt, wenn Geräte deine Aufmerksamkeit ablenken."
       },
       "leaders": {
-        "pill": "Leaders",
-        "title": "BrainDock for <em>Leaders</em>",
-        "description": "Set the standard for your team. BrainDock helps managers and executives protect deep work time, making meetings and strategic thinking more productive."
+        "pill": "Führungskräfte",
+        "title": "Für <em>Führungskräfte</em>",
+        "description": "Setze den Standard für dein Team. BrainDock hilft Managern und Führungskräften, Deep-Work-Zeit zu schützen und Meetings sowie strategisches Denken produktiver zu gestalten."
       },
       "teams": {
         "pill": "Teams",
-        "title": "BrainDock for <em>Teams</em>",
-        "description": "Give your team the tools to focus. BrainDock helps teams reduce distractions during work sessions, improving collective productivity and output quality."
+        "title": "Für <em>Teams</em>",
+        "description": "Gib deinem Team die Werkzeuge zum Fokussieren. BrainDock hilft Teams, Ablenkungen während Arbeitssitzungen zu reduzieren und die kollektive Produktivität und Arbeitsqualität zu verbessern."
       },
       "sales": {
-        "pill": "Sales",
-        "title": "BrainDock for <em>Sales</em>",
-        "description": "Preparation and follow-up demand focus. BrainDock helps sales professionals stay locked in during research, outreach, and CRM work."
+        "pill": "Vertrieb",
+        "title": "Für den <em>Vertrieb</em>",
+        "description": "Vorbereitung und Nachbereitung erfordern Fokus. BrainDock hilft Vertriebsprofis, bei Recherche, Kontaktaufnahme und CRM-Arbeit konzentriert zu bleiben."
       }
     }
   },
@@ -539,29 +539,36 @@
     "benefits": {
       "focusWhenItCounts": {
         "title": "Fokus wenn es zählt",
-        "explanation": "BrainDock hilft dir, beim Lernen, bei Arbeitssitzungen und Deadlines auf Kurs zu bleiben; minimiert Ablenkungen und führt dich schnell zurück, wenn die Aufmerksamkeit nachlässt."
+        "explanation": "BrainDock hilft dir, beim Lernen, bei Arbeitssitzungen und Deadlines auf Kurs zu bleiben; minimiert Ablenkungen und führt dich schnell zurück, wenn die Aufmerksamkeit nachlässt.",
+        "text": "Bleib bei der Arbeit und beim Lernen auf Kurs - mit sanfter Hilfe, wenn die Aufmerksamkeit abdriftet."
       },
       "enableDeepWork": {
         "title": "Deep Work ermöglichen",
-        "explanation": "Schützt ununterbrochene Fokuszeit, damit du klar denken, intelligenter arbeiten und wichtige Aufgaben schneller erledigen kannst."
+        "explanation": "Schützt ununterbrochene Fokuszeit, damit du klar denken, intelligenter arbeiten und wichtige Aufgaben schneller erledigen kannst.",
+        "text": "Schuetze deine Fokuszeit, damit du klar denken und wichtige Aufgaben erledigen kannst."
       },
       "distractionsToAwareness": {
         "title": "Von Ablenkungen zu Bewusstsein",
-        "explanation": "Hilft dir zu erkennen, wann und warum du abgelenkt wirst, damit du dich schneller erholen und gesündere Bildschirmgewohnheiten aufbauen kannst."
+        "explanation": "Hilft dir zu erkennen, wann und warum du abgelenkt wirst, damit du dich schneller erholen und gesündere Bildschirmgewohnheiten aufbauen kannst.",
+        "text": "Erkenne, was dich ablenkt, und baue mit der Zeit bessere Aufmerksamkeitsgewohnheiten auf."
       },
       "tailoredAiGuidance": {
         "title": "Maßgeschneiderte KI-Führung",
-        "explanation": "KI-gesteuerte Impulse passen sich deinen Zielen und Routinen an und bieten Unterstützung, die persönlich wirkt; nicht aufdringlich."
+        "explanation": "KI-gesteuerte Impulse passen sich deinen Zielen und Routinen an und bieten Unterstützung, die persönlich wirkt; nicht aufdringlich.",
+        "text": "Erhalte KI-gesteuerte Impulse, die sich an deine Ziele anpassen und persoenlich wirken."
       },
       "buildLastingFocus": {
         "title": "Dauerhaften Fokus aufbauen",
-        "explanation": "Baut durch konsequentes Üben eine stärkere Aufmerksamkeit auf, sodass es leichter wird, sich länger zu konzentrieren."
+        "explanation": "Baut durch konsequentes Üben eine stärkere Aufmerksamkeit auf, sodass es leichter wird, sich länger zu konzentrieren.",
+        "text": "Staerkere Konzentration durch konsequentes Ueben - leichter mit jeder Sitzung."
       },
       "confidenceFromResults": {
         "title": "Selbstvertrauen durch Ergebnisse",
-        "explanation": "Wenn du mehr von dem erreichst, was wichtig ist, fühlst du dich mehr in Kontrolle über deinen Tag und deine Ziele; und gewinnst mehr Vertrauen in DICH."
+        "explanation": "Wenn du mehr von dem erreichst, was wichtig ist, fühlst du dich mehr in Kontrolle über deinen Tag und deine Ziele; und gewinnst mehr Vertrauen in DICH.",
+        "text": "Erledige mehr von dem, was zaehlt, und fuehle dich im Kontrolle ueber deinen Tag."
       }
-    }
+    },
+    "sectionSubtitle": "Entwickelt, um deinen Fokus zu schützen - jede Sitzung."
   },
   "features": {
     "sectionTitle": "Funktionen",

@@ -145,24 +145,51 @@
       <div class="container">
         <div class="section-header">
           <h2 data-i18n="whyBrainDock.sectionTitle">Why Use BrainDock?</h2>
-          <div class="benefits-grid">
-            <ul class="benefits-list">
-              <li tabindex="0" role="button" data-explanation="BrainDock helps you stay on track during studying, work sessions, and deadlines; minimizing distractions and guiding you back quickly when attention drifts." data-i18n="whyBrainDock.benefits.focusWhenItCounts.title" data-i18n-explanation="whyBrainDock.benefits.focusWhenItCounts.explanation">Focus When It Counts</li>
-              <li tabindex="0" role="button" data-explanation="Protects uninterrupted focus time so you can think clearly, work smarter, and finish meaningful tasks faster." data-i18n="whyBrainDock.benefits.enableDeepWork.title" data-i18n-explanation="whyBrainDock.benefits.enableDeepWork.explanation">Enable Deep Work</li>
-              <li tabindex="0" role="button" data-explanation="Helps you recognize when and why you get pulled away, so you can reset sooner and build healthier screen habits." data-i18n="whyBrainDock.benefits.distractionsToAwareness.title" data-i18n-explanation="whyBrainDock.benefits.distractionsToAwareness.explanation">Distractions To Awareness</li>
-            </ul>
-            <ul class="benefits-list">
-              <li tabindex="0" role="button" data-explanation="AI-driven nudges adapt to your goals and routines, offering support that feels personal, not pushy." data-i18n="whyBrainDock.benefits.tailoredAiGuidance.title" data-i18n-explanation="whyBrainDock.benefits.tailoredAiGuidance.explanation">Tailored AI Guidance</li>
-              <li tabindex="0" role="button" data-explanation="Builds stronger attention through consistent practice, making it easier to focus for longer periods." data-i18n="whyBrainDock.benefits.buildLastingFocus.title" data-i18n-explanation="whyBrainDock.benefits.buildLastingFocus.explanation">Build Lasting Focus</li>
-              <li tabindex="0" role="button" data-explanation="As you complete more of what matters, you'll feel more in control of your day and goals, gaining more confidence in yourself." data-i18n="whyBrainDock.benefits.confidenceFromResults.title" data-i18n-explanation="whyBrainDock.benefits.confidenceFromResults.explanation">Confidence From Results</li>
-            </ul>
-          </div>
-          
-          <!-- Floating card for benefit explanations -->
-          <div class="benefit-card" id="benefit-card" role="dialog" aria-modal="true" aria-label="Benefit explanation" tabindex="-1">
-            <p class="benefit-card-text"></p>
-          </div>
-          <div class="benefit-card-overlay" id="benefit-card-overlay"></div>
+          <p data-i18n="whyBrainDock.sectionSubtitle">Built to protect your focus, every session.</p>
+        </div>
+
+        <div class="roadmap-container">
+          <svg class="roadmap-svg" aria-hidden="true">
+            <path class="roadmap-path" />
+          </svg>
+          <ol class="roadmap" aria-label="Benefits of using BrainDock">
+            <li class="roadmap-step" data-step-index="0">
+              <div class="roadmap-dot"><svg class="roadmap-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div class="roadmap-content">
+                <p data-i18n="whyBrainDock.benefits.focusWhenItCounts.text">Stay on track during work and study, with gentle guidance when attention drifts.</p>
+              </div>
+            </li>
+            <li class="roadmap-step" data-step-index="1">
+              <div class="roadmap-dot"><svg class="roadmap-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.4 5.6 21.2 8 14 2 9.2h7.6z"/></svg></div>
+              <div class="roadmap-content">
+                <p data-i18n="whyBrainDock.benefits.tailoredAiGuidance.text">Get AI-powered nudges that adapt to your goals and feel personal.</p>
+              </div>
+            </li>
+            <li class="roadmap-step" data-step-index="2">
+              <div class="roadmap-dot"><svg class="roadmap-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.5-3 5.7V17H8v-2.3C6.2 13.5 5 11.4 5 9a7 7 0 0 1 7-7z"/></svg></div>
+              <div class="roadmap-content">
+                <p data-i18n="whyBrainDock.benefits.distractionsToAwareness.text">Notice what pulls you away and build healthier attention habits over time.</p>
+              </div>
+            </li>
+            <li class="roadmap-step" data-step-index="3">
+              <div class="roadmap-dot"><svg class="roadmap-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+              <div class="roadmap-content">
+                <p data-i18n="whyBrainDock.benefits.enableDeepWork.text">Protect your deep focus time so you can think clearly and finish meaningful tasks.</p>
+              </div>
+            </li>
+            <li class="roadmap-step" data-step-index="4">
+              <div class="roadmap-dot"><svg class="roadmap-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+              <div class="roadmap-content">
+                <p data-i18n="whyBrainDock.benefits.buildLastingFocus.text">Build stronger focus through consistent practice - easier with every session.</p>
+              </div>
+            </li>
+            <li class="roadmap-step" data-step-index="5">
+              <div class="roadmap-dot"><svg class="roadmap-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+              <div class="roadmap-content">
+                <p data-i18n="whyBrainDock.benefits.confidenceFromResults.text">Complete more of what matters and feel in control of your day.</p>
+              </div>
+            </li>
+          </ol>
         </div>
 
         <!-- Made For You - Dark Card -->
@@ -170,7 +197,7 @@
           <div class="mfy-wrapper">
             <!-- Left column: heading + pills -->
             <div class="mfy-left">
-              <h2 class="mfy-heading" data-i18n-html="madeForYou.sectionTitle">BrainDock is made<br><span class="mfy-heading-accent">for you</span></h2>
+              <h2 class="mfy-heading" data-i18n-html="madeForYou.sectionTitle">BrainDock is made<br><span class="mfy-heading-accent">for you.</span></h2>
               <div class="mfy-pills" role="tablist" aria-label="Audience categories">
                 <button class="mfy-pill active" role="tab" aria-selected="true" aria-controls="mfy-panel-students" id="mfy-tab-students" data-audience="students" tabindex="0">
                   <span data-i18n="madeForYou.audiences.students.pill">Students</span>
@@ -196,7 +223,7 @@
             <!-- Right column: content panels -->
             <div class="mfy-right">
               <div class="mfy-panel active" role="tabpanel" id="mfy-panel-students" aria-labelledby="mfy-tab-students">
-                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.students.title">BrainDock for <em>Students</em></h3>
+                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.students.title">For <em>Students</em></h3>
                 <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.students.description">Focus smarter, not harder. BrainDock helps students maintain concentration during study sessions, reducing distractions and building lasting focus habits.</p>
                 <div class="mfy-panel-actions">
                   <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
@@ -208,7 +235,7 @@
               </div>
 
               <div class="mfy-panel" role="tabpanel" id="mfy-panel-developers" aria-labelledby="mfy-tab-developers">
-                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.developers.title">BrainDock for <em>Developers</em></h3>
+                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.developers.title">For <em>Developers</em></h3>
                 <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.developers.description">Deep work is everything. BrainDock quietly monitors for context switches and device distractions, helping you stay in flow state during coding sessions.</p>
                 <div class="mfy-panel-actions">
                   <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
@@ -220,7 +247,7 @@
               </div>
 
               <div class="mfy-panel" role="tabpanel" id="mfy-panel-creators" aria-labelledby="mfy-tab-creators">
-                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.creators.title">BrainDock for <em>Creators</em></h3>
+                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.creators.title">For <em>Creators</em></h3>
                 <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.creators.description">Whether you're designing, writing, or editing, BrainDock helps you stay in the creative zone by noticing when devices pull your attention away.</p>
                 <div class="mfy-panel-actions">
                   <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
@@ -232,7 +259,7 @@
               </div>
 
               <div class="mfy-panel" role="tabpanel" id="mfy-panel-leaders" aria-labelledby="mfy-tab-leaders">
-                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.leaders.title">BrainDock for <em>Leaders</em></h3>
+                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.leaders.title">For <em>Leaders</em></h3>
                 <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.leaders.description">Set the standard for your team. BrainDock helps managers and executives protect deep work time, making meetings and strategic thinking more productive.</p>
                 <div class="mfy-panel-actions">
                   <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
@@ -244,7 +271,7 @@
               </div>
 
               <div class="mfy-panel" role="tabpanel" id="mfy-panel-teams" aria-labelledby="mfy-tab-teams">
-                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.teams.title">BrainDock for <em>Teams</em></h3>
+                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.teams.title">For <em>Teams</em></h3>
                 <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.teams.description">Give your team the tools to focus. BrainDock helps teams reduce distractions during work sessions, improving collective productivity and output quality.</p>
                 <div class="mfy-panel-actions">
                   <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
@@ -256,7 +283,7 @@
               </div>
 
               <div class="mfy-panel" role="tabpanel" id="mfy-panel-sales" aria-labelledby="mfy-tab-sales">
-                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.sales.title">BrainDock for <em>Sales</em></h3>
+                <h3 class="mfy-panel-title" data-i18n-html="madeForYou.audiences.sales.title">For <em>Sales</em></h3>
                 <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.sales.description">Preparation and follow-up demand focus. BrainDock helps sales professionals stay locked in during research, outreach, and CRM work.</p>
                 <div class="mfy-panel-actions">
                   <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
@@ -338,18 +365,13 @@
             <p data-i18n="features.cards.detailedReports.description">Generate detailed PDF reports with insights into your session highlighting your focus scores, distractions & activity logs.</p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section class="how-it-works section" id="how-it-works">
-      <div class="container">
-        <div class="section-header">
-          <h2 data-i18n="howItWorks.sectionTitle">How It Works</h2>
-          <p data-i18n="howItWorks.sectionSubtitle">Three simple steps to better focus.</p>
-        </div>
         
-        <div class="steps">
+        <!-- How It Works -->
+        <div id="how-it-works" class="how-it-works-wrapper">
+          <h2 class="how-it-works-heading" data-i18n="howItWorks.sectionTitle">How It Works</h2>
+          <p class="how-it-works-subtitle" data-i18n="howItWorks.sectionSubtitle">Three simple steps to better focus.</p>
+          
+          <div class="steps">
           <div class="step">
             <div class="step-number">1</div>
             <h3 data-i18n="howItWorks.steps.step1.title">Download the App</h3>
@@ -366,6 +388,7 @@
             <div class="step-number">3</div>
             <h3 data-i18n="howItWorks.steps.step3.title">Report Generated</h3>
             <p data-i18n="howItWorks.steps.step3.description">A PDF report containing session insights and analytics is available after each session ends.</p>
+          </div>
           </div>
         </div>
       </div>
@@ -400,17 +423,11 @@
           </button>
         </div>
         
-      </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq section" id="faq">
-      <div class="container">
-        <div class="section-header">
-          <h2 data-i18n="faq.sectionTitle">Frequently Asked Questions</h2>
-        </div>
-        
-        <div class="faq-list">
+        <!-- FAQ -->
+        <div id="faq" class="faq-wrapper">
+          <h2 class="faq-heading" data-i18n="faq.sectionTitle">Frequently Asked Questions</h2>
+          
+          <div class="faq-list">
           <div class="faq-item">
             <button class="faq-question" aria-expanded="false">
               <span data-i18n="faq.items.privacy.question">Does BrainDock violate my privacy?</span>
@@ -479,6 +496,7 @@
                 <p data-i18n="faq.items.cloudData.answer">Your session statistics, reports, and personal data remain on your computer. For distraction sensing, frames are temporarily transmitted to our AI models for analysis and then deleted. No data is stored permanently, and we do not retain records of your sessions.</p>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>

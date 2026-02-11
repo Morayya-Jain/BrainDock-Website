@@ -153,15 +153,6 @@ const I18n = {
       }
     });
 
-    // Update data-explanation attributes on benefit items
-    document.querySelectorAll('[data-i18n-explanation]').forEach(element => {
-      const key = element.getAttribute('data-i18n-explanation');
-      const translation = this.getTranslation(key);
-      if (translation) {
-        element.setAttribute('data-explanation', translation);
-      }
-    });
-
     // Update alt attributes on images
     document.querySelectorAll('[data-i18n-alt]').forEach(element => {
       const key = element.getAttribute('data-i18n-alt');

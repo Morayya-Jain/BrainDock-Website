@@ -498,39 +498,39 @@
     "note": "支持macOS和Windows。Linux即将推出。"
   },
   "madeForYou": {
-    "sectionTitle": "BrainDock is made<br><span class=\"mfy-heading-accent\">for you</span>",
-    "learnMore": "Learn more",
-    "download": "Download",
+    "sectionTitle": "BrainDock \u4e3a<br><span class=\"mfy-heading-accent\">\u4f60\u800c\u751f\u3002</span>",
+    "learnMore": "\u4e86\u89e3\u66f4\u591a",
+    "download": "\u4e0b\u8f7d",
     "audiences": {
       "students": {
-        "pill": "Students",
-        "title": "BrainDock for <em>Students</em>",
-        "description": "Focus smarter, not harder. BrainDock helps students maintain concentration during study sessions, reducing distractions and building lasting focus habits."
+        "pill": "\u5b66\u751f",
+        "title": "\u4e3a<em>\u5b66\u751f</em>\u6253\u9020",
+        "description": "\u66f4\u806a\u660e\u5730\u4e13\u6ce8\uff0c\u800c\u4e0d\u662f\u66f4\u52aa\u529b\u3002BrainDock \u5e2e\u52a9\u5b66\u751f\u5728\u5b66\u4e60\u671f\u95f4\u4fdd\u6301\u4e13\u6ce8\u529b\uff0c\u51cf\u5c11\u5206\u5fc3\uff0c\u517b\u6210\u6301\u4e45\u7684\u4e13\u6ce8\u4e60\u60ef\u3002"
       },
       "developers": {
-        "pill": "Developers",
-        "title": "BrainDock for <em>Developers</em>",
-        "description": "Deep work is everything. BrainDock quietly monitors for context switches and device distractions, helping you stay in flow state during coding sessions."
+        "pill": "\u5f00\u53d1\u8005",
+        "title": "\u4e3a<em>\u5f00\u53d1\u8005</em>\u6253\u9020",
+        "description": "\u6df1\u5ea6\u5de5\u4f5c\u662f\u4e00\u5207\u3002BrainDock \u9759\u9ed8\u76d1\u6d4b\u4e0a\u4e0b\u6587\u5207\u6362\u548c\u8bbe\u5907\u5e72\u6270\uff0c\u5e2e\u52a9\u60a8\u5728\u7f16\u7a0b\u4f1a\u8bdd\u4e2d\u4fdd\u6301\u5fc3\u6d41\u72b6\u6001\u3002"
       },
       "creators": {
-        "pill": "Creators",
-        "title": "BrainDock for <em>Creators</em>",
-        "description": "Whether you're designing, writing, or editing, BrainDock helps you stay in the creative zone by noticing when devices pull your attention away."
+        "pill": "\u521b\u4f5c\u8005",
+        "title": "\u4e3a<em>\u521b\u4f5c\u8005</em>\u6253\u9020",
+        "description": "\u65e0\u8bba\u60a8\u662f\u5728\u8bbe\u8ba1\u3001\u5199\u4f5c\u8fd8\u662f\u7f16\u8f91\uff0cBrainDock \u901a\u8fc7\u68c0\u6d4b\u8bbe\u5907\u4f55\u65f6\u5206\u6563\u60a8\u7684\u6ce8\u610f\u529b\uff0c\u5e2e\u52a9\u60a8\u4fdd\u6301\u5728\u521b\u610f\u533a\u57df\u3002"
       },
       "leaders": {
-        "pill": "Leaders",
-        "title": "BrainDock for <em>Leaders</em>",
-        "description": "Set the standard for your team. BrainDock helps managers and executives protect deep work time, making meetings and strategic thinking more productive."
+        "pill": "\u9886\u5bfc\u8005",
+        "title": "\u4e3a<em>\u9886\u5bfc\u8005</em>\u6253\u9020",
+        "description": "\u4e3a\u56e2\u961f\u6811\u7acb\u6807\u51c6\u3002BrainDock \u5e2e\u52a9\u7ba1\u7406\u8005\u548c\u9ad8\u7ba1\u4fdd\u62a4\u6df1\u5ea6\u5de5\u4f5c\u65f6\u95f4\uff0c\u4f7f\u4f1a\u8bae\u548c\u6218\u7565\u601d\u8003\u66f4\u9ad8\u6548\u3002"
       },
       "teams": {
-        "pill": "Teams",
-        "title": "BrainDock for <em>Teams</em>",
-        "description": "Give your team the tools to focus. BrainDock helps teams reduce distractions during work sessions, improving collective productivity and output quality."
+        "pill": "\u56e2\u961f",
+        "title": "\u4e3a<em>\u56e2\u961f</em>\u6253\u9020",
+        "description": "\u4e3a\u60a8\u7684\u56e2\u961f\u63d0\u4f9b\u4e13\u6ce8\u5de5\u5177\u3002BrainDock \u5e2e\u52a9\u56e2\u961f\u5728\u5de5\u4f5c\u4f1a\u8bdd\u4e2d\u51cf\u5c11\u5e72\u6270\uff0c\u63d0\u9ad8\u96c6\u4f53\u751f\u4ea7\u529b\u548c\u8f93\u51fa\u8d28\u91cf\u3002"
       },
       "sales": {
-        "pill": "Sales",
-        "title": "BrainDock for <em>Sales</em>",
-        "description": "Preparation and follow-up demand focus. BrainDock helps sales professionals stay locked in during research, outreach, and CRM work."
+        "pill": "\u9500\u552e",
+        "title": "\u4e3a<em>\u9500\u552e</em>\u6253\u9020",
+        "description": "\u51c6\u5907\u548c\u8ddf\u8fdb\u9700\u8981\u4e13\u6ce8\u3002BrainDock \u5e2e\u52a9\u9500\u552e\u4e13\u4e1a\u4eba\u58eb\u5728\u7814\u7a76\u3001\u62d3\u5c55\u548c CRM \u5de5\u4f5c\u4e2d\u4fdd\u6301\u4e13\u6ce8\u3002"
       }
     }
   },
@@ -539,29 +539,36 @@
     "benefits": {
       "focusWhenItCounts": {
         "title": "关键时刻保持专注",
-        "explanation": "BrainDock帮助你在学习、工作和截止日期期间保持专注；最大限度地减少干扰，在注意力分散时快速引导你回归。"
+        "explanation": "BrainDock帮助你在学习、工作和截止日期期间保持专注；最大限度地减少干扰，在注意力分散时快速引导你回归。",
+        "text": "工作和学习时保持专注，注意力分散时温和地引导你回来。"
       },
       "enableDeepWork": {
         "title": "实现深度工作",
-        "explanation": "保护不受干扰的专注时间，让你能够清晰思考，更聪明地工作，更快地完成重要任务。"
+        "explanation": "保护不受干扰的专注时间，让你能够清晰思考，更聪明地工作，更快地完成重要任务。",
+        "text": "保护你的深度专注时间，让你清晰思考，完成重要任务。"
       },
       "distractionsToAwareness": {
         "title": "从分心到自觉",
-        "explanation": "帮助你认识到何时以及为何分心，以便你能更快地重新集中注意力，建立更健康的屏幕使用习惯。"
+        "explanation": "帮助你认识到何时以及为何分心，以便你能更快地重新集中注意力，建立更健康的屏幕使用习惯。",
+        "text": "发现什么在分散你的注意力，逐步养成更健康的专注习惯。"
       },
       "tailoredAiGuidance": {
         "title": "个性化AI指导",
-        "explanation": "AI驱动的提醒适应你的目标和日常习惯，提供感觉个性化而非强迫性的支持。"
+        "explanation": "AI驱动的提醒适应你的目标和日常习惯，提供感觉个性化而非强迫性的支持。",
+        "text": "获取适应你目标的AI提示，感受个性化的支持。"
       },
       "buildLastingFocus": {
         "title": "建立持久的专注力",
-        "explanation": "通过持续练习建立更强的注意力，使长时间专注变得更容易。"
+        "explanation": "通过持续练习建立更强的注意力，使长时间专注变得更容易。",
+        "text": "通过持续练习增强专注力，每次都更轻松。"
       },
       "confidenceFromResults": {
         "title": "从成果中获得自信",
-        "explanation": "当你完成更多重要的事情时，你会感到对自己的一天和目标更有掌控力；对自己更有信心。"
+        "explanation": "当你完成更多重要的事情时，你会感到对自己的一天和目标更有掌控力；对自己更有信心。",
+        "text": "完成更多重要的事，掌控你的每一天。"
       }
-    }
+    },
+    "sectionSubtitle": "专为保护你的专注力而设计，每次都是如此。"
   },
   "features": {
     "sectionTitle": "功能特点",
@@ -678,19 +685,251 @@
     "hi": "हिन्दी (India)"
   },
   "dashboard": {
-    "nav": {"configuration":"配置","howToUse":"使用指南","dashboard":"仪表盘","sessions":"会话","billingUsage":"账单与用量","linkedDevices":"已连接设备"},
-    "actions": {"backToWebsite":"返回网站","signOut":"退出登录","download":"下载","view":"查看","add":"添加","viewAll":"查看全部","previous":"上一页","next":"下一页","saveChanges":"保存更改","saved":"已保存","unlink":"取消关联","buyHours":"购买时长","getMoreHours":"获取更多时长","buyMoreHours":"购买更多时长"},
-    "time": {"hour":"小时","hours":"小时","min":"分钟","mins":"分钟","sec":"秒","secs":"秒","h":"时","m":"分"},
-    "common": {"today":"今天","yesterday":"昨天","session":"会话","active":"活跃","focus":"专注","gadgets":"设备干扰","screenDistractions":"屏幕干扰","vsYesterday":"与昨天相比","page":"第","of":"页，共","hoursRemaining":"剩余时长","somethingWentWrong":"出了点问题","tryAgain":"请重试。","backToSessions":"返回会话列表"},
-    "modes": {"camera":"摄像头","screen":"屏幕","both":"两者","cameraOnly":"仅摄像头","screenOnly":"仅屏幕","cameraPlusScreen":"摄像头+屏幕"},
-    "home": {"title":"仪表盘","welcome":"欢迎回来，","allSetTitle":"准备就绪！下载BrainDock","allSetDesc":"您有可用时长。下载桌面应用并使用同一账户登录，开始追踪您的专注情况。","downloadMac":"下载macOS版","downloadWin":"下载Windows版","todaysFocus":"今日专注","todaysDistractions":"今日干扰","focusRate":"专注率","recentSessions":"最近会话","noSessionsTitle":"暂无会话","noSessionsDesc":"使用BrainDock应用开始记录，即可在此查看专注统计。","thisWeek":"本周","noDataTitle":"暂无数据","noDataDesc":"使用桌面应用完成一次会话，即可查看每周专注数据。","focusTimeByDay":"每日专注时间","loading":"正在加载仪表盘..."},
-    "sessionList": {"title":"会话历史","noSessionsTitle":"暂无会话","noSessionsDesc":"使用BrainDock桌面应用完成一次会话，即可在此查看历史记录。","loading":"正在加载会话...","errorTitle":"无法加载会话"},
-    "sessionDetail": {"focused":"专注","away":"离开","gadget":"设备","screenDistraction":"屏幕干扰","paused":"已暂停","focusLabel":"专注","awayLabel":"离开","gadgetsLabel":"设备","pausedLabel":"已暂停","focusRateLabel":"专注率：","timeline":"时间线","noEventData":"此会话没有事件数据。","eventLog":"事件日志","noEventsRecorded":"未记录任何事件。","thStart":"开始","thEnd":"结束","thType":"类型","thDuration":"时长","legendFocused":"专注","legendAway":"离开","legendGadget":"设备","legendScreen":"屏幕","legendPaused":"已暂停","notFound":"未找到会话","loading":"正在加载会话...","errorTitle":"无法加载会话"},
-    "config": {"title":"配置","subtitle":"配置哪些行为算作干扰。这些设置在您开始会话时由桌面应用加载。","itemsTitle":"需通知的物品","itemsDesc":"选择要添加到列表中的物品。","websitesTitle":"需通知的网站","websitesDesc":"选择要添加到列表中的网站。","customUrls":"自定义网址","customUrlsDesc":"将域名添加到您的列表。","customApps":"自定义应用","customAppsDesc":"将应用名称添加到您的列表。","noCustomUrls":"未添加自定义网址。","noCustomApps":"未添加自定义应用。","checking":"检查中...","added":"已添加。","loading":"正在加载配置...","errorTitle":"无法加载配置"},
-    "devices": {"title":"已连接设备","subtitle":"您使用BrainDock登录过的设备。取消关联后需要在该设备上重新登录。","noDevicesTitle":"没有已连接设备","noDevicesDesc":"下载BrainDock并登录以关联设备。","downloadBrainDock":"下载BrainDock","unknownDevice":"未知设备","lastActive":"最后活跃：","appVersion":"应用版本：","linkNewDevice":"要关联新设备，请下载BrainDock并使用您的账户登录。","unlinkConfirm":"取消关联此设备？您需要在该设备上重新登录。","unlinkFailed":"取消关联失败。请重试。","justNow":"刚刚","minAgo":"分钟前","hoursAgo":"小时前","daysAgo":"天前","never":"从未","loading":"正在加载设备...","errorTitle":"无法加载设备"},
-    "account": {"title":"账户","subtitle":"您的个人资料信息。","displayName":"显示名称","yourName":"您的姓名","email":"电子邮件","emailManaged":"电子邮件由您的账户提供商管理，无法在此更改。","saveFailed":"保存失败。请重试。","loading":"正在加载账户...","errorTitle":"无法加载个人资料"},
-    "billing": {"title":"账单与用量","subtitle":"您的剩余时长和购买历史。","purchaseHistory":"购买历史","noPurchasesTitle":"暂无购买记录","noPurchasesDesc":"从定价页面购买时长套餐即可开始使用。","package":"套餐","hoursAdded":"添加时长","amount":"金额","date":"日期","receipt":"收据","sentToEmail":"已发送至您的邮箱","paymentSuccess":"支付成功。您的时长已添加。","loading":"正在加载账单...","errorTitle":"无法加载账单"},
-    "howToUse": {"title":"如何使用BrainDock","subtitle":"一份简单的入门指南。","getSetUp":"开始设置","step1Download":"从<a href=\"%URL%/download/\">下载</a>页面下载应用。","step2Account":"在此网站创建账户或登录。","step3SignIn":"打开BrainDock并使用同一账户登录（或使用此网站的登录代码）。","firstLaunch":"首次启动：","macStep1":"<strong>右键点击</strong>（或按住Control点击）BrainDock.app，选择<strong>打开</strong>。","macStep2":"在对话框中点击\u201c打开\u201d。这只需要一次。","macStep3":"当要求摄像头权限时，点击<strong>好</strong>。","winStep1":"运行<strong>BrainDock-Setup.exe</strong>。如果SmartScreen出现，点击<strong>更多信息</strong>然后<strong>仍然运行</strong>。","winStep2":"按照安装程序操作。将创建桌面快捷方式和开始菜单项。","winStep3":"当要求摄像头权限时，点击<strong>允许</strong>。","startSession":"开始会话","sessionStep1":"点击菜单栏（macOS）或系统托盘（Windows）中的BrainDock图标。","sessionStep2":"选择模式：摄像头、屏幕或两者。","sessionStep3":"按\u201c开始会话\u201d。随时可从菜单暂停或停止。","statusColours":"状态颜色：","statusFocussed":"专注","statusAway":"离开","statusGadget":"设备","statusScreen":"屏幕","focusModes":"专注模式","modeCamera":"摄像头","modeCameraDesc":"使用AI检测您离开或拿起手机/平板电脑。不保存视频。","modeScreen":"屏幕","modeScreenDesc":"检查活动窗口是否在阻止列表中。离线可用。","modeBoth":"两者","modeBothDesc":"摄像头和屏幕组合，全面覆盖。","tips":"提示","tip1":"良好的面部照明有助于提高准确性。","tip2":"面对摄像头坐下，距离1到2米。","tip3":"画面中保持一个人。","tip4":"仅标记主动使用设备。桌上放着的手机不会被标记。","yourBlocklist":"您的阻止列表","blocklistDesc":"在<a href=\"%URL%/settings/blocklist/\">设置 &rarr; 阻止列表</a>中选择哪些网站和应用算作偏离任务。","blocklistDesc2":"使用快速阻止常见网站，启用整个类别，或添加自定义网址和应用名称。更改将在下次会话开始时同步到应用。","yourReports":"您的报告","reportsIntro":"每次会话后，PDF将保存到您的下载文件夹。包括：","reportItem1":"会话时长和专注百分比","reportItem2":"离开时间和设备/屏幕事件","reportItem3":"会话的可视时间线","reportItem4":"AI生成的洞察和个性化建议","reportsCta":"您还可以在<a href=\"%URL%/sessions/\">会话</a>页面查看过去的会话。","faqTitle":"常见问题","faq1Q":"如何暂停或停止会话？","faq1A":"点击菜单栏或系统托盘中的BrainDock图标，选择暂停或停止。您可以随时恢复暂停的会话。","faq2Q":"如何更改专注模式？","faq2A":"从菜单栏或系统托盘打开BrainDock弹窗，在开始会话前选择摄像头、屏幕或两者。","faq3Q":"我的PDF报告保存在哪里？","faq3A":"会话结束时，报告会自动保存到您的下载文件夹。您也可以在此网站的会话页面查看会话历史。","faq4Q":"如何将网站或应用添加到阻止列表？","faq4A":"前往此网站的设置 &rarr; 阻止列表。您可以切换常见网站、启用类别或输入自定义网址或应用名称。更改会自动同步到桌面应用。","faq5Q":"我可以在多台电脑上使用BrainDock吗？","faq5A":"可以。在每台电脑上安装应用并使用同一账户登录。您的设置和阻止列表会在所有设备间同步。","faq6Q":"仅屏幕模式在没有网络的情况下能工作吗？","faq6A":"可以。仅屏幕模式完全在您的电脑上运行，不需要网络连接。摄像头模式需要网络用于AI。","faq7Q":"桌上的手机被错误标记了。为什么？","faq7A":"BrainDock仅标记主动使用设备（如滚动或查看手机）。如果仍然出现，请尝试调整摄像头角度或改善照明。您也可以在设置 &rarr; 配置中关闭特定设备类型。"},
-    "downloadPage": {"title":"下载BrainDock","subtitle":"安装桌面应用开始追踪您的专注。支持macOS和Windows。","macOS":"macOS","windows":"Windows","linuxComingSoon":"Linux（即将推出）","afterInstalling":"安装后，打开BrainDock并使用您的账户登录以关联此设备。"}
+    "nav": {
+      "configuration": "配置",
+      "howToUse": "使用指南",
+      "dashboard": "仪表盘",
+      "sessions": "会话",
+      "billingUsage": "账单与用量",
+      "linkedDevices": "已连接设备"
+    },
+    "actions": {
+      "backToWebsite": "返回网站",
+      "signOut": "退出登录",
+      "download": "下载",
+      "view": "查看",
+      "add": "添加",
+      "viewAll": "查看全部",
+      "previous": "上一页",
+      "next": "下一页",
+      "saveChanges": "保存更改",
+      "saved": "已保存",
+      "unlink": "取消关联",
+      "buyHours": "购买时长",
+      "getMoreHours": "获取更多时长",
+      "buyMoreHours": "购买更多时长"
+    },
+    "time": {
+      "hour": "小时",
+      "hours": "小时",
+      "min": "分钟",
+      "mins": "分钟",
+      "sec": "秒",
+      "secs": "秒",
+      "h": "时",
+      "m": "分"
+    },
+    "common": {
+      "today": "今天",
+      "yesterday": "昨天",
+      "session": "会话",
+      "active": "活跃",
+      "focus": "专注",
+      "gadgets": "设备干扰",
+      "screenDistractions": "屏幕干扰",
+      "vsYesterday": "与昨天相比",
+      "page": "第",
+      "of": "页，共",
+      "hoursRemaining": "剩余时长",
+      "somethingWentWrong": "出了点问题",
+      "tryAgain": "请重试。",
+      "backToSessions": "返回会话列表"
+    },
+    "modes": {
+      "camera": "摄像头",
+      "screen": "屏幕",
+      "both": "两者",
+      "cameraOnly": "仅摄像头",
+      "screenOnly": "仅屏幕",
+      "cameraPlusScreen": "摄像头+屏幕"
+    },
+    "home": {
+      "title": "仪表盘",
+      "welcome": "欢迎回来，",
+      "allSetTitle": "准备就绪！下载BrainDock",
+      "allSetDesc": "您有可用时长。下载桌面应用并使用同一账户登录，开始追踪您的专注情况。",
+      "downloadMac": "下载macOS版",
+      "downloadWin": "下载Windows版",
+      "todaysFocus": "今日专注",
+      "todaysDistractions": "今日干扰",
+      "focusRate": "专注率",
+      "recentSessions": "最近会话",
+      "noSessionsTitle": "暂无会话",
+      "noSessionsDesc": "使用BrainDock应用开始记录，即可在此查看专注统计。",
+      "thisWeek": "本周",
+      "noDataTitle": "暂无数据",
+      "noDataDesc": "使用桌面应用完成一次会话，即可查看每周专注数据。",
+      "focusTimeByDay": "每日专注时间",
+      "loading": "正在加载仪表盘..."
+    },
+    "sessionList": {
+      "title": "会话历史",
+      "noSessionsTitle": "暂无会话",
+      "noSessionsDesc": "使用BrainDock桌面应用完成一次会话，即可在此查看历史记录。",
+      "loading": "正在加载会话...",
+      "errorTitle": "无法加载会话"
+    },
+    "sessionDetail": {
+      "focused": "专注",
+      "away": "离开",
+      "gadget": "设备",
+      "screenDistraction": "屏幕干扰",
+      "paused": "已暂停",
+      "focusLabel": "专注",
+      "awayLabel": "离开",
+      "gadgetsLabel": "设备",
+      "pausedLabel": "已暂停",
+      "focusRateLabel": "专注率：",
+      "timeline": "时间线",
+      "noEventData": "此会话没有事件数据。",
+      "eventLog": "事件日志",
+      "noEventsRecorded": "未记录任何事件。",
+      "thStart": "开始",
+      "thEnd": "结束",
+      "thType": "类型",
+      "thDuration": "时长",
+      "legendFocused": "专注",
+      "legendAway": "离开",
+      "legendGadget": "设备",
+      "legendScreen": "屏幕",
+      "legendPaused": "已暂停",
+      "notFound": "未找到会话",
+      "loading": "正在加载会话...",
+      "errorTitle": "无法加载会话"
+    },
+    "config": {
+      "title": "配置",
+      "subtitle": "配置哪些行为算作干扰。这些设置在您开始会话时由桌面应用加载。",
+      "itemsTitle": "需通知的物品",
+      "itemsDesc": "选择要添加到列表中的物品。",
+      "websitesTitle": "需通知的网站",
+      "websitesDesc": "选择要添加到列表中的网站。",
+      "customUrls": "自定义网址",
+      "customUrlsDesc": "将域名添加到您的列表。",
+      "customApps": "自定义应用",
+      "customAppsDesc": "将应用名称添加到您的列表。",
+      "noCustomUrls": "未添加自定义网址。",
+      "noCustomApps": "未添加自定义应用。",
+      "checking": "检查中...",
+      "added": "已添加。",
+      "loading": "正在加载配置...",
+      "errorTitle": "无法加载配置"
+    },
+    "devices": {
+      "title": "已连接设备",
+      "subtitle": "您使用BrainDock登录过的设备。取消关联后需要在该设备上重新登录。",
+      "noDevicesTitle": "没有已连接设备",
+      "noDevicesDesc": "下载BrainDock并登录以关联设备。",
+      "downloadBrainDock": "下载BrainDock",
+      "unknownDevice": "未知设备",
+      "lastActive": "最后活跃：",
+      "appVersion": "应用版本：",
+      "linkNewDevice": "要关联新设备，请下载BrainDock并使用您的账户登录。",
+      "unlinkConfirm": "取消关联此设备？您需要在该设备上重新登录。",
+      "unlinkFailed": "取消关联失败。请重试。",
+      "justNow": "刚刚",
+      "minAgo": "分钟前",
+      "hoursAgo": "小时前",
+      "daysAgo": "天前",
+      "never": "从未",
+      "loading": "正在加载设备...",
+      "errorTitle": "无法加载设备"
+    },
+    "account": {
+      "title": "账户",
+      "subtitle": "您的个人资料信息。",
+      "displayName": "显示名称",
+      "yourName": "您的姓名",
+      "email": "电子邮件",
+      "emailManaged": "电子邮件由您的账户提供商管理，无法在此更改。",
+      "saveFailed": "保存失败。请重试。",
+      "loading": "正在加载账户...",
+      "errorTitle": "无法加载个人资料"
+    },
+    "billing": {
+      "title": "账单与用量",
+      "subtitle": "您的剩余时长和购买历史。",
+      "purchaseHistory": "购买历史",
+      "noPurchasesTitle": "暂无购买记录",
+      "noPurchasesDesc": "从定价页面购买时长套餐即可开始使用。",
+      "package": "套餐",
+      "hoursAdded": "添加时长",
+      "amount": "金额",
+      "date": "日期",
+      "receipt": "收据",
+      "sentToEmail": "已发送至您的邮箱",
+      "paymentSuccess": "支付成功。您的时长已添加。",
+      "loading": "正在加载账单...",
+      "errorTitle": "无法加载账单"
+    },
+    "howToUse": {
+      "title": "如何使用BrainDock",
+      "subtitle": "一份简单的入门指南。",
+      "getSetUp": "开始设置",
+      "step1Download": "从<a href=\"%URL%/download/\">下载</a>页面下载应用。",
+      "step2Account": "在此网站创建账户或登录。",
+      "step3SignIn": "打开BrainDock并使用同一账户登录（或使用此网站的登录代码）。",
+      "firstLaunch": "首次启动：",
+      "macStep1": "<strong>右键点击</strong>（或按住Control点击）BrainDock.app，选择<strong>打开</strong>。",
+      "macStep2": "在对话框中点击“打开”。这只需要一次。",
+      "macStep3": "当要求摄像头权限时，点击<strong>好</strong>。",
+      "winStep1": "运行<strong>BrainDock-Setup.exe</strong>。如果SmartScreen出现，点击<strong>更多信息</strong>然后<strong>仍然运行</strong>。",
+      "winStep2": "按照安装程序操作。将创建桌面快捷方式和开始菜单项。",
+      "winStep3": "当要求摄像头权限时，点击<strong>允许</strong>。",
+      "startSession": "开始会话",
+      "sessionStep1": "点击菜单栏（macOS）或系统托盘（Windows）中的BrainDock图标。",
+      "sessionStep2": "选择模式：摄像头、屏幕或两者。",
+      "sessionStep3": "按“开始会话”。随时可从菜单暂停或停止。",
+      "statusColours": "状态颜色：",
+      "statusFocussed": "专注",
+      "statusAway": "离开",
+      "statusGadget": "设备",
+      "statusScreen": "屏幕",
+      "focusModes": "专注模式",
+      "modeCamera": "摄像头",
+      "modeCameraDesc": "使用AI检测您离开或拿起手机/平板电脑。不保存视频。",
+      "modeScreen": "屏幕",
+      "modeScreenDesc": "检查活动窗口是否在阻止列表中。离线可用。",
+      "modeBoth": "两者",
+      "modeBothDesc": "摄像头和屏幕组合，全面覆盖。",
+      "tips": "提示",
+      "tip1": "良好的面部照明有助于提高准确性。",
+      "tip2": "面对摄像头坐下，距离1到2米。",
+      "tip3": "画面中保持一个人。",
+      "tip4": "仅标记主动使用设备。桌上放着的手机不会被标记。",
+      "yourBlocklist": "您的阻止列表",
+      "blocklistDesc": "在<a href=\"%URL%/settings/blocklist/\">设置 &rarr; 阻止列表</a>中选择哪些网站和应用算作偏离任务。",
+      "blocklistDesc2": "使用快速阻止常见网站，启用整个类别，或添加自定义网址和应用名称。更改将在下次会话开始时同步到应用。",
+      "yourReports": "您的报告",
+      "reportsIntro": "每次会话后，PDF将保存到您的下载文件夹。包括：",
+      "reportItem1": "会话时长和专注百分比",
+      "reportItem2": "离开时间和设备/屏幕事件",
+      "reportItem3": "会话的可视时间线",
+      "reportItem4": "AI生成的洞察和个性化建议",
+      "reportsCta": "您还可以在<a href=\"%URL%/sessions/\">会话</a>页面查看过去的会话。",
+      "faqTitle": "常见问题",
+      "faq1Q": "如何暂停或停止会话？",
+      "faq1A": "点击菜单栏或系统托盘中的BrainDock图标，选择暂停或停止。您可以随时恢复暂停的会话。",
+      "faq2Q": "如何更改专注模式？",
+      "faq2A": "从菜单栏或系统托盘打开BrainDock弹窗，在开始会话前选择摄像头、屏幕或两者。",
+      "faq3Q": "我的PDF报告保存在哪里？",
+      "faq3A": "会话结束时，报告会自动保存到您的下载文件夹。您也可以在此网站的会话页面查看会话历史。",
+      "faq4Q": "如何将网站或应用添加到阻止列表？",
+      "faq4A": "前往此网站的设置 &rarr; 阻止列表。您可以切换常见网站、启用类别或输入自定义网址或应用名称。更改会自动同步到桌面应用。",
+      "faq5Q": "我可以在多台电脑上使用BrainDock吗？",
+      "faq5A": "可以。在每台电脑上安装应用并使用同一账户登录。您的设置和阻止列表会在所有设备间同步。",
+      "faq6Q": "仅屏幕模式在没有网络的情况下能工作吗？",
+      "faq6A": "可以。仅屏幕模式完全在您的电脑上运行，不需要网络连接。摄像头模式需要网络用于AI。",
+      "faq7Q": "桌上的手机被错误标记了。为什么？",
+      "faq7A": "BrainDock仅标记主动使用设备（如滚动或查看手机）。如果仍然出现，请尝试调整摄像头角度或改善照明。您也可以在设置 &rarr; 配置中关闭特定设备类型。"
+    },
+    "downloadPage": {
+      "title": "下载BrainDock",
+      "subtitle": "安装桌面应用开始追踪您的专注。支持macOS和Windows。",
+      "macOS": "macOS",
+      "windows": "Windows",
+      "linuxComingSoon": "Linux（即将推出）",
+      "afterInstalling": "安装后，打开BrainDock并使用您的账户登录以关联此设备。"
+    }
   }
 }
