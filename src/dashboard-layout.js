@@ -251,6 +251,11 @@ async function handleSignOut() {
   } catch (_) {
     // Redirect even if signOut fails (e.g. network error) so user is not stuck
   }
+  // Clear session-scoped state to prevent stale values affecting the next login
+  sessionStorage.removeItem('braindock_desktop')
+  sessionStorage.removeItem('braindock_redirect')
+  sessionStorage.removeItem('braindock_signup_reload_count')
+  sessionStorage.removeItem('braindock_signup_reload_bail')
   window.location.href = '/'
 }
 
@@ -424,10 +429,12 @@ export async function initDashboardLayout(options = {}) {
   initLangToggle()
 
   // Populate remaining-time pill once credits load
-  remainingPromise.then((seconds) => {
-    const textEl = document.getElementById('dashboard-remaining-text')
-    if (textEl) textEl.textContent = formatPillDuration(seconds)
-  })
+  remainingPromise
+    .then((seconds) => {
+      const textEl = document.getElementById('dashboard-remaining-text')
+      if (textEl) textEl.textContent = formatPillDuration(seconds)
+    })
+    .catch(() => { /* credits fetch failed - pill stays as "..." */ })
 
   return { user }
 }

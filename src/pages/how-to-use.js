@@ -172,7 +172,7 @@ function render(main) {
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
       const platform = tab.dataset.platform
-      tabs.forEach((t) => t.classList.remove('active'))
+      tabs.forEach((tabEl) => tabEl.classList.remove('active'))
       tab.classList.add('active')
       main.querySelectorAll('.howto-platform-panel').forEach((p) => p.classList.remove('active'))
       const panel = main.querySelector(`#platform-${platform}`)
@@ -246,16 +246,16 @@ function initStackEffect(main) {
       const myBottom = myStuckY + cards[i].offsetHeight
       const nextTop = next.getBoundingClientRect().top
 
-      // How far the next card has overlapped into this card
+      // How far the next card has overlapped into this card (0 = none, 1 = fully covered)
       const overlap = myBottom - nextTop
-      const t = Math.max(0, Math.min(1, overlap / COVER_PX))
+      const progress = Math.max(0, Math.min(1, overlap / COVER_PX))
 
-      if (t > 0.001) {
-        const s = 1 - (1 - SCALE_MIN) * t
-        const o = 1 - (1 - OPACITY_MIN) * t
+      if (progress > 0.001) {
+        const s = 1 - (1 - SCALE_MIN) * progress
+        const o = 1 - (1 - OPACITY_MIN) * progress
         cards[i].style.transform = `scale(${s})`
         cards[i].style.opacity = o
-        cards[i].style.boxShadow = `0 2px ${8 + 16 * t}px rgba(0,0,0,${0.05 + 0.08 * t})`
+        cards[i].style.boxShadow = `0 2px ${8 + 16 * progress}px rgba(0,0,0,${0.05 + 0.08 * progress})`
       } else {
         cards[i].style.transform = ''
         cards[i].style.opacity = ''

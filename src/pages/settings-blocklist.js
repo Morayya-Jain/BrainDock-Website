@@ -7,7 +7,7 @@
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { validateUrlPattern, validateAppPattern } from '../validators.js'
-import { escapeHtml } from '../utils.js'
+import { escapeHtml, showInlineError } from '../utils.js'
 import { t } from '../dashboard-i18n.js'
 import {
   createIcons,
@@ -154,6 +154,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
         })
       } catch (err) {
         console.error(err)
+        showInlineError(main, t('dashboard.blocklist.saveError', 'Could not save blocklist. Please try again.'))
       }
     }, DEBOUNCE_MS)
   }
@@ -168,6 +169,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
         await saveDetectionSettings(userId, enabled)
       } catch (err) {
         console.error(err)
+        showInlineError(main, t('dashboard.blocklist.saveError', 'Could not save settings. Please try again.'))
       }
     }, DEBOUNCE_MS)
   }
@@ -327,14 +329,18 @@ function render(main, blocklistConfig, detectionSettings, userId) {
 
   async function addCustomUrl() {
     const input = main.querySelector('#custom-url-input')
+    const addBtn = main.querySelector('#custom-url-add')
     const hintEl = main.querySelector('#custom-url-hint')
     const val = input.value.trim()
     if (!val) {
       setHint(hintEl, '', '')
       return
     }
+    // Disable button during async validation to prevent duplicate entries
+    if (addBtn) addBtn.disabled = true
     setHint(hintEl, t('dashboard.config.checking', 'Checking...'), '')
     const result = await validateUrlPattern(val)
+    if (addBtn) addBtn.disabled = false
     if (!result.valid) {
       setHint(hintEl, result.message, 'error')
       return
@@ -365,7 +371,8 @@ function render(main, blocklistConfig, detectionSettings, userId) {
       setHint(hintEl, result.message, 'error')
       return
     }
-    if (state.custom_apps.includes(val)) {
+    const normalizedApp = val.toLowerCase()
+    if (state.custom_apps.some((a) => a.toLowerCase() === normalizedApp)) {
       setHint(hintEl, '', '')
       return
     }
@@ -401,7 +408,11 @@ function render(main, blocklistConfig, detectionSettings, userId) {
 
   // -- Pill hover description popup (shows after 2s hover, near the pill) --
 
-  // Append overlay + modal to document.body so they cover the full viewport
+  // Append overlay + modal to document.body so they cover the full viewport.
+  // Remove any existing ones first to prevent duplicates if render() is called again.
+  document.querySelector('.pill-desc-overlay')?.remove()
+  document.querySelector('.pill-desc-modal')?.remove()
+
   const overlay = document.createElement('div')
   overlay.className = 'pill-desc-overlay'
   overlay.setAttribute('aria-hidden', 'true')

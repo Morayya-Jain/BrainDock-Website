@@ -72,15 +72,11 @@ if (hasStoredSession() && !wasBailed) {
     if (session) {
       await handlePostAuthRedirect(supabase, authCard)
     } else {
-      const count = parseInt(sessionStorage.getItem(reloadCountKey) || '0', 10)
-      if (count >= 2) {
-        sessionStorage.removeItem(reloadCountKey)
-        sessionStorage.setItem(RELOAD_BAIL_KEY, '1')
-        window.location.href = '/auth/signup/'
-      } else {
-        sessionStorage.setItem(reloadCountKey, String(count + 1))
-        window.location.reload()
-      }
+      // Stale/corrupt token in localStorage - sign out to clear it and show the form
+      try { await supabase.auth.signOut() } catch (_) { /* ignore */ }
+      sessionStorage.removeItem(reloadCountKey)
+      // Restore the signup form
+      window.location.href = '/auth/signup/'
     }
   })()
 }

@@ -63,6 +63,7 @@ export function showInlineError(container, message, durationMs = 5000) {
  * Defaults to AUD. Handles other currencies with a simple $ prefix.
  */
 export function formatPrice(cents, currency = 'aud') {
+  if (cents == null || isNaN(cents)) return 'A$0.00'
   const c = (currency || 'aud').toLowerCase()
   if (c === 'aud') return `A$${(cents / 100).toFixed(2)}`
   return `$${(cents / 100).toFixed(2)}`
@@ -91,7 +92,7 @@ export function modeLabel(mode, short = false) {
  * 80%+ = high (green), 50-79% = mid (amber), <50% = low (red).
  */
 export function focusLevelClass(pct) {
+  if (pct == null || isNaN(pct) || pct < 50) return 'dashboard-list-item--focus-low'
   if (pct >= 80) return 'dashboard-list-item--focus-high'
-  if (pct >= 50) return 'dashboard-list-item--focus-mid'
-  return 'dashboard-list-item--focus-low'
+  return 'dashboard-list-item--focus-mid'
 }

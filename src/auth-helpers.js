@@ -100,7 +100,6 @@ export async function handlePostAuthRedirect(supabase, card = null) {
       },
       body: JSON.stringify({
         access_token: session.access_token,
-        refresh_token: session.refresh_token,
       }),
     })
 
@@ -125,10 +124,10 @@ export async function handlePostAuthRedirect(supabase, card = null) {
       }
     }, 2000)
 
-    // Redirect to dashboard after 5s regardless (user is authenticated on the web too)
+    // Redirect to dashboard after 15s to give user time to copy the code
     setTimeout(() => {
       window.location.href = getRedirectPath()
-    }, 5000)
+    }, 15000)
   } catch (err) {
     console.error('Desktop linking error:', err)
     if (card) showError(card, `Desktop login error: ${err.message || err}`)

@@ -11,27 +11,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
-  <style>
-    .dashboard-boot {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 16px;
-      background: linear-gradient(to right, #C7C6C3 0%, #FDFCF9 45%);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: rgba(60, 60, 67, 0.6);
-    }
-    .dashboard-boot-spinner {
-      width: 36px; height: 36px;
-      border: 3px solid #E5E5EA;
-      border-top-color: #D4A373;
-      border-radius: 50%;
-      animation: dbspin 0.8s linear infinite;
-    }
-    @keyframes dbspin { to { transform: rotate(360deg); } }
-  </style>
 </head>
 <body>
   <!-- Visible immediately while JS initializes -->
@@ -39,7 +18,8 @@
     <div class="dashboard-boot-spinner"></div>
     <p>Loading...</p>
   </div>
-  <div id="dashboard-content" style="display:none;"></div>
+  <div id="dashboard-content" hidden></div>
+  <noscript><p style="text-align:center;padding:2rem;">JavaScript is required to use BrainDock. Please enable it in your browser settings.</p></noscript>
   <script type="module" src="/src/pages/download.js"></script>
 </body>
 </html>

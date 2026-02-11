@@ -74,7 +74,7 @@ html {
 
 body {
   font-family: var(--font-sans);
-  font-size: 16px;
+  font-size: 100%;
   line-height: 1.5;
   color: var(--text-primary);
   background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
@@ -638,6 +638,7 @@ p {
    -------------------------------------------------------------------------- */
 .hero {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -812,9 +813,9 @@ body.hero-compact .hero-ctas {
 }
 
 .mfy-heading {
-  font-size: clamp(2.75rem, 5.5vw, 5rem);
+  font-size: clamp(3.75rem, 8vw, 7rem);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.05;
   color: #f5f0e8;
   letter-spacing: -0.02em;
   font-family: var(--font-serif);
@@ -961,7 +962,7 @@ body.hero-compact .hero-ctas {
   }
 
   .mfy-heading {
-    font-size: 2.25rem;
+    font-size: 3rem;
     margin-bottom: 2rem;
   }
 
@@ -1413,9 +1414,13 @@ body.hero-compact .hero-ctas {
   color: rgba(255, 255, 255, 0.9);
 }
 
-.language-toggle:focus {
+.language-toggle:focus:not(:focus-visible) {
   outline: none;
   border-color: rgba(255, 255, 255, 0.5);
+}
+.language-toggle:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 2px;
 }
 
 .language-toggle .globe-icon {
@@ -1463,7 +1468,7 @@ body.hero-compact .hero-ctas {
   transform: translateY(8px);
   transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  z-index: 100;
+  z-index: 110;
 }
 
 .language-dropdown.active {
@@ -1824,6 +1829,29 @@ body.hero-compact .hero-ctas {
   z-index: 1000;
   box-shadow: var(--shadow-hover);
 }
+
+/* --------------------------------------------------------------------------
+   Dashboard boot loading screen (shown before JS loads)
+   -------------------------------------------------------------------------- */
+.dashboard-boot {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  background: linear-gradient(to right, #C7C6C3 0%, #FDFCF9 45%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: rgba(60, 60, 67, 0.6);
+}
+.dashboard-boot-spinner {
+  width: 36px; height: 36px;
+  border: 3px solid #E5E5EA;
+  border-top-color: #D4A373;
+  border-radius: 50%;
+  animation: dbspin 0.8s linear infinite;
+}
+@keyframes dbspin { to { transform: rotate(360deg); } }
 
 /* --------------------------------------------------------------------------
    Respect user's motion preferences

@@ -105,8 +105,8 @@ function buildWeeklyChartData(sessions) {
     const end = next.getTime()
     let focusSeconds = 0
     for (const s of sessions) {
-      const t = new Date(s.start_time).getTime()
-      if (t >= start && t < end) {
+      const startMs = new Date(s.start_time).getTime()
+      if (startMs >= start && startMs < end) {
         focusSeconds += (s.summary_stats?.present_seconds ?? 0)
       }
     }

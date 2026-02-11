@@ -56,8 +56,9 @@ function render(main, credits, purchases) {
         <ul class="dashboard-list" id="purchase-history-list">
           ${purchases.map((p) => {
     const pkg = p.credit_packages
-    const name = pkg?.display_name || `${(p.seconds_added / 3600)} hours`
-    const hours = p.seconds_added ? (p.seconds_added / 3600) : 0
+    const rawHours = p.seconds_added ? (p.seconds_added / 3600) : 0
+    const hours = Math.round(rawHours * 10) / 10
+    const name = pkg?.display_name || `${hours} hours`
     return `
             <li class="dashboard-list-item dashboard-list-item--clickable billing-purchase-row" tabindex="0" role="button" aria-expanded="false" data-purchase-id="${escapeHtml(p.id)}">
               <div class="flex-1">

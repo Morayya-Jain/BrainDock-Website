@@ -46,10 +46,15 @@ if (oauthError) {
   showFailure(oauthError)
 } else {
   let handled = false
+  let fallbackTimer = null
+  let finalTimer = null
 
   async function completeAuth() {
     if (handled) return
     handled = true
+    // Clear pending timers to prevent overlapping actions
+    if (fallbackTimer) clearTimeout(fallbackTimer)
+    if (finalTimer) clearTimeout(finalTimer)
     loadingState.hidden = true
     await handlePostAuthRedirect(supabase, card)
   }
@@ -63,19 +68,23 @@ if (oauthError) {
   })
 
   // Fallback: if no auth event fires within 3 seconds, check getSession() directly
-  setTimeout(async () => {
+  fallbackTimer = setTimeout(async () => {
     if (handled) return
-    const { data: { session } } = await supabase.auth.getSession()
-    if (session) {
-      subscription.unsubscribe()
-      await completeAuth()
-    } else {
-      subscription.unsubscribe()
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session) {
+        subscription.unsubscribe()
+        await completeAuth()
+      } else {
+        subscription.unsubscribe()
+      }
+    } catch (_) {
+      // getSession failed (e.g. network error) - let the final timeout handle it
     }
   }, 3000)
 
   // Final fallback: if nothing worked after 8 seconds, show error
-  setTimeout(() => {
+  finalTimer = setTimeout(() => {
     if (!handled && document.visibilityState !== 'hidden' && !loadingState.hidden) {
       subscription.unsubscribe()
       showFailure('Sign in could not be completed. Please try again.')

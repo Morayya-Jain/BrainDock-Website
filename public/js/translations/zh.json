@@ -495,7 +495,8 @@
     "subtitle": "BrainDock使用AI帮助你集中注意力，更聪明地工作，增强专注力。",
     "downloadBtn": "下载",
     "learnMoreBtn": "了解更多",
-    "note": "支持macOS和Windows。Linux即将推出。"
+    "note": "支持macOS和Windows。Linux即将推出。",
+    "imageAlt": "BrainDock - AI连接设备与心智"
   },
   "madeForYou": {
     "sectionTitle": "BrainDock \u4e3a<br><span class=\"mfy-heading-accent\">\u4f60\u800c\u751f\u3002</span>",

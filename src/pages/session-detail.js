@@ -6,6 +6,7 @@
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { escapeHtml, formatDuration, modeLabel } from '../utils.js'
+import { isValidUuid } from '../validators.js'
 import { t, getLocale } from '../dashboard-i18n.js'
 
 function eventLabel(type) {
@@ -46,7 +47,11 @@ async function fetchSessionWithEvents(sessionId) {
     .select('*')
     .eq('id', sessionId)
     .single()
-  if (sessionError) throw sessionError
+  // PGRST116 = "not found" from .single() - return null instead of throwing
+  if (sessionError) {
+    if (sessionError.code === 'PGRST116') return { session: null, events: [] }
+    throw sessionError
+  }
   if (!session) return { session: null, events: [] }
 
   const { data: events, error: eventsError } = await supabase
@@ -191,7 +196,7 @@ async function main() {
   if (!result) return
 
   const sessionId = getSessionIdFromPath()
-  if (!sessionId) {
+  if (!sessionId || !isValidUuid(sessionId)) {
     window.location.href = '/sessions/'
     return
   }

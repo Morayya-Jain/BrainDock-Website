@@ -9,7 +9,7 @@ import { escapeHtml, showInlineError } from '../utils.js'
 import { t } from '../dashboard-i18n.js'
 
 async function loadProfile(userId) {
-  const { data, error } = await supabase.from('profiles').select('*').eq('id', userId).single()
+  const { data, error } = await supabase.from('profiles').select('id, display_name, email').eq('id', userId).single()
   if (error) throw error
   return data
 }

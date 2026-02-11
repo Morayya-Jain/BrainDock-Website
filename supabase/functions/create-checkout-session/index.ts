@@ -7,8 +7,8 @@
  * strict body schema, per-user rate limit. Stripe also applies its own rate limiting.
  */
 
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
-import Stripe from "https://esm.sh/stripe@14?target=denonext"
+import { serve } from "https://deno.land/std@0.224.0/http/server.ts"
+import Stripe from "https://esm.sh/stripe@17?target=denonext"
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
 
 const ALLOWED_ORIGINS = [
@@ -26,6 +26,7 @@ function getCorsHeaders(origin: string | null): Record<string, string> {
   const allowOrigin = origin && ALLOWED_ORIGINS.includes(origin) ? origin : null
   const h: Record<string, string> = {
     "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Content-Type": "application/json",
   }
   if (allowOrigin) h["Access-Control-Allow-Origin"] = allowOrigin
@@ -41,18 +42,30 @@ serve(async (req) => {
   const corsHeaders = getCorsHeaders(requestOrigin)
 
   if (req.method === "OPTIONS") {
-    return new Response("ok", { headers: corsHeaders })
+    return new Response(null, { status: 204, headers: corsHeaders })
   }
 
   const jsonHeaders = { ...corsHeaders, "Content-Type": "application/json" }
   const withCors = (body: string, status: number) =>
     new Response(body, { status, headers: jsonHeaders })
 
+  // Reject non-POST methods explicitly
+  if (req.method !== "POST") {
+    return withCors(JSON.stringify({ error: "Method not allowed" }), 405)
+  }
+
   const stripeSecret = Deno.env.get("STRIPE_SECRET_KEY")
   const supabaseUrl = Deno.env.get("SUPABASE_URL")
-  const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? Deno.env.get("SUPABASE_ANON_KEY")
+  const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")
+  const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY")
 
-  if (!stripeSecret || !supabaseUrl || !supabaseKey) {
+  if (!stripeSecret || !supabaseUrl || !supabaseAnonKey) {
+    return withCors(JSON.stringify({ error: "Server configuration error" }), 500)
+  }
+
+  // Service role key is required for rate limiting and admin queries - fail fast if missing
+  if (!supabaseServiceKey) {
+    console.error("SUPABASE_SERVICE_ROLE_KEY is not set - admin queries will fail")
     return withCors(JSON.stringify({ error: "Server configuration error" }), 500)
   }
 
@@ -61,12 +74,18 @@ serve(async (req) => {
     return withCors(JSON.stringify({ error: "Not authenticated" }), 401)
   }
 
-  const contentLength = req.headers.get("content-length")
-  if (contentLength && parseInt(contentLength, 10) > MAX_BODY_BYTES) {
+  // Read body as text first to enforce size limit regardless of transfer encoding
+  let rawText: string
+  try {
+    rawText = await req.text()
+  } catch {
+    return withCors(JSON.stringify({ error: "Could not read request body" }), 400)
+  }
+  if (rawText.length > MAX_BODY_BYTES) {
     return withCors(JSON.stringify({ error: "Request body too large" }), 400)
   }
 
-  const supabase = createClient(supabaseUrl, supabaseKey, {
+  const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     global: { headers: { Authorization: authHeader } },
   })
 
@@ -78,7 +97,7 @@ serve(async (req) => {
 
   let rawBody: unknown
   try {
-    rawBody = await req.json()
+    rawBody = JSON.parse(rawText)
   } catch {
     return withCors(JSON.stringify({ error: "Invalid JSON body" }), 400)
   }
@@ -114,16 +133,25 @@ serve(async (req) => {
   const successUrl = `${origin}/account/subscription/?success=true`
   const cancelUrl = `${origin}/pricing/?canceled=true`
 
-  const supabaseAdmin = createClient(supabaseUrl, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? supabaseKey)
-  const stripe = new Stripe(stripeSecret, { apiVersion: "2023-10-16" })
+  const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey)
+  const stripe = new Stripe(stripeSecret, { apiVersion: "2025-01-27.acacia" })
 
-  // Per-user rate limit: prevent checkout session spam (Stripe also has its own rate limiting)
+  // Per-user rate limit: prevent checkout session spam (Stripe also has its own rate limiting).
+  // NOTE: This counts completed purchases, not checkout attempts. It limits bulk abuse
+  // but doesn't prevent rapid session creation from a user with no recent purchases.
+  // Stripe's own per-account rate limits provide a secondary safeguard.
   const fromTime = new Date(Date.now() - RATE_LIMIT_WINDOW_MINUTES * 60 * 1000).toISOString()
-  const { count } = await supabaseAdmin
+  const { count, error: rlError } = await supabaseAdmin
     .from("credit_purchases")
     .select("id", { count: "exact", head: true })
     .eq("user_id", user.id)
     .gte("purchased_at", fromTime)
+
+  // If the rate-limit query fails, deny the request rather than silently bypassing
+  if (rlError) {
+    console.error("Rate limit query failed:", rlError.message)
+    return withCors(JSON.stringify({ error: "Server error. Please try again." }), 500)
+  }
   if (count != null && count >= RATE_LIMIT_MAX_PURCHASES) {
     return new Response(
       JSON.stringify({ error: "Too many requests. Please try again later." }),
@@ -194,26 +222,31 @@ serve(async (req) => {
   }
 
   try {
+    const isSubscription = tier.billing_interval === "subscription"
+    const priceData: Record<string, unknown> = {
+      currency: (tier.currency || "aud").toLowerCase(),
+      unit_amount: tier.price_cents,
+      product_data: {
+        name: tier.display_name || tier.name,
+        description: !isSubscription ? "One-time payment" : undefined,
+      },
+    }
+    // Stripe requires `recurring` inside price_data for subscription-mode sessions
+    if (isSubscription) {
+      priceData.recurring = { interval: "month" }
+    }
+
     const lineItem: Stripe.Checkout.SessionCreateParams.LineItem = tier.stripe_price_id
       ? { price: tier.stripe_price_id, quantity: 1 }
-      : {
-          price_data: {
-            currency: (tier.currency || "aud").toLowerCase(),
-            unit_amount: tier.price_cents,
-            product_data: {
-              name: tier.display_name || tier.name,
-              description: tier.billing_interval === "one_time" ? "One-time payment" : undefined,
-            },
-          },
-          quantity: 1,
-        }
+      : { price_data: priceData as Stripe.Checkout.SessionCreateParams.LineItem.PriceData, quantity: 1 }
 
     const session = await stripe.checkout.sessions.create({
-      mode: tier.billing_interval === "subscription" ? "subscription" : "payment",
+      mode: isSubscription ? "subscription" : "payment",
       line_items: [lineItem],
       success_url: successUrl,
       cancel_url: cancelUrl,
       client_reference_id: user.id,
+      customer_email: user.email,
       metadata: { tier_id: tier.id, user_id: user.id },
     })
 

@@ -46,8 +46,7 @@
 @media (min-width: 768px) {
   .dashboard-app {
     flex-direction: row;
-    height: 100dvh;
-    height: 100vh; /* fallback for browsers without dvh support */
+    height: 100vh;
     overflow: hidden;
   }
 
@@ -737,7 +736,7 @@
   background-color: rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(1.5px);
   -webkit-backdrop-filter: blur(1.5px);
-  z-index: 200;
+  z-index: 250;
   opacity: 0;
   visibility: hidden;
   transition: opacity 200ms ease, visibility 200ms;
@@ -750,7 +749,7 @@
 
 .pill-desc-modal {
   position: fixed;
-  z-index: 201;
+  z-index: 251;
   background: var(--bg-surface);
   border-radius: 14px;
   padding: var(--space-m) var(--space-l);
@@ -2120,15 +2119,5 @@
 .howto-icon--success { color: var(--success); }
 .howto-icon--muted   { color: var(--text-secondary); }
 
-/* --------------------------------------------------------------------------
-   Respect user's motion preferences
-   -------------------------------------------------------------------------- */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
+/* prefers-reduced-motion is handled in public/css/style.css (loaded on all pages) */
 

@@ -5,6 +5,7 @@
 
 import { supabase, supabaseUrl, supabaseAnonKey } from '../supabase.js'
 import { escapeHtml, showInlineError, formatPrice } from '../utils.js'
+import { isValidUuid } from '../validators.js'
 import '../auth.css'
 import '../dashboard.css'
 
@@ -59,11 +60,9 @@ function tierButtonLabel(hours) {
 }
 
 function render(root, packages, hasUser) {
-  const defaultPackages = packages.length > 0 ? packages : [
-    { id: '1', name: '1_hour', display_name: '1 Hour', hours: 1, price_cents: 199, currency: 'aud' },
-    { id: '2', name: '10_hours', display_name: '10 Hours', hours: 10, price_cents: 1499, currency: 'aud' },
-    { id: '3', name: '30_hours', display_name: '30 Hours', hours: 30, price_cents: 3499, currency: 'aud' },
-  ]
+  // If packages failed to load from DB, show an error state instead of non-functional fallbacks
+  const defaultPackages = packages.length > 0 ? packages : []
+  const packagesLoadFailed = packages.length === 0
 
   const origin = window.location.origin
 
@@ -117,7 +116,11 @@ function render(root, packages, hasUser) {
           <p class="pricing-subtitle" data-i18n="pricing.subtitle">Use camera or screen sessions - time is deducted from your balance. Top up anytime.</p>
         </div>
         <div class="pricing-grid">
-          ${defaultPackages.map((pkg) => {
+          ${packagesLoadFailed
+            ? `<div class="dashboard-card pricing-card" style="grid-column: 1 / -1; text-align: center;">
+                <p>Could not load pricing packages. Please refresh the page or try again later.</p>
+              </div>`
+            : defaultPackages.map((pkg) => {
             const perHour = pricePerHour(pkg.price_cents, pkg.hours)
             const tierName = tierDisplayName(pkg.hours) || escapeHtml(pkg.display_name || pkg.name)
             const btnLabel = tierButtonLabel(pkg.hours)
@@ -335,7 +338,7 @@ async function main() {
 
   // Auto-checkout: if user just signed up and was redirected back with a package ID
   const autoCheckoutId = params.get('auto_checkout')
-  if (autoCheckoutId && hasUser) {
+  if (autoCheckoutId && isValidUuid(autoCheckoutId) && hasUser) {
     // Clean URL so refreshing doesn't re-trigger
     window.history.replaceState({}, '', '/pricing/')
 

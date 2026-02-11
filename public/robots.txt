@@ -2,5 +2,12 @@
 User-agent: *
 Allow: /
 
+# Block authenticated/private routes from crawlers
+Disallow: /dashboard/
+Disallow: /sessions/
+Disallow: /settings/
+Disallow: /account/
+Disallow: /auth/callback/
+
 # Sitemap location
 Sitemap: https://thebraindock.com/sitemap.xml

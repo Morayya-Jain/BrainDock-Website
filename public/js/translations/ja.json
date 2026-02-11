@@ -495,7 +495,8 @@
     "subtitle": "BrainDockはAIを使って集中力を高め、より賢く働き、集中力を強化します。",
     "downloadBtn": "ダウンロード",
     "learnMoreBtn": "詳細を見る",
-    "note": "macOSとWindowsに対応。Linux対応は近日公開。"
+    "note": "macOSとWindowsに対応。Linux対応は近日公開。",
+    "imageAlt": "BrainDock - AIがデバイスと心をつなぐ"
   },
   "madeForYou": {
     "sectionTitle": "BrainDock\u306f<br><span class=\"mfy-heading-accent\">\u3042\u306a\u305f\u306e\u305f\u3081\u306b\u3002</span>",

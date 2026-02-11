@@ -10,7 +10,7 @@
  * Timeout: 2 seconds. On timeout or network error, returns exists: true so the user can still add the URL.
  */
 
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import { serve } from "https://deno.land/std@0.224.0/http/server.ts"
 
 const ALLOWED_ORIGINS = [
   "https://thebraindock.com",
@@ -24,6 +24,7 @@ function getCorsHeaders(origin: string | null): Record<string, string> {
   const allowOrigin = origin && ALLOWED_ORIGINS.includes(origin) ? origin : null
   const h: Record<string, string> = {
     "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Content-Type": "application/json",
   }
   if (allowOrigin) h["Access-Control-Allow-Origin"] = allowOrigin
@@ -39,7 +40,7 @@ serve(async (req) => {
   const corsHeaders = getCorsHeaders(requestOrigin)
 
   if (req.method === "OPTIONS") {
-    return new Response("ok", { headers: corsHeaders })
+    return new Response(null, { status: 204, headers: corsHeaders })
   }
 
   const jsonHeaders = { ...corsHeaders, "Content-Type": "application/json" }
@@ -75,15 +76,29 @@ serve(async (req) => {
   }
 
   try {
-    const records = await Promise.race([
-      Deno.resolveDns(domain, "A"),
-      sleep(TIMEOUT_MS),
-    ])
-    const exists = Array.isArray(records) && records.length > 0
+    // Check A records first, fall back to AAAA for IPv6-only domains
+    let records: string[] = []
+    try {
+      records = await Promise.race([
+        Deno.resolveDns(domain, "A"),
+        sleep(TIMEOUT_MS),
+      ]) as string[]
+    } catch {
+      // A lookup failed (NXDOMAIN or error) - try AAAA before giving up
+      try {
+        records = await Promise.race([
+          Deno.resolveDns(domain, "AAAA"),
+          sleep(TIMEOUT_MS),
+        ]) as string[]
+      } catch {
+        // Both lookups failed - fall through to exists check (records stays [])
+      }
+    }
+    const exists = records.length > 0
     return new Response(
       JSON.stringify({
         exists,
-        message: exists ? "Domain verified" : `Domain '${domain}' may not exist (DNS lookup failed)`,
+        message: exists ? "Domain verified" : "Domain may not exist (DNS lookup found no records)",
       }),
       { status: 200, headers: jsonHeaders }
     )

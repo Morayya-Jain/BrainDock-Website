@@ -495,7 +495,8 @@
     "subtitle": "BrainDock nutzt KI, um dir zu helfen, dich zu konzentrieren, intelligenter zu arbeiten und die Konzentration zu stärken.",
     "downloadBtn": "Herunterladen",
     "learnMoreBtn": "Mehr erfahren",
-    "note": "Verfügbar für macOS und Windows. Linux kommt bald."
+    "note": "Verfügbar für macOS und Windows. Linux kommt bald.",
+    "imageAlt": "BrainDock - KI verbindet Geräte und Verstand"
   },
   "madeForYou": {
     "sectionTitle": "BrainDock ist gemacht<br><span class=\"mfy-heading-accent\">für dich.</span>",
@@ -545,7 +546,7 @@
       "enableDeepWork": {
         "title": "Deep Work ermöglichen",
         "explanation": "Schützt ununterbrochene Fokuszeit, damit du klar denken, intelligenter arbeiten und wichtige Aufgaben schneller erledigen kannst.",
-        "text": "Schuetze deine Fokuszeit, damit du klar denken und wichtige Aufgaben erledigen kannst."
+        "text": "Schütze deine Fokuszeit, damit du klar denken und wichtige Aufgaben erledigen kannst."
       },
       "distractionsToAwareness": {
         "title": "Von Ablenkungen zu Bewusstsein",
@@ -555,17 +556,17 @@
       "tailoredAiGuidance": {
         "title": "Maßgeschneiderte KI-Führung",
         "explanation": "KI-gesteuerte Impulse passen sich deinen Zielen und Routinen an und bieten Unterstützung, die persönlich wirkt; nicht aufdringlich.",
-        "text": "Erhalte KI-gesteuerte Impulse, die sich an deine Ziele anpassen und persoenlich wirken."
+        "text": "Erhalte KI-gesteuerte Impulse, die sich an deine Ziele anpassen und persönlich wirken."
       },
       "buildLastingFocus": {
         "title": "Dauerhaften Fokus aufbauen",
         "explanation": "Baut durch konsequentes Üben eine stärkere Aufmerksamkeit auf, sodass es leichter wird, sich länger zu konzentrieren.",
-        "text": "Staerkere Konzentration durch konsequentes Ueben - leichter mit jeder Sitzung."
+        "text": "Stärkere Konzentration durch konsequentes Üben - leichter mit jeder Sitzung."
       },
       "confidenceFromResults": {
         "title": "Selbstvertrauen durch Ergebnisse",
         "explanation": "Wenn du mehr von dem erreichst, was wichtig ist, fühlst du dich mehr in Kontrolle über deinen Tag und deine Ziele; und gewinnst mehr Vertrauen in DICH.",
-        "text": "Erledige mehr von dem, was zaehlt, und fuehle dich im Kontrolle ueber deinen Tag."
+        "text": "Erledige mehr von dem, was zählt, und fühle dich in Kontrolle über deinen Tag."
       }
     },
     "sectionSubtitle": "Entwickelt, um deinen Fokus zu schützen - jede Sitzung."

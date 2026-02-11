@@ -50,9 +50,18 @@ function formatRelativeTime(iso) {
   const now = new Date()
   const sec = Math.floor((now - d) / 1000)
   if (sec < 60) return t('dashboard.devices.justNow', 'Just now')
-  if (sec < 3600) return `${Math.floor(sec / 60)} ${t('dashboard.devices.minAgo', 'min ago')}`
-  if (sec < 86400) return `${Math.floor(sec / 3600)} ${t('dashboard.devices.hoursAgo', 'hours ago')}`
-  if (sec < 604800) return `${Math.floor(sec / 86400)} ${t('dashboard.devices.daysAgo', 'days ago')}`
+  if (sec < 3600) {
+    const mins = Math.floor(sec / 60)
+    return `${mins} ${mins === 1 ? t('dashboard.devices.minAgo', 'min ago') : t('dashboard.devices.minsAgo', 'mins ago')}`
+  }
+  if (sec < 86400) {
+    const hrs = Math.floor(sec / 3600)
+    return `${hrs} ${hrs === 1 ? t('dashboard.devices.hourAgo', 'hour ago') : t('dashboard.devices.hoursAgo', 'hours ago')}`
+  }
+  if (sec < 604800) {
+    const days = Math.floor(sec / 86400)
+    return `${days} ${days === 1 ? t('dashboard.devices.dayAgo', 'day ago') : t('dashboard.devices.daysAgo', 'days ago')}`
+  }
   return d.toLocaleDateString()
 }
 
@@ -121,6 +130,10 @@ function render(main, devices) {
       try {
         await unlinkDevice(id)
         li.remove()
+        // If no devices remain, re-render to show the empty state
+        if (main.querySelectorAll('[data-device-id]').length === 0) {
+          render(main, [])
+        }
       } catch (err) {
         console.error(err)
         showInlineError(main, t('dashboard.devices.unlinkFailed', 'Failed to unlink. Please try again.'))

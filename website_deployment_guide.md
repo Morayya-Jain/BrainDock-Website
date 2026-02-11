@@ -171,5 +171,6 @@ When the app is packaged:
 | Hosting | Netlify (free) |
 | Domain registrar | Porkbun |
 | Total cost | $0 (domain already owned) |
-| Netlify A record | `75.2.60.5` |
-| Tech stack | Static HTML/CSS |
+| Tech stack | Vite + Supabase + Vanilla JS |
+| Build command | `npm run build` |
+| Publish directory | `dist/` |

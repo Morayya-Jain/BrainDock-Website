@@ -47,7 +47,7 @@ function render(main, sessions, page, total, goToPage) {
             const start = new Date(s.start_time)
             const dateStr = start.toLocaleDateString(getLocale(), { month: 'long', day: 'numeric', year: 'numeric' })
             const name = s.session_name || `${t('dashboard.common.session', 'Session')} ${start.toLocaleTimeString(getLocale(), { hour: 'numeric', minute: '2-digit' })}`
-            const activeSec = s.active_seconds ?? (summary.present_seconds ?? 0) + (summary.away_seconds ?? 0) + (summary.gadget_seconds ?? 0) + (summary.screen_distraction_seconds ?? 0)
+            const activeSec = (summary.present_seconds ?? 0) + (summary.away_seconds ?? 0) + (summary.gadget_seconds ?? 0) + (summary.screen_distraction_seconds ?? 0)
             return `
               <li class="dashboard-list-item ${focusLevelClass(Math.round(pct))}">
                 <div>

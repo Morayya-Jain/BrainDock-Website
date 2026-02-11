@@ -304,7 +304,7 @@ const I18n = {
    * Save current scroll position to sessionStorage.
    */
   saveScrollPosition() {
-    const scrollY = window.scrollY || window.pageYOffset;
+    const scrollY = window.scrollY;
     sessionStorage.setItem(this.SCROLL_KEY, scrollY.toString());
   },
 

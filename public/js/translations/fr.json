@@ -495,7 +495,8 @@
     "subtitle": "BrainDock utilise l'IA pour vous aider à vous concentrer, travailler plus intelligemment et renforcer votre concentration.",
     "downloadBtn": "Télécharger",
     "learnMoreBtn": "En savoir plus",
-    "note": "Disponible pour macOS et Windows. Linux bientôt disponible."
+    "note": "Disponible pour macOS et Windows. Linux bientôt disponible.",
+    "imageAlt": "BrainDock - L'IA connectant appareils et esprit"
   },
   "madeForYou": {
     "sectionTitle": "BrainDock est con\u00e7u<br><span class=\"mfy-heading-accent\">pour vous.</span>",
@@ -540,32 +541,32 @@
       "focusWhenItCounts": {
         "title": "Concentrez-vous quand ça compte",
         "explanation": "BrainDock vous aide à rester sur la bonne voie pendant les études, les sessions de travail et les délais; en minimisant les distractions et en vous ramenant rapidement quand l'attention dérive.",
-        "text": "Restez concentre pendant le travail et les etudes, avec un accompagnement discret quand l'attention derive."
+        "text": "Restez concentré pendant le travail et les études, avec un accompagnement discret quand l'attention dérive."
       },
       "enableDeepWork": {
         "title": "Permettre le travail en profondeur",
         "explanation": "Protège le temps de concentration ininterrompu pour que vous puissiez penser clairement, travailler plus intelligemment et terminer les tâches importantes plus rapidement.",
-        "text": "Protegez votre temps de concentration pour penser clairement et accomplir vos taches."
+        "text": "Protégez votre temps de concentration pour penser clairement et accomplir vos tâches."
       },
       "distractionsToAwareness": {
         "title": "Des distractions à la conscience",
         "explanation": "Vous aide à reconnaître quand et pourquoi vous êtes distrait, afin que vous puissiez vous recentrer plus vite et construire des habitudes d'écran plus saines.",
-        "text": "Reperez ce qui vous distrait et developpez de meilleures habitudes d'attention."
+        "text": "Repérez ce qui vous distrait et développez de meilleures habitudes d'attention."
       },
       "tailoredAiGuidance": {
         "title": "Guidage IA personnalisé",
         "explanation": "Les rappels alimentés par l'IA s'adaptent à vos objectifs et routines, offrant un soutien qui semble personnel; pas intrusif.",
-        "text": "Recevez des suggestions IA qui s'adaptent a vos objectifs et semblent personnelles."
+        "text": "Recevez des suggestions IA qui s'adaptent à vos objectifs et semblent personnelles."
       },
       "buildLastingFocus": {
         "title": "Construire une concentration durable",
         "explanation": "Développe une attention plus forte grâce à une pratique constante, facilitant la concentration sur de plus longues périodes.",
-        "text": "Renforcez votre concentration par la pratique - plus facile a chaque session."
+        "text": "Renforcez votre concentration par la pratique - plus facile à chaque session."
       },
       "confidenceFromResults": {
         "title": "La confiance par les résultats",
         "explanation": "En accomplissant plus de ce qui compte, vous vous sentirez plus en contrôle de votre journée et de vos objectifs; et gagnerez plus de confiance en VOUS.",
-        "text": "Accomplissez ce qui compte et sentez-vous maitre de votre journee."
+        "text": "Accomplissez ce qui compte et sentez-vous maître de votre journée."
       }
     },
     "sectionSubtitle": "Conçu pour protéger votre concentration, à chaque session."
@@ -618,24 +619,24 @@
   },
   "pricing": {
     "title": "Tarifs",
-    "subtitle": "Utilisez des sessions camera ou ecran - le temps est deduit de votre solde. Rechargez a tout moment.",
+    "subtitle": "Utilisez des sessions caméra ou écran - le temps est déduit de votre solde. Rechargez à tout moment.",
     "tier": {
       "1": {
         "name": "Pro",
         "perHour": "A$1,99 par heure",
-        "desc": "1 heure de BrainDock - camera, ecran ou les deux.",
+        "desc": "1 heure de BrainDock - caméra, écran ou les deux.",
         "btn": "Obtenir Pro"
       },
       "10": {
         "name": "Ultra",
         "perHour": "A$1,50 par heure",
-        "desc": "10 heures de BrainDock - camera, ecran ou les deux.",
+        "desc": "10 heures de BrainDock - caméra, écran ou les deux.",
         "btn": "Obtenir Ultra"
       },
       "30": {
         "name": "Max",
         "perHour": "A$1,17 par heure",
-        "desc": "30 heures de BrainDock - camera, ecran ou les deux.",
+        "desc": "30 heures de BrainDock - caméra, écran ou les deux.",
         "btn": "Obtenir Max"
       }
     }
