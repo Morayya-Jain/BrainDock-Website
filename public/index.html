@@ -365,7 +365,63 @@
             <p data-i18n="features.cards.detailedReports.description">Generate detailed PDF reports with insights into your session highlighting your focus scores, distractions & activity logs.</p>
           </div>
         </div>
-        
+
+        <!-- How BrainDock Helps -->
+        <div class="hbh-wrapper">
+          <!-- Left column: animated visual panel -->
+          <div class="hbh-visual">
+            <img src="assets/mountain-focus.png" alt="Mountain focus scene" class="hbh-bg-image" />
+            <div class="hbh-dark-overlay"></div>
+
+            <!-- Google Docs style editor mockup -->
+            <div class="hbh-editor">
+              <div class="hbh-editor-toolbar">
+                <span class="hbh-toolbar-title">Document</span>
+                <div class="hbh-toolbar-actions">
+                  <span class="hbh-toolbar-btn">B</span>
+                  <span class="hbh-toolbar-btn" style="font-style: italic;">I</span>
+                  <span class="hbh-toolbar-btn" style="text-decoration: line-through;">S</span>
+                  <span class="hbh-toolbar-btn">U</span>
+                </div>
+              </div>
+              <div class="hbh-editor-body">
+                <p class="hbh-typed-text" id="hbhTypedText"></p>
+                <span class="hbh-cursor" id="hbhCursor">|</span>
+              </div>
+            </div>
+
+            <!-- Focus badge -->
+            <div class="hbh-focus-badge">
+              <span class="hbh-green-dot"></span>
+              Focused, 100% focus rate
+            </div>
+
+            <!-- Completion popup (hidden by default) -->
+            <div class="hbh-complete-popup" id="hbhCompletePopup">
+              <span class="hbh-complete-check">&#10003;</span>
+              Work fully complete
+            </div>
+          </div>
+
+          <!-- Right column: text content -->
+          <div class="hbh-content">
+            <h2 class="hbh-heading">How BrainDock Helps</h2>
+            <p class="hbh-desc">When BrainDock keeps your focus rate at 100%, everything changes. Distractions vanish, context switching stops, and your brain gets to do what it does best. Deep, uninterrupted work. The result is higher productivity, fewer mistakes, and work you are genuinely proud of. It is not about working harder; it is about protecting the focus that makes quality work possible.</p>
+            <div class="hbh-actions">
+              <a href="#how-it-works" class="btn btn-secondary">Learn More</a>
+              <a href="#download" class="btn btn-primary mfy-download-btn">
+                <span>Download</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download section" id="download">
+      <div class="container">
         <!-- How It Works -->
         <div id="how-it-works" class="how-it-works-wrapper">
           <h2 class="how-it-works-heading" data-i18n="howItWorks.sectionTitle">How It Works</h2>
@@ -391,15 +447,9 @@
           </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Download Section -->
-    <section class="download section" id="download">
-      <div class="container">
         <div class="section-header">
           <h2 data-i18n="download.sectionTitle">Download BrainDock</h2>
-          <p data-i18n="download.sectionSubtitle">Available for macOS and Windows. Linux coming soon.</p>
         </div>
         
         <div class="download-buttons">
@@ -425,7 +475,7 @@
         
         <!-- FAQ -->
         <div id="faq" class="faq-wrapper">
-          <h2 class="faq-heading" data-i18n="faq.sectionTitle">Frequently Asked Questions</h2>
+          <h2 class="faq-heading" data-i18n="faq.sectionTitle">FAQs</h2>
           
           <div class="faq-list">
           <div class="faq-item">

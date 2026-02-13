@@ -379,3 +379,84 @@ function initComingSoonPopup() {
     }
   });
 }
+
+/**
+ * "How BrainDock Helps" typing animation.
+ * Types text one character at a time inside a fake editor mockup,
+ * then shows a completion popup. Triggers once when the section
+ * scrolls into view via IntersectionObserver.
+ */
+function initHbhTypingAnimation() {
+  const textEl = document.getElementById('hbhTypedText');
+  const cursor = document.getElementById('hbhCursor');
+  const popup = document.getElementById('hbhCompletePopup');
+
+  if (!textEl) return;
+
+  const fullText =
+    'I met the lawyer in a quiet office, discussing contracts, deadlines, and risks. ' +
+    'Papers rustled, coffee cooled, and advice flowed calmly, leaving me relieved, ' +
+    'informed, and cautiously optimistic about next steps after a long morning.';
+
+  let started = false;
+
+  /** Types characters with human-like variable speed. */
+  function runTyping() {
+    let i = 0;
+
+    function typeChar() {
+      if (i >= fullText.length) {
+        // Typing done: hide cursor, show popup after a short delay
+        if (cursor) cursor.classList.add('hidden');
+        setTimeout(function () {
+          if (popup) popup.classList.add('visible');
+        }, 3000);
+        return;
+      }
+
+      textEl.textContent += fullText[i];
+      i++;
+
+      // Variable delay for a realistic typing feel
+      var char = fullText[i - 1];
+      var delay;
+      if (char === '.' || char === '!') {
+        delay = 280 + Math.random() * 120;
+      } else if (char === ',') {
+        delay = 140 + Math.random() * 80;
+      } else if (char === ' ') {
+        delay = 50 + Math.random() * 50;
+      } else {
+        delay = 40 + Math.random() * 70;
+      }
+
+      setTimeout(typeChar, delay);
+    }
+
+    typeChar();
+  }
+
+  // Trigger animation when the wrapper scrolls into view (plays once)
+  var wrapper = document.querySelector('.hbh-wrapper');
+  if (wrapper && 'IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !started) {
+            started = true;
+            runTyping();
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(wrapper);
+  } else if (wrapper) {
+    // Fallback: run immediately
+    runTyping();
+  }
+}
+
+// Initialise when the DOM is ready
+document.addEventListener('DOMContentLoaded', initHbhTypingAnimation);
