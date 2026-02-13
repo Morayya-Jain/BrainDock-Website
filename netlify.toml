@@ -6,6 +6,9 @@
   NPM_CONFIG_REGISTRY = "https://registry.npmjs.org/"
 
 # Security headers (OWASP best practices)
+# NOTE: style-src uses 'unsafe-inline' because chart bars, progress bars, and timeline
+# segments require dynamic inline styles (computed heights/widths). Removing it would
+# break the dashboard UI. Script-src remains strict (no unsafe-inline).
 [[headers]]
   for = "/*"
   [headers.values]

@@ -10,6 +10,7 @@ import { t, getLocale } from '../dashboard-i18n.js'
 import { MACOS_URL, WINDOWS_URL } from '../constants.js'
 import { fetchUserCredits } from '../credits.js'
 import { appleIcon, windowsIcon } from '../icons.js'
+import { logError } from '../logger.js'
 
 /** Format date for display (e.g. "Today, Feb 7 2026") */
 function formatDateLabel(date) {
@@ -268,7 +269,7 @@ async function main() {
     const weeklyData = buildWeeklyChartData(sessions)
     render(mainEl, result.user, sessions, stats, weeklyData, credits)
   } catch (err) {
-    console.error(err)
+    logError('Dashboard load failed:', err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
         <p class="dashboard-empty-title">${t('dashboard.common.somethingWentWrong', 'Something went wrong')}</p>

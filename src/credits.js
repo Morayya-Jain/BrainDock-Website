@@ -4,6 +4,7 @@
  */
 
 import { supabase } from './supabase.js'
+import { logError } from './logger.js'
 
 /**
  * Fetch user credit balance from user_credits table.
@@ -18,7 +19,7 @@ export async function fetchUserCredits() {
       .select('total_purchased_seconds, total_used_seconds')
       .single()
     if (error) {
-      if (error.code !== 'PGRST116') console.error('Credits fetch error:', error)
+      if (error.code !== 'PGRST116') logError('Credits fetch error:', error)
       return empty
     }
     const purchased = data?.total_purchased_seconds ?? 0

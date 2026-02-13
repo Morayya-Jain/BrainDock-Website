@@ -24,7 +24,7 @@ function render(main) {
           ${windowsIcon(20)}
           ${t('dashboard.downloadPage.windows', 'Windows')}
         </a>
-        <button type="button" class="btn btn-primary btn-download" disabled style="opacity: 0.5; cursor: not-allowed;">
+        <button type="button" class="btn btn-primary btn-download btn-disabled" disabled>
           ${linuxIcon(20)}
           ${t('dashboard.downloadPage.linuxComingSoon', 'Linux (Coming Soon)')}
         </button>

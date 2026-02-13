@@ -7,6 +7,7 @@ import { initDashboardLayout } from '../dashboard-layout.js'
 import { isValidName, sanitizeText, LIMITS } from '../validators.js'
 import { escapeHtml, showInlineError } from '../utils.js'
 import { t } from '../dashboard-i18n.js'
+import { logError } from '../logger.js'
 
 async function loadProfile(userId) {
   const { data, error } = await supabase.from('profiles').select('id, display_name, email').eq('id', userId).single()
@@ -62,7 +63,7 @@ function render(main, profile, userId) {
       savedMsg.style.display = 'inline'
       setTimeout(() => { savedMsg.style.display = 'none' }, 2000)
     } catch (err) {
-      console.error(err)
+      logError('Profile save failed:', err)
       showInlineError(main, t('dashboard.account.saveFailed', 'Failed to save. Please try again.'))
     } finally {
       saveBtn.disabled = false
@@ -83,7 +84,7 @@ async function main() {
     const profile = await loadProfile(result.user.id)
     render(mainEl, profile, result.user.id)
   } catch (err) {
-    console.error(err)
+    logError('Account page load failed:', err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
         <p class="dashboard-empty-title">${t('dashboard.account.errorTitle', 'Could not load profile')}</p>

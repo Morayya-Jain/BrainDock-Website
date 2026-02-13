@@ -8,6 +8,7 @@ import { escapeHtml, showInlineError, formatPrice } from '../utils.js'
 import { isValidUuid } from '../validators.js'
 import '../auth.css'
 import '../dashboard.css'
+import { logError } from '../logger.js'
 
 async function fetchCreditPackages() {
   const { data, error } = await supabase
@@ -318,7 +319,7 @@ async function main() {
   try {
     packages = await fetchCreditPackages()
   } catch (err) {
-    console.error(err)
+    logError('Pricing packages load failed:', err)
   }
   render(root, packages, hasUser)
 

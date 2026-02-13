@@ -2119,4 +2119,7 @@
 .howto-icon--success { color: var(--success); }
 .howto-icon--muted   { color: var(--text-secondary); }
 
+/* Disabled button appearance (used for coming-soon features) */
+.btn-disabled { opacity: 0.5; cursor: not-allowed; }
+
 /* prefers-reduced-motion is handled in public/css/style.css (loaded on all pages) */

@@ -7,6 +7,7 @@ import { initDashboardLayout } from '../dashboard-layout.js'
 import { escapeHtml, formatDuration, formatPrice } from '../utils.js'
 import { t, getLocale } from '../dashboard-i18n.js'
 import { fetchUserCredits } from '../credits.js'
+import { logError } from '../logger.js'
 
 function formatDate(iso) {
   if (!iso) return '-'
@@ -138,7 +139,7 @@ async function main() {
       mainEl.prepend(banner)
     }
   } catch (err) {
-    console.error(err)
+    logError('Billing page load failed:', err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
         <p class="dashboard-empty-title">${t('dashboard.billing.errorTitle', 'Could not load billing')}</p>

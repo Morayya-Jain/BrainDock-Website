@@ -8,6 +8,7 @@ import { initDashboardLayout } from '../dashboard-layout.js'
 import { escapeHtml, formatDuration, modeLabel } from '../utils.js'
 import { isValidUuid } from '../validators.js'
 import { t, getLocale } from '../dashboard-i18n.js'
+import { logError } from '../logger.js'
 
 function eventLabel(type) {
   const labels = {
@@ -44,7 +45,7 @@ function formatTime(iso) {
 async function fetchSessionWithEvents(sessionId) {
   const { data: session, error: sessionError } = await supabase
     .from('sessions')
-    .select('*')
+    .select('id, session_name, start_time, end_time, monitoring_mode, summary_stats')
     .eq('id', sessionId)
     .single()
   // PGRST116 = "not found" from .single() - return null instead of throwing
@@ -56,7 +57,7 @@ async function fetchSessionWithEvents(sessionId) {
 
   const { data: events, error: eventsError } = await supabase
     .from('session_events')
-    .select('*')
+    .select('event_type, start_time, end_time, duration_seconds')
     .eq('session_id', sessionId)
     .order('start_time', { ascending: true })
   if (eventsError) throw eventsError
@@ -219,7 +220,7 @@ async function main() {
     }
     render(mainEl, session, events)
   } catch (err) {
-    console.error(err)
+    logError('Session detail load failed:', err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
         <p class="dashboard-empty-title">${t('dashboard.sessionDetail.errorTitle', 'Could not load session')}</p>

@@ -4,7 +4,17 @@
  * Blocklist URL/app validation matches desktop app behaviour (TLD check, DNS lookup, KNOWN_APPS).
  */
 
-import { VALID_TLDS, KNOWN_APPS } from './blocklist-data.js'
+import { supabaseAnonKey } from './supabase.js'
+
+// Blocklist data (VALID_TLDS, KNOWN_APPS) is large (~1,378 entries).
+// Lazy-loaded on first use so pages that only need basic validators don't pay the bundle cost.
+let _blocklistData = null
+async function getBlocklistData() {
+  if (!_blocklistData) {
+    _blocklistData = await import('./blocklist-data.js')
+  }
+  return _blocklistData
+}
 
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 const URL_FORMAT_REGEX = /^[a-z0-9:][a-z0-9._\-:/]*[a-z0-9]$/
@@ -86,7 +96,10 @@ export async function checkDomainDns(domain) {
   try {
     const res = await fetch(`${baseUrl}/functions/v1/validate-domain`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': supabaseAnonKey,
+      },
       body: JSON.stringify({ domain }),
       signal: controller.signal,
     })
@@ -111,6 +124,8 @@ export async function validateUrlPattern(url) {
     if (u.length > 253) return { valid: false, message: `'${u}' is too long (max 253 characters)`, isWarning: false }
     if (!URL_FORMAT_REGEX.test(u)) return { valid: false, message: `'${u}' contains invalid characters for a URL`, isWarning: false }
     if (!u.includes('.')) return { valid: false, message: `'${u}' doesn't look like a URL - needs a domain extension (e.g. .com)`, isWarning: false }
+
+    const { VALID_TLDS } = await getBlocklistData()
 
     let domain = u
     if (domain.includes('://')) domain = domain.split('://').pop()
@@ -141,11 +156,13 @@ export async function validateUrlPattern(url) {
  * Validate a custom app name pattern (blocklist). Character check + KNOWN_APPS whitelist.
  * Returns { valid: boolean, message: string, isWarning: boolean }.
  */
-export function validateAppPattern(appName) {
+export async function validateAppPattern(appName) {
   try {
     const app = String(appName).trim()
     if (app.length < 3) return { valid: false, message: `'${app}' is too short (min 3 characters)`, isWarning: false }
     if (app.length > 50) return { valid: false, message: `'${app}' is too long (max 50 characters)`, isWarning: false }
+
+    const { VALID_TLDS, KNOWN_APPS } = await getBlocklistData()
 
     if (app.includes('.') && app.split('.').length <= 3) {
       const lowerParts = app.toLowerCase().split('.')

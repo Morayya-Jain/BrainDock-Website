@@ -22,6 +22,23 @@ const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12
 const RATE_LIMIT_WINDOW_MINUTES = 10
 const RATE_LIMIT_MAX_PURCHASES = 5
 
+// In-memory per-user rate limit for checkout session creation attempts
+const SESSION_RATE_LIMIT_WINDOW_MS = 60_000 // 1 minute
+const SESSION_RATE_LIMIT_MAX = 10 // max checkout session attempts per minute
+const userAttempts = new Map<string, { count: number; resetAt: number }>()
+
+/** Check if a user has exceeded the session creation rate limit. Returns true if blocked. */
+function isSessionCreationLimited(userId: string): boolean {
+  const now = Date.now()
+  const entry = userAttempts.get(userId)
+  if (!entry || now >= entry.resetAt) {
+    userAttempts.set(userId, { count: 1, resetAt: now + SESSION_RATE_LIMIT_WINDOW_MS })
+    return false
+  }
+  entry.count++
+  return entry.count > SESSION_RATE_LIMIT_MAX
+}
+
 function getCorsHeaders(origin: string | null): Record<string, string> {
   const allowOrigin = origin && ALLOWED_ORIGINS.includes(origin) ? origin : null
   const h: Record<string, string> = {
@@ -93,6 +110,17 @@ serve(async (req) => {
   const { data: { user }, error: userError } = await supabase.auth.getUser(token)
   if (userError || !user) {
     return withCors(JSON.stringify({ error: "Invalid or expired session" }), 401)
+  }
+
+  // Per-user rate limit on checkout session creation attempts (prevents Stripe session spam)
+  if (isSessionCreationLimited(user.id)) {
+    return new Response(
+      JSON.stringify({ error: "Too many checkout attempts. Please wait a moment." }),
+      {
+        status: 429,
+        headers: { ...corsHeaders, "Content-Type": "application/json", "Retry-After": "60" },
+      }
+    )
   }
 
   let rawBody: unknown

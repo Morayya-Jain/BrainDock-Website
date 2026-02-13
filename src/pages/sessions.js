@@ -6,6 +6,7 @@ import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { escapeHtml, formatDuration, modeLabel, focusLevelClass } from '../utils.js'
 import { t, getLocale } from '../dashboard-i18n.js'
+import { logError } from '../logger.js'
 
 const PAGE_SIZE = 20
 
@@ -93,7 +94,7 @@ async function main() {
       const { sessions, total } = await fetchSessionsWithCount(page)
       render(mainEl, sessions, page, total, loadPage)
     } catch (err) {
-      console.error(err)
+      logError('Sessions list load failed:', err)
       mainEl.innerHTML = `
         <div class="dashboard-empty">
           <p class="dashboard-empty-title">${t('dashboard.sessionList.errorTitle', 'Could not load sessions')}</p>

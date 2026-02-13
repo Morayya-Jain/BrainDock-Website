@@ -84,7 +84,8 @@ export function modeLabel(mode, short = false) {
     if (mode === 'screen_only') return t('dashboard.modes.screenOnly', 'Screen Only')
     if (mode === 'both') return t('dashboard.modes.cameraPlusScreen', 'Camera + Screen')
   }
-  return mode || '-'
+  // Escape fallback to prevent XSS if an unknown mode value comes from the database
+  return escapeHtml(mode) || '-'
 }
 
 /**

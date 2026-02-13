@@ -9,6 +9,7 @@ import { initDashboardLayout } from '../dashboard-layout.js'
 import { validateUrlPattern, validateAppPattern } from '../validators.js'
 import { escapeHtml, showInlineError } from '../utils.js'
 import { t } from '../dashboard-i18n.js'
+import { logError } from '../logger.js'
 import {
   createIcons,
   Smartphone,
@@ -99,7 +100,7 @@ const PAGE_ICONS = {
 
 async function loadBlocklist() {
   /** Load blocklist config from Supabase. */
-  const { data, error } = await supabase.from('blocklist_configs').select('*').single()
+  const { data, error } = await supabase.from('blocklist_configs').select('user_id, quick_blocks, categories, custom_urls, custom_apps').single()
   if (error) throw error
   return data
 }
@@ -153,7 +154,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
           custom_apps: state.custom_apps,
         })
       } catch (err) {
-        console.error(err)
+        logError('Blocklist save failed:', err)
         showInlineError(main, t('dashboard.blocklist.saveError', 'Could not save blocklist. Please try again.'))
       }
     }, DEBOUNCE_MS)
@@ -168,7 +169,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
         const enabled = getEnabledItems()
         await saveDetectionSettings(userId, enabled)
       } catch (err) {
-        console.error(err)
+        logError('Detection settings save failed:', err)
         showInlineError(main, t('dashboard.blocklist.saveError', 'Could not save settings. Please try again.'))
       }
     }, DEBOUNCE_MS)
@@ -358,7 +359,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
     scheduleBlocklistSave()
   }
 
-  function addCustomApp() {
+  async function addCustomApp() {
     const input = main.querySelector('#custom-app-input')
     const hintEl = main.querySelector('#custom-app-hint')
     const val = input.value.trim()
@@ -366,7 +367,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
       setHint(hintEl, '', '')
       return
     }
-    const result = validateAppPattern(val)
+    const result = await validateAppPattern(val)
     if (!result.valid) {
       setHint(hintEl, result.message, 'error')
       return
@@ -507,7 +508,7 @@ async function main() {
     ])
     render(mainEl, blocklistConfig, detectionSettings, result.user.id)
   } catch (err) {
-    console.error(err)
+    logError('Configuration page load failed:', err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
         <p class="dashboard-empty-title">${t('dashboard.config.errorTitle', 'Could not load configuration')}</p>

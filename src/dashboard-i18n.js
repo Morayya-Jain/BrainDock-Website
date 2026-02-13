@@ -5,6 +5,8 @@
  * use inside Vite-bundled dashboard pages.
  */
 
+import { logError } from './logger.js'
+
 const STORAGE_KEY = 'braindock-language'
 const DEFAULT_LANG = 'en'
 export const SUPPORTED_LANGUAGES = ['en', 'ja', 'de', 'fr', 'zh', 'hi']
@@ -55,7 +57,7 @@ export async function initDashboardI18n() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     translations = await res.json()
   } catch (err) {
-    console.error('Dashboard i18n: failed to load translations, falling back to English', err)
+    logError('Dashboard i18n: failed to load translations, falling back to English', err)
     // If we weren't already trying English, attempt that as fallback
     if (currentLang !== DEFAULT_LANG) {
       try {
