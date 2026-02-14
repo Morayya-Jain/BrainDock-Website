@@ -2,6 +2,7 @@ import { supabase } from '../supabase.js'
 import {
   captureDesktopSource,
   captureRedirect,
+  hasStoredSession,
   handlePostAuthRedirect,
   showError,
   hideError,
@@ -16,13 +17,50 @@ import '../auth.css'
 captureDesktopSource()
 captureRedirect()
 
-// If already logged in, skip the form and handle redirect immediately
-// (e.g. desktop app opened login page but user is already authenticated)
+// DOM elements used by both the auto-login check and form handlers
 const loginForm = document.getElementById('login-form')
 const authCard = document.querySelector('.auth-card')
+const loginBtn = document.getElementById('login-btn')
+const googleBtn = document.getElementById('google-btn')
 
+// -- Helpers for the auto-login spinner state --
+let spinnerWrap = null
+
+/** Hide form elements and show the "Signing you in..." spinner. */
+function showSigningInSpinner() {
+  loginForm.style.display = 'none'
+  authCard.querySelector('.auth-divider').style.display = 'none'
+  googleBtn.style.display = 'none'
+  authCard.querySelector('.auth-footer').style.display = 'none'
+  authCard.querySelector('.auth-title').textContent = 'Signing you in...'
+  authCard.querySelector('.auth-subtitle').textContent = ''
+  spinnerWrap = document.createElement('div')
+  spinnerWrap.className = 'auth-loading'
+  spinnerWrap.innerHTML = '<div class="auth-spinner"></div><p class="auth-loading-text">Signing you in...</p>'
+  authCard.appendChild(spinnerWrap)
+}
+
+/** Restore the login form after a failed auto-login attempt. */
+function restoreLoginForm() {
+  loginForm.style.display = ''
+  authCard.querySelector('.auth-divider').style.display = ''
+  googleBtn.style.display = ''
+  authCard.querySelector('.auth-footer').style.display = ''
+  authCard.querySelector('.auth-title').textContent = 'Welcome back'
+  authCard.querySelector('.auth-subtitle').textContent = 'Log in to your BrainDock account'
+  if (spinnerWrap) {
+    spinnerWrap.remove()
+    spinnerWrap = null
+  }
+}
+
+// Show spinner immediately if a stored session exists (avoids form flash)
+if (hasStoredSession()) {
+  showSigningInSpinner()
+}
+
+// Validate the session asynchronously and proceed with redirect or restore form
 ;(async () => {
-  // Wait for Supabase client to finish loading session from localStorage
   let session = null
   try {
     const res = await supabase.auth.getSession()
@@ -49,28 +87,18 @@ const authCard = document.querySelector('.auth-card')
   }
 
   if (session) {
-    loginForm.style.display = 'none'
-    authCard.querySelector('.auth-title').textContent = 'Signing you in...'
-    authCard.querySelector('.auth-subtitle').textContent = ''
-    const spinnerWrap = document.createElement('div')
-    spinnerWrap.className = 'auth-loading'
-    spinnerWrap.innerHTML = '<div class="auth-spinner"></div><p class="auth-loading-text">Signing you in...</p>'
-    authCard.appendChild(spinnerWrap)
+    // Spinner might already be showing from the synchronous check; show it if not
+    if (!spinnerWrap) showSigningInSpinner()
 
-    // handlePostAuthRedirect() refreshes the session internally
     await handlePostAuthRedirect(supabase, authCard)
 
     // If we reach here, redirect didn't happen (error shown on card).
-    // Restore the login form so the user can try again.
-    loginForm.style.display = ''
-    authCard.querySelector('.auth-title').textContent = 'Welcome back'
-    authCard.querySelector('.auth-subtitle').textContent = 'Log in to your BrainDock account'
-    spinnerWrap.remove()
+    restoreLoginForm()
+  } else if (spinnerWrap) {
+    // Spinner was shown synchronously but session is stale/expired — restore form
+    restoreLoginForm()
   }
 })()
-
-const loginBtn = document.getElementById('login-btn')
-const googleBtn = document.getElementById('google-btn')
 
 // Email + password login
 loginForm.addEventListener('submit', async (e) => {

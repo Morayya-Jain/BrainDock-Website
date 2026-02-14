@@ -2,6 +2,7 @@ import { supabase } from '../supabase.js'
 import {
   captureDesktopSource,
   captureRedirect,
+  hasStoredSession,
   REDIRECT_STORAGE_KEY,
   handlePostAuthRedirect,
   showError,
@@ -19,26 +20,6 @@ captureDesktopSource()
 captureRedirect()
 
 const RELOAD_BAIL_KEY = 'braindock_signup_reload_bail'
-
-/**
- * Check localStorage directly for a Supabase session token.
- * Synchronous, works before the client finishes async init.
- */
-function hasStoredSession() {
-  try {
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i)
-      if (key && key.startsWith('sb-') && key.endsWith('-auth-token')) {
-        const raw = localStorage.getItem(key)
-        if (raw) {
-          const parsed = JSON.parse(raw)
-          if (parsed?.access_token) return true
-        }
-      }
-    }
-  } catch (_) { /* ignore */ }
-  return false
-}
 
 // If we bailed out of reload loop (corrupt token), clear the flag and show form
 const wasBailed = !!sessionStorage.getItem(RELOAD_BAIL_KEY)

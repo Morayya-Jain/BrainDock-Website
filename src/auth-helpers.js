@@ -54,6 +54,27 @@ export function captureRedirect() {
 }
 
 /**
+ * Synchronously check localStorage for a Supabase session token.
+ * Works before the Supabase client finishes async init, so the page
+ * can show a spinner immediately instead of flashing the form.
+ */
+export function hasStoredSession() {
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i)
+      if (key && key.startsWith('sb-') && key.endsWith('-auth-token')) {
+        const raw = localStorage.getItem(key)
+        if (raw) {
+          const parsed = JSON.parse(raw)
+          if (parsed?.access_token) return true
+        }
+      }
+    }
+  } catch (_) { /* ignore */ }
+  return false
+}
+
+/**
  * Redirect after successful auth.
  * If the user came from the desktop app (?source=desktop), generates
  * a one-time linking code via Edge Function and redirects to
