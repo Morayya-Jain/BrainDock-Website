@@ -764,7 +764,8 @@
       "tryAgain": "Bitte versuchen Sie es erneut.",
       "backToSessions": "Zurück zu Sitzungen",
       "signedIn": "Angemeldet",
-      "remainingTime": "Verbleibende Sitzungszeit"
+      "remainingTime": "Verbleibende Sitzungszeit",
+      "planned": "geplant"
     },
     "modes": {
       "camera": "Kamera",
@@ -826,7 +827,11 @@
       "legendPaused": "Pausiert",
       "notFound": "Sitzung nicht gefunden",
       "loading": "Sitzung wird geladen...",
-      "errorTitle": "Sitzung konnte nicht geladen werden"
+      "errorTitle": "Sitzung konnte nicht geladen werden",
+      "planned": "Geplant",
+      "actual": "Tatsächlich",
+      "goals": "Ziele",
+      "goalsCompleted": "abgeschlossen"
     },
     "config": {
       "title": "Konfiguration",

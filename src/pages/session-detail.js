@@ -45,7 +45,7 @@ function formatTime(iso) {
 async function fetchSessionWithEvents(sessionId) {
   const { data: session, error: sessionError } = await supabase
     .from('sessions')
-    .select('id, session_name, start_time, end_time, monitoring_mode, summary_stats')
+    .select('id, session_name, start_time, end_time, monitoring_mode, summary_stats, title, category, session_type, planned_duration_seconds, goals')
     .eq('id', sessionId)
     .single()
   // PGRST116 = "not found" from .single() - return null instead of throwing
@@ -101,13 +101,21 @@ function render(main, session, events) {
 
   const startDate = new Date(session.start_time)
   const dateStr = startDate.toLocaleDateString(getLocale(), { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })
-  const name = session.session_name || `${t('dashboard.common.session', 'Session')} ${startDate.toLocaleTimeString(getLocale(), { hour: 'numeric', minute: '2-digit' })}`
+  // Prefer title over auto-generated session_name
+  const displayTitle = session.title || session.session_name || `${t('dashboard.common.session', 'Session')} ${startDate.toLocaleTimeString(getLocale(), { hour: 'numeric', minute: '2-digit' })}`
+  const categoryBadge = session.category ? `<span class="dashboard-category-badge">${escapeHtml(session.category)}</span>` : ''
+  const plannedDuration = session.planned_duration_seconds
+  const isTimedSession = session.session_type === 'timed' && plannedDuration
+  const plannedVsActual = isTimedSession
+    ? ` &middot; ${t('dashboard.sessionDetail.planned', 'Planned')}: ${formatDuration(plannedDuration)} | ${t('dashboard.sessionDetail.actual', 'Actual')}: ${formatDuration(totalActive)}`
+    : ''
+  const goals = session.goals || []
 
   main.innerHTML = `
     <a href="${base}/sessions/" class="dashboard-back-link">${t('dashboard.common.backToSessions', 'Back to Sessions')}</a>
-    <h1 class="dashboard-page-title">${escapeHtml(name)}</h1>
+    <h1 class="dashboard-page-title">${escapeHtml(displayTitle)}</h1>
     <p class="dashboard-page-subtitle">
-      ${dateStr} &middot; ${modeLabel(session.monitoring_mode)}
+      ${categoryBadge} ${dateStr} &middot; ${modeLabel(session.monitoring_mode)}${plannedVsActual}
     </p>
 
     <div class="dashboard-stat-cards dashboard-stat-cards--2col">
@@ -159,6 +167,25 @@ function render(main, session, events) {
           `}
       </div>
     </div>
+
+    ${goals.length > 0 ? `
+    <div class="dashboard-section">
+      <h2 class="dashboard-section-title">${t('dashboard.sessionDetail.goals', 'Goals')}</h2>
+      <div class="dashboard-card">
+        <ul class="dashboard-goals-list">
+          ${goals.map((g) => `
+            <li class="dashboard-goal-item ${g.completed ? 'completed' : ''}">
+              <span class="dashboard-goal-check">${g.completed ? '&#10003;' : '&#10007;'}</span>
+              <span>${escapeHtml(g.text || '')}</span>
+            </li>
+          `).join('')}
+        </ul>
+        <p class="dashboard-meta" style="margin-top: 0.5rem;">
+          ${goals.filter(g => g.completed).length} ${t('dashboard.common.of', 'of')} ${goals.length} ${t('dashboard.sessionDetail.goalsCompleted', 'completed')}
+        </p>
+      </div>
+    </div>
+    ` : ''}
 
     <div class="dashboard-section">
       <h2 class="dashboard-section-title">${t('dashboard.sessionDetail.eventLog', 'Event Log')}</h2>

@@ -764,7 +764,8 @@
       "tryAgain": "Veuillez réessayer.",
       "backToSessions": "Retour aux sessions",
       "signedIn": "Connecte",
-      "remainingTime": "Temps de session restant"
+      "remainingTime": "Temps de session restant",
+      "planned": "prévu"
     },
     "modes": {
       "camera": "Caméra",
@@ -826,7 +827,11 @@
       "legendPaused": "En pause",
       "notFound": "Session introuvable",
       "loading": "Chargement de la session...",
-      "errorTitle": "Impossible de charger la session"
+      "errorTitle": "Impossible de charger la session",
+      "planned": "Prévu",
+      "actual": "Réel",
+      "goals": "Objectifs",
+      "goalsCompleted": "terminés"
     },
     "config": {
       "title": "Configuration",

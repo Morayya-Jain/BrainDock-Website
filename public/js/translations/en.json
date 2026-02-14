@@ -764,7 +764,8 @@
       "tryAgain": "Please try again.",
       "backToSessions": "Back to Sessions",
       "signedIn": "Signed in",
-      "remainingTime": "Remaining session time"
+      "remainingTime": "Remaining session time",
+      "planned": "planned"
     },
     "modes": {
       "camera": "Camera",
@@ -826,7 +827,11 @@
       "legendPaused": "Paused",
       "notFound": "Session not found",
       "loading": "Loading session...",
-      "errorTitle": "Could not load session"
+      "errorTitle": "Could not load session",
+      "planned": "Planned",
+      "actual": "Actual",
+      "goals": "Goals",
+      "goalsCompleted": "completed"
     },
     "config": {
       "title": "Configuration",

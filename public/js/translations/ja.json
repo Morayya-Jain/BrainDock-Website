@@ -764,7 +764,8 @@
       "tryAgain": "もう一度お試しください。",
       "backToSessions": "セッション一覧に戻る",
       "signedIn": "サインイン中",
-      "remainingTime": "残りセッション時間"
+      "remainingTime": "残りセッション時間",
+      "planned": "予定"
     },
     "modes": {
       "camera": "カメラ",
@@ -826,7 +827,11 @@
       "legendPaused": "一時停止",
       "notFound": "セッションが見つかりません",
       "loading": "セッションを読み込み中...",
-      "errorTitle": "セッションを読み込めませんでした"
+      "errorTitle": "セッションを読み込めませんでした",
+      "planned": "予定",
+      "actual": "実績",
+      "goals": "目標",
+      "goalsCompleted": "完了"
     },
     "config": {
       "title": "設定",

@@ -764,7 +764,8 @@
       "tryAgain": "कृपया पुनः प्रयास करें।",
       "backToSessions": "सत्रों पर वापस",
       "signedIn": "साइन इन",
-      "remainingTime": "शेष सत्र समय"
+      "remainingTime": "शेष सत्र समय",
+      "planned": "नियोजित"
     },
     "modes": {
       "camera": "कैमरा",
@@ -826,7 +827,11 @@
       "legendPaused": "रुका हुआ",
       "notFound": "सत्र नहीं मिला",
       "loading": "सत्र लोड हो रहा है...",
-      "errorTitle": "सत्र लोड नहीं हो सका"
+      "errorTitle": "सत्र लोड नहीं हो सका",
+      "planned": "नियोजित",
+      "actual": "वास्तविक",
+      "goals": "लक्ष्य",
+      "goalsCompleted": "पूर्ण"
     },
     "config": {
       "title": "कॉन्फ़िगरेशन",

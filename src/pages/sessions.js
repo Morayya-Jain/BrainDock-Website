@@ -15,7 +15,7 @@ async function fetchSessionsWithCount(page) {
   const to = from + PAGE_SIZE - 1
   const { data, error, count } = await supabase
     .from('sessions')
-    .select('id, session_name, start_time, end_time, monitoring_mode, summary_stats', { count: 'exact', head: false })
+    .select('id, session_name, start_time, end_time, monitoring_mode, summary_stats, title, category, session_type, planned_duration_seconds', { count: 'exact', head: false })
     .order('start_time', { ascending: false })
     .range(from, to)
   if (error) throw error
@@ -47,14 +47,19 @@ function render(main, sessions, page, total, goToPage) {
             const screen = summary.screen_distraction_count ?? 0
             const start = new Date(s.start_time)
             const dateStr = start.toLocaleDateString(getLocale(), { month: 'long', day: 'numeric', year: 'numeric' })
-            const name = s.session_name || `${t('dashboard.common.session', 'Session')} ${start.toLocaleTimeString(getLocale(), { hour: 'numeric', minute: '2-digit' })}`
+            // Prefer title over auto-generated session_name
+            const name = s.title || s.session_name || `${t('dashboard.common.session', 'Session')} ${start.toLocaleTimeString(getLocale(), { hour: 'numeric', minute: '2-digit' })}`
             const activeSec = (summary.present_seconds ?? 0) + (summary.away_seconds ?? 0) + (summary.gadget_seconds ?? 0) + (summary.screen_distraction_seconds ?? 0)
+            const categoryBadge = s.category ? `<span class="dashboard-category-badge-sm">${escapeHtml(s.category)}</span> ` : ''
+            const plannedInfo = (s.session_type === 'timed' && s.planned_duration_seconds)
+              ? ` &middot; ${formatDuration(s.planned_duration_seconds)} ${t('dashboard.common.planned', 'planned')}`
+              : ''
             return `
               <li class="dashboard-list-item ${focusLevelClass(Math.round(pct))}">
                 <div>
-                  <strong>${escapeHtml(name)}</strong><br>
+                  <strong>${categoryBadge}${escapeHtml(name)}</strong><br>
                   <span class="dashboard-meta">${dateStr}</span><br>
-                  <span class="dashboard-meta">${modeLabel(s.monitoring_mode)} &middot; ${formatDuration(activeSec)} ${t('dashboard.common.active', 'active')} &middot; ${Math.round(pct)}% ${t('dashboard.common.focus', 'focus')}</span><br>
+                  <span class="dashboard-meta">${modeLabel(s.monitoring_mode)} &middot; ${formatDuration(activeSec)} ${t('dashboard.common.active', 'active')} &middot; ${Math.round(pct)}% ${t('dashboard.common.focus', 'focus')}${plannedInfo}</span><br>
                   <span class="dashboard-meta-sub">${gadgets} ${t('dashboard.common.gadgets', 'gadgets')} &middot; ${screen} ${t('dashboard.common.screenDistractions', 'screen distractions')}</span>
                 </div>
                 <a href="${base}/sessions/${escapeHtml(s.id)}" class="btn btn-secondary dashboard-btn-sm">${t('dashboard.actions.view', 'View')}</a>

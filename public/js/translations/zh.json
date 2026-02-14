@@ -764,7 +764,8 @@
       "tryAgain": "请重试。",
       "backToSessions": "返回会话列表",
       "signedIn": "已登录",
-      "remainingTime": "剩余会话时间"
+      "remainingTime": "剩余会话时间",
+      "planned": "计划"
     },
     "modes": {
       "camera": "摄像头",
@@ -826,7 +827,11 @@
       "legendPaused": "已暂停",
       "notFound": "未找到会话",
       "loading": "正在加载会话...",
-      "errorTitle": "无法加载会话"
+      "errorTitle": "无法加载会话",
+      "planned": "计划",
+      "actual": "实际",
+      "goals": "目标",
+      "goalsCompleted": "已完成"
     },
     "config": {
       "title": "配置",

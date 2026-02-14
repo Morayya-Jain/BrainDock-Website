@@ -9,7 +9,6 @@ import { initDashboardLayout } from '../dashboard-layout.js'
 import { validateUrlPattern, validateAppPattern } from '../validators.js'
 import { escapeHtml, showInlineError } from '../utils.js'
 import { t } from '../dashboard-i18n.js'
-import { logError } from '../logger.js'
 import {
   createIcons,
   Smartphone,
@@ -100,7 +99,7 @@ const PAGE_ICONS = {
 
 async function loadBlocklist() {
   /** Load blocklist config from Supabase. */
-  const { data, error } = await supabase.from('blocklist_configs').select('user_id, quick_blocks, categories, custom_urls, custom_apps').single()
+  const { data, error } = await supabase.from('blocklist_configs').select('*').single()
   if (error) throw error
   return data
 }
@@ -112,8 +111,8 @@ async function saveBlocklist(userId, payload) {
 }
 
 async function loadDetectionSettings() {
-  /** Load detection item settings from Supabase. */
-  const { data, error } = await supabase.from('user_settings').select('enabled_gadgets').single()
+  /** Load detection item settings (gadgets + distraction level) from Supabase. */
+  const { data, error } = await supabase.from('user_settings').select('enabled_gadgets, distraction_level').single()
   if (error) throw error
   return data
 }
@@ -121,6 +120,12 @@ async function loadDetectionSettings() {
 async function saveDetectionSettings(userId, enabledItems) {
   /** Persist detection item changes. */
   const { error } = await supabase.from('user_settings').update({ enabled_gadgets: enabledItems }).eq('user_id', userId)
+  if (error) throw error
+}
+
+async function saveDistractionLevel(userId, level) {
+  /** Persist distraction level (1=track, 2=warn+delay). */
+  const { error } = await supabase.from('user_settings').update({ distraction_level: level }).eq('user_id', userId)
   if (error) throw error
 }
 
@@ -154,7 +159,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
           custom_apps: state.custom_apps,
         })
       } catch (err) {
-        logError('Blocklist save failed:', err)
+        console.error(err)
         showInlineError(main, t('dashboard.blocklist.saveError', 'Could not save blocklist. Please try again.'))
       }
     }, DEBOUNCE_MS)
@@ -169,33 +174,11 @@ function render(main, blocklistConfig, detectionSettings, userId) {
         const enabled = getEnabledItems()
         await saveDetectionSettings(userId, enabled)
       } catch (err) {
-        logError('Detection settings save failed:', err)
+        console.error(err)
         showInlineError(main, t('dashboard.blocklist.saveError', 'Could not save settings. Please try again.'))
       }
     }, DEBOUNCE_MS)
   }
-
-  // Flush any pending debounced saves when navigating away
-  function flushPendingSaves() {
-    if (blocklistSaveTimeout) {
-      clearTimeout(blocklistSaveTimeout)
-      blocklistSaveTimeout = null
-      // Fire-and-forget save using sendBeacon or sync approach
-      saveBlocklist(userId, {
-        quick_blocks: state.quick_blocks,
-        categories: state.categories,
-        custom_urls: state.custom_urls,
-        custom_apps: state.custom_apps,
-      }).catch(() => {})
-    }
-    if (detectionSaveTimeout) {
-      clearTimeout(detectionSaveTimeout)
-      detectionSaveTimeout = null
-      const enabled = getEnabledItems()
-      saveDetectionSettings(userId, enabled).catch(() => {})
-    }
-  }
-  window.addEventListener('beforeunload', flushPendingSaves)
 
   /** Read currently-active item pills. */
   function getEnabledItems() {
@@ -206,6 +189,9 @@ function render(main, blocklistConfig, detectionSettings, userId) {
     return arr
   }
 
+  // Distraction level state (1=track, 2=warn+delay)
+  let distractionLevel = detectionSettings?.distraction_level || 1
+
   main.innerHTML = `
     <h1 class="dashboard-page-title">${t('dashboard.config.title', 'Configuration')}</h1>
     <p class="dashboard-page-subtitle">
@@ -214,20 +200,33 @@ function render(main, blocklistConfig, detectionSettings, userId) {
 
     <div class="dashboard-card-grid">
 
+      <!-- Distraction response level -->
+      <div class="dashboard-card">
+        <h2 class="dashboard-section-title mb-xs">${t('dashboard.config.levelTitle', 'Distraction Mode')}</h2>
+        <p class="dashboard-meta mb-l">${t('dashboard.config.levelDesc', 'Choose what happens when a distraction is detected during a session.')}</p>
+        <div class="distraction-level-toggle" id="distraction-level-toggle">
+          <button type="button" class="level-option ${distractionLevel === 1 ? 'active' : ''}" data-level="1" aria-pressed="${distractionLevel === 1}">
+            <span class="level-option-title">Track Only</span>
+            <span class="level-option-desc">Silent logging. You won't be interrupted.</span>
+          </button>
+          <button type="button" class="level-option ${distractionLevel === 2 ? 'active' : ''}" data-level="2" aria-pressed="${distractionLevel === 2}">
+            <span class="level-option-title">Warning + Delay</span>
+            <span class="level-option-desc">A 15-second pause screen appears. You choose whether to continue.</span>
+          </button>
+        </div>
+      </div>
+
       <!-- Detection: item pills -->
       <div class="dashboard-card">
         <h2 class="dashboard-section-title mb-xs">${t('dashboard.config.itemsTitle', 'Items to Notify')}</h2>
         <p class="dashboard-meta mb-l">${t('dashboard.config.itemsDesc', 'Select items you want to add to your list.')}</p>
         <div class="pill-toggle-wrap">
-          ${ITEM_PRESETS.map((g) => {
-            const itemName = t(`dashboard.config.items.${g.id}`, g.name)
-            const itemDesc = t(`dashboard.config.items.${g.id}_desc`, g.desc)
-            return `
-            <button type="button" class="pill-toggle ${itemSet.has(g.id) ? 'active' : ''}" data-item="${g.id}" data-desc="${escapeHtml(itemDesc)}" data-name="${escapeHtml(itemName)}" aria-pressed="${itemSet.has(g.id)}">
+          ${ITEM_PRESETS.map((g) => `
+            <button type="button" class="pill-toggle ${itemSet.has(g.id) ? 'active' : ''}" data-item="${g.id}" data-desc="${escapeHtml(g.desc)}" data-name="${escapeHtml(g.name)}" aria-pressed="${itemSet.has(g.id)}">
               ${ITEM_SVGS[g.id] || `<i data-lucide="${g.icon}" class="pill-toggle-icon" aria-hidden="true"></i>`}
-              <span>${escapeHtml(itemName)}</span>
+              <span>${escapeHtml(g.name)}</span>
             </button>
-          `}).join('')}
+          `).join('')}
         </div>
       </div>
 
@@ -255,7 +254,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
           <h2 class="dashboard-section-title mb-xs">${t('dashboard.config.customApps', 'Custom Apps')}</h2>
           <p class="dashboard-meta mb-m">${t('dashboard.config.customAppsDesc', 'Add app names to your list.')}</p>
           <div class="dashboard-input-row">
-            <input type="text" id="custom-app-input" class="dashboard-input dashboard-input--narrow" placeholder="${t('dashboard.config.appNamePlaceholder', 'App name')}" maxlength="50">
+            <input type="text" id="custom-app-input" class="dashboard-input dashboard-input--narrow" placeholder="App name" maxlength="50">
             <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-app-add">${t('dashboard.actions.add', 'Add')}</button>
           </div>
           <p id="custom-app-hint" class="dashboard-input-hint" role="status" aria-live="polite"></p>
@@ -264,6 +263,29 @@ function render(main, blocklistConfig, detectionSettings, userId) {
       </div>
     </div>
   `
+
+  // -- Distraction level toggle interactivity --
+
+  main.querySelectorAll('.level-option[data-level]').forEach((el) => {
+    el.addEventListener('click', async () => {
+      const level = parseInt(el.dataset.level, 10)
+      if (level === distractionLevel) return
+      distractionLevel = level
+      // Update active state on all level buttons
+      main.querySelectorAll('.level-option[data-level]').forEach((btn) => {
+        const isActive = parseInt(btn.dataset.level, 10) === level
+        btn.classList.toggle('active', isActive)
+        btn.setAttribute('aria-pressed', isActive)
+      })
+      // Save immediately (no debounce needed for a single toggle)
+      try {
+        await saveDistractionLevel(userId, level)
+      } catch (err) {
+        console.error(err)
+        showInlineError(main, t('dashboard.blocklist.saveError', 'Could not save settings. Please try again.'))
+      }
+    })
+  })
 
   // -- Detection interactivity (pill click toggles + auto-save) --
 
@@ -278,15 +300,12 @@ function render(main, blocklistConfig, detectionSettings, userId) {
   // -- Blocklist: quick block pills --
 
   const quickContainer = main.querySelector('#quick-blocks-container')
-  quickContainer.innerHTML = QUICK_SITES.map((q) => {
-    // Brand names stay in English; only descriptions are translated
-    const siteDesc = t(`dashboard.config.sites.${q.id}_desc`, q.desc)
-    return `
-    <button type="button" class="pill-toggle ${state.quick_blocks[q.id] ? 'active' : ''}" data-quick="${q.id}" data-desc="${escapeHtml(siteDesc)}" data-name="${escapeHtml(q.name)}" aria-pressed="${!!state.quick_blocks[q.id]}">
+  quickContainer.innerHTML = QUICK_SITES.map((q) => `
+    <button type="button" class="pill-toggle ${state.quick_blocks[q.id] ? 'active' : ''}" data-quick="${q.id}" data-desc="${escapeHtml(q.desc)}" data-name="${escapeHtml(q.name)}" aria-pressed="${!!state.quick_blocks[q.id]}">
       ${BRAND_SVGS[q.id] || `<i data-lucide="${q.icon}" class="pill-toggle-icon" aria-hidden="true"></i>`}
       <span>${escapeHtml(q.name)}</span>
     </button>
-  `}).join('')
+  `).join('')
 
   quickContainer.querySelectorAll('.pill-toggle[data-quick]').forEach((el) => {
     el.addEventListener('click', () => {
@@ -308,7 +327,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
       : state.custom_urls.map((u) => `
           <span class="dashboard-chip">
             ${escapeHtml(u)}
-            <button type="button" class="dashboard-remove-btn" data-url="${escapeHtml(u)}" aria-label="${t('dashboard.actions.remove', 'Remove')} ${escapeHtml(u)}">${CROSS_SVG}</button>
+            <button type="button" class="dashboard-remove-btn" data-url="${escapeHtml(u)}" aria-label="Remove ${escapeHtml(u)}">${CROSS_SVG}</button>
           </span>
         `).join('')
     list.querySelectorAll('.dashboard-remove-btn').forEach((btn) => {
@@ -331,7 +350,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
       : state.custom_apps.map((a) => `
           <span class="dashboard-chip">
             ${escapeHtml(a)}
-            <button type="button" class="dashboard-remove-btn" data-app="${escapeHtml(a)}" aria-label="${t('dashboard.actions.remove', 'Remove')} ${escapeHtml(a)}">${CROSS_SVG}</button>
+            <button type="button" class="dashboard-remove-btn" data-app="${escapeHtml(a)}" aria-label="Remove ${escapeHtml(a)}">${CROSS_SVG}</button>
           </span>
         `).join('')
     list.querySelectorAll('.dashboard-remove-btn').forEach((btn) => {
@@ -387,19 +406,15 @@ function render(main, blocklistConfig, detectionSettings, userId) {
     scheduleBlocklistSave()
   }
 
-  async function addCustomApp() {
+  function addCustomApp() {
     const input = main.querySelector('#custom-app-input')
     const hintEl = main.querySelector('#custom-app-hint')
-    const addBtn = main.querySelector('#custom-app-add')
     const val = input.value.trim()
     if (!val) {
       setHint(hintEl, '', '')
       return
     }
-    // Disable button during async validation to prevent duplicate entries
-    if (addBtn) addBtn.disabled = true
-    const result = await validateAppPattern(val)
-    if (addBtn) addBtn.disabled = false
+    const result = validateAppPattern(val)
     if (!result.valid) {
       setHint(hintEl, result.message, 'error')
       return
@@ -540,11 +555,11 @@ async function main() {
     ])
     render(mainEl, blocklistConfig, detectionSettings, result.user.id)
   } catch (err) {
-    logError('Configuration page load failed:', err)
+    console.error(err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
         <p class="dashboard-empty-title">${t('dashboard.config.errorTitle', 'Could not load configuration')}</p>
-        <p>${t('dashboard.common.tryAgain', 'Please try again.')}</p>
+        <p>${escapeHtml(err.message || t('dashboard.common.tryAgain', 'Please try again.'))}</p>
       </div>
     `
   }
