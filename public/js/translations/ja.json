@@ -610,6 +610,12 @@
       }
     }
   },
+  "howBrainDockHelps": {
+    "title": "BrainDockの効果",
+    "desc": "BrainDockが集中率を100%に保つと、すべてが変わります。気が散ることがなくなり、タスクの切り替えが止まり、脳が最も得意とすることに専念できます。深く、途切れのない作業。その結果、生産性が向上し、ミスが減り、本当に誇れる仕事ができます。より一生懸命働くことではなく、質の高い仕事を可能にする集中力を守ることが大切です。",
+    "learnMore": "詳しく見る",
+    "download": "ダウンロード"
+  },
   "download": {
     "sectionTitle": "BrainDockをダウンロード",
     "sectionSubtitle": "macOSとWindowsに対応。Linux対応は近日公開。",
@@ -814,7 +820,30 @@
       "checking": "確認中...",
       "added": "追加しました。",
       "loading": "設定を読み込み中...",
-      "errorTitle": "設定を読み込めませんでした"
+      "errorTitle": "設定を読み込めませんでした",
+      "appNamePlaceholder": "アプリ名",
+      "items": {
+        "phone": "スマートフォン",
+        "phone_desc": "iPhone、Androidなどの5〜7インチのスマートフォン。",
+        "tablet": "タブレット / iPad",
+        "tablet_desc": "iPadなどの8インチ以上のタッチスクリーンデバイス。",
+        "laptop": "ノートパソコン",
+        "laptop_desc": "メイン画面の横に見える別のノートパソコン。",
+        "controller": "ゲームコントローラー",
+        "controller_desc": "PS5、Xbox、汎用Bluetoothゲームパッドなど。",
+        "tv": "テレビ / リモコン",
+        "tv_desc": "視野内のテレビ画面またはリモコン。",
+        "nintendo_switch": "ニンテンドースイッチ",
+        "nintendo_switch_desc": "携帯モードまたはテーブルモードのNintendo Switch。",
+        "smartwatch": "スマートウォッチ",
+        "smartwatch_desc": "Apple Watch、Fitbit、Galaxy Watchなどの腕時計型デバイス。",
+        "camera": "カメラ",
+        "camera_desc": "一眼レフ、ミラーレス、アクションカメラなどの単体カメラ。",
+        "headphones": "ヘッドフォン",
+        "headphones_desc": "オーバーイヤーヘッドフォンまたは装着中のイヤホン。",
+        "food": "食べ物 / お菓子",
+        "food_desc": "デスク上の食べ物、飲み物、お菓子。"
+      }
     },
     "devices": {
       "title": "接続デバイス",

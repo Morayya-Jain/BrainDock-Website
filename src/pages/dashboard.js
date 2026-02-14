@@ -160,15 +160,15 @@ function render(main, user, sessions, stats, weeklyData, credits) {
 
     <div class="dashboard-stat-cards">
       <div class="dashboard-stat-card">
-        <div class="dashboard-stat-card-label">${t('dashboard.home.dailyFocusTime', 'Daily Focus Time')}</div>
+        <div class="dashboard-stat-card-label">${t('dashboard.home.todaysFocus', "Today's Focus")}</div>
         <div class="dashboard-stat-card-value">${formatDuration(stats.today.focusSeconds)}</div>
       </div>
       <div class="dashboard-stat-card">
-        <div class="dashboard-stat-card-label">${t('dashboard.home.dailyDistractionTime', 'Daily Distraction Time')}</div>
+        <div class="dashboard-stat-card-label">${t('dashboard.home.todaysDistractions', "Today's Distractions")}</div>
         <div class="dashboard-stat-card-value">${formatDuration(stats.today.distractionSeconds)}</div>
       </div>
       <div class="dashboard-stat-card">
-        <div class="dashboard-stat-card-label">${t('dashboard.home.dailyFocusRate', 'Daily Focus Rate')}</div>
+        <div class="dashboard-stat-card-label">${t('dashboard.home.focusRate', 'Focus Rate')}</div>
         <div class="dashboard-stat-card-value">${todayFocusRate}%</div>
       </div>
     </div>

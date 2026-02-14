@@ -59,7 +59,9 @@ function render(main, credits, purchases) {
     const pkg = p.credit_packages
     const rawHours = p.seconds_added ? (p.seconds_added / 3600) : 0
     const hours = Math.round(rawHours * 10) / 10
-    const name = pkg?.display_name || `${hours} hours`
+    // Use translated hour text instead of DB display_name (which is English-only)
+    const hoursLabel = hours === 1 ? t('dashboard.time.hour', 'hour') : t('dashboard.time.hours', 'hours')
+    const name = `${hours} ${hoursLabel}`
     return `
             <li class="dashboard-list-item dashboard-list-item--clickable billing-purchase-row" tabindex="0" role="button" aria-expanded="false" data-purchase-id="${escapeHtml(p.id)}">
               <div class="flex-1">

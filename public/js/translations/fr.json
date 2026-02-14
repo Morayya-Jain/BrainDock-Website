@@ -610,6 +610,12 @@
       }
     }
   },
+  "howBrainDockHelps": {
+    "title": "Comment BrainDock vous aide",
+    "desc": "Quand BrainDock maintient votre taux de concentration a 100 %, tout change. Les distractions disparaissent, les changements de contexte cessent et votre cerveau peut faire ce qu'il fait de mieux. Un travail profond et ininterrompu. Le resultat est une productivite accrue, moins d'erreurs et un travail dont vous etes reellement fier. Il ne s'agit pas de travailler plus dur - il s'agit de proteger la concentration qui rend un travail de qualite possible.",
+    "learnMore": "En savoir plus",
+    "download": "Telecharger"
+  },
   "download": {
     "sectionTitle": "Télécharger BrainDock",
     "sectionSubtitle": "Disponible pour macOS et Windows. Linux bientôt disponible.",
@@ -814,7 +820,30 @@
       "checking": "Vérification...",
       "added": "Ajouté.",
       "loading": "Chargement de la configuration...",
-      "errorTitle": "Impossible de charger la configuration"
+      "errorTitle": "Impossible de charger la configuration",
+      "appNamePlaceholder": "Nom de l'application",
+      "items": {
+        "phone": "Téléphone",
+        "phone_desc": "Tout smartphone - iPhone, Android ou appareil similaire de 5 à 7 pouces.",
+        "tablet": "Tablette / iPad",
+        "tablet_desc": "Tablettes et iPads - appareils tactiles de 8 pouces et plus.",
+        "laptop": "Ordinateur portable",
+        "laptop_desc": "Un ordinateur portable secondaire visible à côté de votre écran principal.",
+        "controller": "Manette de jeu",
+        "controller_desc": "Manettes de jeu comme PS5, Xbox ou manettes Bluetooth génériques.",
+        "tv": "Télévision / Télécommande",
+        "tv_desc": "Écran de télévision ou télécommande dans le champ de vision.",
+        "nintendo_switch": "Nintendo Switch",
+        "nintendo_switch_desc": "Console Nintendo Switch en mode portable ou sur table.",
+        "smartwatch": "Montre connectée",
+        "smartwatch_desc": "Montres connectées comme Apple Watch, Fitbit ou Galaxy Watch.",
+        "camera": "Appareil photo",
+        "camera_desc": "Appareils photo autonomes - reflex, hybrides ou caméras d'action.",
+        "headphones": "Casque audio",
+        "headphones_desc": "Casque supra-auriculaire ou écouteurs visibles portés.",
+        "food": "Nourriture / Collations",
+        "food_desc": "Nourriture, boissons ou collations visibles sur votre bureau."
+      }
     },
     "devices": {
       "title": "Appareils connectés",

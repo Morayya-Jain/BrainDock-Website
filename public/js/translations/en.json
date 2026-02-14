@@ -610,6 +610,12 @@
       }
     }
   },
+  "howBrainDockHelps": {
+    "title": "How BrainDock Helps",
+    "desc": "When BrainDock keeps your focus rate at 100%, everything changes. Distractions vanish, context switching stops, and your brain gets to do what it does best. Deep, uninterrupted work. The result is higher productivity, fewer mistakes, and work you are genuinely proud of. It is not about working harder; it is about protecting the focus that makes quality work possible.",
+    "learnMore": "Learn More",
+    "download": "Download"
+  },
   "download": {
     "sectionTitle": "Download BrainDock",
     "sectionSubtitle": "Available for macOS and Windows. Linux coming soon.",
@@ -814,7 +820,30 @@
       "checking": "Checking...",
       "added": "Added.",
       "loading": "Loading configuration...",
-      "errorTitle": "Could not load configuration"
+      "errorTitle": "Could not load configuration",
+      "appNamePlaceholder": "App name",
+      "items": {
+        "phone": "Phone",
+        "phone_desc": "Any smartphone - iPhone, Android, or similar 5-7 inch handheld device.",
+        "tablet": "Tablet / iPad",
+        "tablet_desc": "Tablets and iPads - larger 8+ inch touchscreen devices.",
+        "laptop": "Laptop",
+        "laptop_desc": "A secondary laptop or notebook visible alongside your main screen.",
+        "controller": "Game Controller",
+        "controller_desc": "Gaming controllers like PS5, Xbox, or generic Bluetooth gamepads.",
+        "tv": "TV / Remote",
+        "tv_desc": "Television screen or a TV remote control in view.",
+        "nintendo_switch": "Nintendo Switch",
+        "nintendo_switch_desc": "Nintendo Switch console in handheld or tabletop mode.",
+        "smartwatch": "Smartwatch",
+        "smartwatch_desc": "Wrist-worn smart devices like Apple Watch, Fitbit, or Galaxy Watch.",
+        "camera": "Camera",
+        "camera_desc": "Standalone cameras - DSLR, mirrorless, or action cameras.",
+        "headphones": "Headphones",
+        "headphones_desc": "Over-ear headphones or visible earbuds being worn.",
+        "food": "Food / Snacks",
+        "food_desc": "Food, drinks, or snacks visible on your desk."
+      }
     },
     "devices": {
       "title": "Linked Devices",

@@ -219,12 +219,15 @@ function render(main, blocklistConfig, detectionSettings, userId) {
         <h2 class="dashboard-section-title mb-xs">${t('dashboard.config.itemsTitle', 'Items to Notify')}</h2>
         <p class="dashboard-meta mb-l">${t('dashboard.config.itemsDesc', 'Select items you want to add to your list.')}</p>
         <div class="pill-toggle-wrap">
-          ${ITEM_PRESETS.map((g) => `
-            <button type="button" class="pill-toggle ${itemSet.has(g.id) ? 'active' : ''}" data-item="${g.id}" data-desc="${escapeHtml(g.desc)}" data-name="${escapeHtml(g.name)}" aria-pressed="${itemSet.has(g.id)}">
+          ${ITEM_PRESETS.map((g) => {
+            const itemName = t(`dashboard.config.items.${g.id}`, g.name)
+            const itemDesc = t(`dashboard.config.items.${g.id}_desc`, g.desc)
+            return `
+            <button type="button" class="pill-toggle ${itemSet.has(g.id) ? 'active' : ''}" data-item="${g.id}" data-desc="${escapeHtml(itemDesc)}" data-name="${escapeHtml(itemName)}" aria-pressed="${itemSet.has(g.id)}">
               ${ITEM_SVGS[g.id] || `<i data-lucide="${g.icon}" class="pill-toggle-icon" aria-hidden="true"></i>`}
-              <span>${escapeHtml(g.name)}</span>
+              <span>${escapeHtml(itemName)}</span>
             </button>
-          `).join('')}
+          `}).join('')}
         </div>
       </div>
 
@@ -252,7 +255,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
           <h2 class="dashboard-section-title mb-xs">${t('dashboard.config.customApps', 'Custom Apps')}</h2>
           <p class="dashboard-meta mb-m">${t('dashboard.config.customAppsDesc', 'Add app names to your list.')}</p>
           <div class="dashboard-input-row">
-            <input type="text" id="custom-app-input" class="dashboard-input dashboard-input--narrow" placeholder="App name" maxlength="50">
+            <input type="text" id="custom-app-input" class="dashboard-input dashboard-input--narrow" placeholder="${t('dashboard.config.appNamePlaceholder', 'App name')}" maxlength="50">
             <button type="button" class="btn btn-secondary dashboard-btn-sm" id="custom-app-add">${t('dashboard.actions.add', 'Add')}</button>
           </div>
           <p id="custom-app-hint" class="dashboard-input-hint" role="status" aria-live="polite"></p>

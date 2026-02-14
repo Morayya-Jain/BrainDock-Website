@@ -610,6 +610,12 @@
       }
     }
   },
+  "howBrainDockHelps": {
+    "title": "BrainDock如何帮助您",
+    "desc": "当BrainDock将您的专注率保持在100%时，一切都会改变。干扰消失，上下文切换停止，您的大脑可以做它最擅长的事情。深度、不间断的工作。结果是更高的生产力、更少的错误，以及您真正引以为傲的工作。这不是关于更努力地工作 - 而是关于保护使高质量工作成为可能的专注力。",
+    "learnMore": "了解更多",
+    "download": "下载"
+  },
   "download": {
     "sectionTitle": "下载BrainDock",
     "sectionSubtitle": "支持macOS和Windows。Linux即将推出。",
@@ -814,7 +820,30 @@
       "checking": "检查中...",
       "added": "已添加。",
       "loading": "正在加载配置...",
-      "errorTitle": "无法加载配置"
+      "errorTitle": "无法加载配置",
+      "appNamePlaceholder": "应用名称",
+      "items": {
+        "phone": "手机",
+        "phone_desc": "任何智能手机 - iPhone、Android或类似的5-7英寸手持设备。",
+        "tablet": "平板电脑 / iPad",
+        "tablet_desc": "平板电脑和iPad - 8英寸以上的触摸屏设备。",
+        "laptop": "笔记本电脑",
+        "laptop_desc": "主屏幕旁可见的第二台笔记本电脑。",
+        "controller": "游戏手柄",
+        "controller_desc": "PS5、Xbox等游戏控制器或通用蓝牙手柄。",
+        "tv": "电视 / 遥控器",
+        "tv_desc": "视野中的电视屏幕或遥控器。",
+        "nintendo_switch": "任天堂Switch",
+        "nintendo_switch_desc": "掌机模式或桌面模式的Nintendo Switch。",
+        "smartwatch": "智能手表",
+        "smartwatch_desc": "Apple Watch、Fitbit、Galaxy Watch等腕戴式智能设备。",
+        "camera": "相机",
+        "camera_desc": "单反、无反或运动相机等独立相机。",
+        "headphones": "耳机",
+        "headphones_desc": "头戴式耳机或正在佩戴的耳塞。",
+        "food": "食物 / 零食",
+        "food_desc": "桌上可见的食物、饮料或零食。"
+      }
     },
     "devices": {
       "title": "已连接设备",

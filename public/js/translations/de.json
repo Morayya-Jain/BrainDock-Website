@@ -610,6 +610,12 @@
       }
     }
   },
+  "howBrainDockHelps": {
+    "title": "So hilft BrainDock",
+    "desc": "Wenn BrainDock Ihre Fokusrate bei 100 % hält, ändert sich alles. Ablenkungen verschwinden, Kontextwechsel hören auf und Ihr Gehirn kann das tun, was es am besten kann. Tiefe, ununterbrochene Arbeit. Das Ergebnis ist höhere Produktivität, weniger Fehler und Arbeit, auf die Sie wirklich stolz sind. Es geht nicht darum, härter zu arbeiten - es geht darum, die Konzentration zu schützen, die qualitativ hochwertige Arbeit möglich macht.",
+    "learnMore": "Mehr erfahren",
+    "download": "Herunterladen"
+  },
   "download": {
     "sectionTitle": "BrainDock herunterladen",
     "sectionSubtitle": "Verfügbar für macOS und Windows. Linux kommt bald.",
@@ -814,7 +820,30 @@
       "checking": "Wird geprüft...",
       "added": "Hinzugefügt.",
       "loading": "Konfiguration wird geladen...",
-      "errorTitle": "Konfiguration konnte nicht geladen werden"
+      "errorTitle": "Konfiguration konnte nicht geladen werden",
+      "appNamePlaceholder": "App-Name",
+      "items": {
+        "phone": "Smartphone",
+        "phone_desc": "Jedes Smartphone - iPhone, Android oder ein ähnliches 5-7-Zoll-Gerät.",
+        "tablet": "Tablet / iPad",
+        "tablet_desc": "Tablets und iPads - größere Touchscreen-Geräte ab 8 Zoll.",
+        "laptop": "Laptop",
+        "laptop_desc": "Ein zweiter Laptop oder Notebook neben Ihrem Hauptbildschirm.",
+        "controller": "Gamecontroller",
+        "controller_desc": "Gaming-Controller wie PS5, Xbox oder generische Bluetooth-Gamepads.",
+        "tv": "Fernseher / Fernbedienung",
+        "tv_desc": "Fernsehbildschirm oder eine TV-Fernbedienung im Sichtfeld.",
+        "nintendo_switch": "Nintendo Switch",
+        "nintendo_switch_desc": "Nintendo Switch Konsole im Handheld- oder Tischmodus.",
+        "smartwatch": "Smartwatch",
+        "smartwatch_desc": "Tragbare Smart-Geräte wie Apple Watch, Fitbit oder Galaxy Watch.",
+        "camera": "Kamera",
+        "camera_desc": "Eigenständige Kameras - DSLR, spiegellos oder Actionkameras.",
+        "headphones": "Kopfhörer",
+        "headphones_desc": "Over-Ear-Kopfhörer oder sichtbare Ohrhörer.",
+        "food": "Essen / Snacks",
+        "food_desc": "Essen, Getränke oder Snacks auf Ihrem Schreibtisch."
+      }
     },
     "devices": {
       "title": "Verbundene Geräte",
