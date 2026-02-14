@@ -1,9 +1,6 @@
 import { supabase } from '../supabase.js'
-import { captureDesktopSource, showError, handlePostAuthRedirect } from '../auth-helpers.js'
+import { showError, isDesktopSource, handlePostAuthRedirect } from '../auth-helpers.js'
 import '../auth.css'
-
-// Capture ?source=desktop from the URL (needed when email confirmation opens in a new tab)
-captureDesktopSource()
 
 const card = document.querySelector('.auth-card')
 const loadingState = document.getElementById('loading-state')
@@ -58,7 +55,16 @@ if (oauthError) {
     // Clear pending timers to prevent overlapping actions
     if (fallbackTimer) clearTimeout(fallbackTimer)
     if (finalTimer) clearTimeout(finalTimer)
-    loadingState.hidden = true
+
+    // For desktop flow, keep the spinner visible so the paste-code fallback
+    // appears on a spinner page.  For web flow, hide it (redirect follows).
+    if (!isDesktopSource()) {
+      loadingState.hidden = true
+    } else {
+      const txt = loadingState.querySelector('.auth-loading-text')
+      if (txt) txt.textContent = 'Connecting to app...'
+    }
+
     await handlePostAuthRedirect(supabase, card)
   }
 

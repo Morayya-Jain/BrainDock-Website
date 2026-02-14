@@ -55,6 +55,14 @@ export function captureRedirect() {
 }
 
 /**
+ * Check whether the current auth flow originated from the desktop app.
+ * Reads the flag set by captureDesktopSource() without consuming it.
+ */
+export function isDesktopSource() {
+  return sessionStorage.getItem(DESKTOP_SOURCE_KEY) === 'true'
+}
+
+/**
  * Synchronously check localStorage for a Supabase session token.
  * Works before the Supabase client finishes async init, so the page
  * can show a spinner immediately instead of flashing the form.
@@ -90,11 +98,11 @@ export async function handlePostAuthRedirect(supabase, card = null) {
   const isDesktop = sessionStorage.getItem(DESKTOP_SOURCE_KEY) === 'true'
   if (!isDesktop) {
     window.location.href = getRedirectPath()
-    return
+    return true
   }
 
-  // Clear the flag so refreshing the page goes to dashboard normally
-  sessionStorage.removeItem(DESKTOP_SOURCE_KEY)
+  // Don't clear the desktop flag yet — preserve it through errors so retries
+  // from the login form still use the desktop flow.  Cleared below on success.
 
   try {
     // Refresh the session first to ensure the access token is valid.
@@ -145,6 +153,15 @@ export async function handlePostAuthRedirect(supabase, card = null) {
       return
     }
 
+    // Linking code obtained — clear the desktop flag now (refresh goes to dashboard)
+    sessionStorage.removeItem(DESKTOP_SOURCE_KEY)
+
+    // Update any visible spinner text to reflect the deep-link step
+    if (card) {
+      const spinnerText = card.querySelector('.auth-loading-text')
+      if (spinnerText) spinnerText.textContent = 'Opening BrainDock...'
+    }
+
     const deepLink = `braindock://callback?code=${encodeURIComponent(result.code)}`
     window.location.href = deepLink
 
@@ -186,7 +203,7 @@ export async function handlePostAuthRedirect(supabase, card = null) {
 
           // Cancel the auto-redirect since user needs time to copy
           if (redirectTimer) { clearTimeout(redirectTimer); redirectTimer = null }
-          card.prepend(codeDisplay)
+          card.appendChild(codeDisplay)
         }
       }
     }, 2000)
@@ -195,6 +212,9 @@ export async function handlePostAuthRedirect(supabase, card = null) {
     redirectTimer = setTimeout(() => {
       window.location.href = getRedirectPath()
     }, 30000)
+
+    // Signal callers that the deep-link flow is active (don't restore the form)
+    return true
   } catch (err) {
     logError('Desktop linking error:', err)
     if (card) showError(card, 'Desktop login failed. Please try again.')

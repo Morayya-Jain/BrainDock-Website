@@ -3,6 +3,7 @@ import {
   captureDesktopSource,
   captureRedirect,
   hasStoredSession,
+  isDesktopSource,
   REDIRECT_STORAGE_KEY,
   handlePostAuthRedirect,
   showError,
@@ -27,30 +28,17 @@ if (wasBailed) {
   sessionStorage.removeItem(RELOAD_BAIL_KEY)
 }
 
-// DOM elements used by both the auto-login check and form handlers
-const form = document.getElementById('signup-form')
-const signupBtn = document.getElementById('signup-btn')
-const googleBtn = document.getElementById('google-btn')
-const card = document.querySelector('.auth-card')
-
 // If already logged in (and not recovering from a bail), hide the form and show loading
 const reloadCountKey = 'braindock_signup_reload_count'
-let spinnerWrap = null
 if (hasStoredSession() && !wasBailed) {
-  // Hide form elements (don't destroy them - keeps DOM intact for event listeners)
-  if (form) form.style.display = 'none'
-  const divider = card?.querySelector('.auth-divider')
-  if (divider) divider.style.display = 'none'
-  if (googleBtn) googleBtn.style.display = 'none'
-  const footer = card?.querySelector('.auth-footer')
-  if (footer) footer.style.display = 'none'
-
-  // Show spinner
-  if (card) {
-    spinnerWrap = document.createElement('div')
-    spinnerWrap.className = 'auth-loading'
-    spinnerWrap.innerHTML = '<div class="auth-spinner"></div><p class="auth-loading-text">Signing you in...</p>'
-    card.appendChild(spinnerWrap)
+  const authCard = document.querySelector('.auth-card')
+  if (authCard) {
+    authCard.innerHTML = `
+      <div class="auth-loading">
+        <div class="auth-spinner"></div>
+        <p class="auth-loading-text">Signing you in...</p>
+      </div>
+    `
   }
 
   ;(async () => {
@@ -64,20 +52,21 @@ if (hasStoredSession() && !wasBailed) {
       await new Promise((r) => setTimeout(r, 100))
     }
     if (session) {
-      await handlePostAuthRedirect(supabase, card)
+      await handlePostAuthRedirect(supabase, authCard)
     } else {
       // Stale/corrupt token in localStorage - sign out to clear it and show the form
       try { await supabase.auth.signOut() } catch (_) { /* ignore */ }
       sessionStorage.removeItem(reloadCountKey)
       // Restore the signup form
-      if (spinnerWrap) { spinnerWrap.remove(); spinnerWrap = null }
-      if (form) form.style.display = ''
-      if (divider) divider.style.display = ''
-      if (googleBtn) googleBtn.style.display = ''
-      if (footer) footer.style.display = ''
+      window.location.href = '/auth/signup/'
     }
   })()
 }
+
+const form = document.getElementById('signup-form')
+const signupBtn = document.getElementById('signup-btn')
+const googleBtn = document.getElementById('google-btn')
+const card = document.querySelector('.auth-card')
 
 // Email + password signup
 form.addEventListener('submit', async (e) => {
@@ -113,56 +102,55 @@ form.addEventListener('submit', async (e) => {
 
   showLoading(signupBtn)
 
-  try {
-    const redirectParam = new URLSearchParams(window.location.search).get('redirect') ||
-      sessionStorage.getItem(REDIRECT_STORAGE_KEY) ||
-      ''
-    // Preserve desktop source in the email redirect URL so it survives
-    // opening in a new tab (sessionStorage is per-tab and would be lost)
-    const isDesktop = sessionStorage.getItem('braindock_desktop') === 'true'
-    const callbackParams = new URLSearchParams()
-    if (redirectParam) callbackParams.set('redirect', redirectParam)
-    if (isDesktop) callbackParams.set('source', 'desktop')
-    const qs = callbackParams.toString()
-    const callbackUrl = `${window.location.origin}/auth/callback/${qs ? '?' + qs : ''}`
+  const redirectParam = new URLSearchParams(window.location.search).get('redirect') ||
+    sessionStorage.getItem(REDIRECT_STORAGE_KEY) ||
+    ''
+  const callbackUrl = redirectParam
+    ? `${window.location.origin}/auth/callback/?redirect=${encodeURIComponent(redirectParam)}`
+    : `${window.location.origin}/auth/callback/`
 
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { full_name: name },
-        emailRedirectTo: callbackUrl,
-      },
-    })
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: { full_name: name },
+      emailRedirectTo: callbackUrl,
+    },
+  })
 
-    if (error) {
-      showError(card, friendlyError(error))
-      return
+  hideLoading(signupBtn)
+
+  if (error) {
+    showError(card, friendlyError(error))
+    return
+  }
+
+  // Supabase returns a user with an empty identities array when the email
+  // is already registered (instead of an error, for security reasons).
+  if (data.user && data.user.identities && data.user.identities.length === 0) {
+    showError(card, 'An account with this email already exists. Try logging in instead.')
+    return
+  }
+
+  // If Supabase returned a session, the user is auto-confirmed (go to dashboard).
+  // If no session, email confirmation is required (show message).
+  if (data.session) {
+    // For desktop flow, switch to spinner so the paste-code fallback
+    // appears on a spinner page rather than the signup form.
+    if (isDesktopSource()) {
+      card.innerHTML = `
+        <div class="auth-loading">
+          <div class="auth-spinner"></div>
+          <p class="auth-loading-text">Signing you in...</p>
+        </div>`
     }
-
-    // Supabase returns a user with an empty identities array when the email
-    // is already registered (instead of an error, for security reasons).
-    if (data.user && data.user.identities && data.user.identities.length === 0) {
-      showError(card, 'An account with this email already exists. Try logging in instead.')
-      return
-    }
-
-    // If Supabase returned a session, the user is auto-confirmed (go to dashboard).
-    // If no session, email confirmation is required (show message).
-    if (data.session) {
-      await handlePostAuthRedirect(supabase, card)
-      return
-    } else {
-      form.hidden = true
-      const authDivider = document.querySelector('.auth-divider')
-      if (authDivider) authDivider.hidden = true
-      googleBtn.hidden = true
-      showSuccess(card, 'Check your email for a confirmation link. Once confirmed, you can log in.')
-    }
-  } catch (err) {
-    showError(card, 'Network error. Please check your connection and try again.')
-  } finally {
-    hideLoading(signupBtn)
+    await handlePostAuthRedirect(supabase, card)
+    return
+  } else {
+    form.hidden = true
+    document.querySelector('.auth-divider').hidden = true
+    googleBtn.hidden = true
+    showSuccess(card, 'Check your email for a confirmation link. Once confirmed, you can log in.')
   }
 })
 
@@ -176,18 +164,14 @@ googleBtn.addEventListener('click', async () => {
     return
   }
 
-  try {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback/`,
-      },
-    })
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `${window.location.origin}/auth/callback/`,
+    },
+  })
 
-    if (error) {
-      showError(card, friendlyError(error))
-    }
-  } catch (err) {
-    showError(card, 'Network error. Please check your connection and try again.')
+  if (error) {
+    showError(card, friendlyError(error))
   }
 })

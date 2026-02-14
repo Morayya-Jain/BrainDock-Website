@@ -3,6 +3,7 @@ import {
   captureDesktopSource,
   captureRedirect,
   hasStoredSession,
+  isDesktopSource,
   handlePostAuthRedirect,
   showError,
   hideError,
@@ -90,10 +91,11 @@ if (hasStoredSession()) {
     // Spinner might already be showing from the synchronous check; show it if not
     if (!spinnerWrap) showSigningInSpinner()
 
-    await handlePostAuthRedirect(supabase, authCard)
+    const handled = await handlePostAuthRedirect(supabase, authCard)
 
-    // If we reach here, redirect didn't happen (error shown on card).
-    restoreLoginForm()
+    // Only restore the form on error (handled=falsy).
+    // For desktop deep-link flow handled=true — keep the spinner visible.
+    if (!handled) restoreLoginForm()
   } else if (spinnerWrap) {
     // Spinner was shown synchronously but session is stale/expired — restore form
     restoreLoginForm()
@@ -123,19 +125,26 @@ loginForm.addEventListener('submit', async (e) => {
 
   showLoading(loginBtn)
 
-  try {
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+  const { error } = await supabase.auth.signInWithPassword({ email, password })
 
-    if (error) {
-      showError(authCard, friendlyError(error))
-      return
-    }
-
-    await handlePostAuthRedirect(supabase, authCard)
-  } catch (err) {
-    showError(authCard, 'Network error. Please check your connection and try again.')
-  } finally {
+  if (error) {
     hideLoading(loginBtn)
+    showError(authCard, friendlyError(error))
+    return
+  }
+
+  // For desktop flow, switch to spinner before the linking/deep-link step
+  // so the paste-code fallback appears on a spinner page, not the login form.
+  if (isDesktopSource()) {
+    showSigningInSpinner()
+  }
+
+  const handled = await handlePostAuthRedirect(supabase, authCard)
+
+  // Restore the form only on error (handled=falsy)
+  if (!handled) {
+    hideLoading(loginBtn)
+    if (spinnerWrap) restoreLoginForm()
   }
 })
 
@@ -143,18 +152,14 @@ loginForm.addEventListener('submit', async (e) => {
 googleBtn.addEventListener('click', async () => {
   hideError(authCard)
 
-  try {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback/`,
-      },
-    })
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `${window.location.origin}/auth/callback/`,
+    },
+  })
 
-    if (error) {
-      showError(authCard, friendlyError(error))
-    }
-  } catch (err) {
-    showError(authCard, 'Network error. Please check your connection and try again.')
+  if (error) {
+    showError(authCard, friendlyError(error))
   }
 })
