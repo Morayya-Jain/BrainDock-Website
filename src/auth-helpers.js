@@ -175,7 +175,7 @@ export async function handlePostAuthRedirect(supabase, card = null) {
           codeDisplay.className = 'auth-linking-fallback'
 
           const msg = document.createElement('p')
-          msg.textContent = 'If the app did not open, copy this code and paste it in BrainDock:'
+          msg.textContent = 'If the app did not log in, copy this code and paste it in BrainDock:'
           codeDisplay.appendChild(msg)
 
           const row = document.createElement('div')
@@ -201,8 +201,7 @@ export async function handlePostAuthRedirect(supabase, card = null) {
           row.appendChild(copyBtn)
           codeDisplay.appendChild(row)
 
-          // Cancel the auto-redirect since user needs time to copy
-          if (redirectTimer) { clearTimeout(redirectTimer); redirectTimer = null }
+          // Keep the 30s redirect active — the user has plenty of time to copy
           card.appendChild(codeDisplay)
         }
       }
