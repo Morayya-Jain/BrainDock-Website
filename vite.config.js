@@ -23,6 +23,7 @@ export default defineConfig({
         signup: resolve(__dirname, 'auth/signup/index.html'),
         callback: resolve(__dirname, 'auth/callback/index.html'),
         forgotPassword: resolve(__dirname, 'auth/forgot-password/index.html'),
+        resetPassword: resolve(__dirname, 'auth/reset-password/index.html'),
         dashboard: resolve(__dirname, 'dashboard/index.html'),
         settingsConfiguration: resolve(__dirname, 'settings/blocklist/index.html'),
         settingsDevices: resolve(__dirname, 'settings/devices/index.html'),

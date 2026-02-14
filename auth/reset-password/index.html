@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set New Password - BrainDock</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="/assets/white-logo.png">
+  <link rel="apple-touch-icon" href="/assets/white-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/src/auth.css">
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-container">
+      <a href="/" class="auth-logo">
+        <img src="/assets/logo_with_text.png" alt="BrainDock">
+      </a>
+
+      <div class="auth-card">
+        <h1 class="auth-title">Set new password</h1>
+        <p class="auth-subtitle">Enter your new password below</p>
+
+        <div class="auth-error" role="alert" hidden></div>
+        <div class="auth-success" role="status" hidden></div>
+
+        <!-- Spinner shown while verifying the recovery token -->
+        <div class="auth-loading" id="loading-state">
+          <div class="auth-spinner"></div>
+          <p class="auth-loading-text">Verifying reset link...</p>
+        </div>
+
+        <form class="auth-form" id="reset-form" novalidate hidden>
+          <div class="auth-field">
+            <label class="auth-label" for="password">New password</label>
+            <input
+              class="auth-input"
+              id="password"
+              type="password"
+              placeholder="Enter new password"
+              autocomplete="new-password"
+              minlength="6"
+              maxlength="128"
+              required
+            >
+          </div>
+
+          <div class="auth-field">
+            <label class="auth-label" for="confirm-password">Confirm password</label>
+            <input
+              class="auth-input"
+              id="confirm-password"
+              type="password"
+              placeholder="Confirm new password"
+              autocomplete="new-password"
+              minlength="6"
+              maxlength="128"
+              required
+            >
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="update-btn">Update Password</button>
+        </form>
+
+        <p class="auth-footer">
+          <a id="login-link" href="/auth/login/">Back to login</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <noscript><p style="text-align:center;padding:2rem;">JavaScript is required to use BrainDock. Please enable it in your browser settings.</p></noscript>
+  <script type="module" src="/src/pages/reset-password.js"></script>
+</body>
+</html>
