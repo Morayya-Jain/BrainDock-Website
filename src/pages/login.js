@@ -2,7 +2,6 @@ import { supabase } from '../supabase.js'
 import {
   captureDesktopSource,
   captureRedirect,
-  checkExistingSession,
   handlePostAuthRedirect,
   showError,
   hideError,
@@ -23,8 +22,31 @@ const loginForm = document.getElementById('login-form')
 const authCard = document.querySelector('.auth-card')
 
 ;(async () => {
-  // Check if already logged in (shared helper avoids duplicating getSession + onAuthStateChange)
-  const session = await checkExistingSession(supabase)
+  // Wait for Supabase client to finish loading session from localStorage
+  let session = null
+  try {
+    const res = await supabase.auth.getSession()
+    session = res.data?.session ?? null
+  } catch (_) { /* ignore */ }
+
+  // If getSession didn't find one, wait for the client's INITIAL_SESSION event
+  if (!session) {
+    session = await new Promise((resolve) => {
+      const timeout = setTimeout(() => {
+        subscription.unsubscribe()
+        resolve(null)
+      }, 2000)
+      const { data: { subscription } } = supabase.auth.onAuthStateChange(
+        (event, sess) => {
+          if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED') {
+            clearTimeout(timeout)
+            subscription.unsubscribe()
+            resolve(sess)
+          }
+        }
+      )
+    })
+  }
 
   if (session) {
     loginForm.style.display = 'none'
@@ -35,13 +57,11 @@ const authCard = document.querySelector('.auth-card')
     spinnerWrap.innerHTML = '<div class="auth-spinner"></div><p class="auth-loading-text">Signing you in...</p>'
     authCard.appendChild(spinnerWrap)
 
-    // Refresh to get a non-expired access token before generating linking code
-    const { data: refreshed } = await supabase.auth.refreshSession()
-    if (refreshed?.session) {
-      await handlePostAuthRedirect(supabase, authCard)
-      return
-    }
-    // Refresh failed - show the login form
+    // handlePostAuthRedirect() refreshes the session internally
+    await handlePostAuthRedirect(supabase, authCard)
+
+    // If we reach here, redirect didn't happen (error shown on card).
+    // Restore the login form so the user can try again.
     loginForm.style.display = ''
     authCard.querySelector('.auth-title').textContent = 'Welcome back'
     authCard.querySelector('.auth-subtitle').textContent = 'Log in to your BrainDock account'

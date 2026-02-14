@@ -1,15 +1,9 @@
 /**
  * Shared auth utilities used across all auth pages.
  * Handles redirects, error/loading UI, and desktop deep-link flow.
- *
- * CROSS-REPO DEPENDENCY: handlePostAuthRedirect() calls the generate-linking-code
- * Edge Function whose source lives in the BrainDock desktop app repo
- * (BrainDock/supabase/functions/generate-linking-code/index.ts), not this repo.
- * Changes to that function's API or deployment affect this code.
  */
 
 import { supabaseUrl, supabaseAnonKey } from './supabase.js'
-import { logError } from './logger.js'
 
 const DESKTOP_SOURCE_KEY = 'braindock_desktop'
 /** Used by signup to pass redirect into emailRedirectTo; also read in getRedirectPath(). */
@@ -106,13 +100,14 @@ export async function handlePostAuthRedirect(supabase, card = null) {
       },
       body: JSON.stringify({
         access_token: session.access_token,
+        refresh_token: session.refresh_token,
       }),
     })
 
     const result = await resp.json().catch(() => ({}))
     if (!resp.ok || !result?.code) {
       const detail = result?.error || result?.message || result?.msg || `HTTP ${resp.status}`
-      logError('Failed to generate linking code:', resp.status, detail, result)
+      console.error('Failed to generate linking code:', resp.status, detail, result)
       if (card) showError(card, `Desktop login failed: ${detail}`)
       else window.location.href = getRedirectPath()
       return
@@ -135,7 +130,7 @@ export async function handlePostAuthRedirect(supabase, card = null) {
       window.location.href = getRedirectPath()
     }, 15000)
   } catch (err) {
-    logError('Desktop linking error:', err)
+    console.error('Desktop linking error:', err)
     if (card) showError(card, `Desktop login error: ${err.message || err}`)
     else window.location.href = getRedirectPath()
   }
@@ -205,42 +200,6 @@ export function hideLoading(button) {
 }
 
 /**
- * Check if the user already has an active session.
- * Tries getSession() first, then waits for INITIAL_SESSION event with a timeout.
- * Used by login and signup pages to skip the form if already authenticated.
- *
- * @param {import('@supabase/supabase-js').SupabaseClient} supabase
- * @param {number} [timeoutMs=2000] - Max time to wait for auth event.
- * @returns {Promise<import('@supabase/supabase-js').Session | null>}
- */
-export async function checkExistingSession(supabase, timeoutMs = 2000) {
-  let session = null
-  try {
-    const res = await supabase.auth.getSession()
-    session = res.data?.session ?? null
-  } catch (_) { /* ignore */ }
-
-  if (session) return session
-
-  // Wait for the client's INITIAL_SESSION event (covers token refresh on page load)
-  return new Promise((resolve) => {
-    const timeout = setTimeout(() => {
-      subscription.unsubscribe()
-      resolve(null)
-    }, timeoutMs)
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, sess) => {
-        if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED') {
-          clearTimeout(timeout)
-          subscription.unsubscribe()
-          resolve(sess)
-        }
-      }
-    )
-  })
-}
-
-/**
  * Map common Supabase auth error messages to user-friendly strings.
  */
 export function friendlyError(error) {
@@ -253,7 +212,7 @@ export function friendlyError(error) {
     return 'An account with this email already exists. Try logging in instead.'
   }
   if (msg.includes('Password should be at least')) {
-    return 'Password must be at least 8 characters.'
+    return 'Password must be at least 6 characters.'
   }
   if (msg.includes('Email rate limit exceeded')) {
     return 'Too many attempts. Please wait a moment and try again.'
