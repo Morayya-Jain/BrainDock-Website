@@ -278,12 +278,15 @@ function render(main, blocklistConfig, detectionSettings, userId) {
   // -- Blocklist: quick block pills --
 
   const quickContainer = main.querySelector('#quick-blocks-container')
-  quickContainer.innerHTML = QUICK_SITES.map((q) => `
-    <button type="button" class="pill-toggle ${state.quick_blocks[q.id] ? 'active' : ''}" data-quick="${q.id}" data-desc="${escapeHtml(q.desc)}" data-name="${escapeHtml(q.name)}" aria-pressed="${!!state.quick_blocks[q.id]}">
+  quickContainer.innerHTML = QUICK_SITES.map((q) => {
+    // Brand names stay in English; only descriptions are translated
+    const siteDesc = t(`dashboard.config.sites.${q.id}_desc`, q.desc)
+    return `
+    <button type="button" class="pill-toggle ${state.quick_blocks[q.id] ? 'active' : ''}" data-quick="${q.id}" data-desc="${escapeHtml(siteDesc)}" data-name="${escapeHtml(q.name)}" aria-pressed="${!!state.quick_blocks[q.id]}">
       ${BRAND_SVGS[q.id] || `<i data-lucide="${q.icon}" class="pill-toggle-icon" aria-hidden="true"></i>`}
       <span>${escapeHtml(q.name)}</span>
     </button>
-  `).join('')
+  `}).join('')
 
   quickContainer.querySelectorAll('.pill-toggle[data-quick]').forEach((el) => {
     el.addEventListener('click', () => {
@@ -305,7 +308,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
       : state.custom_urls.map((u) => `
           <span class="dashboard-chip">
             ${escapeHtml(u)}
-            <button type="button" class="dashboard-remove-btn" data-url="${escapeHtml(u)}" aria-label="Remove ${escapeHtml(u)}">${CROSS_SVG}</button>
+            <button type="button" class="dashboard-remove-btn" data-url="${escapeHtml(u)}" aria-label="${t('dashboard.actions.remove', 'Remove')} ${escapeHtml(u)}">${CROSS_SVG}</button>
           </span>
         `).join('')
     list.querySelectorAll('.dashboard-remove-btn').forEach((btn) => {
@@ -328,7 +331,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
       : state.custom_apps.map((a) => `
           <span class="dashboard-chip">
             ${escapeHtml(a)}
-            <button type="button" class="dashboard-remove-btn" data-app="${escapeHtml(a)}" aria-label="Remove ${escapeHtml(a)}">${CROSS_SVG}</button>
+            <button type="button" class="dashboard-remove-btn" data-app="${escapeHtml(a)}" aria-label="${t('dashboard.actions.remove', 'Remove')} ${escapeHtml(a)}">${CROSS_SVG}</button>
           </span>
         `).join('')
     list.querySelectorAll('.dashboard-remove-btn').forEach((btn) => {

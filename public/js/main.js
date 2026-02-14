@@ -395,10 +395,14 @@ function initHbhTypingAnimation() {
 
   if (!textEl) return;
 
-  const fullText =
+  // Use translated text if available, otherwise fall back to English
+  const defaultText =
     'I met the lawyer in a quiet office, discussing contracts, deadlines, and risks. ' +
     'Papers rustled, coffee cooled, and advice flowed calmly, leaving me relieved, ' +
     'informed, and cautiously optimistic about next steps after a long morning.';
+  const fullText = (typeof I18n !== 'undefined' && I18n.getTranslation)
+    ? (I18n.getTranslation('howBrainDockHelps.typingText') || defaultText)
+    : defaultText;
 
   let started = false;
 

@@ -10,6 +10,14 @@ import '../auth.css'
 import '../dashboard.css'
 import { logError } from '../logger.js'
 
+/** Simple translation helper for the pricing page (uses the landing page I18n global). */
+function pt(key, fallback) {
+  if (typeof I18n !== 'undefined' && I18n.getTranslation) {
+    return I18n.getTranslation(key) || fallback
+  }
+  return fallback
+}
+
 async function fetchCreditPackages() {
   const { data, error } = await supabase
     .from('credit_packages')
@@ -120,7 +128,7 @@ function render(root, packages, hasUser) {
         <div class="pricing-grid">
           ${packagesLoadFailed
             ? `<div class="dashboard-card pricing-card" style="grid-column: 1 / -1; text-align: center;">
-                <p>Could not load pricing packages. Please refresh the page or try again later.</p>
+                <p data-i18n="pricing.loadError">Could not load pricing packages. Please refresh the page or try again later.</p>
               </div>`
             : defaultPackages.map((pkg) => {
             const perHour = pricePerHourCents(pkg.price_cents, pkg.hours)
@@ -140,49 +148,49 @@ function render(root, packages, hasUser) {
 
         <!-- Pricing Q&A -->
         <section class="pricing-faq">
-          <h2 class="pricing-faq-title">Questions & Answers</h2>
+          <h2 class="pricing-faq-title" data-i18n="pricing.faq.title">Questions & Answers</h2>
           <div class="faq-list">
             <div class="faq-item">
               <button class="faq-question" aria-expanded="false">
-                <span>Which plan should I choose?</span>
+                <span data-i18n="pricing.faq.q1">Which plan should I choose?</span>
                 <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
               </button>
               <div class="faq-answer" role="region">
                 <div class="faq-answer-inner">
-                  <p>If you're just getting started, Pro (1 hour) lets you try BrainDock without a big commitment. For regular use, Ultra (10 hours) offers a better per-hour rate. Max (30 hours) is the best value if you plan to use BrainDock daily.</p>
+                  <p data-i18n="pricing.faq.a1">If you're just getting started, Pro (1 hour) lets you try BrainDock without a big commitment. For regular use, Ultra (10 hours) offers a better per-hour rate. Max (30 hours) is the best value if you plan to use BrainDock daily.</p>
                 </div>
               </div>
             </div>
             <div class="faq-item">
               <button class="faq-question" aria-expanded="false">
-                <span>How does the credit system work?</span>
+                <span data-i18n="pricing.faq.q2">How does the credit system work?</span>
                 <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
               </button>
               <div class="faq-answer" role="region">
                 <div class="faq-answer-inner">
-                  <p>You purchase a pack of hours upfront. Each time you run a focus session - whether using your camera, screen monitoring, or both - time is deducted from your balance. You can top up anytime, and your hours never expire.</p>
+                  <p data-i18n="pricing.faq.a2">You purchase a pack of hours upfront. Each time you run a focus session - whether using your camera, screen monitoring, or both - time is deducted from your balance. You can top up anytime, and your hours never expire.</p>
                 </div>
               </div>
             </div>
             <div class="faq-item">
               <button class="faq-question" aria-expanded="false">
-                <span>Can I switch between camera and screen sessions?</span>
+                <span data-i18n="pricing.faq.q3">Can I switch between camera and screen sessions?</span>
                 <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
               </button>
               <div class="faq-answer" role="region">
                 <div class="faq-answer-inner">
-                  <p>Yes. Your hours work across all session types. Use camera-based focus tracking, screen monitoring, or both at the same time - it all draws from the same balance.</p>
+                  <p data-i18n="pricing.faq.a3">Yes. Your hours work across all session types. Use camera-based focus tracking, screen monitoring, or both at the same time - it all draws from the same balance.</p>
                 </div>
               </div>
             </div>
             <div class="faq-item">
               <button class="faq-question" aria-expanded="false">
-                <span>What happens when I run out of hours?</span>
+                <span data-i18n="pricing.faq.q4">What happens when I run out of hours?</span>
                 <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
               </button>
               <div class="faq-answer" role="region">
                 <div class="faq-answer-inner">
-                  <p>Your session will end and you can top up with another pack right away. Any session data you've already recorded stays in your dashboard - nothing is lost.</p>
+                  <p data-i18n="pricing.faq.a4">Your session will end and you can top up with another pack right away. Any session data you've already recorded stays in your dashboard - nothing is lost.</p>
                 </div>
               </div>
             </div>
@@ -257,13 +265,13 @@ function render(root, packages, hasUser) {
 
       // Logged in: go straight to Stripe checkout
       btn.disabled = true
-      btn.textContent = 'Loading...'
+      btn.textContent = pt('pricing.loading', 'Loading...')
       try {
         const { url, error } = await createCheckoutSession(packageId)
         if (error) {
           btn.disabled = false
           btn.textContent = currentLabel
-          showInlineError(root, error)
+          showInlineError(root, pt('pricing.checkoutError', 'Could not start checkout. Please try again.'))
           return
         }
         if (url) {
@@ -275,7 +283,7 @@ function render(root, packages, hasUser) {
       } catch (err) {
         btn.disabled = false
         btn.textContent = currentLabel
-        showInlineError(root, 'Network error. Please check your connection and try again.')
+        showInlineError(root, pt('pricing.networkError', 'Network error. Please check your connection and try again.'))
       }
     })
   })
@@ -334,7 +342,7 @@ async function main() {
     const banner = document.createElement('div')
     banner.className = 'dashboard-banner dashboard-banner-info'
     banner.setAttribute('role', 'status')
-    banner.textContent = 'Checkout was cancelled.'
+    banner.textContent = pt('pricing.checkoutCancelled', 'Checkout was cancelled.')
     const container = root.querySelector('.pricing-container') || root
     const firstChild = container.firstElementChild
     if (firstChild) container.insertBefore(banner, firstChild)
@@ -351,12 +359,12 @@ async function main() {
     try {
       const { url, error } = await createCheckoutSession(autoCheckoutId)
       if (error) {
-        showInlineError(root, 'Could not start checkout: ' + error)
+        showInlineError(root, pt('pricing.checkoutError', 'Could not start checkout. Please try again.'))
         return
       }
       if (url) window.location.href = url
     } catch (err) {
-      showInlineError(root, 'Network error. Please try clicking the button again.')
+      showInlineError(root, pt('pricing.networkError', 'Network error. Please check your connection and try again.'))
     }
   }
 }

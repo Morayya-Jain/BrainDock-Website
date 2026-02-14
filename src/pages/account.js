@@ -54,7 +54,7 @@ function render(main, profile, userId) {
   saveBtn.addEventListener('click', async () => {
     const name = sanitizeText(input.value, LIMITS.NAME_MAX)
     if (name && !isValidName(name)) {
-      showInlineError(main, `Display name must be 1-${LIMITS.NAME_MAX} characters and cannot contain < or >.`)
+      showInlineError(main, t('dashboard.account.nameValidation', `Display name must be 1-${LIMITS.NAME_MAX} characters and cannot contain < or >.`))
       return
     }
     saveBtn.disabled = true

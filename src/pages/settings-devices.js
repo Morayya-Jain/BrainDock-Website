@@ -6,7 +6,7 @@
 import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { escapeHtml, showInlineError } from '../utils.js'
-import { t } from '../dashboard-i18n.js'
+import { t, getLocale } from '../dashboard-i18n.js'
 import { logError } from '../logger.js'
 
 // Inline SVGs for OS icons (kept small and simple)
@@ -63,7 +63,7 @@ function formatRelativeTime(iso) {
     const days = Math.floor(sec / 86400)
     return `${days} ${days === 1 ? t('dashboard.devices.dayAgo', 'day ago') : t('dashboard.devices.daysAgo', 'days ago')}`
   }
-  return d.toLocaleDateString()
+  return d.toLocaleDateString(getLocale())
 }
 
 function render(main, devices, userId) {

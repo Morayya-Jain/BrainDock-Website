@@ -312,7 +312,7 @@ export async function initDashboardLayout(options = {}) {
   const base = window.location.origin
   const avatarUrl = getUserAvatarUrl(user)
   const initials = getUserInitials(user)
-  const displayName = user.user_metadata?.full_name || user.email || 'Signed in'
+  const displayName = user.user_metadata?.full_name || user.email || t('dashboard.common.signedIn', 'Signed in')
 
   const app = document.createElement('div')
   app.className = 'dashboard-app'
@@ -327,7 +327,7 @@ export async function initDashboardLayout(options = {}) {
   const sidebarAvatarEl = sidebar.querySelector('#dashboard-sidebar-avatar')
   // Show full name as primary, email as secondary
   const fullName = user.user_metadata?.full_name || ''
-  if (userNameEl) userNameEl.textContent = fullName || user.email || 'Signed in'
+  if (userNameEl) userNameEl.textContent = fullName || user.email || t('dashboard.common.signedIn', 'Signed in')
   if (userEmailEl) userEmailEl.textContent = fullName ? (user.email || '') : ''
   if (sidebarAvatarEl) {
     sidebarAvatarEl.innerHTML = renderAvatar(avatarUrl, initials)
@@ -343,7 +343,7 @@ export async function initDashboardLayout(options = {}) {
   const headerWrap = document.createElement('div')
   headerWrap.className = 'dashboard-header-wrap'
   headerWrap.innerHTML = `
-    <a href="${base}/account/subscription/" class="dashboard-remaining-pill" id="dashboard-remaining-pill" title="Remaining session time">
+    <a href="${base}/account/subscription/" class="dashboard-remaining-pill" id="dashboard-remaining-pill" title="${t('dashboard.common.remainingTime', 'Remaining session time')}">
       <i data-lucide="hourglass" class="dashboard-remaining-pill-icon" aria-hidden="true"></i>
       <span id="dashboard-remaining-text">...</span>
     </a>

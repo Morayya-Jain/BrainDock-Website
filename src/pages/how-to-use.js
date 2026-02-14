@@ -42,8 +42,8 @@ function render(main) {
         <hr class="howto-divider">
         <p class="dashboard-meta mb-s">${t('dashboard.howToUse.firstLaunch', 'First launch on your platform:')}</p>
         <div class="howto-platform-tabs">
-          <button type="button" class="howto-platform-tab active" data-platform="macos">${ICONS.appleSmall} macOS</button>
-          <button type="button" class="howto-platform-tab" data-platform="windows">${ICONS.windowsSmall} Windows</button>
+          <button type="button" class="howto-platform-tab active" data-platform="macos">${ICONS.appleSmall} ${t('dashboard.howToUse.platformMac', 'macOS')}</button>
+          <button type="button" class="howto-platform-tab" data-platform="windows">${ICONS.windowsSmall} ${t('dashboard.howToUse.platformWin', 'Windows')}</button>
         </div>
         <div class="howto-platform-panel active" id="platform-macos">
           <div class="howto-step"><span class="howto-step-num">1</span><span>${t('dashboard.howToUse.macStep1', '<strong>Right-click</strong> (or Control-click) on BrainDock.app and choose <strong>Open</strong>.')}</span></div>

@@ -614,7 +614,11 @@
     "title": "Comment BrainDock vous aide",
     "desc": "Quand BrainDock maintient votre taux de concentration a 100 %, tout change. Les distractions disparaissent, les changements de contexte cessent et votre cerveau peut faire ce qu'il fait de mieux. Un travail profond et ininterrompu. Le resultat est une productivite accrue, moins d'erreurs et un travail dont vous etes reellement fier. Il ne s'agit pas de travailler plus dur - il s'agit de proteger la concentration qui rend un travail de qualite possible.",
     "learnMore": "En savoir plus",
-    "download": "Telecharger"
+    "download": "Telecharger",
+    "editorTitle": "Document",
+    "focusBadge": "Concentre, taux de concentration 100%",
+    "completePopup": "Travail entierement termine",
+    "typingText": "J'ai rencontre l'avocat dans un bureau calme, discutant de contrats, de delais et de risques. Les papiers bruissaient, le cafe refroidissait et les conseils coulaient calmement, me laissant soulage, informe et prudemment optimiste quant aux prochaines etapes apres une longue matinee."
   },
   "download": {
     "sectionTitle": "Télécharger BrainDock",
@@ -645,7 +649,23 @@
         "desc": "30 heures de BrainDock - caméra, écran ou les deux.",
         "btn": "Obtenir Max"
       }
-    }
+    },
+    "faq": {
+      "title": "Questions et reponses",
+      "q1": "Quel forfait devrais-je choisir ?",
+      "a1": "Si vous debutez, Pro (1 heure) vous permet d'essayer BrainDock sans gros engagement. Pour une utilisation reguliere, Ultra (10 heures) offre un meilleur tarif horaire. Max (30 heures) est le meilleur rapport qualite-prix si vous prevoyez d'utiliser BrainDock quotidiennement.",
+      "q2": "Comment fonctionne le systeme de credits ?",
+      "a2": "Vous achetez un pack d'heures a l'avance. Chaque fois que vous lancez une session de concentration - que ce soit avec la camera, la surveillance d'ecran ou les deux - du temps est deduit de votre solde. Vous pouvez recharger a tout moment et vos heures n'expirent jamais.",
+      "q3": "Puis-je alterner entre les sessions camera et ecran ?",
+      "a3": "Oui. Vos heures fonctionnent pour tous les types de sessions. Utilisez le suivi de concentration par camera, la surveillance d'ecran ou les deux en meme temps - tout est preleve sur le meme solde.",
+      "q4": "Que se passe-t-il quand mes heures sont epuisees ?",
+      "a4": "Votre session se terminera et vous pourrez recharger immediatement avec un autre pack. Toutes les donnees de session deja enregistrees restent dans votre tableau de bord - rien n'est perdu."
+    },
+    "loadError": "Impossible de charger les forfaits. Veuillez actualiser la page ou reessayer plus tard.",
+    "loading": "Chargement...",
+    "checkoutError": "Impossible de lancer le paiement. Veuillez reessayer.",
+    "checkoutCancelled": "Le paiement a ete annule.",
+    "networkError": "Erreur reseau. Veuillez verifier votre connexion et reessayer."
   },
   "faq": {
     "sectionTitle": "Questions fréquemment posées",
@@ -681,7 +701,8 @@
     "copyright": "© 2026 BrainDock. Tous droits réservés."
   },
   "popup": {
-    "comingSoon": "Bientôt disponible !"
+    "comingSoon": "Bientôt disponible !",
+    "ok": "OK"
   },
   "language": {
     "en": "English",
@@ -714,7 +735,8 @@
       "unlink": "Dissocier",
       "buyHours": "Acheter des heures",
       "getMoreHours": "Plus d'heures",
-      "buyMoreHours": "Acheter plus d'heures"
+      "buyMoreHours": "Acheter plus d'heures",
+      "remove": "Supprimer"
     },
     "time": {
       "hour": "heure",
@@ -740,7 +762,9 @@
       "hoursRemaining": "Heures restantes",
       "somethingWentWrong": "Une erreur est survenue",
       "tryAgain": "Veuillez réessayer.",
-      "backToSessions": "Retour aux sessions"
+      "backToSessions": "Retour aux sessions",
+      "signedIn": "Connecte",
+      "remainingTime": "Temps de session restant"
     },
     "modes": {
       "camera": "Caméra",
@@ -843,6 +867,22 @@
         "headphones_desc": "Casque supra-auriculaire ou écouteurs visibles portés.",
         "food": "Nourriture / Collations",
         "food_desc": "Nourriture, boissons ou collations visibles sur votre bureau."
+      },
+      "sites": {
+        "instagram_desc": "Reseau social de partage de photos et videos par Meta.",
+        "youtube_desc": "Plateforme de streaming et partage video par Google.",
+        "netflix_desc": "Service de streaming par abonnement pour films et series.",
+        "threads_desc": "Application sociale textuelle par Meta, liee a Instagram.",
+        "tiktok_desc": "Plateforme de videos courtes pour le divertissement et les tendances.",
+        "twitter_desc": "Plateforme de microblogging pour publications, actualites et discussions.",
+        "facebook_desc": "Reseau social pour se connecter avec amis et groupes.",
+        "snapchat_desc": "Application de messagerie avec photos et stories ephemeres.",
+        "twitch_desc": "Plateforme de streaming en direct axee sur le gaming et le divertissement.",
+        "reddit_desc": "Forum communautaire avec des milliers de sujets.",
+        "pinterest_desc": "Plateforme de decouverte visuelle pour idees et inspiration.",
+        "discord_desc": "Application de chat vocal, video et textuel pour les communautes.",
+        "primevideo_desc": "Service de streaming Amazon pour films et series.",
+        "spotify_desc": "Service de streaming de musique et podcasts."
       }
     },
     "devices": {
@@ -873,6 +913,7 @@
       "email": "E-mail",
       "emailManaged": "L'e-mail est géré par votre fournisseur de compte et ne peut pas être modifié ici.",
       "saveFailed": "Échec de l'enregistrement. Veuillez réessayer.",
+      "nameValidation": "Le nom d'affichage doit comporter 1 a 50 caracteres et ne peut pas contenir < ou >.",
       "loading": "Chargement du compte...",
       "errorTitle": "Impossible de charger le profil"
     },
@@ -900,6 +941,8 @@
       "step2Account": "Créez un compte ou connectez-vous sur ce site web.",
       "step3SignIn": "Ouvrez BrainDock et connectez-vous avec le même compte (ou utilisez le code de connexion de ce site).",
       "firstLaunch": "Premier lancement sur votre plateforme :",
+      "platformMac": "macOS",
+      "platformWin": "Windows",
       "macStep1": "<strong>Clic droit</strong> (ou Control-clic) sur BrainDock.app et choisissez <strong>Ouvrir</strong>.",
       "macStep2": "Cliquez sur « Ouvrir » dans la boîte de dialogue. Cela n'arrive qu'une seule fois.",
       "macStep3": "Lorsqu'on vous demande l'accès à la caméra, cliquez sur <strong>OK</strong>.",

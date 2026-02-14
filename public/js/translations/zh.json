@@ -614,7 +614,11 @@
     "title": "BrainDock如何帮助您",
     "desc": "当BrainDock将您的专注率保持在100%时，一切都会改变。干扰消失，上下文切换停止，您的大脑可以做它最擅长的事情。深度、不间断的工作。结果是更高的生产力、更少的错误，以及您真正引以为傲的工作。这不是关于更努力地工作 - 而是关于保护使高质量工作成为可能的专注力。",
     "learnMore": "了解更多",
-    "download": "下载"
+    "download": "下载",
+    "editorTitle": "文档",
+    "focusBadge": "专注中，专注率100%",
+    "completePopup": "工作已完成",
+    "typingText": "我在一间安静的办公室里见了律师，讨论了合同、截止日期和风险。纸张沙沙作响，咖啡渐渐变凉，建议平静地流淌，让我在漫长的上午之后感到宽慰、充分了解情况，并对下一步持谨慎乐观态度。"
   },
   "download": {
     "sectionTitle": "下载BrainDock",
@@ -645,7 +649,23 @@
         "desc": "30小时BrainDock - 相机、屏幕或两者。",
         "btn": "获取Max"
       }
-    }
+    },
+    "faq": {
+      "title": "常见问题",
+      "q1": "我应该选择哪个套餐？",
+      "a1": "如果您刚开始使用，Pro（1小时）让您无需大量投入即可试用BrainDock。日常使用推荐Ultra（10小时），每小时价格更优惠。如果您计划每天使用BrainDock，Max（30小时）最划算。",
+      "q2": "积分系统如何运作？",
+      "a2": "您预先购买时间包。每次运行专注会话时——无论使用摄像头、屏幕监控还是两者——都会从余额中扣除时间。您可以随时充值，且时间永不过期。",
+      "q3": "可以在摄像头和屏幕会话之间切换吗？",
+      "a3": "可以。您的时间适用于所有会话类型。使用基于摄像头的专注追踪、屏幕监控，或同时使用两者——都从同一余额中扣除。",
+      "q4": "时间用完会怎样？",
+      "a4": "您的会话将结束，您可以立即用另一个套餐充值。已记录的会话数据保留在您的仪表板中——不会丢失。"
+    },
+    "loadError": "无法加载价格套餐。请刷新页面或稍后重试。",
+    "loading": "加载中...",
+    "checkoutError": "无法开始结账。请重试。",
+    "checkoutCancelled": "结账已取消。",
+    "networkError": "网络错误。请检查您的连接并重试。"
   },
   "faq": {
     "sectionTitle": "常见问题",
@@ -681,7 +701,8 @@
     "copyright": "© 2026 BrainDock. 保留所有权利。"
   },
   "popup": {
-    "comingSoon": "即将推出！"
+    "comingSoon": "即将推出！",
+    "ok": "确定"
   },
   "language": {
     "en": "English",
@@ -714,7 +735,8 @@
       "unlink": "取消关联",
       "buyHours": "购买时长",
       "getMoreHours": "获取更多时长",
-      "buyMoreHours": "购买更多时长"
+      "buyMoreHours": "购买更多时长",
+      "remove": "移除"
     },
     "time": {
       "hour": "小时",
@@ -740,7 +762,9 @@
       "hoursRemaining": "剩余时长",
       "somethingWentWrong": "出了点问题",
       "tryAgain": "请重试。",
-      "backToSessions": "返回会话列表"
+      "backToSessions": "返回会话列表",
+      "signedIn": "已登录",
+      "remainingTime": "剩余会话时间"
     },
     "modes": {
       "camera": "摄像头",
@@ -843,6 +867,22 @@
         "headphones_desc": "头戴式耳机或正在佩戴的耳塞。",
         "food": "食物 / 零食",
         "food_desc": "桌上可见的食物、饮料或零食。"
+      },
+      "sites": {
+        "instagram_desc": "Meta旗下的照片和视频分享社交网络。",
+        "youtube_desc": "Google旗下的视频流媒体和分享平台。",
+        "netflix_desc": "电影和电视节目的订阅流媒体服务。",
+        "threads_desc": "Meta旗下与Instagram关联的文字社交应用。",
+        "tiktok_desc": "娱乐和潮流短视频平台。",
+        "twitter_desc": "发帖、新闻和讨论的微博平台。",
+        "facebook_desc": "与朋友和群组联系的社交网络。",
+        "snapchat_desc": "带有阅后即焚照片和故事的消息应用。",
+        "twitch_desc": "专注于游戏和娱乐的直播平台。",
+        "reddit_desc": "拥有数千个主题版块的社区驱动论坛。",
+        "pinterest_desc": "创意和灵感的视觉发现平台。",
+        "discord_desc": "社区语音、视频和文字聊天应用。",
+        "primevideo_desc": "亚马逊电影和剧集流媒体服务。",
+        "spotify_desc": "音乐和播客流媒体服务。"
       }
     },
     "devices": {
@@ -873,6 +913,7 @@
       "email": "电子邮件",
       "emailManaged": "电子邮件由您的账户提供商管理，无法在此更改。",
       "saveFailed": "保存失败。请重试。",
+      "nameValidation": "显示名称必须为1-50个字符，且不能包含<或>。",
       "loading": "正在加载账户...",
       "errorTitle": "无法加载个人资料"
     },
@@ -900,6 +941,8 @@
       "step2Account": "在此网站创建账户或登录。",
       "step3SignIn": "打开BrainDock并使用同一账户登录（或使用此网站的登录代码）。",
       "firstLaunch": "首次启动：",
+      "platformMac": "macOS",
+      "platformWin": "Windows",
       "macStep1": "<strong>右键点击</strong>（或按住Control点击）BrainDock.app，选择<strong>打开</strong>。",
       "macStep2": "在对话框中点击“打开”。这只需要一次。",
       "macStep3": "当要求摄像头权限时，点击<strong>好</strong>。",

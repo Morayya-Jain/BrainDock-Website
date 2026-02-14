@@ -614,7 +614,11 @@
     "title": "How BrainDock Helps",
     "desc": "When BrainDock keeps your focus rate at 100%, everything changes. Distractions vanish, context switching stops, and your brain gets to do what it does best. Deep, uninterrupted work. The result is higher productivity, fewer mistakes, and work you are genuinely proud of. It is not about working harder; it is about protecting the focus that makes quality work possible.",
     "learnMore": "Learn More",
-    "download": "Download"
+    "download": "Download",
+    "editorTitle": "Document",
+    "focusBadge": "Focused, 100% focus rate",
+    "completePopup": "Work fully complete",
+    "typingText": "I met the lawyer in a quiet office, discussing contracts, deadlines, and risks. Papers rustled, coffee cooled, and advice flowed calmly, leaving me relieved, informed, and cautiously optimistic about next steps after a long morning."
   },
   "download": {
     "sectionTitle": "Download BrainDock",
@@ -645,7 +649,23 @@
         "desc": "30 hours of BrainDock - camera, screen, or both.",
         "btn": "Get Max"
       }
-    }
+    },
+    "faq": {
+      "title": "Questions & Answers",
+      "q1": "Which plan should I choose?",
+      "a1": "If you're just getting started, Pro (1 hour) lets you try BrainDock without a big commitment. For regular use, Ultra (10 hours) offers a better per-hour rate. Max (30 hours) is the best value if you plan to use BrainDock daily.",
+      "q2": "How does the credit system work?",
+      "a2": "You purchase a pack of hours upfront. Each time you run a focus session - whether using your camera, screen monitoring, or both - time is deducted from your balance. You can top up anytime, and your hours never expire.",
+      "q3": "Can I switch between camera and screen sessions?",
+      "a3": "Yes. Your hours work across all session types. Use camera-based focus tracking, screen monitoring, or both at the same time - it all draws from the same balance.",
+      "q4": "What happens when I run out of hours?",
+      "a4": "Your session will end and you can top up with another pack right away. Any session data you've already recorded stays in your dashboard - nothing is lost."
+    },
+    "loadError": "Could not load pricing packages. Please refresh the page or try again later.",
+    "loading": "Loading...",
+    "checkoutError": "Could not start checkout. Please try again.",
+    "checkoutCancelled": "Checkout was cancelled.",
+    "networkError": "Network error. Please check your connection and try again."
   },
   "faq": {
     "sectionTitle": "Frequently Asked Questions",
@@ -681,7 +701,8 @@
     "copyright": "© 2026 BrainDock. All rights reserved."
   },
   "popup": {
-    "comingSoon": "Coming Soon!"
+    "comingSoon": "Coming Soon!",
+    "ok": "OK"
   },
   "language": {
     "en": "English",
@@ -714,7 +735,8 @@
       "unlink": "Unlink",
       "buyHours": "Buy Hours",
       "getMoreHours": "Get More Hours",
-      "buyMoreHours": "Buy more hours"
+      "buyMoreHours": "Buy more hours",
+      "remove": "Remove"
     },
     "time": {
       "hour": "hour",
@@ -740,7 +762,9 @@
       "hoursRemaining": "Hours remaining",
       "somethingWentWrong": "Something went wrong",
       "tryAgain": "Please try again.",
-      "backToSessions": "Back to Sessions"
+      "backToSessions": "Back to Sessions",
+      "signedIn": "Signed in",
+      "remainingTime": "Remaining session time"
     },
     "modes": {
       "camera": "Camera",
@@ -843,6 +867,22 @@
         "headphones_desc": "Over-ear headphones or visible earbuds being worn.",
         "food": "Food / Snacks",
         "food_desc": "Food, drinks, or snacks visible on your desk."
+      },
+      "sites": {
+        "instagram_desc": "Photo and video sharing social network by Meta.",
+        "youtube_desc": "Video streaming and sharing platform by Google.",
+        "netflix_desc": "Subscription streaming service for movies and TV shows.",
+        "threads_desc": "Text-based social app by Meta, linked to Instagram.",
+        "tiktok_desc": "Short-form video platform for entertainment and trends.",
+        "twitter_desc": "Microblogging platform for posts, news, and discussions.",
+        "facebook_desc": "Social network for connecting with friends and groups.",
+        "snapchat_desc": "Messaging app with disappearing photos and stories.",
+        "twitch_desc": "Live streaming platform focused on gaming and entertainment.",
+        "reddit_desc": "Community-driven forum with thousands of topic boards.",
+        "pinterest_desc": "Visual discovery platform for ideas and inspiration.",
+        "discord_desc": "Voice, video, and text chat app for communities.",
+        "primevideo_desc": "Amazon streaming service for movies and series.",
+        "spotify_desc": "Music and podcast streaming service."
       }
     },
     "devices": {
@@ -873,6 +913,7 @@
       "email": "Email",
       "emailManaged": "Email is managed by your account provider and cannot be changed here.",
       "saveFailed": "Failed to save. Please try again.",
+      "nameValidation": "Display name must be 1-50 characters and cannot contain < or >.",
       "loading": "Loading account...",
       "errorTitle": "Could not load profile"
     },
@@ -900,6 +941,8 @@
       "step2Account": "Create an account or sign in on this website.",
       "step3SignIn": "Open BrainDock and sign in with the same account (or use the login code from this site).",
       "firstLaunch": "First launch on your platform:",
+      "platformMac": "macOS",
+      "platformWin": "Windows",
       "macStep1": "<strong>Right-click</strong> (or Control-click) on BrainDock.app and choose <strong>Open</strong>.",
       "macStep2": "Click \"Open\" in the dialog. This only happens once.",
       "macStep3": "When asked for camera access, click <strong>OK</strong>.",
