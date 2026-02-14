@@ -273,7 +273,7 @@ async function main() {
     mainEl.innerHTML = `
       <div class="dashboard-empty">
         <p class="dashboard-empty-title">${t('dashboard.common.somethingWentWrong', 'Something went wrong')}</p>
-        <p>${escapeHtml(err.message || 'Failed to load dashboard.')}</p>
+        <p>${t('dashboard.common.tryAgain', 'Please try again.')}</p>
       </div>
     `
   }

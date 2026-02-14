@@ -13,7 +13,7 @@ import { logError } from '../logger.js'
 async function fetchCreditPackages() {
   const { data, error } = await supabase
     .from('credit_packages')
-    .select('*')
+    .select('id, name, display_name, hours, price_cents, currency, sort_order')
     .eq('is_active', true)
     .order('sort_order', { ascending: true })
   if (error) throw error
@@ -39,9 +39,10 @@ async function createCheckoutSession(packageId) {
   return { url: result?.url || null, error: result?.url ? null : 'No checkout URL returned' }
 }
 
-function pricePerHour(cents, hours) {
+/** Calculate per-hour price in cents. Returns null if hours is invalid. */
+function pricePerHourCents(cents, hours) {
   if (!hours || hours < 1) return null
-  return (cents / 100 / hours).toFixed(2)
+  return Math.round(cents / hours)
 }
 
 /** Tier label for display: 1 -> Pro, 10 -> Ultra, 30 -> Max */
@@ -122,14 +123,14 @@ function render(root, packages, hasUser) {
                 <p>Could not load pricing packages. Please refresh the page or try again later.</p>
               </div>`
             : defaultPackages.map((pkg) => {
-            const perHour = pricePerHour(pkg.price_cents, pkg.hours)
+            const perHour = pricePerHourCents(pkg.price_cents, pkg.hours)
             const tierName = tierDisplayName(pkg.hours) || escapeHtml(pkg.display_name || pkg.name)
             const btnLabel = tierButtonLabel(pkg.hours)
             return `
               <div class="dashboard-card pricing-card">
                 <h3 class="pricing-card-title" data-i18n="pricing.tier.${pkg.hours}.name">${tierName}</h3>
                 <p class="pricing-card-price">${formatPrice(pkg.price_cents, pkg.currency)}</p>
-                ${perHour ? `<p class="pricing-card-per-hour" data-i18n="pricing.tier.${pkg.hours}.perHour">A$${perHour} per hour</p>` : '<p class="pricing-card-per-hour"></p>'}
+                ${perHour ? `<p class="pricing-card-per-hour" data-i18n="pricing.tier.${pkg.hours}.perHour">${formatPrice(perHour, pkg.currency)} per hour</p>` : '<p class="pricing-card-per-hour"></p>'}
                 <p class="pricing-card-desc" data-i18n="pricing.tier.${pkg.hours}.desc">${pkg.hours} hour${pkg.hours === 1 ? '' : 's'} of BrainDock - camera, screen, or both.</p>
                 <button type="button" class="btn btn-primary" data-package-id="${escapeHtml(pkg.id)}" data-i18n="pricing.tier.${pkg.hours}.btn">${btnLabel}</button>
               </div>
@@ -265,7 +266,10 @@ function render(root, packages, hasUser) {
           showInlineError(root, error)
           return
         }
-        if (url) window.open(url, '_blank', 'noopener,noreferrer')
+        if (url) {
+          // Use location.href to avoid popup blockers (window.open after async is blocked)
+          window.location.href = url
+        }
         btn.disabled = false
         btn.textContent = currentLabel
       } catch (err) {
@@ -350,7 +354,7 @@ async function main() {
         showInlineError(root, 'Could not start checkout: ' + error)
         return
       }
-      if (url) window.open(url, '_blank', 'noopener,noreferrer')
+      if (url) window.location.href = url
     } catch (err) {
       showInlineError(root, 'Network error. Please try clicking the button again.')
     }

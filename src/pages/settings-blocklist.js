@@ -175,6 +175,28 @@ function render(main, blocklistConfig, detectionSettings, userId) {
     }, DEBOUNCE_MS)
   }
 
+  // Flush any pending debounced saves when navigating away
+  function flushPendingSaves() {
+    if (blocklistSaveTimeout) {
+      clearTimeout(blocklistSaveTimeout)
+      blocklistSaveTimeout = null
+      // Fire-and-forget save using sendBeacon or sync approach
+      saveBlocklist(userId, {
+        quick_blocks: state.quick_blocks,
+        categories: state.categories,
+        custom_urls: state.custom_urls,
+        custom_apps: state.custom_apps,
+      }).catch(() => {})
+    }
+    if (detectionSaveTimeout) {
+      clearTimeout(detectionSaveTimeout)
+      detectionSaveTimeout = null
+      const enabled = getEnabledItems()
+      saveDetectionSettings(userId, enabled).catch(() => {})
+    }
+  }
+  window.addEventListener('beforeunload', flushPendingSaves)
+
   /** Read currently-active item pills. */
   function getEnabledItems() {
     const arr = []
@@ -362,12 +384,16 @@ function render(main, blocklistConfig, detectionSettings, userId) {
   async function addCustomApp() {
     const input = main.querySelector('#custom-app-input')
     const hintEl = main.querySelector('#custom-app-hint')
+    const addBtn = main.querySelector('#custom-app-add')
     const val = input.value.trim()
     if (!val) {
       setHint(hintEl, '', '')
       return
     }
+    // Disable button during async validation to prevent duplicate entries
+    if (addBtn) addBtn.disabled = true
     const result = await validateAppPattern(val)
+    if (addBtn) addBtn.disabled = false
     if (!result.valid) {
       setHint(hintEl, result.message, 'error')
       return
@@ -512,7 +538,7 @@ async function main() {
     mainEl.innerHTML = `
       <div class="dashboard-empty">
         <p class="dashboard-empty-title">${t('dashboard.config.errorTitle', 'Could not load configuration')}</p>
-        <p>${escapeHtml(err.message || t('dashboard.common.tryAgain', 'Please try again.'))}</p>
+        <p>${t('dashboard.common.tryAgain', 'Please try again.')}</p>
       </div>
     `
   }

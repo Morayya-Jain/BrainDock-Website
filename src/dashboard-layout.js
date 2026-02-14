@@ -35,7 +35,9 @@ const DASHBOARD_PATH = '/dashboard/'
 /** Detect user's OS and return the matching download URL. Falls back to /download/ page. */
 function getDownloadUrl() {
   const ua = navigator.userAgent || ''
-  if (/Mac|iPhone|iPad|iPod/.test(ua)) return MACOS_URL
+  // Exclude mobile devices - BrainDock is desktop-only
+  if (/iPhone|iPad|iPod|Android/.test(ua)) return '/download/'
+  if (/Mac/.test(ua)) return MACOS_URL
   if (/Win/.test(ua)) return WINDOWS_URL
   return '/download/'
 }

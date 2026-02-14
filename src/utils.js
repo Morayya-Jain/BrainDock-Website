@@ -21,7 +21,7 @@ export function escapeHtml(str) {
  * Verbose: "2 hours 30 mins" or "45 mins 10 secs" (for session lists).
  */
 export function formatDuration(seconds, compact = false) {
-  if (seconds == null || seconds < 0) return compact ? `0${t('dashboard.time.m', 'm')}` : `0 ${t('dashboard.time.sec', 'sec')}`
+  if (seconds == null || isNaN(seconds) || seconds < 0) return compact ? `0${t('dashboard.time.m', 'm')}` : `0 ${t('dashboard.time.sec', 'sec')}`
   const h = Math.floor(seconds / 3600)
   const m = Math.floor((seconds % 3600) / 60)
   const s = Math.floor(seconds % 60)

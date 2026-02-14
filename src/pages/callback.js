@@ -1,6 +1,9 @@
 import { supabase } from '../supabase.js'
-import { showError, handlePostAuthRedirect } from '../auth-helpers.js'
+import { captureDesktopSource, showError, handlePostAuthRedirect } from '../auth-helpers.js'
 import '../auth.css'
+
+// Capture ?source=desktop from the URL (needed when email confirmation opens in a new tab)
+captureDesktopSource()
 
 const card = document.querySelector('.auth-card')
 const loadingState = document.getElementById('loading-state')

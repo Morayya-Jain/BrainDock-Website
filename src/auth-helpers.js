@@ -4,6 +4,7 @@
  */
 
 import { supabaseUrl, supabaseAnonKey } from './supabase.js'
+import { logError } from './logger.js'
 
 const DESKTOP_SOURCE_KEY = 'braindock_desktop'
 /** Used by signup to pass redirect into emailRedirectTo; also read in getRedirectPath(). */
@@ -112,24 +113,34 @@ export async function handlePostAuthRedirect(supabase, card = null) {
       return
     }
 
-    const resp = await fetch(`${supabaseUrl}/functions/v1/generate-linking-code`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${session.access_token}`,
-        'apikey': supabaseAnonKey,
-      },
-      body: JSON.stringify({
-        access_token: session.access_token,
-        refresh_token: session.refresh_token,
-      }),
-    })
+    // Abort after 8 seconds to prevent hanging forever
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 8000)
+
+    let resp
+    try {
+      resp = await fetch(`${supabaseUrl}/functions/v1/generate-linking-code`, {
+        method: 'POST',
+        signal: controller.signal,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`,
+          'apikey': supabaseAnonKey,
+        },
+        body: JSON.stringify({
+          access_token: session.access_token,
+          refresh_token: session.refresh_token,
+        }),
+      })
+    } finally {
+      clearTimeout(timeoutId)
+    }
 
     const result = await resp.json().catch(() => ({}))
     if (!resp.ok || !result?.code) {
       const detail = result?.error || result?.message || result?.msg || `HTTP ${resp.status}`
-      console.error('Failed to generate linking code:', resp.status, detail, result)
-      if (card) showError(card, `Desktop login failed: ${detail}`)
+      logError('Failed to generate linking code:', resp.status, detail, result)
+      if (card) showError(card, 'Desktop login failed. Please try again.')
       else window.location.href = getRedirectPath()
       return
     }
@@ -138,21 +149,55 @@ export async function handlePostAuthRedirect(supabase, card = null) {
     window.location.href = deepLink
 
     // If browser blocks custom scheme, page stays visible; show code after 2s
+    let redirectTimer = null
     setTimeout(() => {
       if (document.visibilityState !== 'hidden') {
         if (card) {
-          showError(card, `If the app did not open, copy this code and paste it in BrainDock: ${result.code}`)
+          // Build the fallback UI with safe DOM APIs (no innerHTML with user data)
+          const codeDisplay = document.createElement('div')
+          codeDisplay.className = 'auth-linking-fallback'
+
+          const msg = document.createElement('p')
+          msg.textContent = 'If the app did not open, copy this code and paste it in BrainDock:'
+          codeDisplay.appendChild(msg)
+
+          const row = document.createElement('div')
+          row.style.cssText = 'display:flex;align-items:center;gap:8px;margin:8px 0;'
+
+          const codeEl = document.createElement('code')
+          codeEl.style.cssText = 'user-select:all;padding:4px 8px;background:rgba(0,0,0,0.1);border-radius:4px;font-size:1.1rem;'
+          codeEl.textContent = result.code // safe - no HTML parsing
+          row.appendChild(codeEl)
+
+          const copyBtn = document.createElement('button')
+          copyBtn.type = 'button'
+          copyBtn.className = 'btn btn-secondary'
+          copyBtn.style.cssText = 'padding:4px 12px;font-size:0.85rem;'
+          copyBtn.textContent = 'Copy'
+          copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(result.code).then(() => {
+              copyBtn.textContent = 'Copied!'
+            }).catch(() => {
+              copyBtn.textContent = 'Copy failed'
+            })
+          })
+          row.appendChild(copyBtn)
+          codeDisplay.appendChild(row)
+
+          // Cancel the auto-redirect since user needs time to copy
+          if (redirectTimer) { clearTimeout(redirectTimer); redirectTimer = null }
+          card.prepend(codeDisplay)
         }
       }
     }, 2000)
 
-    // Redirect to dashboard after 15s to give user time to copy the code
-    setTimeout(() => {
+    // Redirect to dashboard after 30s to give user time to copy the code
+    redirectTimer = setTimeout(() => {
       window.location.href = getRedirectPath()
-    }, 15000)
+    }, 30000)
   } catch (err) {
-    console.error('Desktop linking error:', err)
-    if (card) showError(card, `Desktop login error: ${err.message || err}`)
+    logError('Desktop linking error:', err)
+    if (card) showError(card, 'Desktop login failed. Please try again.')
     else window.location.href = getRedirectPath()
   }
 }
@@ -242,5 +287,7 @@ export function friendlyError(error) {
     return 'Too many attempts. Please wait a moment and try again.'
   }
 
-  return msg
+  // Don't leak raw Supabase error details to user - log for debugging
+  logError('Unmapped auth error:', msg)
+  return 'Something went wrong. Please try again.'
 }

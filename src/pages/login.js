@@ -123,29 +123,38 @@ loginForm.addEventListener('submit', async (e) => {
 
   showLoading(loginBtn)
 
-  const { error } = await supabase.auth.signInWithPassword({ email, password })
+  try {
+    const { error } = await supabase.auth.signInWithPassword({ email, password })
 
-  if (error) {
+    if (error) {
+      showError(authCard, friendlyError(error))
+      return
+    }
+
+    await handlePostAuthRedirect(supabase, authCard)
+  } catch (err) {
+    showError(authCard, 'Network error. Please check your connection and try again.')
+  } finally {
     hideLoading(loginBtn)
-    showError(authCard, friendlyError(error))
-    return
   }
-
-  await handlePostAuthRedirect(supabase, authCard)
 })
 
 // Google OAuth login
 googleBtn.addEventListener('click', async () => {
   hideError(authCard)
 
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
-    options: {
-      redirectTo: `${window.location.origin}/auth/callback/`,
-    },
-  })
+  try {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback/`,
+      },
+    })
 
-  if (error) {
-    showError(authCard, friendlyError(error))
+    if (error) {
+      showError(authCard, friendlyError(error))
+    }
+  } catch (err) {
+    showError(authCard, 'Network error. Please check your connection and try again.')
   }
 })

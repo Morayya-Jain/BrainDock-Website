@@ -103,9 +103,11 @@ form.addEventListener('submit', async (e) => {
     hideLoading(updateBtn)
   }
 
-  // Success — hide form and show confirmation
+  // Success — sign out all sessions (invalidates old tokens), then redirect to login
   form.hidden = true
   showSuccess(card, 'Password updated successfully! Redirecting to login...')
+
+  try { await supabase.auth.signOut({ scope: 'global' }) } catch (_) { /* ignore */ }
 
   setTimeout(() => {
     window.location.href = '/auth/login/'

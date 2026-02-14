@@ -264,8 +264,17 @@ function initStackEffect(main) {
     }
   }
 
+  let prevScrollEl = scrollEl
+
   function recache() {
-    scrollEl = getScrollParent()
+    const newScrollEl = getScrollParent()
+    // Re-attach scroll listener if the scroll container changed (e.g. mobile to desktop)
+    if (newScrollEl !== prevScrollEl) {
+      if (prevScrollEl) prevScrollEl.removeEventListener('scroll', onScroll)
+      if (newScrollEl) newScrollEl.addEventListener('scroll', onScroll, { passive: true })
+      prevScrollEl = newScrollEl
+    }
+    scrollEl = newScrollEl
     stickyTops = cards.map((c) => parseFloat(getComputedStyle(c).top) || 0)
     update()
   }

@@ -98,7 +98,7 @@ async function main() {
       mainEl.innerHTML = `
         <div class="dashboard-empty">
           <p class="dashboard-empty-title">${t('dashboard.sessionList.errorTitle', 'Could not load sessions')}</p>
-          <p>${escapeHtml(err.message || t('dashboard.common.tryAgain', 'Please try again.'))}</p>
+          <p>${t('dashboard.common.tryAgain', 'Please try again.')}</p>
         </div>
       `
     }

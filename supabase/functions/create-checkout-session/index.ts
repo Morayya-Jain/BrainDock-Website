@@ -11,11 +11,11 @@ import { serve } from "https://deno.land/std@0.224.0/http/server.ts"
 import Stripe from "https://esm.sh/stripe@17?target=denonext"
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
 
-const ALLOWED_ORIGINS = [
-  "https://thebraindock.com",
-  "http://localhost:5173",
-  "http://localhost:4173",
-]
+// Production origins only; localhost is added automatically in local dev via DENO_ENV
+const ALLOWED_ORIGINS = ["https://thebraindock.com"]
+if (Deno.env.get("DENO_ENV") !== "production") {
+  ALLOWED_ORIGINS.push("http://localhost:5173", "http://localhost:4173")
+}
 const DEFAULT_ORIGIN = "https://thebraindock.com"
 const MAX_BODY_BYTES = 512
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
@@ -233,8 +233,8 @@ serve(async (req) => {
         headers: jsonHeaders,
       })
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Stripe error"
-      return withCors(JSON.stringify({ error: message }), 500)
+      console.error("Stripe checkout error (package):", err instanceof Error ? err.message : err)
+      return withCors(JSON.stringify({ error: "Payment processing error. Please try again." }), 500)
     }
   }
 
@@ -283,7 +283,7 @@ serve(async (req) => {
       headers: jsonHeaders,
     })
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : "Stripe error"
-    return withCors(JSON.stringify({ error: message }), 500)
+    console.error("Stripe checkout error (tier):", err instanceof Error ? err.message : err)
+    return withCors(JSON.stringify({ error: "Payment processing error. Please try again." }), 500)
   }
 })

@@ -12,11 +12,11 @@
 
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts"
 
-const ALLOWED_ORIGINS = [
-  "https://thebraindock.com",
-  "http://localhost:5173",
-  "http://localhost:4173",
-]
+// Production origins only; localhost is added automatically in local dev via DENO_ENV
+const ALLOWED_ORIGINS = ["https://thebraindock.com"]
+if (Deno.env.get("DENO_ENV") !== "production") {
+  ALLOWED_ORIGINS.push("http://localhost:5173", "http://localhost:4173")
+}
 const TIMEOUT_MS = 2000
 const MAX_DOMAIN_LENGTH = 253
 
@@ -50,6 +50,15 @@ serve(async (req) => {
       status: 405,
       headers: jsonHeaders,
     })
+  }
+
+  // Require authentication to prevent abuse as an open DNS resolver
+  const authHeader = req.headers.get("authorization")
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return new Response(
+      JSON.stringify({ exists: true, message: "Authentication required" }),
+      { status: 401, headers: jsonHeaders }
+    )
   }
 
   let domain: string

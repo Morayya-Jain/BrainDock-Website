@@ -222,17 +222,32 @@ const I18n = {
         dropdown.classList.toggle('active');
       });
 
-      // Handle language selection
-      dropdown.querySelectorAll('[data-lang]').forEach(option => {
-        option.addEventListener('click', (e) => {
+      // Handle language selection (click + keyboard)
+      const langOptions = dropdown.querySelectorAll('[data-lang]');
+      langOptions.forEach((option, idx) => {
+        function selectLang(e) {
           e.stopPropagation();
           const newLang = option.getAttribute('data-lang');
-          if (newLang && newLang !== this.currentLang) {
-            this.changeLanguage(newLang);
+          if (newLang && newLang !== I18n.currentLang) {
+            I18n.changeLanguage(newLang);
           }
-          // Close dropdown
           toggle.setAttribute('aria-expanded', 'false');
           dropdown.classList.remove('active');
+        }
+        option.addEventListener('click', selectLang);
+        option.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            selectLang(e);
+          } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            const next = langOptions[(idx + 1) % langOptions.length];
+            if (next) next.focus();
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            const prev = langOptions[(idx - 1 + langOptions.length) % langOptions.length];
+            if (prev) prev.focus();
+          }
         });
       });
     });

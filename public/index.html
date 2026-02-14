@@ -135,7 +135,7 @@
           <p class="hero-note" data-i18n="hero.note">Available for macOS and Windows. Linux coming soon.</p>
         </div>
         <div class="hero-image">
-          <img src="assets/image_transparent_screen.png" alt="BrainDock - AI connecting devices and mind" data-i18n-alt="hero.imageAlt">
+          <img src="assets/image_transparent_screen.png" alt="BrainDock - AI connecting devices and mind" data-i18n-alt="hero.imageAlt" width="564" height="524">
         </div>
       </div>
     </section>
@@ -370,7 +370,7 @@
         <div class="hbh-wrapper">
           <!-- Left column: animated visual panel -->
           <div class="hbh-visual">
-            <img src="assets/mountain-focus.png" alt="Mountain focus scene" class="hbh-bg-image" />
+            <img src="assets/mountain-focus.png" alt="Mountain focus scene" class="hbh-bg-image" loading="lazy" width="881" height="536" />
             <div class="hbh-dark-overlay"></div>
 
             <!-- Google Docs style editor mockup -->
@@ -479,13 +479,13 @@
           
           <div class="faq-list">
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-privacy">
               <span data-i18n="faq.items.privacy.question">Does BrainDock violate my privacy?</span>
               <svg class="faq-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M6 9l6 6 6-6"/>
               </svg>
             </button>
-            <div class="faq-answer">
+            <div class="faq-answer" id="faq-answer-privacy" role="region">
               <div class="faq-answer-inner">
                 <p data-i18n="faq.items.privacy.answer">No, privacy was a top priority when we built BrainDock. We don't permanently store anything, we don't use facial recognition, and your session data stays on your device. BrainDock is here to help you focus, not collect your personal information.</p>
               </div>
@@ -493,13 +493,13 @@
           </div>
           
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-screen">
               <span data-i18n="faq.items.screenSharing.question">Is sharing your screen private and safe?</span>
               <svg class="faq-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M6 9l6 6 6-6"/>
               </svg>
             </button>
-            <div class="faq-answer">
+            <div class="faq-answer" id="faq-answer-screen" role="region">
               <div class="faq-answer-inner">
                 <p data-i18n="faq.items.screenSharing.answer">Yes, completely. Screen sharing is done entirely on your computer and works offline. BrainDock only reads the name of your active window to check against your distraction list. No screenshots are taken, no recordings are made, and nothing regarding this leaves your machine.</p>
               </div>
@@ -507,13 +507,13 @@
           </div>
           
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-notice">
               <span data-i18n="faq.items.whatCanNotice.question">What can BrainDock actually notice during your session?</span>
               <svg class="faq-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M6 9l6 6 6-6"/>
               </svg>
             </button>
-            <div class="faq-answer">
+            <div class="faq-answer" id="faq-answer-notice" role="region">
               <div class="faq-answer-inner">
                 <p data-i18n="faq.items.whatCanNotice.answer">BrainDock can notice activities during your session. For example, stepping away from your desk, distractions like using your phone, tablets, game controllers, etc. The best part is that it only flags these when you're actually using them in front of your screen, not just because they're nearby.</p>
               </div>
@@ -521,13 +521,13 @@
           </div>
           
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-internet">
               <span data-i18n="faq.items.internetConnection.question">Does BrainDock require an internet connection?</span>
               <svg class="faq-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M6 9l6 6 6-6"/>
               </svg>
             </button>
-            <div class="faq-answer">
+            <div class="faq-answer" id="faq-answer-internet" role="region">
               <div class="faq-answer-inner">
                 <p data-i18n="faq.items.internetConnection.answer">Screen sharing operates entirely offline, as it runs locally on your computer. AI-powered distraction sensing requires an internet connection to identify devices such as phones and tablets; however, no data is stored permanently on servers, and any data sent for analysis is discarded after processing.</p>
               </div>
@@ -535,13 +535,13 @@
           </div>
           
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-cloud">
               <span data-i18n="faq.items.cloudData.question">Is my data uploaded to the Cloud?</span>
               <svg class="faq-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M6 9l6 6 6-6"/>
               </svg>
             </button>
-            <div class="faq-answer">
+            <div class="faq-answer" id="faq-answer-cloud" role="region">
               <div class="faq-answer-inner">
                 <p data-i18n="faq.items.cloudData.answer">Your session statistics, reports, and personal data remain on your computer. For distraction sensing, frames are temporarily transmitted to our AI models for analysis and then deleted. No data is stored permanently, and we do not retain records of your sessions.</p>
               </div>
@@ -593,12 +593,12 @@
             </svg>
           </button>
           <ul class="language-dropdown" role="listbox" aria-labelledby="footer-lang-toggle">
-            <li role="option" aria-selected="false" data-lang="en">English</li>
-            <li role="option" aria-selected="false" data-lang="ja">日本語 (Japan)</li>
-            <li role="option" aria-selected="false" data-lang="de">Deutsch (Germany)</li>
-            <li role="option" aria-selected="false" data-lang="fr">Français (France)</li>
-            <li role="option" aria-selected="false" data-lang="zh">中文 (China)</li>
-            <li role="option" aria-selected="false" data-lang="hi">हिन्दी (India)</li>
+            <li role="option" tabindex="0" aria-selected="false" data-lang="en">English</li>
+            <li role="option" tabindex="0" aria-selected="false" data-lang="ja">日本語 (Japan)</li>
+            <li role="option" tabindex="0" aria-selected="false" data-lang="de">Deutsch (Germany)</li>
+            <li role="option" tabindex="0" aria-selected="false" data-lang="fr">Français (France)</li>
+            <li role="option" tabindex="0" aria-selected="false" data-lang="zh">中文 (China)</li>
+            <li role="option" tabindex="0" aria-selected="false" data-lang="hi">हिन्दी (India)</li>
           </ul>
         </div>
       </div>
@@ -607,7 +607,7 @@
 
   <!-- Coming Soon Popup -->
   <div class="popup-overlay" id="coming-soon-overlay"></div>
-  <div class="popup" id="coming-soon-popup">
+  <div class="popup" id="coming-soon-popup" role="dialog" aria-modal="true" aria-label="Coming Soon">
     <p class="popup-text" data-i18n="popup.comingSoon">Coming Soon!</p>
     <button class="popup-close" id="popup-close-btn" aria-label="Close popup">OK</button>
   </div>

@@ -31,16 +31,16 @@ function getOsIcon(os) {
   return DEVICE_SVG
 }
 
-async function loadDevices() {
-  /** Fetch all linked devices, newest first. */
-  const { data, error } = await supabase.from('devices').select('id, device_name, machine_id, os, last_seen, app_version').order('last_seen', { ascending: false })
+async function loadDevices(userId) {
+  /** Fetch all linked devices for this user, newest first. */
+  const { data, error } = await supabase.from('devices').select('id, device_name, machine_id, os, last_seen, app_version').eq('user_id', userId).order('last_seen', { ascending: false })
   if (error) throw error
   return data || []
 }
 
-async function unlinkDevice(deviceId) {
-  /** Remove a device link. */
-  const { error } = await supabase.from('devices').delete().eq('id', deviceId)
+async function unlinkDevice(deviceId, userId) {
+  /** Remove a device link with explicit ownership check. */
+  const { error } = await supabase.from('devices').delete().eq('id', deviceId).eq('user_id', userId)
   if (error) throw error
 }
 
@@ -66,7 +66,7 @@ function formatRelativeTime(iso) {
   return d.toLocaleDateString()
 }
 
-function render(main, devices) {
+function render(main, devices, userId) {
   const base = window.location.origin
 
   main.innerHTML = `
@@ -129,11 +129,11 @@ function render(main, devices) {
       if (!id || !confirm(t('dashboard.devices.unlinkConfirm', 'Unlink this device? You will need to sign in again on it.'))) return
       btn.disabled = true
       try {
-        await unlinkDevice(id)
+        await unlinkDevice(id, userId)
         li.remove()
         // If no devices remain, re-render to show the empty state
         if (main.querySelectorAll('[data-device-id]').length === 0) {
-          render(main, [])
+          render(main, [], userId)
         }
       } catch (err) {
         logError('Device unlink failed:', err)
@@ -153,15 +153,17 @@ async function main() {
 
   mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.devices.loading', 'Loading devices...')}</p></div>`
 
+  const userId = result.user.id
+
   try {
-    const devices = await loadDevices()
-    render(mainEl, devices)
+    const devices = await loadDevices(userId)
+    render(mainEl, devices, userId)
   } catch (err) {
     logError('Devices page load failed:', err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
         <p class="dashboard-empty-title">${t('dashboard.devices.errorTitle', 'Could not load devices')}</p>
-        <p>${escapeHtml(err.message || t('dashboard.common.tryAgain', 'Please try again.'))}</p>
+        <p>${t('dashboard.common.tryAgain', 'Please try again.')}</p>
       </div>
     `
   }

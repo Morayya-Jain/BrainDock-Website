@@ -4,7 +4,7 @@
  * Blocklist URL/app validation matches desktop app behaviour (TLD check, DNS lookup, KNOWN_APPS).
  */
 
-import { supabaseAnonKey } from './supabase.js'
+import { supabaseAnonKey, supabase } from './supabase.js'
 
 // Blocklist data (VALID_TLDS, KNOWN_APPS) is large (~1,378 entries).
 // Lazy-loaded on first use so pages that only need basic validators don't pay the bundle cost.
@@ -94,12 +94,21 @@ export async function checkDomainDns(domain) {
   const controller = new AbortController()
   const timeoutId = setTimeout(() => controller.abort(), DNS_FETCH_TIMEOUT_MS)
   try {
+    // Include auth token to satisfy edge function authentication requirement
+    const headers = {
+      'Content-Type': 'application/json',
+      'apikey': supabaseAnonKey,
+    }
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session?.access_token) {
+        headers['Authorization'] = `Bearer ${session.access_token}`
+      }
+    } catch (_) { /* proceed without auth - edge function returns exists: true as fallback */ }
+
     const res = await fetch(`${baseUrl}/functions/v1/validate-domain`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': supabaseAnonKey,
-      },
+      headers,
       body: JSON.stringify({ domain }),
       signal: controller.signal,
     })

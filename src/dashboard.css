@@ -1199,7 +1199,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 2px;
+  padding: 6px;
+  min-width: 32px;
+  min-height: 32px;
   color: var(--text-secondary);
   background: none;
   border: none;

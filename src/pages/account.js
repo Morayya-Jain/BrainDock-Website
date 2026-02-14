@@ -88,7 +88,7 @@ async function main() {
     mainEl.innerHTML = `
       <div class="dashboard-empty">
         <p class="dashboard-empty-title">${t('dashboard.account.errorTitle', 'Could not load profile')}</p>
-        <p>${escapeHtml(err.message || t('dashboard.common.tryAgain', 'Please try again.'))}</p>
+        <p>${t('dashboard.common.tryAgain', 'Please try again.')}</p>
       </div>
     `
   }

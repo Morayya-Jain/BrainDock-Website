@@ -68,6 +68,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px; /* Account for fixed navbar (80px) + breathing room */
+  color-scheme: light; /* Ensure browser chrome matches our light theme */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -1217,7 +1218,9 @@ body.hero-compact .hero-ctas {
   transform: rotate(180deg);
 }
 
-/* CSS Grid technique for smooth height animation */
+/* CSS Grid technique for smooth height animation.
+   Safari < 16.4 does not support grid-template-rows: 0fr, so we
+   use max-height as a fallback and let modern browsers override. */
 .faq-answer {
   display: grid;
   grid-template-rows: 0fr;
@@ -1230,6 +1233,22 @@ body.hero-compact .hero-ctas {
 
 .faq-answer-inner {
   overflow: hidden;
+}
+
+/* Fallback for Safari 15-16.3 where 0fr is ignored (content stays visible) */
+@supports not (grid-template-rows: 0fr) {
+  .faq-answer {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .faq-item.active .faq-answer {
+    max-height: 500px;
+  }
+  .faq-answer-inner {
+    overflow: visible;
+  }
 }
 
 .faq-answer p {
@@ -1266,11 +1285,7 @@ body.hero-compact .hero-ctas {
   margin-bottom: var(--space-l);
 }
 
-.download-note {
-  text-align: center;
-  font-size: 0.875rem;
-  color: var(--text-tertiary);
-}
+/* .download-note removed - unused */
 
 @media (min-width: 768px) {
   .download-buttons {
@@ -1407,8 +1422,8 @@ body.hero-compact .hero-ctas {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
-  height: 36px;
+  padding: 8px 14px;
+  min-height: 44px; /* WCAG 2.2 recommended touch target */
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
@@ -2008,6 +2023,7 @@ body.hero-compact .hero-ctas {
   gap: 0.4rem;
   padding: 0.4rem 0.85rem;
   background: rgba(15, 15, 20, 0.75);
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   border-radius: 9999px;
   font-size: 0.75rem;
@@ -2042,6 +2058,7 @@ body.hero-compact .hero-ctas {
   gap: 0.5rem;
   padding: 1.8rem 2.5rem;
   background: rgba(10, 10, 15, 0.85);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-radius: var(--card-radius);
   color: #ffffff;
@@ -2087,33 +2104,7 @@ body.hero-compact .hero-ctas {
   max-width: 480px;
 }
 
-.hbh-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.hbh-list li {
-  font-size: 1.05rem;
-  line-height: 1.5;
-  color: var(--text-secondary);
-  padding-left: 1.4rem;
-  position: relative;
-}
-
-.hbh-list li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.55em;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent-highlight);
-}
+/* .hbh-list styles removed - unused (section uses <p> not <ul>) */
 
 .hbh-actions {
   display: flex;

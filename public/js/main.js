@@ -6,7 +6,9 @@
 /** Detect user's OS and return the matching direct download URL. */
 function getDownloadUrl() {
   const ua = navigator.userAgent || ''
-  if (/Mac|iPhone|iPad|iPod/.test(ua)) return 'https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg'
+  // Exclude mobile devices first - BrainDock is desktop-only
+  if (/iPhone|iPad|iPod|Android/.test(ua)) return null
+  if (/Mac/.test(ua)) return 'https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg'
   if (/Win/.test(ua)) return 'https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe'
   return null // unknown OS - keep default #download anchor
 }
@@ -197,8 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Roadmap S-curve path
-  drawRoadmapPath();
+  // Note: drawRoadmapPath() already called by runAllResponsiveChecks() above
 
   // Made For You audience pill switcher
   initMadeForYou();
@@ -347,20 +348,21 @@ function initComingSoonPopup() {
     return;
   }
 
-  /**
-   * Show the coming soon popup.
-   */
+  let previousFocus = null;
+
+  /** Show the coming soon popup and trap focus. */
   function showPopup() {
+    previousFocus = document.activeElement;
     popup.classList.add('active');
     overlay.classList.add('active');
+    closeBtn.focus();
   }
 
-  /**
-   * Hide the coming soon popup.
-   */
+  /** Hide the coming soon popup and restore focus. */
   function hidePopup() {
     popup.classList.remove('active');
     overlay.classList.remove('active');
+    if (previousFocus) previousFocus.focus();
   }
 
   // Show popup when clicking the Linux download button
