@@ -401,10 +401,8 @@ function initBinaryBanner() {
   var dpr = window.devicePixelRatio || 1;
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Grid of binary characters - larger cells for cleaner, bolder look
-  var FONT_SIZE = 11;
-  var CELL_W = 7;
-  var CELL_H = 12;
+  // Grid of binary characters - scale down on small screens for readability
+  var FONT_SIZE, CELL_W, CELL_H;
 
   var W, H, cols, rows, mask, dripMask, centerWeight, edgeNoise, grid, rainY, settled, animId;
 
@@ -416,7 +414,21 @@ function initBinaryBanner() {
   /** Set canvas dimensions and rebuild everything. */
   function setup() {
     W = canvas.parentElement.clientWidth;
-    H = Math.max(200, Math.min(500, W * 0.38));
+    // Fixed height on small screens, proportional on larger ones
+    if (W < 600) {
+      H = 220;
+    } else {
+      H = Math.max(280, Math.min(500, W * 0.38));
+    }
+
+    // Scale grid cells based on screen width for readable text at all sizes
+    if (W < 600) {
+      FONT_SIZE = 7; CELL_W = 4; CELL_H = 7;
+    } else if (W < 900) {
+      FONT_SIZE = 9; CELL_W = 5; CELL_H = 9;
+    } else {
+      FONT_SIZE = 11; CELL_W = 7; CELL_H = 12;
+    }
 
     canvas.width = W * dpr;
     canvas.height = H * dpr;
@@ -440,14 +452,15 @@ function initBinaryBanner() {
     oc.scale(dpr, dpr);
 
     // Large bold text covering ~65% of banner height
-    var fontSize = Math.min(H * 0.38, W * 0.11); // Cap by width so text fits on small screens
+    var fontSize = Math.min(H * 0.38, W * 0.16); // Cap by width so text fits on small screens
     oc.font = '800 ' + fontSize + 'px "Inter", sans-serif';
     oc.textAlign = 'center';
     oc.textBaseline = 'middle';
-    // Stroke for extra thickness
-    oc.lineWidth = fontSize * 0.07;
+    // Stroke for extra thickness (thinner on small screens to preserve letter openings like C)
+    oc.lineWidth = W < 600 ? fontSize * 0.03 : fontSize * 0.07;
     oc.strokeStyle = '#000';
-    var textY = H * 0.48; // Slightly above center, closer to nav pill
+    // Center text vertically within the canvas (CSS handles nav offset on mobile)
+    var textY = H * 0.50;
     oc.strokeText('BrainDock', W / 2, textY);
     oc.fillStyle = '#000';
     oc.fillText('BrainDock', W / 2, textY);
@@ -494,7 +507,7 @@ function initBinaryBanner() {
 
     // Center-weight map: elliptical Gaussian falloff for background noise density
     var halfW = W / 2;
-    var centerY = H * 0.48; // Match text vertical offset
+    var centerY = H * 0.45; // Match text vertical offset
     centerWeight = [];
     for (var r3 = 0; r3 < rows; r3++) {
       centerWeight[r3] = [];

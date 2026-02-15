@@ -762,8 +762,11 @@ body.hero-compact .hero-ctas {
   }
 }
 
-/* Reduce content overlap on mobile so hero image isn't hidden behind canvas */
+/* On mobile, push canvas below nav pill and reduce content overlap */
 @media (max-width: 768px) {
+  .hero {
+    padding-top: 80px; /* Push canvas below the nav pill */
+  }
   .hero .container {
     margin-top: -30px;
   }
