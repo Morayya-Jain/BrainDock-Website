@@ -34,55 +34,25 @@ document.addEventListener('DOMContentLoaded', function() {
    * Dynamically check if navigation elements fit in the container.
    * Adds 'nav-compact' class to nav when elements would overflow.
    */
-  // Measure both nav widths once and store them
-  var navFullWidth = 0;
-  var navCompactWidth = 0;
-
-  function measureNavWidths() {
-    if (!navContainer || !navLogo) return;
-
-    // Measure full (expanded) width
-    nav.classList.remove('nav-compact');
-    nav.style.minWidth = '';
-    void nav.offsetWidth;
-    navFullWidth = nav.offsetWidth;
-
-    // Measure compact width
-    nav.classList.add('nav-compact');
-    nav.style.minWidth = '';
-    void nav.offsetWidth;
-    navCompactWidth = nav.offsetWidth;
-
-    // Start in correct state
-    nav.classList.remove('nav-compact');
-  }
-
-  /** Compare stored nav width against viewport. Switch to compact if too narrow. */
+  /**
+   * Check if the full nav fits in the viewport.
+   * CSS width:max-content ensures the pill never squeezes.
+   * This just toggles compact mode when the viewport is too narrow.
+   */
   function checkNavFit() {
-    if (!navContainer || !navLogo) return;
+    if (!nav || !navContainer) return;
 
-    // First run: measure both widths
-    if (navFullWidth === 0) measureNavWidths();
+    // Temporarily show full nav to measure its true width
+    nav.classList.remove('nav-compact');
+    void nav.offsetWidth;
+    var fullWidth = nav.offsetWidth;
 
     // Buffer so the pill doesn't touch the screen edges
-    const buffer = 40;
+    var buffer = 40;
 
-    if (window.innerWidth < navFullWidth + buffer) {
+    if (window.innerWidth < fullWidth + buffer) {
       nav.classList.add('nav-compact');
-      nav.style.minWidth = navCompactWidth + 'px'; // Lock compact pill width
-    } else {
-      nav.classList.remove('nav-compact');
-      nav.style.minWidth = navFullWidth + 'px'; // Lock full pill width
     }
-  }
-
-  // Re-measure nav after web fonts load (fixes width mismatch on first visit)
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(function () {
-      navFullWidth = 0; // Force re-measurement
-      navCompactWidth = 0;
-      checkNavFit();
-    });
   }
 
   // Mark that JS is handling responsive nav (for CSS fallback)

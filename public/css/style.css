@@ -457,7 +457,7 @@ p {
   top: var(--space-l);
   left: 50%;
   transform: translateX(-50%);
-  width: auto;
+  width: max-content; /* Never shrink below content width - no JS locking needed */
   z-index: 100;
   background: rgba(249, 248, 244, 0.72);
   -webkit-backdrop-filter: blur(12px);
