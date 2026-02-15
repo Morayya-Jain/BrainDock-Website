@@ -552,19 +552,19 @@ p {
   transition: transform var(--transition-fast);
 }
 
-/* Mobile menu - dropdown below pill */
+/* Mobile menu - dropdown merges with pill */
 .nav-mobile {
   display: none;
   position: absolute;
-  top: 64px; /* Flush with nav-container bottom */
-  left: 0;
-  right: 0;
+  top: calc(100% - 1px); /* Overlap 1px into pill border for seamless connection */
+  left: -1px; /* Align with pill's outer border */
+  right: -1px;
   background: rgba(249, 248, 244, 0.95);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border: 1px solid var(--text-primary);
   border-top: none;
-  border-radius: 0 0 var(--card-radius) var(--card-radius);
+  border-radius: 0 0 16px 16px;
   padding: var(--space-m) var(--space-l);
   max-height: calc(100vh - 80px);
   overflow-y: auto;
@@ -573,7 +573,8 @@ p {
 
 /* When mobile menu is open, flatten pill bottom corners to merge with dropdown */
 .nav.nav-menu-open {
-  border-radius: 16px 16px var(--card-radius) var(--card-radius);
+  border-radius: 16px 16px 0 0;
+  border-bottom: none;
 }
 
 .nav-mobile.active {
@@ -639,7 +640,7 @@ p {
   width: 20px;
 }
 .nav.nav-mini .nav-mobile {
-  top: 48px; /* Flush with mini nav-container bottom */
+  /* top: calc(100% - 1px) inherited - works automatically for mini height */
 }
 
 /* CSS-only fallback for browsers without JavaScript (uses a safe breakpoint) */
