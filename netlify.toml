@@ -25,11 +25,11 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Cache translation files for 1 day (they change infrequently)
+# Cache translation files briefly - they can change with deploys
 [[headers]]
   for = "/js/translations/*"
   [headers.values]
-    Cache-Control = "public, max-age=86400"
+    Cache-Control = "public, max-age=300, must-revalidate"
 
 # Session detail: /sessions/:id serves detail page; JS parses id from pathname
 [[redirects]]
