@@ -632,6 +632,26 @@ p {
 
 
 /* --------------------------------------------------------------------------
+   Binary Banner - "BrainDock" in binary digits (canvas animation)
+   -------------------------------------------------------------------------- */
+.binary-banner {
+  padding-top: 80px; /* Account for fixed nav */
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
+}
+.binary-banner canvas {
+  display: block;
+  width: 100%;
+}
+/* When banner is present, hero no longer needs nav offset and gap is reduced */
+.binary-banner + .hero {
+  padding-top: 0;
+  min-height: 70vh;
+  min-height: 70dvh;
+}
+
+/* --------------------------------------------------------------------------
    Hero Section - Fluid Scaling Design
    Fixed maximum size (original 16" MacBook Pro layout).
    Only scales down when screen is smaller. Never expands beyond max.

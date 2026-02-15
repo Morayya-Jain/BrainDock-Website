@@ -382,6 +382,257 @@ function initComingSoonPopup() {
   });
 }
 
+// ========== BINARY TEXT BANNER ==========
+// Renders "BrainDock" formed by dense 0s and 1s with a Matrix-rain
+// reveal and continuous character scrambling.
+
+/** Initialise the binary text banner canvas animation. */
+function initBinaryBanner() {
+  var canvas = document.getElementById('binaryCanvas');
+  if (!canvas) return;
+
+  var ctx = canvas.getContext('2d');
+  var dpr = window.devicePixelRatio || 1;
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Dense grid - compact chars for high-res binary texture
+  var FONT_SIZE = 9;
+  var CELL_W = 6;
+  var CELL_H = 10;
+
+  var W, H, cols, rows, mask, dripMask, centerWeight, grid, rainY, settled, animId;
+
+  /** Set canvas dimensions and rebuild everything. */
+  function setup() {
+    W = canvas.parentElement.clientWidth;
+    H = Math.max(220, Math.min(380, W * 0.3));
+
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    cols = Math.ceil(W / CELL_W);
+    rows = Math.ceil(H / CELL_H);
+
+    buildMask();
+    initGrid();
+  }
+
+  /** Render "BrainDock" at full canvas resolution, sample at each grid cell. */
+  function buildMask() {
+    var off = document.createElement('canvas');
+    off.width = Math.ceil(W * dpr);
+    off.height = Math.ceil(H * dpr);
+    var oc = off.getContext('2d');
+    oc.scale(dpr, dpr);
+
+    // Large bold text covering ~65% of banner height
+    var fontSize = H * 0.65;
+    oc.font = '800 ' + fontSize + 'px "Inter", sans-serif';
+    oc.textAlign = 'center';
+    oc.textBaseline = 'middle';
+    // Stroke for extra thickness
+    oc.lineWidth = fontSize * 0.04;
+    oc.strokeStyle = '#000';
+    oc.strokeText('BrainDock', W / 2, H / 2);
+    oc.fillStyle = '#000';
+    oc.fillText('BrainDock', W / 2, H / 2);
+
+    var data = oc.getImageData(0, 0, off.width, off.height).data;
+
+    // Sample the pixel at the center of each grid cell
+    mask = [];
+    for (var r = 0; r < rows; r++) {
+      mask[r] = [];
+      for (var c = 0; c < cols; c++) {
+        var cx = Math.floor((c * CELL_W + CELL_W / 2) * dpr);
+        var cy = Math.floor((r * CELL_H + CELL_H / 2) * dpr);
+        if (cx >= off.width) cx = off.width - 1;
+        if (cy >= off.height) cy = off.height - 1;
+        var idx = (cy * off.width + cx) * 4;
+        mask[r][c] = data[idx + 3] > 25;
+      }
+    }
+
+    // Drip mask: 2D bleed around text for soft halo (vertical + horizontal)
+    dripMask = [];
+    for (var r2 = 0; r2 < rows; r2++) {
+      dripMask[r2] = [];
+      for (var c2 = 0; c2 < cols; c2++) {
+        if (mask[r2][c2]) {
+          dripMask[r2][c2] = 0;
+          continue;
+        }
+        var nearest = 99;
+        for (var dr = -14; dr <= 14; dr++) {
+          for (var dc = -30; dc <= 30; dc++) {
+            var rr = r2 + dr;
+            var cc = c2 + dc;
+            if (rr >= 0 && rr < rows && cc >= 0 && cc < cols && mask[rr][cc]) {
+              var d = Math.sqrt(dr * dr + dc * dc);
+              if (d < nearest) nearest = d;
+            }
+          }
+        }
+        dripMask[r2][c2] = nearest < 99 ? Math.max(0, 0.45 - nearest * 0.035) : 0;
+      }
+    }
+
+    // Center-weight map: elliptical Gaussian falloff for background noise density
+    var halfW = W / 2;
+    var halfH = H / 2;
+    centerWeight = [];
+    for (var r3 = 0; r3 < rows; r3++) {
+      centerWeight[r3] = [];
+      for (var c3 = 0; c3 < cols; c3++) {
+        var dx = (c3 * CELL_W + CELL_W / 2 - halfW) / halfW;
+        var dy = (r3 * CELL_H + CELL_H / 2 - halfH) / halfH;
+        var d2 = dx * dx * 0.1 + dy * dy; // Elliptical: wider horizontal spread
+        centerWeight[r3][c3] = Math.exp(-d2 * 1.0);
+      }
+    }
+  }
+
+  /** Fill grid with random binary chars and stagger rain start positions. */
+  function initGrid() {
+    grid = [];
+    rainY = [];
+    settled = false;
+
+    for (var r = 0; r < rows; r++) {
+      grid[r] = [];
+      for (var c = 0; c < cols; c++) {
+        grid[r][c] = Math.random() > 0.5 ? '1' : '0';
+      }
+    }
+    for (var c = 0; c < cols; c++) {
+      rainY[c] = -(Math.random() * rows * 1.5);
+    }
+  }
+
+  var frame = 0;
+
+  /** Main render loop. */
+  function draw() {
+    frame++;
+
+    ctx.clearRect(0, 0, W, H);
+
+    ctx.font = FONT_SIZE + 'px "Courier New", monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    // Advance rain
+    if (!settled) {
+      var allDone = true;
+      for (var c = 0; c < cols; c++) {
+        rainY[c] += 0.5 + Math.random() * 0.3;
+        if (rainY[c] < rows + 5) allDone = false;
+      }
+      if (allDone) settled = true;
+    }
+
+    // Draw every cell
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        var isText = mask[r][c];
+        var drip = dripMask[r][c];
+        var rainPos = rainY[c];
+        var visible = r <= rainPos;
+
+        if (!visible) continue;
+
+        // Scramble characters
+        if (!isText && frame % 3 === 0 && Math.random() > 0.95) {
+          grid[r][c] = Math.random() > 0.5 ? '1' : '0';
+        }
+        if (isText && frame % 5 === 0 && Math.random() > 0.92) {
+          grid[r][c] = Math.random() > 0.5 ? '1' : '0';
+        }
+
+        // Determine opacity
+        var dist = rainPos - r;
+        var alpha;
+
+        if (isText) {
+          alpha = settled ? 1.0 : Math.min(1.0, dist / 2.5);
+        } else if (drip > 0) {
+          alpha = settled ? drip : Math.min(drip, dist / 6);
+        } else {
+          // Background noise with center-focused density
+          var cw = centerWeight[r][c];
+          if (cw < 0.005) continue;
+          var baseAlpha = 0.14 * cw;
+          alpha = settled ? baseAlpha : Math.min(baseAlpha, dist / 30);
+        }
+
+        if (alpha < 0.01) continue;
+
+        ctx.fillStyle = 'rgba(28,28,30,' + alpha.toFixed(3) + ')';
+        ctx.fillText(grid[r][c], c * CELL_W + CELL_W / 2, r * CELL_H + CELL_H / 2);
+      }
+    }
+
+    animId = requestAnimationFrame(draw);
+  }
+
+  // Pause when scrolled out of viewport for performance
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      var vis = entries[0].isIntersecting;
+      if (vis && !animId && !reducedMotion) draw();
+      if (!vis && animId) {
+        cancelAnimationFrame(animId);
+        animId = null;
+      }
+    }, { threshold: 0 });
+    observer.observe(canvas);
+  }
+
+  // --- Init ---
+  setup();
+
+  if (reducedMotion) {
+    settled = true;
+    for (var c = 0; c < cols; c++) rainY[c] = rows + 10;
+    draw();
+    cancelAnimationFrame(animId);
+    animId = null;
+  } else {
+    draw();
+  }
+
+  // Debounced resize handler
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      if (animId) cancelAnimationFrame(animId);
+      animId = null;
+      frame = 0;
+      setup();
+      if (reducedMotion) {
+        settled = true;
+        for (var c2 = 0; c2 < cols; c2++) rainY[c2] = rows + 10;
+        draw();
+        cancelAnimationFrame(animId);
+        animId = null;
+      } else {
+        draw();
+      }
+    }, 250);
+  });
+}
+
+// Run binary banner after fonts are loaded (mask needs Inter 800)
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(initBinaryBanner);
+} else {
+  window.addEventListener('load', initBinaryBanner);
+}
+
 /**
  * "How BrainDock Helps" typing animation.
  * Types text one character at a time inside a fake editor mockup,
