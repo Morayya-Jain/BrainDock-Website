@@ -556,7 +556,7 @@ p {
 .nav-mobile {
   display: none;
   position: absolute;
-  top: calc(64px + 4px); /* Matches nav-container height */
+  top: 64px; /* Flush with nav-container bottom */
   left: 0;
   right: 0;
   background: rgba(249, 248, 244, 0.95);
@@ -639,7 +639,7 @@ p {
   width: 20px;
 }
 .nav.nav-mini .nav-mobile {
-  top: calc(48px + 4px); /* Matches mini nav-container height */
+  top: 48px; /* Flush with mini nav-container bottom */
 }
 
 /* CSS-only fallback for browsers without JavaScript (uses a safe breakpoint) */

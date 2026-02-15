@@ -38,34 +38,50 @@ document.addEventListener('DOMContentLoaded', function() {
    * Three nav states based on viewport width:
    * 1. Full: logo + links + Sign Up + Download
    * 2. Compact (nav-compact): logo + Download + hamburger
-   * 3. Mini (nav-mini): logo + hamburger only
+   * 3. Mini (nav-mini): scaled-down compact for very small screens
+   * Widths are measured once and cached to prevent flicker on scroll/resize.
    */
-  function checkNavFit() {
-    if (!nav || !navContainer) return;
+  var cachedFullWidth = 0;
+  var cachedCompactWidth = 0;
 
-    // Measure full nav width
+  function measureNavWidths() {
+    if (!nav || !navContainer) return;
+    // Measure full nav
     nav.classList.remove('nav-compact', 'nav-mini');
     void nav.offsetWidth;
-    var fullWidth = nav.offsetWidth;
-
-    // Measure compact nav width
+    cachedFullWidth = nav.offsetWidth;
+    // Measure compact nav
     nav.classList.add('nav-compact');
     nav.classList.remove('nav-mini');
     void nav.offsetWidth;
-    var compactWidth = nav.offsetWidth;
-
-    // Reset to determine correct state
+    cachedCompactWidth = nav.offsetWidth;
+    // Reset
     nav.classList.remove('nav-compact', 'nav-mini');
+  }
+
+  function checkNavFit() {
+    if (!nav || !navContainer) return;
+    if (cachedFullWidth === 0) measureNavWidths();
 
     var buffer = 40;
 
-    if (window.innerWidth < compactWidth + buffer) {
-      // Screen too narrow even for compact - go mini
+    if (window.innerWidth < cachedCompactWidth + buffer) {
       nav.classList.add('nav-compact', 'nav-mini');
-    } else if (window.innerWidth < fullWidth + buffer) {
-      // Screen too narrow for full - go compact
+    } else if (window.innerWidth < cachedFullWidth + buffer) {
+      nav.classList.remove('nav-mini');
       nav.classList.add('nav-compact');
+    } else {
+      nav.classList.remove('nav-compact', 'nav-mini');
     }
+  }
+
+  // Re-measure after fonts load (only time we need to re-measure)
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () {
+      cachedFullWidth = 0;
+      cachedCompactWidth = 0;
+      checkNavFit();
+    });
   }
 
   // Mark that JS is handling responsive nav (for CSS fallback)
@@ -130,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let responsiveResizeTimeout;
   window.addEventListener('resize', function() {
     clearTimeout(responsiveResizeTimeout);
-    responsiveResizeTimeout = setTimeout(runAllResponsiveChecks, 50);
+    responsiveResizeTimeout = setTimeout(runAllResponsiveChecks, 150);
   });
 
   if (navToggle && navMobile) {
