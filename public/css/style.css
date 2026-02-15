@@ -556,7 +556,7 @@ p {
 .nav-mobile {
   display: none;
   position: absolute;
-  top: calc(64px + 4px);
+  top: calc(64px + 4px); /* Matches nav-container height */
   left: 0;
   right: 0;
   background: rgba(249, 248, 244, 0.95);
@@ -615,9 +615,31 @@ p {
   display: flex;
 }
 
-/* Mini state: logo + hamburger only (very small screens) */
-.nav.nav-mini .nav-actions {
-  display: none;
+/* Mini state: same as compact but scaled down for very small screens */
+.nav.nav-mini .nav-container {
+  height: 48px;
+  padding: 0 var(--space-m);
+  gap: var(--space-m);
+}
+.nav.nav-mini .nav-logo img {
+  height: 26px;
+}
+.nav.nav-mini .nav-cta-download {
+  padding: 6px 14px;
+  font-size: 0.75rem;
+}
+.nav.nav-mini .nav-cta-download svg {
+  width: 12px;
+  height: 12px;
+}
+.nav.nav-mini .nav-toggle {
+  padding: var(--space-xs);
+}
+.nav.nav-mini .nav-toggle span {
+  width: 20px;
+}
+.nav.nav-mini .nav-mobile {
+  top: calc(48px + 4px); /* Matches mini nav-container height */
 }
 
 /* CSS-only fallback for browsers without JavaScript (uses a safe breakpoint) */
@@ -767,11 +789,8 @@ body.hero-compact .hero-ctas {
   }
 }
 
-/* On mobile, push canvas below nav pill and reduce content overlap */
+/* Reduce content overlap on mobile */
 @media (max-width: 768px) {
-  .hero {
-    padding-top: 80px; /* Push canvas below the nav pill */
-  }
   .hero .container {
     margin-top: -30px;
   }
