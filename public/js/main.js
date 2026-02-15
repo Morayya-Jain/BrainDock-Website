@@ -34,43 +34,45 @@ document.addEventListener('DOMContentLoaded', function() {
    * Dynamically check if navigation elements fit in the container.
    * Adds 'nav-compact' class to nav when elements would overflow.
    */
-  function checkNavFit() {
-    if (!navContainer || !navLinks || !navLogo) return;
+  // Measure both nav widths once and store them
+  var navFullWidth = 0;
+  var navCompactWidth = 0;
 
-    // Temporarily remove compact mode to measure true widths
+  function measureNavWidths() {
+    if (!navContainer || !navLogo) return;
+
+    // Measure full (expanded) width
     nav.classList.remove('nav-compact');
+    nav.style.minWidth = '';
+    void nav.offsetWidth;
+    navFullWidth = nav.offsetWidth;
 
-    // Force a reflow to get accurate measurements
-    void navContainer.offsetWidth;
+    // Measure compact width
+    nav.classList.add('nav-compact');
+    nav.style.minWidth = '';
+    void nav.offsetWidth;
+    navCompactWidth = nav.offsetWidth;
 
-    // Get the container's available width (accounting for padding)
-    const containerStyle = getComputedStyle(navContainer);
-    const containerPadding = parseFloat(containerStyle.paddingLeft) + parseFloat(containerStyle.paddingRight);
-    const availableWidth = navContainer.clientWidth - containerPadding;
+    // Start in correct state
+    nav.classList.remove('nav-compact');
+  }
 
-    // Measure each element's width
-    const logoWidth = navLogo.offsetWidth;
-    const linksWidth = navLinks.scrollWidth;
-    const ctaWidth = navCta ? navCta.offsetWidth : 0;
+  /** Compare stored nav width against viewport. Switch to compact if too narrow. */
+  function checkNavFit() {
+    if (!navContainer || !navLogo) return;
 
-    // Get gap size from CSS custom property or fallback
-    const gap = parseFloat(getComputedStyle(navContainer).gap) || 24;
+    // First run: measure both widths
+    if (navFullWidth === 0) measureNavWidths();
 
-    // Calculate total required width (elements + gaps between them)
-    // Elements: logo, links, cta = 2 gaps between 3 elements
-    let elementCount = 1; // logo always present
-    if (linksWidth > 0) elementCount++;
-    if (ctaWidth > 0) elementCount++;
-    const totalGaps = (elementCount - 1) * gap;
+    // Buffer so the pill doesn't touch the screen edges
+    const buffer = 40;
 
-    const requiredWidth = logoWidth + linksWidth + ctaWidth + totalGaps;
-
-    // Add buffer for safety (20px)
-    const buffer = 20;
-
-    // If not enough space, switch to compact/mobile mode
-    if (requiredWidth + buffer > availableWidth) {
+    if (window.innerWidth < navFullWidth + buffer) {
       nav.classList.add('nav-compact');
+      nav.style.minWidth = navCompactWidth + 'px'; // Lock compact pill width
+    } else {
+      nav.classList.remove('nav-compact');
+      nav.style.minWidth = navFullWidth + 'px'; // Lock full pill width
     }
   }
 
@@ -142,6 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (navToggle && navMobile) {
     navToggle.addEventListener('click', function() {
       const isOpen = navMobile.classList.toggle('active');
+      nav.classList.toggle('nav-menu-open', isOpen); // Safari 15.0-15.3 compat (replaces :has())
       this.setAttribute('aria-expanded', isOpen);
     });
 
@@ -149,6 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.nav-mobile a').forEach(link => {
       link.addEventListener('click', () => {
         navMobile.classList.remove('active');
+        nav.classList.remove('nav-menu-open');
         navToggle.setAttribute('aria-expanded', 'false');
       });
     });
@@ -159,6 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
           !navMobile.contains(e.target) && 
           !navToggle.contains(e.target)) {
         navMobile.classList.remove('active');
+        nav.classList.remove('nav-menu-open');
         navToggle.setAttribute('aria-expanded', 'false');
       }
     });
@@ -170,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
       menuResizeTimeout = setTimeout(function() {
         if (!nav.classList.contains('nav-compact') && navMobile.classList.contains('active')) {
           navMobile.classList.remove('active');
+          nav.classList.remove('nav-menu-open');
           navToggle.setAttribute('aria-expanded', 'false');
         }
       }, 100);
@@ -410,7 +416,7 @@ function initBinaryBanner() {
   /** Set canvas dimensions and rebuild everything. */
   function setup() {
     W = canvas.parentElement.clientWidth;
-    H = Math.max(180, Math.min(500, W * 0.38));
+    H = Math.max(200, Math.min(500, W * 0.38));
 
     canvas.width = W * dpr;
     canvas.height = H * dpr;
@@ -441,7 +447,7 @@ function initBinaryBanner() {
     // Stroke for extra thickness
     oc.lineWidth = fontSize * 0.07;
     oc.strokeStyle = '#000';
-    var textY = H * 0.55; // Shift text down, more digits above near the nav pill
+    var textY = H * 0.48; // Slightly above center, closer to nav pill
     oc.strokeText('BrainDock', W / 2, textY);
     oc.fillStyle = '#000';
     oc.fillText('BrainDock', W / 2, textY);
@@ -482,20 +488,20 @@ function initBinaryBanner() {
             }
           }
         }
-        dripMask[r2][c2] = nearest < 99 ? Math.max(0, 0.55 - nearest * 0.03) : 0;
+        dripMask[r2][c2] = nearest < 99 ? Math.max(0, 0.55 - nearest * 0.015) : 0;
       }
     }
 
     // Center-weight map: elliptical Gaussian falloff for background noise density
     var halfW = W / 2;
-    var centerY = H * 0.55; // Match text vertical offset
+    var centerY = H * 0.48; // Match text vertical offset
     centerWeight = [];
     for (var r3 = 0; r3 < rows; r3++) {
       centerWeight[r3] = [];
       for (var c3 = 0; c3 < cols; c3++) {
         var dx = (c3 * CELL_W + CELL_W / 2 - halfW) / halfW;
         var dy = (r3 * CELL_H + CELL_H / 2 - centerY) / (H / 2);
-        var d2 = dx * dx * 0.4 + dy * dy * 1.8;
+        var d2 = dx * dx * 0.3 + dy * dy * 0.3; // Subtle horizontal fade, gentle vertical
         centerWeight[r3][c3] = Math.exp(-d2 * 1.0);
       }
     }
@@ -585,13 +591,13 @@ function initBinaryBanner() {
 
         if (isText) {
           alpha = settled ? 1.0 : Math.min(1.0, dist / 2.5);
-        } else if (drip > 0) {
-          alpha = settled ? drip : Math.min(drip, dist / 6);
         } else {
-          // Background noise with center-focused density
+          // Use the brighter of drip halo and background noise - no gaps between zones
           var cw = centerWeight[r][c];
-          var baseAlpha = 0.22 * cw;
-          alpha = settled ? baseAlpha : Math.min(baseAlpha, dist / 30);
+          var baseAlpha = 0.28 * cw;
+          var dripAlpha = drip > 0 ? drip : 0;
+          alpha = Math.max(dripAlpha, baseAlpha);
+          if (!settled) alpha = Math.min(alpha, dist / 6);
         }
 
         // Soft spotlight glow near cursor
@@ -599,17 +605,12 @@ function initBinaryBanner() {
           alpha = Math.min(1.0, alpha + proximity * 0.2);
         }
 
-        // Organic edge fade - noise creates a soft cloud-like boundary
-        if (!isText) {
-          var eDx = (c - cols / 2) / (cols / 2);
-          var eDy = (r - rows * 0.55) / (rows / 2);
-          var hWeight = eDy > 0 ? 1.0 : 0.15;
-          var eDist = Math.sqrt(eDx * eDx * hWeight + eDy * eDy);
-          // Per-cell noise offsets the fade threshold for an organic edge
-          var noiseOffset = edgeNoise[r][c];
-          var fadeStart = 0.40 - noiseOffset;
-          var edgeFade = eDist < fadeStart ? 1.0 : Math.max(0, 1.0 - (eDist - fadeStart) / 0.45);
-          alpha *= edgeFade;
+        // Bottom-only organic fade - digits dissolve well before canvas edge
+        var bottomProgress = (r - rows * 0.5) / (rows * 0.5); // 0 at midpoint, 1 at bottom
+        if (bottomProgress > 0) {
+          var noiseOffset = isText ? 0 : edgeNoise[r][c];
+          var fadeFactor = Math.max(0, 1.0 - (bottomProgress - noiseOffset) * 1.6);
+          alpha *= fadeFactor;
         }
 
         if (alpha < 0.01) continue;

@@ -458,7 +458,6 @@ p {
   left: 50%;
   transform: translateX(-50%);
   width: auto;
-  max-width: calc(100% - 32px);
   z-index: 100;
   background: rgba(249, 248, 244, 0.72);
   -webkit-backdrop-filter: blur(12px);
@@ -470,16 +469,20 @@ p {
 @media (max-width: 480px) {
   .nav {
     top: var(--space-s);
-    max-width: calc(100% - 16px);
   }
 }
 
 .nav-container {
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
   gap: var(--space-xl);
   height: 64px;
   padding: 0 var(--space-l);
+}
+
+.nav-logo {
+  flex-shrink: 0;
 }
 
 .nav-logo img {
@@ -492,7 +495,7 @@ p {
   align-items: center;
   justify-content: center;
   gap: var(--space-l);
-  min-width: 0;
+  flex-shrink: 0;
 }
 
 .nav-links {
@@ -569,7 +572,7 @@ p {
 }
 
 /* When mobile menu is open, flatten pill bottom corners to merge with dropdown */
-.nav:has(.nav-mobile.active) {
+.nav.nav-menu-open {
   border-radius: 16px 16px var(--card-radius) var(--card-radius);
 }
 
@@ -642,9 +645,10 @@ p {
 .hero-binary-canvas {
   display: block;
   width: 100%;
-  /* Radial CSS mask - dissolves digits into the hero background seamlessly */
-  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 38%, black 30%, transparent 62%);
-  mask-image: radial-gradient(ellipse 75% 70% at 50% 38%, black 30%, transparent 62%);
+  align-self: stretch;
+  flex-shrink: 0; /* Never shrink the canvas */
+  position: relative;
+  z-index: 1; /* Canvas renders above hero content overflow */
 }
 
 /* --------------------------------------------------------------------------
@@ -674,6 +678,9 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 0; /* Below the canvas (z-index: 1) so it doesn't cover the fade */
+  margin-top: -60px; /* Shift content up while keeping section height */
 }
 
 /* Desktop: 80px edge padding */
@@ -752,6 +759,13 @@ body.hero-compact .hero-ctas {
 @media (max-width: 500px) {
   body:not(.hero-compact) .hero-ctas {
     flex-direction: column;
+  }
+}
+
+/* Reduce content overlap on mobile so hero image isn't hidden behind canvas */
+@media (max-width: 768px) {
+  .hero .container {
+    margin-top: -30px;
   }
 }
 
