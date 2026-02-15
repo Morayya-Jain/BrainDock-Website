@@ -10,21 +10,21 @@
     "backToTop": "Back to top",
     "privacy": {
       "pageTitle": "Privacy Policy",
-      "pageMeta": "BrainDock Focus Assistance Application - Last Updated: January 2026",
+      "pageMeta": "BrainDock Focus Assistance Application - Last Updated: February 2026",
       "section1": {
         "title": "1. Introduction",
-        "content": "<p>BrainDock (\"we\", \"us\", \"our\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our focus assistance application (\"the Application\").</p><p>This policy is designed to comply with the Australian Privacy Principles (APPs) under the Privacy Act 1988 (Cth), as well as provide transparency for users in other jurisdictions including the European Union (GDPR) and United Kingdom (UK GDPR).</p><p><strong>Please read this Privacy Policy carefully.</strong> By using the Application, you consent to the practices described in this policy.</p>"
+        "content": "<p>BrainDock (\"we\", \"us\", \"our\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our focus assistance application (\"the Application\"), including our desktop app and online dashboard.</p><p>This policy is designed to comply with the Australian Privacy Principles (APPs) under the Privacy Act 1988 (Cth), as well as provide transparency for users in other jurisdictions including the European Union (GDPR) and United Kingdom (UK GDPR).</p><p><strong>Please read this Privacy Policy carefully.</strong> By using the Application, you consent to the practices described in this policy.</p>"
       },
       "section2": {
         "title": "2. About Us",
-        "content": "<p>BrainDock is a focus assistance application that helps users observe their study and work sessions using camera-based presence awareness.</p><p><strong>Contact Information:</strong></p><ul><li>Email: <a href=\"mailto:morayya@thebraindock.com\">morayya@thebraindock.com</a> or <a href=\"mailto:help.thebraindock@gmail.com\">help.thebraindock@gmail.com</a></li><li>Website: thebraindock.com</li></ul>"
+        "content": "<p>BrainDock is a focus assistance application that helps users observe their study and work sessions using camera-based presence awareness. Users can create an account to sync session history and settings across devices and view their data via an online dashboard.</p><p><strong>Contact Information:</strong></p><ul><li>Email: <a href=\"mailto:morayya@thebraindock.com\">morayya@thebraindock.com</a> or <a href=\"mailto:help.thebraindock@gmail.com\">help.thebraindock@gmail.com</a></li><li>Website: thebraindock.com</li></ul>"
       },
       "section3": {
         "title": "3. Information We Collect",
         "intro": "<p>We collect different types of information to provide and improve our service.</p>",
         "subsection1": {
           "title": "3.1 Camera Frame Data (Processed, Not Stored)",
-          "content": "<p><strong>What we capture:</strong></p><ul><li>Visual frames from your device's camera during active sessions started by you.</li></ul><p><strong>What we analyse:</strong></p><ul><li>Whether a person is present at the desk</li><li>Whether the person appears to be engaged with distraction devices (phones, tablets, game controllers)</li><li>General presence indicators (at desk vs. away)</li></ul><p><strong>What we do NOT analyse or collect:</strong></p><ul><li>Your identity or facial features for recognition purposes</li><li>Biometric templates or biometric identifiers</li><li>Audio from your microphone</li><li>Keystrokes or typing content</li></ul><p><strong>Processing:</strong></p><ul><li>Frames are captured approximately every 3 seconds during active sessions only</li><li>Frames are transmitted to our AI processing providers (OpenAI or Google Gemini) for analysis</li><li>Frames are NOT stored locally on your device</li><li>Frames are NOT stored on our servers</li></ul>"
+          "content": "<p><strong>What we capture:</strong></p><ul><li>Visual frames from your device's camera during active sessions started by you.</li></ul><p><strong>What we analyse:</strong></p><ul><li>Whether a person is present at the desk</li><li>Whether the person appears to be engaged with distraction devices (phones, tablets, game controllers, and other configurable items)</li><li>General presence indicators (at desk vs. away)</li></ul><p><strong>What we do NOT analyse or collect:</strong></p><ul><li>Your identity or facial features for recognition purposes</li><li>Biometric templates or biometric identifiers</li><li>Audio from your microphone</li><li>Keystrokes or typing content</li></ul><p><strong>Processing:</strong></p><ul><li>Frames are captured approximately every 3 seconds during active sessions only</li><li>Frames are transmitted to our AI processing providers (OpenAI or Google Gemini) for analysis</li><li>Frames are NOT stored locally on your device</li><li>Frames are NOT stored on our servers</li></ul>"
         },
         "subsection2": {
           "title": "3.2 Screen Awareness Data (Processed Locally On Your Device)",
@@ -35,16 +35,20 @@
           "content": "<p><strong>This feature is disabled by default.</strong> You must explicitly enable it in Application settings.</p><p><strong>When enabled:</strong></p><ul><li>The Application captures screenshots of your screen</li><li>Screenshots are transmitted to our AI providers (OpenAI or Google Gemini) for analysis</li><li>AI analyses the screenshot to identify distraction content</li><li>Screenshots are processed in real-time and <strong>NOT stored</strong> on your device or our servers</li></ul><p><strong>What the AI analyses:</strong></p><ul><li>Whether distraction apps/websites are visible</li><li>General screen content category (work, entertainment, social media, etc.)</li></ul><p><strong>What the AI does NOT extract:</strong></p><ul><li>Text content or readable information from screenshots</li><li>Personal data visible on screen</li><li>File names, passwords, or sensitive information</li></ul><p><strong>Important warnings:</strong></p><ul><li>Screenshots may capture sensitive information visible on your screen</li><li>Ensure no confidential information is visible when this feature is enabled</li><li>You can disable this feature at any time</li></ul>"
         },
         "subsection4": {
-          "title": "3.4 Session Log Data (Local)",
-          "content": "<p>The following data is generated and stored locally on your device:</p><table><thead><tr><th>Data Type</th><th>Description</th><th>Storage Location</th></tr></thead><tbody><tr><td>Session timestamps</td><td>Start and end times of focus sessions</td><td>Your device</td></tr><tr><td>Event logs</td><td>Timestamps of state changes (present, away, distraction identified)</td><td>Your device</td></tr><tr><td>Focus statistics</td><td>Calculated metrics (focus time, distraction count, etc.)</td><td>Your device</td></tr><tr><td>Session reports</td><td>Generated PDF summaries</td><td>Your device (Downloads folder)</td></tr></tbody></table>"
+          "title": "3.4 Session Data",
+          "content": "<p>The following data is generated during focus sessions:</p><table><thead><tr><th>Data Type</th><th>Description</th><th>Storage Location</th></tr></thead><tbody><tr><td>Session timestamps</td><td>Start and end times of focus sessions</td><td>Your device and cloud</td></tr><tr><td>Event logs</td><td>Timestamps of state changes (present, away, distraction identified)</td><td>Your device and cloud</td></tr><tr><td>Focus statistics</td><td>Calculated metrics (focus time, distraction count, etc.)</td><td>Your device and cloud</td></tr><tr><td>Session details</td><td>Session title, category, and goals you set</td><td>Your device and cloud</td></tr><tr><td>Session reports</td><td>Generated PDF summaries</td><td>Your device (Downloads folder)</td></tr><tr><td>Daily statistics</td><td>Cumulative daily focus and distraction time</td><td>Your device</td></tr></tbody></table><p>If you are logged in, session summaries (timestamps, event timeline, focus statistics, session title, category, and goals) are synced to your BrainDock cloud account so you can view your history via the online dashboard.</p>"
         },
         "subsection5": {
-          "title": "3.5 Licence and Payment Data",
-          "content": "<p>When you purchase the Application:</p><table><thead><tr><th>Data Type</th><th>Collected By</th><th>Purpose</th></tr></thead><tbody><tr><td>Email address</td><td>Stripe (payment processor)</td><td>Payment confirmation, licence delivery</td></tr><tr><td>Payment details</td><td>Stripe</td><td>Process payment</td></tr><tr><td>Licence key</td><td>Stored locally</td><td>Validate your licence</td></tr><tr><td>Terms acceptance</td><td>Stripe</td><td>Record of consent</td></tr></tbody></table><p>We do not directly collect or store your payment card details.</p>"
+          "title": "3.5 Payment and Usage Data",
+          "content": "<p>When you purchase usage hours:</p><table><thead><tr><th>Data Type</th><th>Collected By</th><th>Purpose</th></tr></thead><tbody><tr><td>Email address</td><td>Stripe (payment processor)</td><td>Payment confirmation and account</td></tr><tr><td>Payment details</td><td>Stripe</td><td>Process payment</td></tr><tr><td>Usage balance</td><td>BrainDock</td><td>Track remaining usage hours</td></tr><tr><td>Terms acceptance</td><td>Stripe</td><td>Record of consent</td></tr></tbody></table><p>We do not directly collect or store your payment card details. Your usage balance (hours purchased and hours used) is stored in your cloud account and cached locally on your device.</p>"
         },
         "subsection6": {
           "title": "3.6 Technical and Diagnostic Data",
           "content": "<p>We may collect minimal technical data for troubleshooting:</p><ul><li>Error logs (may include timestamps, error messages)</li><li>Application version</li><li>Operating system type</li></ul><p><strong>Note:</strong> We design our logging to avoid capturing personal information. However, error logs may inadvertently contain personal data in some circumstances.</p>"
+        },
+        "subsection7": {
+          "title": "3.7 Account and Device Data",
+          "content": "<p>When you create an account or log in to the Application, we collect:</p><ul><li><strong>Email address</strong> - used for your account and to deliver purchase confirmations</li><li><strong>Device identifier</strong> - an anonymous identifier derived from your device, used to manage device registration</li><li><strong>Basic device information</strong> - device name, operating system, and app version</li></ul><p>Authentication tokens are stored securely on your device, using your operating system's keychain where available.</p><p>Your settings (such as monitoring mode, enabled distraction items, and blocklist preferences) are synced between your account and your device so they persist across sessions.</p>"
         }
       },
       "section4": {
@@ -53,7 +57,7 @@
       },
       "section5": {
         "title": "5. How We Use Your Information",
-        "content": "<p>We use collected information for the following purposes:</p><table><thead><tr><th>Purpose</th><th>Legal Basis (GDPR)</th><th>APP Reference</th></tr></thead><tbody><tr><td>Provide focus assistance functionality</td><td>Contract performance / Consent</td><td>APP 3, 6</td></tr><tr><td>Generate session reports</td><td>Contract performance</td><td>APP 6</td></tr><tr><td>Process payments</td><td>Contract performance</td><td>APP 3, 6</td></tr><tr><td>Validate licences</td><td>Legitimate interest</td><td>APP 6</td></tr><tr><td>Improve the Application</td><td>Legitimate interest</td><td>APP 6</td></tr><tr><td>Respond to support requests</td><td>Contract performance</td><td>APP 6</td></tr><tr><td>Comply with legal obligations</td><td>Legal obligation</td><td>APP 6</td></tr></tbody></table>"
+        "content": "<p>We use collected information for the following purposes:</p><table><thead><tr><th>Purpose</th><th>Legal Basis (GDPR)</th><th>APP Reference</th></tr></thead><tbody><tr><td>Provide focus assistance functionality</td><td>Contract performance / Consent</td><td>APP 3, 6</td></tr><tr><td>Generate session reports</td><td>Contract performance</td><td>APP 6</td></tr><tr><td>Process payments</td><td>Contract performance</td><td>APP 3, 6</td></tr><tr><td>Validate licences</td><td>Legitimate interest</td><td>APP 6</td></tr><tr><td>Improve the Application</td><td>Legitimate interest</td><td>APP 6</td></tr><tr><td>Respond to support requests</td><td>Contract performance</td><td>APP 6</td></tr><tr><td>Manage your account and sync settings</td><td>Contract performance</td><td>APP 3, 6</td></tr><tr><td>Track usage balance</td><td>Contract performance</td><td>APP 3, 6</td></tr><tr><td>Register and identify your devices</td><td>Contract performance / Legitimate interest</td><td>APP 6</td></tr><tr><td>Comply with legal obligations</td><td>Legal obligation</td><td>APP 6</td></tr></tbody></table>"
       },
       "section6": {
         "title": "6. Disclosure to Third Parties",
@@ -73,10 +77,14 @@
         },
         "subsection2": {
           "title": "6.2 Payment Processor (Stripe)",
-          "content": "<p><strong>What is disclosed:</strong> Payment and contact information you provide at checkout</p><p><strong>Why:</strong> To process your payment and deliver your licence</p><p><strong>Location:</strong> United States (with global operations)</p><p><strong>Their data practices:</strong> <a href=\"https://stripe.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://stripe.com/privacy</a></p>"
+          "content": "<p><strong>What is disclosed:</strong> Payment and contact information you provide at checkout</p><p><strong>Why:</strong> To process your payment and deliver your usage hours</p><p><strong>Location:</strong> United States (with global operations)</p><p><strong>Their data practices:</strong> <a href=\"https://stripe.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://stripe.com/privacy</a></p>"
         },
         "subsection3": {
-          "title": "6.3 Other Disclosures",
+          "title": "6.3 Cloud Infrastructure (Supabase)",
+          "content": "<p><strong>What is stored:</strong> Your account information, session summaries, usage balance, device registration, and settings</p><p><strong>Why:</strong> To provide account management, session history via the online dashboard, and cross-device settings sync</p><p><strong>Location:</strong> United States (hosted on Amazon Web Services)</p><p><strong>Their data practices:</strong> <a href=\"https://supabase.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://supabase.com/privacy</a></p><p>All data is protected by row-level security policies, ensuring users can only access their own data.</p>"
+        },
+        "subsection4": {
+          "title": "6.4 Other Disclosures",
           "content": "<p>We may disclose your information:</p><ul><li><strong>Legal Requirements:</strong> If required by law, court order, or government request</li><li><strong>Protection of Rights:</strong> To protect our rights, privacy, safety, or property</li><li><strong>Business Transfer:</strong> In connection with a merger, acquisition, or sale of assets (with notice to you)</li></ul><p>We do NOT:</p><ul><li>Sell your personal information</li><li>Share data for third-party marketing</li><li>Trade in personal information</li></ul>"
         }
       },
@@ -103,10 +111,10 @@
       "section8": {
         "title": "8. Data Retention Schedule",
         "intro": "<p>We maintain the following retention practices:</p>",
-        "table": "<table><thead><tr><th>Data Type</th><th>Retention Period</th><th>Deletion Method</th></tr></thead><tbody><tr><td>Camera frames</td><td>Not retained (processed in real-time only)</td><td>Not applicable</td></tr><tr><td>Screenshots (if enabled)</td><td>Not retained (processed in real-time only)</td><td>Not applicable</td></tr><tr><td>Screen awareness data</td><td>Not retained (processed locally in real-time)</td><td>Not applicable</td></tr><tr><td>Session logs (local)</td><td>Until you delete them</td><td>User-controlled deletion</td></tr><tr><td>PDF reports (local)</td><td>Until you delete them</td><td>User-controlled deletion</td></tr><tr><td>Error logs</td><td>Minimal retention for troubleshooting</td><td>Automatic deletion</td></tr><tr><td>Licence data</td><td>Duration of licence validity</td><td>Upon licence revocation</td></tr><tr><td>Payment records (Stripe)</td><td>Per Stripe's retention policy</td><td>Contact Stripe</td></tr><tr><td>OpenAI processing</td><td>Per OpenAI's API data usage policy</td><td>Automatic per OpenAI</td></tr><tr><td>Google Gemini processing</td><td>Per Google's Gemini API terms</td><td>Automatic per Google</td></tr></tbody></table>",
+        "table": "<table><thead><tr><th>Data Type</th><th>Retention Period</th><th>Deletion Method</th></tr></thead><tbody><tr><td>Camera frames</td><td>Not retained (processed in real-time only)</td><td>Not applicable</td></tr><tr><td>Screenshots (if enabled)</td><td>Not retained (processed in real-time only)</td><td>Not applicable</td></tr><tr><td>Screen awareness data</td><td>Not retained (processed locally in real-time)</td><td>Not applicable</td></tr><tr><td>Session data (local)</td><td>Until you delete them</td><td>User-controlled deletion</td></tr><tr><td>Session data (cloud)</td><td>Duration of your account</td><td>Account deletion or contact us</td></tr><tr><td>Account data</td><td>Duration of your account</td><td>Account deletion or contact us</td></tr><tr><td>Device registration</td><td>Duration of your account</td><td>Account deletion or contact us</td></tr><tr><td>PDF reports (local)</td><td>Until you delete them</td><td>User-controlled deletion</td></tr><tr><td>Error logs</td><td>Minimal retention for troubleshooting</td><td>Automatic deletion</td></tr><tr><td>Usage balance</td><td>Duration of your account</td><td>Account deletion or contact us</td></tr><tr><td>Payment records (Stripe)</td><td>Per Stripe's retention policy</td><td>Contact Stripe</td></tr><tr><td>OpenAI processing</td><td>Per OpenAI's API data usage policy</td><td>Automatic per OpenAI</td></tr><tr><td>Google Gemini processing</td><td>Per Google's Gemini API terms</td><td>Automatic per Google</td></tr></tbody></table>",
         "subsection1": {
           "title": "8.1 Your Control Over Local Data",
-          "content": "<p>All session data and reports are stored locally on your device. You can delete this data at any time by:</p><ol><li>Deleting files from the Application's data directory</li><li>Uninstalling the Application</li><li>Using your operating system's file management tools</li></ol>"
+          "content": "<p>Session data and reports stored locally on your device can be deleted at any time by:</p><ol><li>Deleting files from the Application's data directory</li><li>Uninstalling the Application</li><li>Using your operating system's file management tools</li></ol><p>To delete your cloud-stored data (session history, account information, and device registrations), contact us or delete your account via the dashboard.</p>"
         },
         "subsection2": {
           "title": "8.2 Data We Cannot Delete",
@@ -118,7 +126,7 @@
         "intro": "<p>We implement reasonable security measures to protect your information:</p>",
         "subsection1": {
           "title": "9.1 Technical Measures",
-          "content": "<ul><li><strong>Encryption in Transit:</strong> All data transmitted to third parties uses TLS/HTTPS encryption</li><li><strong>Local Storage:</strong> Session data is stored in standard file formats on your device, protected by your device's security</li><li><strong>No Central Database:</strong> We do not maintain a central database of user session data</li><li><strong>API Security:</strong> We use secure API authentication with our service providers</li></ul>"
+          "content": "<ul><li><strong>Encryption in Transit:</strong> All data transmitted to third parties uses TLS/HTTPS encryption</li><li><strong>Local Storage:</strong> Session data is stored in standard file formats on your device, protected by your device's security</li><li><strong>Cloud Storage:</strong> Cloud-stored data is protected by row-level security policies and encrypted connections</li><li><strong>Authentication:</strong> Tokens are stored in your operating system's secure keychain where available</li><li><strong>API Security:</strong> We use secure API authentication with our service providers</li></ul>"
         },
         "subsection2": {
           "title": "9.2 Organisational Measures",
@@ -126,7 +134,7 @@
         },
         "subsection3": {
           "title": "9.3 Your Responsibilities",
-          "content": "<p>You are responsible for:</p><ul><li>Securing your device with appropriate passwords/biometrics</li><li>Keeping your operating system and the Application updated</li><li>Not sharing your licence key with others</li><li>Protecting any exported reports containing session data</li></ul>"
+          "content": "<p>You are responsible for:</p><ul><li>Securing your device with appropriate passwords/biometrics</li><li>Keeping your operating system and the Application updated</li><li>Keeping your account credentials secure</li><li>Protecting any exported reports containing session data</li></ul>"
         }
       },
       "section10": {
@@ -137,7 +145,7 @@
         },
         "subsection2": {
           "title": "10.2 Limitation of Liability",
-          "content": "<p>BrainDock expressly disclaims liability for any data breaches, security incidents, or unauthorised access that occurs:</p><ul><li>At the AI provider level (OpenAI or Google Gemini)</li><li>At the payment processor level (Stripe)</li><li>On your local device due to unauthorised access</li></ul>"
+          "content": "<p>BrainDock expressly disclaims liability for any data breaches, security incidents, or unauthorised access that occurs:</p><ul><li>At the AI provider level (OpenAI or Google Gemini)</li><li>At the payment processor level (Stripe)</li><li>At the cloud infrastructure level (Supabase)</li><li>On your local device due to unauthorised access</li></ul>"
         },
         "subsection3": {
           "title": "10.3 Local Data",
@@ -233,7 +241,7 @@
       },
       "section18": {
         "title": "18. Data Flow Summary",
-        "content": "<p>For transparency, here is a summary of how data flows through our Application:</p><pre><code>+------------------------------------------------------------------+\n|                        YOUR DEVICE                               |\n+------------------------------------------------------------------+\n|                                                                  |\n|  CAMERA AWARENESS (activated when selected)                      |\n|  Camera -> Captures frames -> Sent to AI -> Returns presence info|\n|                                                                  |\n|  SCREEN AWARENESS (activated when selected)                      |\n|  Window titles & URLs -> Checked locally against your list       |\n|  (NOT sent to AI unless screenshot analysis enabled)             |\n|                                                                  |\n|  SCREENSHOT ANALYSIS (optional, disabled by default)             |\n|  If enabled: Screenshot -> Sent to AI -> Returns distraction info|\n|  (Screenshots are NOT stored)                                    |\n|                                                                  |\n|  Results stored locally -> Session logs, statistics              |\n|       |                                                          |\n|  PDF Report generated -> Saved to Downloads on your device       |\n|                                                                  |\n+------------------------------------------------------------------+\n                              |\n                              v\n+------------------------------------------------------------------+\n|              AI PROVIDERS (Only one used at a time)              |\n+------------------------------------------------------------------+\n|                                                                  |\n|  OPENAI                         GOOGLE GEMINI                    |\n|  - Vision API                   - Gemini Vision API              |\n|  - Located in US                - Located in US                  |\n|  - As per OpenAI's policy       - As per Google's policy         |\n|                                                                  |\n|  Both providers receive:                                         |\n|  - Camera frames (for presence/gadget identification)            |\n|  - Screenshots if enabled (for distraction identification)       |\n|  - Return identification results only                            |\n|                                                                  |\n+------------------------------------------------------------------+\n\nData NOT Collected:\nX Biometric templates\nX Facial recognition data  \nX Audio\nX Keystroke data\nX File contents\nX Passwords or sensitive text from screenshots</code></pre>"
+        "content": "<p>For transparency, here is a summary of how data flows through our Application:</p><pre><code>+------------------------------------------------------------------+\n|                        YOUR DEVICE                               |\n+------------------------------------------------------------------+\n|                                                                  |\n|  CAMERA AWARENESS (activated when selected)                      |\n|  Camera -> Captures frames -> Sent to AI -> Returns presence info|\n|                                                                  |\n|  SCREEN AWARENESS (activated when selected)                      |\n|  Window titles & URLs -> Checked locally against your list       |\n|  (NOT sent to AI unless screenshot analysis enabled)             |\n|                                                                  |\n|  SCREENSHOT ANALYSIS (optional, disabled by default)             |\n|  If enabled: Screenshot -> Sent to AI -> Returns distraction info|\n|  (Screenshots are NOT stored)                                    |\n|                                                                  |\n|  Results stored locally -> Session logs, statistics              |\n|       |                                                          |\n|  PDF Report generated -> Saved to Downloads on your device       |\n|                                                                  |\n+------------------------------------------------------------------+\n              |                               |\n              v                               v\n+-------------------------------+  +-------------------------------+\n| AI PROVIDERS (one at a time)  |  | YOUR BRAINDOCK ACCOUNT        |\n+-------------------------------+  +-------------------------------+\n|                               |  |                               |\n| OPENAI / GOOGLE GEMINI        |  | SUPABASE (Cloud)              |\n| - Located in US               |  | - Located in US               |\n|                               |  |                               |\n| Receives:                     |  | Stores:                       |\n| - Camera frames               |  | - Session summaries           |\n| - Screenshots (if enabled)    |  | - Account and settings        |\n| - Returns results only        |  | - Usage balance               |\n|                               |  | - Device registration         |\n+-------------------------------+  +-------------------------------+\n\nData NOT Collected:\nX Biometric templates\nX Facial recognition data\nX Audio\nX Keystroke data\nX File contents\nX Passwords or sensitive text from screenshots</code></pre>"
       },
       "section19": {
         "title": "19. Questions and Contact",
@@ -241,19 +249,19 @@
       },
       "section20": {
         "title": "20. Acknowledgment",
-        "content": "<p>By using BrainDock, you acknowledge that you have read and understood this Privacy Policy and consent to the collection, use, and disclosure of your information as described herein.</p><hr><p><em>This Privacy Policy was last updated in January 2026.</em></p><p><em>This policy is designed to comply with applicable privacy laws and regulations globally. However, this document does not constitute legal advice. We recommend consulting with a qualified privacy lawyer for advice specific to your situation.</em></p>"
+        "content": "<p>By using BrainDock, you acknowledge that you have read and understood this Privacy Policy and consent to the collection, use, and disclosure of your information as described herein.</p><hr><p><em>This Privacy Policy was last updated in February 2026.</em></p><p><em>This policy is designed to comply with applicable privacy laws and regulations globally. However, this document does not constitute legal advice. We recommend consulting with a qualified privacy lawyer for advice specific to your situation.</em></p>"
       }
     },
     "terms": {
       "pageTitle": "Terms and Conditions",
-      "pageMeta": "BrainDock Focus Assistance Application - Last Updated: January 2026",
+      "pageMeta": "BrainDock Focus Assistance Application - Last Updated: February 2026",
       "section1": {
         "title": "1. Agreement to Terms and Conditions",
         "content": "<p>By downloading, installing, accessing, or using BrainDock (\"the Application\", \"the App\", \"we\", \"us\", or \"our\"), you (\"User\", \"you\", or \"your\") agree to be bound by these Terms and Conditions (\"Terms\"). If you do not agree to these Terms and Conditions, do not use the Application.</p><p>These Terms and Conditions constitute a legally binding agreement between you and BrainDock. Please read them carefully.</p>"
       },
       "section2": {
         "title": "2. Description of Service",
-        "intro": "<p>BrainDock is a focus assistance application designed to help users observe their study or work sessions. The Application:</p><ul><li>Uses your device's camera to identify your presence and potential distractions</li><li>Observes your active window and browser URLs to identify distraction apps/websites</li><li>Optionally captures screenshots for AI analysis (disabled by default, user-controlled)</li><li>Sends camera frames and/or screenshots to third-party AI services for real-time analysis</li><li>Generates session reports summarising your focus patterns</li><li>Does <strong>NOT</strong> perform facial recognition, identity verification, or biometric identification</li></ul>",
+        "intro": "<p>BrainDock is a focus assistance application designed to help users observe their study or work sessions. The Application:</p><ul><li>Uses your device's camera to identify your presence and potential distractions</li><li>Observes your active window and browser URLs to identify distraction apps/websites</li><li>Optionally captures screenshots for AI analysis (disabled by default, user-controlled)</li><li>Sends camera frames and/or screenshots to third-party AI services for real-time analysis</li><li>Generates session reports summarising your focus patterns</li><li>Provides an online account and dashboard to view session history and manage settings</li><li>Does <strong>NOT</strong> perform facial recognition, identity verification, or biometric identification</li></ul>",
         "subsection1": {
           "title": "2.1 What BrainDock Does",
           "content": "<ul><li>Identifies whether a person is present at the desk</li><li>Identifies whether you appear to be using distraction devices (phones, tablets, game controllers, etc.)</li><li>Observes active window titles and browser URLs to identify distraction apps/websites</li><li><strong>Optional AI Screenshot Analysis:</strong> If enabled by you, captures screenshots and sends them to AI for distraction identification (disabled by default)</li><li>Generates focus session statistics and PDF reports</li><li>Provides AI-generated insights about your focus patterns</li></ul>"
@@ -312,7 +320,7 @@
         "title": "6. Payment and Refunds",
         "subsection1": {
           "title": "6.1 Pricing",
-          "content": "<p>The Application requires a one-time payment for full access. Current pricing is displayed at the point of purchase.</p>"
+          "content": "<p>The Application uses a credit-based pricing model. You purchase usage hours which are consumed during active focus sessions. Unused hours do not expire. Current pricing is displayed at the point of purchase.</p>"
         },
         "subsection2": {
           "title": "6.2 Payment Processing",
@@ -340,11 +348,15 @@
         },
         "subsection4": {
           "title": "7.4 Session Data",
-          "content": "<ul><li>Session logs (timestamps, event types, focus statistics) are stored locally on your device</li><li>PDF reports are generated and saved to your device</li><li>You control the retention and deletion of local data</li></ul>"
+          "content": "<ul><li>Session logs (timestamps, event types, focus statistics) are stored locally on your device</li><li>If you are logged in, session summaries (including title, category, goals, event timeline, and focus statistics) are synced to your cloud account</li><li>PDF reports are generated and saved to your device</li><li>You control the retention and deletion of local data</li></ul>"
         },
         "subsection5": {
           "title": "7.5 Cross-Border Data Transfer",
-          "content": "<p>Your camera frames and screenshots (if enabled) are transmitted to AI service providers located in the United States of America. Our current providers (OpenAI and Google) operate servers in the United States. By using the Application, you consent to this cross-border transfer. See our <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener noreferrer\">Privacy Policy</a> for details on data protection measures.</p>"
+          "content": "<p>Your camera frames, screenshots (if enabled), and cloud account data are transmitted to service providers located in the United States of America. By using the Application, you consent to this cross-border transfer. See our <a href=\"privacy.html\" target=\"_blank\" rel=\"noopener noreferrer\">Privacy Policy</a> for details on data protection measures.</p>"
+        },
+        "subsection6": {
+          "title": "7.6 Account and Device Data",
+          "content": "<ul><li>When you create an account, your email address is collected</li><li>When you log in from the desktop app, basic device information (anonymous device identifier, device name, operating system, app version) is recorded</li><li>Your settings and usage balance are synced between your device and your cloud account</li></ul>"
         }
       },
       "section8": {
@@ -371,6 +383,10 @@
         "subsection2": {
           "title": "10.2 Payment Processing",
           "content": "<p>Payments are processed by Stripe:</p><ul><li>Stripe Terms of Service: <a href=\"https://stripe.com/legal\" target=\"_blank\" rel=\"noopener noreferrer\">https://stripe.com/legal</a></li><li>Stripe Privacy Policy: <a href=\"https://stripe.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://stripe.com/privacy</a></li></ul>"
+        },
+        "subsection3": {
+          "title": "10.3 Cloud Infrastructure",
+          "content": "<p>Account data, session history, and settings are stored using Supabase (hosted on Amazon Web Services):</p><ul><li>Supabase Privacy Policy: <a href=\"https://supabase.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">https://supabase.com/privacy</a></li><li>Supabase Terms of Service: <a href=\"https://supabase.com/terms\" target=\"_blank\" rel=\"noopener noreferrer\">https://supabase.com/terms</a></li></ul>"
         }
       },
       "section11": {
@@ -477,7 +493,7 @@
       },
       "section19": {
         "title": "19. Acceptance",
-        "content": "<p>By clicking \"I Agree\", completing a purchase, or using the Application, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions and our Privacy Policy.</p><hr><p><em>These Terms and Conditions were last updated in January 2026.</em></p>"
+        "content": "<p>By clicking \"I Agree\", completing a purchase, or using the Application, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions and our Privacy Policy.</p><hr><p><em>These Terms and Conditions were last updated in February 2026.</em></p>"
       }
     }
   },

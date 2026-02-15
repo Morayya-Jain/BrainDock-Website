@@ -115,19 +115,19 @@
       <div class="legal-content">
         <header class="legal-header">
           <h1 data-i18n="legal.privacy.pageTitle">Privacy Policy</h1>
-          <p class="legal-meta" data-i18n="legal.privacy.pageMeta">BrainDock Focus Assistance Application - Last Updated: January 2026</p>
+          <p class="legal-meta" data-i18n="legal.privacy.pageMeta">BrainDock Focus Assistance Application - Last Updated: February 2026</p>
         </header>
 
         <h2 data-i18n="legal.privacy.section1.title">1. Introduction</h2>
         <div data-i18n-html="legal.privacy.section1.content">
-          <p>BrainDock ("we", "us", "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our focus assistance application ("the Application").</p>
+          <p>BrainDock ("we", "us", "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our focus assistance application ("the Application"), including our desktop app and online dashboard.</p>
           <p>This policy is designed to comply with the Australian Privacy Principles (APPs) under the Privacy Act 1988 (Cth), as well as provide transparency for users in other jurisdictions including the European Union (GDPR) and United Kingdom (UK GDPR).</p>
           <p><strong>Please read this Privacy Policy carefully.</strong> By using the Application, you consent to the practices described in this policy.</p>
         </div>
 
         <h2 data-i18n="legal.privacy.section2.title">2. About Us</h2>
         <div data-i18n-html="legal.privacy.section2.content">
-          <p>BrainDock is a focus assistance application that helps users observe their study and work sessions using camera-based presence awareness.</p>
+          <p>BrainDock is a focus assistance application that helps users observe their study and work sessions using camera-based presence awareness. Users can create an account to sync session history and settings across devices and view their data via an online dashboard.</p>
           <p><strong>Contact Information:</strong></p>
           <ul>
             <li>Email: <a href="mailto:morayya@thebraindock.com">morayya@thebraindock.com</a> or <a href="mailto:help.thebraindock@gmail.com">help.thebraindock@gmail.com</a></li>
@@ -149,7 +149,7 @@
           <p><strong>What we analyse:</strong></p>
           <ul>
             <li>Whether a person is present at the desk</li>
-            <li>Whether the person appears to be engaged with distraction devices (phones, tablets, game controllers)</li>
+            <li>Whether the person appears to be engaged with distraction devices (phones, tablets, game controllers, and other configurable items)</li>
             <li>General presence indicators (at desk vs. away)</li>
           </ul>
           <p><strong>What we do NOT analyse or collect:</strong></p>
@@ -219,9 +219,9 @@
           </ul>
         </div>
 
-        <h3 data-i18n="legal.privacy.section3.subsection4.title">3.4 Session Log Data (Local)</h3>
+        <h3 data-i18n="legal.privacy.section3.subsection4.title">3.4 Session Data</h3>
         <div data-i18n-html="legal.privacy.section3.subsection4.content">
-          <p>The following data is generated and stored locally on your device:</p>
+          <p>The following data is generated during focus sessions:</p>
           <table>
             <thead>
               <tr>
@@ -234,30 +234,41 @@
               <tr>
                 <td>Session timestamps</td>
                 <td>Start and end times of focus sessions</td>
-                <td>Your device</td>
+                <td>Your device and cloud</td>
               </tr>
               <tr>
                 <td>Event logs</td>
                 <td>Timestamps of state changes (present, away, distraction identified)</td>
-                <td>Your device</td>
+                <td>Your device and cloud</td>
               </tr>
               <tr>
                 <td>Focus statistics</td>
                 <td>Calculated metrics (focus time, distraction count, etc.)</td>
-                <td>Your device</td>
+                <td>Your device and cloud</td>
+              </tr>
+              <tr>
+                <td>Session details</td>
+                <td>Session title, category, and goals you set</td>
+                <td>Your device and cloud</td>
               </tr>
               <tr>
                 <td>Session reports</td>
                 <td>Generated PDF summaries</td>
                 <td>Your device (Downloads folder)</td>
               </tr>
+              <tr>
+                <td>Daily statistics</td>
+                <td>Cumulative daily focus and distraction time</td>
+                <td>Your device</td>
+              </tr>
             </tbody>
           </table>
+          <p>If you are logged in, session summaries (timestamps, event timeline, focus statistics, session title, category, and goals) are synced to your BrainDock cloud account so you can view your history via the online dashboard.</p>
         </div>
 
-        <h3 data-i18n="legal.privacy.section3.subsection5.title">3.5 Licence and Payment Data</h3>
+        <h3 data-i18n="legal.privacy.section3.subsection5.title">3.5 Payment and Usage Data</h3>
         <div data-i18n-html="legal.privacy.section3.subsection5.content">
-          <p>When you purchase the Application:</p>
+          <p>When you purchase usage hours:</p>
           <table>
             <thead>
               <tr>
@@ -270,7 +281,7 @@
               <tr>
                 <td>Email address</td>
                 <td>Stripe (payment processor)</td>
-                <td>Payment confirmation, licence delivery</td>
+                <td>Payment confirmation and account</td>
               </tr>
               <tr>
                 <td>Payment details</td>
@@ -278,9 +289,9 @@
                 <td>Process payment</td>
               </tr>
               <tr>
-                <td>Licence key</td>
-                <td>Stored locally</td>
-                <td>Validate your licence</td>
+                <td>Usage balance</td>
+                <td>BrainDock</td>
+                <td>Track remaining usage hours</td>
               </tr>
               <tr>
                 <td>Terms acceptance</td>
@@ -289,7 +300,7 @@
               </tr>
             </tbody>
           </table>
-          <p>We do not directly collect or store your payment card details.</p>
+          <p>We do not directly collect or store your payment card details. Your usage balance (hours purchased and hours used) is stored in your cloud account and cached locally on your device.</p>
         </div>
 
         <h3 data-i18n="legal.privacy.section3.subsection6.title">3.6 Technical and Diagnostic Data</h3>
@@ -301,6 +312,18 @@
             <li>Operating system type</li>
           </ul>
           <p><strong>Note:</strong> We design our logging to avoid capturing personal information. However, error logs may inadvertently contain personal data in some circumstances.</p>
+        </div>
+
+        <h3 data-i18n="legal.privacy.section3.subsection7.title">3.7 Account and Device Data</h3>
+        <div data-i18n-html="legal.privacy.section3.subsection7.content">
+          <p>When you create an account or log in to the Application, we collect:</p>
+          <ul>
+            <li><strong>Email address</strong> - used for your account and to deliver purchase confirmations</li>
+            <li><strong>Device identifier</strong> - an anonymous identifier derived from your device, used to manage device registration</li>
+            <li><strong>Basic device information</strong> - device name, operating system, and app version</li>
+          </ul>
+          <p>Authentication tokens are stored securely on your device, using your operating system's keychain where available.</p>
+          <p>Your settings (such as monitoring mode, enabled distraction items, and blocklist preferences) are synced between your account and your device so they persist across sessions.</p>
         </div>
 
         <h2 data-i18n="legal.privacy.section4.title">4. Explicit Statement: No Biometric Data Collection</h2>
@@ -367,6 +390,21 @@
                 <td>APP 6</td>
               </tr>
               <tr>
+                <td>Manage your account and sync settings</td>
+                <td>Contract performance</td>
+                <td>APP 3, 6</td>
+              </tr>
+              <tr>
+                <td>Track usage balance</td>
+                <td>Contract performance</td>
+                <td>APP 3, 6</td>
+              </tr>
+              <tr>
+                <td>Register and identify your devices</td>
+                <td>Contract performance / Legitimate interest</td>
+                <td>APP 6</td>
+              </tr>
+              <tr>
                 <td>Comply with legal obligations</td>
                 <td>Legal obligation</td>
                 <td>APP 6</td>
@@ -422,13 +460,22 @@
         <h3 data-i18n="legal.privacy.section6.subsection2.title">6.2 Payment Processor (Stripe)</h3>
         <div data-i18n-html="legal.privacy.section6.subsection2.content">
           <p><strong>What is disclosed:</strong> Payment and contact information you provide at checkout</p>
-          <p><strong>Why:</strong> To process your payment and deliver your licence</p>
+          <p><strong>Why:</strong> To process your payment and deliver your usage hours</p>
           <p><strong>Location:</strong> United States (with global operations)</p>
           <p><strong>Their data practices:</strong> <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer">https://stripe.com/privacy</a></p>
         </div>
 
-        <h3 data-i18n="legal.privacy.section6.subsection3.title">6.3 Other Disclosures</h3>
+        <h3 data-i18n="legal.privacy.section6.subsection3.title">6.3 Cloud Infrastructure (Supabase)</h3>
         <div data-i18n-html="legal.privacy.section6.subsection3.content">
+          <p><strong>What is stored:</strong> Your account information, session summaries, usage balance, device registration, and settings</p>
+          <p><strong>Why:</strong> To provide account management, session history via the online dashboard, and cross-device settings sync</p>
+          <p><strong>Location:</strong> United States (hosted on Amazon Web Services)</p>
+          <p><strong>Their data practices:</strong> <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">https://supabase.com/privacy</a></p>
+          <p>All data is protected by row-level security policies, ensuring users can only access their own data.</p>
+        </div>
+
+        <h3 data-i18n="legal.privacy.section6.subsection4.title">6.4 Other Disclosures</h3>
+        <div data-i18n-html="legal.privacy.section6.subsection4.content">
           <p>We may disclose your information:</p>
           <ul>
             <li><strong>Legal Requirements:</strong> If required by law, court order, or government request</li>
@@ -504,9 +551,24 @@
                 <td>Not applicable</td>
               </tr>
               <tr>
-                <td>Session logs (local)</td>
+                <td>Session data (local)</td>
                 <td>Until you delete them</td>
                 <td>User-controlled deletion</td>
+              </tr>
+              <tr>
+                <td>Session data (cloud)</td>
+                <td>Duration of your account</td>
+                <td>Account deletion or contact us</td>
+              </tr>
+              <tr>
+                <td>Account data</td>
+                <td>Duration of your account</td>
+                <td>Account deletion or contact us</td>
+              </tr>
+              <tr>
+                <td>Device registration</td>
+                <td>Duration of your account</td>
+                <td>Account deletion or contact us</td>
               </tr>
               <tr>
                 <td>PDF reports (local)</td>
@@ -519,9 +581,9 @@
                 <td>Automatic deletion</td>
               </tr>
               <tr>
-                <td>Licence data</td>
-                <td>Duration of licence validity</td>
-                <td>Upon licence revocation</td>
+                <td>Usage balance</td>
+                <td>Duration of your account</td>
+                <td>Account deletion or contact us</td>
               </tr>
               <tr>
                 <td>Payment records (Stripe)</td>
@@ -544,12 +606,13 @@
 
         <h3 data-i18n="legal.privacy.section8.subsection1.title">8.1 Your Control Over Local Data</h3>
         <div data-i18n-html="legal.privacy.section8.subsection1.content">
-          <p>All session data and reports are stored locally on your device. You can delete this data at any time by:</p>
+          <p>Session data and reports stored locally on your device can be deleted at any time by:</p>
           <ol>
             <li>Deleting files from the Application's data directory</li>
             <li>Uninstalling the Application</li>
             <li>Using your operating system's file management tools</li>
           </ol>
+          <p>To delete your cloud-stored data (session history, account information, and device registrations), contact us or delete your account via the dashboard.</p>
         </div>
 
         <h3 data-i18n="legal.privacy.section8.subsection2.title">8.2 Data We Cannot Delete</h3>
@@ -567,7 +630,8 @@
           <ul>
             <li><strong>Encryption in Transit:</strong> All data transmitted to third parties uses TLS/HTTPS encryption</li>
             <li><strong>Local Storage:</strong> Session data is stored in standard file formats on your device, protected by your device's security</li>
-            <li><strong>No Central Database:</strong> We do not maintain a central database of user session data</li>
+            <li><strong>Cloud Storage:</strong> Cloud-stored data is protected by row-level security policies and encrypted connections</li>
+            <li><strong>Authentication:</strong> Tokens are stored in your operating system's secure keychain where available</li>
             <li><strong>API Security:</strong> We use secure API authentication with our service providers</li>
           </ul>
         </div>
@@ -587,7 +651,7 @@
           <ul>
             <li>Securing your device with appropriate passwords/biometrics</li>
             <li>Keeping your operating system and the Application updated</li>
-            <li>Not sharing your licence key with others</li>
+            <li>Keeping your account credentials secure</li>
             <li>Protecting any exported reports containing session data</li>
           </ul>
         </div>
@@ -605,6 +669,7 @@
           <ul>
             <li>At the AI provider level (OpenAI or Google Gemini)</li>
             <li>At the payment processor level (Stripe)</li>
+            <li>At the cloud infrastructure level (Supabase)</li>
             <li>On your local device due to unauthorised access</li>
           </ul>
         </div>
@@ -837,7 +902,7 @@ X Passwords or sensitive text from screenshots</code></pre>
         <div data-i18n-html="legal.privacy.section20.content">
           <p>By using BrainDock, you acknowledge that you have read and understood this Privacy Policy and consent to the collection, use, and disclosure of your information as described herein.</p>
           <hr>
-          <p><em>This Privacy Policy was last updated in January 2026.</em></p>
+          <p><em>This Privacy Policy was last updated in February 2026.</em></p>
           <p><em>This policy is designed to comply with applicable privacy laws and regulations globally. However, this document does not constitute legal advice. We recommend consulting with a qualified privacy lawyer for advice specific to your situation.</em></p>
         </div>
 

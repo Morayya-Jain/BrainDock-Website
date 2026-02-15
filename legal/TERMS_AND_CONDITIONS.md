@@ -7,7 +7,7 @@ permalink: /legal/terms/
 
 **BrainDock Focus Tracking Application**
 
-Last Updated: January 2026
+Last Updated: February 2026
 
 ---
 
@@ -28,6 +28,7 @@ BrainDock is a focus tracking application designed to help users monitor their s
 - Optionally captures screenshots for AI analysis (disabled by default, user-controlled)
 - Sends camera frames and/or screenshots to third-party AI services for real-time analysis
 - Generates session reports summarising your focus patterns
+- Provides an online account and dashboard to view session history and manage settings
 - Does **NOT** perform facial recognition, identity verification, or biometric identification
 
 ### 2.1 What BrainDock Does
@@ -138,7 +139,7 @@ We may terminate your licence if you breach these Terms and Conditions. Upon ter
 
 ### 6.1 Pricing
 
-The Application requires a one-time payment for full access. Current pricing is displayed at the point of purchase.
+The Application uses a credit-based pricing model. You purchase usage hours which are consumed during active focus sessions. Unused hours do not expire. Current pricing is displayed at the point of purchase.
 
 ### 6.2 Payment Processing
 
@@ -187,12 +188,19 @@ By using the Application, you acknowledge and consent to:
 ### 7.4 Session Data
 
 - Session logs (timestamps, event types, focus statistics) are stored locally on your device
+- If you are logged in, session summaries (including title, category, goals, event timeline, and focus statistics) are synced to your cloud account
 - PDF reports are generated and saved to your device
 - You control the retention and deletion of local data
 
 ### 7.5 Cross-Border Data Transfer
 
-Your camera frames and screenshots (if enabled) are transmitted to AI service providers located in the United States of America. Our current providers (OpenAI and Google) operate servers in the United States. By using the Application, you consent to this cross-border transfer. See our Privacy Policy for details on data protection measures.
+Your camera frames, screenshots (if enabled), and cloud account data are transmitted to service providers located in the United States of America. Our current providers (OpenAI and Google) operate servers in the United States. By using the Application, you consent to this cross-border transfer. See our Privacy Policy for details on data protection measures.
+
+### 7.6 Account and Device Data
+
+- When you create an account, your email address is collected
+- When you log in from the desktop app, basic device information (anonymous device identifier, device name, operating system, app version) is recorded
+- Your settings and usage balance are synced between your device and your cloud account
 
 For full details on data handling, please review our [Privacy Policy](PRIVACY_POLICY.md).
 
@@ -246,6 +254,13 @@ Payments are processed by Stripe:
 
 - Stripe Terms of Service: https://stripe.com/legal
 - Stripe Privacy Policy: https://stripe.com/privacy
+
+### 10.3 Cloud Infrastructure
+
+Account data, session history, and settings are stored using Supabase (hosted on Amazon Web Services):
+
+- Supabase Privacy Policy: https://supabase.com/privacy
+- Supabase Terms of Service: https://supabase.com/terms
 
 ---
 
@@ -402,4 +417,4 @@ By clicking "I Agree", completing a purchase, or using the Application, you ackn
 
 ---
 
-*These Terms and Conditions were last updated in January 2026.*
+*These Terms and Conditions were last updated in February 2026.*

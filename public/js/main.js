@@ -76,6 +76,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // Re-measure nav after web fonts load (fixes width mismatch on first visit)
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () {
+      navFullWidth = 0; // Force re-measurement
+      navCompactWidth = 0;
+      checkNavFit();
+    });
+  }
+
   // Mark that JS is handling responsive nav (for CSS fallback)
   if (nav) {
     nav.setAttribute('data-js-ready', 'true');
@@ -456,8 +465,8 @@ function initBinaryBanner() {
     oc.font = '800 ' + fontSize + 'px "Inter", sans-serif';
     oc.textAlign = 'center';
     oc.textBaseline = 'middle';
-    // Stroke for extra thickness (thinner on small screens to preserve letter openings like C)
-    oc.lineWidth = W < 600 ? fontSize * 0.03 : fontSize * 0.07;
+    // Stroke for extra thickness (thinner to preserve letter details like i dot and C opening)
+    oc.lineWidth = W < 600 ? fontSize * 0.02 : fontSize * 0.04;
     oc.strokeStyle = '#000';
     // Center text vertically within the canvas (CSS handles nav offset on mobile)
     var textY = H * 0.50;

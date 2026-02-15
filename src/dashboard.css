@@ -1715,7 +1715,7 @@
 
 .pricing-main {
   flex: 1;
-  padding-top: calc(80px + 5vh);
+  padding-top: calc(100px + 5vh);
   padding-bottom: 5vh;
   background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
 }

@@ -7,13 +7,13 @@ permalink: /legal/privacy/
 
 **BrainDock Focus Tracking Application**
 
-Last Updated: January 2026
+Last Updated: February 2026
 
 ---
 
 ## 1. Introduction
 
-BrainDock ("we", "us", "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our focus tracking application ("the Application").
+BrainDock ("we", "us", "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our focus tracking application, including our desktop app and online dashboard ("the Application").
 
 This policy is designed to comply with the Australian Privacy Principles (APPs) under the Privacy Act 1988 (Cth), as well as provide transparency for users in other jurisdictions including the European Union (GDPR) and United Kingdom (UK GDPR).
 
@@ -23,7 +23,7 @@ This policy is designed to comply with the Australian Privacy Principles (APPs) 
 
 ## 2. About Us
 
-BrainDock is a focus tracking application that helps users monitor their study and work sessions using camera-based presence detection.
+BrainDock is a focus tracking application that helps users monitor their study and work sessions using camera-based presence detection. Users can create an account to sync session history and settings across devices and view their data via an online dashboard.
 
 **Contact Information:**
 
@@ -43,7 +43,7 @@ We collect different types of information to provide and improve our service.
 
 **What we analyse:**
 - Whether a person is present at the desk
-- Whether the person appears to be engaged with distraction devices (phones, tablets, game controllers)
+- Whether the person appears to be engaged with distraction devices (phones, tablets, game controllers, and other configurable items)
 - General presence indicators (at desk vs. away)
 
 **What we do NOT analyse or collect:**
@@ -99,29 +99,33 @@ We collect different types of information to provide and improve our service.
 - Ensure no confidential information is visible when this feature is enabled
 - You can disable this feature at any time
 
-### 3.4 Session Log Data (Local)
+### 3.4 Session Data
 
-The following data is generated and stored locally on your device:
+The following data is generated and stored:
 
 | Data Type | Description | Storage Location |
 |-----------|-------------|------------------|
-| Session timestamps | Start and end times of focus sessions | Your device |
-| Event logs | Timestamps of state changes (present, away, distraction detected) | Your device |
-| Focus statistics | Calculated metrics (focus time, distraction count, etc.) | Your device |
+| Session timestamps | Start and end times of focus sessions | Your device and cloud |
+| Event logs | Timestamps of state changes (present, away, distraction detected) | Your device and cloud |
+| Focus statistics | Calculated metrics (focus time, distraction count, etc.) | Your device and cloud |
+| Session details | Title, category, and goals you set | Your device and cloud |
+| Daily statistics | Cumulative daily focus and distraction time | Your device |
 | Session reports | Generated PDF summaries | Your device (Downloads folder) |
 
-### 3.5 Licence and Payment Data
+If you are logged in, session summaries (timestamps, event timeline, focus statistics, session title, category, and goals) are synced to your BrainDock cloud account so you can view your history via the online dashboard.
 
-When you purchase the Application:
+### 3.5 Payment and Usage Data
+
+When you purchase usage hours:
 
 | Data Type | Collected By | Purpose |
 |-----------|--------------|---------|
-| Email address | Stripe (payment processor) | Payment confirmation, licence delivery |
+| Email address | Stripe (payment processor) | Payment confirmation and account |
 | Payment details | Stripe | Process payment |
-| Licence key | Stored locally | Validate your licence |
+| Usage balance | BrainDock | Track remaining usage hours |
 | Terms acceptance | Stripe | Record of consent |
 
-We do not directly collect or store your payment card details.
+We do not directly collect or store your payment card details. Your usage balance (hours purchased and hours used) is stored in your cloud account and cached locally on your device.
 
 ### 3.6 Technical and Diagnostic Data
 
@@ -132,6 +136,18 @@ We may collect minimal technical data for troubleshooting:
 - Operating system type
 
 **Note:** We design our logging to avoid capturing personal information. However, error logs may inadvertently contain personal data in some circumstances.
+
+### 3.7 Account and Device Data
+
+When you create an account or log in to the Application, we collect:
+
+- **Email address** - used for your account and to deliver purchase confirmations
+- **Device identifier** - an anonymous identifier derived from your device, used to manage device registration
+- **Basic device information** - device name, operating system, and app version
+
+Authentication tokens are stored securely on your device, using your operating system's keychain where available.
+
+Your settings (such as monitoring mode, enabled distraction items, and blocklist preferences) are synced between your account and your device so they persist across sessions.
 
 ---
 
@@ -169,6 +185,9 @@ We use collected information for the following purposes:
 | Validate licences | Legitimate interest | APP 6 |
 | Improve the Application | Legitimate interest | APP 6 |
 | Respond to support requests | Contract performance | APP 6 |
+| Manage your account and sync settings | Contract performance | APP 3, 6 |
+| Track usage balance | Contract performance | APP 3, 6 |
+| Register and identify your devices | Contract performance / Legitimate interest | APP 6 |
 | Comply with legal obligations | Legal obligation | APP 6 |
 
 ---
@@ -222,13 +241,25 @@ We use third-party AI services for image analysis. **Only one provider is used a
 
 **What is disclosed:** Payment and contact information you provide at checkout
 
-**Why:** To process your payment and deliver your licence
+**Why:** To process your payment and deliver your usage hours
 
 **Location:** United States (with global operations)
 
 **Their data practices:** https://stripe.com/privacy
 
-### 6.3 Other Disclosures
+### 6.3 Cloud Infrastructure (Supabase)
+
+**What is stored:** Your account information, session summaries, usage balance, device registration, and settings
+
+**Why:** To provide account management, session history via the online dashboard, and cross-device settings sync
+
+**Location:** United States (hosted on Amazon Web Services)
+
+**Their data practices:** https://supabase.com/privacy
+
+All data is protected by row-level security policies, ensuring users can only access their own data.
+
+### 6.4 Other Disclosures
 
 We may disclose your information:
 
@@ -279,21 +310,26 @@ We maintain the following retention practices:
 | Camera frames | Not retained (processed in real-time only) | Not applicable |
 | Screenshots (if enabled) | Not retained (processed in real-time only) | Not applicable |
 | Screen monitoring data | Not retained (processed locally in real-time) | Not applicable |
-| Session logs (local) | Until you delete them | User-controlled deletion |
+| Session data (local) | Until you delete them | User-controlled deletion |
+| Session data (cloud) | Duration of your account | Account deletion or contact us |
+| Account data | Duration of your account | Account deletion or contact us |
+| Device registration | Duration of your account | Account deletion or contact us |
 | PDF reports (local) | Until you delete them | User-controlled deletion |
 | Error logs | Minimal retention for troubleshooting | Automatic deletion |
-| Licence data | Duration of licence validity | Upon licence revocation |
+| Usage balance | Duration of your account | Account deletion or contact us |
 | Payment records (Stripe) | Per Stripe's retention policy | Contact Stripe |
 | OpenAI processing | Per OpenAI's API data usage policy | Automatic per OpenAI |
 | Google Gemini processing | Per Google's Gemini API terms | Automatic per Google |
 
 ### 8.1 Your Control Over Local Data
 
-All session data and reports are stored locally on your device. You can delete this data at any time by:
+Session data and reports stored locally on your device can be deleted at any time by:
 
 1. Deleting files from the Application's data directory
 2. Uninstalling the Application
 3. Using your operating system's file management tools
+
+To delete your cloud-stored data (session history, account information, and device registrations), contact us or delete your account via the dashboard.
 
 ### 8.2 Data We Cannot Delete
 
@@ -309,7 +345,8 @@ We implement reasonable security measures to protect your information:
 
 - **Encryption in Transit:** All data transmitted to third parties uses TLS/HTTPS encryption
 - **Local Storage:** Session data is stored in standard file formats on your device, protected by your device's security
-- **No Central Database:** We do not maintain a central database of user session data
+- **Cloud Storage:** Cloud-stored data is protected by row-level security policies and encrypted connections
+- **Authentication:** Tokens are stored in your operating system's secure keychain where available
 - **API Security:** We use secure API authentication with our service providers
 
 ### 9.2 Organisational Measures
@@ -323,7 +360,7 @@ We implement reasonable security measures to protect your information:
 You are responsible for:
 - Securing your device with appropriate passwords/biometrics
 - Keeping your operating system and the Application updated
-- Not sharing your licence key with others
+- Keeping your account credentials secure
 - Protecting any exported reports containing session data
 
 ---
@@ -339,6 +376,7 @@ Visual data is shared with our AI providers (OpenAI or Google Gemini) for proces
 BrainDock expressly disclaims liability for any data breaches, security incidents, or unauthorised access that occurs:
 - At the AI provider level (OpenAI or Google Gemini)
 - At the payment processor level (Stripe)
+- At the cloud infrastructure level (Supabase)
 - On your local device due to unauthorised access
 
 ### 10.3 Local Data
@@ -507,51 +545,49 @@ If you are located in a jurisdiction with specific privacy laws not addressed he
 For transparency, here is a summary of how data flows through our Application:
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                        YOUR DEVICE                               │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  CAMERA MONITORING (activated when selected)                     │
-│  Camera → Captures frames → Sent to AI → Returns presence info   │
-│                                                                  │
-│  SCREEN MONITORING (activated when selected)                     │
-│  Window titles & URLs → Checked locally against your list   │
-│  (NOT sent to AI unless screenshot analysis enabled)             │
-│                                                                  │
-│  SCREENSHOT ANALYSIS (optional, disabled by default)             │
-│  If enabled: Screenshot → Sent to AI → Returns distraction info  │
-│  (Screenshots are NOT stored)                                    │
-│                                                                  │
-│  Results stored locally → Session logs, statistics               │
-│       ↓                                                          │
-│  PDF Report generated → Saved to Downloads on your device        │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                              ↓
-┌─────────────────────────────────────────────────────────────────┐
-│              AI PROVIDERS (Only one used at a time)              │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  OPENAI                         GOOGLE GEMINI                    │
-│  • Vision API                   • Gemini Vision API              │
-│  • Located in US                • Located in US                  │
-│  • As per OpenAI's policy       • As per Google's policy         │
-│                                                                  │
-│  Both providers receive:                                         │
-│  • Camera frames (for presence/gadget detection)                 │
-│  • Screenshots if enabled (for distraction detection)            │
-│  • Return detection results only                                 │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
++------------------------------------------------------------------+
+|                        YOUR DEVICE                               |
++------------------------------------------------------------------+
+|                                                                  |
+|  CAMERA MONITORING (activated when selected)                     |
+|  Camera -> Captures frames -> Sent to AI -> Returns presence info|
+|                                                                  |
+|  SCREEN MONITORING (activated when selected)                     |
+|  Window titles & URLs -> Checked locally against your list       |
+|  (NOT sent to AI unless screenshot analysis enabled)             |
+|                                                                  |
+|  SCREENSHOT ANALYSIS (optional, disabled by default)             |
+|  If enabled: Screenshot -> Sent to AI -> Returns distraction info|
+|  (Screenshots are NOT stored)                                    |
+|                                                                  |
+|  Results stored locally -> Session logs, statistics              |
+|       |                                                          |
+|  PDF Report generated -> Saved to Downloads on your device       |
+|                                                                  |
++------------------------------------------------------------------+
+              |                               |
+              v                               v
++-------------------------------+  +-------------------------------+
+| AI PROVIDERS (one at a time)  |  | YOUR BRAINDOCK ACCOUNT        |
++-------------------------------+  +-------------------------------+
+|                               |  |                               |
+| OPENAI / GOOGLE GEMINI        |  | SUPABASE (Cloud)              |
+| - Located in US               |  | - Located in US               |
+|                               |  |                               |
+| Receives:                     |  | Stores:                       |
+| - Camera frames               |  | - Session summaries           |
+| - Screenshots (if enabled)    |  | - Account and settings        |
+| - Returns results only        |  | - Usage balance               |
+|                               |  | - Device registration         |
++-------------------------------+  +-------------------------------+
 
 Data NOT Collected:
-✗ Biometric templates
-✗ Facial recognition data  
-✗ Audio recordings
-✗ Keystroke data
-✗ File contents
-✗ Passwords or sensitive text from screenshots
+X Biometric templates
+X Facial recognition data
+X Audio
+X Keystroke data
+X File contents
+X Passwords or sensitive text from screenshots
 ```
 
 ---
@@ -574,6 +610,6 @@ By using BrainDock, you acknowledge that you have read and understood this Priva
 
 ---
 
-*This Privacy Policy was last updated in January 2026.*
+*This Privacy Policy was last updated in February 2026.*
 
 *This policy is designed to comply with applicable privacy laws and regulations globally. However, this document does not constitute legal advice. We recommend consulting with a qualified privacy lawyer for advice specific to your situation.*

@@ -1583,7 +1583,7 @@ body.hero-compact .hero-ctas {
    Legal Pages Styles
    -------------------------------------------------------------------------- */
 .legal-page {
-  padding-top: calc(80px + var(--space-xl));
+  padding-top: calc(100px + var(--space-xxl));
   padding-bottom: var(--space-xxxl);
 }
 
