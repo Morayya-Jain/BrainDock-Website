@@ -35,22 +35,35 @@ document.addEventListener('DOMContentLoaded', function() {
    * Adds 'nav-compact' class to nav when elements would overflow.
    */
   /**
-   * Check if the full nav fits in the viewport.
-   * CSS width:max-content ensures the pill never squeezes.
-   * This just toggles compact mode when the viewport is too narrow.
+   * Three nav states based on viewport width:
+   * 1. Full: logo + links + Sign Up + Download
+   * 2. Compact (nav-compact): logo + Download + hamburger
+   * 3. Mini (nav-mini): logo + hamburger only
    */
   function checkNavFit() {
     if (!nav || !navContainer) return;
 
-    // Temporarily show full nav to measure its true width
-    nav.classList.remove('nav-compact');
+    // Measure full nav width
+    nav.classList.remove('nav-compact', 'nav-mini');
     void nav.offsetWidth;
     var fullWidth = nav.offsetWidth;
 
-    // Buffer so the pill doesn't touch the screen edges
+    // Measure compact nav width
+    nav.classList.add('nav-compact');
+    nav.classList.remove('nav-mini');
+    void nav.offsetWidth;
+    var compactWidth = nav.offsetWidth;
+
+    // Reset to determine correct state
+    nav.classList.remove('nav-compact', 'nav-mini');
+
     var buffer = 40;
 
-    if (window.innerWidth < fullWidth + buffer) {
+    if (window.innerWidth < compactWidth + buffer) {
+      // Screen too narrow even for compact - go mini
+      nav.classList.add('nav-compact', 'nav-mini');
+    } else if (window.innerWidth < fullWidth + buffer) {
+      // Screen too narrow for full - go compact
       nav.classList.add('nav-compact');
     }
   }

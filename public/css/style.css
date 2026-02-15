@@ -615,6 +615,11 @@ p {
   display: flex;
 }
 
+/* Mini state: logo + hamburger only (very small screens) */
+.nav.nav-mini .nav-actions {
+  display: none;
+}
+
 /* CSS-only fallback for browsers without JavaScript (uses a safe breakpoint) */
 @media (max-width: 1200px) {
   .nav:not(.nav-compact):not([data-js-ready]) .nav-center {
