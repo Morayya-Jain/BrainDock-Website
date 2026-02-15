@@ -482,13 +482,14 @@
     }
   },
   "nav": {
-    "whyBrainDock": "Warum BrainDock",
+    "whyBrainDock": "Warum?",
     "features": "Funktionen",
     "howItWorks": "So funktioniert es",
     "contact": "Kontakt",
     "signup": "Registrieren",
     "pricing": "Preise",
-    "download": "Herunterladen"
+    "download": "Herunterladen",
+    "faqs": "FAQs"
   },
   "hero": {
     "title": "Behalte deine Aufmerksamkeit",

@@ -482,13 +482,14 @@
     }
   },
   "nav": {
-    "whyBrainDock": "为什么选择BrainDock",
+    "whyBrainDock": "为什么？",
     "features": "功能特点",
     "howItWorks": "工作原理",
     "contact": "联系我们",
     "signup": "注册",
     "pricing": "价格",
-    "download": "下载"
+    "download": "下载",
+    "faqs": "FAQs"
   },
   "hero": {
     "title": "掌控你的注意力",

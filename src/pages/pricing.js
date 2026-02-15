@@ -85,16 +85,15 @@ function render(root, packages, hasUser) {
         </a>
         <div class="nav-center">
           <div class="nav-links">
-            <a href="${origin}/#why-braindock" target="_blank" rel="noopener" data-i18n="nav.whyBrainDock">Why Use BrainDock</a>
+            <a href="${origin}/#why-braindock" target="_blank" rel="noopener" data-i18n="nav.whyBrainDock">Why?</a>
             <a href="${origin}/#features" target="_blank" rel="noopener" data-i18n="nav.features">Features</a>
-            <a href="${origin}/#how-it-works" target="_blank" rel="noopener" data-i18n="nav.howItWorks">How It Works</a>
             <a href="/pricing/" data-i18n="nav.pricing">Pricing</a>
-            <a href="#pricing-contact" data-i18n="nav.contact">Contact Us</a>
+            <a href="${origin}/#faq" target="_blank" rel="noopener" data-i18n="nav.faqs">FAQs</a>
           </div>
         </div>
         <div class="nav-actions">
-          <a href="/auth/signup/" class="btn btn-secondary nav-cta" target="_blank" rel="noopener" data-i18n="nav.signup">Sign Up</a>
-          <a href="${origin}/#download" class="btn btn-primary nav-cta" target="_blank" rel="noopener">
+          <a href="/auth/signup/" class="btn btn-secondary nav-cta nav-cta-signup" target="_blank" rel="noopener" data-i18n="nav.signup">Sign Up</a>
+          <a href="${origin}/#download" class="btn btn-primary nav-cta nav-cta-download" target="_blank" rel="noopener">
             <span data-i18n="nav.download">Download</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -108,11 +107,10 @@ function render(root, packages, hasUser) {
         </button>
       </div>
       <div class="nav-mobile" id="pricing-nav-mobile">
-        <a href="${origin}/#why-braindock" target="_blank" rel="noopener" data-i18n="nav.whyBrainDock">Why Use BrainDock</a>
+        <a href="${origin}/#why-braindock" target="_blank" rel="noopener" data-i18n="nav.whyBrainDock">Why?</a>
         <a href="${origin}/#features" target="_blank" rel="noopener" data-i18n="nav.features">Features</a>
-        <a href="${origin}/#how-it-works" target="_blank" rel="noopener" data-i18n="nav.howItWorks">How It Works</a>
         <a href="/pricing/" data-i18n="nav.pricing">Pricing</a>
-        <a href="#pricing-contact" data-i18n="nav.contact">Contact Us</a>
+        <a href="${origin}/#faq" target="_blank" rel="noopener" data-i18n="nav.faqs">FAQs</a>
         <a href="/auth/signup/" target="_blank" rel="noopener" data-i18n="nav.signup">Sign Up</a>
         <a href="${origin}/#download" target="_blank" rel="noopener" data-i18n="nav.download">Download</a>
       </div>

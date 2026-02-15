@@ -67,7 +67,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 100px; /* Account for fixed navbar (80px) + breathing room */
+  scroll-padding-top: 80px; /* Account for floating pill nav (56px + 8px gap + breathing room) */
   color-scheme: light; /* Ensure browser chrome matches our light theme */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -454,20 +454,23 @@ p {
    -------------------------------------------------------------------------- */
 .nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: var(--space-l);
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  max-width: calc(100% - 32px);
   z-index: 100;
-  background: linear-gradient(to right, rgba(199, 198, 195, 0.95) 0%, rgba(253, 252, 249, 0.95) 45%); /* Gradient with fallback */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid #E5E5EA;
+  background: rgba(249, 248, 244, 0.72);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid var(--text-primary);
 }
-
-/* Enhance background for browsers that support backdrop-filter */
-@supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)) {
+/* Tighter top spacing on small screens */
+@media (max-width: 480px) {
   .nav {
-    background: linear-gradient(to right, rgba(199, 198, 195, 0.9) 0%, rgba(253, 252, 249, 0.9) 45%);
+    top: var(--space-s);
+    max-width: calc(100% - 16px);
   }
 }
 
@@ -475,37 +478,27 @@ p {
   display: flex;
   align-items: center;
   gap: var(--space-xl);
-  height: 80px;
-  padding: 0 var(--space-l); /* Default padding for mobile */
-}
-
-/* Desktop navigation: Capped max-width with 80px edge padding */
-@media (min-width: 1024px) {
-  .nav-container {
-    max-width: 1570px;
-    padding: 0 80px;
-    margin: 0 auto;
-  }
+  height: 64px;
+  padding: 0 var(--space-l);
 }
 
 .nav-logo img {
-  height: 38px;
+  height: 32px;
   width: auto;
 }
 
 .nav-center {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-xl);
+  gap: var(--space-l);
   min-width: 0;
 }
 
 .nav-links {
   display: flex;
-  gap: var(--space-xl);
-  white-space: nowrap; /* Prevent text wrapping within links */
+  gap: var(--space-l);
+  white-space: nowrap;
 }
 
 .nav-actions {
@@ -513,6 +506,8 @@ p {
   align-items: center;
   gap: var(--space-m);
   flex-shrink: 0;
+  border-left: 1px solid var(--border-subtle);
+  padding-left: var(--space-m);
 }
 
 .nav-links a {
@@ -520,7 +515,7 @@ p {
   font-weight: 500;
   color: var(--text-secondary);
   transition: color var(--transition-fast);
-  white-space: nowrap; /* Prevent text wrapping */
+  white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -529,9 +524,9 @@ p {
 
 .nav-cta {
   display: inline-flex;
-  padding: 10px 22px;
+  padding: 10px 20px;
   font-size: 0.875rem;
-  white-space: nowrap; /* Prevent text wrapping */
+  white-space: nowrap;
 }
 
 /* Mobile menu toggle - hidden by default, shown in compact mode */
@@ -554,19 +549,28 @@ p {
   transition: transform var(--transition-fast);
 }
 
-/* Mobile menu */
+/* Mobile menu - dropdown below pill */
 .nav-mobile {
   display: none;
   position: absolute;
-  top: 80px;
+  top: calc(64px + 4px);
   left: 0;
   right: 0;
-  background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
-  border-bottom: 1px solid var(--border-subtle);
-  padding: var(--space-l);
+  background: rgba(249, 248, 244, 0.95);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--text-primary);
+  border-top: none;
+  border-radius: 0 0 var(--card-radius) var(--card-radius);
+  padding: var(--space-m) var(--space-l);
   max-height: calc(100vh - 80px);
   overflow-y: auto;
   overscroll-behavior: contain;
+}
+
+/* When mobile menu is open, flatten pill bottom corners to merge with dropdown */
+.nav:has(.nav-mobile.active) {
+  border-radius: 16px 16px var(--card-radius) var(--card-radius);
 }
 
 .nav-mobile.active {
@@ -596,10 +600,11 @@ p {
 }
 
 .nav.nav-compact .nav-actions {
-  display: none;
+  border-left: none;
+  padding-left: 0;
 }
 
-.nav.nav-compact .nav-cta {
+.nav.nav-compact .nav-cta-signup {
   display: none;
 }
 
@@ -617,12 +622,12 @@ p {
     display: none;
   }
 
-  .nav:not(.nav-compact):not([data-js-ready]) .nav-actions {
+  .nav:not(.nav-compact):not([data-js-ready]) .nav-cta-signup {
     display: none;
   }
 
-  .nav:not(.nav-compact):not([data-js-ready]) .nav-cta {
-    display: none;
+  .nav:not(.nav-compact):not([data-js-ready]) .nav-center {
+    /* already hidden above */
   }
 
   .nav:not(.nav-compact):not([data-js-ready]) .nav-toggle {
@@ -632,23 +637,14 @@ p {
 
 
 /* --------------------------------------------------------------------------
-   Binary Banner - "BrainDock" in binary digits (canvas animation)
+   Binary Canvas inside Hero - "BrainDock" in binary digits
    -------------------------------------------------------------------------- */
-.binary-banner {
-  padding-top: 80px; /* Account for fixed nav */
-  width: 100%;
-  overflow: hidden;
-  background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
-}
-.binary-banner canvas {
+.hero-binary-canvas {
   display: block;
   width: 100%;
-}
-/* When banner is present, hero no longer needs nav offset and gap is reduced */
-.binary-banner + .hero {
-  padding-top: 0;
-  min-height: 70vh;
-  min-height: 70dvh;
+  /* Radial CSS mask - dissolves digits into the hero background seamlessly */
+  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 38%, black 30%, transparent 62%);
+  mask-image: radial-gradient(ellipse 75% 70% at 50% 38%, black 30%, transparent 62%);
 }
 
 /* --------------------------------------------------------------------------
@@ -661,10 +657,11 @@ p {
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding-top: 80px; /* Account for fixed nav */
-  padding-bottom: clamp(var(--space-l), 4vh, var(--space-xxl));
+  justify-content: flex-start;
+  padding-top: 0; /* Canvas sits flush at the top */
+  padding-bottom: clamp(80px, 14vh, 180px);
   background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
 }
 
@@ -687,7 +684,7 @@ p {
   flex-direction: column-reverse; /* Image appears above text on mobile */
   align-items: center;
   justify-content: center;
-  gap: clamp(var(--space-l), 3vw, var(--space-xxl));
+  gap: 1px;
   text-align: center;
   width: 100%;
 }
@@ -699,15 +696,15 @@ p {
 
 /* Fluid typography - scales down when needed, capped at max */
 .hero h1 {
-  font-size: clamp(1.75rem, 5vw, 3.5rem);
-  margin-bottom: clamp(var(--space-m), 2vh, var(--space-l));
+  font-size: clamp(1.75rem, 4.5vw, 3.25rem);
+  margin-bottom: clamp(var(--space-s), 1.5vh, var(--space-m));
 }
 
 .hero-subtitle {
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
   color: var(--text-secondary);
-  max-width: 600px;
-  margin: 0 auto clamp(var(--space-l), 3vh, var(--space-xl));
+  max-width: 580px;
+  margin: 0 auto clamp(var(--space-m), 2vh, var(--space-l));
 }
 
 .hero-ctas {
@@ -720,18 +717,20 @@ p {
 }
 
 .hero-ctas .btn {
-  white-space: nowrap; /* Prevent button text from wrapping */
+  white-space: nowrap;
+  padding: 13px 26px;
+  font-size: 1rem;
 }
 
 .hero-note {
-  margin-top: clamp(var(--space-l), 3vh, var(--space-xl));
+  margin-top: clamp(var(--space-m), 2vh, var(--space-l));
   font-size: 0.875rem;
   color: var(--text-tertiary);
 }
 
 /* Fluid image sizing - scales down when needed */
 .hero-image {
-  max-width: clamp(280px, 40vw, 450px);
+  max-width: clamp(260px, 38vw, 420px);
   width: 100%;
 }
 
@@ -758,7 +757,7 @@ body.hero-compact .hero-ctas {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: clamp(var(--space-xl), 4vw, var(--space-xxxl));
+    gap: clamp(var(--space-m), 2vw, var(--space-xl));
   }
 
   .hero-content {
@@ -773,11 +772,11 @@ body.hero-compact .hero-ctas {
 
   /* Fluid title - scales down when needed, capped at max */
   .hero h1 {
-    font-size: clamp(2rem, min(5vw, 6vh), 3.5rem);
+    font-size: clamp(2rem, min(4.5vw, 5.5vh), 3.25rem);
   }
 
   .hero-subtitle {
-    font-size: clamp(1rem, min(1.4vw, 2vh), 1.25rem);
+    font-size: clamp(1rem, min(1.4vw, 2vh), 1.2rem);
     margin-left: 0;
     margin-right: 0;
   }
@@ -788,8 +787,8 @@ body.hero-compact .hero-ctas {
 
   /* Fluid image - fixed max, scales down when needed */
   .hero-image {
-    flex: 0 1 720px; /* Starts at 720px max, shrinks if needed */
-    max-width: min(720px, min(45vw, 70vh));
+    flex: 0 1 640px; /* Starts at 640px max, shrinks if needed */
+    max-width: min(640px, min(42vw, 62vh));
     width: auto;
     margin-right: clamp(10px, 2vw, 24px); /* Slight right shift, scales with viewport */
   }
@@ -1336,7 +1335,7 @@ body.hero-compact .hero-ctas {
 }
 
 .footer-brand img {
-  height: 28px;
+  height: 44px;
   width: auto;
   filter: brightness(0) invert(1);
   margin-bottom: var(--space-m);

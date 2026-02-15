@@ -482,13 +482,14 @@
     }
   },
   "nav": {
-    "whyBrainDock": "Pourquoi BrainDock",
+    "whyBrainDock": "Pourquoi ?",
     "features": "Fonctionnalités",
     "howItWorks": "Comment ça marche",
     "contact": "Nous contacter",
     "signup": "S'inscrire",
     "pricing": "Tarifs",
-    "download": "Télécharger"
+    "download": "Télécharger",
+    "faqs": "FAQs"
   },
   "hero": {
     "title": "Maîtrisez votre attention",

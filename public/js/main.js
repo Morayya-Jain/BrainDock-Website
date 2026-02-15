@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const ctaWidth = navCta ? navCta.offsetWidth : 0;
 
     // Get gap size from CSS custom property or fallback
-    const gap = parseFloat(getComputedStyle(navContainer).gap) || 32;
+    const gap = parseFloat(getComputedStyle(navContainer).gap) || 24;
 
     // Calculate total required width (elements + gaps between them)
     // Elements: logo, links, cta = 2 gaps between 3 elements
@@ -395,17 +395,22 @@ function initBinaryBanner() {
   var dpr = window.devicePixelRatio || 1;
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Dense grid - compact chars for high-res binary texture
-  var FONT_SIZE = 9;
-  var CELL_W = 6;
-  var CELL_H = 10;
+  // Grid of binary characters - larger cells for cleaner, bolder look
+  var FONT_SIZE = 11;
+  var CELL_W = 7;
+  var CELL_H = 12;
 
-  var W, H, cols, rows, mask, dripMask, centerWeight, grid, rainY, settled, animId;
+  var W, H, cols, rows, mask, dripMask, centerWeight, edgeNoise, grid, rainY, settled, animId;
+
+  // Hover spotlight state - soft glow + scramble near cursor
+  var SPOT_RADIUS = 30; // cells
+  var mouseCol = -1;
+  var mouseRow = -1;
 
   /** Set canvas dimensions and rebuild everything. */
   function setup() {
     W = canvas.parentElement.clientWidth;
-    H = Math.max(220, Math.min(380, W * 0.3));
+    H = Math.max(180, Math.min(500, W * 0.38));
 
     canvas.width = W * dpr;
     canvas.height = H * dpr;
@@ -429,16 +434,17 @@ function initBinaryBanner() {
     oc.scale(dpr, dpr);
 
     // Large bold text covering ~65% of banner height
-    var fontSize = H * 0.65;
+    var fontSize = Math.min(H * 0.38, W * 0.11); // Cap by width so text fits on small screens
     oc.font = '800 ' + fontSize + 'px "Inter", sans-serif';
     oc.textAlign = 'center';
     oc.textBaseline = 'middle';
     // Stroke for extra thickness
-    oc.lineWidth = fontSize * 0.04;
+    oc.lineWidth = fontSize * 0.07;
     oc.strokeStyle = '#000';
-    oc.strokeText('BrainDock', W / 2, H / 2);
+    var textY = H * 0.55; // Shift text down, more digits above near the nav pill
+    oc.strokeText('BrainDock', W / 2, textY);
     oc.fillStyle = '#000';
-    oc.fillText('BrainDock', W / 2, H / 2);
+    oc.fillText('BrainDock', W / 2, textY);
 
     var data = oc.getImageData(0, 0, off.width, off.height).data;
 
@@ -476,21 +482,30 @@ function initBinaryBanner() {
             }
           }
         }
-        dripMask[r2][c2] = nearest < 99 ? Math.max(0, 0.45 - nearest * 0.035) : 0;
+        dripMask[r2][c2] = nearest < 99 ? Math.max(0, 0.55 - nearest * 0.03) : 0;
       }
     }
 
     // Center-weight map: elliptical Gaussian falloff for background noise density
     var halfW = W / 2;
-    var halfH = H / 2;
+    var centerY = H * 0.55; // Match text vertical offset
     centerWeight = [];
     for (var r3 = 0; r3 < rows; r3++) {
       centerWeight[r3] = [];
       for (var c3 = 0; c3 < cols; c3++) {
         var dx = (c3 * CELL_W + CELL_W / 2 - halfW) / halfW;
-        var dy = (r3 * CELL_H + CELL_H / 2 - halfH) / halfH;
-        var d2 = dx * dx * 0.1 + dy * dy; // Elliptical: wider horizontal spread
+        var dy = (r3 * CELL_H + CELL_H / 2 - centerY) / (H / 2);
+        var d2 = dx * dx * 0.4 + dy * dy * 1.8;
         centerWeight[r3][c3] = Math.exp(-d2 * 1.0);
+      }
+    }
+
+    // Edge noise map: per-cell random offset for organic/cloud-like fade boundary
+    edgeNoise = [];
+    for (var r4 = 0; r4 < rows; r4++) {
+      edgeNoise[r4] = [];
+      for (var c4 = 0; c4 < cols; c4++) {
+        edgeNoise[r4][c4] = Math.random() * 0.18; // 0 to 0.18 random offset
       }
     }
   }
@@ -542,9 +557,21 @@ function initBinaryBanner() {
         var rainPos = rainY[c];
         var visible = r <= rainPos;
 
-        if (!visible) continue;
+        // Cursor proximity (0 = far away, 1 = right on cursor)
+        var proximity = 0;
+        if (mouseCol >= 0) {
+          var mdc = c - mouseCol;
+          var mdr = r - mouseRow;
+          var mDist = Math.sqrt(mdc * mdc + mdr * mdr);
+          if (mDist < SPOT_RADIUS) proximity = 1 - mDist / SPOT_RADIUS;
+        }
 
-        // Scramble characters
+        if (!visible && proximity === 0) continue;
+
+        // Scramble characters (faster near cursor)
+        if (proximity > 0.3 && Math.random() < proximity * 0.4) {
+          grid[r][c] = Math.random() > 0.5 ? '1' : '0';
+        }
         if (!isText && frame % 3 === 0 && Math.random() > 0.95) {
           grid[r][c] = Math.random() > 0.5 ? '1' : '0';
         }
@@ -563,15 +590,41 @@ function initBinaryBanner() {
         } else {
           // Background noise with center-focused density
           var cw = centerWeight[r][c];
-          if (cw < 0.005) continue;
-          var baseAlpha = 0.14 * cw;
+          var baseAlpha = 0.22 * cw;
           alpha = settled ? baseAlpha : Math.min(baseAlpha, dist / 30);
+        }
+
+        // Soft spotlight glow near cursor
+        if (proximity > 0) {
+          alpha = Math.min(1.0, alpha + proximity * 0.2);
+        }
+
+        // Organic edge fade - noise creates a soft cloud-like boundary
+        if (!isText) {
+          var eDx = (c - cols / 2) / (cols / 2);
+          var eDy = (r - rows * 0.55) / (rows / 2);
+          var hWeight = eDy > 0 ? 1.0 : 0.15;
+          var eDist = Math.sqrt(eDx * eDx * hWeight + eDy * eDy);
+          // Per-cell noise offsets the fade threshold for an organic edge
+          var noiseOffset = edgeNoise[r][c];
+          var fadeStart = 0.40 - noiseOffset;
+          var edgeFade = eDist < fadeStart ? 1.0 : Math.max(0, 1.0 - (eDist - fadeStart) / 0.45);
+          alpha *= edgeFade;
         }
 
         if (alpha < 0.01) continue;
 
-        ctx.fillStyle = 'rgba(28,28,30,' + alpha.toFixed(3) + ')';
-        ctx.fillText(grid[r][c], c * CELL_W + CELL_W / 2, r * CELL_H + CELL_H / 2);
+        var cx = c * CELL_W + CELL_W / 2;
+        var cy = r * CELL_H + CELL_H / 2;
+        if (isText) {
+          // Pure black, drawn twice for subtle extra weight
+          ctx.fillStyle = 'rgba(0,0,0,' + alpha.toFixed(3) + ')';
+          ctx.fillText(grid[r][c], cx, cy);
+          ctx.fillText(grid[r][c], cx, cy);
+        } else {
+          ctx.fillStyle = 'rgba(28,28,30,' + alpha.toFixed(3) + ')';
+          ctx.fillText(grid[r][c], cx, cy);
+        }
       }
     }
 
@@ -589,6 +642,36 @@ function initBinaryBanner() {
       }
     }, { threshold: 0 });
     observer.observe(canvas);
+  }
+
+  // Mouse + touch tracking for hover spotlight (skip for reduced-motion)
+  if (!reducedMotion) {
+    /** Convert a pointer/touch event to grid cell coordinates. */
+    function updatePointer(e) {
+      var rect = canvas.getBoundingClientRect();
+      var x = e.clientX !== undefined ? e.clientX : e.touches[0].clientX;
+      var y = e.clientY !== undefined ? e.clientY : e.touches[0].clientY;
+      mouseCol = Math.floor((x - rect.left) / CELL_W);
+      mouseRow = Math.floor((y - rect.top) / CELL_H);
+    }
+    function clearPointer() {
+      mouseCol = -1;
+      mouseRow = -1;
+    }
+
+    // Mouse
+    canvas.addEventListener('mousemove', updatePointer);
+    canvas.addEventListener('mouseleave', clearPointer);
+
+    // Touch (passive so it doesn't block scrolling)
+    canvas.addEventListener('touchmove', function (e) {
+      if (e.touches.length === 1) updatePointer(e);
+    }, { passive: true });
+    canvas.addEventListener('touchstart', function (e) {
+      if (e.touches.length === 1) updatePointer(e);
+    }, { passive: true });
+    canvas.addEventListener('touchend', clearPointer, { passive: true });
+    canvas.addEventListener('touchcancel', clearPointer, { passive: true });
   }
 
   // --- Init ---

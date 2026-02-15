@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": {
-      "index": "BrainDock - AI-Powered Focus Assistant",
+      "index": "BrainDock | AI Powered Focus Assistant",
       "privacy": "Privacy Policy - BrainDock",
       "terms": "Terms and Conditions - BrainDock"
     }
@@ -482,13 +482,14 @@
     }
   },
   "nav": {
-    "whyBrainDock": "Why Use BrainDock",
+    "whyBrainDock": "Why?",
     "features": "Features",
     "howItWorks": "How It Works",
     "contact": "Contact Us",
     "signup": "Sign Up",
     "pricing": "Pricing",
-    "download": "Download"
+    "download": "Download",
+    "faqs": "FAQs"
   },
   "hero": {
     "title": "Own Your Attention",
