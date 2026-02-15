@@ -25,11 +25,22 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Cache translation files briefly - they can change with deploys
+# HTML pages - always revalidate on deploy
 [[headers]]
-  for = "/js/translations/*"
+  for = "/*.html"
   [headers.values]
-    Cache-Control = "public, max-age=300, must-revalidate"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Landing page static JS/CSS (not content-hashed) - revalidate frequently
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=60, must-revalidate"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=60, must-revalidate"
 
 # Session detail: /sessions/:id serves detail page; JS parses id from pathname
 [[redirects]]
