@@ -22,6 +22,8 @@
   --success: #34C759;
   --warning: #FF9500;
   --error: #FF3B30;
+  --btn-primary-bg: #5A7A0D;
+  --btn-primary-hover: #4D6B0B;
 
   /* Typography */
   --font-serif: Georgia, 'Times New Roman', serif;
@@ -210,7 +212,7 @@ p {
 
 .roadmap-path {
   fill: none;
-  stroke: var(--accent-highlight);
+  stroke: var(--btn-primary-bg);
   stroke-width: 2.5;
   stroke-dasharray: 8 8;
   stroke-linecap: round;
@@ -240,7 +242,7 @@ p {
   padding-bottom: 0;
 }
 
-/* Gold dot marker with icon inside + soft outer ring */
+/* Green dot marker with icon inside + soft outer ring */
 .roadmap-dot {
   position: absolute;
   left: 0;
@@ -248,20 +250,20 @@ p {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--accent-highlight);
+  background: var(--btn-primary-bg);
   flex-shrink: 0;
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 0 6px rgba(212, 163, 115, 0.15);
+  box-shadow: 0 0 0 6px rgba(90, 122, 13, 0.15);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 /* Dot grows + glows when its card is hovered */
 .roadmap-step:hover .roadmap-dot {
   transform: scale(1.15);
-  box-shadow: 0 0 0 6px rgba(212, 163, 115, 0.15), 0 0 12px rgba(212, 163, 115, 0.4);
+  box-shadow: 0 0 0 6px rgba(90, 122, 13, 0.15), 0 0 12px rgba(90, 122, 13, 0.4);
 }
 
 /* Mobile: straight dotted line via pseudo-element (SVG hidden) */
@@ -271,7 +273,7 @@ p {
   left: 17px;
   top: 18px;
   bottom: 18px;
-  border-left: 2px dotted var(--accent-highlight);
+  border-left: 2px dotted var(--btn-primary-bg);
   opacity: 0.35;
   z-index: 0;
 }
@@ -279,7 +281,7 @@ p {
 /* Content card - organic, centered */
 .roadmap-content {
   background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(212, 163, 115, 0.12);
+  border: 1px solid rgba(90, 122, 13, 0.12);
   border-radius: var(--btn-radius);
   padding: var(--space-l) var(--space-xl);
   width: fit-content;
@@ -420,33 +422,44 @@ p {
 }
 
 .btn:focus-visible {
-  outline: 2px solid var(--accent-highlight);
+  outline: 2px solid var(--btn-primary-bg);
   outline-offset: 2px;
 }
 
 .btn-primary {
-  background-color: var(--text-primary);
+  background-color: var(--btn-primary-bg);
   color: #FFFFFF;
   box-shadow: var(--shadow-subtle);
 }
 
 .btn-primary:hover {
+  background-color: var(--btn-primary-hover);
   box-shadow: var(--shadow-hover);
 }
 
 .btn-secondary {
-  background-color: transparent;
+  background-color: #F0F4D8;
   color: var(--text-primary);
-  border: 2px solid var(--border-subtle);
+  border: 2px solid rgba(212, 224, 96, 0.4);
 }
 
 .btn-secondary:hover {
-  border-color: var(--text-primary);
+  background-color: #E6EDC0;
+  border-color: rgba(212, 224, 96, 0.7);
 }
 
 .btn-download {
   width: 160px;
   justify-content: center;
+}
+
+#linux-download-btn {
+  background-color: #D4E060;
+  color: var(--text-primary);
+}
+
+#linux-download-btn:hover {
+  background-color: #BBC554;
 }
 
 /* --------------------------------------------------------------------------
@@ -845,7 +858,7 @@ body.hero-compact .hero-ctas {
    -------------------------------------------------------------------------- */
 .why-braindock {
   background:
-    radial-gradient(ellipse at 50% 60%, rgba(212, 163, 115, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 60%, rgba(90, 122, 13, 0.06) 0%, transparent 70%),
     linear-gradient(to right, var(--bg-secondary-dark) 0%, var(--bg-secondary-light) 45%);
   padding-bottom: 96px;
 }
@@ -855,8 +868,9 @@ body.hero-compact .hero-ctas {
    -------------------------------------------------------------------------- */
 .mfy-card {
   background:
-    radial-gradient(ellipse at 50% 50%, rgba(212, 163, 115, 0.07) 0%, transparent 70%),
-    #352C20;
+    radial-gradient(ellipse at 50% 50%, rgba(90, 122, 13, 0.06) 0%, transparent 70%),
+    #E5EBD4;
+  border: 1px solid rgba(90, 122, 13, 0.12);
   border-radius: var(--card-radius);
   overflow: hidden;
   margin-top: 120px;
@@ -882,14 +896,14 @@ body.hero-compact .hero-ctas {
   font-size: clamp(4.25rem, 9vw, 8rem);
   font-weight: 700;
   line-height: 1.02;
-  color: #f5f0e8;
+  color: var(--text-primary);
   letter-spacing: -0.02em;
   font-family: var(--font-serif);
   margin-bottom: 3rem;
 }
 
 .mfy-heading-accent {
-  color: var(--accent-highlight);
+  color: var(--btn-primary-bg);
 }
 
 /* Pills - 3 per row, 2 rows */
@@ -905,31 +919,31 @@ body.hero-compact .hero-ctas {
   justify-content: center;
   padding: 0.5rem 1.25rem;
   background: transparent;
-  border: 1.5px solid rgba(212, 163, 115, 0.35);
+  border: 1.5px solid rgba(90, 122, 13, 0.30);
   border-radius: 9999px;
   font-family: var(--font-sans);
   font-size: 0.875rem;
   font-weight: 500;
-  color: rgba(245, 230, 210, 0.8);
+  color: var(--text-secondary);
   cursor: pointer;
   transition: all var(--transition-base);
   white-space: nowrap;
 }
 
 .mfy-pill:hover {
-  border-color: rgba(212, 163, 115, 0.65);
-  color: #fff;
+  border-color: rgba(90, 122, 13, 0.60);
+  color: var(--text-primary);
 }
 
 .mfy-pill:focus-visible {
-  outline: 2px solid var(--accent-highlight);
+  outline: 2px solid var(--btn-primary-bg);
   outline-offset: 2px;
 }
 
 .mfy-pill.active {
-  background: var(--accent-highlight);
-  border-color: var(--accent-highlight);
-  color: #1C1C1E;
+  background: var(--btn-primary-bg);
+  border-color: var(--btn-primary-bg);
+  color: #FFFFFF;
   font-weight: 600;
 }
 
@@ -960,7 +974,7 @@ body.hero-compact .hero-ctas {
 .mfy-panel-title {
   font-size: clamp(1.75rem, 3.5vw, 2.5rem);
   font-weight: 600;
-  color: #f5f0e8;
+  color: var(--text-primary);
   margin-bottom: 1.25rem;
   font-family: var(--font-serif);
 }
@@ -968,14 +982,14 @@ body.hero-compact .hero-ctas {
 .mfy-panel-title em {
   font-style: italic;
   text-decoration: underline;
-  text-decoration-color: var(--accent-highlight);
+  text-decoration-color: var(--btn-primary-bg);
   text-underline-offset: 6px;
 }
 
 .mfy-panel-desc {
   font-family: var(--font-sans);
   font-size: 1.125rem;
-  color: rgba(245, 230, 210, 0.8);
+  color: var(--text-secondary);
   line-height: 1.65;
   margin-bottom: 2rem;
   max-width: 520px;
@@ -999,23 +1013,24 @@ body.hero-compact .hero-ctas {
 
 .mfy-panel-actions .btn-outline {
   background: transparent;
-  color: #F5F0E8;
-  border: 2px solid rgba(212, 163, 115, 0.45);
+  color: var(--text-primary);
+  border: 2px solid rgba(90, 122, 13, 0.35);
 }
 
 .mfy-panel-actions .btn-outline:hover {
-  border-color: #FFFFFF;
-  color: #FFFFFF;
+  border-color: var(--btn-primary-bg);
+  color: var(--btn-primary-bg);
 }
 
 .mfy-panel-actions .btn-primary {
-  background: #F5F0E8;
-  color: var(--text-primary);
+  background: var(--btn-primary-bg);
+  color: #FFFFFF;
   box-shadow: var(--shadow-subtle);
   border: none;
 }
 
 .mfy-panel-actions .btn-primary:hover {
+  background: var(--btn-primary-hover);
   box-shadow: var(--shadow-hover);
 }
 
@@ -1846,7 +1861,7 @@ body.hero-compact .hero-ctas {
   font-size: 0.9375rem;
   font-weight: 600;
   color: #FFFFFF;
-  background-color: var(--text-primary);
+  background-color: var(--btn-primary-bg);
   border: none;
   border-radius: var(--btn-radius);
   cursor: pointer;
@@ -1854,6 +1869,7 @@ body.hero-compact .hero-ctas {
 }
 
 .popup-close:hover {
+  background-color: var(--btn-primary-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-hover);
 }
@@ -1912,7 +1928,7 @@ body.hero-compact .hero-ctas {
   overflow: visible;
   clip: auto;
   white-space: nowrap;
-  background-color: var(--text-primary);
+  background-color: var(--btn-primary-bg);
   color: #FFFFFF;
   font-family: var(--font-sans);
   font-size: 0.875rem;

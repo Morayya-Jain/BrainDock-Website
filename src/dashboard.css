@@ -25,12 +25,12 @@
    Dashboard button overrides: accent colour instead of black
    -------------------------------------------------------------------------- */
 .dashboard-app .btn-primary {
-  background-color: var(--accent-dashboard);
+  background-color: var(--btn-primary-bg);
   color: #FFFFFF;
 }
 
 .dashboard-app .btn-primary:hover {
-  background-color: var(--accent-dashboard-hover);
+  background-color: var(--btn-primary-hover);
 }
 
 /* --------------------------------------------------------------------------
