@@ -7,12 +7,12 @@
    -------------------------------------------------------------------------- */
 :root {
   /* Colors */
-  --bg-primary: #F9F8F4;
-  --bg-primary-dark: #C7C6C3;  /* 20% darker for gradient left */
-  --bg-primary-light: #FDFCF9;  /* 3% lighter for gradient right */
-  --bg-secondary: #F2F0EB;
-  --bg-secondary-dark: #C2C0BC;  /* 20% darker for gradient left */
-  --bg-secondary-light: #F8F6F1;  /* 3% lighter for gradient right */
+  --bg-primary: #FEFEFD;
+  --bg-primary-dark: #D9D9D8;  /* 20% darker for gradient left */
+  --bg-primary-light: #FFFFFF;  /* 3% lighter for gradient right */
+  --bg-secondary: #FCFBF8;
+  --bg-secondary-dark: #D4D3D1;  /* 20% darker for gradient left */
+  --bg-secondary-light: #FEFEFD;  /* 3% lighter for gradient right */
   --bg-surface: #FFFFFF;
   --text-primary: #1C1C1E;
   --text-secondary: rgba(60, 60, 67, 0.6);
@@ -866,7 +866,7 @@ body.hero-compact .hero-ctas {
 }
 
 /* --------------------------------------------------------------------------
-   Made For You - Dark Card
+   Made For You - Light Card
    -------------------------------------------------------------------------- */
 .mfy-card {
   background:
@@ -1190,7 +1190,7 @@ body.hero-compact .hero-ctas {
   justify-content: center;
   width: 56px;
   height: 56px;
-  background-color: var(--btn-primary-bg);
+  background-color: var(--text-primary);
   color: #FFFFFF;
   font-family: var(--font-serif);
   font-size: 1.25rem;
