@@ -7,8 +7,8 @@
    Dashboard-specific design tokens
    -------------------------------------------------------------------------- */
 :root {
-  --accent-dashboard:       #c4935f;
-  --accent-dashboard-hover: #b8854f;
+  --accent-dashboard:       #648610;
+  --accent-dashboard-hover: #5A7A0D;
   --color-focused:  #059669;
   --color-away:     #C4841D;
   --color-gadget:   #DC2626;
@@ -210,7 +210,7 @@
   z-index: -1;
 }
 
-/* Active pill (warm gold) - overrides hover */
+/* Active pill (green tint) - overrides hover */
 .dashboard-sidebar-link.active {
   color: var(--text-primary);
 }
@@ -219,7 +219,7 @@
   content: '';
   position: absolute;
   inset: 2px 8px;
-  background: rgba(212, 163, 115, 0.18);
+  background: rgba(100, 134, 16, 0.18);
   border-radius: 10px;
   z-index: -1;
   animation: pillAppear 0.3s ease-out both;
@@ -396,7 +396,7 @@
   font-family: var(--font-sans);
   font-weight: 600;
   color: var(--text-primary);
-  background: rgba(212, 163, 115, 0.25);
+  background: rgba(100, 134, 16, 0.25);
   border-radius: 50%;
   flex-shrink: 0;
   overflow: hidden;
@@ -498,7 +498,7 @@
 
 .dashboard-remaining-pill:hover {
   background: var(--bg-surface);
-  border-color: var(--accent-highlight);
+  border-color: var(--btn-primary-bg);
 }
 
 .dashboard-remaining-pill-icon {
@@ -521,7 +521,7 @@
 }
 
 .dashboard-profile-trigger:hover .dashboard-avatar-md {
-  background: rgba(212, 163, 115, 0.35);
+  background: rgba(100, 134, 16, 0.35);
 }
 
 .dashboard-profile-dropdown {
@@ -558,7 +558,7 @@
 }
 
 .dashboard-profile-link:hover {
-  color: var(--accent-highlight);
+  color: var(--btn-primary-bg);
 }
 
 .dashboard-profile-signout {
@@ -1141,7 +1141,7 @@
 }
 
 .dashboard-list-item:hover {
-  background: rgba(212, 163, 115, 0.18);
+  background: rgba(100, 134, 16, 0.18);
 }
 
 /* Focus quality color indicators on session list items */
@@ -1229,7 +1229,7 @@
 }
 
 .dashboard-table tbody tr:hover {
-  background: rgba(212, 163, 115, 0.18);
+  background: rgba(100, 134, 16, 0.18);
 }
 
 .dashboard-table tbody tr:hover td:first-child {
@@ -1291,8 +1291,8 @@
 }
 
 .dashboard-input:focus {
-  border-color: var(--accent-highlight);
-  box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.15);
+  border-color: var(--btn-primary-bg);
+  box-shadow: 0 0 0 3px rgba(100, 134, 16, 0.15);
 }
 
 .dashboard-input:disabled {
@@ -1332,7 +1332,7 @@
 .dashboard-radio-option input {
   width: 18px;
   height: 18px;
-  accent-color: var(--accent-highlight);
+  accent-color: var(--btn-primary-bg);
 }
 
 .dashboard-select {
@@ -1350,7 +1350,7 @@
 
 .dashboard-select:focus {
   outline: none;
-  border-color: var(--accent-highlight);
+  border-color: var(--btn-primary-bg);
 }
 
 /* Toggle switch */
@@ -1407,7 +1407,7 @@
 }
 
 .dashboard-toggle-switch.active {
-  background: var(--accent-highlight);
+  background: var(--btn-primary-bg);
 }
 
 .dashboard-toggle-switch::after {
@@ -1428,7 +1428,7 @@
 }
 
 .dashboard-toggle-switch:focus-visible {
-  outline: 2px solid var(--accent-highlight);
+  outline: 2px solid var(--btn-primary-bg);
   outline-offset: 2px;
 }
 
@@ -1448,7 +1448,7 @@
 
 .dashboard-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #D4A373 0%, #E8C9A0 100%);
+  background: linear-gradient(90deg, #648610 0%, #8DAF1B 100%);
   border-radius: 7px;
   transition: width var(--transition-base);
 }
@@ -1538,7 +1538,7 @@
   max-width: 40px;
   height: 0;
   min-height: 4px;
-  background: linear-gradient(180deg, #E8C9A0 0%, var(--accent-highlight) 100%);
+  background: linear-gradient(180deg, #8DAF1B 0%, var(--btn-primary-bg) 100%);
   border-radius: 6px 6px 0 0;
   transition: height var(--transition-base);
 }
@@ -1693,7 +1693,7 @@
   width: 40px;
   height: 40px;
   border: 3px solid var(--border-subtle);
-  border-top-color: var(--accent-highlight);
+  border-top-color: var(--btn-primary-bg);
   border-radius: 50%;
   animation: dashboard-spin 0.8s linear infinite;
   margin-bottom: var(--space-m);
@@ -1903,7 +1903,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: var(--accent-highlight);
+  background: var(--btn-primary-bg);
   color: #fff;
   font-size: 0.8125rem;
   font-weight: 600;
@@ -1989,7 +1989,7 @@
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  color: var(--accent-highlight);
+  color: var(--btn-primary-bg);
   position: relative;
   top: 2px;
 }
@@ -2019,13 +2019,13 @@
 
 .howto-platform-tab:hover {
   color: var(--text-primary);
-  border-color: var(--accent-highlight);
+  border-color: var(--btn-primary-bg);
 }
 
 .howto-platform-tab.active {
   color: #fff;
-  background: var(--accent-highlight);
-  border-color: var(--accent-highlight);
+  background: var(--btn-primary-bg);
+  border-color: var(--btn-primary-bg);
 }
 
 .howto-platform-panel {
@@ -2137,7 +2137,7 @@
 }
 
 .dashboard-lang-dropdown li.selected {
-  color: var(--accent-highlight, var(--text-primary));
+  color: var(--btn-primary-bg, var(--text-primary));
   font-weight: 600;
 }
 
@@ -2170,7 +2170,7 @@
 .flex-1 { flex: 1; }
 
 /* How-to-use icon color variants */
-.howto-icon--accent  { color: var(--accent-highlight); }
+.howto-icon--accent  { color: var(--btn-primary-bg); }
 .howto-icon--success { color: var(--success); }
 .howto-icon--muted   { color: var(--text-secondary); }
 
@@ -2186,7 +2186,7 @@
 /* Category badge (session detail page) */
 .dashboard-category-badge {
   display: inline-block;
-  background: var(--accent-highlight);
+  background: var(--btn-primary-bg);
   color: #fff;
   font-size: 0.75rem;
   font-weight: 600;

@@ -112,7 +112,7 @@
 
 .auth-input:focus {
   border-color: var(--accent-highlight);
-  box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.15);
+  box-shadow: 0 0 0 3px rgba(100, 134, 16, 0.15);
 }
 
 .auth-input:disabled {
@@ -134,6 +134,15 @@
   opacity: 0.7;
   cursor: not-allowed;
   pointer-events: none;
+}
+
+/* Auth buttons stay black */
+.auth-form .btn-primary {
+  background-color: var(--text-primary);
+}
+
+.auth-form .btn-primary:hover {
+  background-color: var(--text-primary);
 }
 
 /* Google OAuth button */

@@ -17,13 +17,13 @@
   --text-primary: #1C1C1E;
   --text-secondary: rgba(60, 60, 67, 0.6);
   --text-tertiary: rgba(60, 60, 67, 0.45);
-  --accent-highlight: #D4A373;
+  --accent-highlight: #648610;
   --border-subtle: #E5E5EA;
   --success: #34C759;
   --warning: #FF9500;
   --error: #FF3B30;
-  --btn-primary-bg: #5A7A0D;
-  --btn-primary-hover: #4D6B0B;
+  --btn-primary-bg: #648610;
+  --btn-primary-hover: #5A7A0D;
 
   /* Typography */
   --font-serif: Georgia, 'Times New Roman', serif;
@@ -256,14 +256,14 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 0 6px rgba(90, 122, 13, 0.15);
+  box-shadow: 0 0 0 6px rgba(100, 134, 16, 0.15);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 /* Dot grows + glows when its card is hovered */
 .roadmap-step:hover .roadmap-dot {
   transform: scale(1.15);
-  box-shadow: 0 0 0 6px rgba(90, 122, 13, 0.15), 0 0 12px rgba(90, 122, 13, 0.4);
+  box-shadow: 0 0 0 6px rgba(100, 134, 16, 0.15), 0 0 12px rgba(100, 134, 16, 0.4);
 }
 
 /* Mobile: straight dotted line via pseudo-element (SVG hidden) */
@@ -281,7 +281,7 @@ p {
 /* Content card - organic, centered */
 .roadmap-content {
   background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(90, 122, 13, 0.12);
+  border: 1px solid rgba(100, 134, 16, 0.12);
   border-radius: var(--btn-radius);
   padding: var(--space-l) var(--space-xl);
   width: fit-content;
@@ -438,14 +438,13 @@ p {
 }
 
 .btn-secondary {
-  background-color: #F0F4D8;
+  background-color: transparent;
   color: var(--text-primary);
-  border: 2px solid rgba(212, 224, 96, 0.4);
+  border: 2px solid var(--border-subtle);
 }
 
 .btn-secondary:hover {
-  background-color: #E6EDC0;
-  border-color: rgba(212, 224, 96, 0.7);
+  border-color: var(--text-primary);
 }
 
 .btn-download {
@@ -454,12 +453,15 @@ p {
 }
 
 #linux-download-btn {
-  background-color: #D4E060;
+  background-color: #F0F4D8;
   color: var(--text-primary);
+  border: 2px solid rgba(212, 224, 96, 0.4);
+  box-shadow: none;
 }
 
 #linux-download-btn:hover {
-  background-color: #BBC554;
+  background-color: #E6EDC0;
+  border-color: rgba(212, 224, 96, 0.7);
 }
 
 /* --------------------------------------------------------------------------
@@ -858,7 +860,7 @@ body.hero-compact .hero-ctas {
    -------------------------------------------------------------------------- */
 .why-braindock {
   background:
-    radial-gradient(ellipse at 50% 60%, rgba(90, 122, 13, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 60%, rgba(100, 134, 16, 0.06) 0%, transparent 70%),
     linear-gradient(to right, var(--bg-secondary-dark) 0%, var(--bg-secondary-light) 45%);
   padding-bottom: 96px;
 }
@@ -868,9 +870,9 @@ body.hero-compact .hero-ctas {
    -------------------------------------------------------------------------- */
 .mfy-card {
   background:
-    radial-gradient(ellipse at 50% 50%, rgba(90, 122, 13, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 50%, rgba(100, 134, 16, 0.06) 0%, transparent 70%),
     #E5EBD4;
-  border: 1px solid rgba(90, 122, 13, 0.12);
+  border: 1px solid rgba(100, 134, 16, 0.12);
   border-radius: var(--card-radius);
   overflow: hidden;
   margin-top: 120px;
@@ -919,7 +921,7 @@ body.hero-compact .hero-ctas {
   justify-content: center;
   padding: 0.5rem 1.25rem;
   background: transparent;
-  border: 1.5px solid rgba(90, 122, 13, 0.30);
+  border: 1.5px solid rgba(100, 134, 16, 0.30);
   border-radius: 9999px;
   font-family: var(--font-sans);
   font-size: 0.875rem;
@@ -931,7 +933,7 @@ body.hero-compact .hero-ctas {
 }
 
 .mfy-pill:hover {
-  border-color: rgba(90, 122, 13, 0.60);
+  border-color: rgba(100, 134, 16, 0.60);
   color: var(--text-primary);
 }
 
@@ -1014,7 +1016,7 @@ body.hero-compact .hero-ctas {
 .mfy-panel-actions .btn-outline {
   background: transparent;
   color: var(--text-primary);
-  border: 2px solid rgba(90, 122, 13, 0.35);
+  border: 2px solid rgba(100, 134, 16, 0.35);
 }
 
 .mfy-panel-actions .btn-outline:hover {
@@ -1188,7 +1190,7 @@ body.hero-compact .hero-ctas {
   justify-content: center;
   width: 56px;
   height: 56px;
-  background-color: var(--text-primary);
+  background-color: var(--btn-primary-bg);
   color: #FFFFFF;
   font-family: var(--font-serif);
   font-size: 1.25rem;
@@ -1955,7 +1957,7 @@ body.hero-compact .hero-ctas {
 .dashboard-boot-spinner {
   width: 36px; height: 36px;
   border: 3px solid #E5E5EA;
-  border-top-color: #D4A373;
+  border-top-color: var(--btn-primary-bg);
   border-radius: 50%;
   animation: dbspin 0.8s linear infinite;
 }
