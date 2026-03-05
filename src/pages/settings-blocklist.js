@@ -112,7 +112,7 @@ async function saveBlocklist(userId, payload) {
 
 async function loadDetectionSettings() {
   /** Load detection item settings (gadgets + distraction level) from Supabase. */
-  const { data, error } = await supabase.from('user_settings').select('enabled_gadgets, distraction_level').single()
+  const { data, error } = await supabase.from('user_settings').select('enabled_gadgets').single()
   if (error) throw error
   return data
 }
