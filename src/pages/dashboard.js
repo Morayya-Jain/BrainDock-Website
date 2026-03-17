@@ -34,7 +34,7 @@ async function fetchSessionsForDashboard() {
   from.setDate(from.getDate() - 14)
   const { data, error } = await supabase
     .from('sessions')
-    .select('id, session_name, start_time, end_time, monitoring_mode, summary_stats')
+    .select('id, session_name, start_time, end_time, monitoring_mode, summary_stats, objective')
     .gte('start_time', from.toISOString())
     .order('start_time', { ascending: false })
     .limit(100)
@@ -201,7 +201,7 @@ function render(main, user, sessions, stats, weeklyData, credits) {
                 return `
                   <li class="dashboard-list-item ${focusLevelClass(Math.round(pct))}">
                     <div>
-                      <strong>${escapeHtml(s.session_name || t('dashboard.common.session', 'Session'))}</strong><br>
+                      <strong>${escapeHtml(s.session_name || t('dashboard.common.session', 'Session'))}</strong>${s.objective ? `<br><span class="dashboard-meta">${escapeHtml(s.objective)}</span>` : ''}<br>
                       <span class="dashboard-meta">${dayStr} ${timeStr} &middot; ${modeLabel(s.monitoring_mode, true)} &middot; ${formatDuration(duration, true)} ${t('dashboard.common.active', 'active')} &middot; ${Math.round(pct)}% ${t('dashboard.common.focus', 'focus')}</span><br>
                       <span class="dashboard-meta-sub">${gadgets} ${t('dashboard.common.gadgets', 'gadgets')} &middot; ${screen} ${t('dashboard.common.screenDistractions', 'screen distractions')}</span>
                     </div>
@@ -261,10 +261,14 @@ async function main() {
   `
 
   try {
-    const [sessions, credits] = await Promise.all([
+    const results = await Promise.allSettled([
       fetchSessionsForDashboard(),
       fetchUserCredits(),
     ])
+    const sessions = results[0].status === 'fulfilled' ? results[0].value : []
+    const credits = results[1].status === 'fulfilled' ? results[1].value : null
+    if (results[0].status === 'rejected') logError('Session fetch failed:', results[0].reason)
+    if (results[1].status === 'rejected') logError('Credit fetch failed:', results[1].reason)
     const stats = computeDailyStats(sessions)
     const weeklyData = buildWeeklyChartData(sessions)
     render(mainEl, result.user, sessions, stats, weeklyData, credits)

@@ -30,6 +30,14 @@ const userAttempts = new Map<string, { count: number; resetAt: number }>()
 /** Check if a user has exceeded the session creation rate limit. Returns true if blocked. */
 function isSessionCreationLimited(userId: string): boolean {
   const now = Date.now()
+
+  // Sweep expired entries to prevent unbounded memory growth
+  if (userAttempts.size > 50) {
+    for (const [key, val] of userAttempts) {
+      if (now >= val.resetAt) userAttempts.delete(key)
+    }
+  }
+
   const entry = userAttempts.get(userId)
   if (!entry || now >= entry.resetAt) {
     userAttempts.set(userId, { count: 1, resetAt: now + SESSION_RATE_LIMIT_WINDOW_MS })

@@ -39,13 +39,15 @@ function getSessionIdFromPath() {
 
 function formatTime(iso) {
   if (!iso) return '-'
-  return new Date(iso).toLocaleTimeString(getLocale(), { hour: 'numeric', minute: '2-digit', second: '2-digit' })
+  const d = new Date(iso)
+  if (isNaN(d.getTime())) return '-'
+  return d.toLocaleTimeString(getLocale(), { hour: 'numeric', minute: '2-digit', second: '2-digit' })
 }
 
 async function fetchSessionWithEvents(sessionId) {
   const { data: session, error: sessionError } = await supabase
     .from('sessions')
-    .select('id, session_name, start_time, end_time, monitoring_mode, summary_stats')
+    .select('id, session_name, start_time, end_time, monitoring_mode, summary_stats, objective')
     .eq('id', sessionId)
     .single()
   // PGRST116 = "not found" from .single() - return null instead of throwing
@@ -107,6 +109,7 @@ function render(main, session, events) {
   main.innerHTML = `
     <a href="${base}/sessions/" class="dashboard-back-link">${t('dashboard.common.backToSessions', 'Back to Sessions')}</a>
     <h1 class="dashboard-page-title">${escapeHtml(displayTitle)}</h1>
+    ${session.objective ? `<p class="dashboard-page-subtitle">${escapeHtml(session.objective)}</p>` : ''}
     <p class="dashboard-page-subtitle">
       ${dateStr} &middot; ${modeLabel(session.monitoring_mode)}
     </p>

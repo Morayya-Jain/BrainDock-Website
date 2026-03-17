@@ -406,15 +406,20 @@ function render(main, blocklistConfig, detectionSettings, userId) {
     scheduleBlocklistSave()
   }
 
-  function addCustomApp() {
+  async function addCustomApp() {
     const input = main.querySelector('#custom-app-input')
+    const addBtn = main.querySelector('#custom-app-add')
     const hintEl = main.querySelector('#custom-app-hint')
     const val = input.value.trim()
     if (!val) {
       setHint(hintEl, '', '')
       return
     }
-    const result = validateAppPattern(val)
+    // Disable button during async validation to prevent duplicate entries
+    if (addBtn) addBtn.disabled = true
+    setHint(hintEl, t('dashboard.config.checking', 'Checking...'), '')
+    const result = await validateAppPattern(val)
+    if (addBtn) addBtn.disabled = false
     if (!result.valid) {
       setHint(hintEl, result.message, 'error')
       return

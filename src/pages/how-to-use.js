@@ -180,8 +180,8 @@ function render(main) {
     })
   })
 
-  // 3D stacking scroll effect
-  initStackEffect(main)
+  // 3D stacking scroll effect — return cleanup function for SPA navigation
+  return initStackEffect(main)
 }
 
 /**
@@ -286,16 +286,34 @@ function initStackEffect(main) {
   window.addEventListener('resize', recache)
   window.addEventListener('orientationchange', recache)
   update()
+
+  // Return cleanup function for SPA navigation
+  return function cleanup() {
+    if (scrollEl) scrollEl.removeEventListener('scroll', onScroll)
+    if (prevScrollEl && prevScrollEl !== scrollEl) prevScrollEl.removeEventListener('scroll', onScroll)
+    window.removeEventListener('scroll', onScroll)
+    window.removeEventListener('resize', recache)
+    window.removeEventListener('orientationchange', recache)
+  }
 }
 
+// Module-level cleanup for SPA navigation
+let _cleanupStackEffect = null
+
 async function main() {
+  // Clean up previous listeners if re-entering from SPA navigation
+  if (_cleanupStackEffect) {
+    _cleanupStackEffect()
+    _cleanupStackEffect = null
+  }
+
   const result = await initDashboardLayout()
   if (!result) return
 
   const mainEl = document.querySelector('.dashboard-main')
   if (!mainEl) return
 
-  render(mainEl)
+  _cleanupStackEffect = render(mainEl)
 }
 
 main()

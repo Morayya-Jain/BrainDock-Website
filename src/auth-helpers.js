@@ -11,19 +11,31 @@ const DESKTOP_SOURCE_KEY = 'braindock_desktop'
 export const REDIRECT_STORAGE_KEY = 'braindock_redirect'
 
 /**
- * Determine where to redirect after successful auth.
- * Uses persisted redirect (sessionStorage) first, then ?redirect= param, then /dashboard/.
- * Consumes the stored redirect so it is only used once.
+ * Validate that a redirect path is safe (relative, no open-redirect tricks).
+ * Rejects protocol-relative paths (//), backslash paths (/\), and non-parseable URLs.
  */
+function isValidRedirectPath(path) {
+  if (!path || typeof path !== 'string') return false
+  if (!path.startsWith('/')) return false
+  if (path.startsWith('//')) return false
+  if (path.includes('\\')) return false
+  try {
+    const url = new URL(path, window.location.origin)
+    return url.origin === window.location.origin
+  } catch {
+    return false
+  }
+}
+
 export function getRedirectPath() {
   const stored = sessionStorage.getItem(REDIRECT_STORAGE_KEY)
-  if (stored && stored.startsWith('/') && !stored.startsWith('//')) {
+  if (isValidRedirectPath(stored)) {
     sessionStorage.removeItem(REDIRECT_STORAGE_KEY)
     return stored
   }
   const params = new URLSearchParams(window.location.search)
   const redirect = params.get('redirect')
-  if (redirect && redirect.startsWith('/') && !redirect.startsWith('//')) {
+  if (isValidRedirectPath(redirect)) {
     return redirect
   }
   return '/settings/blocklist/'
@@ -49,7 +61,7 @@ export function captureDesktopSource() {
 export function captureRedirect() {
   const params = new URLSearchParams(window.location.search)
   const redirect = params.get('redirect')
-  if (redirect && redirect.startsWith('/') && !redirect.startsWith('//')) {
+  if (isValidRedirectPath(redirect)) {
     sessionStorage.setItem(REDIRECT_STORAGE_KEY, redirect)
   }
 }

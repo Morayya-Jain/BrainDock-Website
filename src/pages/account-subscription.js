@@ -128,7 +128,11 @@ async function main() {
   mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.billing.loading', 'Loading billing...')}</p></div>`
 
   try {
-    const [credits, purchases] = await Promise.all([fetchUserCredits(), loadPurchaseHistory()])
+    const results = await Promise.allSettled([fetchUserCredits(), loadPurchaseHistory()])
+    const credits = results[0].status === 'fulfilled' ? results[0].value : null
+    const purchases = results[1].status === 'fulfilled' ? results[1].value : []
+    if (results[0].status === 'rejected') logError('Credit fetch failed:', results[0].reason)
+    if (results[1].status === 'rejected') logError('Purchase history fetch failed:', results[1].reason)
     render(mainEl, credits, purchases)
 
     const params = new URLSearchParams(window.location.search)

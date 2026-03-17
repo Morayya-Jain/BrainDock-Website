@@ -52,11 +52,12 @@ function render(main, profile, userId) {
   const input = main.querySelector('#display_name')
 
   saveBtn.addEventListener('click', async () => {
-    const name = sanitizeText(input.value, LIMITS.NAME_MAX)
-    if (name && !isValidName(name)) {
+    const rawName = input.value.trim()
+    if (rawName && !isValidName(rawName)) {
       showInlineError(main, t('dashboard.account.nameValidation', `Display name must be 1-${LIMITS.NAME_MAX} characters and cannot contain < or >.`))
       return
     }
+    const name = sanitizeText(rawName, LIMITS.NAME_MAX)
     saveBtn.disabled = true
     try {
       await updateProfile(userId, { display_name: name || null })
