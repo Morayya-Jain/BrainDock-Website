@@ -177,6 +177,8 @@ const I18n = {
       titleKey = 'meta.title.privacy';
     } else if (path.includes('terms')) {
       titleKey = 'meta.title.terms';
+    } else if (path.includes('about')) {
+      titleKey = 'meta.title.about';
     }
     
     const title = this.getTranslation(titleKey);

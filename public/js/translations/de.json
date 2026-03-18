@@ -1,9 +1,10 @@
 {
   "meta": {
     "title": {
-      "index": "BrainDock - KI-gestützter Fokus-Assistent",
+      "index": "BrainDock - KI-Fokus-App für macOS & Windows | Konzentriert bleiben",
       "privacy": "Datenschutzrichtlinie - BrainDock",
-      "terms": "Allgemeine Geschäftsbedingungen - BrainDock"
+      "terms": "Allgemeine Geschäftsbedingungen - BrainDock",
+      "about": "Über uns - BrainDock"
     }
   },
   "legal": {
@@ -717,7 +718,7 @@
     "pricing": "Preise",
     "howToUse": "Anleitung",
     "faq": "FAQ",
-    "about": "Uber uns",
+    "about": "Über uns",
     "legalTitle": "Rechtliches",
     "privacyPolicy": "Datenschutzrichtlinie",
     "termsOfService": "Nutzungsbedingungen",
@@ -725,12 +726,12 @@
     "copyright": "© 2026 BrainDock. Alle Rechte vorbehalten."
   },
   "about": {
-    "backHome": "← Zuruck zur Startseite",
-    "title": "Uber BrainDock",
-    "subtitle": "BrainDock ist ein KI-gestutzter Fokus-Assistent, der Ihnen hilft, bei der Arbeit und beim Lernen konzentriert zu bleiben. Er erkennt Ablenkungen uber die Webcam - ohne Videos zu speichern oder Gesichtserkennung zu verwenden.",
+    "backHome": "← Zurück zur Startseite",
+    "title": "Über BrainDock",
+    "subtitle": "BrainDock ist ein KI-gestützter Fokus-Assistent, der Ihnen hilft, bei der Arbeit und beim Lernen konzentriert zu bleiben. Er erkennt Ablenkungen über die Webcam - ohne Videos zu speichern oder Gesichtserkennung zu verwenden.",
     "mission": {
       "title": "Unsere Mission",
-      "description": "Wir glauben, dass tiefe Konzentration eine trainierbare Fahigkeit ist. BrainDock wurde entwickelt, um Menschen einen sanften, intelligenten Begleiter zu geben, der bemerkt, wenn die Aufmerksamkeit nachlasst."
+      "description": "Wir glauben, dass tiefe Konzentration eine trainierbare Fähigkeit ist. BrainDock wurde entwickelt, um Menschen einen sanften, intelligenten Begleiter zu geben, der bemerkt, wenn die Aufmerksamkeit nachlässt."
     },
     "privacy": {
       "title": "Datenschutz zuerst",
@@ -738,7 +739,7 @@
     },
     "platforms": {
       "title": "macOS & Windows",
-      "description": "BrainDock lauft nativ auf macOS und Windows als leichtgewichtige Desktop-App. Es arbeitet leise im Hintergrund wahrend Ihrer Sitzungen."
+      "description": "BrainDock läuft nativ auf macOS und Windows als leichtgewichtige Desktop-App. Es arbeitet leise im Hintergrund während Ihrer Sitzungen."
     },
     "contact": {
       "title": "Kontakt"

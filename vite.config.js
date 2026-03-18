@@ -1,7 +1,7 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 
-const posthogTag = `<script src="/js/posthog.js"></script>`
+const posthogTag = `<script src="/js/posthog.js" defer></script>`
 
 export default defineConfig({
   // Rewrite "/" to "/index.html" so public/index.html serves as the landing page
