@@ -100,7 +100,7 @@ const PAGE_ICONS = {
 
 async function loadBlocklist(userId) {
   /** Load blocklist config from Supabase. */
-  const { data, error } = await supabase.from('blocklist_configs').select('*').eq('user_id', userId).single()
+  const { data, error } = await supabase.from('blocklist_configs').select('quick_blocks, categories, custom_urls, custom_apps').eq('user_id', userId).single()
   if (error) throw error
   return data
 }

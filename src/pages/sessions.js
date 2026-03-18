@@ -10,12 +10,13 @@ import { logError } from '../logger.js'
 
 const PAGE_SIZE = 20
 
-async function fetchSessionsWithCount(page) {
+async function fetchSessionsWithCount(page, userId) {
   const from = (page - 1) * PAGE_SIZE
   const to = from + PAGE_SIZE - 1
   const { data, error, count } = await supabase
     .from('sessions')
     .select('id, session_name, start_time, end_time, monitoring_mode, summary_stats, objective', { count: 'exact', head: false })
+    .eq('user_id', userId)
     .order('start_time', { ascending: false })
     .range(from, to)
   if (error) throw error
@@ -88,11 +89,13 @@ async function main() {
 
   let currentPage = 1
 
+  const userId = result.user.id
+
   async function loadPage(page) {
     currentPage = page
     mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.sessionList.loading', 'Loading sessions...')}</p></div>`
     try {
-      const { sessions, total } = await fetchSessionsWithCount(page)
+      const { sessions, total } = await fetchSessionsWithCount(page, userId)
       render(mainEl, sessions, page, total, loadPage)
     } catch (err) {
       logError('Sessions list load failed:', err)

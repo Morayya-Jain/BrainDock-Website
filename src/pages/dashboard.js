@@ -28,13 +28,14 @@ function formatDateLabel(date) {
 /**
  * Fetch sessions from the last N days for dashboard stats and chart.
  */
-async function fetchSessionsForDashboard() {
+async function fetchSessionsForDashboard(userId) {
   const now = new Date()
   const from = new Date(now)
   from.setDate(from.getDate() - 14)
   const { data, error } = await supabase
     .from('sessions')
     .select('id, session_name, start_time, end_time, monitoring_mode, summary_stats, objective')
+    .eq('user_id', userId)
     .gte('start_time', from.toISOString())
     .order('start_time', { ascending: false })
     .limit(100)
@@ -262,7 +263,7 @@ async function main() {
 
   try {
     const results = await Promise.allSettled([
-      fetchSessionsForDashboard(),
+      fetchSessionsForDashboard(result.user.id),
       fetchUserCredits(),
     ])
     const sessions = results[0].status === 'fulfilled' ? results[0].value : []

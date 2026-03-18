@@ -58,6 +58,8 @@ async function fetchSessionWithEvents(sessionId, userId) {
   }
   if (!session) return { session: null, events: [] }
 
+  // Ownership already verified by the session query above (user_id filter on sessions table).
+  // Events are scoped to the validated session_id, so no separate user_id filter needed here.
   const { data: events, error: eventsError } = await supabase
     .from('session_events')
     .select('event_type, start_time, end_time, duration_seconds')

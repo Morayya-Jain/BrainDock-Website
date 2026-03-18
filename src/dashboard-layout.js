@@ -249,6 +249,10 @@ function initSidebarFooterPopup() {
 
 async function handleSignOut() {
   try {
+    // scope: 'local' (default) - only clears this browser session.
+    // scope: 'global' would revoke ALL tokens including the desktop app,
+    // causing silent session data loss if user is mid-focus. Password reset
+    // uses 'global' (reset-password.js) which is the appropriate place.
     await supabase.auth.signOut()
   } catch (_) {
     // Redirect even if signOut fails (e.g. network error) so user is not stuck
@@ -437,6 +441,13 @@ export async function initDashboardLayout(options = {}) {
       if (textEl) textEl.textContent = formatPillDuration(seconds)
     })
     .catch(() => { /* credits fetch failed - pill stays as "..." */ })
+
+  // Redirect to login if the user signs out in another tab
+  supabase.auth.onAuthStateChange((event) => {
+    if (event === 'SIGNED_OUT') {
+      window.location.href = LOGIN_PATH
+    }
+  })
 
   return { user }
 }
