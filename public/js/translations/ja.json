@@ -711,11 +711,38 @@
   },
   "footer": {
     "brandDescription": "より良い習慣を築くAI搭載フォーカスアシスタント。",
+    "productTitle": "製品",
+    "features": "機能",
+    "howItWorks": "使い方",
+    "pricing": "料金",
+    "howToUse": "使用方法",
+    "faq": "よくある質問",
+    "about": "概要",
     "legalTitle": "法的情報",
     "privacyPolicy": "プライバシーポリシー",
     "termsOfService": "利用規約",
     "contactTitle": "お問い合わせ",
     "copyright": "© 2026 BrainDock. All rights reserved."
+  },
+  "about": {
+    "backHome": "← ホームに戻る",
+    "title": "BrainDockについて",
+    "subtitle": "BrainDockは、仕事や勉強中に集中力を維持するAI搭載フォーカスアシスタントです。ウェブカメラで注意散漫を検出しますが、動画の保存や顔認識は一切行いません。",
+    "mission": {
+      "title": "私たちのミッション",
+      "description": "深い集中力はトレーニングできるスキルだと信じています。BrainDockは、注意が逸れた時にそっと気づかせてくれるインテリジェントなコンパニオンとして作られました。"
+    },
+    "privacy": {
+      "title": "プライバシー最優先",
+      "description": "動画は保存されません。顔認識なし。スクリーンショットの保存なし。BrainDockはすべてをリアルタイムで処理し、即座に破棄します。"
+    },
+    "platforms": {
+      "title": "macOS & Windows",
+      "description": "BrainDockはmacOSとWindowsでネイティブに動作する軽量デスクトップアプリです。セッション中はバックグラウンドで静かに動作します。"
+    },
+    "contact": {
+      "title": "お問い合わせ"
+    }
   },
   "popup": {
     "comingSoon": "近日公開！",

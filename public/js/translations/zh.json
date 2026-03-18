@@ -711,11 +711,38 @@
   },
   "footer": {
     "brandDescription": "AI驱动的专注助手，帮助你建立更好的习惯。",
+    "productTitle": "产品",
+    "features": "功能",
+    "howItWorks": "工作原理",
+    "pricing": "定价",
+    "howToUse": "使用方法",
+    "faq": "常见问题",
+    "about": "关于",
     "legalTitle": "法律信息",
     "privacyPolicy": "隐私政策",
     "termsOfService": "服务条款",
     "contactTitle": "联系方式",
     "copyright": "© 2026 BrainDock. 保留所有权利。"
+  },
+  "about": {
+    "backHome": "← 返回首页",
+    "title": "关于 BrainDock",
+    "subtitle": "BrainDock 是一款 AI 驱动的专注助手，帮助您在工作和学习期间保持专注。它通过摄像头检测分心行为 - 不存储任何视频，也不使用面部识别。",
+    "mission": {
+      "title": "我们的使命",
+      "description": "我们相信深度专注是一项可以训练的技能。BrainDock 旨在为人们提供一个温和、智能的伙伴，在注意力分散时及时提醒。"
+    },
+    "privacy": {
+      "title": "隐私优先",
+      "description": "不存储视频。不使用面部识别。不保存截图。BrainDock 实时处理所有数据并立即丢弃。"
+    },
+    "platforms": {
+      "title": "macOS 和 Windows",
+      "description": "BrainDock 作为轻量级桌面应用在 macOS 和 Windows 上原生运行。在您的会话期间在后台安静运行。"
+    },
+    "contact": {
+      "title": "联系我们"
+    }
   },
   "popup": {
     "comingSoon": "即将推出！",

@@ -42,6 +42,7 @@ export default defineConfig({
         accountSubscription: resolve(__dirname, 'account/subscription/index.html'),
         pricing: resolve(__dirname, 'pricing/index.html'),
         howToUse: resolve(__dirname, 'how-to-use/index.html'),
+        about: resolve(__dirname, 'about/index.html'),
         download: resolve(__dirname, 'download/index.html'),
       },
     },

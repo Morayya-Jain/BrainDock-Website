@@ -21,7 +21,18 @@
       "mcp__posthog__projects-get",
       "mcp__posthog__event-definitions-list",
       "Bash(wc:*)",
-      "Bash(file /Users/morayyajain/Developer/BrainDock-Website/public/assets/*.png)"
+      "Bash(file /Users/morayyajain/Developer/BrainDock-Website/public/assets/*.png)",
+      "Bash(ls -la /Users/morayyajain/Developer/BrainDock-Website/public/assets/*.png)",
+      "Bash(cwebp -q 80 mountain-focus.png -o mountain-focus.webp)",
+      "Bash(cwebp -q 80 image_transparent_screen.png -o image_transparent_screen.webp)",
+      "Bash(cwebp -q 80 website_image.png -o website_image.webp)",
+      "Bash(node:*)",
+      "Bash(node -e \"JSON.parse\\(require\\(''fs''\\).readFileSync\\(''/Users/morayyajain/Developer/BrainDock-Website/public/js/translations/en.json'',''utf8''\\)\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\(''fs''\\).readFileSync\\(''/Users/morayyajain/Developer/BrainDock-Website/public/js/translations/ja.json'',''utf8''\\)\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\(''fs''\\).readFileSync\\(''/Users/morayyajain/Developer/BrainDock-Website/public/js/translations/de.json'',''utf8''\\)\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\(''fs''\\).readFileSync\\(''/Users/morayyajain/Developer/BrainDock-Website/public/js/translations/fr.json'',''utf8''\\)\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\(''fs''\\).readFileSync\\(''/Users/morayyajain/Developer/BrainDock-Website/public/js/translations/zh.json'',''utf8''\\)\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\(''fs''\\).readFileSync\\(''/Users/morayyajain/Developer/BrainDock-Website/public/js/translations/hi.json'',''utf8''\\)\\)\")"
     ]
   },
   "enableAllProjectMcpServers": true,

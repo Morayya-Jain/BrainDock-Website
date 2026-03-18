@@ -711,11 +711,38 @@
   },
   "footer": {
     "brandDescription": "KI-gestützter Fokus-Assistent, der dir hilft, bessere Gewohnheiten aufzubauen.",
+    "productTitle": "Produkt",
+    "features": "Funktionen",
+    "howItWorks": "So funktioniert es",
+    "pricing": "Preise",
+    "howToUse": "Anleitung",
+    "faq": "FAQ",
+    "about": "Uber uns",
     "legalTitle": "Rechtliches",
     "privacyPolicy": "Datenschutzrichtlinie",
     "termsOfService": "Nutzungsbedingungen",
     "contactTitle": "Kontakt",
     "copyright": "© 2026 BrainDock. Alle Rechte vorbehalten."
+  },
+  "about": {
+    "backHome": "← Zuruck zur Startseite",
+    "title": "Uber BrainDock",
+    "subtitle": "BrainDock ist ein KI-gestutzter Fokus-Assistent, der Ihnen hilft, bei der Arbeit und beim Lernen konzentriert zu bleiben. Er erkennt Ablenkungen uber die Webcam - ohne Videos zu speichern oder Gesichtserkennung zu verwenden.",
+    "mission": {
+      "title": "Unsere Mission",
+      "description": "Wir glauben, dass tiefe Konzentration eine trainierbare Fahigkeit ist. BrainDock wurde entwickelt, um Menschen einen sanften, intelligenten Begleiter zu geben, der bemerkt, wenn die Aufmerksamkeit nachlasst."
+    },
+    "privacy": {
+      "title": "Datenschutz zuerst",
+      "description": "Keine Videos gespeichert. Keine Gesichtserkennung. Keine Screenshots gespeichert. BrainDock verarbeitet alles in Echtzeit und verwirft es sofort."
+    },
+    "platforms": {
+      "title": "macOS & Windows",
+      "description": "BrainDock lauft nativ auf macOS und Windows als leichtgewichtige Desktop-App. Es arbeitet leise im Hintergrund wahrend Ihrer Sitzungen."
+    },
+    "contact": {
+      "title": "Kontakt"
+    }
   },
   "popup": {
     "comingSoon": "Demnächst verfügbar!",

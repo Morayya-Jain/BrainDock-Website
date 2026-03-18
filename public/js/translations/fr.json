@@ -711,11 +711,38 @@
   },
   "footer": {
     "brandDescription": "Assistant de concentration alimenté par l'IA qui vous aide à construire de meilleures habitudes.",
+    "productTitle": "Produit",
+    "features": "Fonctionnalites",
+    "howItWorks": "Comment ca marche",
+    "pricing": "Tarifs",
+    "howToUse": "Mode d'emploi",
+    "faq": "FAQ",
+    "about": "A propos",
     "legalTitle": "Mentions légales",
     "privacyPolicy": "Politique de confidentialité",
     "termsOfService": "Conditions d'utilisation",
     "contactTitle": "Contact",
     "copyright": "© 2026 BrainDock. Tous droits réservés."
+  },
+  "about": {
+    "backHome": "← Retour a l'accueil",
+    "title": "A propos de BrainDock",
+    "subtitle": "BrainDock est un assistant de concentration propulse par l'IA qui vous aide a rester concentre pendant vos sessions de travail et d'etude. Il detecte les distractions via webcam - sans jamais stocker de video ni utiliser la reconnaissance faciale.",
+    "mission": {
+      "title": "Notre mission",
+      "description": "Nous croyons que la concentration profonde est une competence qui peut etre entrainee. BrainDock a ete concu pour offrir un compagnon intelligent et bienveillant qui remarque quand l'attention derive."
+    },
+    "privacy": {
+      "title": "Vie privee d'abord",
+      "description": "Aucune video stockee. Pas de reconnaissance faciale. Pas de captures d'ecran sauvegardees. BrainDock traite tout en temps reel et le supprime immediatement."
+    },
+    "platforms": {
+      "title": "macOS & Windows",
+      "description": "BrainDock fonctionne nativement sur macOS et Windows en tant qu'application de bureau legere. Il fonctionne silencieusement en arriere-plan pendant vos sessions."
+    },
+    "contact": {
+      "title": "Nous contacter"
+    }
   },
   "popup": {
     "comingSoon": "Bientôt disponible !",

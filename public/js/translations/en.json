@@ -711,11 +711,38 @@
   },
   "footer": {
     "brandDescription": "AI-powered focus assistant that helps you build better habits.",
+    "productTitle": "Product",
+    "features": "Features",
+    "howItWorks": "How It Works",
+    "pricing": "Pricing",
+    "howToUse": "How to Use",
+    "faq": "FAQ",
+    "about": "About",
     "legalTitle": "Legal",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms and Conditions",
     "contactTitle": "Contact",
     "copyright": "© 2026 BrainDock. All rights reserved."
+  },
+  "about": {
+    "backHome": "← Back to home",
+    "title": "About BrainDock",
+    "subtitle": "BrainDock is an AI-powered focus assistant that helps you stay on task during work and study sessions. It uses your webcam to detect distractions - without ever storing video or using facial recognition.",
+    "mission": {
+      "title": "Our Mission",
+      "description": "We believe deep focus is a skill that can be trained. BrainDock was built to give people a gentle, intelligent companion that notices when attention drifts - so you can build stronger focus habits over time."
+    },
+    "privacy": {
+      "title": "Privacy First",
+      "description": "No video is stored. No facial recognition. No screenshots saved. BrainDock processes everything in real-time and discards it immediately. Your focus data stays on your device unless you choose to sync it."
+    },
+    "platforms": {
+      "title": "macOS & Windows",
+      "description": "BrainDock runs natively on macOS and Windows as a lightweight desktop app. It works quietly in the background during your sessions - no browser extensions or plugins needed."
+    },
+    "contact": {
+      "title": "Get in Touch"
+    }
   },
   "popup": {
     "comingSoon": "Coming Soon!",

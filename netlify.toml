@@ -31,16 +31,16 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Landing page static JS/CSS (not content-hashed) - revalidate frequently
+# Landing page static JS/CSS (not content-hashed) - cache for 1 hour
 [[headers]]
   for = "/js/*"
   [headers.values]
-    Cache-Control = "public, max-age=60, must-revalidate"
+    Cache-Control = "public, max-age=3600, must-revalidate"
 
 [[headers]]
   for = "/css/*"
   [headers.values]
-    Cache-Control = "public, max-age=60, must-revalidate"
+    Cache-Control = "public, max-age=3600, must-revalidate"
 
 # Session detail: /sessions/:id serves detail page; JS parses id from pathname
 [[redirects]]
@@ -52,9 +52,9 @@
 [[redirects]]
   from = "/download/macos"
   to = "https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg"
-  status = 302
+  status = 301
 
 [[redirects]]
   from = "/download/windows"
   to = "https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe"
-  status = 302
+  status = 301
