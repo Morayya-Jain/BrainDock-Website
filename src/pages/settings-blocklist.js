@@ -8,6 +8,7 @@ import { supabase } from '../supabase.js'
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { validateUrlPattern, validateAppPattern } from '../validators.js'
 import { escapeHtml, showInlineError } from '../utils.js'
+import { logError } from '../logger.js'
 import { t } from '../dashboard-i18n.js'
 import {
   createIcons,
@@ -97,9 +98,9 @@ const PAGE_ICONS = {
 
 // -- Data helpers --
 
-async function loadBlocklist() {
+async function loadBlocklist(userId) {
   /** Load blocklist config from Supabase. */
-  const { data, error } = await supabase.from('blocklist_configs').select('*').single()
+  const { data, error } = await supabase.from('blocklist_configs').select('*').eq('user_id', userId).single()
   if (error) throw error
   return data
 }
@@ -110,9 +111,9 @@ async function saveBlocklist(userId, payload) {
   if (error) throw error
 }
 
-async function loadDetectionSettings() {
+async function loadDetectionSettings(userId) {
   /** Load detection item settings (gadgets + distraction level) from Supabase. */
-  const { data, error } = await supabase.from('user_settings').select('enabled_gadgets').single()
+  const { data, error } = await supabase.from('user_settings').select('enabled_gadgets, distraction_level').eq('user_id', userId).single()
   if (error) throw error
   return data
 }
@@ -159,7 +160,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
           custom_apps: state.custom_apps,
         })
       } catch (err) {
-        console.error(err)
+        logError('Blocklist save failed:', err)
         showInlineError(main, t('dashboard.blocklist.saveError', 'Could not save blocklist. Please try again.'))
       }
     }, DEBOUNCE_MS)
@@ -174,7 +175,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
         const enabled = getEnabledItems()
         await saveDetectionSettings(userId, enabled)
       } catch (err) {
-        console.error(err)
+        logError('Detection settings save failed:', err)
         showInlineError(main, t('dashboard.blocklist.saveError', 'Could not save settings. Please try again.'))
       }
     }, DEBOUNCE_MS)
@@ -206,12 +207,12 @@ function render(main, blocklistConfig, detectionSettings, userId) {
         <p class="dashboard-meta mb-l">${t('dashboard.config.levelDesc', 'Choose what happens when a distraction is detected during a session.')}</p>
         <div class="distraction-level-toggle" id="distraction-level-toggle">
           <button type="button" class="level-option ${distractionLevel === 1 ? 'active' : ''}" data-level="1" aria-pressed="${distractionLevel === 1}">
-            <span class="level-option-title">Track Only</span>
-            <span class="level-option-desc">Silent logging. You won't be interrupted.</span>
+            <span class="level-option-title">${t('dashboard.config.trackOnlyTitle', 'Track Only')}</span>
+            <span class="level-option-desc">${t('dashboard.config.trackOnlyDesc', 'Silent logging. You won\'t be interrupted.')}</span>
           </button>
           <button type="button" class="level-option ${distractionLevel === 2 ? 'active' : ''}" data-level="2" aria-pressed="${distractionLevel === 2}">
-            <span class="level-option-title">Warning + Delay</span>
-            <span class="level-option-desc">A 15-second pause screen appears. You choose whether to continue.</span>
+            <span class="level-option-title">${t('dashboard.config.warningTitle', 'Warning + Delay')}</span>
+            <span class="level-option-desc">${t('dashboard.config.warningDesc', 'A 15-second pause screen appears. You choose whether to continue.')}</span>
           </button>
         </div>
       </div>
@@ -281,7 +282,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
       try {
         await saveDistractionLevel(userId, level)
       } catch (err) {
-        console.error(err)
+        logError('Distraction level save failed:', err)
         showInlineError(main, t('dashboard.blocklist.saveError', 'Could not save settings. Please try again.'))
       }
     })
@@ -555,16 +556,16 @@ async function main() {
   try {
     // Load blocklist and detection data in parallel
     const [blocklistConfig, detectionSettings] = await Promise.all([
-      loadBlocklist(),
-      loadDetectionSettings(),
+      loadBlocklist(result.user.id),
+      loadDetectionSettings(result.user.id),
     ])
     render(mainEl, blocklistConfig, detectionSettings, result.user.id)
   } catch (err) {
-    console.error(err)
+    logError('Configuration load failed:', err)
     mainEl.innerHTML = `
       <div class="dashboard-empty">
         <p class="dashboard-empty-title">${t('dashboard.config.errorTitle', 'Could not load configuration')}</p>
-        <p>${escapeHtml(err.message || t('dashboard.common.tryAgain', 'Please try again.'))}</p>
+        <p>${t('dashboard.common.tryAgain', 'Please try again.')}</p>
       </div>
     `
   }

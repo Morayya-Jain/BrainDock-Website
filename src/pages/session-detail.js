@@ -44,11 +44,12 @@ function formatTime(iso) {
   return d.toLocaleTimeString(getLocale(), { hour: 'numeric', minute: '2-digit', second: '2-digit' })
 }
 
-async function fetchSessionWithEvents(sessionId) {
+async function fetchSessionWithEvents(sessionId, userId) {
   const { data: session, error: sessionError } = await supabase
     .from('sessions')
     .select('id, session_name, start_time, end_time, monitoring_mode, summary_stats, objective')
     .eq('id', sessionId)
+    .eq('user_id', userId)
     .single()
   // PGRST116 = "not found" from .single() - return null instead of throwing
   if (sessionError) {
@@ -212,7 +213,7 @@ async function main() {
   mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.sessionDetail.loading', 'Loading session...')}</p></div>`
 
   try {
-    const { session, events } = await fetchSessionWithEvents(sessionId)
+    const { session, events } = await fetchSessionWithEvents(sessionId, result.user.id)
     if (!session) {
       mainEl.innerHTML = `
         <div class="dashboard-empty">

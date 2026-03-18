@@ -43,6 +43,12 @@
   background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
 }
 
+@supports (min-height: 100dvh) {
+  .dashboard-app {
+    min-height: 100dvh;
+  }
+}
+
 @media (min-width: 768px) {
   .dashboard-app {
     flex-direction: row;

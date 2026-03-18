@@ -81,6 +81,8 @@ body {
   line-height: 1.5;
   color: var(--text-primary);
   background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 img {
@@ -955,6 +957,7 @@ body.hero-compact .hero-ctas {
   min-height: 280px;
   display: flex;
   flex-direction: column;
+  padding-left: 2rem;
 }
 
 .mfy-panel {
@@ -1056,6 +1059,7 @@ body.hero-compact .hero-ctas {
 
   .mfy-right {
     min-height: auto;
+    padding-left: 0;
   }
 
   .mfy-panel-actions {
@@ -1417,7 +1421,7 @@ body.hero-compact .hero-ctas {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.6);
   margin-bottom: var(--space-m);
 }
 

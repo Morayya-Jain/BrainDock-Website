@@ -14,9 +14,12 @@ import { logError } from './logger.js'
 export async function fetchUserCredits() {
   const empty = { total_purchased_seconds: 0, total_used_seconds: 0, remaining_seconds: 0 }
   try {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return empty
     const { data, error } = await supabase
       .from('user_credits')
       .select('total_purchased_seconds, total_used_seconds')
+      .eq('user_id', user.id)
       .single()
     if (error) {
       if (error.code !== 'PGRST116') logError('Credits fetch error:', error)

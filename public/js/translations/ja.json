@@ -868,6 +868,12 @@
       "loading": "設定を読み込み中...",
       "errorTitle": "設定を読み込めませんでした",
       "appNamePlaceholder": "アプリ名",
+      "levelTitle": "気が散った時の対応",
+      "levelDesc": "セッション中に気が散った時の対応を選択してください。",
+      "trackOnlyTitle": "記録のみ",
+      "trackOnlyDesc": "サイレント記録。中断されません。",
+      "warningTitle": "警告 + 遅延",
+      "warningDesc": "15秒の一時停止画面が表示されます。続行するかどうかを選択できます。",
       "items": {
         "phone": "スマートフォン",
         "phone_desc": "iPhone、Androidなどの5〜7インチのスマートフォン。",

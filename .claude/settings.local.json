@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -r forgot-password /Users/morayyajain/Developer/BrainDock-Website/auth --include=*.html)",
+      "Bash(grep -r .eq.*user_id /Users/morayyajain/Developer/BrainDock-Website/src/pages --include=*.js)",
+      "Bash(grep -r select\\\\\\(/Users/morayyajain/Developer/BrainDock-Website/src/pages --include=*.js)",
+      "Bash(grep -n \"\\\\.eq\\(\" /Users/morayyajain/Developer/BrainDock-Website/src/pages/*.js)",
+      "Bash(grep -n \"spotify_desc\\\\|^\\\\s*}\\\\s*$\" /Users/morayyajain/Developer/BrainDock-Website/public/js/translations/en.json)",
+      "Bash(grep -n \"spotify_desc\\\\|^\\\\s*}\\\\s*$\" /Users/morayyajain/Developer/BrainDock-Website/public/js/translations/ja.json)",
+      "Bash(grep -n \"spotify_desc\\\\|^\\\\s*}\\\\s*$\" /Users/morayyajain/Developer/BrainDock-Website/public/js/translations/de.json)",
+      "Bash(grep -n \"spotify_desc\\\\|^\\\\s*}\\\\s*$\" /Users/morayyajain/Developer/BrainDock-Website/public/js/translations/fr.json)",
+      "Bash(grep -n \"spotify_desc\\\\|^\\\\s*}\\\\s*$\" /Users/morayyajain/Developer/BrainDock-Website/public/js/translations/zh.json)",
+      "Bash(grep -n \"spotify_desc\\\\|^\\\\s*}\\\\s*$\" /Users/morayyajain/Developer/BrainDock-Website/public/js/translations/hi.json)",
+      "Bash(grep:*)",
+      "Bash(npm run:*)",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Bash(node -e \"JSON.parse\\(require\\(''fs''\\).readFileSync\\(''$f'',''utf8''\\)\\); console.log\\(''OK''\\)\")",
+      "Bash(done)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "supabase"
+  ]
+}

@@ -868,6 +868,12 @@
       "loading": "Chargement de la configuration...",
       "errorTitle": "Impossible de charger la configuration",
       "appNamePlaceholder": "Nom de l'application",
+      "levelTitle": "Mode de distraction",
+      "levelDesc": "Choisissez ce qui se passe lorsqu'une distraction est détectée pendant une session.",
+      "trackOnlyTitle": "Suivi uniquement",
+      "trackOnlyDesc": "Journalisation silencieuse. Vous ne serez pas interrompu.",
+      "warningTitle": "Avertissement + Délai",
+      "warningDesc": "Un écran de pause de 15 secondes apparaît. Vous choisissez de continuer ou non.",
       "items": {
         "phone": "Téléphone",
         "phone_desc": "Tout smartphone - iPhone, Android ou appareil similaire de 5 à 7 pouces.",

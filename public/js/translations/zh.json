@@ -868,6 +868,12 @@
       "loading": "正在加载配置...",
       "errorTitle": "无法加载配置",
       "appNamePlaceholder": "应用名称",
+      "levelTitle": "分心模式",
+      "levelDesc": "选择在会话中检测到分心时的处理方式。",
+      "trackOnlyTitle": "仅记录",
+      "trackOnlyDesc": "静默记录。不会打断您。",
+      "warningTitle": "警告 + 延迟",
+      "warningDesc": "出现15秒暂停屏幕。您可以选择是否继续。",
       "items": {
         "phone": "手机",
         "phone_desc": "任何智能手机 - iPhone、Android或类似的5-7英寸手持设备。",

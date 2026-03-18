@@ -868,6 +868,12 @@
       "loading": "Loading configuration...",
       "errorTitle": "Could not load configuration",
       "appNamePlaceholder": "App name",
+      "levelTitle": "Distraction Mode",
+      "levelDesc": "Choose what happens when a distraction is detected during a session.",
+      "trackOnlyTitle": "Track Only",
+      "trackOnlyDesc": "Silent logging. You won't be interrupted.",
+      "warningTitle": "Warning + Delay",
+      "warningDesc": "A 15-second pause screen appears. You choose whether to continue.",
       "items": {
         "phone": "Phone",
         "phone_desc": "Any smartphone - iPhone, Android, or similar 5-7 inch handheld device.",

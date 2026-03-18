@@ -868,6 +868,12 @@
       "loading": "Konfiguration wird geladen...",
       "errorTitle": "Konfiguration konnte nicht geladen werden",
       "appNamePlaceholder": "App-Name",
+      "levelTitle": "Ablenkungsmodus",
+      "levelDesc": "Wählen Sie, was passiert, wenn eine Ablenkung während einer Sitzung erkannt wird.",
+      "trackOnlyTitle": "Nur aufzeichnen",
+      "trackOnlyDesc": "Stille Protokollierung. Sie werden nicht unterbrochen.",
+      "warningTitle": "Warnung + Verzögerung",
+      "warningDesc": "Ein 15-Sekunden-Pausenbildschirm erscheint. Sie entscheiden, ob Sie fortfahren möchten.",
       "items": {
         "phone": "Smartphone",
         "phone_desc": "Jedes Smartphone - iPhone, Android oder ein ähnliches 5-7-Zoll-Gerät.",

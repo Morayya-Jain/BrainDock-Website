@@ -14,10 +14,11 @@ function formatDate(iso) {
   return new Date(iso).toLocaleDateString(getLocale(), { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
-async function loadPurchaseHistory() {
+async function loadPurchaseHistory(userId) {
   const { data, error } = await supabase
     .from('credit_purchases')
     .select('id, seconds_added, amount_cents, purchased_at, credit_packages(display_name, hours)')
+    .eq('user_id', userId)
     .order('purchased_at', { ascending: false })
     .limit(50)
   if (error) throw error
@@ -128,7 +129,7 @@ async function main() {
   mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.billing.loading', 'Loading billing...')}</p></div>`
 
   try {
-    const results = await Promise.allSettled([fetchUserCredits(), loadPurchaseHistory()])
+    const results = await Promise.allSettled([fetchUserCredits(), loadPurchaseHistory(result.user.id)])
     const credits = results[0].status === 'fulfilled' ? results[0].value : null
     const purchases = results[1].status === 'fulfilled' ? results[1].value : []
     if (results[0].status === 'rejected') logError('Credit fetch failed:', results[0].reason)
