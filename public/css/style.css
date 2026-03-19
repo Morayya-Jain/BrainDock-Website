@@ -1071,6 +1071,7 @@ body.hero-compact .hero-ctas {
 
   .mfy-panel-desc {
     max-width: 100%;
+    text-align: left;
   }
 
   .mfy-panel-actions {
@@ -1086,8 +1087,8 @@ body.hero-compact .hero-ctas {
   }
 }
 
-/* Narrow phones */
-@media (max-width: 380px) {
+/* Narrow phones - covers iPhone 14/15 (390px), Pixel/Galaxy (412px) */
+@media (max-width: 480px) {
   .mfy-pills {
     grid-template-columns: repeat(2, max-content);
     gap: 0.375rem;
@@ -1099,6 +1100,7 @@ body.hero-compact .hero-ctas {
   }
 
   .mfy-panel-actions .btn {
+    max-width: none;
     padding: 0.625rem 1.25rem;
     font-size: 0.875rem;
   }
