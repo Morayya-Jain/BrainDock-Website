@@ -594,7 +594,7 @@
     "cards": {
       "timedSessions": {
         "title": "Sessions minutées",
-        "description": "Lancez une session quand vous êtes prêt. BrainDock suit votre concentration en temps réel lorsque vous travaillez."
+        "description": "Lancez une session quand vous êtes prêt. BrainDock soutient votre concentration en temps réel lorsque vous travaillez."
       },
       "attentionCoach": {
         "title": "Coach d'attention",
@@ -602,7 +602,7 @@
       },
       "screenAwareness": {
         "title": "Conscience de l'écran",
-        "description": "Suit optionnellement la fenêtre active pour identifier les passages vers des applications ou sites web distrayants."
+        "description": "Vérifie optionnellement la fenêtre active pour identifier les passages vers des applications ou sites web distrayants."
       },
       "detailedReports": {
         "title": "Rapport de performance",
@@ -673,7 +673,7 @@
       "q1": "Quel forfait devrais-je choisir ?",
       "a1": "Si vous debutez, Pro (1 heure) vous permet d'essayer BrainDock sans gros engagement. Pour une utilisation reguliere, Ultra (10 heures) offre un meilleur tarif horaire. Max (30 heures) est le meilleur rapport qualite-prix si vous prevoyez d'utiliser BrainDock quotidiennement.",
       "q2": "Comment fonctionne le systeme de credits ?",
-      "a2": "Vous achetez un pack d'heures a l'avance. Chaque fois que vous lancez une session de concentration - que ce soit avec la camera, la surveillance d'ecran ou les deux - du temps est deduit de votre solde. Vous pouvez recharger a tout moment et vos heures n'expirent jamais.",
+      "a2": "Vous achetez un pack d'heures a l'avance. Chaque fois que vous lancez une session de concentration - que ce soit avec la camera, la conscience d'ecran ou les deux - du temps est deduit de votre solde. Vous pouvez recharger a tout moment et vos heures n'expirent jamais.",
       "q3": "Puis-je alterner entre les sessions camera et ecran ?",
       "a3": "Oui. Vos heures fonctionnent pour tous les types de sessions. Utilisez le suivi de concentration par camera, la surveillance d'ecran ou les deux en meme temps - tout est preleve sur le meme solde.",
       "q4": "Que se passe-t-il quand mes heures sont epuisees ?",
@@ -728,7 +728,7 @@
   "about": {
     "backHome": "← Retour à l'accueil",
     "title": "À propos de BrainDock",
-    "subtitle": "BrainDock est un assistant de concentration propulsé par l'IA qui vous aide à rester concentré pendant vos sessions de travail et d'étude. Il détecte les distractions via webcam - sans jamais stocker de vidéo ni utiliser la reconnaissance faciale.",
+    "subtitle": "BrainDock est un assistant de concentration propulsé par l'IA qui vous aide à rester concentré pendant vos sessions de travail et d'étude. Il utilise l'IA pour soutenir votre concentration - sans jamais stocker de vidéo ni utiliser la reconnaissance faciale.",
     "mission": {
       "title": "Notre mission",
       "description": "Nous croyons que la concentration profonde est une compétence qui peut être entraînée. BrainDock a été conçu pour offrir un compagnon intelligent et bienveillant qui remarque quand l'attention dérive."

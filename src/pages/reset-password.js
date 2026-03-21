@@ -8,7 +8,11 @@ import {
   friendlyError,
 } from '../auth-helpers.js'
 import { isValidPassword, LIMITS } from '../validators.js'
+import { initDashboardI18n, t } from '../dashboard-i18n.js'
 import '../auth.css'
+import { initAnimatedGrid } from '../animated-grid.js'
+initAnimatedGrid()
+initDashboardI18n()
 
 const form = document.getElementById('reset-form')
 const updateBtn = document.getElementById('update-btn')
@@ -31,11 +35,11 @@ function showForm() {
  */
 function showExpiredError() {
   loadingState.hidden = true
-  showError(card, 'This reset link has expired or is invalid. Please request a new one.')
+  showError(card, t('auth.reset.expired', 'This reset link has expired or is invalid. Please request a new one.'))
   // Update the footer link to point to forgot-password for convenience
   const footer = card.querySelector('.auth-footer')
   if (footer) {
-    footer.innerHTML = '<a href="/auth/forgot-password/">Request a new reset link</a>'
+    footer.innerHTML = `<a href="/auth/forgot-password/">${t('auth.reset.requestNew', 'Request a new reset link')}</a>`
   }
 }
 
@@ -75,7 +79,7 @@ form.addEventListener('submit', async (e) => {
   const confirmPassword = document.getElementById('confirm-password').value
 
   if (!password || !confirmPassword) {
-    showError(card, 'Please fill in both password fields.')
+    showError(card, t('auth.reset.emptyFields', 'Please fill in both password fields.'))
     return
   }
   if (!isValidPassword(password)) {
@@ -83,7 +87,7 @@ form.addEventListener('submit', async (e) => {
     return
   }
   if (password !== confirmPassword) {
-    showError(card, 'Passwords do not match.')
+    showError(card, t('auth.reset.mismatch', 'Passwords do not match.'))
     return
   }
 
@@ -97,7 +101,7 @@ form.addEventListener('submit', async (e) => {
       return
     }
   } catch (err) {
-    showError(card, 'Network error. Please check your connection and try again.')
+    showError(card, t('auth.reset.networkError', 'Network error. Please check your connection and try again.'))
     return
   } finally {
     hideLoading(updateBtn)
@@ -105,7 +109,7 @@ form.addEventListener('submit', async (e) => {
 
   // Success — sign out all sessions (invalidates old tokens), then redirect to login
   form.hidden = true
-  showSuccess(card, 'Password updated successfully! Redirecting to login...')
+  showSuccess(card, t('auth.reset.success', 'Password updated successfully! Redirecting to login...'))
 
   try { await supabase.auth.signOut({ scope: 'global' }) } catch (_) { /* ignore */ }
 

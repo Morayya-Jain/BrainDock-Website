@@ -15,7 +15,11 @@ import {
 } from '../auth-helpers.js'
 import { isValidName, isValidEmail, isValidPassword, LIMITS } from '../validators.js'
 import { track, EVENTS } from '../analytics.js'
+import { initDashboardI18n, t } from '../dashboard-i18n.js'
 import '../auth.css'
+import { initAnimatedGrid } from '../animated-grid.js'
+initAnimatedGrid()
+initDashboardI18n()
 
 // Persist ?source=desktop and ?redirect= FIRST (synchronous, before any async work)
 captureDesktopSource()
@@ -37,7 +41,7 @@ if (hasStoredSession() && !wasBailed) {
     authCard.innerHTML = `
       <div class="auth-loading">
         <div class="auth-spinner"></div>
-        <p class="auth-loading-text">Signing you in...</p>
+        <p class="auth-loading-text">${t('auth.signup.signingIn', 'Signing you in...')}</p>
       </div>
     `
   }
@@ -79,15 +83,15 @@ form.addEventListener('submit', async (e) => {
   const password = document.getElementById('password').value
 
   if (!name || !email || !password) {
-    showError(card, 'Please fill in all fields.')
+    showError(card, t('auth.signup.emptyFields', 'Please fill in all fields.'))
     return
   }
   if (!isValidName(name)) {
-    showError(card, `Name must be 1-${LIMITS.NAME_MAX} characters and cannot contain < or >.`)
+    showError(card, t('auth.signup.nameValidation', `Name must be 1-${LIMITS.NAME_MAX} characters and cannot contain < or >.`))
     return
   }
   if (!isValidEmail(email)) {
-    showError(card, 'Please enter a valid email address.')
+    showError(card, t('auth.signup.invalidEmail', 'Please enter a valid email address.'))
     return
   }
   if (!isValidPassword(password)) {
@@ -97,7 +101,7 @@ form.addEventListener('submit', async (e) => {
 
   const termsCheckbox = document.getElementById('terms')
   if (!termsCheckbox?.checked) {
-    showError(card, 'Please agree to the Terms of Service to continue.')
+    showError(card, t('auth.signup.termsRequired', 'Please agree to the Terms of Service to continue.'))
     return
   }
 
@@ -131,7 +135,7 @@ form.addEventListener('submit', async (e) => {
   // Supabase returns a user with an empty identities array when the email
   // is already registered (instead of an error, for security reasons).
   if (data.user && data.user.identities && data.user.identities.length === 0) {
-    showError(card, 'An account with this email already exists. Try logging in instead.')
+    showError(card, t('auth.signup.alreadyExists', 'An account with this email already exists. Try logging in instead.'))
     return
   }
 
@@ -145,7 +149,7 @@ form.addEventListener('submit', async (e) => {
       card.innerHTML = `
         <div class="auth-loading">
           <div class="auth-spinner"></div>
-          <p class="auth-loading-text">Signing you in...</p>
+          <p class="auth-loading-text">${t('auth.signup.signingIn', 'Signing you in...')}</p>
         </div>`
     }
     await handlePostAuthRedirect(supabase, card)
@@ -155,7 +159,7 @@ form.addEventListener('submit', async (e) => {
     document.querySelector('.auth-divider').hidden = true
     googleBtn.hidden = true
     track(EVENTS.SIGNUP_COMPLETED, { method: 'email', needs_confirmation: true })
-    showSuccess(card, 'Check your email for a confirmation link. Once confirmed, you can log in.')
+    showSuccess(card, t('auth.signup.checkEmail', 'Check your email for a confirmation link. Once confirmed, you can log in.'))
   }
 })
 
@@ -165,7 +169,7 @@ googleBtn.addEventListener('click', async () => {
 
   const termsCheckbox = document.getElementById('terms')
   if (!termsCheckbox?.checked) {
-    showError(card, 'Please agree to the Terms of Service to continue.')
+    showError(card, t('auth.signup.termsRequired', 'Please agree to the Terms of Service to continue.'))
     return
   }
 

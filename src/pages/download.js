@@ -5,7 +5,7 @@
 import { initDashboardLayout } from '../dashboard-layout.js'
 import { t } from '../dashboard-i18n.js'
 import { MACOS_URL, WINDOWS_URL } from '../constants.js'
-import { appleIcon, windowsIcon, linuxIcon } from '../icons.js'
+import { appleIcon, windowsIcon, linuxIcon, ctaSlideHtml } from '../icons.js'
 import { track, EVENTS } from '../analytics.js'
 
 function render(main) {
@@ -17,13 +17,13 @@ function render(main) {
 
     <div class="dashboard-card">
       <div class="download-buttons">
-        <a href="${MACOS_URL}" class="btn btn-primary btn-download">
-          ${appleIcon(22)}
-          ${t('dashboard.downloadPage.macOS', 'macOS')}
+        <a href="${MACOS_URL}" class="btn btn-primary btn-cta btn-download">
+          <span class="btn-cta-label">${appleIcon(22)} ${t('dashboard.downloadPage.macOS', 'macOS')}</span>
+          ${ctaSlideHtml()}
         </a>
-        <a href="${WINDOWS_URL}" class="btn btn-primary btn-download">
-          ${windowsIcon(20)}
-          ${t('dashboard.downloadPage.windows', 'Windows')}
+        <a href="${WINDOWS_URL}" class="btn btn-primary btn-cta btn-download">
+          <span class="btn-cta-label">${windowsIcon(20)} ${t('dashboard.downloadPage.windows', 'Windows')}</span>
+          ${ctaSlideHtml()}
         </a>
         <button type="button" class="btn btn-primary btn-download btn-disabled" disabled>
           ${linuxIcon(20)}

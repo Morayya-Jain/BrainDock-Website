@@ -8,8 +8,12 @@ import { escapeHtml, showInlineError, formatPrice } from '../utils.js'
 import { isValidUuid } from '../validators.js'
 import '../auth.css'
 import '../dashboard.css'
+import { initAnimatedGrid } from '../animated-grid.js'
 import { logError } from '../logger.js'
 import { track, EVENTS } from '../analytics.js'
+import { ctaSlideHtml } from '../icons.js'
+
+initAnimatedGrid()
 
 /** Simple translation helper for the pricing page (uses the landing page I18n global). */
 function pt(key, fallback) {
@@ -101,13 +105,12 @@ function render(root, packages, hasUser) {
         </div>
         <div class="nav-actions">
           <a href="/auth/signup/" class="btn btn-secondary nav-cta nav-cta-signup" target="_blank" rel="noopener" data-i18n="nav.signup">Sign Up</a>
-          <a href="${origin}/#download" class="btn btn-primary nav-cta nav-cta-download" target="_blank" rel="noopener">
-            <span data-i18n="nav.download">Download</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
+          <a href="${origin}/#download" class="btn btn-primary btn-cta nav-cta nav-cta-download" target="_blank" rel="noopener">
+            <span class="btn-cta-label">
+              <span data-i18n="nav.download">Download</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </span>
+            ${ctaSlideHtml()}
           </a>
         </div>
         <button class="nav-toggle" id="pricing-nav-toggle" aria-label="Toggle menu" aria-expanded="false">
@@ -153,7 +156,7 @@ function render(root, packages, hasUser) {
                 <p class="pricing-card-price">${formatPrice(pkg.price_cents, pkg.currency)}</p>
                 ${perHour ? `<p class="pricing-card-per-hour" data-i18n="pricing.tier.${pkg.hours}.perHour">${formatPrice(perHour, pkg.currency)} per hour</p>` : '<p class="pricing-card-per-hour"></p>'}
                 <p class="pricing-card-desc" data-i18n="pricing.tier.${pkg.hours}.desc">${pkg.hours} hour${pkg.hours === 1 ? '' : 's'} of BrainDock - camera, screen, or both.</p>
-                <button type="button" class="btn btn-primary" data-package-id="${escapeHtml(pkg.id)}" data-i18n="pricing.tier.${pkg.hours}.btn">${btnLabel}</button>
+                <button type="button" class="btn btn-primary btn-cta" data-package-id="${escapeHtml(pkg.id)}"><span class="btn-cta-label"><span data-i18n="pricing.tier.${pkg.hours}.btn">${btnLabel}</span></span>${ctaSlideHtml()}</button>
               </div>
             `
           }).join('')}

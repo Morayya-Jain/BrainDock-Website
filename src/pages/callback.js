@@ -1,7 +1,11 @@
 import { supabase } from '../supabase.js'
 import { showError, isDesktopSource, handlePostAuthRedirect } from '../auth-helpers.js'
 import { track, identify, EVENTS } from '../analytics.js'
+import { initDashboardI18n, t } from '../dashboard-i18n.js'
 import '../auth.css'
+import { initAnimatedGrid } from '../animated-grid.js'
+initAnimatedGrid()
+initDashboardI18n()
 
 const card = document.querySelector('.auth-card')
 const loadingState = document.getElementById('loading-state')
@@ -22,13 +26,13 @@ function checkForOAuthError() {
   if (error) {
     return errorDescription
       ? errorDescription.replace(/\+/g, ' ')
-      : 'Sign in was cancelled.'
+      : t('auth.callback.cancelled', 'Sign in was cancelled.')
   }
 
   // Also check query params (some providers use these instead)
   const query = new URLSearchParams(window.location.search)
   if (query.get('error')) {
-    return query.get('error_description')?.replace(/\+/g, ' ') || 'Sign in was cancelled.'
+    return query.get('error_description')?.replace(/\+/g, ' ') || t('auth.callback.cancelled', 'Sign in was cancelled.')
   }
 
   return null
@@ -65,7 +69,7 @@ if (oauthError) {
       loadingState.hidden = true
     } else {
       const txt = loadingState.querySelector('.auth-loading-text')
-      if (txt) txt.textContent = 'Connecting to app...'
+      if (txt) txt.textContent = t('auth.callback.connecting', 'Connecting to app...')
     }
 
     await handlePostAuthRedirect(supabase, card)
@@ -105,7 +109,7 @@ if (oauthError) {
   finalTimer = setTimeout(() => {
     if (!handled && document.visibilityState !== 'hidden' && !loadingState.hidden) {
       subscription.unsubscribe()
-      showFailure('Sign in could not be completed. Please try again.')
+      showFailure(t('auth.callback.failed', 'Sign in could not be completed. Please try again.'))
     }
   }, 8000)
 }

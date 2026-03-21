@@ -8,6 +8,7 @@ import { escapeHtml, formatDuration, formatPrice } from '../utils.js'
 import { t, getLocale } from '../dashboard-i18n.js'
 
 import { logError } from '../logger.js'
+import { ctaSlideHtml } from '../icons.js'
 import { track, EVENTS } from '../analytics.js'
 
 function formatDate(iso) {
@@ -43,7 +44,7 @@ function render(main, credits, purchases) {
       <div class="dashboard-credits-widget">
         <p class="dashboard-credits-widget-value">${credits?.is_free_tier ? `${t('dashboard.common.free', 'FREE')} | ` : ''}${formatDuration(remaining)} ${t('dashboard.common.remaining', 'remaining')}</p>
         ${credits?.is_free_tier && credits?.free_tier_reset_at ? `<p class="dashboard-meta">${t('dashboard.billing.resetsOn', 'Resets on')} ${formatDate(credits.free_tier_reset_at)}</p>` : ''}
-        <a href="${base}/pricing/" target="_blank" rel="noopener" class="btn btn-secondary">${credits?.is_free_tier ? t('dashboard.actions.upgradeNow', 'Upgrade Now') : t('dashboard.actions.getMoreHours', 'Get More Hours')}</a>
+        <a href="${base}/pricing/" target="_blank" rel="noopener" class="btn btn-secondary btn-cta"><span class="btn-cta-label">${credits?.is_free_tier ? t('dashboard.actions.upgradeNow', 'Upgrade Now') : t('dashboard.actions.getMoreHours', 'Get More Hours')}</span>${ctaSlideHtml()}</a>
       </div>
     </div>
 

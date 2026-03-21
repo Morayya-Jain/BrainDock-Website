@@ -8,6 +8,7 @@ import { initDashboardLayout } from '../dashboard-layout.js'
 import { escapeHtml, formatDuration, modeLabel, focusLevelClass } from '../utils.js'
 import { t, getLocale } from '../dashboard-i18n.js'
 import { MACOS_URL, WINDOWS_URL } from '../constants.js'
+import { ctaSlideHtml } from '../icons.js'
 
 import { appleIcon, windowsIcon } from '../icons.js'
 import { logError } from '../logger.js'
@@ -149,13 +150,13 @@ function render(main, user, sessions, stats, weeklyData, credits) {
         ? t('dashboard.home.allSetDescFree', 'You have free minutes available. Download the app to start your first session.')
         : t('dashboard.home.allSetDesc', 'You have hours available. Download the desktop app and sign in with the same account to start tracking your focus.')}</p>
       <div class="download-buttons">
-        <a href="${MACOS_URL}" class="btn btn-primary btn-download">
-          ${appleIcon(22)}
-          ${t('dashboard.home.downloadMac', 'macOS')}
+        <a href="${MACOS_URL}" class="btn btn-primary btn-cta btn-download">
+          <span class="btn-cta-label">${appleIcon(22)} ${t('dashboard.home.downloadMac', 'macOS')}</span>
+          ${ctaSlideHtml()}
         </a>
-        <a href="${WINDOWS_URL}" class="btn btn-primary btn-download">
-          ${windowsIcon(20)}
-          ${t('dashboard.home.downloadWin', 'Windows')}
+        <a href="${WINDOWS_URL}" class="btn btn-primary btn-cta btn-download">
+          <span class="btn-cta-label">${windowsIcon(20)} ${t('dashboard.home.downloadWin', 'Windows')}</span>
+          ${ctaSlideHtml()}
         </a>
       </div>
     </div>

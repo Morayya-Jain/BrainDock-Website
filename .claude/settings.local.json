@@ -39,7 +39,9 @@
       "WebFetch(domain:www.focusbear.io)",
       "WebFetch(domain:www.fomilab.ai)",
       "WebFetch(domain:freedom.to)",
-      "WebFetch(domain:trackermode.app)"
+      "WebFetch(domain:trackermode.app)",
+      "Bash(find /Users/morayyajain/Developer/BrainDock-Website/public/js/translations -name \"*.json\" -exec wc -l {} +)",
+      "Bash(npx vite:*)"
     ]
   },
   "enableAllProjectMcpServers": true,

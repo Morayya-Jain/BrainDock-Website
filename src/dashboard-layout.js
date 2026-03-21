@@ -26,8 +26,10 @@ import {
   Hourglass,
 } from 'lucide/dist/cjs/lucide.js'
 import { MACOS_URL, WINDOWS_URL } from './constants.js'
+import { ctaSlideHtml } from './icons.js'
 import { fetchUserCredits } from './credits.js'
 import { identify } from './analytics.js'
+import { initAnimatedGrid } from './animated-grid.js'
 import './dashboard.css'
 
 const LOGIN_PATH = '/auth/login/'
@@ -115,13 +117,12 @@ function buildSidebarHTML(currentPath) {
           </a>
         </li>
       </ul>
-      <a href="${getDownloadUrl()}" class="btn btn-primary nav-cta dashboard-sidebar-download">
-        <span>${t('dashboard.nav.download', 'Download')}</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/>
-          <line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>
+      <a href="${getDownloadUrl()}" class="btn btn-primary btn-cta nav-cta dashboard-sidebar-download">
+        <span class="btn-cta-label">
+          <span>${t('dashboard.nav.download', 'Download')}</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </span>
+        ${ctaSlideHtml()}
       </a>
     </nav>
     <div class="dashboard-sidebar-footer">
@@ -419,6 +420,8 @@ export async function initDashboardLayout(options = {}) {
   } else {
     document.body.appendChild(app)
   }
+
+  initAnimatedGrid()
 
   createIcons({
     icons: { LayoutDashboard, Clock, Settings, ChevronDown, Smartphone, CreditCard, BookOpen, Hourglass },

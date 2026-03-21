@@ -13,7 +13,11 @@ import {
 } from '../auth-helpers.js'
 import { isValidEmail, isValidPassword, LIMITS } from '../validators.js'
 import { track, EVENTS } from '../analytics.js'
+import { initDashboardI18n, t } from '../dashboard-i18n.js'
 import '../auth.css'
+import { initAnimatedGrid } from '../animated-grid.js'
+initAnimatedGrid()
+initDashboardI18n()
 
 // Persist ?source=desktop and ?redirect= before they are lost to OAuth redirects
 captureDesktopSource()
@@ -34,11 +38,11 @@ function showSigningInSpinner() {
   authCard.querySelector('.auth-divider').style.display = 'none'
   googleBtn.style.display = 'none'
   authCard.querySelector('.auth-footer').style.display = 'none'
-  authCard.querySelector('.auth-title').textContent = 'Signing you in...'
+  authCard.querySelector('.auth-title').textContent = t('auth.login.signingIn', 'Signing you in...')
   authCard.querySelector('.auth-subtitle').textContent = ''
   spinnerWrap = document.createElement('div')
   spinnerWrap.className = 'auth-loading'
-  spinnerWrap.innerHTML = '<div class="auth-spinner"></div><p class="auth-loading-text">Signing you in...</p>'
+  spinnerWrap.innerHTML = `<div class="auth-spinner"></div><p class="auth-loading-text">${t('auth.login.signingIn', 'Signing you in...')}</p>`
   authCard.appendChild(spinnerWrap)
 }
 
@@ -48,8 +52,8 @@ function restoreLoginForm() {
   authCard.querySelector('.auth-divider').style.display = ''
   googleBtn.style.display = ''
   authCard.querySelector('.auth-footer').style.display = ''
-  authCard.querySelector('.auth-title').textContent = 'Welcome back'
-  authCard.querySelector('.auth-subtitle').textContent = 'Log in to your BrainDock account'
+  authCard.querySelector('.auth-title').textContent = t('auth.login.welcomeBack', 'Welcome back')
+  authCard.querySelector('.auth-subtitle').textContent = t('auth.login.subtitle', 'Log in to your BrainDock account')
   if (spinnerWrap) {
     spinnerWrap.remove()
     spinnerWrap = null
@@ -112,11 +116,11 @@ loginForm.addEventListener('submit', async (e) => {
   const password = document.getElementById('password').value
 
   if (!email || !password) {
-    showError(authCard, 'Please enter your email and password.')
+    showError(authCard, t('auth.login.emptyFields', 'Please enter your email and password.'))
     return
   }
   if (!isValidEmail(email)) {
-    showError(authCard, 'Please enter a valid email address.')
+    showError(authCard, t('auth.login.invalidEmail', 'Please enter a valid email address.'))
     return
   }
   if (!isValidPassword(password)) {

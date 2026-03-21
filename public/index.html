@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="BrainDock is a free AI focus app for macOS and Windows. Detects distractions via webcam during work and study sessions - no video stored. Download free.">
+  <meta name="description" content="BrainDock is a free AI focus app for macOS and Windows. Helps you stay focused during work and study sessions - no video stored. Download free.">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://thebraindock.com/">
@@ -21,13 +21,13 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://thebraindock.com/">
   <meta property="og:title" content="BrainDock - AI Focus App for macOS & Windows | Stay Focused">
-  <meta property="og:description" content="BrainDock is a free AI-powered focus app for macOS and Windows. It detects distractions via webcam during work and study sessions - without storing any video.">
+  <meta property="og:description" content="BrainDock is a free AI-powered focus app for macOS and Windows. It helps you stay focused during work and study sessions - without storing any video.">
   <meta property="og:image" content="https://thebraindock.com/assets/website_image.png">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="BrainDock - AI Focus App for macOS & Windows | Stay Focused">
-  <meta name="twitter:description" content="BrainDock is a free AI-powered focus app for macOS and Windows. It detects distractions via webcam during work and study sessions - without storing any video.">
+  <meta name="twitter:description" content="BrainDock is a free AI-powered focus app for macOS and Windows. It helps you stay focused during work and study sessions - without storing any video.">
   <meta name="twitter:image" content="https://thebraindock.com/assets/website_image.png">
 
   <title>BrainDock - AI Focus App for macOS & Windows | Stay Focused</title>
@@ -89,7 +89,7 @@
     "name": "BrainDock",
     "applicationCategory": "ProductivityApplication",
     "operatingSystem": "macOS, Windows",
-    "description": "AI-powered focus assistant that detects distractions via webcam without storing any video.",
+    "description": "AI-powered focus assistant that helps you stay on task without storing any video.",
     "url": "https://thebraindock.com",
     "offers": {
       "@type": "Offer",
@@ -187,13 +187,12 @@
       
       <div class="nav-actions">
         <a href="/auth/signup/" class="btn btn-secondary nav-cta nav-cta-signup" data-i18n="nav.signup" target="_blank" rel="noopener">Sign Up</a>
-        <a href="#download" class="btn btn-primary nav-cta nav-cta-download">
-          <span data-i18n="nav.download">Download</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
+        <a href="#download" class="btn btn-primary btn-cta nav-cta nav-cta-download">
+          <span class="btn-cta-label">
+            <span data-i18n="nav.download">Download</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </span>
+          <span class="btn-cta-slide" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
         </a>
       </div>
       
@@ -226,13 +225,12 @@
             BrainDock uses AI to help you focus, work smarter and strengthen concentration.
           </p>
           <div class="hero-ctas">
-            <a href="#download" class="btn btn-primary">
-              <span data-i18n="hero.downloadBtn">Download</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
+            <a href="#download" class="btn btn-primary btn-cta">
+              <span class="btn-cta-label">
+                <span data-i18n="hero.downloadBtn">Download</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </span>
+              <span class="btn-cta-slide" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
             </a>
             <a href="#why-braindock" class="btn btn-secondary" data-i18n="hero.learnMoreBtn">Learn More</a>
           </div>
@@ -334,9 +332,12 @@
                 <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.students.description">Focus smarter, not harder. BrainDock helps students maintain concentration during study sessions, reducing distractions and building lasting focus habits.</p>
                 <div class="mfy-panel-actions">
                   <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
-                  <a href="#download" class="btn btn-primary mfy-download-btn">
-                    <span data-i18n="madeForYou.download">Download</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <a href="#download" class="btn btn-primary btn-cta mfy-download-btn">
+                    <span class="btn-cta-label">
+                      <span data-i18n="madeForYou.download">Download</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    </span>
+                    <span class="btn-cta-slide" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
                   </a>
                 </div>
               </div>
@@ -346,9 +347,12 @@
                 <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.developers.description">Deep work is everything. BrainDock quietly monitors for context switches and device distractions, helping you stay in flow state during coding sessions.</p>
                 <div class="mfy-panel-actions">
                   <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
-                  <a href="#download" class="btn btn-primary mfy-download-btn">
-                    <span data-i18n="madeForYou.download">Download</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <a href="#download" class="btn btn-primary btn-cta mfy-download-btn">
+                    <span class="btn-cta-label">
+                      <span data-i18n="madeForYou.download">Download</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    </span>
+                    <span class="btn-cta-slide" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
                   </a>
                 </div>
               </div>
@@ -358,9 +362,12 @@
                 <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.creators.description">Whether you're designing, writing, or editing, BrainDock helps you stay in the creative zone by noticing when devices pull your attention away.</p>
                 <div class="mfy-panel-actions">
                   <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
-                  <a href="#download" class="btn btn-primary mfy-download-btn">
-                    <span data-i18n="madeForYou.download">Download</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <a href="#download" class="btn btn-primary btn-cta mfy-download-btn">
+                    <span class="btn-cta-label">
+                      <span data-i18n="madeForYou.download">Download</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    </span>
+                    <span class="btn-cta-slide" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
                   </a>
                 </div>
               </div>
@@ -370,9 +377,12 @@
                 <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.leaders.description">Set the standard for your team. BrainDock helps managers and executives protect deep work time, making meetings and strategic thinking more productive.</p>
                 <div class="mfy-panel-actions">
                   <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
-                  <a href="#download" class="btn btn-primary mfy-download-btn">
-                    <span data-i18n="madeForYou.download">Download</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <a href="#download" class="btn btn-primary btn-cta mfy-download-btn">
+                    <span class="btn-cta-label">
+                      <span data-i18n="madeForYou.download">Download</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    </span>
+                    <span class="btn-cta-slide" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
                   </a>
                 </div>
               </div>
@@ -382,9 +392,12 @@
                 <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.teams.description">Give your team the tools to focus. BrainDock helps teams reduce distractions during work sessions, improving collective productivity and output quality.</p>
                 <div class="mfy-panel-actions">
                   <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
-                  <a href="#download" class="btn btn-primary mfy-download-btn">
-                    <span data-i18n="madeForYou.download">Download</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <a href="#download" class="btn btn-primary btn-cta mfy-download-btn">
+                    <span class="btn-cta-label">
+                      <span data-i18n="madeForYou.download">Download</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    </span>
+                    <span class="btn-cta-slide" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
                   </a>
                 </div>
               </div>
@@ -394,9 +407,12 @@
                 <p class="mfy-panel-desc" data-i18n="madeForYou.audiences.sales.description">Preparation and follow-up demand focus. BrainDock helps sales professionals stay locked in during research, outreach, and CRM work.</p>
                 <div class="mfy-panel-actions">
                   <a href="#features" class="btn btn-outline" data-i18n="madeForYou.learnMore">Learn more</a>
-                  <a href="#download" class="btn btn-primary mfy-download-btn">
-                    <span data-i18n="madeForYou.download">Download</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <a href="#download" class="btn btn-primary btn-cta mfy-download-btn">
+                    <span class="btn-cta-label">
+                      <span data-i18n="madeForYou.download">Download</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    </span>
+                    <span class="btn-cta-slide" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
                   </a>
                 </div>
               </div>
@@ -519,9 +535,12 @@
             <p class="hbh-desc" data-i18n="howBrainDockHelps.desc">When BrainDock keeps your focus rate at 100%, everything changes. Distractions vanish, context switching stops, and your brain gets to do what it does best. Deep, uninterrupted work. The result is higher productivity, fewer mistakes, and work you are genuinely proud of. It is not about working harder; it is about protecting the focus that makes quality work possible.</p>
             <div class="hbh-actions">
               <a href="#how-it-works" class="btn btn-secondary" data-i18n="howBrainDockHelps.learnMore">Learn More</a>
-              <a href="#download" class="btn btn-primary mfy-download-btn">
-                <span data-i18n="howBrainDockHelps.download">Download</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <a href="#download" class="btn btn-primary btn-cta mfy-download-btn">
+                <span class="btn-cta-label">
+                  <span data-i18n="howBrainDockHelps.download">Download</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </span>
+                <span class="btn-cta-slide" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
               </a>
             </div>
           </div>
@@ -563,17 +582,19 @@
         </div>
         
         <div class="download-buttons">
-          <a href="/download/macos" class="btn btn-primary btn-download">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-            </svg>
-            <span data-i18n="download.macOS">macOS</span>
+          <a href="/download/macos" class="btn btn-primary btn-cta btn-download">
+            <span class="btn-cta-label">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              <span data-i18n="download.macOS">macOS</span>
+            </span>
+            <span class="btn-cta-slide" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
           </a>
-          <a href="/download/windows" class="btn btn-primary btn-download">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
-            </svg>
-            <span data-i18n="download.windows">Windows</span>
+          <a href="/download/windows" class="btn btn-primary btn-cta btn-download">
+            <span class="btn-cta-label">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+              <span data-i18n="download.windows">Windows</span>
+            </span>
+            <span class="btn-cta-slide" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
           </a>
           <button id="linux-download-btn" class="btn btn-primary btn-download">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -674,16 +695,6 @@
         </div>
         
         <div class="footer-links">
-          <h4 data-i18n="footer.productTitle">Product</h4>
-          <a href="#features" data-i18n="footer.features">Features</a>
-          <a href="#how-it-works" data-i18n="footer.howItWorks">How It Works</a>
-          <a href="/pricing/" data-i18n="footer.pricing">Pricing</a>
-          <a href="/how-to-use/" data-i18n="footer.howToUse">How to Use</a>
-          <a href="#faq" data-i18n="footer.faq">FAQ</a>
-          <a href="/about/" data-i18n="footer.about">About</a>
-        </div>
-
-        <div class="footer-links">
           <h4 data-i18n="footer.legalTitle">Legal</h4>
           <a href="privacy.html" target="_blank" rel="noopener noreferrer" data-i18n="footer.privacyPolicy">Privacy Policy</a>
           <a href="terms.html" target="_blank" rel="noopener noreferrer" data-i18n="footer.termsOfService">Terms and Conditions</a>
@@ -734,6 +745,7 @@
 
   <!-- Scripts -->
   <script src="js/i18n.js"></script>
+  <script src="js/animated-grid.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

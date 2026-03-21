@@ -44,7 +44,7 @@
 
   /* Components */
   --radius-md: 12px;
-  --btn-radius: 30px;
+  --btn-radius: 10px;
   --card-radius: 20px;
   --bg-surface-elevated: #FAFAF8;
   --shadow-subtle: 0 4px 16px rgba(0, 0, 0, 0.06);
@@ -450,7 +450,7 @@ p {
 }
 
 .btn-download {
-  width: 160px;
+  width: 190px;
   justify-content: center;
 }
 
@@ -464,6 +464,76 @@ p {
 #linux-download-btn:hover {
   background-color: #E6EDC0;
   border-color: rgba(212, 224, 96, 0.7);
+}
+
+/* --------------------------------------------------------------------------
+   CTA Slide Animation (download + payment buttons)
+   -------------------------------------------------------------------------- */
+.btn-cta {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-cta-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-s);
+  margin-right: 2.5rem;
+  transition: opacity 500ms ease;
+}
+
+.btn-cta:hover .btn-cta-label {
+  opacity: 0;
+}
+
+.btn-cta:focus-visible .btn-cta-label {
+  opacity: 1;
+}
+
+.btn-cta-slide {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  bottom: 4px;
+  width: 20%;
+  border-radius: 4px;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  transition: width 500ms ease, transform 150ms ease;
+}
+
+.btn-cta:hover .btn-cta-slide {
+  width: calc(100% - 8px);
+}
+
+.btn-cta:active .btn-cta-slide {
+  transform: scale(0.95);
+}
+
+/* Disabled CTA buttons should not animate */
+.btn-cta.btn-disabled .btn-cta-label,
+.btn-cta[disabled] .btn-cta-label {
+  margin-right: 0;
+}
+.btn-cta.btn-disabled .btn-cta-slide,
+.btn-cta[disabled] .btn-cta-slide {
+  display: none;
+}
+
+/* Secondary-style CTA buttons (e.g. "Upgrade Now") need a darker slide panel */
+.btn-secondary.btn-cta .btn-cta-slide {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-cta-label {
+    transition: none;
+  }
+  .btn-cta-slide {
+    transition: none;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -547,6 +617,15 @@ p {
   padding: 10px 20px;
   font-size: 0.875rem;
   white-space: nowrap;
+}
+
+.nav-cta.btn-cta .btn-cta-label {
+  margin-right: 2rem;
+}
+
+.nav-cta.btn-cta .btn-cta-slide svg {
+  width: 14px;
+  height: 14px;
 }
 
 /* Mobile menu toggle - hidden by default, shown in compact mode */
@@ -711,7 +790,6 @@ p {
   justify-content: flex-start;
   padding-top: 0; /* Canvas sits flush at the top */
   padding-bottom: clamp(80px, 14vh, 180px);
-  background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
 }
 
 /* Hero container padding - responsive */
@@ -861,9 +939,6 @@ body.hero-compact .hero-ctas {
    Why Use BrainDock Section
    -------------------------------------------------------------------------- */
 .why-braindock {
-  background:
-    radial-gradient(ellipse at 50% 60%, rgba(100, 134, 16, 0.06) 0%, transparent 70%),
-    linear-gradient(to right, var(--bg-secondary-dark) 0%, var(--bg-secondary-light) 45%);
   padding-bottom: 96px;
 }
 
@@ -871,9 +946,6 @@ body.hero-compact .hero-ctas {
    Made For You - Light Card
    -------------------------------------------------------------------------- */
 .mfy-card {
-  background:
-    radial-gradient(ellipse at 50% 50%, rgba(100, 134, 16, 0.06) 0%, transparent 70%),
-    #E5EBD4;
   border: 1px solid rgba(100, 134, 16, 0.12);
   border-radius: var(--card-radius);
   overflow: hidden;
@@ -1007,7 +1079,7 @@ body.hero-compact .hero-ctas {
   margin-top: auto;
 }
 
-/* Buttons - matching site pill shape (14px 28px, 30px radius) */
+/* Buttons - matching site button shape */
 .mfy-panel-actions .btn {
   padding: 14px 28px;
   font-family: var(--font-sans);
@@ -1110,7 +1182,6 @@ body.hero-compact .hero-ctas {
    Features Section
    -------------------------------------------------------------------------- */
 .features {
-  background: linear-gradient(to right, var(--bg-primary-dark) 0%, var(--bg-primary-light) 45%);
   padding-bottom: 96px;
 }
 
@@ -1381,7 +1452,6 @@ body.hero-compact .hero-ctas {
    Download Section
    -------------------------------------------------------------------------- */
 .download {
-  background: linear-gradient(to right, var(--bg-secondary-dark) 0%, var(--bg-secondary-light) 45%);
   padding-bottom: 96px;
 }
 
@@ -2000,6 +2070,34 @@ body.hero-compact .hero-ctas {
   animation: dbspin 0.8s linear infinite;
 }
 @keyframes dbspin { to { transform: rotate(360deg); } }
+
+/* --------------------------------------------------------------------------
+   Animated grid background
+   -------------------------------------------------------------------------- */
+.animated-grid-bg {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: -30%;
+  height: 200%;
+  width: 100%;
+  pointer-events: none;
+  z-index: -1;
+  color: rgba(176, 176, 176, 0.15);
+  transform: skewY(12deg);
+  transform-origin: top center;
+}
+
+.animated-grid-bg .grid-square {
+  fill: rgba(176, 176, 176, 1);
+  animation: gridSquarePulse var(--grid-duration, 5s) ease-in-out infinite;
+  animation-delay: var(--grid-delay, 0s);
+}
+
+@keyframes gridSquarePulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.15; }
+}
 
 /* --------------------------------------------------------------------------
    Respect user's motion preferences

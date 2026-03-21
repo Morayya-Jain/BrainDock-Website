@@ -529,7 +529,7 @@
       "developers": {
         "pill": "Entwickler",
         "title": "Für <em>Entwickler</em>",
-        "description": "Deep Work ist alles. BrainDock überwacht leise Kontextwechsel und Geräteablenkungen und hilft dir, während Programmiersitzungen im Flow-Zustand zu bleiben."
+        "description": "Deep Work ist alles. BrainDock bemerkt leise Kontextwechsel und Geräteablenkungen und hilft dir, während Programmiersitzungen im Flow-Zustand zu bleiben."
       },
       "creators": {
         "pill": "Kreative",
@@ -594,7 +594,7 @@
     "cards": {
       "timedSessions": {
         "title": "Zeitsitzungen",
-        "description": "Starte eine Sitzung, wann immer du bereit bist. BrainDock begleitet deinen Fokus in Echtzeit, wenn du arbeitest."
+        "description": "Starte eine Sitzung, wann immer du bereit bist. BrainDock unterstützt deinen Fokus in Echtzeit, während du arbeitest."
       },
       "attentionCoach": {
         "title": "Aufmerksamkeits-Coach",
@@ -602,7 +602,7 @@
       },
       "screenAwareness": {
         "title": "Bildschirm-Bewusstsein",
-        "description": "Verfolgt optional das aktive Fenster, um Wechsel zu ablenkenden Anwendungen oder Websites zu erkennen."
+        "description": "Prüft optional das aktive Fenster, um Wechsel zu ablenkenden Anwendungen oder Websites zu erkennen."
       },
       "detailedReports": {
         "title": "Leistungsbericht",
@@ -673,9 +673,9 @@
       "q1": "Welchen Plan sollte ich wählen?",
       "a1": "Wenn Sie gerade erst anfangen, können Sie mit Pro (1 Stunde) BrainDock ohne große Verpflichtung ausprobieren. Für regelmäßige Nutzung bietet Ultra (10 Stunden) einen besseren Stundenpreis. Max (30 Stunden) ist am günstigsten, wenn Sie BrainDock täglich nutzen möchten.",
       "q2": "Wie funktioniert das Kreditsystem?",
-      "a2": "Sie kaufen ein Stundenpaket im Voraus. Jedes Mal, wenn Sie eine Fokus-Sitzung starten - ob mit Kamera, Bildschirmüberwachung oder beidem - wird Zeit von Ihrem Guthaben abgezogen. Sie können jederzeit aufladen, und Ihre Stunden verfallen nie.",
+      "a2": "Sie kaufen ein Stundenpaket im Voraus. Jedes Mal, wenn Sie eine Fokus-Sitzung starten - ob mit Kamera, Bildschirm-Bewusstsein oder beidem - wird Zeit von Ihrem Guthaben abgezogen. Sie können jederzeit aufladen, und Ihre Stunden verfallen nie.",
       "q3": "Kann ich zwischen Kamera- und Bildschirm-Sitzungen wechseln?",
-      "a3": "Ja. Ihre Stunden funktionieren über alle Sitzungstypen hinweg. Nutzen Sie kamerabasiertes Fokus-Tracking, Bildschirmüberwachung oder beides gleichzeitig - alles wird vom selben Guthaben abgezogen.",
+      "a3": "Ja. Ihre Stunden funktionieren über alle Sitzungstypen hinweg. Nutzen Sie kamerabasierte Fokus-Sitzungen, Bildschirm-Bewusstsein oder beides gleichzeitig - alles wird vom selben Guthaben abgezogen.",
       "q4": "Was passiert, wenn meine Stunden aufgebraucht sind?",
       "a4": "Ihre Sitzung endet und Sie können sofort mit einem neuen Paket aufladen. Alle bereits aufgezeichneten Sitzungsdaten bleiben in Ihrem Dashboard erhalten - nichts geht verloren."
     },
@@ -728,7 +728,7 @@
   "about": {
     "backHome": "← Zurück zur Startseite",
     "title": "Über BrainDock",
-    "subtitle": "BrainDock ist ein KI-gestützter Fokus-Assistent, der Ihnen hilft, bei der Arbeit und beim Lernen konzentriert zu bleiben. Er erkennt Ablenkungen über die Webcam - ohne Videos zu speichern oder Gesichtserkennung zu verwenden.",
+    "subtitle": "BrainDock ist ein KI-gestützter Fokus-Assistent, der Ihnen hilft, bei der Arbeit und beim Lernen konzentriert zu bleiben. Er nutzt KI, um Ihren Fokus zu unterstützen - ohne jemals Videos zu speichern oder Gesichtserkennung zu verwenden.",
     "mission": {
       "title": "Unsere Mission",
       "description": "Wir glauben, dass tiefe Konzentration eine trainierbare Fähigkeit ist. BrainDock wurde entwickelt, um Menschen einen sanften, intelligenten Begleiter zu geben, der bemerkt, wenn die Aufmerksamkeit nachlässt."
