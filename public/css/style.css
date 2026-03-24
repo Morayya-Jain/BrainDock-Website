@@ -1208,35 +1208,8 @@ body.hero-compact .hero-ctas {
   }
 }
 
-/* --- Features layout: heading left, deck right --- */
-.features-layout {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.features-header {
-  flex: 0 0 auto;
-  max-width: 260px;
-  text-align: left;
-}
-
-.features-header h2 {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  margin-bottom: 12px;
-  color: var(--text-primary);
-}
-
-.features-header p {
-  font-size: 1rem;
-  line-height: 1.5;
-  color: var(--text-secondary);
-  margin: 0;
-}
-
 /* --- Deck container --- */
 .features-deck {
-  flex: 1;
   display: grid;
   grid-template-areas: "stack";
   place-items: center;
@@ -1452,20 +1425,6 @@ body.hero-compact .hero-ctas {
 .feature-card:focus-visible {
   outline: 2px solid var(--accent-highlight);
   outline-offset: 4px;
-}
-
-/* --- Tablet: stack heading above deck --- */
-@media (max-width: 1024px) {
-  .features-layout {
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .features-header {
-    max-width: 100%;
-    text-align: center;
-    margin-bottom: var(--space-l);
-  }
 }
 
 /* --- Mobile --- */
