@@ -3,7 +3,7 @@
  * Called by the website after login (?source=desktop). Requires valid JWT - do NOT use --no-verify-jwt.
  * Tokens are encrypted with AES-256-GCM before storage in the linking_codes table.
  */
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
 
 // Production origins only; localhost is added automatically in local dev via DENO_ENV
 const ALLOWED_ORIGINS = ["https://thebraindock.com"];
@@ -93,16 +93,25 @@ Deno.serve(async (req) => {
   const accessToken = (access_token as string).trim();
   const refreshToken = (refresh_token as string).trim();
 
+  // Validate the access token by extracting user info.
+  // Use the token from the Authorization header (already verified by Supabase gateway)
+  // to create an authenticated client, then verify the body token matches.
+  const authHeader = req.headers.get("authorization") ?? "";
+  const headerToken = authHeader.replace(/^Bearer\s+/i, "").trim();
+
+  // Create a client authenticated with the header JWT (gateway-verified)
   const userClient = createClient(
     Deno.env.get("SUPABASE_URL")!,
-    Deno.env.get("SUPABASE_ANON_KEY")!
+    Deno.env.get("SUPABASE_ANON_KEY")!,
+    { global: { headers: { Authorization: `Bearer ${headerToken}` } } }
   );
   const {
     data: { user },
     error,
-  } = await userClient.auth.getUser(accessToken);
+  } = await userClient.auth.getUser();
   if (error || !user) {
-    return new Response(JSON.stringify({ error: "Invalid token" }), {
+    console.error("[generate-linking-code] getUser failed:", error?.message);
+    return new Response(JSON.stringify({ error: "Invalid token", detail: error?.message }), {
       status: 401,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });

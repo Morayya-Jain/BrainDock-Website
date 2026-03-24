@@ -133,13 +133,22 @@ export async function handlePostAuthRedirect(supabase, card = null) {
   // from the login form still use the desktop flow.  Cleared below on success.
 
   try {
-    // Refresh the session first to ensure the access token is valid.
-    // getSession() returns stale tokens; refreshSession() gets fresh ones.
-    const { data: refreshed, error: refreshError } = await supabase.auth.refreshSession()
-    console.log('[DEBUG] refreshSession result:', { refreshError, hasSession: !!refreshed?.session, tokenPrefix: refreshed?.session?.access_token?.substring(0, 20) })
-    const session = refreshed?.session
+    // Get the current session. Try getSession() first (fast, local).
+    // Only fall back to refreshSession() if getSession() returns no session.
+    let session = null
+    const { data: current } = await supabase.auth.getSession()
+    session = current?.session
+    console.log('[DEBUG] getSession result:', { hasSession: !!session, tokenPrefix: session?.access_token?.substring(0, 20) })
+
     if (!session) {
-      console.error('[DEBUG] No session after refresh. Error:', refreshError)
+      // No local session — try refresh as fallback
+      const { data: refreshed, error: refreshError } = await supabase.auth.refreshSession()
+      console.log('[DEBUG] refreshSession fallback:', { refreshError, hasSession: !!refreshed?.session })
+      session = refreshed?.session
+    }
+
+    if (!session) {
+      console.error('[DEBUG] No session available')
       if (card) showError(card, t('auth.helpers.sessionExpired', 'Session expired. Please try logging in again.'))
       else window.location.href = getRedirectPath()
       return
