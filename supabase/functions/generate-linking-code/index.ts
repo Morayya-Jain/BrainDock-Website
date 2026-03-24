@@ -54,10 +54,18 @@ async function encryptToken(plaintext: string): Promise<string> {
   return btoa(String.fromCharCode(...combined));
 }
 
-function isValidToken(s: unknown): s is string {
+/** Access tokens are JWTs (start with "ey"). */
+function isValidAccessToken(s: unknown): s is string {
   if (typeof s !== "string" || !s.length) return false;
   if (s.length > MAX_TOKEN_LENGTH) return false;
   return s.trim().startsWith("ey");
+}
+
+/** Refresh tokens may be JWTs or opaque strings (UUIDs) depending on Supabase version. */
+function isValidRefreshToken(s: unknown): s is string {
+  if (typeof s !== "string" || !s.length) return false;
+  if (s.length > MAX_TOKEN_LENGTH) return false;
+  return true;
 }
 
 Deno.serve(async (req) => {
@@ -85,8 +93,8 @@ Deno.serve(async (req) => {
 
   const access_token = body?.access_token;
   const refresh_token = body?.refresh_token;
-  if (!isValidToken(access_token) || !isValidToken(refresh_token)) {
-    return new Response(JSON.stringify({ error: "Invalid token format", detail: "Tokens must start with ey and be under 4096 chars" }), {
+  if (!isValidAccessToken(access_token) || !isValidRefreshToken(refresh_token)) {
+    return new Response(JSON.stringify({ error: "Invalid token format" }), {
       status: 400,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
