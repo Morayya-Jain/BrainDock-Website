@@ -606,7 +606,7 @@
       },
       "detailedReports": {
         "title": "Leistungsbericht",
-        "description": "Erstelle detaillierte PDF-Berichte mit Einblicken in deine Sitzung, die deine Fokus-Werte, Ablenkungen und Aktivitätsprotokolle hervorheben."
+        "description": "Erstelle nach jeder Sitzung einen detaillierten PDF-Bericht mit deinem Fokus-Wert, einer Aufschlüsselung der Ablenkungen und einem vollständigen Aktivitätsprotokoll. Sieh genau, wohin deine Aufmerksamkeit ging, und erkenne Muster, um deine nächste Sitzung zu verbessern."
       }
     }
   },

@@ -606,7 +606,7 @@
       },
       "detailedReports": {
         "title": "Rapport de performance",
-        "description": "Générez des rapports PDF détaillés avec des aperçus de votre session mettant en évidence vos scores de concentration, distractions et journaux d'activité."
+        "description": "Générez un rapport PDF détaillé après chaque session avec votre score de concentration, un aperçu des distractions et un journal d'activité complet. Voyez exactement où votre attention s'est portée et repérez les tendances pour améliorer votre prochaine session."
       }
     }
   },

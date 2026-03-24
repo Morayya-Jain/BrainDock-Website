@@ -1343,8 +1343,8 @@ body.hero-compact .hero-ctas {
 
 /* --- Front card (highest z-index in stack): always green, no grayscale --- */
 .feature-card.deck-front {
-  filter: grayscale(0%);
-  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%) opacity(1);
+  -webkit-filter: grayscale(0%) opacity(1);
   border-color: rgba(100, 134, 16, 0.25);
   box-shadow: var(--shadow-card);
 }
@@ -1388,8 +1388,8 @@ body.hero-compact .hero-ctas {
              translateX(var(--deck-offset-x, 0px))
              translateY(var(--deck-offset-y, 0px))
              scale(1.2);
-  filter: grayscale(0%);
-  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%) opacity(1);
+  -webkit-filter: grayscale(0%) opacity(1);
   border-color: rgba(100, 134, 16, 0.2);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.10);
 }

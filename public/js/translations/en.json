@@ -606,7 +606,7 @@
       },
       "detailedReports": {
         "title": "Performance Report",
-        "description": "Generate detailed PDF reports with insights into your session highlighting your focus scores, distractions & activity logs."
+        "description": "Generate a detailed PDF report after each session with your focus score, a breakdown of distractions, and a full activity log. See exactly where your attention went and spot patterns to improve your next session."
       }
     }
   },
