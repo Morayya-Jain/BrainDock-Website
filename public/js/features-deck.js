@@ -8,20 +8,20 @@
   'use strict'
 
   var DESKTOP_OFFSETS = [
-    { x: -100, y: 0   },
-    { x: -30,  y: 50  },
-    { x: 40,   y: 100 },
-    { x: 110,  y: 150 }
+    { x: -80, y: 0   },
+    { x: -28, y: 40  },
+    { x: 28,  y: 80  },
+    { x: 80,  y: 120 }
   ]
-  var DESKTOP_ACTIVE = { x: 0, y: -20 }
+  var DESKTOP_ACTIVE = { x: 0, y: -15 }
 
   var MOBILE_OFFSETS = [
-    { x: -40, y: 0  },
-    { x: -14, y: 30 },
-    { x: 14,  y: 60 },
-    { x: 40,  y: 90 }
+    { x: -32, y: 0  },
+    { x: -12, y: 25 },
+    { x: 12,  y: 50 },
+    { x: 32,  y: 75 }
   ]
-  var MOBILE_ACTIVE = { x: 0, y: -15 }
+  var MOBILE_ACTIVE = { x: 0, y: -10 }
 
   var cards = []
   var activeIndex = -1
