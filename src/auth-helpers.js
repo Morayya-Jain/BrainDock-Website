@@ -220,6 +220,10 @@ export async function handlePostAuthRedirect(supabase, card = null) {
           copyBtn.style.cssText = 'padding:4px 12px;font-size:0.85rem;'
           copyBtn.textContent = t('auth.helpers.copy', 'Copy')
           copyBtn.addEventListener('click', () => {
+            if (!navigator.clipboard?.writeText) {
+              copyBtn.textContent = t('auth.helpers.copyFailed', 'Copy failed')
+              return
+            }
             navigator.clipboard.writeText(result.code).then(() => {
               copyBtn.textContent = t('auth.helpers.copied', 'Copied!')
             }).catch(() => {
