@@ -235,10 +235,26 @@ export async function handlePostAuthRedirect(supabase, card = null) {
       }
     }, 2000)
 
-    // Redirect to dashboard after 30s to give user time to copy the code
+    // If the deep link opened the app, the page becomes hidden.
+    // Redirect to dashboard quickly in that case; keep the full 30s
+    // only when the page stays visible (user needs time to copy the code).
     redirectTimer = setTimeout(() => {
       window.location.href = getRedirectPath()
     }, 30000)
+
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        // Deep link worked — the desktop app opened.
+        // Replace the 30s timer with a short one so the dashboard
+        // loads promptly when the user switches back to the browser.
+        clearTimeout(redirectTimer)
+        redirectTimer = setTimeout(() => {
+          window.location.href = getRedirectPath()
+        }, 3000)
+        document.removeEventListener('visibilitychange', onVisibilityChange)
+      }
+    }
+    document.addEventListener('visibilitychange', onVisibilityChange)
 
     // Signal callers that the deep-link flow is active (don't restore the form)
     return true
