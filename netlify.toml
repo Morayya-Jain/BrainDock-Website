@@ -48,13 +48,13 @@
   to = "/sessions/detail/index.html"
   status = 200
 
-# Branded download redirects → GitHub Releases
+# Branded download redirects → GitHub Releases (302 to avoid caching stale URLs)
 [[redirects]]
   from = "/download/macos"
   to = "https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-macOS.dmg"
-  status = 301
+  status = 302
 
-[[redirects]]
-  from = "/download/windows"
-  to = "https://github.com/Morayya-Jain/BrainDock/releases/latest/download/BrainDock-Setup.exe"
-  status = 301
+# Windows download handled by edge function (dynamically resolves .exe from latest release)
+[[edge_functions]]
+  function = "download-windows"
+  path = "/download/windows"

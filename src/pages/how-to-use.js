@@ -51,7 +51,7 @@ function render(main) {
           <div class="howto-step"><span class="howto-step-num">3</span><span>${t('dashboard.howToUse.macStep3', 'When asked for camera access, click <strong>OK</strong>.')}</span></div>
         </div>
         <div class="howto-platform-panel" id="platform-windows">
-          <div class="howto-step"><span class="howto-step-num">1</span><span>${t('dashboard.howToUse.winStep1', 'Run <strong>BrainDock-Setup.exe</strong>. If SmartScreen appears, click <strong>More info</strong> then <strong>Run anyway</strong>.')}</span></div>
+          <div class="howto-step"><span class="howto-step-num">1</span><span>${t('dashboard.howToUse.winStep1', 'Run the downloaded <strong>BrainDock installer</strong>. If SmartScreen appears, click <strong>More info</strong> then <strong>Run anyway</strong>.')}</span></div>
           <div class="howto-step"><span class="howto-step-num">2</span><span>${t('dashboard.howToUse.winStep2', 'Follow the installer. A desktop shortcut and Start Menu entry will be created.')}</span></div>
           <div class="howto-step"><span class="howto-step-num">3</span><span>${t('dashboard.howToUse.winStep3', 'When asked for camera access, click <strong>Allow</strong>.')}</span></div>
         </div>

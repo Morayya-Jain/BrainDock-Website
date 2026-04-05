@@ -1000,7 +1000,7 @@
       "macStep1": "<strong>Right-click</strong> (or Control-click) on BrainDock.app and choose <strong>Open</strong>.",
       "macStep2": "Click \"Open\" in the dialog. This only happens once.",
       "macStep3": "When asked for camera access, click <strong>OK</strong>.",
-      "winStep1": "Run <strong>BrainDock-Setup.exe</strong>. If SmartScreen appears, click <strong>More info</strong> then <strong>Run anyway</strong>.",
+      "winStep1": "Run the downloaded <strong>BrainDock installer</strong>. If SmartScreen appears, click <strong>More info</strong> then <strong>Run anyway</strong>.",
       "winStep2": "Follow the installer. A desktop shortcut and Start Menu entry will be created.",
       "winStep3": "When asked for camera access, click <strong>Allow</strong>.",
       "startSession": "Start a Session",

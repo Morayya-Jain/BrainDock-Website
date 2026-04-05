@@ -1000,7 +1000,7 @@
       "macStep1": "BrainDock.appを<strong>右クリック</strong>（またはControlキーを押しながらクリック）し、<strong>開く</strong>を選択します。",
       "macStep2": "ダイアログで「開く」をクリックします。これは一度だけです。",
       "macStep3": "カメラアクセスを求められたら、<strong>OK</strong>をクリックします。",
-      "winStep1": "<strong>BrainDock-Setup.exe</strong>を実行します。SmartScreenが表示されたら、<strong>詳細情報</strong>をクリックし、<strong>実行</strong>を選択します。",
+      "winStep1": "ダウンロードした<strong>BrainDockインストーラー</strong>を実行します。SmartScreenが表示されたら、<strong>詳細情報</strong>をクリックし、<strong>実行</strong>を選択します。",
       "winStep2": "インストーラーに従ってください。デスクトップショートカットとスタートメニュー項目が作成されます。",
       "winStep3": "カメラアクセスを求められたら、<strong>許可</strong>をクリックします。",
       "startSession": "セッションを開始",

@@ -1000,7 +1000,7 @@
       "macStep1": "<strong>右键点击</strong>（或按住Control点击）BrainDock.app，选择<strong>打开</strong>。",
       "macStep2": "在对话框中点击“打开”。这只需要一次。",
       "macStep3": "当要求摄像头权限时，点击<strong>好</strong>。",
-      "winStep1": "运行<strong>BrainDock-Setup.exe</strong>。如果SmartScreen出现，点击<strong>更多信息</strong>然后<strong>仍然运行</strong>。",
+      "winStep1": "运行下载的<strong>BrainDock安装程序</strong>。如果SmartScreen出现，点击<strong>更多信息</strong>然后<strong>仍然运行</strong>。",
       "winStep2": "按照安装程序操作。将创建桌面快捷方式和开始菜单项。",
       "winStep3": "当要求摄像头权限时，点击<strong>允许</strong>。",
       "startSession": "开始会话",

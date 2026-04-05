@@ -1000,7 +1000,7 @@
       "macStep1": "BrainDock.app पर <strong>राइट-क्लिक</strong> (या Control-क्लिक) करें और <strong>Open</strong> चुनें।",
       "macStep2": "डायलॉग में \"Open\" पर क्लिक करें। यह केवल एक बार होता है।",
       "macStep3": "कैमरा एक्सेस के लिए पूछे जाने पर <strong>OK</strong> क्लिक करें।",
-      "winStep1": "<strong>BrainDock-Setup.exe</strong> चलाएं। अगर SmartScreen दिखे, तो <strong>More info</strong> फिर <strong>Run anyway</strong> क्लिक करें।",
+      "winStep1": "डाउनलोड किया हुआ <strong>BrainDock इंस्टॉलर</strong> चलाएं। अगर SmartScreen दिखे, तो <strong>More info</strong> फिर <strong>Run anyway</strong> क्लिक करें।",
       "winStep2": "इंस्टॉलर का पालन करें। डेस्कटॉप शॉर्टकट और स्टार्ट मेनू एंट्री बनाई जाएगी।",
       "winStep3": "कैमरा एक्सेस के लिए पूछे जाने पर <strong>Allow</strong> क्लिक करें।",
       "startSession": "सत्र शुरू करें",

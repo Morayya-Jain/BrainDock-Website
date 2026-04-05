@@ -1000,7 +1000,7 @@
       "macStep1": "<strong>Rechtsklick</strong> (oder Control-Klick) auf BrainDock.app und wählen Sie <strong>Öffnen</strong>.",
       "macStep2": "Klicken Sie im Dialog auf \"Öffnen\". Dies geschieht nur einmal.",
       "macStep3": "Wenn nach Kamerazugriff gefragt wird, klicken Sie auf <strong>OK</strong>.",
-      "winStep1": "Führen Sie <strong>BrainDock-Setup.exe</strong> aus. Wenn SmartScreen erscheint, klicken Sie auf <strong>Weitere Informationen</strong> und dann <strong>Trotzdem ausführen</strong>.",
+      "winStep1": "Führen Sie das heruntergeladene <strong>BrainDock-Installationsprogramm</strong> aus. Wenn SmartScreen erscheint, klicken Sie auf <strong>Weitere Informationen</strong> und dann <strong>Trotzdem ausführen</strong>.",
       "winStep2": "Folgen Sie dem Installer. Eine Desktop-Verknüpfung und ein Startmenü-Eintrag werden erstellt.",
       "winStep3": "Wenn nach Kamerazugriff gefragt wird, klicken Sie auf <strong>Zulassen</strong>.",
       "startSession": "Sitzung starten",
