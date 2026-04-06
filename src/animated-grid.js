@@ -28,7 +28,6 @@ export function initAnimatedGrid(options = {}) {
   if (document.querySelector('.animated-grid-bg')) return
 
   const patternId = `grid-pattern-${gridCounter++}`
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   // Build SVG
   const svg = document.createElementNS(SVG_NS, 'svg')
@@ -61,70 +60,68 @@ export function initAnimatedGrid(options = {}) {
   bgRect.setAttribute('fill', `url(#${patternId})`)
   svg.appendChild(bgRect)
 
-  // Animated squares (skip if reduced motion)
-  if (!reducedMotion) {
-    const squaresGroup = document.createElementNS(SVG_NS, 'svg')
-    squaresGroup.setAttribute('class', 'grid-squares-group')
-    squaresGroup.style.overflow = 'visible'
+  // Animated squares
+  const squaresGroup = document.createElementNS(SVG_NS, 'svg')
+  squaresGroup.setAttribute('class', 'grid-squares-group')
+  squaresGroup.style.overflow = 'visible'
 
-    const squares = []
-    for (let i = 0; i < squareCount; i++) {
-      const rect = document.createElementNS(SVG_NS, 'rect')
-      rect.setAttribute('class', 'grid-square')
-      rect.setAttribute('width', cellSize - 1)
-      rect.setAttribute('height', cellSize - 1)
-      rect.setAttribute('fill', 'rgba(176, 176, 176, 1)')
-      rect.setAttribute('stroke-width', '0')
+  const squares = []
+  for (let i = 0; i < squareCount; i++) {
+    const rect = document.createElementNS(SVG_NS, 'rect')
+    rect.setAttribute('class', 'grid-square')
+    rect.setAttribute('width', cellSize - 1)
+    rect.setAttribute('height', cellSize - 1)
+    rect.setAttribute('fill', 'rgba(176, 176, 176, 1)')
+    rect.setAttribute('stroke-width', '0')
 
-      const duration = minDuration + Math.random() * (maxDuration - minDuration)
-      const delay = Math.random() * duration
-      rect.style.setProperty('--grid-duration', `${duration.toFixed(1)}s`)
-      rect.style.setProperty('--grid-delay', `${delay.toFixed(1)}s`)
+    const duration = minDuration + Math.random() * (maxDuration - minDuration)
+    const delay = Math.random() * duration
+    rect.style.setProperty('--grid-duration', `${duration.toFixed(1)}s`)
+    rect.style.setProperty('--grid-delay', `${delay.toFixed(1)}s`)
 
-      squaresGroup.appendChild(rect)
-      squares.push(rect)
-    }
-
-    svg.appendChild(squaresGroup)
-
-    // Position a square at a random grid cell within current viewport
-    function positionSquare(rect) {
-      const cols = Math.floor(window.innerWidth / cellSize)
-      const rows = Math.floor(window.innerHeight / cellSize)
-      if (cols < 1 || rows < 1) {
-        rect.setAttribute('x', -cellSize)
-        rect.setAttribute('y', -cellSize)
-        return
-      }
-      const x = Math.floor(Math.random() * cols) * cellSize + 1
-      const y = Math.floor(Math.random() * rows) * cellSize + 1
-      rect.setAttribute('x', x)
-      rect.setAttribute('y', y)
-    }
-
-    // Initial positioning
-    squares.forEach(positionSquare)
-
-    // Reposition each square after every animation cycle
-    squares.forEach((rect) => {
-      rect.addEventListener('animationiteration', () => positionSquare(rect))
-    })
-
-    // Reposition all squares on resize (debounced)
-    let resizeTimer = null
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer)
-      resizeTimer = setTimeout(() => squares.forEach(positionSquare), 250)
-    })
-
-    // Pause animations when tab is hidden
-    document.addEventListener('visibilitychange', () => {
-      const state = document.hidden ? 'paused' : 'running'
-      squares.forEach((rect) => {
-        rect.style.animationPlayState = state
-      })
-    })
+    squaresGroup.appendChild(rect)
+    squares.push(rect)
   }
+
+  svg.appendChild(squaresGroup)
+
+  // Position a square at a random grid cell within current viewport
+  function positionSquare(rect) {
+    const cols = Math.floor(window.innerWidth / cellSize)
+    const rows = Math.floor(window.innerHeight / cellSize)
+    if (cols < 1 || rows < 1) {
+      rect.setAttribute('x', -cellSize)
+      rect.setAttribute('y', -cellSize)
+      return
+    }
+    const x = Math.floor(Math.random() * cols) * cellSize + 1
+    const y = Math.floor(Math.random() * rows) * cellSize + 1
+    rect.setAttribute('x', x)
+    rect.setAttribute('y', y)
+  }
+
+  // Initial positioning
+  squares.forEach(positionSquare)
+
+  // Reposition each square after every animation cycle
+  squares.forEach((rect) => {
+    rect.addEventListener('animationiteration', () => positionSquare(rect))
+  })
+
+  // Reposition all squares on resize (debounced)
+  let resizeTimer = null
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer)
+    resizeTimer = setTimeout(() => squares.forEach(positionSquare), 250)
+  })
+
+  // Pause animations when tab is hidden
+  document.addEventListener('visibilitychange', () => {
+    const state = document.hidden ? 'paused' : 'running'
+    squares.forEach((rect) => {
+      rect.style.animationPlayState = state
+    })
+  })
 
   // Inject as first child of body so it sits behind everything
   document.body.insertBefore(svg, document.body.firstChild)

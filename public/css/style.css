@@ -2284,6 +2284,11 @@ html[data-scroll-reveal-init] .steps .step.scroll-reveal:nth-child(3) { --reveal
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  /* Grid pulse is opacity-only, non-vestibular — always allow */
+  .animated-grid-bg .grid-square {
+    animation-duration: var(--grid-duration, 5s) !important;
+    animation-iteration-count: infinite !important;
+  }
 }
 
 /* --------------------------------------------------------------------------

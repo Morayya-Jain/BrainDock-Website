@@ -14,8 +14,6 @@
 
   if (document.querySelector('.animated-grid-bg')) return
 
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
   // Build SVG
   var svg = document.createElementNS(SVG_NS, 'svg')
   svg.setAttribute('class', 'animated-grid-bg')
@@ -48,63 +46,61 @@
   svg.appendChild(bgRect)
 
   // Animated squares
-  if (!reducedMotion) {
-    var squaresGroup = document.createElementNS(SVG_NS, 'svg')
-    squaresGroup.setAttribute('class', 'grid-squares-group')
-    squaresGroup.style.overflow = 'visible'
+  var squaresGroup = document.createElementNS(SVG_NS, 'svg')
+  squaresGroup.setAttribute('class', 'grid-squares-group')
+  squaresGroup.style.overflow = 'visible'
 
-    var squares = []
+  var squares = []
 
-    function positionSquare(rect) {
-      var cols = Math.floor(window.innerWidth / CELL_SIZE)
-      var rows = Math.floor(window.innerHeight / CELL_SIZE)
-      if (cols < 1 || rows < 1) {
-        rect.setAttribute('x', -CELL_SIZE)
-        rect.setAttribute('y', -CELL_SIZE)
-        return
-      }
-      rect.setAttribute('x', Math.floor(Math.random() * cols) * CELL_SIZE + 1)
-      rect.setAttribute('y', Math.floor(Math.random() * rows) * CELL_SIZE + 1)
+  function positionSquare(rect) {
+    var cols = Math.floor(window.innerWidth / CELL_SIZE)
+    var rows = Math.floor(window.innerHeight / CELL_SIZE)
+    if (cols < 1 || rows < 1) {
+      rect.setAttribute('x', -CELL_SIZE)
+      rect.setAttribute('y', -CELL_SIZE)
+      return
     }
-
-    for (var i = 0; i < SQUARE_COUNT; i++) {
-      var rect = document.createElementNS(SVG_NS, 'rect')
-      rect.setAttribute('class', 'grid-square')
-      rect.setAttribute('width', CELL_SIZE - 1)
-      rect.setAttribute('height', CELL_SIZE - 1)
-      rect.setAttribute('fill', 'rgba(176, 176, 176, 1)')
-      rect.setAttribute('stroke-width', '0')
-
-      var duration = MIN_DURATION + Math.random() * (MAX_DURATION - MIN_DURATION)
-      var delay = Math.random() * duration
-      rect.style.setProperty('--grid-duration', duration.toFixed(1) + 's')
-      rect.style.setProperty('--grid-delay', delay.toFixed(1) + 's')
-
-      squaresGroup.appendChild(rect)
-      squares.push(rect)
-    }
-
-    svg.appendChild(squaresGroup)
-    squares.forEach(positionSquare)
-
-    // Reposition after each animation cycle
-    squares.forEach(function (rect) {
-      rect.addEventListener('animationiteration', function () { positionSquare(rect) })
-    })
-
-    // Debounced resize
-    var resizeTimer = null
-    window.addEventListener('resize', function () {
-      clearTimeout(resizeTimer)
-      resizeTimer = setTimeout(function () { squares.forEach(positionSquare) }, 250)
-    })
-
-    // Pause when tab hidden
-    document.addEventListener('visibilitychange', function () {
-      var state = document.hidden ? 'paused' : 'running'
-      squares.forEach(function (rect) { rect.style.animationPlayState = state })
-    })
+    rect.setAttribute('x', Math.floor(Math.random() * cols) * CELL_SIZE + 1)
+    rect.setAttribute('y', Math.floor(Math.random() * rows) * CELL_SIZE + 1)
   }
+
+  for (var i = 0; i < SQUARE_COUNT; i++) {
+    var rect = document.createElementNS(SVG_NS, 'rect')
+    rect.setAttribute('class', 'grid-square')
+    rect.setAttribute('width', CELL_SIZE - 1)
+    rect.setAttribute('height', CELL_SIZE - 1)
+    rect.setAttribute('fill', 'rgba(176, 176, 176, 1)')
+    rect.setAttribute('stroke-width', '0')
+
+    var duration = MIN_DURATION + Math.random() * (MAX_DURATION - MIN_DURATION)
+    var delay = Math.random() * duration
+    rect.style.setProperty('--grid-duration', duration.toFixed(1) + 's')
+    rect.style.setProperty('--grid-delay', delay.toFixed(1) + 's')
+
+    squaresGroup.appendChild(rect)
+    squares.push(rect)
+  }
+
+  svg.appendChild(squaresGroup)
+  squares.forEach(positionSquare)
+
+  // Reposition after each animation cycle
+  squares.forEach(function (rect) {
+    rect.addEventListener('animationiteration', function () { positionSquare(rect) })
+  })
+
+  // Debounced resize
+  var resizeTimer = null
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer)
+    resizeTimer = setTimeout(function () { squares.forEach(positionSquare) }, 250)
+  })
+
+  // Pause when tab hidden
+  document.addEventListener('visibilitychange', function () {
+    var state = document.hidden ? 'paused' : 'running'
+    squares.forEach(function (rect) { rect.style.animationPlayState = state })
+  })
 
   document.body.insertBefore(svg, document.body.firstChild)
 })()
