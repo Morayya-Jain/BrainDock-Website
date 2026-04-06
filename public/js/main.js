@@ -366,6 +366,7 @@ function initBinaryBanner() {
   var FONT_SIZE, CELL_W, CELL_H;
 
   var W, H, cols, rows, mask, dripMask, centerWeight, edgeNoise, grid, rainY, settled, animId;
+  var canvasVisible = true; // tracked by IntersectionObserver
 
   // Hover spotlight state - soft glow + scramble near cursor
   var SPOT_RADIUS = 30; // cells
@@ -513,6 +514,14 @@ function initBinaryBanner() {
   function draw() {
     frame++;
 
+    // Reduced-motion: skip 3 of 4 frames (~15 fps) to save CPU on lower-end
+    // machines while still showing subtle character mutations.
+    // Guard frame > 1 so the very first render after init/resize is immediate.
+    if (reducedMotion && settled && frame > 1 && frame % 4 !== 0) {
+      animId = requestAnimationFrame(draw);
+      return;
+    }
+
     ctx.clearRect(0, 0, W, H);
 
     ctx.font = FONT_SIZE + 'px "Courier New", monospace';
@@ -610,7 +619,8 @@ function initBinaryBanner() {
   if ('IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function (entries) {
       var vis = entries[0].isIntersecting;
-      if (vis && !animId && !reducedMotion) draw();
+      canvasVisible = vis;
+      if (vis && !animId) draw();
       if (!vis && animId) {
         cancelAnimationFrame(animId);
         animId = null;
@@ -618,6 +628,16 @@ function initBinaryBanner() {
     }, { threshold: 0 });
     observer.observe(canvas);
   }
+
+  // Pause when tab is hidden to save CPU (matches animated-grid behaviour)
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden && animId) {
+      cancelAnimationFrame(animId);
+      animId = null;
+    } else if (!document.hidden && !animId && canvasVisible) {
+      draw();
+    }
+  });
 
   // Mouse + touch tracking for hover spotlight (skip for reduced-motion)
   if (!reducedMotion) {
@@ -655,12 +675,8 @@ function initBinaryBanner() {
   if (reducedMotion) {
     settled = true;
     for (var c = 0; c < cols; c++) rainY[c] = rows + 10;
-    draw();
-    cancelAnimationFrame(animId);
-    animId = null;
-  } else {
-    draw();
   }
+  draw();
 
   // Debounced resize handler
   var resizeTimer;
@@ -674,12 +690,8 @@ function initBinaryBanner() {
       if (reducedMotion) {
         settled = true;
         for (var c2 = 0; c2 < cols; c2++) rainY[c2] = rows + 10;
-        draw();
-        cancelAnimationFrame(animId);
-        animId = null;
-      } else {
-        draw();
       }
+      draw();
     }, 250);
   });
 }
