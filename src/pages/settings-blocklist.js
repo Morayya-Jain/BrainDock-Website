@@ -11,6 +11,7 @@ import { escapeHtml, showInlineError } from '../utils.js'
 import { logError } from '../logger.js'
 import { t } from '../dashboard-i18n.js'
 import { track, EVENTS } from '../analytics.js'
+import { configSkeleton } from '../skeleton.js'
 import {
   createIcons,
   Smartphone,
@@ -403,6 +404,10 @@ function render(main, blocklistConfig, detectionSettings, userId) {
       setHint(hintEl, '', '')
       return
     }
+    if (state.custom_urls.length >= 100) {
+      setHint(hintEl, t('dashboard.config.limitReachedUrls', 'Limit reached (100 custom URLs)'), 'error')
+      return
+    }
     state.custom_urls.push(normalized)
     track(EVENTS.BLOCKLIST_CUSTOM_URL_ADDED)
     input.value = ''
@@ -433,6 +438,10 @@ function render(main, blocklistConfig, detectionSettings, userId) {
     const normalizedApp = val.toLowerCase()
     if (state.custom_apps.some((a) => a.toLowerCase() === normalizedApp)) {
       setHint(hintEl, '', '')
+      return
+    }
+    if (state.custom_apps.length >= 100) {
+      setHint(hintEl, t('dashboard.config.limitReachedApps', 'Limit reached (100 custom apps)'), 'error')
       return
     }
     state.custom_apps.push(val)
@@ -557,7 +566,7 @@ async function main() {
   const mainEl = document.querySelector('.dashboard-main')
   if (!mainEl) return
 
-  mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.config.loading', 'Loading configuration...')}</p></div>`
+  mainEl.innerHTML = configSkeleton()
 
   try {
     // Load blocklist and detection data in parallel

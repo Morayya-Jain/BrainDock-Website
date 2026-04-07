@@ -889,6 +889,8 @@
       "customAppsDesc": "将应用名称添加到您的列表。",
       "noCustomUrls": "未添加自定义网址。",
       "noCustomApps": "未添加自定义应用。",
+      "limitReachedUrls": "已达上限 (100个自定义网址)",
+      "limitReachedApps": "已达上限 (100个自定义应用)",
       "checking": "检查中...",
       "added": "已添加。",
       "loading": "正在加载配置...",

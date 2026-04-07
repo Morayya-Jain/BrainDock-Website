@@ -889,6 +889,8 @@
       "customAppsDesc": "App-Namen zu Ihrer Liste hinzufügen.",
       "noCustomUrls": "Keine eigenen URLs hinzugefügt.",
       "noCustomApps": "Keine eigenen Apps hinzugefügt.",
+      "limitReachedUrls": "Limit erreicht (100 eigene URLs)",
+      "limitReachedApps": "Limit erreicht (100 eigene Apps)",
       "checking": "Wird geprüft...",
       "added": "Hinzugefügt.",
       "loading": "Konfiguration wird geladen...",

@@ -889,6 +889,8 @@
       "customAppsDesc": "リストにアプリ名を追加します。",
       "noCustomUrls": "カスタムURLは追加されていません。",
       "noCustomApps": "カスタムアプリは追加されていません。",
+      "limitReachedUrls": "上限に達しました (カスタムURL 100件)",
+      "limitReachedApps": "上限に達しました (カスタムアプリ 100件)",
       "checking": "確認中...",
       "added": "追加しました。",
       "loading": "設定を読み込み中...",

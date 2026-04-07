@@ -139,6 +139,19 @@ export async function validateUrlPattern(url) {
     let domain = u
     if (domain.includes('://')) domain = domain.split('://').pop()
     if (domain.includes('/')) domain = domain.split('/')[0]
+    const domainWithoutWww = domain.replace(/^www\./, '')
+    if (
+      domainWithoutWww === 'thebraindock.com' ||
+      domainWithoutWww.endsWith('.thebraindock.com')
+    ) {
+      return { valid: false, message: "You can't block BrainDock's website - you need it to manage your settings", isWarning: false }
+    }
+    if (
+      domainWithoutWww === 'supabase.co' || domainWithoutWww.endsWith('.supabase.co') ||
+      domainWithoutWww === 'stripe.com' || domainWithoutWww.endsWith('.stripe.com')
+    ) {
+      return { valid: false, message: "Blocking this domain would break BrainDock's core services (sync, payments)", isWarning: false }
+    }
     const parts = domain.split('.')
     if (parts.length >= 2) {
       const potentialCompound = parts.slice(-2).join('.')
@@ -168,6 +181,9 @@ export async function validateUrlPattern(url) {
 export async function validateAppPattern(appName) {
   try {
     const app = String(appName).trim()
+    if (app.toLowerCase() === 'braindock') {
+      return { valid: false, message: "You can't block BrainDock - you need it to manage your focus sessions", isWarning: false }
+    }
     if (app.length < 3) return { valid: false, message: `'${app}' is too short (min 3 characters)`, isWarning: false }
     if (app.length > 50) return { valid: false, message: `'${app}' is too long (max 50 characters)`, isWarning: false }
 

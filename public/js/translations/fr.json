@@ -889,6 +889,8 @@
       "customAppsDesc": "Ajoutez des noms d'applications à votre liste.",
       "noCustomUrls": "Aucune URL personnalisée ajoutée.",
       "noCustomApps": "Aucune application personnalisée ajoutée.",
+      "limitReachedUrls": "Limite atteinte (100 URLs personnalis\u00e9es)",
+      "limitReachedApps": "Limite atteinte (100 applications personnalis\u00e9es)",
       "checking": "Vérification...",
       "added": "Ajouté.",
       "loading": "Chargement de la configuration...",
