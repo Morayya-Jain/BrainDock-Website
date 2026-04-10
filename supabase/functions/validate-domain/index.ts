@@ -63,7 +63,14 @@ serve(async (req) => {
 
   let domain: string
   try {
-    const body = await req.json()
+    const rawText = await req.text()
+    if (rawText.length > 512) {
+      return new Response(
+        JSON.stringify({ exists: true, message: "Request body too large" }),
+        { status: 400, headers: jsonHeaders }
+      )
+    }
+    const body = JSON.parse(rawText)
     if (typeof body?.domain !== "string") {
       return new Response(
         JSON.stringify({ exists: true, message: "Missing or invalid domain" }),

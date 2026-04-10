@@ -6,6 +6,7 @@
 
 import { supabase } from './supabase.js'
 import { escapeHtml } from './utils.js'
+import { logError } from './logger.js'
 import {
   initDashboardI18n,
   t,
@@ -256,7 +257,8 @@ async function handleSignOut() {
     // causing silent session data loss if user is mid-focus. Password reset
     // uses 'global' (reset-password.js) which is the appropriate place.
     await supabase.auth.signOut()
-  } catch (_) {
+  } catch (err) {
+    logError('Sign out failed', err)
     // Redirect even if signOut fails (e.g. network error) so user is not stuck
   }
   // Clear session-scoped state to prevent stale values affecting the next login

@@ -184,7 +184,8 @@ form.addEventListener('submit', async (e) => {
     return
   } else {
     form.hidden = true
-    document.querySelector('.auth-divider').hidden = true
+    const dividerEl = document.querySelector('.auth-divider')
+    if (dividerEl) dividerEl.hidden = true
     googleBtn.hidden = true
     track(EVENTS.SIGNUP_COMPLETED, { method: 'email', needs_confirmation: true })
     showSuccess(card, t('auth.signup.checkEmail', 'Check your email for a confirmation link. Once confirmed, you can log in.'))
@@ -204,10 +205,15 @@ googleBtn.addEventListener('click', async () => {
   track(EVENTS.SIGNUP_STARTED, { method: 'google' })
   sessionStorage.setItem('braindock_auth_flow', 'signup')
 
+  const redirect = new URLSearchParams(window.location.search).get('redirect')
+  const callbackUrl = redirect
+    ? `${window.location.origin}/auth/callback/?redirect=${encodeURIComponent(redirect)}`
+    : `${window.location.origin}/auth/callback/`
+
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: `${window.location.origin}/auth/callback/`,
+      redirectTo: callbackUrl,
     },
   })
 

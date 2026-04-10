@@ -2,6 +2,7 @@ import { supabase } from '../supabase.js'
 import { showError, isDesktopSource, handlePostAuthRedirect } from '../auth-helpers.js'
 import { track, identify, EVENTS } from '../analytics.js'
 import { initDashboardI18n, t } from '../dashboard-i18n.js'
+import { logError } from '../logger.js'
 import '../auth.css'
 import { initAnimatedGrid } from '../animated-grid.js'
 initAnimatedGrid()
@@ -24,15 +25,15 @@ function checkForOAuthError() {
   const errorDescription = params.get('error_description')
 
   if (error) {
-    return errorDescription
-      ? errorDescription.replace(/\+/g, ' ')
-      : t('auth.callback.cancelled', 'Sign in was cancelled.')
+    logError('OAuth error:', errorDescription || error)
+    return t('auth.callback.cancelled', 'Sign in was cancelled.')
   }
 
   // Also check query params (some providers use these instead)
   const query = new URLSearchParams(window.location.search)
   if (query.get('error')) {
-    return query.get('error_description')?.replace(/\+/g, ' ') || t('auth.callback.cancelled', 'Sign in was cancelled.')
+    logError('OAuth error:', query.get('error_description') || query.get('error'))
+    return t('auth.callback.cancelled', 'Sign in was cancelled.')
   }
 
   return null
@@ -40,9 +41,9 @@ function checkForOAuthError() {
 
 /** Show an error state with a back link. */
 function showFailure(message) {
-  loadingState.hidden = true
-  showError(card, message)
-  fallbackLink.hidden = false
+  if (loadingState) loadingState.hidden = true
+  if (card) showError(card, message)
+  if (fallbackLink) fallbackLink.hidden = false
 }
 
 // Check for errors immediately (user cancelled or something went wrong)
@@ -66,9 +67,9 @@ if (oauthError) {
     // For desktop flow, keep the spinner visible so the paste-code fallback
     // appears on a spinner page.  For web flow, hide it (redirect follows).
     if (!isDesktopSource()) {
-      loadingState.hidden = true
+      if (loadingState) loadingState.hidden = true
     } else {
-      const txt = loadingState.querySelector('.auth-loading-text')
+      const txt = loadingState?.querySelector('.auth-loading-text')
       if (txt) txt.textContent = t('auth.callback.connecting', 'Connecting to app...')
     }
 
@@ -107,7 +108,7 @@ if (oauthError) {
 
   // Final fallback: if nothing worked after 8 seconds, show error
   finalTimer = setTimeout(() => {
-    if (!handled && document.visibilityState !== 'hidden' && !loadingState.hidden) {
+    if (!handled && document.visibilityState !== 'hidden' && loadingState && !loadingState.hidden) {
       subscription.unsubscribe()
       showFailure(t('auth.callback.failed', 'Sign in could not be completed. Please try again.'))
     }

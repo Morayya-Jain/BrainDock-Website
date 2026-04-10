@@ -7,6 +7,7 @@ import { initDashboardLayout } from '../dashboard-layout.js'
 import { escapeHtml, formatDuration, modeLabel, focusLevelClass } from '../utils.js'
 import { t, getLocale } from '../dashboard-i18n.js'
 import { logError } from '../logger.js'
+import { sessionsSkeleton } from '../skeleton.js'
 
 const PAGE_SIZE = 20
 
@@ -87,13 +88,10 @@ async function main() {
   const mainEl = document.querySelector('.dashboard-main')
   if (!mainEl) return
 
-  let currentPage = 1
-
   const userId = result.user.id
 
   async function loadPage(page) {
-    currentPage = page
-    mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.sessionList.loading', 'Loading sessions...')}</p></div>`
+    mainEl.innerHTML = sessionsSkeleton()
     try {
       const { sessions, total } = await fetchSessionsWithCount(page, userId)
       render(mainEl, sessions, page, total, loadPage)

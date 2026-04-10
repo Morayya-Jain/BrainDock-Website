@@ -73,6 +73,7 @@ html {
   color-scheme: light; /* Ensure browser chrome matches our light theme */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Fallback for browsers that don't support clip */
   overflow-x: clip; /* Defensive: prevent accidental horizontal overflow */
 }
 
@@ -2202,28 +2203,146 @@ body.hero-compact .hero-ctas {
 }
 
 /* --------------------------------------------------------------------------
-   Dashboard boot loading screen (shown before JS loads)
+   Skeleton boot screen (shown before JS loads)
    -------------------------------------------------------------------------- */
-.dashboard-boot {
+@keyframes skeleton-boot-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-boot .skeleton-bone,
+  .skeleton-boot .skeleton-bone--card {
+    animation: none !important;
+  }
+}
+
+.skeleton-boot {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   min-height: 100dvh;
+  background: linear-gradient(to right, #C7C6C3 0%, #FDFCF9 45%);
+}
+
+@media (min-width: 768px) {
+  .skeleton-boot {
+    flex-direction: row;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+}
+
+/* Skeleton sidebar (desktop only) */
+.skeleton-sidebar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .skeleton-sidebar {
+    display: flex;
+    flex-direction: column;
+    width: clamp(200px, 22vw, 260px);
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 0 28px 28px 0;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.04);
+  }
+}
+
+.skeleton-sidebar-logo {
+  padding: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.skeleton-sidebar-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+}
+
+.skeleton-sidebar-footer {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 12px;
+  padding: 16px 24px;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 14px 14px 0 0;
+}
+
+.skeleton-sidebar-footer-lines {
+  display: flex;
   flex-direction: column;
-  gap: 16px;
-  background: linear-gradient(to right, #C7C6C3 0%, #FDFCF9 45%);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  color: rgba(60, 60, 67, 0.6);
+  gap: 6px;
 }
-.dashboard-boot-spinner {
-  width: 36px; height: 36px;
-  border: 3px solid #E5E5EA;
-  border-top-color: var(--btn-primary-bg);
+
+/* Skeleton main area */
+.skeleton-main {
+  flex: 1;
+  padding: 48px clamp(16px, 3vw, 48px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.skeleton-main > * {
+  width: 100%;
+  max-width: 960px;
+}
+
+/* Boot-level bone styles (independent of design tokens) */
+.skeleton-boot .skeleton-bone {
+  background-color: rgba(0, 0, 0, 0.08);
+  background-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.08) 25%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(0, 0, 0, 0.08) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-boot-shimmer 1.8s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+.skeleton-boot .skeleton-bone--text {
+  height: 14px;
+  border-radius: 4px;
+}
+
+.skeleton-boot .skeleton-bone--title {
+  height: 28px;
+  border-radius: 6px;
+  margin-bottom: 24px;
+}
+
+.skeleton-boot .skeleton-bone--circle {
   border-radius: 50%;
-  animation: dbspin 0.8s linear infinite;
+  flex-shrink: 0;
 }
-@keyframes dbspin { to { transform: rotate(360deg); } }
+
+.skeleton-boot .skeleton-bone--card {
+  height: 100px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.04);
+  background-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.04) 25%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(0, 0, 0, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-boot-shimmer 1.8s ease-in-out infinite;
+}
+
+.skeleton-boot .skeleton-stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
 
 /* --------------------------------------------------------------------------
    Animated grid background

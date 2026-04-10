@@ -2,7 +2,7 @@
  * Shared utility functions used across dashboard pages.
  */
 
-import { t } from './dashboard-i18n.js'
+import { t, getLocale } from './dashboard-i18n.js'
 
 const ESCAPE_MAP = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }
 
@@ -63,10 +63,16 @@ export function showInlineError(container, message, durationMs = 5000) {
  * Defaults to AUD. Handles other currencies with a simple $ prefix.
  */
 export function formatPrice(cents, currency = 'aud') {
-  if (cents == null || isNaN(cents)) return 'A$0.00'
-  const c = (currency || 'aud').toLowerCase()
-  if (c === 'aud') return `A$${(cents / 100).toFixed(2)}`
-  return `$${(cents / 100).toFixed(2)}`
+  if (cents == null || isNaN(cents)) cents = 0
+  try {
+    return new Intl.NumberFormat(getLocale(), {
+      style: 'currency',
+      currency: currency.toUpperCase(),
+    }).format(cents / 100)
+  } catch (_) {
+    // Fallback for invalid currency codes
+    return `$${(cents / 100).toFixed(2)}`
+  }
 }
 
 /**

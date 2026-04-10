@@ -153,7 +153,7 @@ Deno.serve(async (req) => {
   } catch (decryptErr) {
     console.error("[exchange-linking-code] Token decryption failed:", decryptErr);
     return new Response(
-      JSON.stringify({ error: "Token decryption failed" }),
+      JSON.stringify({ error: "Server error. Please try again." }),
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },

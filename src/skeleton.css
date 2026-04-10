@@ -1,0 +1,290 @@
+/* ==========================================================================
+   Skeleton Screen Styles (page-level, loaded via Vite)
+   Requires design tokens from public/css/style.css (--space-*, --card-radius,
+   --btn-radius, --bg-surface). These are always present since every page
+   links style.css. Boot-level skeletons use hardcoded values instead
+   (see the .skeleton-boot section in style.css).
+   ========================================================================== */
+
+/* Shimmer animation: left-to-right gradient sweep */
+@keyframes skeleton-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Note: prefers-reduced-motion is handled by the global rule in style.css */
+
+/* --------------------------------------------------------------------------
+   Base bone element
+   -------------------------------------------------------------------------- */
+.skeleton-bone {
+  background-color: rgba(0, 0, 0, 0.08);
+  background-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.08) 25%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(0, 0, 0, 0.08) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.8s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* --------------------------------------------------------------------------
+   Bone modifiers
+   -------------------------------------------------------------------------- */
+
+/* Text line */
+.skeleton-bone--text {
+  height: 14px;
+  border-radius: 4px;
+}
+
+/* Title (page heading) */
+.skeleton-bone--title {
+  height: 28px;
+  border-radius: 6px;
+  margin-bottom: var(--space-l);
+}
+
+/* Subtitle */
+.skeleton-bone--subtitle {
+  height: 16px;
+  border-radius: 4px;
+  margin-bottom: var(--space-xl);
+}
+
+/* Circle (avatars, icons) */
+.skeleton-bone--circle {
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Card-sized container (lighter for visual hierarchy) */
+.skeleton-bone--card {
+  height: 100px;
+  border-radius: var(--card-radius);
+  background-color: rgba(0, 0, 0, 0.04);
+  background-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.04) 25%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(0, 0, 0, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.8s ease-in-out infinite;
+}
+
+/* Chart bar */
+.skeleton-bone--bar {
+  border-radius: 6px 6px 0 0;
+  width: 100%;
+  max-width: 40px;
+}
+
+/* Pill (toggle, tag) */
+.skeleton-bone--pill {
+  height: 36px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+/* Button */
+.skeleton-bone--button {
+  height: 40px;
+  border-radius: var(--btn-radius);
+}
+
+/* Input field */
+.skeleton-bone--input {
+  height: 42px;
+  border-radius: 10px;
+}
+
+/* Progress bar */
+.skeleton-bone--progress {
+  height: 14px;
+  border-radius: 7px;
+  width: 100%;
+}
+
+/* Timeline bar */
+.skeleton-bone--timeline {
+  height: 28px;
+  border-radius: 6px;
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Layout containers
+   -------------------------------------------------------------------------- */
+
+/* Stat card row (matches .dashboard-stat-cards grid) */
+.skeleton-stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: var(--space-l);
+  margin-bottom: var(--space-xl);
+}
+
+.skeleton-stat-row--2col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 639px) {
+  .skeleton-stat-row--2col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Section wrapper */
+.skeleton-section {
+  margin-bottom: clamp(24px, 4vw, 48px);
+}
+
+/* List item row */
+.skeleton-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
+  padding: var(--space-m);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.skeleton-list-item:last-child {
+  border-bottom: none;
+}
+
+/* Chart container (matches .dashboard-chart) */
+.skeleton-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-s);
+  height: clamp(140px, 20vh, 200px);
+  padding: var(--space-m) 0;
+}
+
+.skeleton-chart-bar-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-xs);
+  height: 100%;
+}
+
+/* Card wrapper (matches .dashboard-card) */
+.skeleton-card {
+  background: var(--bg-surface);
+  border-radius: var(--card-radius);
+  padding: var(--space-l);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: var(--space-l);
+}
+
+/* Pill wrap (flex row, wrapping) */
+.skeleton-pill-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Side-by-side card pair (matches .dashboard-card-row) */
+.skeleton-card-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-l);
+}
+
+@media (min-width: 1060px) {
+  .skeleton-card-row {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .skeleton-card-row > .skeleton-card {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+/* Pricing grid (no sidebar, matches .pricing-grid) */
+.skeleton-pricing-grid {
+  display: grid;
+  gap: clamp(12px, 2vw, 28px);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1100px) {
+  .skeleton-pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .skeleton-pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+}
+
+.skeleton-pricing-card {
+  min-height: clamp(380px, 45vh, 520px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  padding: clamp(16px, 1.8vw, 24px) clamp(18px, 2.5vw, 32px);
+}
+
+/* Pagination placeholder */
+.skeleton-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-m);
+  margin-top: var(--space-xl);
+}
+
+/* Config level toggle row */
+.skeleton-level-row {
+  display: flex;
+  gap: var(--space-m);
+}
+
+.skeleton-level-row > .skeleton-bone {
+  flex: 1;
+}
+
+/* Device list item with icon */
+.skeleton-device-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  padding: var(--space-m);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.skeleton-device-item:last-child {
+  border-bottom: none;
+}
+
+.skeleton-device-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* FAQ row */
+.skeleton-faq-row {
+  padding: var(--space-m) 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.skeleton-faq-row:last-child {
+  border-bottom: none;
+}

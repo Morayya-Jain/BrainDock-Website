@@ -10,6 +10,7 @@ import { isValidUuid } from '../validators.js'
 import { t, getLocale } from '../dashboard-i18n.js'
 import { logError } from '../logger.js'
 import { track, EVENTS } from '../analytics.js'
+import { sessionDetailSkeleton } from '../skeleton.js'
 
 function eventLabel(type) {
   const labels = {
@@ -213,7 +214,7 @@ async function main() {
   const mainEl = document.querySelector('.dashboard-main')
   if (!mainEl) return
 
-  mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.sessionDetail.loading', 'Loading session...')}</p></div>`
+  mainEl.innerHTML = sessionDetailSkeleton()
 
   try {
     const { session, events } = await fetchSessionWithEvents(sessionId, result.user.id)

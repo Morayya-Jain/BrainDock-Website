@@ -140,13 +140,13 @@ export async function handlePostAuthRedirect(supabase, card = null) {
     if (!session) {
       if (card) showError(card, t('auth.helpers.sessionExpired', 'Session expired. Please try logging in again.'))
       else window.location.href = getRedirectPath()
-      return
+      return false
     }
 
     if (!supabaseUrl || !supabaseAnonKey) {
       if (card) showError(card, t('auth.helpers.configError', 'App configuration error. Please try again later.'))
       else window.location.href = getRedirectPath()
-      return
+      return false
     }
 
     // Abort after 8 seconds to prevent hanging forever
@@ -178,7 +178,7 @@ export async function handlePostAuthRedirect(supabase, card = null) {
       logError('Failed to generate linking code:', resp.status, detail, result)
       if (card) showError(card, t('auth.helpers.desktopFailed', 'Desktop login failed. Please try again.'))
       else window.location.href = getRedirectPath()
-      return
+      return false
     }
 
     // Linking code obtained — clear the desktop flag now (refresh goes to dashboard)
@@ -266,6 +266,7 @@ export async function handlePostAuthRedirect(supabase, card = null) {
     logError('Desktop linking error:', err)
     if (card) showError(card, t('auth.helpers.desktopFailed', 'Desktop login failed. Please try again.'))
     else window.location.href = getRedirectPath()
+    return false
   }
 }
 

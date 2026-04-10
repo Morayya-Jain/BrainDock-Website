@@ -123,7 +123,7 @@ Deno.serve(async (req) => {
 
   if (setError) {
     console.error("[generate-linking-code] setSession failed:", setError.message);
-    return new Response(JSON.stringify({ error: "Invalid session", detail: setError.message }), {
+    return new Response(JSON.stringify({ error: "Invalid session" }), {
       status: 401,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
@@ -135,7 +135,7 @@ Deno.serve(async (req) => {
   } = await userClient.auth.getUser();
   if (error || !user) {
     console.error("[generate-linking-code] getUser failed:", error?.message);
-    return new Response(JSON.stringify({ error: "Invalid token", detail: error?.message }), {
+    return new Response(JSON.stringify({ error: "Invalid token" }), {
       status: 401,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });

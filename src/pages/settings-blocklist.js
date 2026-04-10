@@ -26,8 +26,6 @@ import {
   Youtube,
   Twitch,
   Facebook,
-  Linkedin,
-  Newspaper,
   PlayCircle,
 } from 'lucide/dist/cjs/lucide.js'
 
@@ -95,7 +93,7 @@ const ITEM_PRESETS = [
 const PAGE_ICONS = {
   Smartphone, Gamepad2, Gamepad, Watch, Laptop, UtensilsCrossed, Camera, Headphones,
   Instagram, Youtube, Twitch, Facebook,
-  Linkedin, Newspaper, PlayCircle,
+  PlayCircle,
 }
 
 // -- Data helpers --
@@ -319,7 +317,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
       el.classList.toggle('active', next)
       el.setAttribute('aria-pressed', next)
       track(EVENTS.BLOCKLIST_SITE_TOGGLED, { site_id: id, enabled: next })
-      state.quick_blocks[id] = next
+      state.quick_blocks = { ...state.quick_blocks, [id]: next }
       scheduleBlocklistSave()
     })
   })
@@ -339,8 +337,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
     list.querySelectorAll('.dashboard-remove-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const u = btn.dataset.url
-        const idx = state.custom_urls.indexOf(u)
-        if (idx !== -1) state.custom_urls.splice(idx, 1)
+        state.custom_urls = state.custom_urls.filter((url) => url !== u)
         renderCustomUrls()
         scheduleBlocklistSave()
       })
@@ -362,8 +359,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
     list.querySelectorAll('.dashboard-remove-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const a = btn.dataset.app
-        const idx = state.custom_apps.indexOf(a)
-        if (idx !== -1) state.custom_apps.splice(idx, 1)
+        state.custom_apps = state.custom_apps.filter((app) => app !== a)
         renderCustomApps()
         scheduleBlocklistSave()
       })
@@ -408,7 +404,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
       setHint(hintEl, t('dashboard.config.limitReachedUrls', 'Limit reached (100 custom URLs)'), 'error')
       return
     }
-    state.custom_urls.push(normalized)
+    state.custom_urls = [...state.custom_urls, normalized]
     track(EVENTS.BLOCKLIST_CUSTOM_URL_ADDED)
     input.value = ''
     setHint(hintEl, result.isWarning ? result.message : t('dashboard.config.added', 'Added.'), result.isWarning ? 'warning' : 'success')
@@ -444,7 +440,7 @@ function render(main, blocklistConfig, detectionSettings, userId) {
       setHint(hintEl, t('dashboard.config.limitReachedApps', 'Limit reached (100 custom apps)'), 'error')
       return
     }
-    state.custom_apps.push(val)
+    state.custom_apps = [...state.custom_apps, val]
     track(EVENTS.BLOCKLIST_CUSTOM_APP_ADDED)
     input.value = ''
     setHint(hintEl, result.isWarning ? result.message : t('dashboard.config.added', 'Added.'), result.isWarning ? 'warning' : 'success')

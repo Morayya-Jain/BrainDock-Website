@@ -13,10 +13,39 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <!-- Visible immediately while JS initializes -->
-  <div class="dashboard-boot" id="dashboard-boot">
-    <div class="dashboard-boot-spinner"></div>
-    <p>Loading dashboard...</p>
+  <!-- Skeleton screen visible immediately while JS initializes -->
+  <div class="skeleton-boot" id="dashboard-boot" aria-hidden="true">
+    <aside class="skeleton-sidebar">
+      <div class="skeleton-sidebar-logo">
+        <div class="skeleton-bone" style="width:120px;height:28px"></div>
+      </div>
+      <nav class="skeleton-sidebar-nav">
+        <div class="skeleton-bone skeleton-bone--text" style="width:80%"></div>
+        <div class="skeleton-bone skeleton-bone--text" style="width:65%"></div>
+        <div class="skeleton-bone skeleton-bone--text" style="width:75%"></div>
+        <div class="skeleton-bone skeleton-bone--text" style="width:60%"></div>
+        <div class="skeleton-bone skeleton-bone--text" style="width:70%"></div>
+        <div class="skeleton-bone skeleton-bone--text" style="width:55%"></div>
+      </nav>
+      <div class="skeleton-sidebar-footer">
+        <div class="skeleton-bone skeleton-bone--circle" style="width:38px;height:38px"></div>
+        <div class="skeleton-sidebar-footer-lines">
+          <div class="skeleton-bone skeleton-bone--text" style="width:100px;height:10px"></div>
+          <div class="skeleton-bone skeleton-bone--text" style="width:130px;height:8px"></div>
+        </div>
+      </div>
+    </aside>
+    <div class="skeleton-main">
+      <div>
+        <div class="skeleton-bone skeleton-bone--title" style="width:40%;max-width:250px"></div>
+        <div class="skeleton-stat-row">
+          <div class="skeleton-bone skeleton-bone--card"></div>
+          <div class="skeleton-bone skeleton-bone--card"></div>
+          <div class="skeleton-bone skeleton-bone--card"></div>
+        </div>
+        <div class="skeleton-bone skeleton-bone--card" style="height:200px;width:100%"></div>
+      </div>
+    </div>
   </div>
   <div id="dashboard-content" hidden></div>
 

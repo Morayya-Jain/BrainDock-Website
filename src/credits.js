@@ -38,7 +38,8 @@ export async function fetchUserCredits() {
       free_tier_seconds_granted: data?.free_tier_seconds_granted ?? 0,
       free_tier_reset_at: data?.free_tier_reset_at ?? null,
     }
-  } catch (_) {
+  } catch (err) {
+    logError('Credits fetch error', err)
     return empty
   }
 }

@@ -12,6 +12,7 @@ import { ctaSlideHtml } from '../icons.js'
 
 import { appleIcon, windowsIcon } from '../icons.js'
 import { logError } from '../logger.js'
+import { dashboardSkeleton } from '../skeleton.js'
 
 /** Format date for display (e.g. "Today, Feb 7 2026") */
 function formatDateLabel(date) {
@@ -257,12 +258,7 @@ async function main() {
   const mainEl = document.querySelector('.dashboard-main')
   if (!mainEl) return
 
-  mainEl.innerHTML = `
-    <div class="dashboard-loading">
-      <div class="dashboard-spinner"></div>
-      <p>${t('dashboard.home.loading', 'Loading dashboard...')}</p>
-    </div>
-  `
+  mainEl.innerHTML = dashboardSkeleton()
 
   try {
     const results = await Promise.allSettled([

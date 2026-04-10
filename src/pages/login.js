@@ -35,12 +35,16 @@ let spinnerWrap = null
 
 /** Hide form elements and show the "Signing you in..." spinner. */
 function showSigningInSpinner() {
-  loginForm.style.display = 'none'
-  authCard.querySelector('.auth-divider').style.display = 'none'
-  googleBtn.style.display = 'none'
-  authCard.querySelector('.auth-footer').style.display = 'none'
-  authCard.querySelector('.auth-title').textContent = t('auth.login.signingIn', 'Signing you in...')
-  authCard.querySelector('.auth-subtitle').textContent = ''
+  const divider = authCard.querySelector('.auth-divider')
+  const footer = authCard.querySelector('.auth-footer')
+  const title = authCard.querySelector('.auth-title')
+  const subtitle = authCard.querySelector('.auth-subtitle')
+  if (loginForm) loginForm.style.display = 'none'
+  if (divider) divider.style.display = 'none'
+  if (googleBtn) googleBtn.style.display = 'none'
+  if (footer) footer.style.display = 'none'
+  if (title) title.textContent = t('auth.login.signingIn', 'Signing you in...')
+  if (subtitle) subtitle.textContent = ''
   spinnerWrap = document.createElement('div')
   spinnerWrap.className = 'auth-loading'
   spinnerWrap.innerHTML = `<div class="auth-spinner"></div><p class="auth-loading-text">${t('auth.login.signingIn', 'Signing you in...')}</p>`
@@ -49,12 +53,16 @@ function showSigningInSpinner() {
 
 /** Restore the login form after a failed auto-login attempt. */
 function restoreLoginForm() {
-  loginForm.style.display = ''
-  authCard.querySelector('.auth-divider').style.display = ''
-  googleBtn.style.display = ''
-  authCard.querySelector('.auth-footer').style.display = ''
-  authCard.querySelector('.auth-title').textContent = t('auth.login.welcomeBack', 'Welcome back')
-  authCard.querySelector('.auth-subtitle').textContent = t('auth.login.subtitle', 'Log in to your BrainDock account')
+  const divider = authCard.querySelector('.auth-divider')
+  const footer = authCard.querySelector('.auth-footer')
+  const title = authCard.querySelector('.auth-title')
+  const subtitle = authCard.querySelector('.auth-subtitle')
+  if (loginForm) loginForm.style.display = ''
+  if (divider) divider.style.display = ''
+  if (googleBtn) googleBtn.style.display = ''
+  if (footer) footer.style.display = ''
+  if (title) title.textContent = t('auth.login.welcomeBack', 'Welcome back')
+  if (subtitle) subtitle.textContent = t('auth.login.subtitle', 'Log in to your BrainDock account')
   if (spinnerWrap) {
     spinnerWrap.remove()
     spinnerWrap = null
@@ -165,10 +173,15 @@ googleBtn.addEventListener('click', async () => {
   hideError(authCard)
   track(EVENTS.LOGIN_STARTED, { method: 'google' })
 
+  const redirect = new URLSearchParams(window.location.search).get('redirect')
+  const callbackUrl = redirect
+    ? `${window.location.origin}/auth/callback/?redirect=${encodeURIComponent(redirect)}`
+    : `${window.location.origin}/auth/callback/`
+
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: `${window.location.origin}/auth/callback/`,
+      redirectTo: callbackUrl,
     },
   })
 

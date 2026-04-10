@@ -79,9 +79,10 @@ export function isValidUuid(str) {
  */
 export function sanitizeText(str, maxLength = 200) {
   if (str == null) return ''
-  const s = String(str).trim()
-  if (s.length <= maxLength) return s
-  return s.slice(0, maxLength)
+  const trimmed = String(str).trim()
+  if (trimmed.length <= maxLength) return trimmed
+  // Use Array.from to split on code points, not UTF-16 code units
+  return Array.from(trimmed).slice(0, maxLength).join('')
 }
 
 /**
@@ -170,7 +171,7 @@ export async function validateUrlPattern(url) {
     if (!dns.exists) return { valid: true, message: dns.message, isWarning: true }
     return { valid: true, message: '', isWarning: false }
   } catch (e) {
-    return { valid: false, message: `Validation error: ${e.message}`, isWarning: false }
+    return { valid: false, message: 'Validation failed. Please try again.', isWarning: false }
   }
 }
 
@@ -208,7 +209,7 @@ export async function validateAppPattern(appName) {
     if (KNOWN_APPS.has(appLower)) return { valid: true, message: '', isWarning: false }
     return { valid: false, message: `'${app}' is not a recognised app - please check the name`, isWarning: false }
   } catch (e) {
-    return { valid: false, message: `Validation error: ${e.message}`, isWarning: false }
+    return { valid: false, message: 'Validation failed. Please try again.', isWarning: false }
   }
 }
 

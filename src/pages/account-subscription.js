@@ -10,6 +10,7 @@ import { t, getLocale } from '../dashboard-i18n.js'
 import { logError } from '../logger.js'
 import { ctaSlideHtml } from '../icons.js'
 import { track, EVENTS } from '../analytics.js'
+import { billingSkeleton } from '../skeleton.js'
 
 function formatDate(iso) {
   if (!iso) return '-'
@@ -129,7 +130,7 @@ async function main() {
   const mainEl = document.querySelector('.dashboard-main')
   if (!mainEl) return
 
-  mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.billing.loading', 'Loading billing...')}</p></div>`
+  mainEl.innerHTML = billingSkeleton()
 
   try {
     const results = await Promise.allSettled([result.creditsPromise, loadPurchaseHistory(result.user.id)])

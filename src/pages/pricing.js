@@ -12,6 +12,7 @@ import { initAnimatedGrid } from '../animated-grid.js'
 import { logError } from '../logger.js'
 import { track, EVENTS } from '../analytics.js'
 import { ctaSlideHtml } from '../icons.js'
+import { pricingSkeleton } from '../skeleton.js'
 
 initAnimatedGrid()
 
@@ -258,7 +259,7 @@ async function main() {
   const root = document.getElementById('pricing-root')
   if (!root) return
 
-  root.innerHTML = '<div class="auth-page"><div class="auth-container"><p>Loading pricing...</p></div></div>'
+  root.innerHTML = pricingSkeleton()
 
   const { data: { session } } = await supabase.auth.getSession()
   const hasUser = !!session

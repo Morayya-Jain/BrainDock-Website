@@ -8,6 +8,7 @@ import { isValidName, sanitizeText, LIMITS } from '../validators.js'
 import { escapeHtml, showInlineError } from '../utils.js'
 import { t } from '../dashboard-i18n.js'
 import { logError } from '../logger.js'
+import { accountSkeleton } from '../skeleton.js'
 
 async function loadProfile(userId) {
   const { data, error } = await supabase.from('profiles').select('id, display_name, email').eq('id', userId).single()
@@ -79,7 +80,7 @@ async function main() {
   const mainEl = document.querySelector('.dashboard-main')
   if (!mainEl) return
 
-  mainEl.innerHTML = `<div class="dashboard-loading"><div class="dashboard-spinner"></div><p>${t('dashboard.account.loading', 'Loading account...')}</p></div>`
+  mainEl.innerHTML = accountSkeleton()
 
   try {
     const profile = await loadProfile(result.user.id)
